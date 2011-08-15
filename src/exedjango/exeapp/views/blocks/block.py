@@ -73,7 +73,8 @@ class Block(object):
             return self.render()
         elif action == 'apply_changes':
             form = self.save_form(data)
-            self.idevice.apply_changes(form.cleaned_data)
+            if form.is_valid():
+                self.idevice.apply_changes(form.cleaned_data)
             return self.render(form=form)
         else:
             raise IdeviceActionNotFound("Action %s not found" % action)
