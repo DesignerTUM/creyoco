@@ -1,0 +1,12 @@
+<div class="close">
+	{{content|safe}}
+	{% for gap in gaps_text %}
+		<input type="hidden" class="cloze_answer" id="answer_{{gap.0}}" value="{{gap.1|safe}}" />
+	{% endfor %}	
+	<input type="submit" class="cloze_submit" value="Submit" />
+	<div class="cloze_result">
+		<p class="cloze_result_text"></p>
+		<input type="submit" class="cloze_restart" value="Restart" />
+		<input type="submit" class="cloze_show_answers" value="Show Answers" />
+	</div>
+</div>

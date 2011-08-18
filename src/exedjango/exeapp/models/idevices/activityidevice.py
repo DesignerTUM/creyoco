@@ -1,7 +1,5 @@
 from django.db import models
 from exeapp.models.idevices.idevice import Idevice
-import re
-from django.conf import settings
 from exeapp.models.idevices.genericidevice import GenericIdevice
 from exeapp.models.idevices import fields
 

@@ -17,3 +17,11 @@ class URLField(models.CharField):
     def formfield(self, **kwargs):
         kwargs["widget"] = URLWidget
         return super(URLField, self).formfield(**kwargs)
+
+class ClozeTextField(models.TextField):
+    def formfield(self, **kwargs):
+        kwargs["widget"] = ClozeWidget
+        return super(ClozeTextField, self).formfield(**kwargs)
+    
+
+

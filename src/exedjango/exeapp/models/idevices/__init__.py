@@ -15,6 +15,7 @@ from exeapp.models.idevices.feedbackidevice import FeedbackIdevice
 from exeapp.models.idevices.rssidevice import RSSIdevice
 from exeapp.models.idevices.externalurlidevice import ExternalURLIdevice
 from exeapp.models.idevices.appletidevice import AppletIdevice
+from exeapp.models.idevices.clozeidevice import ClozeIdevice
 
 idevice_list = [FreeTextIdevice,
             ActivityIdevice,
@@ -31,6 +32,7 @@ idevice_list = [FreeTextIdevice,
             RSSIdevice,
             ExternalURLIdevice,
             AppletIdevice,
+            ClozeIdevice,
             ]
 
 __all__ = ['Idevice', 'idevice_list'] +\
