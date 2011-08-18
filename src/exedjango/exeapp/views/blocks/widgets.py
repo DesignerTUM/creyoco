@@ -7,6 +7,7 @@ from django.forms.widgets import TextInput
 from django.template.loader import render_to_string
 from django import forms
 from django.core.urlresolvers import reverse
+from BeautifulSoup import BeautifulSoup
 
 class FreeTextWidget(TinyMCE):
     
@@ -30,7 +31,7 @@ class FreeTextWidget(TinyMCE):
         return re.sub(reg_exp, r'src="\g<1>"', content)
     
     def render_export(self, content):
-        return mark_safe(self._replace_sources(content))
+        return self._replace_sources(self.render_preview(content))
     
 class FeedbackWidget(FreeTextWidget):
     view_media = forms.Media(
@@ -41,17 +42,29 @@ class FeedbackWidget(FreeTextWidget):
         return render_to_string("exe/idevices/widgets/feedback.html",
                                 {"content" : content})
         
-    def render_export(self, content):
-        return self.render_preview(self._replace_sources(content))
     
-class FileSelectWidget(TextInput):
-    
-    #media = forms.Media(js=reverse('tinymce-filebrowser'))
-    pass
         
 class URLWidget(TextInput):
     def render(self, *args, **kwargs):
         html = super(URLWidget, self).render(*args, **kwargs)
         html += '<input type="submit" name="idevice_action" value="Load" />'
         return html
+    
+class ClozeWidget(FreeTextWidget):
+    view_media = forms.Media(
+            js=["%sscripts/widgets/cloze.js" % settings.STATIC_URL],
+            css={"all" : ["%scss/widgets/cloze.css" % settings.STATIC_URL]},
+                    )
+    def render_preview(self, content):
+        gaps = BeautifulSoup(content).findAll(attrs={"style" : "text-decoration: underline;"})
+        for gap_number, gap in enumerate(gaps):
+            content = content.replace(str(gap), '<input type="text" '
+                                      'class="cloze_gap"' \
+                                      'id="gap_%s" autocomplete="off" />'
+                                      % gap_number)
+        
+        gaps_text = enumerate((gap.text for gap in gaps))
+        return render_to_string("exe/idevices/widgets/cloze.html",
+                                {"content" : content,
+                                 "gaps_text" : gaps_text})
         

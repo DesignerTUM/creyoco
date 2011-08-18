@@ -31,6 +31,7 @@ from exeapp.models import ExternalURLIdevice
 from exeapp.views.blocks.externalurlblock import ExternalURLBlock
 from exeapp.models import AppletIdevice
 from exeapp.views.blocks.appletblock import AppletBlock
+from exeapp.models import ClozeIdevice
 
 idevice_map = {
           FreeTextIdevice : GenericBlock,
@@ -48,6 +49,7 @@ idevice_map = {
           RSSIdevice : RSSBlock,
           ExternalURLIdevice : ExternalURLBlock,
           AppletIdevice : AppletBlock,
+          ClozeIdevice : GenericBlock,
           }
 
 
