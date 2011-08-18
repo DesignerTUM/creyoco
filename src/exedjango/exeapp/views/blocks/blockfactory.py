@@ -10,8 +10,7 @@ Provides block_factory. Returns block object based on given idevice.
 from exedjango.exeapp.views.blocks.genericblock import GenericBlock
 from exeapp.models.idevices import FreeTextIdevice
 from exeapp.models.idevices.activityidevice import ActivityIdevice
-from exeapp.views.blocks.glossaryblock import GlossaryBlock
-from exeapp.models.idevices.glossaryidevice import GlossaryIdevice
+from exeapp.models.idevices.glossaryidevice import GlossaryIdevice, GlossaryTerm
 from exeapp.models.idevices.pdfidevice import PDFIdevice
 from exeapp.views.blocks.pdfblock import PDFBlock
 from exeapp.models.idevices.readingactidevice import ReadingActivityIdevice
@@ -32,6 +31,10 @@ from exeapp.views.blocks.externalurlblock import ExternalURLBlock
 from exeapp.models import AppletIdevice
 from exeapp.views.blocks.appletblock import AppletBlock
 from exeapp.models import ClozeIdevice
+from exeapp.views.blocks.formsetblock import FormsetBlockFactory
+from exeapp.models import CaseStudyIdevice
+from exeapp.models.idevices.casestudyidevice import CaseActivity
+from exeapp.views.blocks.glossaryblock import GlossaryBlock
 
 idevice_map = {
           FreeTextIdevice : GenericBlock,
@@ -50,6 +53,10 @@ idevice_map = {
           ExternalURLIdevice : ExternalURLBlock,
           AppletIdevice : AppletBlock,
           ClozeIdevice : GenericBlock,
+          CaseStudyIdevice : FormsetBlockFactory(
+                                CaseActivity,
+                                ("activity", "feedback"),
+                                )
           }
 
 
