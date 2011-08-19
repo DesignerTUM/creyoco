@@ -27,7 +27,7 @@ class GenericBlock(Block):
     
     def __init__(self, idevice, fields=()):
         super(GenericBlock, self).__init__(idevice)
-        self.form_factory = IdeviceFormFactory(model=self.idevice.__class__,
+        self.BlockForm = IdeviceFormFactory(model=self.idevice.__class__,
                                                 fields=fields)
         
         if not hasattr(self.idevice,'undo'): 
@@ -59,7 +59,7 @@ class GenericBlock(Block):
         """
         Code reuse function for rendering the correct template
         """
-        form = form or self.form_factory(instance=self.idevice,
+        form = form or self.BlockForm(instance=self.idevice,
                              auto_id="%s_field_" % self.idevice.id + "%s")
         try:
             html = render_to_string(template, {"idevice" : self.idevice,

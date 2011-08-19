@@ -44,9 +44,8 @@ class Block(object):
     """
     nextId = 0
     Edit, Preview, View, Hidden = range(4)
-    form_factory = None # redefined by the child
-    formset_factory = None #
-    
+    BlockForm = None # redefined by the child
+    BlockFormset = None
     
     def __init__(self, idevice):
         """
@@ -80,7 +79,7 @@ class Block(object):
             raise IdeviceActionNotFound("Action %s not found" % action)
         
     def save_form(self, data):
-        form = self.form_factory(data, instance=self.idevice)
+        form = self.BlockForm(data, instance=self.idevice)
         if form.is_valid():
             form.save(commit=False)
                 
@@ -90,9 +89,9 @@ class Block(object):
     def media(self):
         '''Returns a list of media files used in iDevice's HTML'''
         if self.idevice.edit:
-            return self.form_factory().media
+            return self.BlockForm().media
         else:
-            return self.form_factory().view_media
+            return self.BlockForm().view_media
     
     def render(self, **kwargs):
         """
@@ -109,7 +108,7 @@ class Block(object):
 
     def renderEdit(self, form=None):
         """
-        Returns an XHTML string with the form_factory element for editing this block
+        Returns an XHTML string with the BlockForm element for editing this block
         """
         log.error(u"renderEdit called directly")
         return u"ERROR Block.renderEdit called directly"
