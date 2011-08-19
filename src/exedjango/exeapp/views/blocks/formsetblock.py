@@ -23,7 +23,7 @@ class BaseFormsetBlock(GenericBlock):
                 model = self.model
                 fields = self.fields
                 
-        self.formset_factory = modelformset_factory(
+        self.formset_class = modelformset_factory(
                                 self.model, FormsetItemForm,
                                 fields=self.fields,
                                 extra=0,
@@ -53,8 +53,8 @@ class BaseFormsetBlock(GenericBlock):
             return super(BaseFormsetBlock, self).process(action, data)
         
     def handle_apply_changes(self, data):
-        form = self.form_factory(data, instance=self.idevice)
-        formset = self.formset_factory(data)
+        form = self.form_class(data, instance=self.idevice)
+        formset = self.formset_class(data)
         if formset.is_valid() and form.is_valid():
             form.save(commit=False)
             self.idevice.apply_changes(form.cleaned_data)
@@ -65,13 +65,13 @@ class BaseFormsetBlock(GenericBlock):
     def media(self):
         media = super(BaseFormsetBlock, self).media
         if not self.idevice.edit:
-            media += self.formset_factory().form().view_media
+            media += self.formset_class().form().view_media
         return media
     
     
     def _render_view(self, template, form=None, formset=None):
-        form = form or self.form_factory(instance=self.idevice)
-        formset = formset or self.formset_factory(queryset=self.model.\
+        form = form or self.form_class(instance=self.idevice)
+        formset = formset or self.formset_class(queryset=self.model.\
                             objects.filter(idevice=self.idevice))
         try:
             html = render_to_string(template, {"idevice" : self.idevice,
