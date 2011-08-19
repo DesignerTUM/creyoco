@@ -52,7 +52,7 @@ class Page(object):
         self.view_media = forms.Media()
         for idevice in node.idevices.all():
             block = block_factory(idevice.as_child())
-            form_class = block.form_factory()
+            form_class = block.BlockForm()
             if hasattr(form_class, "view_media"):
                 self.view_media += form_class.view_media
             
