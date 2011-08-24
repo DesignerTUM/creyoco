@@ -4,10 +4,13 @@ from django.forms.models import modelformset_factory
 from django.template.loader import render_to_string
 from exeapp.views.blocks.ideviceform import IdeviceForm
 
-def FormsetBlockMetaclassFactory(model, fields):
+def FormsetBlockMetaclassFactory(model, fields, form=None, order=None):
     class FormsetBlockMetaclass(type):
         def __new__(cls, name, bases, dict):
-            dict.update({"model" : model, "fields" :  fields})
+            dict.update({"model" : model,
+                         "fields" :  fields,
+                         "form" : form,
+                         "order" : order})
             return type.__new__(cls, name, bases, dict)
     return FormsetBlockMetaclass
 
@@ -16,7 +19,7 @@ class BaseFormsetBlock(GenericBlock):
     def __init__(self, *args, **kwargs):
         super(BaseFormsetBlock, self).__init__(*args, **kwargs)
         
-        class FormsetItemForm(IdeviceForm):
+        class FormsetItemForm(self.form or IdeviceForm):
             pass
             
             class Meta:
@@ -71,8 +74,10 @@ class BaseFormsetBlock(GenericBlock):
     
     def _render_view(self, template, form=None, formset=None):
         form = form or self.BlockForm(instance=self.idevice)
-        formset = formset or self.BlockFormset(queryset=self.model.\
-                            objects.filter(idevice=self.idevice))
+        queryset = self.model.objects.filter(idevice=self.idevice)
+        if self.order is not None:
+            queryset = queryset.order_by(self.order)
+        formset = formset or self.BlockFormset(queryset=queryset)
         try:
             html = render_to_string(template, {"idevice" : self.idevice,
                                            "form" : form,
@@ -84,8 +89,8 @@ class BaseFormsetBlock(GenericBlock):
         else:
             return html
         
-def FormsetBlockFactory(model, fields):
-    metaclass = FormsetBlockMetaclassFactory(model, fields)
+def FormsetBlockFactory(model, fields, form=None, order=None):
+    metaclass = FormsetBlockMetaclassFactory(model, fields, form, order)
     class FormsetBlock(BaseFormsetBlock):
         __metaclass__ = metaclass
         

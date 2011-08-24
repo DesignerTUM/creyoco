@@ -1,29 +1,12 @@
-from exeapp.views.blocks.formsetblock import BaseFormsetBlock,\
-    FormsetBlockMetaclassFactory
-from exeapp.models.idevices.glossaryidevice import GlossaryTerm
-from django.template.loader import render_to_string
+from exedjango.exeapp.views.blocks.ideviceform import IdeviceForm
+from django.utils.safestring import mark_safe
 
-class GlossaryBlock(BaseFormsetBlock):
-    __metaclass__ = FormsetBlockMetaclassFactory(
-                                GlossaryTerm,
-                                ("title", "definition"))
+class GlossaryTermForm(IdeviceForm):
     
-    preview_template = "exe/idevices/glossary/preview.html"
-    view_template = "exe/idevices/glossary/export.html"
+    def _render_view(self, purpose):
+        html = "<em>%s</em>%s" %\
+            (self.initial['title'], self.initial['definition'])
+        return mark_safe(html)
+        
+
     
-    def renderPreview(self):
-        ordered_terms = self.idevice.terms.order_by('title')
-        return render_to_string(self.preview_template, 
-                                {"idevice" : self.idevice,
-                                 "ordered_terms" : ordered_terms,
-                                 "self" : self,
-                                 }
-                                )
-    
-    def renderView(self):
-        ordered_terms = self.idevice.terms.order_by('title')
-        return render_to_string(self.view_template,
-                                 {"idevice" : self.idevice,
-                                  "ordered_terms" : ordered_terms,
-                                  }
-                                )

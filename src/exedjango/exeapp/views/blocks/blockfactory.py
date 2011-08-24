@@ -34,12 +34,16 @@ from exeapp.models import ClozeIdevice
 from exeapp.views.blocks.formsetblock import FormsetBlockFactory
 from exeapp.models import CaseStudyIdevice
 from exeapp.models.idevices.casestudyidevice import CaseActivity
-from exeapp.views.blocks.glossaryblock import GlossaryBlock
+from exedjango.exeapp.views.blocks.glossaryblock import GlossaryTermForm
 
 idevice_map = {
           FreeTextIdevice : GenericBlock,
           ActivityIdevice : GenericBlock,
-          GlossaryIdevice : GlossaryBlock,
+          GlossaryIdevice : FormsetBlockFactory(
+                                GlossaryTerm,
+                                ("title", "definition"),
+                                GlossaryTermForm,
+                                "title"),
           ReadingActivityIdevice : GenericBlock,
           ReflectionIdevice : GenericBlock,
           TOCIdevice : GenericBlock,
