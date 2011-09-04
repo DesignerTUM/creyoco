@@ -43,7 +43,7 @@ class BaseFormsetBlock(GenericBlock):
         if action == self.add_action:
             self.handle_apply_changes(data)
             self.idevice.edit = True
-            self.idevice.add_term()
+            self.model.objects.create(idevice=self.idevice)
             return self.render()
         elif action == self.remove_action:
             self.handle_apply_changes(data)

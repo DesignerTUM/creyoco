@@ -35,6 +35,9 @@ from exeapp.views.blocks.formsetblock import FormsetBlockFactory
 from exeapp.models import CaseStudyIdevice
 from exeapp.models.idevices.casestudyidevice import CaseActivity
 from exedjango.exeapp.views.blocks.glossaryblock import GlossaryTermForm
+from exeapp.models import MultipleChoiceIdevice
+from exeapp.models.idevices.multiplechoiceidevice import MultipleChoiceQuestion
+from exeapp.views.blocks.multiplechoiceblock import MultipleChoiceBlock
 
 idevice_map = {
           FreeTextIdevice : GenericBlock,
@@ -60,7 +63,8 @@ idevice_map = {
           CaseStudyIdevice : FormsetBlockFactory(
                                 CaseActivity,
                                 ("activity", "feedback"),
-                                )
+                                ),
+          MultipleChoiceIdevice : MultipleChoiceBlock,
           }
 
 

@@ -17,6 +17,7 @@ from exeapp.models.idevices.externalurlidevice import ExternalURLIdevice
 from exeapp.models.idevices.appletidevice import AppletIdevice
 from exeapp.models.idevices.clozeidevice import ClozeIdevice
 from exeapp.models.idevices.casestudyidevice import CaseStudyIdevice
+from exeapp.models.idevices.multiplechoiceidevice import MultipleChoiceIdevice
 
 idevice_list = [FreeTextIdevice,
             ActivityIdevice,
@@ -35,6 +36,7 @@ idevice_list = [FreeTextIdevice,
             AppletIdevice,
             ClozeIdevice,
             CaseStudyIdevice,
+            MultipleChoiceIdevice,
             ]
 
 __all__ = ['Idevice', 'idevice_list'] +\

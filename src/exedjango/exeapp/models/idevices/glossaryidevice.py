@@ -21,9 +21,6 @@ class GlossaryIdevice(Idevice):
     
     objects = GlossaryIdeviceManager()
     
-    def add_term(self):
-        GlossaryTerm.objects.create(idevice=self)
-    
     class Meta:
         app_label = "exeapp"
     

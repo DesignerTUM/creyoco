@@ -38,9 +38,6 @@ in order to gain resolution of the situation.""")
     
     objects = CaseStudyIdeviceManager()
     
-    def add_term(self):
-        CaseActivity.objects.create(idevice=self)
-    
     class Meta:
         app_label = "exeapp"
     
