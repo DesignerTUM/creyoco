@@ -1,0 +1,14 @@
+{% extends 'exe/idevices/preview_base.html' %}
+{% block idevice %}
+{% for question in idevice.questions.all %}
+	<div class="question">
+	<em>{{ question.question|safe }}</em>
+	{% for option in question.options.all %}
+		<div class="option"> 
+			<input type="radio" name="question_{{question.id}}" value="option_{{option.id}}" />
+			<span>{{option.option.get_naked_code|safe}}</span>
+		</div>
+	{% endfor %}
+	</div>
+{% endfor %}
+{% endblock %}

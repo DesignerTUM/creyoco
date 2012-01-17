@@ -1,10 +1,10 @@
 from django import forms
 from exeapp.views.blocks.genericblock import GenericBlock
-from django.forms.models import modelformset_factory
+from django.forms.models import modelformset_factory, inlineformset_factory
 from django.template.loader import render_to_string
 from exeapp.views.blocks.ideviceform import IdeviceForm
 
-def FormsetBlockMetaclassFactory(model, fields, form=None, order=None):
+def FormsetBlockMetaclassFactory(model, fields, form=IdeviceForm, order=None):
     class FormsetBlockMetaclass(type):
         def __new__(cls, name, bases, dict):
             dict.update({"model" : model,
@@ -14,7 +14,15 @@ def FormsetBlockMetaclassFactory(model, fields, form=None, order=None):
             return type.__new__(cls, name, bases, dict)
     return FormsetBlockMetaclass
 
+
+
+
 class BaseFormsetBlock(GenericBlock):
+    model = None
+    fields = ()
+    form = IdeviceForm
+    order = None
+    formset = None
     
     def __init__(self, *args, **kwargs):
         super(BaseFormsetBlock, self).__init__(*args, **kwargs)
@@ -26,8 +34,11 @@ class BaseFormsetBlock(GenericBlock):
                 model = self.model
                 fields = self.fields
                 
-        self.BlockFormset = modelformset_factory(
-                                self.model, FormsetItemForm,
+        self.BlockFormset = inlineformset_factory(
+                                self.idevice.__class__,
+                                self.model,
+                                form=self.form,
+                                formset=self.formset,
                                 fields=self.fields,
                                 extra=0,
                                 can_delete=True,
@@ -57,7 +68,7 @@ class BaseFormsetBlock(GenericBlock):
         
     def handle_apply_changes(self, data):
         form = self.BlockForm(data, instance=self.idevice)
-        formset = self.BlockFormset(data)
+        formset = self.BlockFormset(data, instance=self.idevice)
         if formset.is_valid() and form.is_valid():
             form.save(commit=False)
             self.idevice.apply_changes(form.cleaned_data)
@@ -77,7 +88,7 @@ class BaseFormsetBlock(GenericBlock):
         queryset = self.model.objects.filter(idevice=self.idevice)
         if self.order is not None:
             queryset = queryset.order_by(self.order)
-        formset = formset or self.BlockFormset(queryset=queryset)
+        formset = formset or self.BlockFormset(instance=self.idevice)
         try:
             html = render_to_string(template, {"idevice" : self.idevice,
                                            "form" : form,

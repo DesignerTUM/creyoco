@@ -1,8 +1,9 @@
 {% extends "exe/idevices/edit_base.html" %}
 {% block idevice %}
 {{ form.render_edit }}
+{{formset.management_form}}
 {% for fs_form in formset %}
 	{{ fs_form.render_edit }}
 	{{ fs_form.nested.as_p }}
-{% endif %}
+{% endfor %}
 {% endblock %}

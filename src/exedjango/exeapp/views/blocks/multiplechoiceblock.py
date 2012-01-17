@@ -1,14 +1,18 @@
 from django.forms.models import BaseInlineFormSet, inlineformset_factory
+from django.http import QueryDict
 from exeapp.models.idevices.multiplechoiceidevice import MultipleChoiceQuestion,\
     MultipleChoiceOption, MultipleChoiceIdevice
 from exeapp.views.blocks.formsetblock import BaseFormsetBlock
 from django.forms.formsets import DELETION_FIELD_NAME
+from exeapp.views.blocks.ideviceform import IdeviceForm
+from django.utils.safestring import mark_safe
+from django.template.loader import render_to_string
 
 
 
 OptionsFormSet = inlineformset_factory(MultipleChoiceQuestion,
                                        MultipleChoiceOption,
-                                       extra=1)
+                                       extra=0)
 
 class BaseQuestionFormSet(BaseInlineFormSet):
     
@@ -21,18 +25,18 @@ class BaseQuestionFormSet(BaseInlineFormSet):
         except IndexError:
             instance = None
             pk_value = hash(form.prefix)
-        
         if self.data:
             data = self.data
         else:
             data = None
-        nested =  OptionsFormSet(data=data, 
+        
+        nested = OptionsFormSet(data=data, 
                                  instance=instance, 
                                  prefix="OPTION_%s" % pk_value)
         form.nested = nested
         
     def is_valid(self):
-        result = super(BaseBuildingFormset, self).is_valid()
+        result = super(BaseQuestionFormSet, self).is_valid()
  
         for form in self.forms:
             if hasattr(form, 'nested'):
@@ -70,13 +74,13 @@ class BaseQuestionFormSet(BaseInlineFormSet):
  
         return False
  
-    def save_all(self, commit=True):
+    def save(self, commit=True):
         """Save all formsets and along with their nested formsets."""
  
         # Save without committing (so self.saved_forms is populated)
         # -- We need self.saved_forms so we can go back and access
         #    the nested formsets
-        objects = self.save(commit=False)
+        objects = super(BaseQuestionFormSet, self).save(commit=False)
  
         # Save each instance if commit=True
         if commit:
@@ -92,15 +96,17 @@ class BaseQuestionFormSet(BaseInlineFormSet):
             if self.should_delete(form): continue
  
             form.nested.save(commit=commit)
+            
+    def as_p(self):
+        forms = u" ".join([form.as_p() + form.nested.as_p() \
+                            for form in self])
+        return mark_safe(u'\n'.join([unicode(self.management_form), forms]))
         
 class MultipleChoiceBlock(BaseFormsetBlock):
+    model = MultipleChoiceQuestion
+    formset = BaseQuestionFormSet
+    fields = ("question",)
     
-    def __init__(self, *args, **kwargs):
-        super(BaseFormsetBlock, self).__init__(*args, **kwargs)
-        self.model = MultipleChoiceQuestion
-        self.order = None
-        self.BlockFormset = inlineformset_factory(self.idevice.__class__,
-                                                  self.model,
-                                                  formset=BaseQuestionFormSet)
-        
-        edit_template = "exe/idevices/multiplechoice/edit.html"
+    preview_template = "exe/idevices/multiplechoice/preview.html"
+    edit_template = "exe/idevices/multiplechoice/edit.html"
+    

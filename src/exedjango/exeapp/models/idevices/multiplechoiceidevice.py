@@ -15,7 +15,7 @@ class MCIdeviceManager(models.Manager):
 
 class MultipleChoiceIdevice(Idevice):
     
-    name = "Multiple Choise"
+    name = "Multiple Choice"
     author = "University of Auckland"
     purpose = """Although more often used in formal testing 
 situations MCQs can be used as a testing tool to stimulate thought and  
