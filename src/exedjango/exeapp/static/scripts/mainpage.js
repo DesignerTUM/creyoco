@@ -90,9 +90,14 @@ jQuery(document).ready(function() {
                 // Initialize outline tree
                 $.jstree._themes = "/static/css/themes/"
                 get_outline_pane().jstree({
-                  "core" : {"animation" : 200},
-                  "ui" : {"select_limit" : 1, 
-                      "initially_select" : ["node" + get_outline_pane().attr("current_node")]},
+                  "core" : {	"animation" : 200
+                  },
+                  "ui" : {		"select_limit" : 1, 
+                      			"initially_select" : ["node" + get_outline_pane().attr("current_node")]
+                  },
+                  "themes" : {	"dots" : false,
+                  				"icons" : false, 
+                  },
                   "plugins" : ["themes", "html_data", "ui", "crrm"]});
                 get_outline_pane().jstree('open_all', $('#outline_pane>ul'));
                 //bind actions to outline nodes
@@ -108,7 +113,11 @@ jQuery(document).ready(function() {
                 
                 
                 // Initialize idevice Tree
-                $("#idevice_pane").jstree({"plugins" : ["themes", "html_data", "ui"]})
+                $("#idevice_pane").jstree({"themes" : {	"dots" : false,
+                  										"icons" : false, 
+                  							},
+                  							"plugins" : ["themes", "html_data", "ui"]
+                  						});
                 $("#idevice_pane").jstree('open_all', $('#idevice_pane>ul'));
                                    
                 

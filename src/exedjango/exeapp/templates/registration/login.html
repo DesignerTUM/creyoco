@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block title %} Login {% endblock %}
+{% block head %}<link rel="stylesheet" href="{% get_static_prefix %}css/login.css" /> {% endblock %}
 
 {% block content %}
 
