@@ -1,13 +1,12 @@
 <VirtualHost *:80>
+	ServerName 129.187.81.136
+	
 	#Alias /robots.txt /usr/local/wsgi/static/robots.txt
 	#Alias /favicon.ico /usr/local/wsgi/static/favicon.ico
-	
-	#AliasMatch ^/([^/]*\.css) /usr/local/wsgi/static/styles/$1
 	
 	Alias /media/ /home/dimitri/creyoco/src/exedjango/exeapp_media/
 	
 	Alias /static/ /home/dimitri/creyoco/src/exedjango/static/
 	
 	WSGIScriptAlias / /home/dimitri/creyoco/src/exedjango/apache/django.wsgi
-
 </VirtualHost>
