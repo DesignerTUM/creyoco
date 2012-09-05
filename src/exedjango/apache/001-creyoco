@@ -1,0 +1,16 @@
+<VirtualHost *:80>
+#Alias /robots.txt /usr/local/wsgi/static/robots.txt
+#Alias /favicon.ico /usr/local/wsgi/static/favicon.ico
+
+#AliasMatch ^/([^/]*\.css) /usr/local/wsgi/static/styles/$1
+
+Alias /media/ /home/dimitri/creyoco/src/exedjango/exeapp_media/
+
+<Directory /home/dimitri/creyoco/src/exedjango/exeapp_media/>
+Order deny,allow
+Allow from all
+</Directory>
+
+WSGIScriptAlias / /home/dimitri/creyoco/src/exedjango/exeapp_media/apache/django.wsgi
+
+</VirtualHost>
