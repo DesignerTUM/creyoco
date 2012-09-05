@@ -1,3 +1,4 @@
+
 /*
 ===========================================================================
 eXe
@@ -17,7 +18,7 @@ body {
     padding: 10px 10px 10px 10px;
     font-family: arial, verdana, helvetica, sans-serif;
     font-size: .8em;
-    background-color: #FFFFFF;
+    background-color: none;
 }
 
 body > #header {

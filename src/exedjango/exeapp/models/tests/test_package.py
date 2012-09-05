@@ -18,6 +18,8 @@ class UserandPackageTestCase(TestCase):
         Package.objects.create(title=self.PACKAGE_TITLE, user=self.user)
         self.package = Package.objects.get(id=self.PACKAGE_ID)
     
+    def tearDown(self):
+        User.objects.all().delete()
         
     def test_get_user_from_package(self):
         self.assertEquals(self.package.user,

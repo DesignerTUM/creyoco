@@ -16,5 +16,8 @@ class UserProfile(models.Model):
     def media_url(self):
         return "%suploads/%s/" % (settings.MEDIA_URL, self.user.username)
     
+    def __unicode__(self):
+        return "User Profile for {0}".format(self.user)
+    
     class Meta:
         app_label = "exeapp"

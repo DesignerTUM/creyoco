@@ -156,8 +156,21 @@ jQuery(document).ready(function() {
                 	}
                 })
                 
-                
-                
+                $("#previewIFrame").load(function() {
+                	var node_id = $("#previewIFrame").contents().find("#node_id").text();
+                	if (current_outline_id() != node_id){
+                		get_outline_pane().jstree("select_node", $("#node" + node_id), true);
+                	}
+                	
+                	$('#previewIFrame').contents().find("head").append("<link>");
+                	css = $('#previewIFrame').contents().find("head").children(":last");
+                	css.attr({
+      rel:  "stylesheet",
+      type: "text/css",
+      id: "preview",
+      href: '/static/css/styles/' + $("#package_style").text() + '/content.css'
+    });
+                })
             });
             
 // Adds a new node to current one
@@ -452,6 +465,12 @@ function reload_authoring(){
   		window.frames['authoringIFrame1'].reload_authoring();
 	} else {
 		window.frames['authoringIFrame1'].location = 'authoring/';
+	}
+	
+	if ("reload_authoring" in window.frames['previewIFrame']) {
+  		window.frames['previewIFrame'].reload_authoring();
+	} else {
+		window.frames['previewIFrame'].location = 'authoring/';
 	}
 }
 

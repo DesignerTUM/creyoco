@@ -1,0 +1,54 @@
+#navi {
+	margin-top:75px;
+}
+#navi-left {
+	float:left;
+}
+
+#navi-right {
+	text-align: right;
+	float: right;
+}
+
+.button {
+	margin-right:4px;
+}
+
+.button:last-child {
+	margin-right:0px;
+}
+
+.button a {
+	background-image:url(/static/images/mz/navibutton.png);
+	background-repeat:no-repeat;
+	color:#6E6E6E !important;
+	display:inline-block;
+	font-size:12px;
+	height:18px;
+	padding-top:4px;
+	text-align:center;
+	text-decoration:none !important;
+	width:169px;
+}
+
+.button_active a {
+	background-image:url(/static/images/mz/navibutton_active.png);
+	background-repeat:no-repeat;
+	color:#FFF !important;
+	display:inline-block;
+	font-size:12px;
+	height:18px;
+	padding-top:4px;
+	text-align:center;
+	text-decoration:none !important;
+	width:169px;
+}
+
+#outline {
+	margin-top:100px;
+}
+
+#idevice_pane {
+	margin-top:100px;
+	margin-left: -5px;
+}

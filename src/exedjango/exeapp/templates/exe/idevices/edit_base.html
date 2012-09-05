@@ -4,7 +4,7 @@
 {% get_static_prefix as STATIC_PREFIX %}
 {% submit_image "apply_changes" self.id "images/stock-apply.png" "Done" %}
 {% if no_undo %}
-	{% submit_image "cancel" self.id "images/stock-undo.png" "Undo Edits") %}
+	{% submit_image "cancel" self.id "images/stock-undo.png" "Undo Edits" %}
 {% else %}
 	{% submit_image "no_cancel" self.id "images/stock-undoNOT.png" "Can NOT Undo Edits" %}
 {% endif %}

@@ -31,18 +31,20 @@ if settings.DEBUG and not getattr(settings, "TEST", False):
 @receiver(signal=signals.post_save, sender=auth_models.User)
 def user_post_save(sender, instance, created, **kwargs):
     if created:
-        profile, new = UserProfile.\
-                    objects.get_or_create(user=instance)
+        profile = UserProfile.\
+                    objects.create(user=instance)
+        profile.save()
         try:
             os.mkdir(profile.media_path)
         except Exception, e:
             if not getattr(settings, "TEST", False):
-                print "Folder for user %s was not created" % profile
+                print "Folder for user {0} at {1} was not created".\
+                    format(profile, profile.media_path)
+                raise e
         
-@receiver(signal=signals.post_delete, sender=auth_models.User)
-def user_post_delete(sender, instance, **kwargs):
-    profile = UserProfile(user=instance)
-    print profile.media_path
+@receiver(signal=signals.pre_delete, sender=auth_models.User)
+def user_pre_delete(sender, instance, **kwargs):
+    profile = instance.userprofile
     shutil.rmtree(profile.media_path)
     profile.delete()
         

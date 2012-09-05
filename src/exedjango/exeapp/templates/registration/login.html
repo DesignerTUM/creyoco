@@ -1,27 +1,139 @@
 {% extends "base.html" %}
 
+{% load mainpage_extras %}
+
 {% load static %}
 
-{% block title %} Login {% endblock %}
-{% block head %}<link rel="stylesheet" href="{% get_static_prefix %}css/login.css" /> {% endblock %}
+{% block title %}Package Page: {{ package.title }}{% endblock %}
 
+{% block head%}
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/ui-lightness/jquery-ui-1.8.4.custom.css" />
+<link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/mz/basic.css" />
+<!-- SCRIPTS -->
+<script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.js"></script>
+<script type="text/javascript" src="{% get_static_prefix %}scripts/jquery-ui.custom.min.js"></script>
+<script type="text/javascript" src="{% get_static_prefix %}scripts/mainpage.js"></script>
+<script type='text/javascript' src='{% get_static_prefix %}scripts/jquery.jsonrpc.js'></script>
+<script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.form.js"></script>
+<script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.cookie.js"></script>
+<script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.jstree.js"></script>
+<script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.confirm.js"></script>
+
+<script type="text/javascript">
+/*$(document).ready(function() {
+	$('.username').focusin( function() {
+		if($(this).val() == 'Benutzername') {
+			$(this).val('');
+		}
+	});
+	
+	$('.username').focusout( function() {
+		if($(this).val() == '') {
+			$(this).val('Benutzername');
+		}
+	});
+	
+	$('.password').focusin( function() {
+		if($(this).val() == 'Passwort') {
+			$(this).val('');
+		}
+	});
+	
+	$('.password').focusout( function() {
+		if($(this).val() == '') {
+			$(this).val('Passwort');
+		}
+	});
+});*/
+</script>
+
+{% endblock %}
 {% block content %}
 
-  {% if form.errors %}
-    <p class="error">Sorry, that's not a valid username or password</p>
-  {% endif %}
+<div id="wrapper">
+	<div id="header">
+		creyoco
+	</div>
+		
+	<div id="box_left">
+		<!--<h1>Themenkatalog</h2>-->
+		
+	</div>
+		
+	<div id="content">
+		<h1>Willkommen bei creyoco!</h2>
+		<img style="margin-bottom:-258px;margin-left:747px;" src="{% get_static_prefix %}images/mz/authoring_shadow_top.png" alt="" />
+		
+			<div id="navi">
+			<!--	<div id="navi-left">
+					<span class="button button_active">
+						<a href="#" onclick="$('#middle-row').children().hide();$('#authoring').show();$('#navi span').removeClass('button_active');$(this).parent().addClass('button_active');">Inhalt bearbeiten</a>
+					</span>
+				
+					<span class="button">
+						<a href="#" onclick="$('#middle-row').children().hide();$('#selectStyle').show();$('#navi span').removeClass('button_active');$(this).parent().addClass('button_active');">Ausgabe-Layout</a>
+					</span>
+				
+					<span class="button">
+						<a href="#" onclick="$('#middle-row').children().hide();$('#preview').show();$('#navi span').removeClass('button_active');$(this).parent().addClass('button_active');">Vorschau</a>
+					</span>
+				</div>
+			
+				<div id="navi-right">
+					<span class="button">
+						<a href="#" onclick="$('#middle-row').children().hide();$('#properties').show();$('#navi span').removeClass('button_active');$(this).parent().addClass('button_active');">Projekt-Eigenschaften</a>
+					</span>
+				</div>-->
+			</div>
+			
+			<div style="clear:both"></div>
+    				
+			<div id="middle-row">
+			<div style="margin-top:40px;margin-left:40px;margin-right:10px;width:270px;float:left">
+				<div style="font-size:13px;font-weight:500;margin-bottom:10px">Bereits Mitglied? <span style="color:rgba(0,0,0,0.5)"> Melde dich an!</span></div>
+				{% if form.errors %}
+				<p class="error">Sorry, that's not a valid username or password</p>
+				{% endif %}
 
-  <form action='.' method='post'>
-    {% csrf_token %}
-    <label for="username">User name:</label>
-    <input type="text" name="username" value="" id="username">
-    <label for="password">Password:</label>
-    <input type="password" name="password" value="" id="password">
-
-    <input type="submit" value="login" />
-    <input type="hidden" name="next" value="/" />
-  </form>
-  <a href="/accounts/registration/">Registration</a>
-    
-
+				<form action='.' method='post'>
+				{% csrf_token %}
+					<input class="username" type="text" name="username" placeholder="Benutzername" id="username" style="display:block">
+					<input class="password no_margin" type="password" name="password" placeholder="Passwort" id="password" style="">
+					
+					<input class="submit no_margin" type="submit" value="Einloggen" />
+					<input type="hidden" name="next" value="/" />
+				</form>
+				
+				<a class="forgot_pw" href="">Passwort vergessen?</a>
+			</div>
+			<div style="margin-top:40px;margin-right:40px;width:263px;float:right;">
+			<div style="font-size:13px;font-weight:500;margin-bottom:10px">Neu bei creyoco? <span style="color:rgba(0,0,0,0.5)"> Registriere dich jetzt!</span></div>
+				<form action='.' method='post'>
+					<input class="reg_username" type="text" name="username" placeholder="Benutzername" id="username">
+					<input class="reg_email" type="text" name="email" placeholder="E-Mail" id="email">
+					<input class="reg_password" type="password" name="password" placeholder="Passwort" id="password">
+					<input class="reg_password_return" type="password" name="password" placeholder="Passwort wiederholen" id="password">
+					
+					
+					<input class="reg_submit" type="submit" value="Benutzerkonto erstellen" />
+					<input type="hidden" name="next" value="/" />
+				</form>
+			</div>
+			</div>
+		<img style="position:absolute;z-index:-1;margin-top:-289px;margin-left:-3px;" src="{% get_static_prefix %}images/mz/authoring_shadow_bottom.png" alt="" />
+	</div>
+	
+	<div id="box_right">
+	<!--	<h1>Werkzeuge</h2>-->
+		
+	</div>
+	
+	<div style="clear:both"></div>
+	
+	<div id="footer">
+		<a href="#impressum">Impressum</a>
+		<img src="{% get_static_prefix %}images/mz/help.png" alt="Hilfe" align="right">
+	</div>
+</div>
 {% endblock %}

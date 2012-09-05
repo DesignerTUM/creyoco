@@ -47,7 +47,7 @@ from exeapp.views.blocks.blockfactory import block_factory
 
 PACKAGE_COUNT = 3
 PACKAGE_NAME_TEMPLATE = '%s\'s Package %s'
-TEST_USER = "admin"
+TEST_USER = "test_admin"
 TEST_PASSWORD = "password"
     
 def _create_packages(user, package_count=PACKAGE_COUNT,
@@ -82,6 +82,9 @@ class MainPageTestCase(TestCase):
         self.c = Client()
         # login
         self.c.login(username=TEST_USER, password=TEST_PASSWORD)
+        
+    def tearDown(self):
+        User.objects.all().delete()
     
     def test_basic_elements(self):
         response = self.c.get('/exeapp/')
@@ -116,6 +119,9 @@ class PackagesPageTestCase(TestCase):
         self.s = TestingServiceProxy(self.c,
                                 reverse("jsonrpc_mountpoint"),
                                 version="2.0")
+        
+    def tearDown(self):
+        User.objects.all().delete()
         
     def test_basic_structure(self):
         response = self.c.get(self.PAGE_URL % self.PACKAGE_ID)
@@ -203,7 +209,7 @@ class ShortcutTestCase(TestCase):
     PACKAGE_ID = 1
     NON_EXISTENT_PACKAGE_ID = 9001 # over 9000
     PACKAGE_TITLE = "test"
-    TEST_USER = 'admin'
+    TEST_USER = 'test_admin'
     WRONG_USER = 'foo'
     TEST_PASSWORD = 'admin'
     TEST_ARG = 'arg'
@@ -258,6 +264,9 @@ view, this tests should be also merged'''
         self.c.login(username=TEST_USER, password=TEST_PASSWORD)
         self.package = Package.objects.get(pk=self.TEST_PACKAGE_ID)
         self.root = self.package.root
+        
+    def tearDown(self):
+        User.objects.all().delete()
 
     def test_basic_elements(self): 
         '''Basic tests aimed to determine if this view works at all'''
@@ -430,6 +439,9 @@ class ExportTestCase(TestCase):
         self.data = Package.objects.get(id=self.TEST_PACKAGE_ID)
         for x in range(3):
             self.data.add_child_node()
+            
+    def tearDown(self):
+        User.objects.all().delete()
         
         
     def test_basic_export(self):

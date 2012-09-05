@@ -23,6 +23,9 @@ class PackageTestCase(TestCase):
             child = self.root.create_child()
             child.title = "node%s" % x
             child.save()
+            
+    def tearDown(self):
+        User.objects.all().delete()
 
     def test_get_root_from_package(self):
         root = self.package.root
