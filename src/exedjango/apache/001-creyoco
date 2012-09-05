@@ -6,10 +6,7 @@
 	
 	Alias /media/ /home/dimitri/creyoco/src/exedjango/exeapp_media/
 	
-	<Directory /home/dimitri/creyoco/src/exedjango/exeapp_media/>
-	Order deny,allow
-	Allow from all
-	</Directory>
+	Alias /static/ /home/dimitri/creyoco/src/exedjango/static/
 	
 	WSGIScriptAlias / /home/dimitri/creyoco/src/exedjango/apache/django.wsgi
 
