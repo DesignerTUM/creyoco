@@ -76,14 +76,14 @@
 				{% csrf_token %}
 				{% if form.errors %}
 					<div style="position:relative;">
-						<div class="tip"><span>Benutzername oder…</span></div>
+						<div class="error"><span>Benutzername oder…</span></div>
 					</div>
 				{% endif %}
 					<input class="username" type="text" name="username" placeholder="Benutzername" id="username" style="display:block">
 					
 				{% if form.errors %}
 					<div style="position:relative">
-						<div class="tip"><span>Passwort falsch!</span></div>
+						<div class="error"><span>Passwort falsch!</span></div>
 					</div>
 				{% endif %}
 				
