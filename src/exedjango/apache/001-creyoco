@@ -7,6 +7,9 @@
 	Alias /media/ /home/dimitri/creyoco/src/exedjango/exeapp_media/
 	
 	Alias /static/ /home/dimitri/creyoco/src/exedjango/static/
+
+	WSGIScriptAlias /dimitri /home/dimitri/creyoco_dimitri/src/exedjango/apache/django.wsgi
 	
 	WSGIScriptAlias / /home/dimitri/creyoco/src/exedjango/apache/django.wsgi
+
 </VirtualHost>
