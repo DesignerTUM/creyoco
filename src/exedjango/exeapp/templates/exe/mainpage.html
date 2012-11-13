@@ -156,6 +156,14 @@ $(document).ready(function() {
 					{% endfor %}
 			</div>
 		</div>
+		<ul id="package_list">
+		  {% for package in package_list %}
+		  
+		    <li class='package' id="package{{ package.id }}">
+		      <a href="{{ package.get_absolute_url }}">{{ package.title }}</a>
+		    </li>
+		  {% endfor %}
+		</ul>
 	</div>
 		
 	<div id="content">
