@@ -80,7 +80,7 @@ if successful'''
 def create_package(request, package_name):
     user = User.objects.get(username=request.user.username)
     p = Package.objects.create(title=package_name, user=user)
-    return {'id': p.id, 'title': p.title}
+    return {'id': p.id, 'title': p.title, 'url': p.get_absolute_url()}
 
 
 @jsonrpc_method('package.delete_package', authenticated=True)

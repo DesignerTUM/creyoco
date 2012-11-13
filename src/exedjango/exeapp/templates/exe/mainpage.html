@@ -157,6 +157,9 @@ $(document).ready(function() {
 			</div>
 		</div>
 		<ul id="package_list">
+			<li class="new_package">
+				<a id="create_new_package">Create new package</a>
+			</li>
 		  {% for package_iter in package_list %}
 		  
 		    <li class='package {% if package_iter == package %}current_package{% endif %}'

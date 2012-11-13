@@ -171,13 +171,29 @@ jQuery(document).ready(function() {
 				      href: '/static/css/styles/' + $("#package_style").text() + '/content.css'
 				    });
                 });
+                
+                //
+                //Package overview handling
+                //
                 $(".remove_package").bind("click", delete_package);
+                $("#create_new_package").bind("click", create_package);
             });
 
 // Called after successful package deletion
 function callback_delete_package(id) {
   var package_li = $(".package[package_id=" + id + "]");
   package_li.remove();
+}
+
+// Promps a new package new and sens a "main.create_package" call via 
+// rpc
+function create_package(){
+  var package_title = prompt('Enter package title');
+    $.jsonRPC.request('create_package', [package_title], {
+      success: function(results){
+        window.open(results.result.url, "_self");
+      }
+    });
 }
 
 function delete_package(){
