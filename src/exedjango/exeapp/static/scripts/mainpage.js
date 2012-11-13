@@ -165,14 +165,36 @@ jQuery(document).ready(function() {
                 	$('#previewIFrame').contents().find("head").append("<link>");
                 	css = $('#previewIFrame').contents().find("head").children(":last");
                 	css.attr({
-      rel:  "stylesheet",
-      type: "text/css",
-      id: "preview",
-      href: '/static/css/styles/' + $("#package_style").text() + '/content.css'
-    });
-                })
+				      rel:  "stylesheet",
+				      type: "text/css",
+				      id: "preview",
+				      href: '/static/css/styles/' + $("#package_style").text() + '/content.css'
+				    });
+                });
+                $(".remove_package").bind("click", delete_package);
             });
-            
+
+// Called after successful package deletion
+function callback_delete_package(id) {
+  var package_li = $(".package[package_id=" + id + "]");
+  package_li.remove();
+}
+
+function delete_package(){
+    var package_id = $(this).parent().attr('package_id');
+    $.jsonRPC.request('delete_package', [package_id], {
+      success: function(results) {
+        var deleted_package_id = results.result.package_id;
+          if (deleted_package_id > 0) {
+            // Just a pre-caution that we remove the same package as the
+            // server
+          callback_delete_package(deleted_package_id);
+        }
+      }
+    })
+}
+
+
 // Adds a new node to current one
 function add_child_node() {
   

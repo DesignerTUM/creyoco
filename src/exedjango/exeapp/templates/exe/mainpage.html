@@ -159,8 +159,9 @@ $(document).ready(function() {
 		<ul id="package_list">
 		  {% for package in package_list %}
 		  
-		    <li class='package' id="package{{ package.id }}">
+		    <li class='package' package_id="{{ package.id }}">
 		      <a href="{{ package.get_absolute_url }}">{{ package.title }}</a>
+		      <a class="remove_package">Remove</a>
 		    </li>
 		  {% endfor %}
 		</ul>
