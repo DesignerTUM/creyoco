@@ -4,7 +4,7 @@
 
 {% load static %}
 
-{% block title %}Package Page: {{ package.title }}{% endblock %}
+{% block title %}{{ package.title }}{% endblock %}
 
 {% block head%}
 <!-- CSS -->
@@ -62,32 +62,42 @@
 		
 	<div id="content">
 		<h1>Willkommen bei creyoco!</h1>
-		<img style="margin-bottom:-258px;margin-left:747px;" src="{% get_static_prefix %}images/mz/authoring_shadow_top.png" alt="" />
+		<img style="margin-bottom:-180px;margin-left:747px;" src="{% get_static_prefix %}images/mz/authoring_shadow_top.png" alt="" />
 			
 		<div style="clear:both"></div>
     				
 		<div id="middle-row">
-			<div style="margin-top:90px;margin-left:50px;width:350px;float:left">
-				<div style="font-size:13px;font-weight:500;margin-bottom:10px">
+			<div style="margin-top:90px;margin-left:50px;margin-right:85px;width:262px;float:left;">
+				<div style="font-size:13px;font-weight:500;margin-bottom:25px">
 					Bereits Mitglied? <span style="color:rgba(0,0,0,0.5)"> Melde dich an!</span>
 				</div>
-				{% if form.errors %}
-				<p class="error">Sorry, that's not a valid username or password</p>
-				{% endif %}
-
+				
 				<form action='.' method='post'>
 				{% csrf_token %}
+				{% if form.errors %}
+					<div style="position:relative;">
+						<div class="tip"><span>Benutzername oder…</span></div>
+					</div>
+				{% endif %}
 					<input class="username" type="text" name="username" placeholder="Benutzername" id="username" style="display:block">
+					
+				{% if form.errors %}
+					<div style="position:relative">
+						<div class="tip"><span>Passwort falsch!</span></div>
+					</div>
+				{% endif %}
+				
 					<input class="password no_margin" type="password" name="password" placeholder="Passwort" id="password" style="">
 					
-					<input class="submit no_margin" type="submit" value="Einloggen" />
+					<input class="login_submit no_margin" type="submit" value="Einloggen" />
 					<input type="hidden" name="next" value="/" />
 				</form>
 				
 				<a class="forgot_pw" href="">Passwort vergessen?</a>
+
 			</div>
-			<div style="margin-top:90px;margin-right:50px;float:left;width:250px;">
-				<div style="font-size:13px;font-weight:500;margin-bottom:10px">
+			<div style="margin-top:90px;margin-right:50px;float:left;width:262px;">
+				<div style="font-size:13px;font-weight:500;margin-bottom:25px">
 					Neu bei creyoco? <span style="color:rgba(0,0,0,0.5)"> Registriere dich jetzt!</span>
 				</div>
 				<form action='.' method='post'>
