@@ -1,4 +1,5 @@
 *.db
+/src/exedjango/static/
 src/exedjango/exeapp_media/
 src/exedjango/exeapp_media_testing/
 src/exedjango/sqlite.*
