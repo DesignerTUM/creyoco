@@ -5,10 +5,12 @@ from jsonrpc import jsonrpc_method
 from exeapp.shortcuts import get_package_by_id_or_error, jsonrpc_authernticating_method
 
 import logging
+from django.contrib.auth.models import User
+from exeapp.models.package import Package
 
 log = logging.getLogger()
 
-__all__ = ['add_node', 'delete_current_node', 'change_current_node', 
+__all__ = ['add_node', 'delete_current_node', 'change_current_node',
            'rename_current_node', 'move_current_node_up']
 
 @jsonrpc_authernticating_method('package.add_child_node')
@@ -30,7 +32,7 @@ node'''
 @jsonrpc_authernticating_method('package.change_current_node')
 def change_current_node(request, package, node_id):
     '''Handles jsonRPC request "package.change_current_node". Changes current
-node to one with give node_id''' 
+node to one with give node_id'''
     package.set_current_node_by_id(node_id)
 
 @jsonrpc_authernticating_method('package.rename_current_node')
@@ -73,3 +75,19 @@ if successful'''
     moved = int(package.move_current_node_down())
     return {"moved" : moved}
 
+
+@jsonrpc_method('package.create_package', authenticated=True)
+def create_package(request, package_name):
+    user = User.objects.get(username=request.user.username)
+    p = Package.objects.create(title=package_name, user=user)
+    return {'id': p.id, 'title': p.title, 'url': p.get_absolute_url()}
+
+
+@jsonrpc_method('package.delete_package', authenticated=True)
+@get_package_by_id_or_error
+def delete_package(request, package):
+    '''Removes a package'''
+
+    package_id = package.id
+    package.delete()
+    return {"package_id": package_id}

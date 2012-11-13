@@ -1,8 +1,8 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseForbidden, HttpResponse, HttpResponseBadRequest,\
+from django.http import HttpResponseForbidden, HttpResponse, HttpResponseBadRequest, \
     Http404, HttpResponseRedirect, HttpResponseNotAllowed
-from django.core.servers.basehttp import FileWrapper 
+from django.core.servers.basehttp import FileWrapper
 from django.core.exceptions import ObjectDoesNotExist
 
 from exeapp.models import Package, User, idevice_store, Package
@@ -19,7 +19,7 @@ try:
     from cStringIO import StringIO
 except ImportError:
     from StringIO import StringIO
-    
+
 import logging
 
 log = logging.getLogger(__name__)
@@ -31,16 +31,16 @@ class PackagePropertiesForm(forms.ModelForm):
     form_type = "properties_form"
     form_type_field = forms.CharField(initial=form_type,
                                   widget=forms.HiddenInput())
-    
+
     class Meta:
         model = Package
         fields = ('title', 'author', 'email', 'description')
-        
+
 class DublinCoreForm(forms.ModelForm):
     form_type = "dublincore_form"
     form_type_field = forms.CharField(initial=form_type,
                                   widget=forms.HiddenInput())
-    
+
     class Meta:
         model = DublinCore
 
@@ -48,8 +48,8 @@ def generate_package_main(request, package, **kwargs):
     '''Generates main page, can take additional keyword args to
     create forms'''
 
-    
-    log.info("%s accesses package of %s" % (request.user.username, 
+
+    log.info("%s accesses package of %s" % (request.user.username,
                                             package.user.username))
     idevices = idevice_store.values()
     exporter_type_title_map = dict(((type, exporter.title) \
@@ -58,11 +58,13 @@ def generate_package_main(request, package, **kwargs):
                                  PackagePropertiesForm(instance=package))
     dublincore_form = kwargs.get(DublinCoreForm.form_type,
                                  DublinCoreForm(instance=package.dublincore))
+    user = User.objects.get(username=request.user.username)
+    package_list = Package.objects.filter(user=user)
     return render_to_response('exe/mainpage.html', locals())
 
 def change_properties(request, package):
     '''Parses post requests and applies changes to the package'''
-    form_type = request.POST['form_type_field'] 
+    form_type = request.POST['form_type_field']
     if form_type == PackagePropertiesForm.form_type:
         form = PackagePropertiesForm(request.POST, instance=package)
     elif form_type == DublinCoreForm.form_type:
@@ -80,7 +82,7 @@ def change_properties(request, package):
         else:
             return generate_package_main(request, package,
                                          **{form.form_type : form})
-    
+
 @login_required
 @get_package_by_id_or_error
 def package_main(request, package, properties_form=None):
@@ -93,7 +95,7 @@ def package_main(request, package, properties_form=None):
 @login_required
 @get_package_by_id_or_error
 def export(request, package, format):
-    
+
     file_obj = StringIO()
     try:
         exporter = exporter_factory(format, package, file_obj)

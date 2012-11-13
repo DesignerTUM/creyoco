@@ -122,7 +122,7 @@ $(document).ready(function() {
 	</div>
 		
 	<div id="box_left">
-		<h1>Themenkatalog</h2>
+		<h1>Themenkatalog</h1>
 		<div id="outline">
 			{% render_outline package %}
 			
@@ -156,6 +156,21 @@ $(document).ready(function() {
 					{% endfor %}
 			</div>
 		</div>
+		<ul id="package_list">
+			<li class="new_package">
+				<a id="create_new_package">Create new package</a>
+			</li>
+		  {% for package_iter in package_list %}
+		  
+		    <li class='package {% if package_iter == package %}current_package{% endif %}'
+		    											 package_id="{{ package_iter.id }}">
+		      <a href="{{ package_iter.get_absolute_url }}">{{ package_iter.title }}</a>
+		      {% if not package_iter == package %}
+		      <a class="remove_package">Remove</a>
+		      {% endif %}
+		    </li>
+		  {% endfor %}
+		</ul>
 	</div>
 		
 	<div id="content">
