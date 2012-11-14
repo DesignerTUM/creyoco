@@ -74,10 +74,9 @@
 				
 				<form action='.' method='post'>
 				{% csrf_token %}
+				
 					<input class="username" type="text" name="username" placeholder="Benutzername" id="username" style="display:block">
-					
 					<input class="password no_margin" type="password" name="password" placeholder="Passwort" id="password" style="">
-					
 					<input class="login_submit no_margin" type="submit" value="Einloggen" />
 					<input type="hidden" name="next" value="/" />
 				</form>
@@ -91,10 +90,15 @@
 				</div>
 				<form action='/accounts/register/' method='post'>
 					{% csrf_token %}
-					<input class="reg_username" type="text" name="username" placeholder="Benutzername" id="username">
 					{% if form.errors %}
 					<div style="position:relative;">
-						<div class="error"><span>Something went wrong...</span></div>
+						<p>Something went wrong.</p>
+					</div>
+					<input class="reg_username" type="text" name="username" placeholder="Benutzername" id="username">
+					{% endif %}
+					{% if form.email.errors %}
+						<div style="position:relative;">
+						<div class="error"><span>Geben Sie bitte eine valide email ein.</span></div>
 					</div>
 					{% endif %}
 					<input class="reg_email" type="text" name="email" placeholder="E-Mail" id="email">
