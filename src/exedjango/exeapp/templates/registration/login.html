@@ -100,7 +100,7 @@
 				<div style="font-size:13px;font-weight:500;margin-bottom:25px">
 					Neu bei creyoco? <span style="color:rgba(0,0,0,0.5)"> Registriere dich jetzt!</span>
 				</div>
-				<form action='/accounts/register/' method='post'>
+				<form action='/accounts/registration/' method='post'>
 					{% csrf_token %}
 					<input class="reg_username" type="text" name="username" placeholder="Benutzername" id="username">
 					<input class="reg_email" type="text" name="email" placeholder="E-Mail" id="email">
