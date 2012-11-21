@@ -149,12 +149,12 @@ jQuery(document).ready(function() {
                 $("#middle").tabs();
                 updateTitle();
                 
-                $("#authoringIFrame1").load(function() {
-                	var node_id = $("#authoringIFrame1").contents().find("#node_id").text();
-                	if (current_outline_id() != node_id){
-                		get_outline_pane().jstree("select_node", $("#node" + node_id), true);
-                	}
-                })
+                // $("#authoringIFrame1").load(function() {
+                	// var node_id = $("#authoringIFrame1").contents().find("#node_id").text();
+                	// if (current_outline_id() != node_id){
+                		// get_outline_pane().jstree("select_node", $("#node" + node_id), true);
+                	// }
+                // })
                 
                 $("#previewIFrame").load(function() {
                 	var node_id = $("#previewIFrame").contents().find("#node_id").text();
@@ -494,22 +494,6 @@ function get_current_node() {
 
 function get_outline_pane() {
   return $("#outline_pane");
-}
-
-// Reloads content of authoring part. Convinience function, just 
-// calls reload from authoring iframe
-function reload_authoring(){
-	if ("reload_authoring" in window.frames['authoringIFrame1']) {
-  		window.frames['authoringIFrame1'].reload_authoring();
-	} else {
-		window.frames['authoringIFrame1'].location = 'authoring/';
-	}
-	
-	if ("reload_authoring" in window.frames['previewIFrame']) {
-  		window.frames['previewIFrame'].reload_authoring();
-	} else {
-		window.frames['previewIFrame'].location = 'authoring/';
-	}
 }
 
 function setDocumentTitle(title) {

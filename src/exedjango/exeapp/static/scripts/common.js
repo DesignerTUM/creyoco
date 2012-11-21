@@ -153,7 +153,7 @@ function reload_authoring() {
 	// dynamically load scripts for idevices
 	get_media("./?partial=true&media=true");
 			
-	$("body").load('./?partial=true', function() {
+	$("#authoringIFrame1").load('authoring/?partial=true', function() {
 		initialize_authoring();
 		});
 }
@@ -182,7 +182,7 @@ function add_idevice(idevice_id) {
 	    url: "./?idevice_id=" + idevice_id,
 	    dataType: 'html',
 	    success: function (data) {
-	    	 $('body').append(data);
+	    	 $('#authoringIFrame1').append(data);
 	    	 initialize_authoring();
 	    	 }
 		});
