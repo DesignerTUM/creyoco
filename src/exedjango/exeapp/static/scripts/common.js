@@ -137,7 +137,7 @@ function initialize_authoring() {
  			tinyMCE.execCommand("mceRemoveControl", true, $(this).attr("id"));
  		});
  		if (responseText){
- 			get_media("./?idevice_id=" + idevice_id + "&media=true");
+ 			get_media(".authoring/?idevice_id=" + idevice_id + "&media=true");
 	 		$form.html(responseText);
  		} else {
  			reload_authoring();
@@ -151,7 +151,7 @@ function initialize_authoring() {
 
 function reload_authoring() {
 	// dynamically load scripts for idevices
-	get_media("./?partial=true&media=true");
+	get_media("authoring/?partial=true&media=true");
 			
 	$("#authoringIFrame1").load('authoring/?partial=true', function() {
 		initialize_authoring();
@@ -179,9 +179,9 @@ function get_media(request_url) {
 
 function insert_idevice(idevice_id) {
 	// dynamically load scripts for idevices
-	get_media("./?idevice_id=" + idevice_id + "&media=true");
+	get_media(".authoring/?idevice_id=" + idevice_id + "&media=true");
 	    $.ajax({
-	    url: "./?idevice_id=" + idevice_id,
+	    url: ".authoring/?idevice_id=" + idevice_id,
 	    dataType: 'html',
 	    success: function (data) {
 	    	 $('#authoringIFrame1').append(data);
