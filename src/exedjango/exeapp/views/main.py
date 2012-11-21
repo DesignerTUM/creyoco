@@ -33,4 +33,3 @@ def delete_package(request, package):
     package_id = package.id
     package.delete()
     return {"package_id" : package_id}
-
