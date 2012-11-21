@@ -316,7 +316,7 @@ function add_idevice() {
   var ideviceid = $("#idevice_pane").jstree("get_selected").find(">a").attr('ideviceid');
   $.jsonRPC.request('add_idevice', [get_package_id(), ideviceid],{
     success: function(results) {
-    	window.frames['authoringIFrame1'].add_idevice(
+    	insert_idevice(
     		results.result.idevice_id
     	);
     }

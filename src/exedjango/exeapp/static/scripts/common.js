@@ -166,16 +166,18 @@ function get_media(request_url) {
 		success: function(data){
 			$.each(data, function(key, val) {
 				if (/\.css$/.test(val)){
-					$('<link rel="stylesheet" href="' + val + '">')
-							.appendTo("head");
+					if (!($("link[href=" + val + "]"))) {
+						$('<link rel="stylesheet" href="' + val + '">')
+								.appendTo("head");
+					}
 				} else {
-				$.getScript(val);
+					$.getScript(val);
 				}
 			});
 		}});
 }	
 
-function add_idevice(idevice_id) {
+function insert_idevice(idevice_id) {
 	// dynamically load scripts for idevices
 	get_media("./?idevice_id=" + idevice_id + "&media=true");
 	    $.ajax({
