@@ -14,8 +14,8 @@ if DEBUG:
 
 import logging
 logging.basicConfig(
-            level = DEBUG and logging.DEBUG or logging.INFO,
-            format = '%(asctime)s %(levelname)s %(message)s',
+            level=DEBUG and logging.DEBUG or logging.INFO,
+            format='%(asctime)s %(levelname)s %(message)s',
             )
 
 ADMINS = (
@@ -29,11 +29,11 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': _get_file_from_root('sqlite.db'),                      # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'NAME': _get_file_from_root('sqlite.db'), # Or path to database file if using sqlite3.
+        'USER': '', # Not used with sqlite3.
+        'PASSWORD': '', # Not used with sqlite3.
+        'HOST': '', # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '', # Set to empty string for default. Not used with sqlite3.
     }
 }
 
@@ -93,7 +93,7 @@ MIDDLEWARE_CLASSES = (
     #'django.middleware.csrf.CsrfResponseMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    
+
     #handling of 403 exception
     'exedjango.base.middleware.Http403Middleware',
 )
@@ -110,6 +110,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'grappelli',
+    'registration',
     'django.contrib.admin',
     'django.contrib.staticfiles',
     'django_extensions',
@@ -121,6 +122,11 @@ INSTALLED_APPS = (
     'filebrowser',
 )
 
+ABSOLUTE_URL_OVERRIDES = {
+        'auth.user': lambda user: '/',
+        }
+
+
 STATIC_ROOT = _get_file_from_root('static')
 STATIC_URL = '/static/'
 STYLE_DIR = "%s/css/styles/" % STATIC_ROOT
@@ -130,13 +136,13 @@ TINYMCE_JS_ROOT = os.path.join(STATIC_ROOT, 'tiny_mce')
 
 TINYMCE_COMPRESSOR = True
 
-TINYMCE_DEFAULT_CONFIG = {   
-    "content_css" : "/static/css/extra.css", 
+TINYMCE_DEFAULT_CONFIG = {
+    "content_css" : "/static/css/extra.css",
      "strict_loading_mode" : True,
-    "apply_source_formatting" : True, 
-    "cleanup_on_startup" : False, 
-    "entity_encoding" : "raw", 
-    "gecko_spellcheck" : True, 
+    "apply_source_formatting" : True,
+    "cleanup_on_startup" : False,
+    "entity_encoding" : "raw",
+    "gecko_spellcheck" : True,
     "external_link_list_url" : "./link_list/",
      #"mode" : "specific_textareas",
      #"editor_selector" : "mceEditor",
@@ -164,6 +170,6 @@ FILEBROWSER_PATH_FILEBROWSER_MEDIA = "%s/filebrowser/" % STATIC_ROOT
 FILEBROWSER_URL_FILEBROWSER_MEDIA = "%sfilebrowser/" % STATIC_URL
 
 FILEBROWSER_URL_TINYMCE = "%stiny_mce/" % STATIC_URL
-FILEBROWSER_PATH_TINYMCE = "/tinymce/" 
+FILEBROWSER_PATH_TINYMCE = "/tinymce/"
 
 FILEBROWSER_CONVERT_FILENAME = False

@@ -13,7 +13,7 @@ urlpatterns = patterns('',
     (r'tinymce/', include('tinymce.urls')),
     (r'^exeapp/', include('exeapp.urls')),
     (r'^admin/', include(admin.site.urls)),
-    (r'^accounts/', include('exedjango.accountsurl')),
+    (r'^accounts/', include('registration.backends.simple.urls')),
 
 )
 
