@@ -16,21 +16,20 @@ class GenericBlock(Block):
     edit_template = "exe/idevices/generic/edit.html"
     preview_template = "exe/idevices/generic/preview.html"
     view_template = "exe/idevices/generic/export.html"
-    
+
     # Use these templates if the export and preview version of
     # an iDevice has the same content 
     use_common_content = False
     COMMON_PREVIEW = "exe/idevices/generic/common/preview.html"
     COMMON_EXPORT = "exe/idevices/generic/common/preview.html"
     content_template = ""
-    
-    
+
     def __init__(self, idevice, fields=()):
         super(GenericBlock, self).__init__(idevice)
         self.BlockForm = IdeviceFormFactory(model=self.idevice.__class__,
                                                 fields=fields)
-        
-        if not hasattr(self.idevice,'undo'): 
+
+        if not hasattr(self.idevice, 'undo'):
             self.idevice.undo = True
 
     def renderEdit(self, form=None):
@@ -54,7 +53,7 @@ class GenericBlock(Block):
         template = self.COMMON_EXPORT if self.use_common_content else\
                     self.view_template
         return self._render_view(template)
-        
+
     def _render_view(self, template, form=None):
         """
         Code reuse function for rendering the correct template
