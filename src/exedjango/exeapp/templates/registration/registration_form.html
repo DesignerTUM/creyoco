@@ -72,7 +72,7 @@
 					Bereits Mitglied? <span style="color:rgba(0,0,0,0.5)"> Melde dich an!</span>
 				</div>
 				
-				<form action='.' method='post'>
+				<form action='/accounts/login/' method='post'>
 				{% csrf_token %}
 				
 					<input class="username" type="text" name="username" placeholder="Benutzername" id="username" style="display:block">
@@ -124,7 +124,7 @@
 	<div id="footer">
 		<a href="#impressum">Impressum</a>
 		<img src="{% get_static_prefix %}images/mz/help.png" alt="Hilfe" align="right">
-		<a href="/accounts/registration/">Registration</a>
+		<a href="/accounts/register/">Registration</a>
 	</div>
 </div>
 {% endblock %}
