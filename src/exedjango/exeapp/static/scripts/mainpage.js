@@ -347,20 +347,6 @@ function handle_select_style() {
 	}});
 }
 
-function handle_export(e) {
-	var export_type = $("#export_selector").val();
-	var url = $("#export_link").attr("href").slice(0, -1) + export_type + "/";
-	/*var download_iframe = $("<iframe />")
-		.attr("src", url)
-		.hide().
-		appendTo(document);
-	
-	// download_iframe.delete();*/
-	// e.preventDefault();
-	window.location.href = url;
-	return false;
-}
-
 //handle renamed node event. Calls package.rename_node over rpc.
 function handle_renamed_current_node(e, data){
   var new_title = data.rslt.name;
