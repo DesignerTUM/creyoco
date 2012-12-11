@@ -153,7 +153,7 @@ function reload_authoring() {
 	// dynamically load scripts for idevices
 	get_media("authoring/?partial=true&media=true");
 			
-	$("#authoringIFrame1").load('authoring/?partial=true', function() {
+	$("#authoring").load('authoring/?partial=true', function() {
 		initialize_authoring();
 		});
 }
@@ -184,7 +184,7 @@ function insert_idevice(idevice_id) {
 	    url: ".authoring/?idevice_id=" + idevice_id,
 	    dataType: 'html',
 	    success: function (data) {
-	    	 $('#authoringIFrame1').append(data);
+	    	 $('#authoring').append(data);
 	    	 initialize_authoring();
 	    	 }
 		});
@@ -308,7 +308,7 @@ function addImage(elementId) {
         var path  = document.getElementById('path'+elementId);
         path.value = imagePath;
         image.src  = 'file://'+imagePath;
-        var theForm = top["authoringIFrame1"].document.getElementById('contentForm')
+        var theForm = top["authoring"].document.getElementById('contentForm')
         if (!theForm) {
             theForm = document.getElementById('contentForm')
         }
@@ -328,7 +328,7 @@ function addFeedbackImage(elementId) {
         var path  = document.getElementById('path'+elementId);
         path.value = imagePath;
         image.src  = 'file://'+imagePath;
-        var theForm = top["authoringIFrame1"].document.getElementById('contentForm')
+        var theForm = top["authoring"].document.getElementById('contentForm')
         if (!theForm) {
             theForm = document.getElementById('contentForm')
         }
@@ -355,7 +355,7 @@ function addJpgImage(elementId) {
         var path  = document.getElementById('path'+elementId);
         path.value = imagePath;
         image.src  = 'file://'+imagePath;
-        var theForm = top["authoringIFrame1"].document.getElementById('contentForm')
+        var theForm = top["authoring"].document.getElementById('contentForm')
         if (!theForm) 
             theForm = document.getElementById('contentForm')
         theForm.action.value = "addJpgImage"
@@ -826,7 +826,7 @@ function uploadFile(blockId) {
         var path  = document.getElementById('path'+blockId);
         path.value = fp.file.path;
     }
-    var theForm = top["authoringIFrame1"].document.getElementById('contentForm')
+    var theForm = top["authoring"].document.getElementById('contentForm')
     if (!theForm) {
         // try and find the form for the authoring page
         theForm = document.getElementById('contentForm')
@@ -899,7 +899,7 @@ function getContentForm() {
     var contentForm = $("#contentForm");
     if (contentForm.length == 0) {
         //we are in main window - return contentForm from IFrame
-        return $("#authoringIFrame1").contents().find("#contentForm");
+        return $("#authoring").contents().find("#contentForm");
     } else {
         //we are in IFrame
         return contentForm;

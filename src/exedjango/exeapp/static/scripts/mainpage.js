@@ -343,7 +343,7 @@ function handle_select_style() {
 	$.jsonRPC.request("set_package_style", [get_package_id(), $("#style_selector").val()],
 	{success: function() {
 		// fully reload iframe to apply new style sheets
-		window.frames.authoringIFrame1.location = 'authoring/';
+		window.frames.authoring.location = 'authoring/';
 	}});
 }
 
