@@ -92,20 +92,46 @@
 					{% csrf_token %}
 					{% if form.errors %}
 					<div style="position:relative;">
-						<p>Something went wrong.</p>
+					<!--	<p>Something went wrong.</p>-->
 					</div>
-					<input class="reg_username" type="text" name="username" placeholder="Benutzername" id="username">
 					{% endif %}
+					
+					{% if form.username.errors %}
+					<div style="position:relative;">
+						<div class="error-right"><span>Bitte geben Sie einen Benutzernamen an.</span></div>
+					</div>
+					{% endif %}
+					<input class="reg_username" type="text" name="username" placeholder="Benutzername" id="username" value="{{ form.username.value|default_if_none:"" }}">
+					
 					{% if form.email.errors %}
-						<div style="position:relative;">
-						<div class="error"><span>Geben Sie bitte eine valide email ein.</span></div>
+					<div style="position:relative;">
+						<div class="error-right"><span>Bitte geben Sie eine valide email ein.</span></div>
 					</div>
 					{% endif %}
-					<input class="reg_email" type="text" name="email" placeholder="E-Mail" id="email">
+					<input class="reg_email" type="text" name="email" placeholder="E-Mail" id="email" value="{{ form.email.value|default_if_none:"" }}">
+										{% if form.password2.value == "" %}
+					{% else %}
+					{% if form.password1.value == "" %}
+					{% else %}
+					{% if form.password2.value != form.password1.value %}
+					<div style="position:relative;">
+						<div class="error-right"><span>Die Passwörter stimmten nicht überein.</span></div>
+					</div>
+					{% endif %}{% endif %}{% endif %}
+					{% if form.password1.errors %}
+					<div style="position:relative;">
+						<div class="error-right"><span>Bitte geben Sie ein Passwort ein.</span></div>
+					</div>
+					{% endif %}
 					<input class="reg_password" type="password" name="password1" placeholder="Passwort" id="password">
+					
+					{% if form.password2.errors %}
+					<div style="position:relative;">
+						<div class="error-right"><span>Bitte wiederholen Sie das Passwort.</span></div>
+					</div>
+					{% endif %}
 					<input class="reg_password_return" type="password" name="password2" placeholder="Passwort wiederholen" id="password">
-					
-					
+				
 					<input class="reg_submit" type="submit" value="Benutzerkonto erstellen" />
 					<input type="hidden" name="next" value="/" />
 				</form>
