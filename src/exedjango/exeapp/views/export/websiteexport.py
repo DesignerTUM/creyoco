@@ -68,6 +68,7 @@ class WebsiteExport(object):
         Cleans up the previous packages pages and performs the export
         """
         self.create_pages()
+        self.save_pages()
 
         self.copy_files()
         # Zip up the website package
@@ -123,6 +124,7 @@ class WebsiteExport(object):
                                           **additional_kwargs))
         self.generate_pages(self.package.root, 2, additional_kwargs)
 
+    def save_pages(self):
         for page in self.pages:
             page.save(self.output_dir)
 
