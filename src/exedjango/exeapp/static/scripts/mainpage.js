@@ -505,3 +505,8 @@ function setEditorsWidth() {
 	var width = prompt("Enter editor's new width. 0 or empty to set it to 100%");
 	$.jsonRPC('setEditorsWidth', [get_package_id(),'',width]);
 }
+
+//Set the page title
+function updateTitle() {
+	;
+}

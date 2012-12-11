@@ -18,24 +18,6 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 // ===========================================================================
 
-// This module is for the common Javascript used in the authoring webpage.
-
-// Called upon loading the page this function clears the hidden
-// action and object fields so they can be used by submitLink
-var objBrowse = navigator.appName;
-
-// An array of js strings to evaluate on document load
-var onLoadHandlers = [clearHidden, window.parent.enableButtons];
-var beforeSubmitHandlers = new Array();
-
-// Called on document load
-function onLoadHandler() {
-    runFuncArray(onLoadHandlers)
-}
-
-curr_edits_math_num = 1
-// for unique mimetex images from exemath. will reset to #1 w/ each new edit, 
-// but will create  unique math# within each edit session to the previews dir.
 
 // Strings to be translated
 SELECT_AN_IMAGE    = "Select an image";
