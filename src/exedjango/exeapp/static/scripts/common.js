@@ -166,7 +166,7 @@ function get_media(request_url) {
 		success: function(data){
 			$.each(data, function(key, val) {
 				if (/\.css$/.test(val)){
-					if (!($("link[href=" + val + "]"))) {
+					if (!($("link[href='" + val + "']")).length > 0) {
 						$('<link rel="stylesheet" href="' + val + '">')
 								.appendTo("head");
 					}
