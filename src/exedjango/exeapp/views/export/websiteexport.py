@@ -25,26 +25,26 @@ WebsiteExport will export a package as a website of HTML pages
 from django.conf import settings
 
 import logging
-import re
-import imp
 from utils.path import Path
-from exeapp.views.export.websitepage   import WebsitePage
-from zipfile                  import ZipFile, ZIP_DEFLATED
+from exeapp.views.export.websitepage import WebsitePage
+from zipfile import ZipFile, ZIP_DEFLATED
 import tempfile
 
 
 def _(value):
+    """Place holder for translation"""
     return value
+
 
 log = logging.getLogger(__name__)
 
-# ===========================================================================
+
 class WebsiteExport(object):
     """
     WebsiteExport will export a package as a website of HTML pages
     """
     title = "Website (Zip)"
-    
+
     def __init__(self, package, file_obj):
         """
         'style_dir' is the directory where we can copy the stylesheets from
@@ -59,17 +59,17 @@ class WebsiteExport(object):
         self.file_obj = file_obj
         self.media_dir = Path(package.user.get_profile().media_path)
         self.page_class = WebsitePage
-        
+
         self.output_dir = Path(tempfile.mkdtemp())
 
     def export(self):
-        """ 
+        """
         Export web site
         Cleans up the previous packages pages and performs the export
         """
         self.create_pages()
 
-        self.copyFiles()
+        self.copy_files()
         # Zip up the website package
         self.doZip()
         # Clean up the temporary dir
@@ -81,75 +81,75 @@ class WebsiteExport(object):
         """
         zipped = ZipFile(self.file_obj, "w")
         for scormFile in self.output_dir.files():
-            zipped.write(scormFile, scormFile.basename().encode('utf8'), ZIP_DEFLATED)
+            zipped.write(scormFile, scormFile.basename().\
+                         encode('utf8'), ZIP_DEFLATED)
         zipped.close()
-        
 
     def copy_style_files(self):
-        styleFiles = ["%s/../base.css" % self.style_dir]
-        styleFiles.append("%s/../popup_bg.gif" % self.style_dir)
-        styleFiles += self.style_dir.files("*.css")
-        styleFiles += self.style_dir.files("*.jpg")
-        styleFiles += self.style_dir.files("*.gif")
-        styleFiles += self.style_dir.files("*.svg")
-        styleFiles += self.style_dir.files("*.png")
-        styleFiles += self.style_dir.files("*.js")
-        styleFiles += self.style_dir.files("*.html")
-        self.style_dir.copylist(styleFiles, self.output_dir)
-
+        """Copy style fiels to the export package"""
+        style_files = ["%s/../base.css" % self.style_dir]
+        style_files.append("%s/../popup_bg.gif" % self.style_dir)
+        style_files += self.style_dir.files("*.css")
+        style_files += self.style_dir.files("*.jpg")
+        style_files += self.style_dir.files("*.gif")
+        style_files += self.style_dir.files("*.svg")
+        style_files += self.style_dir.files("*.png")
+        style_files += self.style_dir.files("*.js")
+        style_files += self.style_dir.files("*.html")
+        self.style_dir.copylist(style_files, self.output_dir)
 
     def copy_licence(self):
+        """Copy licence file"""
         if self.package.license == "GNU Free Documentation License":
             # include a copy of the GNU Free Documentation Licence
-            self.templatesDir / 'fdl.html'.copyfile(self.output_dir / 'fdl.html')
+            (self.templatesDir / 'fdl.html').copyfile(\
+                                    self.output_dir / 'fdl.html')
 
-    def copyFiles(self):
+    def copy_files(self):
         """
         Copy all the files used by the website.
         """
         # Copy the style sheet files to the output dir
         self.copy_style_files()
         self.copy_resources()
-        self.scripts_dir.copylist(('libot_drag.js','jquery.js'), 
+        self.scripts_dir.copylist(('libot_drag.js', 'jquery.js'),
                                   self.output_dir)
         self.copy_players()
-        
+
         self.copy_licence()
-
-
 
     def create_pages(self, additional_kwargs={}):
         self.pages.append(self.page_class(self.package.root, 1, exporter=self,
                                           **additional_kwargs))
         self.generate_pages(self.package.root, 2, additional_kwargs)
-        
+
         for page in self.pages:
             page.save(self.output_dir)
-            
+
     def copy_players(self):
-        hasFlowplayer = False
-        hasMagnifier = False
-        hasXspfplayer = False
-        isBreak = False
-        
+        has_flowplayer = False
+        has_magnifier = False
+        has_xspfplayer = False
+        is_break = False
+
         for page in self.pages:
-            if isBreak:
+            if is_break:
                 break
             for idevice in page.node.idevices.all():
                 resources = idevice.as_child().system_resources
-                if (hasFlowplayer and hasMagnifier and hasXspfplayer):
-                    isBreak = True
+                if (has_flowplayer and has_magnifier and has_xspfplayer):
+                    is_break = True
                     break
-                if not hasFlowplayer:
+                if not has_flowplayer:
                     if 'flowPlayer.swf' in resources:
-                        hasFlowplayer = True
-                if not hasMagnifier:
+                        has_flowplayer = True
+                if not has_magnifier:
                     if 'magnifier.swf' in resources:
-                        hasMagnifier = True
-                if not hasXspfplayer:
+                        has_magnifier = True
+                if not has_xspfplayer:
                     if 'xspf_player.swf' in resources:
-                        hasXspfplayer = True
-                        
+                        has_xspfplayer = True
+
     def copy_resources(self):
         view_media = []
         for page in self.pages:
@@ -160,22 +160,17 @@ class WebsiteExport(object):
         Path(settings.STATIC_ROOT).copylist(view_media, self.output_dir)
         self.media_dir.copylist(self.package.resources, self.output_dir)
 
-    
-    
-    
     def generate_pages(self, node, depth, kwargs={}):
         """
         Recursively generate pages and store in pages member variable
 for retrieving later. Kwargs will be used at page creation.
         """
         for child in node.children.all():
-            
-            
-            page = self.page_class(child, depth, 
-                           exporter = self,
+            page = self.page_class(child, depth,
+                           exporter=self,
                            has_children=child.children.exists(),
                            **kwargs)
-            
+
             last_page = self.pages[-1] if self.pages else None
             if last_page:
                 page.prev_page = last_page
