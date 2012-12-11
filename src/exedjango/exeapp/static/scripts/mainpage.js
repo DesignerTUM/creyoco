@@ -109,8 +109,6 @@ jQuery(document).ready(function() {
                 // handle theme selection
                 set_current_style()
                 $("#style_selector").change(handle_select_style);
-                $("#export_link").click(handle_export);
-                
                 
                 // Initialize idevice Tree
                 $("#idevice_pane").jstree({"themes" : {	"dots" : false,
