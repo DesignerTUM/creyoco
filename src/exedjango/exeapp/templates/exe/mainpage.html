@@ -11,15 +11,14 @@
 <!-- CSS -->
 <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/ui-lightness/jquery-ui-1.8.4.custom.css" />
 <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/mz/style.min.css" />
-<link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/styles/base.css">
-<link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/editing.css">
-<!--<link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/mz/jquery.qtip.css" />-->
+<!--<link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/styles/base.css">
+<link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/editing.css">-->
 <!-- SCRIPTS -->
 <script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.js"></script>
 <script type="text/javascript" src="{% get_static_prefix %}scripts/jquery-ui.custom.min.js"></script>
 <script type="text/javascript" src="{% get_static_prefix %}scripts/mainpage.js"></script>
+<script type='text/javascript' src="{% get_static_prefix %}scripts/jquery.jsonrpc.js"></script>
 <script type="text/javascript" src="{% get_static_prefix %}scripts/common.js"></script>
-<script type='text/javascript' src='{% get_static_prefix %}scripts/jquery.jsonrpc.js'></script>
 <script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.form.js"></script>
 <script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.cookie.js"></script>
 <script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.jstree.js"></script>
@@ -129,12 +128,10 @@ $(document).ready(function() {
 <div id="wrapper">
 	<div id="header">
 		creyoco
-		<!--{% include "exe/export_type_selector.html" %}
-		<a href="/accounts/logout/">Logout</a>-->
 	</div>
 		
 	<div id="box_left">
-		<h2>Themenkatalog</h2>
+		<!--<h2>Themenkatalog</h2>-->
 		<select data-placeholder="Wählen Sie einen Kurs" class="chzn-select" style="width:100%" tabindex="-1" id="select_course">
 			<option value="{{ package.get_absolute_url }}">{{ package.title }}</option>
 			{% for package_iter in package_list %}
@@ -172,7 +169,7 @@ $(document).ready(function() {
 			
 			<div id="download" style="margin-left:0;display:none;background-color:white;width:130px;border:1px solid rgb(155, 155, 155)">
 					{% for type, title in exporter_type_title_map.items %}
-						<a class="export_link" href="{% url exeapp.views.package.export package.id type %}">{{title}}</a>
+						<a class="export_link" href="{% url exeapp.views.package.export package.id "" %}{{type}}">{{title}}</a>
 					{% endfor %}
 			</div>
 		</div>
@@ -208,7 +205,7 @@ $(document).ready(function() {
 					</span>
 				
 					<span class="button">
-						<a id="preview_button" href="#" onclick="$('#middle-row').children().hide();$('#preview').show();$('#navi span').removeClass('button_active');$(this).parent().addClass('button_active');">Vorschau</a>
+						<a href="#" onclick="$('#middle-row').children().hide();$('#preview').show();$('#navi span').removeClass('button_active');$(this).parent().addClass('button_active');">Vorschau</a>
 					</span>
 				</div>
 			
@@ -229,7 +226,7 @@ $(document).ready(function() {
 			<div style="width:100%;min-height:600px;" id="authoring" name="authoringIFrame1"></div>
 				
 				<div id="preview" style="display:none">
-					<iframe style="width:100%;height:600px;" scrolling="auto" id="previewIFrame" name="previewIFrame" src=""></iframe>
+					<iframe style="width:100%;height:600px;" scrolling="auto" id="previewIFrame" name="previewIFrame"></iframe>
 				</div>
 				
 				<div id="properties" style="display:none;">
