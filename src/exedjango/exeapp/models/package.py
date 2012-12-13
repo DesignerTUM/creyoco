@@ -31,14 +31,14 @@ from django.contrib.auth.models import User
 
 import logging
 import time
-import zipfile 
+import zipfile
 import re
 from collections import defaultdict
 from xml.dom                   import minidom
 from exedjango.utils.path      import Path, TempDirPath, toUnicode
 from exeapp.models        import Node
 #from exe.engine.genericidevice import GenericIdevice
-                                      
+
 from BeautifulSoup  import BeautifulSoup
 
 log = logging.getLogger()
@@ -51,23 +51,23 @@ def _(value):
 def clonePrototypeIdevice(title):
     idevice = None
 
-    for prototype in G.application.ideviceStore.getIdevices(): 
+    for prototype in G.application.ideviceStore.getIdevices():
         if prototype.get_title() == title:
-            log.debug('have prototype of:' + prototype.get_title()) 
-            idevice = prototype.clone() 
+            log.debug('have prototype of:' + prototype.get_title())
+            idevice = prototype.clone()
             idevice.edit = False
-            break 
+            break
 
     return idevice
 
-def burstIdevice(idev_type, i, node): 
+def burstIdevice(idev_type, i, node):
     # given the iDevice type and the BeautifulSoup fragment i, burst it:
     idevice = clonePrototypeIdevice(idev_type)
     if idevice is None:
         log.warn("unable to clone " + idev_type + " idevice")
         freetext_idevice = clonePrototypeIdevice('Free Text')
         if freetext_idevice is None:
-            log.error("unable to clone Free Text for " + idev_type 
+            log.error("unable to clone Free Text for " + idev_type
                     + " idevice")
             return
         idevice = freetext_idevice
@@ -84,59 +84,59 @@ def loadNodesIdevices(node, s):
     body = soup.find('body')
 
     if body:
-        idevices = body.findAll(name='div', 
+        idevices = body.findAll(name='div',
                 attrs={'class' : re.compile('Idevice$') })
         if len(idevices) > 0:
-            for i in idevices: 
+            for i in idevices:
                 # WARNING: none of the idevices yet re-attach their media,
                 # but they do attempt to re-attach images and other links.
 
-                if i.attrMap['class']=="activityIdevice":
+                if i.attrMap['class'] == "activityIdevice":
                     idevice = burstIdevice('Activity', i, node)
-                elif i.attrMap['class']=="objectivesIdevice":
+                elif i.attrMap['class'] == "objectivesIdevice":
                     idevice = burstIdevice('Objectives', i, node)
-                elif i.attrMap['class']=="preknowledgeIdevice":
+                elif i.attrMap['class'] == "preknowledgeIdevice":
                     idevice = burstIdevice('Preknowledge', i, node)
-                elif i.attrMap['class']=="readingIdevice":
+                elif i.attrMap['class'] == "readingIdevice":
                     idevice = burstIdevice('Reading Activity', i, node)
                 # the above are all Generic iDevices;
                 # below are all others:
-                elif i.attrMap['class']=="RssIdevice":
+                elif i.attrMap['class'] == "RssIdevice":
                     idevice = burstIdevice('RSS', i, node)
-                elif i.attrMap['class']=="WikipediaIdevice":
+                elif i.attrMap['class'] == "WikipediaIdevice":
                     # WARNING: Wiki problems loading images with accents, etc:
                     idevice = burstIdevice('Wiki Article', i, node)
-                elif i.attrMap['class']=="ReflectionIdevice":
+                elif i.attrMap['class'] == "ReflectionIdevice":
                     idevice = burstIdevice('Reflection', i, node)
-                elif i.attrMap['class']=="GalleryIdevice":
+                elif i.attrMap['class'] == "GalleryIdevice":
                     # WARNING: Gallery problems with the popup html:
                     idevice = burstIdevice('Image Gallery', i, node)
-                elif i.attrMap['class']=="ImageMagnifierIdevice":
+                elif i.attrMap['class'] == "ImageMagnifierIdevice":
                     # WARNING: Magnifier missing major bursting components:
                     idevice = burstIdevice('Image Magnifier', i, node)
-                elif i.attrMap['class']=="AppletIdevice":
+                elif i.attrMap['class'] == "AppletIdevice":
                     # WARNING: Applet missing file bursting components:
                     idevice = burstIdevice('Java Applet', i, node)
-                elif i.attrMap['class']=="ExternalUrlIdevice":
+                elif i.attrMap['class'] == "ExternalUrlIdevice":
                     idevice = burstIdevice('External Web Site', i, node)
-                elif i.attrMap['class']=="ClozeIdevice":
+                elif i.attrMap['class'] == "ClozeIdevice":
                     idevice = burstIdevice('Cloze Activity', i, node)
-                elif i.attrMap['class']=="FreeTextIdevice":
+                elif i.attrMap['class'] == "FreeTextIdevice":
                     idevice = burstIdevice('Free Text', i, node)
-                elif i.attrMap['class']=="CasestudyIdevice":
+                elif i.attrMap['class'] == "CasestudyIdevice":
                     idevice = burstIdevice('Case Study', i, node)
-                elif i.attrMap['class']=="MultichoiceIdevice":
+                elif i.attrMap['class'] == "MultichoiceIdevice":
                     idevice = burstIdevice('Multi-choice', i, node)
-                elif i.attrMap['class']=="MultiSelectIdevice":
+                elif i.attrMap['class'] == "MultiSelectIdevice":
                     idevice = burstIdevice('Multi-select', i, node)
-                elif i.attrMap['class']=="QuizTestIdevice":
+                elif i.attrMap['class'] == "QuizTestIdevice":
                     idevice = burstIdevice('SCORM Quiz', i, node)
-                elif i.attrMap['class']=="TrueFalseIdevice":
+                elif i.attrMap['class'] == "TrueFalseIdevice":
                     idevice = burstIdevice('True-False Question', i, node)
                 else:
                     # NOTE: no custom idevices burst yet,
                     # nor any deprecated idevices. Just burst into a FreeText:
-                    log.warn("unburstable idevice " + i.attrMap['class'] + 
+                    log.warn("unburstable idevice " + i.attrMap['class'] +
                             "; bursting into Free Text")
                     idevice = burstIdevice('Free Text', i, node)
 
@@ -192,21 +192,21 @@ def loadNode(pass_num, resourceDir, zippedFile, node, doc, item, level):
                         # let these be re-created upon bursting.
                         if pass_num == 0:
                             # 1st pass call to unzip the resources:
-                            log.debug('ignoring resource file: '+ filename)
+                            log.debug('ignoring resource file: ' + filename)
                     else:
                         if pass_num == 0:
                             # 1st pass call to unzip the resources:
                             try:
                                 zipinfo = zippedFile.getinfo(filename)
                                 log.debug('unzipping resource file: '
-                                        + resourceDir/filename )
-                                outFile = open(resourceDir/filename, "wb") 
-                                outFile.write(zippedFile.read(filename)) 
-                                outFile.flush() 
+                                        + resourceDir / filename)
+                                outFile = open(resourceDir / filename, "wb")
+                                outFile.write(zippedFile.read(filename))
+                                outFile.flush()
                                 outFile.close()
                             except:
                                 log.warn('error unzipping resource file: '
-                                        + resourceDir/filename )
+                                        + resourceDir / filename)
                         ##########
                         # WARNING: the resource is now in the resourceDir,
                         # BUT it is NOT YET added into any of the project,
@@ -218,7 +218,7 @@ def loadNode(pass_num, resourceDir, zippedFile, node, doc, item, level):
 
     # process this node's children
     for subitem in item.childNodes:
-        if subitem.nodeName == 'item': 
+        if subitem.nodeName == 'item':
             # for the first pass, of unzipping only, do not
             # create any child nodes, just cruise on with this one:
             next_node = node
@@ -226,14 +226,14 @@ def loadNode(pass_num, resourceDir, zippedFile, node, doc, item, level):
                 # if this is actually loading the nodes:
                 next_node = node.create_child()
             loadNode(pass_num, resourceDir, zippedFile, next_node,
-                    doc, subitem, level+1)
+                    doc, subitem, level + 1)
 
 def loadCC(zippedFile, filename):
     """
     Load an IMS Common Cartridge or Content Package from filename
     """
     package = Package(Path(filename).namebase)
-    xmldoc = minidom.parseString( zippedFile.read('imsmanifest.xml')) 
+    xmldoc = minidom.parseString(zippedFile.read('imsmanifest.xml'))
 
     organizations_list = xmldoc.getElementsByTagName('organizations')
     level = 0
@@ -245,7 +245,7 @@ def loadCC(zippedFile, filename):
             for organization in organization_list:
                 for item in organization.childNodes:
                     if item.nodeName == 'item':
-                        loadNode(pass_num, package.resourceDir, zippedFile, 
+                        loadNode(pass_num, package.resourceDir, zippedFile,
                                 package.root, xmldoc, item, level)
     return package
 
@@ -266,13 +266,13 @@ class DublinCore(models.Model):
     relation = models.CharField(blank=True, max_length=256)
     coverage = models.CharField(blank=True, max_length=128)
     rights = models.CharField(blank=True, max_length=256)
-    
+
     class Meta:
         app_label = "exeapp"
 
 class PackageManager(models.Manager):
-    
-    
+
+
     def create(self, *args, **kwargs):
         package = Package(*args, **kwargs)
         dublincore = DublinCore.objects.create()
@@ -281,8 +281,8 @@ class PackageManager(models.Manager):
         root = Node(package=package, parent=None,
                     title="Home", is_current_node=True, is_root=True)
         root.save()
-        
-        
+
+
         return package
 
 class Package(models.Model):
@@ -290,39 +290,39 @@ class Package(models.Model):
     Package represents the collection of resources the user is editing
 i.e. the "package".
     """
-    
-    DEFAULT_LEVEL_NAMES  = ["Topic", "Section", "Unit"]
-    
-    
+
+    DEFAULT_LEVEL_NAMES = ["Topic", "Section", "Unit"]
+
+
     title = models.CharField(max_length=100)
-    
+
     user = models.ForeignKey(User)
-      
+
     author = models.CharField(max_length=50, blank=True)
     email = models.EmailField(max_length=50, blank=True)
     description = models.CharField(max_length=256, blank=True)
-    
-    backgroundImg = models.ImageField(upload_to='background', 
+
+    backgroundImg = models.ImageField(upload_to='background',
                                            blank=True, null=True)
     backgroundImgTile = models.BooleanField(default=False)
     footer = models.CharField(max_length=100, blank=True)
-    footerImg     = models.ImageField(upload_to='footer', 
+    footerImg = models.ImageField(upload_to='footer',
                                            blank=True, null=True)
-    
+
     license = models.CharField(max_length=50, blank=True)
     style = models.CharField(max_length=20, default="default")
-    resourceDir = models.FileField(upload_to="resources", 
+    resourceDir = models.FileField(upload_to="resources",
                                     blank=True, null=True)
     dublincore = models.OneToOneField(DublinCore)
-    
+
     level1 = models.CharField(max_length=20, default=DEFAULT_LEVEL_NAMES[0])
     level2 = models.CharField(max_length=20, default=DEFAULT_LEVEL_NAMES[1])
     level3 = models.CharField(max_length=20, default=DEFAULT_LEVEL_NAMES[2])
-    
-    
-    
+
+
+
     objects = PackageManager()
-    
+
         # self.dublinCore    = DublinCore()
         # self.license       = "None"
         # self.footer        = ""
@@ -330,16 +330,16 @@ i.e. the "package".
         # self.resourceDir = TempDirPath()
 
     # Property Handlers
-    
+
     def set_current_node_by_id(self, node_id):
         try:
             node = Node.objects.get(pk=node_id, package=self)
-            self.current_node = node 
+            self.current_node = node
         except Node.DoesNotExist:
             raise KeyError("Could not find node %s" % node_id)
-        
+
     def set_current_node_by_unique_name(self, node_name):
-        
+
         try:
             if node_name == 'index':
                 node = self.root
@@ -352,14 +352,14 @@ i.e. the "package".
                            % node_name)
         else:
             self.current_node = node
-        
-        
+
+
     def add_child_node(self):
         '''Creates a child node of the current node, current node stays
 the same'''
-        node = self.current_node.create_child() 
+        node = self.current_node.create_child()
         return node
-            
+
     def delete_current_node(self):
         '''Removes current node. Sets current node to deleted node's 
 parent'''
@@ -370,7 +370,7 @@ parent'''
             return "1"
         else:
             return "0"
-    
+
     def rename_current_node(self, new_title):
         '''Renames current node. Returns new name, if it's changed, old name else'''
         node = self.current_node
@@ -378,39 +378,39 @@ parent'''
             node.title = new_title
             node.save()
         return node.title
-    
+
     def promote_current_node(self):
         '''Moves current node one step up in the hierarchie. Returns True if
 successful'''
         return self.current_node.promote()
-    
+
     def demote_current_node(self):
         '''Moves current node one step up in the hierarchie. Returns True if
 successful'''
         return self.current_node.demote()
-    
+
     def move_current_node_up(self):
         '''Moves current node up on the same level. Returns true if 
 successful'''
         return self.current_node.up()
-    
+
     def move_current_node_down(self):
         '''Moves current node down on the same level. Returns true if 
 successful'''
         return self.current_node.down()
-    
+
     def add_idevice(self, idevice_type):
         '''Adds idevice by a given type to the current node.
 Throws KeyError, if idevice_type is not found'''
-        idevice = self.current_node.add_idevice(idevice_type) 
+        idevice = self.current_node.add_idevice(idevice_type)
         return idevice
-        
+
     def get_idevice_for_partial(self, idevice_id):
         '''Returns a idevice only in case its on the current node of this
 package'''
         return self.current_node.idevices.get(id=int(idevice_id))
-            
-        
+
+
     def handle_action(self, idevice_id, action, data):
         '''Delegates a action to current_node'''
         return self.current_node.handle_action(idevice_id,
@@ -430,7 +430,7 @@ package'''
             self._backgroundImg = Resource(self, Path(imgFile))
         else:
             self._backgroundImg = u''
-    
+
 
     def get_footerImg(self):
         """Get the footer image for this package"""
@@ -457,7 +457,7 @@ package'''
     @property
     def current_node(self):
         return self.nodes.get(is_current_node=True)
-    
+
     @current_node.setter
     def current_node(self, node):
         old_node = self.current_node
@@ -469,11 +469,11 @@ package'''
     def set_style(self, style):
         self.style = style
         self.save()
-        
+
     @property
     def root(self):
         return self.nodes.get(is_root=True)
-    
+
     @property
     def resources(self):
         # ask each node to its resources to desceare coupling
@@ -482,15 +482,15 @@ package'''
         for node in self.nodes.all():
             resources.update(node.resources)
         return resources
-    
-    
+
+
     @property
     def link_list(self):
         link_list = []
         for node in self.nodes.all():
             link_list += node.link_list
-        return link_list 
-        
+        return link_list
+
     def levelName(self, level):
         """
         Return the level name
@@ -499,7 +499,7 @@ package'''
             return _(self._levelNames[level])
         else:
             return _(u"?????")
-        
+
 
     def updateRecentDocuments(self, filename):
         """
@@ -508,7 +508,7 @@ package'''
         # TODO Fix the function
         return 0
         # Don't update the list for the generic.data "package"
-        genericData = G.application.config.configDir/'idevices'/'generic.data'
+        genericData = G.application.config.configDir / 'idevices' / 'generic.data'
         if genericData.isfile() or genericData.islink():
             if Path(filename).samefile(genericData):
                 return
@@ -528,8 +528,8 @@ package'''
         Clones and extracts the currently selected node into a new package.
         """
         newPackage = Package('NoName') # Name will be set once it is saved..
-        newPackage.title  = self.current_node.title
-        newPackage.style  = self.style
+        newPackage.title = self.current_node.title
+        newPackage.style = self.style
         newPackage.author = self.author
         newPackage._nextNodeId = self._nextNodeId
         # Copy the nodes from the original package
@@ -549,11 +549,11 @@ package'''
         except zipfile.BadZipFile:
             log.error("File %s is not a zip file" % file)
             return None
-                
-        
+
+
         try:
             # Get the jellied package data
-            toDecode   = zippedFile.read(u"content.data")
+            toDecode = zippedFile.read(u"content.data")
         except KeyError:
             log.info("no content.data, trying Common Cartridge/Content Package")
             newPackage = loadCC(zippedFile, filename)
@@ -562,14 +562,14 @@ package'''
             newPackage.filename = Path(filename)
 
             return newPackage
-            
+
         # Need to add a TempDirPath because it is a non-persistent member
         resourceDir = TempDirPath()
 
         # Extract resource files from package to temporary directory
         for fn in zippedFile.namelist():
             if unicode(fn, 'utf8') != u"content.data":
-                outFile = open(resourceDir/fn, "wb")
+                outFile = open(resourceDir / fn, "wb")
                 outFile.write(zippedFile.read(fn))
                 outFile.flush()
                 outFile.close()
@@ -580,13 +580,13 @@ package'''
             newPackage.resourceDir = resourceDir
 #            G.application.afterUpgradeZombies2Delete = []
 
-            if newLoad: 
+            if newLoad:
                 # provide newPackage to doUpgrade's versionUpgrade() to
                 # correct old corrupt extracted packages by setting the
                 # any corrupt package references to the new package:
 
-                log.debug("load() about to doUpgrade newPackage \"" 
-                        + newPackage._name + "\" " + repr(newPackage) )
+                log.debug("load() about to doUpgrade newPackage \""
+                        + newPackage._name + "\" " + repr(newPackage))
                 if hasattr(newPackage, 'resourceDir'):
                     log.debug("newPackage resourceDir = "
                             + newPackage.resourceDir)
@@ -600,29 +600,29 @@ package'''
 #                if G.application.maxFieldId >= Field.nextId:
 #                    Field.nextId = G.application.maxFieldId + 1
 
-            else: 
+            else:
                 # and when merging, automatically set package references to
                 # the destinationPackage, into which this is being merged:
 
-                log.debug("load() about to merge doUpgrade newPackage \"" 
+                log.debug("load() about to merge doUpgrade newPackage \""
                         + newPackage._name + "\" " + repr(newPackage)
-                        + " INTO destinationPackage \"" 
-                        + destinationPackage._name + "\" " 
+                        + " INTO destinationPackage \""
+                        + destinationPackage._name + "\" "
                         + repr(destinationPackage))
-                
+
                 log.debug("using their resourceDirs:")
                 if hasattr(newPackage, 'resourceDir'):
-                    log.debug("   newPackage resourceDir = " 
+                    log.debug("   newPackage resourceDir = "
                             + newPackage.resourceDir)
                 else:
                     log.error("newPackage has NO resourceDir!")
                 if hasattr(destinationPackage, 'resourceDir'):
-                    log.debug("   destinationPackage resourceDir = " 
+                    log.debug("   destinationPackage resourceDir = "
                             + destinationPackage.resourceDir)
                 else:
                     log.error("destinationPackage has NO resourceDir!")
 
-                doUpgrade(destinationPackage, 
+                doUpgrade(destinationPackage,
                         isMerge=True, preMergePackage=newPackage)
 
                 # after doUpgrade, compare the largest found field ID:
@@ -667,14 +667,14 @@ package'''
         # Regardless, only the real package will have a resourceDir,
         # and the other will fail.
         # For now, then, put in this quick and easy safety check:
-        if not hasattr(self,'resourceDir'):
+        if not hasattr(self, 'resourceDir'):
             log.warn("cleanUpResources called on a redundant package")
             return
 
         existingFiles = set([fn.basename() for fn in self.resourceDir.files()])
         usedFiles = set([reses[0].storageName for reses in self.resources.values()])
         for fn in existingFiles - usedFiles:
-            (self.resourceDir/fn).remove()
+            (self.resourceDir / fn).remove()
 
     def findResourceByName(self, queryName):
         """
@@ -690,14 +690,14 @@ package'''
                     foundResource = this_resource
                     return foundResource
         return foundResource
-    
+
     def get_absolute_url(self):
         return reverse('exeapp.views.package.package_main',
                        kwargs={'package_id' : self.id})
-    
+
     def __unicode__(self):
         return "Package %s: %s" % (self.id, self.title)
-    
+
     class Meta:
         app_label = "exeapp"
 

@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% load mainpage_extras %}
+{% load authoring_extras %}
 
 {% load static %}
 
@@ -10,17 +11,21 @@
 <!-- CSS -->
 <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/ui-lightness/jquery-ui-1.8.4.custom.css" />
 <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/mz/basic.css" />
+<link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/styles/base.css">
+<link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/editing.css">
 <!--<link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/mz/jquery.qtip.css" />-->
 <!-- SCRIPTS -->
 <script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.js"></script>
 <script type="text/javascript" src="{% get_static_prefix %}scripts/jquery-ui.custom.min.js"></script>
 <script type="text/javascript" src="{% get_static_prefix %}scripts/mainpage.js"></script>
+<script type="text/javascript" src="{% get_static_prefix %}scripts/common.js"></script>
 <script type='text/javascript' src='{% get_static_prefix %}scripts/jquery.jsonrpc.js'></script>
 <script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.form.js"></script>
 <script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.cookie.js"></script>
 <script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.jstree.js"></script>
 <script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.confirm.js"></script>
 <script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.qtip.min.js"></script>
+{% render_form_media package.current_node %}
 <script>
 $(document).ready(function() {
 	$('#settings_button').qtip ({
@@ -52,7 +57,7 @@ $(document).ready(function() {
 			classes: 'tip'
 		},
 		
-		show: {
+		show: { 
 			delay: 500,
 			effect: function(offset) {
 				$(this).slideDown(200); // "this" refers to the tooltip
@@ -206,9 +211,7 @@ $(document).ready(function() {
 					{% render_styles %}
 				</div>
 				
-				<div id="authoring">
-					<iframe style="width:100%;height:600px;" scrolling="auto" id="authoringIFrame1" name="authoringIFrame1"></iframe>
-				</div>
+			<div style="width:100%;height:600px;overflow:scroll;" id="authoring" name="authoringIFrame1"></div>
 				
 				<div id="preview" style="display:none">
 					<iframe style="width:100%;height:600px;" scrolling="auto" id="previewIFrame" name="previewIFrame"></iframe>
@@ -265,3 +268,4 @@ $(document).ready(function() {
 	<div id="package_style" style="display:none">{{package.style}}</div>
 </div>
 {% endblock %}
+
