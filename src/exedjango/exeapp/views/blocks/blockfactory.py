@@ -37,23 +37,23 @@ from exeapp.models.idevices.casestudyidevice import CaseActivity
 from exeapp.views.blocks.glossaryblock import GlossaryBlock
 
 idevice_map = {
-          FreeTextIdevice : GenericBlock,
-          ActivityIdevice : GenericBlock,
-          GlossaryIdevice : GlossaryBlock,
-          ReadingActivityIdevice : GenericBlock,
-          ReflectionIdevice : GenericBlock,
-          TOCIdevice : GenericBlock,
-          WikipediaIdevice : WikipediaBlock,
-          PDFIdevice : PDFBlock,
-          ObjectivesIdevice : GenericBlock,
-          PreknowledgeIdevice : GenericBlock,
-          CommentIdevice : CommentBlock,
-          FeedbackIdevice : FeedbackBlock,
-          RSSIdevice : RSSBlock,
-          ExternalURLIdevice : ExternalURLBlock,
-          AppletIdevice : AppletBlock,
-          ClozeIdevice : GenericBlock,
-          CaseStudyIdevice : FormsetBlockFactory(
+          FreeTextIdevice: GenericBlock,
+          ActivityIdevice: GenericBlock,
+          GlossaryIdevice: GlossaryBlock,
+          ReadingActivityIdevice: GenericBlock,
+          ReflectionIdevice: GenericBlock,
+          TOCIdevice: GenericBlock,
+          WikipediaIdevice: WikipediaBlock,
+          PDFIdevice: PDFBlock,
+          ObjectivesIdevice: GenericBlock,
+          PreknowledgeIdevice: GenericBlock,
+          CommentIdevice: CommentBlock,
+          FeedbackIdevice: FeedbackBlock,
+          RSSIdevice: RSSBlock,
+          ExternalURLIdevice: ExternalURLBlock,
+          AppletIdevice: AppletBlock,
+          ClozeIdevice: GenericBlock,
+          CaseStudyIdevice: FormsetBlockFactory(
                                 CaseActivity,
                                 ("activity", "feedback"),
                                 )
@@ -62,11 +62,13 @@ idevice_map = {
 
 block_map = dict((v, k) for k, v in idevice_map.items())
 
-    
-block_factory = lambda idevice : idevice_map[idevice.__class__](idevice)
+
+block_factory = lambda idevice: idevice_map[idevice.__class__](idevice)
+
+
 def idevice_class_factory(block):
     if isinstance(block, type):
         return block_map[block]
     else:
         return block_map[block.__class__]
-    
+

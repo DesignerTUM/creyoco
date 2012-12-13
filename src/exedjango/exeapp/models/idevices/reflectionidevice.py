@@ -14,8 +14,8 @@ opportunity to observe and reflect on their observations before presenting
 these as a piece of academic work. Journals, diaries, profiles and portfolios 
 are useful tools for collecting observation data. Rubrics and guides can be 
 effective feedback tools."""
-    emphasis         = Idevice.SOMEEMPHASIS
-    group            = Idevice.CONTENT
+    emphasis = Idevice.SOMEEMPHASIS
+    group = Idevice.CONTENT
     activity = fields.RichTextField(blank=True, default="",
                                       help_text="""Enter a question for learners 
 to reflect upon.""")
@@ -23,6 +23,6 @@ to reflect upon.""")
                                    help_text="""Describe how learners will assess how 
 they have done in the exercise. (Rubrics are useful devices for providing 
 reflective feedback.)""")
-    
+
     class Meta:
         app_label = "exeapp"

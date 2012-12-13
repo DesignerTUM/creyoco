@@ -2,17 +2,18 @@ from django import forms
 from django.utils.safestring import mark_safe
 from django.forms.widgets import Media
 
+
 class IdeviceForm(forms.ModelForm):
-    
+
     def render_edit(self):
         return self.as_p()
-    
+
     def render_preview(self):
         return self._render_view("preview")
-    
+
     def render_export(self):
         return self._render_view("export")
-    
+
     def _render_view(self, purpose):
         '''Decouples field rendering from the purpose'''
         html = ""
@@ -24,9 +25,9 @@ class IdeviceForm(forms.ModelForm):
             else:
                 # dumb widget, shouldn't be exported
                 html += ""
-        return mark_safe(html) 
-        
-    
+        return mark_safe(html)
+
+
     @property
     def view_media(self):
         media = Media()
@@ -34,24 +35,25 @@ class IdeviceForm(forms.ModelForm):
             if hasattr(field.widget, "view_media"):
                     media += field.widget.view_media
         return media
-    
+
 class IdeviceFormFactory(object):
     def __init__(self, model, fields, form_class=IdeviceForm, widgets={}):
-        
+
         self.model = model
         self.fields = fields
         self.widgets = widgets
         self.form = form_class
-        
+
     def __call__(self, *args, **kwargs):
         class NewIdeviceForm(self.form):
             pass
-            
+
             class Meta:
                 model = self.model
                 if self.fields:
                     fields = self.fields
                 exclude = ("parent_node", "edit")
-                widgets = self.widgets
-                
+                if self.widgets:
+                    widgets = self.widgets
+
         return NewIdeviceForm(*args, **kwargs)
