@@ -1,25 +1,26 @@
-{% spaceless %}
+{% load static %}
 {% load export_extras %}
 
 {% with NAVIGATION_LINKS="exe/export/navigation_links.html" %}
 <!DOCTYPE html>
 <html>
   <head>
-    <style type="text/css">
-      @import url(base.css);
-      @import url(content.css);
-      @import url(nav.css);</style>
-    </style>
-    <script type="text/javascript" src="jquery.js"></script>
+  <link rel="stylesheet" type="text/css" href="{% if full_style_url%}{% get_static_prefix %}css/styles/{% endif %}base.css" />
+  <link rel="stylesheet" type="text/css" href="{% if full_style_url %}{% get_static_prefix %}css/styles/{{current_page.node.package.style}}/{% endif %}content.css" />
+  <link rel="stylesheet" type="text/css" href="{% if full_style_url %}{% get_static_prefix %}css/styles/{{current_page.node.package.style}}/{% endif %}nav.css" />
+    <script type="text/javascript" src="{% if full_style_url %}{% get_static_prefix %}scripts/{% endif %}jquery.js"></script>
     {% view_media current_page %}
     <title>{{current_page.node.title}}</title>
+   {% if full_style_url %}
+   
+   {% endif %}
   </head>
   <body>
     <div id="content">
       <!-- TODO Background -->
       <div id="navcontainer">
       	<ul id="navlist">
-          {% navigation_bar current_page %}
+          {% navigation_bar current_page full_style_url %}
       	</ul>
       </div>
       <div id="main">
@@ -39,4 +40,3 @@
   </head>
 </html>
 {% endwith %}
-{% endspaceless %}

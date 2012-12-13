@@ -10,4 +10,5 @@ urlpatterns = patterns('exeapp.views',
    (r'authoring/link_list/$', 'authoring.link_list'),
    (r'authoring/(?P<page_name>\w*).html$', 'authoring.change_page'),
    (r'download/(?P<format>\w*)/$', 'package.export'),
+   (r'preview/(?P<node_id>\d+)/', 'package.preview'),
 )

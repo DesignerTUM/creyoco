@@ -22,7 +22,7 @@ def main(request):
 def create_package(request, package_name):
     user = User.objects.get(username=request.user.username)
     p = Package.objects.create(title=package_name, user=user)
-    return {'id' : p.id, 'title' : p.title}
+    return {'id': p.id, 'title': p.title}
 
 
 @jsonrpc_method('main.delete_package', authenticated=True)
@@ -32,4 +32,4 @@ def delete_package(request, package):
 
     package_id = package.id
     package.delete()
-    return {"package_id" : package_id}
+    return {"package_id": package_id}

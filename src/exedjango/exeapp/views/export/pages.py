@@ -26,7 +26,6 @@ Export Pages functions
 
 import logging
 from urllib                   import quote
-import re
 
 
 log = logging.getLogger(__name__)
@@ -38,12 +37,13 @@ class Page(object):
     This is an abstraction for a page containing a node
     e.g. in a SCORM package or Website
     """
-    def __init__(self, node, depth, exporter, prev_page=None, next_page = None, has_children=False):
+    def __init__(self, node, depth, exporter, prev_page=None, next_page=None,
+                  has_children=False):
         """
         Initialize
         """
         self.depth = depth
-        self.node  = node
+        self.node = node
         self.exporter = exporter
         self.prev_page = prev_page
         self.next_page = next_page
@@ -55,20 +55,21 @@ class Page(object):
             form_class = block.BlockForm()
             if hasattr(form_class, "view_media"):
                 self.view_media += form_class.view_media
-            
-        
-    def save(self, outputDir):
+
+    def save(self, output_dir):
         """
         This is the main function. It will render the page and save it to a
-        file.  'outputDir' is the directory where the filenames will be saved
+        file.  'output_dir' is the directory where the filenames will be saved
         (a 'path' instance)
         """
-        outfile = codecs.open(outputDir / self.name+".html", "w", "utf-8")
+        outfile = codecs.open(output_dir / self.name + ".html", "w", "utf-8")
         content = self.render()
         outfile.write(content)
         outfile.close()
-        
-        
+
+    def render(self):
+        raise NotImplementedError()
+
     def _generate_name(self):
         return self.node.unique_name()
 

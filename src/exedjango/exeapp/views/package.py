@@ -44,16 +44,16 @@ class DublinCoreForm(forms.ModelForm):
     class Meta:
         model = DublinCore
 
+
 def generate_package_main(request, package, **kwargs):
     '''Generates main page, can take additional keyword args to
     create forms'''
 
-
     log.info("%s accesses package of %s" % (request.user.username,
                                             package.user.username))
     idevices = idevice_store.values()
-    exporter_type_title_map = dict(((type, exporter.title) \
-                                for type, exporter in exporter_map.items()))
+    exporter_type_title_map = dict(((export_type, exporter.title) \
+                        for export_type, exporter in exporter_map.items()))
     properties_form = kwargs.get(PackagePropertiesForm.form_type,
                                  PackagePropertiesForm(instance=package))
     dublincore_form = kwargs.get(DublinCoreForm.form_type,
@@ -92,22 +92,37 @@ def package_main(request, package, properties_form=None):
     else:
         return generate_package_main(request, package)
 
+
 @login_required
 @get_package_by_id_or_error
-def export(request, package, format):
+def export(request, package, export_format):
 
     file_obj = StringIO()
     try:
-        exporter = exporter_factory(format, package, file_obj)
+        exporter = exporter_factory(export_format, package, file_obj)
     except KeyError:
         return HttpResponseBadRequest("Invalid export type")
     exporter.export()
-    zip = file_obj.getvalue()
-    len_zip = len(zip)
+    zip_file = file_obj.getvalue()
     file_obj.close()
-    response = HttpResponse(content_type="application/zip")
-    response['Content-Disposition'] = 'attachment; filename=%s.zip'\
+    response = HttpResponse(content_type="application/zip_file")
+    response['Content-Disposition'] = 'attachment; filename=%s.zip_file'\
                                 % package.title
-    response['Content-Length'] = len(zip)
-    response.write(zip)
+    response['Content-Length'] = len(zip_file)
+    response.write(zip_file)
     return response
+
+
+@login_required
+@get_package_by_id_or_error
+def preview(request, package, node_id):
+    exporter = exporter_factory("website", package, None)
+    exporter.create_pages()
+    print exporter.pages
+    print node_id
+    for page in exporter.pages:
+        print page.node.id
+        if page.node.id == int(node_id):
+            found_page = page
+            break
+    return HttpResponse(found_page.render(full_style_url=True))
