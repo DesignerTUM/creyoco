@@ -24,7 +24,11 @@
 <script type="text/javascript" src="{% get_static_prefix %}scripts/chosen.jquery.min.js"></script>
 <script>
 $(document).ready(function() {
-	$(".chzn-select").chosen();
+	$('.chzn-select').chosen();
+	$('#select_course').change( function() {
+		location.href = $(this).val();
+	});
+	
 	$('#settings_button').qtip ({
 		content: 'Hinzufuegen, loeschen oder verschieben der Themen', // Noti ce that content.text is long-hand for simply declaring content as a string
 		
@@ -119,16 +123,16 @@ $(document).ready(function() {
 <div id="wrapper">
 	<div id="header">
 		creyoco
-		<!--{% include "exe/export_type_selector.html" %}
-		<a href="/accounts/logout/">Logout</a>-->
 	</div>
 		
 	<div id="box_left">
 		<h2>Themenkatalog</h2>
-				<select data-placeholder="Wählen Sie einen Kurs" class="chzn-select" style="width:100%" tabindex="-1" id="sel1FE">
-			<option value=""></option>
+		<select data-placeholder="Wählen Sie einen Kurs" class="chzn-select" style="width:100%" tabindex="-1" id="select_course">
+			<option value="{{ package.get_absolute_url }}">{{ package.title }}</option>
 			{% for package_iter in package_list %}
-			<option value="">{{ package_iter.title }}</option>
+			{% if package_iter != package %}
+			<option value='{{ package_iter.get_absolute_url }}'>{{ package_iter.title }}</option>
+			{% endif %}
 			{% endfor %}
 		</select>
 		<div id="outline">
