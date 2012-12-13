@@ -1,19 +1,13 @@
 {% load static %}
-<!--<div id="style_selection">
-	<span>Select Style: </span>
-	<select id="style_selector">
-		{% for style in styles %}
-		<option class="style_selector" value="{{style}}">{{style|capfirst}}</option>
-		{% endfor %}
-	</select>
-</div>-->
+	{% for style in styles %}
+	<input class="SelectStyle" id="{{style}}" type="image" src="{% get_static_prefix %}images/mz/themes/{{style}}.png" />
+	{% endfor %}
 
-
-	<input class="SelectStyle" id="vhb" type="image" src="{% get_static_prefix %}images/mz/themes/vhb.png" value="vhb" style="margin-right:35px;margin-bottom:35px;">
+<!-- 	<input class="SelectStyle" id="vhb" type="image" src="{% get_static_prefix %}images/mz/themes/vhb.png" value="vhb" style="margin-right:35px;margin-bottom:35px;">
 	<input class="SelectStyle" id="garden" type="image" src="{% get_static_prefix %}images/mz/themes/garden.png" value="garden" style="margin-bottom:35px;">
 	<input class="SelectStyle" id="default" type="image" src="{% get_static_prefix %}images/mz/themes/default.png" value="default" style="margin-right:35px;margin-bottom:35px;">
 	<input class="SelectStyle" id="silver" type="image" src="{% get_static_prefix %}images/mz/themes/silver.png" value="silver" style="margin-bottom:35px;">
-	
+	 -->
 	<script>
 		$("input.SelectStyle").click(function () {
 			var style = $(this).val();
@@ -22,16 +16,7 @@
 			$("#silver").removeClass("StyleActive");
 			$("#default").removeClass("StyleActive");
 			$(this).addClass('StyleActive');
-			$.jsonRPC.request("set_package_style", [get_package_id(), $(this).val()],
-				{success: function() {
-					// fully reload iframe to apply new style sheets
-					window.frames.authoringIFrame1.location = 'authoring/';
-					
-					$('#previewIFrame').contents().find("head").children(":last").attr({
-      					rel:  "stylesheet",
-     					type: "text/css",
-      					href: "/static/css/styles/" + style + "/content.css"
-					});
-			}});
+			$.jsonRPC.request("set_package_style", [get_package_id(), $(this).attr("id")]);
+			update_preview();
 		});
 	</script>

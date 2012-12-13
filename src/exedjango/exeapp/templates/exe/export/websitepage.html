@@ -11,6 +11,9 @@
     <script type="text/javascript" src="{% if full_style_url %}{% get_static_prefix %}scripts/{% endif %}jquery.js"></script>
     {% view_media current_page %}
     <title>{{current_page.node.title}}</title>
+   {% if full_style_url %}
+   
+   {% endif %}
   </head>
   <body>
     <div id="content">

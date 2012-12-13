@@ -208,7 +208,7 @@ $(document).ready(function() {
 					</span>
 				
 					<span class="button">
-						<a href="#" onclick="$('#middle-row').children().hide();$('#preview').show();$('#navi span').removeClass('button_active');$(this).parent().addClass('button_active');">Vorschau</a>
+						<a id="preview_button" href="#" onclick="$('#middle-row').children().hide();$('#preview').show();$('#navi span').removeClass('button_active');$(this).parent().addClass('button_active');">Vorschau</a>
 					</span>
 				</div>
 			
@@ -229,7 +229,7 @@ $(document).ready(function() {
 			<div style="width:100%;min-height:600px;" id="authoring" name="authoringIFrame1"></div>
 				
 				<div id="preview" style="display:none">
-					<iframe style="width:100%;height:600px;" scrolling="auto" id="previewIFrame" name="previewIFrame"></iframe>
+					<iframe style="width:100%;height:600px;" scrolling="auto" id="previewIFrame" name="previewIFrame" src=""></iframe>
 				</div>
 				
 				<div id="properties" style="display:none;">

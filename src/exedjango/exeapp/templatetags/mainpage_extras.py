@@ -19,24 +19,24 @@ def idevice_ul(groups, group_order):
         idevice_list.append("<a>%s</a>" % group)
         prototype_list = []
         for prototype in groups[group]:
-            prototype_list.append('<a class="ideviceItem" href="#"' +\
+            prototype_list.append('<a class="ideviceItem" href="#"' + \
                 ' ideviceid="%s">%s</a>' % (prototype.__name__,
                                              prototype.name))
         idevice_list.append(prototype_list)
-    
+
     return unordered_list(idevice_list)
-        
+
 @register.inclusion_tag('exe/outlinepane.html')
 def render_outline(package):
     NODE_TEMPLATE = "exe/node_link.html"
-    
+
     node_list = [render_to_string(NODE_TEMPLATE, {"node" : package.root}),
                  _create_children_list(package.root, NODE_TEMPLATE)]
-    
+
     return locals()
 
 
-    
+
 @register.tag
 def testing(parser, token):
     '''Show content of a tag only if settings.DEBUG is set'''
@@ -49,16 +49,16 @@ def testing(parser, token):
 
 class TestingNode(template.Node):
     '''Renders nodes, if there are any'''
-    
+
     def __init__(self, nodelist=None):
         self.nodelist = nodelist
-        
+
     def render(self, context):
         if self.nodelist is not None:
             return self.nodelist.render(context)
         else:
             return ""
-        
+
 @register.inclusion_tag('exe/idevicepane.html')
 def render_idevicepane(idevices):
     """
@@ -76,9 +76,9 @@ def render_idevicepane(idevices):
             groups[idevice.group].append(idevice)
         else:
             groups[Idevice.UNKNOWN] += idevice
-    
+
     group_order = (group for group in Idevice.GROUP_ORDER \
-                   if group in groups)    
+                   if group in groups)
     return locals()
 
 @register.inclusion_tag("exe/styles.html")
@@ -95,7 +95,7 @@ def _create_children_list(node, template=None,):
 Root node has to be appended manually in a higher level function. List items will
 be rendered using given template. """
         children_list = []
-        
+
         if node.children.all():
             for child in node.children.all():
                 if template is None:

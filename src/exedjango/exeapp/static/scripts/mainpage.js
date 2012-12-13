@@ -107,7 +107,6 @@ jQuery(document).ready(function() {
                 //bind renaming event
                 get_outline_pane().bind("rename_node.jstree", handle_renamed_current_node);
                 // handle theme selection
-                set_current_style()
                 $("#style_selector").change(handle_select_style);
                 
                 // Initialize idevice Tree
@@ -153,22 +152,7 @@ jQuery(document).ready(function() {
                 		// get_outline_pane().jstree("select_node", $("#node" + node_id), true);
                 	// }
                 // })
-                
-                $("#previewIFrame").load(function() {
-                	var node_id = $("#previewIFrame").contents().find("#node_id").text();
-                	if (current_outline_id() != node_id){
-                		get_outline_pane().jstree("select_node", $("#node" + node_id), true);
-                	}
-                	
-                	$('#previewIFrame').contents().find("head").append("<link>");
-                	css = $('#previewIFrame').contents().find("head").children(":last");
-                	css.attr({
-				      rel:  "stylesheet",
-				      type: "text/css",
-				      id: "preview",
-				      href: '/static/css/styles/' + $("#package_style").text() + '/content.css'
-				    });
-                });
+                set_current_style()
                 
                 //
                 //Package overview handling
@@ -338,11 +322,7 @@ function handle_select_node(event, data) {
 
 function handle_select_style() {
 	
-	$.jsonRPC.request("set_package_style", [get_package_id(), $("#style_selector").val()],
-	{success: function() {
-		// fully reload iframe to apply new style sheets
-		window.frames.authoring.location = 'authoring/';
-	}});
+	$.jsonRPC.request("set_package_style", [get_package_id(), $("#style_selector").val()]);
 }
 
 //handle renamed node event. Calls package.rename_node over rpc.
@@ -461,6 +441,12 @@ function set_current_node(node) {
   get_outline_pane().attr('current_node', get_current_node().attr('nodeid'));
   updateTitle();
   reload_authoring();
+  update_preview();
+}
+
+function update_preview() {
+  var url = window.location.protocol + '//' + location.host + location.pathname;
+  $('#preview > iframe').attr('src', url + "preview/" + get_outline_pane().attr("current_node") + '/');
 }
 
 function set_current_style() {
@@ -468,6 +454,7 @@ function set_current_style() {
 		{success: function(results){
 			var style_val = results.result.style;
 			$("#style_selector").val(style_val);
+			update_preview();
 		}});
 }
 
