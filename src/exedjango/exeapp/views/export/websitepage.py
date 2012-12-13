@@ -18,6 +18,7 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 # ===========================================================================
 from django.template.loader import render_to_string
+from django.conf import settings
 """
 This class transforms an eXe node into a page on a self-contained website
 """
@@ -34,9 +35,16 @@ class WebsitePage(Page):
     This class transforms an eXe node into a page on a self-contained website
     """
 
-    def render(self):
+    def render(self, full_style_url=False):
         """
         Returns an XHTML string rendering this page.
+        If full_style_url is set, render website url for
+        styles in pages.
         """
         current_page = self
+        if full_style_url:
+            css_prefix = settings.STATIC_URL + "css/styles/" + \
+                     self.node.package.style + "/"
+        else:
+            css_prefix = ""
         return render_to_string("exe/export/websitepage.html", locals())

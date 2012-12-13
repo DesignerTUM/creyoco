@@ -125,4 +125,4 @@ def preview(request, package, node_id):
         if page.node.id == int(node_id):
             found_page = page
             break
-    return HttpResponse(found_page.render())
+    return HttpResponse(found_page.render(full_style_url=True))
