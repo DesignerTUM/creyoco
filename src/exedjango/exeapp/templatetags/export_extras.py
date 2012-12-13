@@ -16,7 +16,7 @@ register = template.Library()
 def export_idevice(idevice):
     '''Convinience filter, just renders calls render function of a
 block'''
-    
+
     block = block_factory(idevice.as_child())
     return block.renderView()
 
@@ -24,11 +24,11 @@ block'''
 
 
 @register.simple_tag
-def navigation_bar(current_page):
+def navigation_bar(current_page, full_url):
     """
     Generate the left navigation string for this page
     """
-    depth    = 1
+    depth = 1
     pages = current_page.exporter.pages
     nodePath = [None] + list(current_page.node.ancestors()) + [current_page.node]
 
@@ -45,9 +45,11 @@ def navigation_bar(current_page):
                 depth -= 1
 
             html += render_to_string("exe/export/navigation_bar_item.html",
-                                     {"page" : page,
-                                      "current_page" : current_page})
-    
+                                     {"page": page,
+                                      "current_page": current_page,
+                                      "full_url": full_url,
+                                      })
+
     while depth > 2:
             html += "</div>\n"
             depth -= 1
@@ -60,7 +62,7 @@ def render_licence(current_page):
     Returns an XHTML string rendering the license.
     """
     licences = {"GNU Free Documentation License":
-                 "http://www.gnu.org/copyleft/fdl.html", 
+                 "http://www.gnu.org/copyleft/fdl.html",
                  "Creative Commons Attribution 3.0 License":
                  "http://creativecommons.org/licenses/by/3.0/",
                  "Creative Commons Attribution Share Alike 3.0 License":
@@ -87,10 +89,10 @@ def render_licence(current_page):
                  "http://creativecommons.org/licenses/by-nc-nd/2.5/",
                  "Developing Nations 2.0":
                  "http://creativecommons.org/licenses/devnations/2.0/"}
-    
+
     licence = current_page.node.package.license
     licence_url = licences.get(licence)
-    
+
     return {"licences" : licences,
             "licence" : licence,
             "licence_url" : licence_url,
@@ -112,8 +114,8 @@ def view_media(page):
     html_media = str(forms.Media(js=js_list, css={'all' : css_list}))
     html_media = html_media.replace(settings.STATIC_URL, "")
     return html_media
-        
-    
+
+
 @register.filter
 def process_internal_links(html, package):
     """
