@@ -15,14 +15,16 @@
 <script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.js"></script>
 <script type="text/javascript" src="{% get_static_prefix %}scripts/jquery-ui.custom.min.js"></script>
 <script type="text/javascript" src="{% get_static_prefix %}scripts/mainpage.js"></script>
-<script type='text/javascript' src='{% get_static_prefix %}scripts/jquery.jsonrpc.js'></script>
+<script type='text/javascript' src="{% get_static_prefix %}scripts/jquery.jsonrpc.js"></script>
 <script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.form.js"></script>
 <script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.cookie.js"></script>
 <script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.jstree.js"></script>
 <script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.confirm.js"></script>
 <script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.qtip.min.js"></script>
+<script type="text/javascript" src="{% get_static_prefix %}scripts/chosen.jquery.min.js"></script>
 <script>
 $(document).ready(function() {
+	$(".chzn-select").chosen();
 	$('#settings_button').qtip ({
 		content: 'Hinzufuegen, loeschen oder verschieben der Themen', // Noti ce that content.text is long-hand for simply declaring content as a string
 		
@@ -122,7 +124,13 @@ $(document).ready(function() {
 	</div>
 		
 	<div id="box_left">
-		<h1>Themenkatalog</h1>
+		<h2>Themenkatalog</h2>
+				<select data-placeholder="Wählen Sie einen Kurs" class="chzn-select" style="width:100%" tabindex="-1" id="sel1FE">
+			<option value=""></option>
+			{% for package_iter in package_list %}
+			<option value="">{{ package_iter.title }}</option>
+			{% endfor %}
+		</select>
 		<div id="outline">
 			{% render_outline package %}
 			
@@ -156,7 +164,7 @@ $(document).ready(function() {
 					{% endfor %}
 			</div>
 		</div>
-		<ul id="package_list">
+		<!--<ul id="package_list">
 			<li class="new_package">
 				<a id="create_new_package">Create new package</a>
 			</li>
@@ -170,11 +178,11 @@ $(document).ready(function() {
 		      {% endif %}
 		    </li>
 		  {% endfor %}
-		</ul>
+		</ul>-->
 	</div>
 		
 	<div id="content">
-		<h1>Inhalt</h2>
+		<h2>Inhalt</h2>
 		<img style="margin-bottom:-258px;margin-left:747px;" src="{% get_static_prefix %}images/mz/authoring_shadow_top.png" alt="" />
 		
 			<div id="navi">
@@ -248,7 +256,7 @@ $(document).ready(function() {
 	</div>
 	
 	<div id="box_right">
-		<h1>Werkzeuge</h2>
+		<h2>Werkzeuge</h2>
 		{% render_idevicepane idevices %}
 	</div>
 	
