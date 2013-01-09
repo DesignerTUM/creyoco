@@ -1,6 +1,7 @@
 # Django settings for exedjango project.
 
 import os, sys
+from django.core.urlresolvers import reverse
 
 def _get_file_from_root(folder_name):
     '''Returns path to a file or folder in root of the project'''
@@ -137,34 +138,36 @@ TINYMCE_JS_ROOT = os.path.join(STATIC_ROOT, 'tiny_mce')
 
 TINYMCE_COMPRESSOR = False
 
+LINK_LIST = "authoring/link_list"
+
 TINYMCE_DEFAULT_CONFIG = {
-    "content_css" : "/static/css/extra.css",
-     "strict_loading_mode" : True,
-    "apply_source_formatting" : True,
-    "cleanup_on_startup" : True,
-    "entity_encoding" : "raw",
-    "gecko_spellcheck" : True,
-    "external_link_list_url" : "./link_list/",
-     # "mode" : "specific_textareas",
-     # "editor_selector" : "mceEditor",
-     "plugins" : "table,save,advhr,advimage,advlink,emotions,media, contextmenu,paste,directionality",
-     "theme" : "advanced",
-     "theme_advanced_layout_manager" : "SimpleLayout",
-    "theme_advanced_toolbar_location" : "top",
-     "theme_advanced_buttons1" : "newdocument,separator,bold,italic,underline,fontsizeselect,forecolor,backcolor,separator,sub,sup,separator,justifyleft,justifycenter,justifyright,justifyfull,separator,bullist,numlist,outdent,indent,separator,anchor,separator,cut,copy,paste,pastetext,pasteword,help",
-     "theme_advanced_buttons2" : "image,media,exemath,advhr,fontselect,tablecontrols,separator,link,unlink,separator, undo,redo,separator,charmap,code,removeformat",
-     "theme_advanced_buttons3" : "",
-    "advimage_image_browser_callback" : "chooseImage_viaTinyMCE",
-    "advimage_image2insert_browser_callback" : "chooseImage_viaTinyMCE",
-    "media_media_browser_callback" : "chooseImage_viaTinyMCE",
-    "media_media2insert_browser_callback" : "chooseImage_viaTinyMCE",
-    "advlink_file_browser_callback" : "chooseImage_viaTinyMCE",
-    "advlink_file2insert_browser_callback" : "chooseImage_viaTinyMCE",
-    "theme_advanced_statusbar_location" : "bottom",
-        "theme_advanced_resize_horizontal" : True,
-        "theme_advanced_resizing" : True,
-        "width" : "100%"
- }
+   "content_css": "/static/css/extra.css",
+    "strict_loading_mode": True,
+   "apply_source_formatting": True,
+   "cleanup_on_startup": True,
+   "entity_encoding": "raw",
+   "gecko_spellcheck": True,
+   "external_link_list_url": LINK_LIST,
+    # "mode": "specific_textareas",
+    # "editor_selector": "mceEditor",
+    "plugins": "table,save,advhr,advimage,advlink,emotions,media, contextmenu,paste,directionality",
+    "theme": "advanced",
+    "theme_advanced_layout_manager": "SimpleLayout",
+   "theme_advanced_toolbar_location": "top",
+    "theme_advanced_buttons1": "newdocument,separator,bold,italic,underline,fontsizeselect,forecolor,backcolor,separator,sub,sup,separator,justifyleft,justifycenter,justifyright,justifyfull,separator,bullist,numlist,outdent,indent,separator,anchor,separator,cut,copy,paste,pastetext,pasteword,help",
+    "theme_advanced_buttons2": "image,media,exemath,advhr,fontselect,tablecontrols,separator,link,unlink,separator, undo,redo,separator,charmap,code,removeformat",
+    "theme_advanced_buttons3": "",
+   "advimage_image_browser_callback": "chooseImage_viaTinyMCE",
+   "advimage_image2insert_browser_callback": "chooseImage_viaTinyMCE",
+   "media_media_browser_callback": "chooseImage_viaTinyMCE",
+   "media_media2insert_browser_callback": "chooseImage_viaTinyMCE",
+   "advlink_file_browser_callback": "chooseImage_viaTinyMCE",
+   "advlink_file2insert_browser_callback": "chooseImage_viaTinyMCE",
+   "theme_advanced_statusbar_location": "bottom",
+       "theme_advanced_resize_horizontal": True,
+       "theme_advanced_resizing": True,
+       "width": "100%"
+}
 
 # filebrowser settings
 FILEBROWSER_PATH_FILEBROWSER_MEDIA = "%s/filebrowser/" % STATIC_ROOT

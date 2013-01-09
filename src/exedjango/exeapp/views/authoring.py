@@ -66,10 +66,7 @@ def get_media_list(node, ajax=False):
 includes tinymce compressor, since it can't be loaded dynamically'''
     # always load tinymce compressor
 #    media = forms.Media(js=[reverse('tinymce-compressor')])
-    tinymce_media = ["/static/tiny_mce/tiny_mce.js",
-                         reverse('tinymce-js', args=['exe']),
-                         ]
-    media = forms.Media(js=tinymce_media)
+    media = forms.Media(js=["/static/tiny_mce/tiny_mce.js"])
 #    media = forms.Media()
     for idevice in node.idevices.all():
         idevice = idevice.as_child()
@@ -79,9 +76,8 @@ includes tinymce compressor, since it can't be loaded dynamically'''
         # print media._js
     if ajax:
         # don't include tinymce js in ajax script loading
-        for tiny_medium in tinymce_media:
-            if tiny_medium in media._js:
-                media._js.remove(tiny_medium)
+        if "/static/tiny_mce/tiny_mce.js" in media._js:
+            media._js.remove("/static/tiny_mce/tiny_mce.js")
         return simplejson.dumps(media._js + media._css.get('all', []))
     else:
         return str(media)
@@ -92,12 +88,8 @@ def get_unique_media_list(node, idevice=None):
     block = block_factory(idevice.as_child())
     media = block.media._js + block.media._css.get('all', [])
     # compressor is always loaded per default
-    tinymce_media = ["/static/tiny_mce/tiny_mce.js",
-                     reverse('tinymce-js', args=['exe']),
-                     ]
-    for tiny_medium in tinymce_media:
-        if tiny_medium in media:
-            media.remove(tiny_medium)
+    if "/static/tiny_mce/tiny_mce.js" in media:
+        media.remove("/static/tiny_mce/tiny_mce.js")
     for idevice in node.idevices.exclude(id=idevice.id):
         block = block_factory(idevice.as_child())
         for js in block.media._js + block.media._css.get('all', []):
