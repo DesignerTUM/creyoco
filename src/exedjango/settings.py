@@ -28,12 +28,12 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': _get_file_from_root('sqlite.db'), # Or path to database file if using sqlite3.
-        'USER': '', # Not used with sqlite3.
-        'PASSWORD': '', # Not used with sqlite3.
-        'HOST': '', # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '', # Set to empty string for default. Not used with sqlite3.
+        'ENGINE': 'django.db.backends.sqlite3',  # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': _get_file_from_root('sqlite.db'),  # Or path to database file if using sqlite3.
+        'USER': '',  # Not used with sqlite3.
+        'PASSWORD': '',  # Not used with sqlite3.
+        'HOST': '',  # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '',  # Set to empty string for default. Not used with sqlite3.
     }
 }
 
@@ -90,11 +90,11 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    #'django.middleware.csrf.CsrfResponseMiddleware',
+    # 'django.middleware.csrf.CsrfResponseMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
 
-    #handling of 403 exception
+    # handling of 403 exception
     'exedjango.base.middleware.Http403Middleware',
 )
 
@@ -110,6 +110,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'grappelli',
+    'filebrowser',
     'registration',
     'django.contrib.admin',
     'django.contrib.staticfiles',
@@ -119,7 +120,6 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'tinymce',
     'exeapp',
-    'filebrowser',
 )
 
 ABSOLUTE_URL_OVERRIDES = {
@@ -132,20 +132,21 @@ STATIC_URL = '/static/'
 STYLE_DIR = "%s/css/styles/" % STATIC_ROOT
 
 TINYMCE_JS_URL = os.path.join(STATIC_URL, 'tiny_mce/tiny_mce.js')
+
 TINYMCE_JS_ROOT = os.path.join(STATIC_ROOT, 'tiny_mce')
 
-TINYMCE_COMPRESSOR = True
+TINYMCE_COMPRESSOR = False
 
 TINYMCE_DEFAULT_CONFIG = {
     "content_css" : "/static/css/extra.css",
      "strict_loading_mode" : True,
     "apply_source_formatting" : True,
-    "cleanup_on_startup" : False,
+    "cleanup_on_startup" : True,
     "entity_encoding" : "raw",
     "gecko_spellcheck" : True,
     "external_link_list_url" : "./link_list/",
-     #"mode" : "specific_textareas",
-     #"editor_selector" : "mceEditor",
+     # "mode" : "specific_textareas",
+     # "editor_selector" : "mceEditor",
      "plugins" : "table,save,advhr,advimage,advlink,emotions,media, contextmenu,paste,directionality",
      "theme" : "advanced",
      "theme_advanced_layout_manager" : "SimpleLayout",

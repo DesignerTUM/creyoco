@@ -4,12 +4,14 @@ from django.views.generic.simple import redirect_to
 
 from django.contrib import admin
 from django.core.urlresolvers import reverse
+
+from filebrowser.sites import site
 admin.autodiscover()
 
 urlpatterns = patterns('',
     (r'^$', include('exeapp.urls')),
     (r'grappelli', include('grappelli.urls')),
-    (r'filebrowser/', include('filebrowser.urls')),
+    (r'filebrowser/', include(site.urls)),
     (r'tinymce/', include('tinymce.urls')),
     (r'^exeapp/', include('exeapp.urls')),
     (r'^admin/', include(admin.site.urls)),
