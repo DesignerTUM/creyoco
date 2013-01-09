@@ -79,21 +79,33 @@ function initialize_authoring() {
 
  //$(".action_button").bind("click", handle_action_button)
  $(".idevice_form").ajaxForm({success: function(responseText, statusText, xhr, $form){
- 	var idevice_id = $form.attr("idevice_id");
- 		$form.find("textarea").each(function() {
- 			tinyMCE.execCommand("mceRemoveControl", true, $(this).attr("id"));
- 		});
- 		if (responseText){
- 			get_media(".authoring/?idevice_id=" + idevice_id + "&media=true");
+	 	var idevice_id = $form.attr("idevice_id");
+	 	scroll_to_element($form);
+	 		$form.find("textarea").each(function() {
+	 			tinyMCE.execCommand("mceRemoveControl", true, $(this).attr("id"));
+	 		});
+		if (responseText){
+			get_media(".authoring/?idevice_id=" + idevice_id + "&media=true");
 	 		$form.html(responseText);
- 		} else {
- 			reload_authoring();
- 		}
- 		initialize_authoring();
+		} else {
+			reload_authoring();
+		}
+		initialize_authoring();
  	},
  	beforeSerialize: function() {
  		 tinyMCE.triggerSave(true, true);},
  	});
+}
+
+function scroll_to_element(element){
+	var offset = element.offset().top - $(window).scrollTop();
+
+	if(offset > window.innerHeight){
+    	// Not in view so scroll to it
+    	$('html,body').animate({scrollTop: offset}, 1000);
+	} else if (offset < 0) {
+		$('html,body').animate({scrollTop: element.offset().top - 100}, 1000);
+	} 
 }
 
 function reload_authoring() {
@@ -133,6 +145,8 @@ function insert_idevice(idevice_id) {
 	    success: function (data) {
 	    	 $('#authoring').append(data);
 	    	 initialize_authoring();
+	    	 var element = $('#authoring').children().last();
+	    	 scroll_to_element(element);
 	    	 }
 		});
 }
