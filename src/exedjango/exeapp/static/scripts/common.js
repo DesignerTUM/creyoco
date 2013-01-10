@@ -111,10 +111,14 @@ function scroll_to_element(element){
 function reload_authoring() {
 	// dynamically load scripts for idevices
 	get_media("authoring/?partial=true&media=true");
-			
-	$("#authoring").load('authoring/?partial=true', function() {
+	
+	url = "/exeapp/package/" + get_package_id() + "/" + get_current_node_id() + "/";
+	$.pjax({url: url,
+		container: "#authoring",
+		complete: function() {
 		initialize_authoring();
-		});
+		}
+	});
 }
 
 function get_media(request_url) {

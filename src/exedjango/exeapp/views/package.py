@@ -15,6 +15,7 @@ from exeapp.models.package import DublinCore
 from exeapp.views.export.exporter_factory import exporter_factory, exporter_map
 from exeapp.models.node import Node
 from django.utils.encoding import smart_str
+from exeapp.views.authoring import authoring
 
 try:
     from cStringIO import StringIO
@@ -89,12 +90,14 @@ def change_properties(request, package):
 
 @login_required
 @get_package_by_id_or_error
-def package_main(request, package, node_id, properties_form=None):
+def package_main(request, package, node, properties_form=None):
     '''Handle calls to package site. Renders exe/mainpage.html.'''
     if request.method == 'POST':
         return change_properties(request, package)
+    elif request.GET.get('_pjax'):
+        return authoring(request, package.id, node.id)
     else:
-        return generate_package_main(request, package, node_id)
+        return generate_package_main(request, package, node)
 
 
 @login_required

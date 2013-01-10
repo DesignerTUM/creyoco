@@ -36,7 +36,7 @@ def authoring(request, package, current_node, partial=False):
             raise Http404(e)
     # if partial is set return only content of body
     partial = partial or \
-                "partial" in request.GET and request.GET['partial'] == "true"
+                "_pjax" in request.GET
     if partial and "media" in request.GET and request.GET['media'] == "true":
         return HttpResponse(get_media_list(current_node, ajax=True),
                              content_type="text/javascript")
