@@ -99,6 +99,14 @@ def package_main(request, package, node_id, properties_form=None):
 
 @login_required
 @get_package_by_id_or_error
+def package_root(request, package):
+    current_node = package.root
+    return HttpResponseRedirect(reverse(package_main, args=[package.id,
+                                                            current_node.id]))
+
+
+@login_required
+@get_package_by_id_or_error
 def export(request, package, export_format):
 
     file_obj = StringIO()
@@ -119,15 +127,12 @@ def export(request, package, export_format):
 
 @login_required
 @get_package_by_id_or_error
-def preview(request, package, node_id):
-    node_id = int(node_id)
+def preview(request, package, node):
+    node_id = node.id
     exporter = exporter_factory("website", package, None)
     exporter.create_pages()
-    print exporter.pages
-    print node_id
     for page in exporter.pages:
-        print page.node.id
-        if page.node.id == int(node_id):
+        if page.node.id == node_id:
             found_page = page
             break
     return HttpResponse(found_page.render(full_style_url=True))
@@ -135,9 +140,7 @@ def preview(request, package, node_id):
 
 @login_required
 @get_package_by_id_or_error
-def preview_static(request, package, node_id, path):
-    node_id = int(node_id)
-    node = Node.objects.get(pk=node_id)
+def preview_static(request, package, node, path):
     if node.package != package or package.user != request.user:
         return HttpResponseForbidden()
     user_media_url = request.user.get_profile().media_url

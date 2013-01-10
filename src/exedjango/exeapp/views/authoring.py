@@ -43,19 +43,15 @@ def authoring(request, package, current_node, partial=False):
     return render_to_response('exe/authoring.html', locals())
 
 
-
-
 @login_required
 @get_package_by_id_or_error
-def handle_action(request, package):
+def handle_action(request, package, node):
     '''Handles post action sent from authoring'''
     if request.method == "POST":
         post_dict = dict(request.POST)
-        if 'content' in request.POST:
-            content = request.POST['content']
         idevice_id = post_dict.pop('idevice_id')[0]
         action = post_dict.pop('idevice_action')[0]
-        response = package.handle_action(idevice_id,
+        response = node.handle_action(idevice_id,
                                           action, request.POST)
         return HttpResponse(response)
     return HttpResponse()
@@ -104,18 +100,3 @@ def link_list(request, package):
     html = "var tinyMCELinkList = %s;" % \
         simplejson.dumps(package.link_list)
     return HttpResponse(html, content_type="application/x-javascript")
-
-
-@login_required
-@get_package_by_id_or_error
-def change_page(request, package, page_name):
-    try:
-        package.set_current_node_by_unique_name(page_name)
-    except KeyError:
-        raise Http404
-    if request.is_ajax():
-        return HttpResponse("")
-    else:
-        return HttpResponseRedirect(\
-                        reverse('exeapp.views.authoring.authoring', \
-                        args=[package.id]))

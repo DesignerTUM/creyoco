@@ -12,6 +12,7 @@ from exeapp.models.idevices.idevice import Idevice
 log = getLogger()
 register = template.Library()
 
+
 @register.filter()
 def idevice_ul(groups, group_order):
     idevice_list = []
@@ -26,15 +27,15 @@ def idevice_ul(groups, group_order):
 
     return unordered_list(idevice_list)
 
+
 @register.inclusion_tag('exe/outlinepane.html')
-def render_outline(package):
+def render_outline(package, current_node):
     NODE_TEMPLATE = "exe/node_link.html"
 
-    node_list = [render_to_string(NODE_TEMPLATE, {"node" : package.root}),
+    node_list = [render_to_string(NODE_TEMPLATE, {"node": package.root}),
                  _create_children_list(package.root, NODE_TEMPLATE)]
 
     return locals()
-
 
 
 @register.tag
@@ -47,6 +48,7 @@ def testing(parser, token):
     else:
         return TestingNode()
 
+
 class TestingNode(template.Node):
     '''Renders nodes, if there are any'''
 
@@ -58,6 +60,7 @@ class TestingNode(template.Node):
             return self.nodelist.render(context)
         else:
             return ""
+
 
 @register.inclusion_tag('exe/idevicepane.html')
 def render_idevicepane(idevices):
@@ -81,14 +84,16 @@ def render_idevicepane(idevices):
                    if group in groups)
     return locals()
 
+
 @register.inclusion_tag("exe/styles.html")
 def render_styles():
     styles = sorted([os.path.basename(style) for style in \
               os.listdir(settings.STYLE_DIR) \
-              # style dir has to be joined because of a bug on windows 
+              # style dir has to be joined because of a bug on windows
               # with abapath resolving
               if os.path.isdir(os.path.join(settings.STYLE_DIR, style))])
     return locals()
+
 
 def _create_children_list(node, template=None,):
         """Creates a list of all children from the root recursively.

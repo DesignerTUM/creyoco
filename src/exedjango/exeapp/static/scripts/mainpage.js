@@ -296,7 +296,7 @@ function move_current_node_down() {
 
 function add_idevice() {
   var ideviceid = $("#idevice_pane").jstree("get_selected").find(">a").attr('ideviceid');
-  $.jsonRPC.request('add_idevice', [get_package_id(), ideviceid],{
+  $.jsonRPC.request('add_idevice', [get_package_id(), get_current_node_id(), ideviceid],{
     success: function(results) {
     	insert_idevice(
     		results.result.idevice_id
@@ -306,18 +306,10 @@ function add_idevice() {
   return false;
 } 
 
-// Handles outline_pane selection event. Calls package.change_current_node
-// via rpc. 
 function handle_select_node(event, data) {
 
     var node = get_current_node();
-    $.jsonRPC.request('change_current_node',
-    [get_package_id(), $(node).attr("nodeId")], {
-        success: function(results) {
-              set_current_node(node);
-        }
-    });
-    return false;
+    set_current_node(node);
 }
 
 function handle_select_style() {
@@ -446,7 +438,7 @@ function set_current_node(node) {
 
 function update_preview() {
   var url = window.location.protocol + '//' + location.host + location.pathname;
-  $('#preview > iframe').attr('src', url + "preview/" + get_outline_pane().attr("current_node") + '/');
+  $('#preview > iframe').attr('src', url + "preview/");	
 }
 
 function set_current_style() {
@@ -461,6 +453,11 @@ function set_current_style() {
 function get_current_node() {
     var selected = get_outline_pane().jstree("get_selected").find(">a");
     return selected;
+}
+
+function get_current_node_id() {
+	node = get_current_node();
+	return node.attr('id').match(/node(\d+)/)[1]
 }
 
 function get_outline_pane() {

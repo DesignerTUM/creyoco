@@ -1,5 +1,5 @@
 # ===========================================================================
-# eXe 
+# eXe
 # Copyright 2004-2006, University of Auckland
 # Copyright 2006-2008 eXe Project, http://eXeLearning.org/
 #
@@ -37,7 +37,7 @@ from collections import defaultdict
 from xml.dom                   import minidom
 from exedjango.utils.path      import Path, TempDirPath, toUnicode
 from exeapp.models        import Node
-#from exe.engine.genericidevice import GenericIdevice
+# from exe.engine.genericidevice import GenericIdevice
 
 from BeautifulSoup  import BeautifulSoup
 
@@ -399,23 +399,16 @@ successful'''
 successful'''
         return self.current_node.down()
 
-    def add_idevice(self, idevice_type):
+    def add_idevice(self, node, idevice_type):
         '''Adds idevice by a given type to the current node.
 Throws KeyError, if idevice_type is not found'''
-        idevice = self.current_node.add_idevice(idevice_type)
+        idevice = node.add_idevice(idevice_type)
         return idevice
 
     def get_idevice_for_partial(self, idevice_id):
         '''Returns a idevice only in case its on the current node of this
 package'''
         return self.current_node.idevices.get(id=int(idevice_id))
-
-
-    def handle_action(self, idevice_id, action, data):
-        '''Delegates a action to current_node'''
-        return self.current_node.handle_action(idevice_id,
-                                        action,
-                                        data)
 
     def set_backgroundImg(self, value):
         """Set the background image for this package"""
@@ -520,14 +513,14 @@ package'''
                 return
             recentProjects.remove(filename)
         recentProjects.insert(0, filename)
-        del recentProjects[5:] # Delete any older names from the list
-        G.application.config.configParser.write() # Save the settings
+        del recentProjects[5:]  # Delete any older names from the list
+        G.application.config.configParser.write()  # Save the settings
 
     def extractNode(self):
         """
         Clones and extracts the currently selected node into a new package.
         """
-        newPackage = Package('NoName') # Name will be set once it is saved..
+        newPackage = Package('NoName')  # Name will be set once it is saved..
         newPackage.title = self.current_node.title
         newPackage.style = self.style
         newPackage.author = self.author
@@ -542,7 +535,7 @@ package'''
         """
         Load package from disk, returns a package.
         """
-        #if not zipfile.is_zipfile(filename):
+        # if not zipfile.is_zipfile(filename):
         #    return None
         try:
             zippedFile = zipfile.ZipFile(filename, "r")
@@ -661,7 +654,7 @@ package'''
         # but upgrading of resources and package happens in no particular order
         # and must be done after all resources have been upgraded
 
-        # some earlier .elp files appear to have been corrupted with 
+        # some earlier .elp files appear to have been corrupted with
         # two packages loaded, *possibly* from some strange extract/merge
         # functionality in earlier eXe versions?
         # Regardless, only the real package will have a resourceDir,
@@ -692,8 +685,8 @@ package'''
         return foundResource
 
     def get_absolute_url(self):
-        return reverse('exeapp.views.package.package_main',
-                       kwargs={'package_id' : self.id})
+        return reverse('exeapp.views.package.package_root',
+                       kwargs={'package_id': self.id})
 
     def __unicode__(self):
         return "Package %s: %s" % (self.id, self.title)
