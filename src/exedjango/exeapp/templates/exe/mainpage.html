@@ -120,19 +120,69 @@ $(document).ready(function() {
 
 		}
 	});
+	
+	$(document).keyup(function(e) {
+		if (e.keyCode == 27) {
+			$('#preview').hide();
+			$('body').css('overflow', 'auto');
+		}
+	});
+	
+	$('#modal-dialog-bg').click( function(){
+		$('#preview').hide();
+		$('body').css('overflow', 'auto');
+	});
+	
+	$('.button a').click( function(){
+		if($(this).attr('href') == '#_preview') {
+			$('#previewIFrame').attr("src", $('#previewIFrame').attr("src"));
+			$('#preview').show();
+			$('#previewIFrame').css({
+				overflow: 'hidden',
+				width: '0px',
+				height: '0px',
+				opacity: 0
+			});
+			$('#previewIFrame').animate({
+				height: '756px',
+				width: '1024px',
+				opacity: 1
+        	}, 1000);
+		}
+		else if($(this).attr('href') == '#_editor') {
+			$('#middle-row').children().hide();
+			$('#authoring').show();
+			$('#navi span').removeClass('button_active');
+			$(this).parent().addClass('button_active');
+		}
+		else if($(this).attr('href') == '#_theme') {
+			$('#middle-row').children().hide();
+			$('#selectStyle').show();
+			$('#navi span').removeClass('button_active')
+			$(this).parent().addClass('button_active');
+		}
+		else if($(this).attr('href') == '#_preferences') {
+			$('#middle-row').children().hide();
+			$('#properties').show();
+			$('#navi span').removeClass('button_active');
+			$(this).parent().addClass('button_active');
+		}
+	});
 });
 </script>
+
 {% endblock %}
 {% block content %}
+				<div id="preview" style="display:none">
+					
+					<div id="modal-dialog-bg"></div>
+					<iframe scrolling="auto" class="modal-dialog" id="previewIFrame" name="previewIFrame"></iframe>
 
-<div id="wrapper">
-	<div id="header">
-		creyoco
-	</div>
-		
-	<div id="box_left">
-		<!--<h2>Themenkatalog</h2>-->
-		<select data-placeholder="Wählen Sie einen Kurs" class="chzn-select" style="width:100%" tabindex="-1" id="select_course">
+
+				</div>
+<div id="header">
+	<div>
+		<select data-placeholder="Wählen Sie einen Kurs" class="chzn-select" tabindex="-1" id="select_course">
 			<option value="{{ package.get_absolute_url }}">{{ package.title }}</option>
 			{% for package_iter in package_list %}
 			{% if package_iter != package %}
@@ -140,6 +190,16 @@ $(document).ready(function() {
 			{% endif %}
 			{% endfor %}
 		</select>
+		
+		<h1>creyoco</h1>
+		<hr>
+	</div>
+</div>
+
+<div id="wrapper">
+	<div id="box_left">
+		<div style="position:fixed">
+		<h2>Themenkatalog</h2>
 		<div id="outline">
 			{% render_outline package %}
 			
@@ -157,7 +217,7 @@ $(document).ready(function() {
 				<a id="btnDemote" action="Demote">Demote</a>
 				<a id="btnUp" action="Up">Up</a>
 				<a id="btnDown" action="Down">Down</a>-->
-				<a href="#Add" id="btnAdd">Hinzufuegen</a>
+				<a href="#Add" id="btnAdd">Hinzufügen</a>
 				<a href="#Remove" id="btnRemove">Loeschen</a>
 				<a href="#Rename" id="btnRename" action="RenameNode">Umbenennen</a>
 				<a href="#Dublicate" id="btnDuplicate" action="DblNode">Duplizieren</a>
@@ -172,22 +232,8 @@ $(document).ready(function() {
 						<a class="export_link" href="{% url exeapp.views.package.export package.id "" %}{{type}}">{{title}}</a>
 					{% endfor %}
 			</div>
+			</div>
 		</div>
-		<!--<ul id="package_list">
-			<li class="new_package">
-				<a id="create_new_package">Create new package</a>
-			</li>
-		  {% for package_iter in package_list %}
-		  
-		    <li class='package {% if package_iter == package %}current_package{% endif %}'
-		    											 package_id="{{ package_iter.id }}">
-		      <a href="{{ package_iter.get_absolute_url }}">{{ package_iter.title }}</a>
-		      {% if not package_iter == package %}
-		      <a class="remove_package">Remove</a>
-		      {% endif %}
-		    </li>
-		  {% endfor %}
-		</ul>-->
 	</div>
 		
 	<div id="content">
@@ -197,21 +243,21 @@ $(document).ready(function() {
 			<div id="navi">
 				<div id="navi-left">
 					<span class="button button_active">
-						<a href="#" onclick="$('#middle-row').children().hide();$('#authoring').show();$('#navi span').removeClass('button_active');$(this).parent().addClass('button_active');">Inhalt bearbeiten</a>
+						<a href="#_editor">Inhalt bearbeiten</a>
 					</span>
 				
 					<span class="button">
-						<a href="#" onclick="$('#middle-row').children().hide();$('#selectStyle').show();$('#navi span').removeClass('button_active');$(this).parent().addClass('button_active');">Ausgabe-Layout</a>
+						<a href="#_theme">Ausgabe-Layout</a>
 					</span>
 				
 					<span class="button">
-						<a href="#" onclick="$('#middle-row').children().hide();$('#preview').show();$('#navi span').removeClass('button_active');$(this).parent().addClass('button_active');">Vorschau</a>
+						<a href="#_preview">Vorschau</a>
 					</span>
 				</div>
 			
 				<div id="navi-right">
 					<span class="button">
-						<a href="#" onclick="$('#middle-row').children().hide();$('#properties').show();$('#navi span').removeClass('button_active');$(this).parent().addClass('button_active');">Projekt-Eigenschaften</a>
+						<a href="#_preferences">Projekt-Eigenschaften</a>
 					</span>
 				</div>
 			</div>
@@ -223,13 +269,9 @@ $(document).ready(function() {
 					{% render_styles %}
 				</div>
 				
-			<div style="width:100%;min-height:600px;" id="authoring" name="authoringIFrame1"></div>
+				<div style="width:100%;min-height:600px;" id="authoring" name="authoringIFrame1"></div>
 				
-				<div id="preview" style="display:none">
-					<iframe style="width:100%;height:600px;" scrolling="auto" id="previewIFrame" name="previewIFrame"></iframe>
-				</div>
-				
-				<div id="properties" style="display:none;">
+								<div id="properties" style="display:none;">
 					<div id="package_properties" style="float:left">
 						<form id="properties_form" class="property_form" method="post" action=".#properties">
 							{% if properties_form.errors %}
@@ -263,8 +305,10 @@ $(document).ready(function() {
 	</div>
 	
 	<div id="box_right">
+	<div style="position:fixed">
 		<h2>Werkzeuge</h2>
 		{% render_idevicepane idevices %}
+	</div>
 	</div>
 	
 	<div style="clear:both"></div>
