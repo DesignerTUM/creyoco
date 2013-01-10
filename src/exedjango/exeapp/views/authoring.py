@@ -15,6 +15,7 @@ from django.core.urlresolvers import reverse
 from django import forms
 from exeapp.models.package import Package
 
+
 @login_required
 @get_package_by_id_or_error
 def authoring(request, package, partial=False):
@@ -59,37 +60,43 @@ def handle_action(request, package):
         return HttpResponse(response)
     return HttpResponse()
 
+
 def get_media_list(node, ajax=False):
     '''Returns the idevice-specific media list for a given node. Always
 includes tinymce compressor, since it can't be loaded dynamically'''
     # always load tinymce compressor
-    media = forms.Media(js=[reverse('tinymce-compressor')])
+#    media = forms.Media(js=[reverse('tinymce-compressor')])
+    media = forms.Media(js=["/static/tiny_mce/tiny_mce.js"])
+#    media = forms.Media()
     for idevice in node.idevices.all():
         idevice = idevice.as_child()
         block = block_factory(idevice)
         media += block.media
-        #print "#" * 10
-        #print media._js
+        # print "#" * 10
+        # print media._js
     if ajax:
-        media._js.remove(reverse('tinymce-compressor'))
+        # don't include tinymce js in ajax script loading
+        if "/static/tiny_mce/tiny_mce.js" in media._js:
+            media._js.remove("/static/tiny_mce/tiny_mce.js")
         return simplejson.dumps(media._js + media._css.get('all', []))
     else:
         return str(media)
+
 
 def get_unique_media_list(node, idevice=None):
     '''Returns a list of media which is used only by this idevice'''
     block = block_factory(idevice.as_child())
     media = block.media._js + block.media._css.get('all', [])
     # compressor is always loaded per default
-    compressor_url = reverse('tinymce-compressor')
-    if compressor_url in media:
-        media.remove(compressor_url)
+    if "/static/tiny_mce/tiny_mce.js" in media:
+        media.remove("/static/tiny_mce/tiny_mce.js")
     for idevice in node.idevices.exclude(id=idevice.id):
         block = block_factory(idevice.as_child())
         for js in block.media._js + block.media._css.get('all', []):
             if js in media:
                 media.remove(js)
     return media
+
 
 @login_required
 @get_package_by_id_or_error

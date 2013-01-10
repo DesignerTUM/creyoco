@@ -1,6 +1,7 @@
 # Django settings for exedjango project.
 
 import os, sys
+from django.core.urlresolvers import reverse
 
 def _get_file_from_root(folder_name):
     '''Returns path to a file or folder in root of the project'''
@@ -28,12 +29,12 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': _get_file_from_root('sqlite.db'), # Or path to database file if using sqlite3.
-        'USER': '', # Not used with sqlite3.
-        'PASSWORD': '', # Not used with sqlite3.
-        'HOST': '', # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '', # Set to empty string for default. Not used with sqlite3.
+        'ENGINE': 'django.db.backends.sqlite3',  # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': _get_file_from_root('sqlite.db'),  # Or path to database file if using sqlite3.
+        'USER': '',  # Not used with sqlite3.
+        'PASSWORD': '',  # Not used with sqlite3.
+        'HOST': '',  # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '',  # Set to empty string for default. Not used with sqlite3.
     }
 }
 
@@ -90,11 +91,11 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    #'django.middleware.csrf.CsrfResponseMiddleware',
+    # 'django.middleware.csrf.CsrfResponseMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
 
-    #handling of 403 exception
+    # handling of 403 exception
     'exedjango.base.middleware.Http403Middleware',
 )
 
@@ -110,6 +111,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'grappelli',
+    'filebrowser',
     'registration',
     'django.contrib.admin',
     'django.contrib.staticfiles',
@@ -119,7 +121,6 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'tinymce',
     'exeapp',
-    'filebrowser',
 )
 
 ABSOLUTE_URL_OVERRIDES = {
@@ -132,38 +133,41 @@ STATIC_URL = '/static/'
 STYLE_DIR = "%s/css/styles/" % STATIC_ROOT
 
 TINYMCE_JS_URL = os.path.join(STATIC_URL, 'tiny_mce/tiny_mce.js')
+
 TINYMCE_JS_ROOT = os.path.join(STATIC_ROOT, 'tiny_mce')
 
-TINYMCE_COMPRESSOR = True
+TINYMCE_COMPRESSOR = False
+
+LINK_LIST = "authoring/link_list"
 
 TINYMCE_DEFAULT_CONFIG = {
-    "content_css" : "/static/css/extra.css",
-     "strict_loading_mode" : True,
-    "apply_source_formatting" : True,
-    "cleanup_on_startup" : False,
-    "entity_encoding" : "raw",
-    "gecko_spellcheck" : True,
-    "external_link_list_url" : "./link_list/",
-     #"mode" : "specific_textareas",
-     #"editor_selector" : "mceEditor",
-     "plugins" : "table,save,advhr,advimage,advlink,emotions,media, contextmenu,paste,directionality",
-     "theme" : "advanced",
-     "theme_advanced_layout_manager" : "SimpleLayout",
-    "theme_advanced_toolbar_location" : "top",
-     "theme_advanced_buttons1" : "newdocument,separator,bold,italic,underline,fontsizeselect,forecolor,backcolor,separator,sub,sup,separator,justifyleft,justifycenter,justifyright,justifyfull,separator,bullist,numlist,outdent,indent,separator,anchor,separator,cut,copy,paste,pastetext,pasteword,help",
-     "theme_advanced_buttons2" : "image,media,exemath,advhr,fontselect,tablecontrols,separator,link,unlink,separator, undo,redo,separator,charmap,code,removeformat",
-     "theme_advanced_buttons3" : "",
-    "advimage_image_browser_callback" : "chooseImage_viaTinyMCE",
-    "advimage_image2insert_browser_callback" : "chooseImage_viaTinyMCE",
-    "media_media_browser_callback" : "chooseImage_viaTinyMCE",
-    "media_media2insert_browser_callback" : "chooseImage_viaTinyMCE",
-    "advlink_file_browser_callback" : "chooseImage_viaTinyMCE",
-    "advlink_file2insert_browser_callback" : "chooseImage_viaTinyMCE",
-    "theme_advanced_statusbar_location" : "bottom",
-        "theme_advanced_resize_horizontal" : True,
-        "theme_advanced_resizing" : True,
-        "width" : "100%"
- }
+   "content_css": "/static/css/extra.css",
+    "strict_loading_mode": True,
+   "apply_source_formatting": True,
+   "cleanup_on_startup": True,
+   "entity_encoding": "raw",
+   "gecko_spellcheck": True,
+   "external_link_list_url": LINK_LIST,
+    # "mode": "specific_textareas",
+    # "editor_selector": "mceEditor",
+    "plugins": "table,save,advhr,advimage,advlink,emotions,media, contextmenu,paste,directionality",
+    "theme": "advanced",
+    "theme_advanced_layout_manager": "SimpleLayout",
+   "theme_advanced_toolbar_location": "top",
+    "theme_advanced_buttons1": "newdocument,separator,bold,italic,underline,fontsizeselect,forecolor,backcolor,separator,sub,sup,separator,justifyleft,justifycenter,justifyright,justifyfull,separator,bullist,numlist,outdent,indent,separator,anchor,separator,cut,copy,paste,pastetext,pasteword,help",
+    "theme_advanced_buttons2": "image,media,exemath,advhr,fontselect,tablecontrols,separator,link,unlink,separator, undo,redo,separator,charmap,code,removeformat",
+    "theme_advanced_buttons3": "",
+   "advimage_image_browser_callback": "chooseImage_viaTinyMCE",
+   "advimage_image2insert_browser_callback": "chooseImage_viaTinyMCE",
+   "media_media_browser_callback": "chooseImage_viaTinyMCE",
+   "media_media2insert_browser_callback": "chooseImage_viaTinyMCE",
+   "advlink_file_browser_callback": "chooseImage_viaTinyMCE",
+   "advlink_file2insert_browser_callback": "chooseImage_viaTinyMCE",
+   "theme_advanced_statusbar_location": "bottom",
+       "theme_advanced_resize_horizontal": True,
+       "theme_advanced_resizing": True,
+       "width": "100%"
+}
 
 # filebrowser settings
 FILEBROWSER_PATH_FILEBROWSER_MEDIA = "%s/filebrowser/" % STATIC_ROOT
