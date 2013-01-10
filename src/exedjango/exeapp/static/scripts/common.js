@@ -66,6 +66,9 @@ $('html').ajaxSend(function(event, xhr, settings) {
 });
 
 jQuery(document).ready(function() {
+	$(document).on("pjax:success", function() {
+		initialize_authoring();
+	});
 	$.jsonRPC.setup({
            endPoint: '/exeapp/json/',
            namespace: 'package',
@@ -114,11 +117,9 @@ function reload_authoring() {
 	
 	url = "/exeapp/package/" + get_package_id() + "/" + get_current_node_id() + "/";
 	$.pjax({url: url,
-		container: "#authoring",
-		complete: function() {
-		initialize_authoring();
+		container: "#authoring"
 		}
-	});
+	);
 }
 
 function get_media(request_url) {

@@ -23,8 +23,8 @@ def authoring(request, package, current_node, partial=False):
 
     if "idevice_id" in request.GET:
         try:
-            idevice = package.get_idevice_for_partial\
-                        (request.GET['idevice_id'])
+            idevice = current_node.idevices.get(
+                                pk=(request.GET['idevice_id']))
             if request.GET.get("media", "") == "true":
                 json = simplejson.dumps(get_unique_media_list(
                                         idevice.parent_node, idevice))
