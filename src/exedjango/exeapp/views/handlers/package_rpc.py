@@ -55,7 +55,7 @@ log = logging.getLogger(__name__)
 
 
 @jsonrpc_authernticating_method('package.get_current_style')
-def get_current_style(request, package, node):
+def get_current_style(request, package):
     return {"style": package.style}
 
 
@@ -68,7 +68,7 @@ def set_package_style(request, package, node, style_id):
 def add_idevice(request, package, node, idevice_type):
     '''Adds a idevice of given type to the current node'''
 
-    idevice = package.add_idevice(node, idevice_type)
+    idevice = node.add_idevice(idevice_type)
     return {'idevice_id': idevice.id}
 
 
@@ -96,6 +96,7 @@ def handleDblNode (request, package):
         newNode.RenamedNodePath(isMerge=True)
         client.sendScript(u'top.location = "/%s"' % \
                       package.name)
+
 
 @jsonrpc_authernticating_method('package.setEditorsWidth')
 def setEditorsWidth(request, package, width):

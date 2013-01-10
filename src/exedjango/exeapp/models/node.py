@@ -1,5 +1,5 @@
 # ===========================================================================
-# eXe 
+# eXe
 # Copyright 2004-2006, University of Auckland
 #
 # This program is free software; you can redistribute it and/or modify
@@ -31,10 +31,9 @@ import logging
 from copy               import deepcopy
 from urllib             import quote
 
-#from exe.webui                import common
-
-
+# from exe.webui                import common
 log = logging.getLogger()
+
 
 class NodeManager(models.Manager):
 
@@ -51,6 +50,7 @@ class NodeManager(models.Manager):
         node.save()
         return node
 
+
 class Node(models.Model):
     """
     Nodes provide the structure to the package hierarchy
@@ -64,7 +64,7 @@ class Node(models.Model):
 
     objects = NodeManager()
 
-    #self.last_full_node_path = self.GetFullNodePath()
+    # self.last_full_node_path = self.GetFullNodePath()
 
     # Properties
 
@@ -76,7 +76,6 @@ class Node(models.Model):
         return len(list(self.ancestors()))
     level = property(getLevel)
 
-
     def get_idevice(self, idevice_id):
         '''Returns idevice with given id. Can't use dictionary, because
 it is unordered and can't use OrderedDict, because jelly doesn't play nice
@@ -85,9 +84,7 @@ with it'''
             if idevice.id == idevice_id:
                 return idevice
         raise KeyError("Idevice %s not found" % idevice_id)
-    # 
-
-
+    #
 
     def GetFullNodePath(self, new_node_title=""):
         """
@@ -109,8 +106,8 @@ with it'''
             if node is not None:
                 # note: if node is None,
                 #   appears to be an invalid ancestor in an Extracted package,
-                #   but continue on, since it was probably one of the top nodes 
-                #   above the extraction that is None. 
+                #   but continue on, since it was probably one of the top nodes
+                #   above the extraction that is None.
                 # but this node IS valid, so add it to the path:
                 full_path = "%s:%s" % (full_path, self.title)
 
@@ -121,8 +118,6 @@ with it'''
             # a new_node_title was specified, create this path with the new name
             full_path = "%s:%s" % (full_path, new_node_title)
         return full_path
-
-
 
     def RenamedNodePath(self, isMerge=False, isExtract=False):
         """
@@ -171,8 +166,8 @@ with it'''
                     old_full_link_name = old_node_path + "#" + this_anchor_name
                     new_full_link_name = new_node_path + "#" + this_anchor_name
 
-                    # Remove any linked fields that no longer apply, 
-                    # using reverse for loop to delete: 
+                    # Remove any linked fields that no longer apply,
+                    # using reverse for loop to delete:
                     num_links = len(this_field.anchors_linked_from_fields[\
                             this_anchor_name])
                     for i in range(num_links - 1, -1, -1):
@@ -180,13 +175,13 @@ with it'''
                             this_anchor_name][i]
                         that_field_is_valid = True
                         if isExtract:
-                            # first ensure that each linked_from_field is 
+                            # first ensure that each linked_from_field is
                             # still in the extracted package.
                             # as with the subsequent isExtract link detection...
                             # Now, carefully check that the this_anchor_field
                             # is indeed in the current extracted sub-package,
-                            # being especially aware of zombie nodes which are 
-                            # unfortunately included with the sub-package, but 
+                            # being especially aware of zombie nodes which are
+                            # unfortunately included with the sub-package, but
                             # are NOT actually listed within its _nodeIdDict!
                             if that_field.idevice is None \
                             or that_field.idevice.parentNode is None \
@@ -222,20 +217,20 @@ with it'''
                 self.package.anchor_nodes = []
             if num_links > 0 and self not in self.package.anchor_nodes:
                 self.package.anchor_nodes.append(self)
-        # Remove any linked fields that no longer apply, 
-        # using reverse for loop to delete: 
+        # Remove any linked fields that no longer apply,
+        # using reverse for loop to delete:
         for i in range(num_links - 1, -1, -1):
             # now, for ANY type of node renaming, update corresponding links:
             that_field = self.top_anchors_linked_from_fields[i]
             that_field_is_valid = True
             if isExtract:
-                # first ensure that each linked_from_field is 
+                # first ensure that each linked_from_field is
                 # still in the extracted package.
                 # as with the subsequent isExtract link detection...
                 # Now, carefully check that the this_anchor_field
                 # is indeed in the current extracte sub-package,
-                # being especially aware of zombie nodes which are 
-                # unfortunately included with the sub-package, but 
+                # being especially aware of zombie nodes which are
+                # unfortunately included with the sub-package, but
                 # are NOT actually listed within its _nodeIdDict!
                 if that_field.idevice is None \
                 or that_field.idevice.parentNode is None \
@@ -258,16 +253,16 @@ with it'''
         # and determine if any links to this node remain
         num_links = len(self.top_anchors_linked_from_fields)
         if num_top_links > 0 and num_links <= 0:
-            # there WERE links to this node's auto_top, 
+            # there WERE links to this node's auto_top,
             # but they no longer apply to this extracted sub-package.
-            # If no other anchors are in any of this node's fields, then 
+            # If no other anchors are in any of this node's fields, then
             # no need for this node to be in the package's anchor_nodes list:
             if len(self.anchor_fields) <= 0:
                 if self.package and hasattr(self.package, 'anchor_nodes') \
                 and self in self.package.anchor_nodes:
                     self.package.anchor_nodes.remove(self)
 
-        # and for package extractions, also ensure that any internal links 
+        # and for package extractions, also ensure that any internal links
         # in ANY of its fields are to anchors that still exist in this package:
         if isExtract:
             for this_idevice in self.idevices:
@@ -275,8 +270,8 @@ with it'''
                     if hasattr(this_field, 'intlinks_to_anchors') \
                     and len(this_field.intlinks_to_anchors) > 0:
 
-                        # Remove any linked fields that no longer apply, 
-                        # using reverse for loop to delete: 
+                        # Remove any linked fields that no longer apply,
+                        # using reverse for loop to delete:
                         these_link_names = this_field.intlinks_to_anchors.keys()
                         num_links = len(these_link_names)
                         for i in range(num_links - 1, -1, -1):
@@ -285,8 +280,8 @@ with it'''
                                 this_field.intlinks_to_anchors[this_link_name]
                             # Now, carefully check that the this_anchor_field
                             # is indeed in the current extracted sub-package,
-                            # being especially aware of zombie nodes which are 
-                            # unfortunately included with the sub-package, but 
+                            # being especially aware of zombie nodes which are
+                            # unfortunately included with the sub-package, but
                             # are NOT actually listed within its _nodeIdDict!
 
                             # could not import this at the top:
@@ -312,7 +307,7 @@ with it'''
                             not in current_package._nodeIdDict \
                             or current_package._nodeIdDict[this_link_node.id] \
                             != this_link_node:
-                                # this internal link points to an anchor 
+                                # this internal link points to an anchor
                                 # which is NO LONGER a VALID part of this
                                 # newly extracted sub-package.  Remove it:
                                 this_field.RemoveInternalLinkToRemovedAnchor(\
@@ -338,8 +333,8 @@ with it'''
         log.debug(u"clone " + self.title)
 
         try:
-            # Setting self.parent in the copy to None, so it doesn't 
-            # go up copying the whole tree 
+            # Setting self.parent in the copy to None, so it doesn't
+            # go up copying the whole tree
             newNode = deepcopy(self, {id(self._package): newPackage,
                                   id(self.parent): None})
             newNode._id = newPackage._regNewNode(newNode)
@@ -362,7 +357,7 @@ with it'''
 
     def ancestors(self):
         """Iterates over our ancestors"""
-        if self.parent: # All top level nodes have no ancestors
+        if self.parent:  # All top level nodes have no ancestors
             node = self
             while node is not None and node is not self.package.root:
                 if not hasattr(node, 'parent'):
@@ -372,11 +367,9 @@ with it'''
                     node = node.parent
                     yield node
 
-
     def isAncestorOf(self, node):
         """If we are an ancestor of 'node' returns 'true'"""
         return self in node.ancestors()
-
 
     @property
     def resources(self):
@@ -414,6 +407,11 @@ with it'''
             block.idevice.save()
             return response
 
+    def rename(self, new_title):
+        if new_title not in ['', 'null', 'undefined']:
+            self.title = new_title
+            self.save()
+        return self.title
 
     def create_child(self):
         """
@@ -549,7 +547,7 @@ Returns True is successful
         to the seemingly random upgrading of the package and resource objects,
         this might be called too early.
         """
-        # only bother launching the zombie node sub-tree check 
+        # only bother launching the zombie node sub-tree check
         # on potential root nodes, either valid or of zombie trees:
         if not hasattr(self, 'parent') or self.parent is None:
             # supposedly the root of a sub-tree, but it could also be a zombie.

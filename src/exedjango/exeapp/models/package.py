@@ -79,6 +79,7 @@ def burstIdevice(idev_type, i, node):
     idevice.burstHTML(i)
     return idevice
 
+
 def loadNodesIdevices(node, s):
     soup = BeautifulSoup(s)
     body = soup.find('body')
@@ -158,6 +159,7 @@ def test_for_node(html_content):
     else:
         return False
 
+
 def loadNode(pass_num, resourceDir, zippedFile, node, doc, item, level):
     # populate this node
     # 1st pass = merely unzipping all resources such that they are available,
@@ -228,6 +230,7 @@ def loadNode(pass_num, resourceDir, zippedFile, node, doc, item, level):
             loadNode(pass_num, resourceDir, zippedFile, next_node,
                     doc, subitem, level + 1)
 
+
 def loadCC(zippedFile, filename):
     """
     Load an IMS Common Cartridge or Content Package from filename
@@ -249,7 +252,7 @@ def loadCC(zippedFile, filename):
                                 package.root, xmldoc, item, level)
     return package
 
-# ===========================================================================
+
 class DublinCore(models.Model):
     title = models.CharField(blank=True, max_length=128)
     creator = models.CharField(blank=True, max_length=128)
@@ -270,8 +273,8 @@ class DublinCore(models.Model):
     class Meta:
         app_label = "exeapp"
 
-class PackageManager(models.Manager):
 
+class PackageManager(models.Manager):
 
     def create(self, *args, **kwargs):
         package = Package(*args, **kwargs)
@@ -281,9 +284,8 @@ class PackageManager(models.Manager):
         root = Node(package=package, parent=None,
                     title="Home", is_current_node=True, is_root=True)
         root.save()
-
-
         return package
+
 
 class Package(models.Model):
     """
@@ -292,23 +294,17 @@ i.e. the "package".
     """
 
     DEFAULT_LEVEL_NAMES = ["Topic", "Section", "Unit"]
-
-
     title = models.CharField(max_length=100)
-
     user = models.ForeignKey(User)
-
     author = models.CharField(max_length=50, blank=True)
     email = models.EmailField(max_length=50, blank=True)
     description = models.CharField(max_length=256, blank=True)
-
     backgroundImg = models.ImageField(upload_to='background',
                                            blank=True, null=True)
     backgroundImgTile = models.BooleanField(default=False)
     footer = models.CharField(max_length=100, blank=True)
     footerImg = models.ImageField(upload_to='footer',
                                            blank=True, null=True)
-
     license = models.CharField(max_length=50, blank=True)
     style = models.CharField(max_length=20, default="default")
     resourceDir = models.FileField(upload_to="resources",
@@ -318,8 +314,6 @@ i.e. the "package".
     level1 = models.CharField(max_length=20, default=DEFAULT_LEVEL_NAMES[0])
     level2 = models.CharField(max_length=20, default=DEFAULT_LEVEL_NAMES[1])
     level3 = models.CharField(max_length=20, default=DEFAULT_LEVEL_NAMES[2])
-
-
 
     objects = PackageManager()
 
@@ -331,79 +325,15 @@ i.e. the "package".
 
     # Property Handlers
 
-    def set_current_node_by_id(self, node_id):
-        try:
-            node = Node.objects.get(pk=node_id, package=self)
-            self.current_node = node
-        except Node.DoesNotExist:
-            raise KeyError("Could not find node %s" % node_id)
-
-    def set_current_node_by_unique_name(self, node_name):
-
-        try:
-            if node_name == 'index':
-                node = self.root
-            else:
-                node_id = node_name.split("_")[-1]
-                node = Node.objects.get(pk=node_id,
-                                     package=self)
-        except Node.DoesNotExist:
-            raise KeyError("Package with name %s wasn't found"\
-                           % node_name)
-        else:
-            self.current_node = node
-
-
-    def add_child_node(self):
-        '''Creates a child node of the current node, current node stays
-the same'''
-        node = self.current_node.create_child()
-        return node
-
-    def delete_current_node(self):
+    def delete_current_node(self, node):
         '''Removes current node. Sets current node to deleted node's 
 parent'''
-        node = self.current_node
         if node is not self.root:
             self.current_node = node.parent
             node.delete()
             return "1"
         else:
             return "0"
-
-    def rename_current_node(self, new_title):
-        '''Renames current node. Returns new name, if it's changed, old name else'''
-        node = self.current_node
-        if new_title not in ['', 'null']:
-            node.title = new_title
-            node.save()
-        return node.title
-
-    def promote_current_node(self):
-        '''Moves current node one step up in the hierarchie. Returns True if
-successful'''
-        return self.current_node.promote()
-
-    def demote_current_node(self):
-        '''Moves current node one step up in the hierarchie. Returns True if
-successful'''
-        return self.current_node.demote()
-
-    def move_current_node_up(self):
-        '''Moves current node up on the same level. Returns true if 
-successful'''
-        return self.current_node.up()
-
-    def move_current_node_down(self):
-        '''Moves current node down on the same level. Returns true if 
-successful'''
-        return self.current_node.down()
-
-    def add_idevice(self, node, idevice_type):
-        '''Adds idevice by a given type to the current node.
-Throws KeyError, if idevice_type is not found'''
-        idevice = node.add_idevice(idevice_type)
-        return idevice
 
     def get_idevice_for_partial(self, idevice_id):
         '''Returns a idevice only in case its on the current node of this
