@@ -1,19 +1,20 @@
-from django.shortcuts import render_to_response, get_object_or_404
+import os
+from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseForbidden, HttpResponse, HttpResponseBadRequest, \
-    Http404, HttpResponseRedirect, HttpResponseNotAllowed
+from django.http import HttpResponse, HttpResponseBadRequest, \
+    HttpResponseRedirect, HttpResponsePermanentRedirect, HttpResponseForbidden
 from django.core.servers.basehttp import FileWrapper
-from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.staticfiles.views import serve
+from django.conf import settings
 
-from exeapp.models import Package, User, idevice_store, Package
-from exeapp.views.export.websiteexport import WebsiteExport
-from exeapp import shortcuts
+from exeapp.models import User, idevice_store, Package
 from exeapp.shortcuts import get_package_by_id_or_error
 from django import forms
 from django.core.urlresolvers import reverse
 from exeapp.models.package import DublinCore
-from exeapp.views.export.imsexport import IMSExport
 from exeapp.views.export.exporter_factory import exporter_factory, exporter_map
+from exeapp.models.node import Node
+from django.utils.encoding import smart_str
 
 try:
     from cStringIO import StringIO
@@ -116,6 +117,7 @@ def export(request, package, export_format):
 @login_required
 @get_package_by_id_or_error
 def preview(request, package, node_id):
+    node_id = int(node_id)
     exporter = exporter_factory("website", package, None)
     exporter.create_pages()
     print exporter.pages
@@ -126,3 +128,13 @@ def preview(request, package, node_id):
             found_page = page
             break
     return HttpResponse(found_page.render(full_style_url=True))
+
+
+@login_required
+@get_package_by_id_or_error
+def preview_static(request, package, node_id, path):
+    node_id = int(node_id)
+    if Node.objects.get(pk=node_id).package.user != request.user:
+        return HttpResponseForbidden()
+    user_media_url = request.user.get_profile().media_url
+    return HttpResponsePermanentRedirect(user_media_url + path)
