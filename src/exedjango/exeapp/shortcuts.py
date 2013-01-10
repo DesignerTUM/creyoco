@@ -16,6 +16,7 @@ can't be found.
 Please specify additional view arguments in the view docstring.
 Depends on Http403 handling middleware.
 Tested by exeapp.tests.ShortcutsTestCase.test_get_package_or_error. '''
+
     @wraps(func)
     def permission_checking_view(request, package_id, *args, **kwargs):
         try:
@@ -40,10 +41,12 @@ def jsonrpc_authernticating_method(*args, **kwargs):
     def decorator(func):
         if "authenticated" not in kwargs:
             kwargs['authenticated'] = True
+
         @jsonrpc_method(*args, **kwargs)
         @get_package_by_id_or_error
         def wrapper(*args, **kwargs):
             return func(*args, **kwargs)
+
     return decorator
 
 

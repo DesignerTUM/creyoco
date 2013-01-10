@@ -1,11 +1,14 @@
 # Django settings for exedjango project.
 
-import os, sys
+import os
+import sys
 from django.core.urlresolvers import reverse
+
 
 def _get_file_from_root(folder_name):
     '''Returns path to a file or folder in root of the project'''
     return os.path.join(os.path.dirname(__file__), folder_name).replace('\\', '/')
+
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -14,6 +17,7 @@ if DEBUG:
     sys.dont_write_bytecode = True
 
 import logging
+
 logging.basicConfig(
             level=DEBUG and logging.DEBUG or logging.INFO,
             format='%(asctime)s %(levelname)s %(message)s',
@@ -29,12 +33,12 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',  # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': _get_file_from_root('sqlite.db'),  # Or path to database file if using sqlite3.
-        'USER': '',  # Not used with sqlite3.
-        'PASSWORD': '',  # Not used with sqlite3.
-        'HOST': '',  # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',  # Set to empty string for default. Not used with sqlite3.
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': _get_file_from_root('sqlite.db'),
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '',
     }
 }
 
