@@ -37,6 +37,7 @@ class PackagePropertiesForm(forms.ModelForm):
         model = Package
         fields = ('title', 'author', 'email', 'description')
 
+
 class DublinCoreForm(forms.ModelForm):
     form_type = "dublincore_form"
     form_type_field = forms.CharField(initial=form_type,
@@ -63,6 +64,7 @@ def generate_package_main(request, package, **kwargs):
     package_list = Package.objects.filter(user=user)
     return render_to_response('exe/mainpage.html', locals())
 
+
 def change_properties(request, package):
     '''Parses post requests and applies changes to the package'''
     form_type = request.POST['form_type_field']
@@ -83,6 +85,7 @@ def change_properties(request, package):
         else:
             return generate_package_main(request, package,
                                          **{form.form_type : form})
+
 
 @login_required
 @get_package_by_id_or_error
@@ -134,7 +137,8 @@ def preview(request, package, node_id):
 @get_package_by_id_or_error
 def preview_static(request, package, node_id, path):
     node_id = int(node_id)
-    if Node.objects.get(pk=node_id).package.user != request.user:
+    node = Node.objects.get(pk=node_id)
+    if node.package != package or package.user != request.user:
         return HttpResponseForbidden()
     user_media_url = request.user.get_profile().media_url
     return HttpResponsePermanentRedirect(user_media_url + path)
