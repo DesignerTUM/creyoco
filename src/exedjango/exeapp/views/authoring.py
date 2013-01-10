@@ -18,7 +18,7 @@ from exeapp.models.package import Package
 
 @login_required
 @get_package_by_id_or_error
-def authoring(request, package, partial=False):
+def authoring(request, package, current_node, partial=False):
     '''Handles calls to authoring iframe. Renders exe/authoring.html'''
 
     if "idevice_id" in request.GET:
@@ -38,7 +38,7 @@ def authoring(request, package, partial=False):
     partial = partial or \
                 "partial" in request.GET and request.GET['partial'] == "true"
     if partial and "media" in request.GET and request.GET['media'] == "true":
-        return HttpResponse(get_media_list(package.current_node, ajax=True),
+        return HttpResponse(get_media_list(current_node, ajax=True),
                              content_type="text/javascript")
     return render_to_response('exe/authoring.html', locals())
 

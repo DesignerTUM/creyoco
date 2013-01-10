@@ -90,6 +90,11 @@
 	</div>
 </div>
 {% endblock %}
+{% block content %}
+				<div id="preview" style="display:none">
+					
+					<div id="modal-dialog-bg"></div>
+					<iframe scrolling="auto" class="modal-dialog" id="previewIFrame" name="previewIFrame"></iframe>
 
 {% block h2 %}Inhalt{% endblock %}
 
@@ -131,6 +136,16 @@
 	</div>
 	
 	<div style="clear:both"></div>
+	
+	<div id="footer">
+		<a href="#impressum">Impressum</a>
+		<img src="{% get_static_prefix %}images/mz/help.png" alt="Hilfe" align="right">
+	</div>
+	<div id="package_id" style="display: none">
+		{{package.id}}
+	</div>
+	
+	<div id="package_style" style="display:none">{{package.style}}</div>
 </div>
 {% endblock %}
 

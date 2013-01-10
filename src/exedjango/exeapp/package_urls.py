@@ -5,7 +5,8 @@ from django.conf import settings
 # from exeapp.views.package_outline_rpc import *
 
 urlpatterns = patterns('exeapp.views',
-   (r'^$', 'package.package_main'),
+   (r'^$', 'package.package_root'),
+   (r'^/(?P<node_id>\d+/$', 'package.package_main'),
    (r'authoring/$', 'authoring.authoring'),
    (r'handle_action/$', 'authoring.handle_action'),
    (settings.LINK_LIST + '$', 'authoring.link_list'),

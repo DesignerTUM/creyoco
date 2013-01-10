@@ -47,7 +47,7 @@ class DublinCoreForm(forms.ModelForm):
         model = DublinCore
 
 
-def generate_package_main(request, package, **kwargs):
+def generate_package_main(request, package, current_node, **kwargs):
     '''Generates main page, can take additional keyword args to
     create forms'''
 
@@ -89,12 +89,12 @@ def change_properties(request, package):
 
 @login_required
 @get_package_by_id_or_error
-def package_main(request, package, properties_form=None):
+def package_main(request, package, node_id, properties_form=None):
     '''Handle calls to package site. Renders exe/mainpage.html.'''
     if request.method == 'POST':
         return change_properties(request, package)
     else:
-        return generate_package_main(request, package)
+        return generate_package_main(request, package, node_id)
 
 
 @login_required
