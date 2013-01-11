@@ -1,132 +1,52 @@
 {% extends "base.html" %}
-
-{% load mainpage_extras %}
-
 {% load static %}
 
-{% block title %}{{ package.title }}{% endblock %}
+{% block title %}creyoco | create your course{% endblock %}
 
-{% block head%}
-<!-- CSS -->
-<link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/ui-lightness/jquery-ui-1.8.4.custom.css" />
-<link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/mz/style.min.css" />
-<!-- SCRIPTS -->
-<script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.js"></script>
-<script type="text/javascript" src="{% get_static_prefix %}scripts/jquery-ui.custom.min.js"></script>
-<script type="text/javascript" src="{% get_static_prefix %}scripts/mainpage.js"></script>
-<script type='text/javascript' src='{% get_static_prefix %}scripts/jquery.jsonrpc.js'></script>
-<script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.form.js"></script>
-<script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.cookie.js"></script>
-<script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.jstree.js"></script>
-<script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.confirm.js"></script>
+{% block box_left %}{% endblock %}
+{% block box_right %}{% endblock %}
 
-<script type="text/javascript">
-/*$(document).ready(function() {
-	$('.username').focusin( function() {
-		if($(this).val() == 'Benutzername') {
-			$(this).val('');
-		}
-	});
-	
-	$('.username').focusout( function() {
-		if($(this).val() == '') {
-			$(this).val('Benutzername');
-		}
-	});
-	
-	$('.password').focusin( function() {
-		if($(this).val() == 'Passwort') {
-			$(this).val('');
-		}
-	});
-	
-	$('.password').focusout( function() {
-		if($(this).val() == '') {
-			$(this).val('Passwort');
-		}
-	});
-});*/
-</script>
-
-{% endblock %}
+{% block h2 %}Willkommen bei creyoco!{% endblock %}
+{% block dialog %}{% endblock %}
 {% block content %}
+<div style="margin-top:90px;margin-left:50px;margin-right:85px;width:262px;float:left;">
+	<div style="font-size:13px;font-weight:500;margin-bottom:25px">Bereits Mitglied?<span style="color:rgba(0,0,0,0.5)"> Melde dich an!</span></div>
 
-<div id="wrapper">
-	<div id="header">
-		creyoco
-	</div>
-		
-	<div id="box_left">
-		<!--<h1>Themenkatalog</h2>-->
-	</div>
-		
-	<div id="content">
-		<h1>Willkommen bei creyoco!</h1>
-		<img style="margin-bottom:-180px;margin-left:747px;" src="{% get_static_prefix %}images/mz/authoring_shadow_top.png" alt="" />
-			
-		<div style="clear:both"></div>
-    				
-		<div id="middle-row">
-			<div style="margin-top:90px;margin-left:50px;margin-right:85px;width:262px;float:left;">
-				<div style="font-size:13px;font-weight:500;margin-bottom:25px">
-					Bereits Mitglied? <span style="color:rgba(0,0,0,0.5)"> Melde dich an!</span>
-				</div>
-				
-				<form action='/accounts/login/' method='post'>
-				{% csrf_token %}
-				{% if form.errors %}
-					<div style="position:relative;">
-						<div class="error-left"><span>Benutzername oder…</span></div>
-					</div>
-				{% endif %}
-					<input class="username" type="text" name="username" placeholder="Benutzername" id="username" value="{{ form.username.value|default_if_none:"" }}">
-					
-				{% if form.errors %}
-					<div style="position:relative">
-						<div class="error-left"><span>Passwort falsch!</span></div>
-					</div>
-				{% endif %}
-				
-					<input class="password no_margin" type="password" name="password" placeholder="Passwort" id="password" value="{{ form.username.value|default_if_none:"" }}">
-					
-					<input class="login_submit no_margin" type="submit" value="Einloggen" />
-					<input type="hidden" name="next" value="/" />
-				</form>
-				
-				<a class="forgot_pw" href="">Passwort vergessen?</a>
-
-			</div>
-			<div style="margin-top:90px;margin-right:50px;float:left;width:262px;">
-				<div style="font-size:13px;font-weight:500;margin-bottom:25px">
-					Neu bei creyoco? <span style="color:rgba(0,0,0,0.5)"> Registriere dich jetzt!</span>
-				</div>
-				<form action='/accounts/register/' method='post'>
-					{% csrf_token %}
-					<input class="reg_username" type="text" name="username" placeholder="Benutzername" id="username">
-					<input class="reg_email" type="text" name="email" placeholder="E-Mail" id="email">
-					<input class="reg_password" type="password" name="password1" placeholder="Passwort" id="password">
-					<input class="reg_password_return" type="password" name="password2" placeholder="Passwort wiederholen" id="password">
-					
-					
-					<input class="reg_submit" type="submit" value="Benutzerkonto erstellen" />
-					<input type="hidden" name="next" value="/" />
-				</form>
-			</div>
+	<form action='/accounts/login/' method='post'>
+		{% csrf_token %}
+		{% if form.errors %}
+		<div style="position:relative;">
+			<div class="error-left"><span>Benutzername oder…</span></div>
 		</div>
-		<img style="position:absolute;z-index:-1;margin-top:-289px;margin-left:-3px;" src="{% get_static_prefix %}images/mz/authoring_shadow_bottom.png" alt="" />
-
-	</div>
-	
-	<div id="box_right">
-	<!--	<h1>Werkzeuge</h2>-->
-	</div>
-	
-	<div style="clear:both"></div>
-	
-	<div id="footer">
-		<a href="#impressum">Impressum</a>
-		<img src="{% get_static_prefix %}images/mz/help.png" alt="Hilfe" align="right">
-		<a href="/accounts/register/">Registration</a>
-	</div>
+		{% endif %}
+		<input class="username" type="text" name="username" placeholder="Benutzername" value="{{ form.username.value|default_if_none:"" }}">
+			
+		{% if form.errors %}
+		<div style="position:relative">
+			<div class="error-left"><span>Passwort falsch!</span></div>
+		</div>
+		{% endif %}
+			
+		<input class="login_password" type="password" name="password" placeholder="Passwort" value="{{ form.username.value|default_if_none:"" }}">
+		<input class="login_submit" type="submit" value="Einloggen">
+		<input type="hidden" name="next" value="/">
+	</form>
+		
+	<a class="forgot_pw" href="">Passwort vergessen?</a>
 </div>
+
+<div style="margin-top:90px;margin-right:50px;float:left;width:262px;">
+	<div style="font-size:13px;font-weight:500;margin-bottom:25px">Neu bei creyoco? <span style="color:rgba(0,0,0,0.5)"> Registriere dich jetzt!</span></div>
+		
+	<form action='/accounts/register/' method='post'>
+		{% csrf_token %}
+		<input class="reg_username" type="text" name="username" placeholder="Benutzername">
+		<input class="reg_email" type="text" name="email" placeholder="E-Mail">
+		<input class="reg_password" type="password" name="password1" placeholder="Passwort">
+		<input class="reg_password_return" type="password" name="password2" placeholder="Passwort wiederholen">
+		<input class="reg_submit" type="submit" value="Benutzerkonto erstellen">
+		<input type="hidden" name="next" value="/">
+	</form>
+</div>
+
 {% endblock %}

@@ -1,13 +1,65 @@
 {% spaceless %}
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>
-<title>{% block title %}{% endblock %}</title>
-{% block head %}{% endblock %}
-</head>
-<body>
-{% block content %} {% endblock %}
-</body>
+<html lang="de">
+	<head>
+		<meta charset="UTF-8">
+		<title>{% block title %}{% endblock %}</title>
+		
+		{% block head_css %}
+			<link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/mz/style.min.css">
+		{% endblock %}
+		
+		{% block head_javascript %}{% endblock %}
+	</head>
+	<body>
+		{% block dialog %}
+		<div id="preview" style="display:none">
+			<div id="modal-dialog-bg"></div>
+			<iframe scrolling="auto" class="modal-dialog" id="previewIFrame" name="previewIFrame"></iframe>
+		</div>
+		{% endblock %}
+		
+		<div id="header">
+			<div>
+			{% block header %}
+				<h1>creyoco</h1>
+				<hr>
+			{% endblock %}
+			</div>
+		</div>
+		
+		<div id="wrapper">
+			<div id="box_left">
+				{% block box_left %}{% endblock %}
+			</div>
+			
+			<div id="content">
+				<h2>{% block h2 %}{% endblock %}</h2>
+				<img style="margin-bottom:-258px;margin-left:747px;" src="{% get_static_prefix %}images/mz/authoring_shadow_top.png" alt="">
+
+				{% block navi %}{% endblock %}
+				
+				<div style="clear:both"></div>
+				
+				<div id="middle-row">
+					{% block content %}{% endblock %}
+				</div>
+				
+				<img style="position:absolute;z-index:-1;margin-top:-289px;margin-left:-3px;" src="{% get_static_prefix %}images/mz/authoring_shadow_bottom.png" alt="">
+			</div>
+			<div id="box_right">
+				{% block box_right %}{% endblock %}
+			</div>
+			<div style="clear:both"></div>
+			<div id="footer">
+				{% block footer %}
+				<a href="#impressum">Impressum</a>
+				<img src="{% get_static_prefix %}images/mz/help.png" alt="Hilfe" align="right">
+				{% endblock %}
+			</div>
+		</div>
+		{% block append %}{% endblock %}
+	</body>
 </html>
 {% endspaceless %}

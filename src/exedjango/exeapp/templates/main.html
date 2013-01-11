@@ -1,36 +1,39 @@
 {% extends "base.html" %}
 
+{% load mainpage_extras %}
+
 {% load static %}
 
-{% block title %}Main Page{% endblock %}
-{% block head %}
-<script type='text/javascript' src='{% get_static_prefix %}scripts/jquery.js'></script>
-<script type='text/javascript' src='{% get_static_prefix %}scripts/jquery.jsonrpc.js'></script>
-<script type='text/javascript' src='{% get_static_prefix %}scripts/main.js'></script>
+{% block title %}creyoco | Kursübersicht{% endblock %}
 
-<!--<link rel="stylesheet" href="{% get_static_prefix %}css/main.css" />-->
-
-<link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/mz/style.min.css" />
+{% block head_javascript %}
+<script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.js"></script>
+<script type="text/javascript" src="{% get_static_prefix %}scripts/jquery-ui.custom.min.js"></script>
+<script type="text/javascript" src="{% get_static_prefix %}scripts/mainpage.js"></script>
+<script type='text/javascript' src="{% get_static_prefix %}scripts/jquery.jsonrpc.js"></script>
+<script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.form.js"></script>
+<script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.cookie.js"></script>
+<script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.jstree.js"></script>
+<script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.confirm.js"></script>
 {% endblock %}
-{% block content %} 
 
-<h2><em>IMPORTANT!</em>Please be advised that this is NOT a production server. The data stored here may and will likely be lost!</h2>
+{% block h2 %}Kursübersicht{% endblock %}
+
+{% block content %}
 <p>Logged in as {{ user.username }}</p>
-<h1>Main Page</h1>
+
 <ul id="package_list">
-  {% for package in package_list %}
-  
-    <li class='package' id="package{{ package.id }}">
-      <input type="checkbox" class="package_checkbox" packageid="{{ package.id }}" />
-      <a href="{{ package.get_absolute_url }}">{{ package.title }}</a>
-    </li>
-  {% endfor %}
+	{% for package in package_list %}
+	<li class='package' id="package{{ package.id }}">
+		<input type="checkbox" class="package_checkbox" packageid="{{ package.id }}" />
+		<a href="{{ package.get_absolute_url }}">{{ package.title }}</a>
+	</li>
+	{% endfor %}
 </ul>
 <div id='createPackage'>
-    <p>
-      <input type='submit' id='create_package' value='Create' />
-      <input type='submit' id='delete_selected_packages' value='Delete Selected' />
-    </p> 
+	<p><input type='submit' id='create_package' value='Create'></p>
+	<p><input type='submit' id='delete_selected_packages' value='Delete Selected'></p>
 </div>
 <a href="/accounts/logout/">Logout</a>
+
 {% endblock %}

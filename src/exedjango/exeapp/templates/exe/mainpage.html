@@ -5,15 +5,9 @@
 
 {% load static %}
 
-{% block title %}Package Page: {{ package.title }}{% endblock %}
+{% block title %}{{ package.title }}{% endblock %}
 
-{% block head%}
-<!-- CSS -->
-<link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/ui-lightness/jquery-ui-1.8.4.custom.css" />
-<link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/mz/style.min.css" />
-<!--<link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/styles/base.css">
-<link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/editing.css">-->
-<!-- SCRIPTS -->
+{% block head_javascript %}
 <script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.js"></script>
 <script type="text/javascript" src="{% get_static_prefix %}scripts/jquery-ui.custom.min.js"></script>
 <script type="text/javascript" src="{% get_static_prefix %}scripts/mainpage.js"></script>
@@ -25,303 +19,122 @@
 <script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.confirm.js"></script>
 <script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.qtip.min.js"></script>
 <script type="text/javascript" src="{% get_static_prefix %}scripts/chosen.jquery.min.js"></script>
-
+<script type="text/javascript" src="{% get_static_prefix %}scripts/eyecandy.js"></script>
 {% render_form_media package.current_node %}
-<script>
-$(document).ready(function() {
-	$('.chzn-select').chosen();
-	$('#select_course').change( function() {
-		location.href = $(this).val();
-	});
-	
-	$('#settings_button').qtip ({
-		content: 'Hinzufuegen, loeschen oder verschieben der Themen', // Noti ce that content.text is long-hand for simply declaring content as a string
-		
-		style: { 
-			tip: true,
-			classes: 'tip'
-		},
-		
-		show: {
-			delay: 500,
-			effect: function(offset) {
-				$(this).slideDown(200); // "this" refers to the tooltip
-			}
-		},
-		position: {
-		adjust: {
-			x: -20
-		}
-	}
-	});
-	
-	$('#download_button').qtip ({
-		content: 'Formatauswahl und herunterladen des Paketes', // Noti ce that content.text is long-hand for simply declaring content as a string
-		
-		style: { 
-			tip: true,
-			classes: 'tip'
-		},
-		
-		show: { 
-			delay: 500,
-			effect: function(offset) {
-				$(this).slideDown(200); // "this" refers to the tooltip
-			}
-		},
-		position: {
-			adjust: {
-				x: -20
-			}
-		}
-	});
-
-	if($('#package_style').text() == 'vhb') {
-		$("#vhb").addClass("StyleActive");
-	}
-	else if($('#package_style').text() == 'garden') {
-		$("#garden").addClass("StyleActive");
-	}
-	else if($('#package_style').text() == 'silver') {
-		$("#silver").addClass("StyleActive");
-	}
-	else if($('#package_style').text() == 'default') {
-		$("#default").addClass("StyleActive");
-	}
-	
-	$('#outline img').click( function() {
-		if($(this).attr('id') == 'settings_button') {
-			$(this).removeClass('transparent');
-			$('#download').hide();
-			$('#settings').slideToggle('slow', function() {
-				if($('#settings').is(':visible')) {
-					$(this).removeClass('transparent');
-					$('#download_button').addClass('transparent');
-				}
-				else {
-					$(this).removeClass('transparent');
-					$('#download_button').removeClass('transparent');
-				}
-			});
-		}
-		else if($(this).attr('id') == 'download_button') {
-			$(this).removeClass('transparent');
-			$('#settings').hide();
-			$('#download').slideToggle('slow', function() {
-				if($('#download').is(':visible')) {
-					$(this).removeClass('transparent');
-					$('#settings_button').addClass('transparent');
-				}
-				else {
-					$(this).removeClass('transparent');
-					$('#settings_button').removeClass('transparent');
-				}
-			});
-
-		}
-	});
-	
-	$(document).keyup(function(e) {
-		if (e.keyCode == 27) {
-			$('#preview').hide();
-			$('body').css('overflow', 'auto');
-		}
-	});
-	
-	$('#modal-dialog-bg').click( function(){
-		$('#preview').hide();
-		$('body').css('overflow', 'auto');
-	});
-	
-	$('.button a').click( function(){
-		if($(this).attr('href') == '#_preview') {
-			$('#previewIFrame').attr("src", $('#previewIFrame').attr("src"));
-			$('#preview').show();
-			$('#previewIFrame').css({
-				overflow: 'hidden',
-				width: '0px',
-				height: '0px',
-				opacity: 0
-			});
-			$('#previewIFrame').animate({
-				height: '756px',
-				width: '1024px',
-				opacity: 1
-        	}, 1000);
-		}
-		else if($(this).attr('href') == '#_editor') {
-			$('#middle-row').children().hide();
-			$('#authoring').show();
-			$('#navi span').removeClass('button_active');
-			$(this).parent().addClass('button_active');
-		}
-		else if($(this).attr('href') == '#_theme') {
-			$('#middle-row').children().hide();
-			$('#selectStyle').show();
-			$('#navi span').removeClass('button_active')
-			$(this).parent().addClass('button_active');
-		}
-		else if($(this).attr('href') == '#_preferences') {
-			$('#middle-row').children().hide();
-			$('#properties').show();
-			$('#navi span').removeClass('button_active');
-			$(this).parent().addClass('button_active');
-		}
-	});
-});
-</script>
-
 {% endblock %}
-{% block content %}
-				<div id="preview" style="display:none">
-					
-					<div id="modal-dialog-bg"></div>
-					<iframe scrolling="auto" class="modal-dialog" id="previewIFrame" name="previewIFrame"></iframe>
 
-
-				</div>
-<div id="header">
-	<div>
-		<select data-placeholder="Wählen Sie einen Kurs" class="chzn-select" tabindex="-1" id="select_course">
-			<option value="{{ package.get_absolute_url }}">{{ package.title }}</option>
-			{% for package_iter in package_list %}
-			{% if package_iter != package %}
-			<option value='{{ package_iter.get_absolute_url }}'>{{ package_iter.title }}</option>
-			{% endif %}
-			{% endfor %}
-		</select>
+{% block header %}
+<select data-placeholder="Wählen Sie einen Kurs" class="chzn-select" tabindex="-1" id="select_course">
+	<option value="{{ package.get_absolute_url }}">{{ package.title }}</option>
+	{% for package_iter in package_list %}
+	{% if package_iter != package %}
+	<option value='{{ package_iter.get_absolute_url }}'>{{ package_iter.title }}</option>
+	{% endif %}
+	{% endfor %}
+</select>
 		
-		<h1>creyoco</h1>
-		<hr>
-	</div>
-</div>
+<h1>creyoco</h1>
+<hr>
+{% endblock %}
 
-<div id="wrapper">
-	<div id="box_left">
-		<div style="position:fixed">
-		<h2>Themenkatalog</h2>
-		<div id="outline">
-			{% render_outline package %}
-			
-			<hr style="border:1px solid white;width:168px;margin-left:0px;margin-top:40px;margin-bottom:15px;">
-			
-			<img id="settings_button" src="{% get_static_prefix %}images/mz/settings.png" style="cursor:pointer;margin-right:10px;" alt="Einstellungen">
-			<img id="download_button" src="{% get_static_prefix %}images/mz/download.png" alt="Download" style="cursor:pointer">
-
-			<div id="settings" style="margin-left:0;display:none;background-color:white;width:130px;border:1px solid rgb(155, 155, 155)">
-				<!--<a href="#Add" id="btnAdd">Add</a>
-				<a href="#Remove" id="btnRemove">Remove</a>
-				<a href="#Rename" id="btnRename" action="RenameNode">Rename</a>
-				<a href="#Dublicate" id="btnDuplicate" action="DblNode">Duplicate</a>
-				<a id="btnPromote">Promote</a>
-				<a id="btnDemote" action="Demote">Demote</a>
-				<a id="btnUp" action="Up">Up</a>
-				<a id="btnDown" action="Down">Down</a>-->
-				<a href="#Add" id="btnAdd">Hinzufuegen</a>
-				<a href="#Remove" id="btnRemove">Loeschen</a>
-				<a href="#Rename" id="btnRename" action="RenameNode">Umbenennen</a>
-				<a href="#Dublicate" id="btnDuplicate" action="DblNode">Duplizieren</a>
-				<a id="btnPromote">Promote</a>
-				<a id="btnDemote" action="Demote">Demote</a>
-				<a id="btnUp" action="Up">Up</a>
-				<a id="btnDown" action="Down">Down</a>
-			</div>
-			
-			<div id="download" style="margin-left:0;display:none;background-color:white;width:130px;border:1px solid rgb(155, 155, 155)">
-					{% for type, title in exporter_type_title_map.items %}
-						<a class="export_link" href="{% url exeapp.views.package.export package.id "" %}{{type}}">{{title}}</a>
-					{% endfor %}
-			</div>
-			</div>
+{% block box_left %}
+<div style="position:fixed">
+	<h2>Themenkatalog</h2>
+	
+	<div id="outline">
+		{% render_outline package %}
+		<hr style="border:1px solid white;width:168px;margin-left:0px;margin-top:40px;margin-bottom:15px;">
+		<img id="settings_button" src="{% get_static_prefix %}images/mz/settings.png" style="cursor:pointer;margin-right:10px;" alt="Einstellungen">
+		<img id="download_button" src="{% get_static_prefix %}images/mz/download.png" alt="Download" style="cursor:pointer">
+		
+		<div id="settings" style="margin-left:0;display:none;background-color:white;width:130px;border:1px solid rgb(155, 155, 155)">
+			<!--<a href="#Add" id="btnAdd">Add</a><a href="#Remove" id="btnRemove">Remove</a><a href="#Rename" id="btnRename" action="RenameNode">Rename</a><a href="#Dublicate" id="btnDuplicate" action="DblNode">Duplicate</a><a id="btnPromote">Promote</a><a id="btnDemote" action="Demote">Demote</a><a id="btnUp" action="Up">Up</a><a id="btnDown" action="Down">Down</a>-->
+			<a href="#Add" id="btnAdd">Hinzufuegen</a>
+			<a href="#Remove" id="btnRemove">Loeschen</a>
+			<a href="#Rename" id="btnRename" action="RenameNode">Umbenennen</a>
+			<a href="#Dublicate" id="btnDuplicate" action="DblNode">Duplizieren</a>
+			<a id="btnPromote">Promote</a>
+			<a id="btnDemote" action="Demote">Demote</a>
+			<a id="btnUp" action="Up">Up</a>
+			<a id="btnDown" action="Down">Down</a>
+		</div>
+		
+		<div id="download" style="margin-left:0;display:none;background-color:white;width:130px;border:1px solid rgb(155, 155, 155)">
+			{% for type, title in exporter_type_title_map.items %}
+			<a class="export_link" href="{% url exeapp.views.package.export package.id "" %}{{type}}">{{title}}</a>
+			{% endfor %}
 		</div>
 	</div>
+</div>
+{% endblock %}
+
+{% block box_right %}
+<div style="position:fixed">
+	<h2>Werkzeuge</h2>
+	{% render_idevicepane idevices %}
+</div>
+{% endblock %}
+
+{% block navi %}
+<div id="navi">
+	<div id="navi-left">
+		<span class="button button_active"><a href="#_editor">Inhalt bearbeiten</a></span>
 		
-	<div id="content">
-		<h2>Inhalt</h2>
-		<img style="margin-bottom:-258px;margin-left:747px;" src="{% get_static_prefix %}images/mz/authoring_shadow_top.png" alt="" />
+		<span class="button"><a href="#_theme">Ausgabe-Layout</a></span>
 		
-			<div id="navi">
-				<div id="navi-left">
-					<span class="button button_active">
-						<a href="#_editor">Inhalt bearbeiten</a>
-					</span>
-				
-					<span class="button">
-						<a href="#_theme">Ausgabe-Layout</a>
-					</span>
-				
-					<span class="button">
-						<a href="#_preview">Vorschau</a>
-					</span>
-				</div>
-			
-				<div id="navi-right">
-					<span class="button">
-						<a href="#_preferences">Projekt-Eigenschaften</a>
-					</span>
-				</div>
-			</div>
-			
-			<div style="clear:both"></div>
-    				
-			<div id="middle-row">		
-				<div id="selectStyle" style="display:none">
-					{% render_styles %}
-				</div>
-				
-				<div style="width:100%;min-height:600px;" id="authoring" name="authoringIFrame1"></div>
-				
-								<div id="properties" style="display:none;">
-					<div id="package_properties" style="float:left">
-						<form id="properties_form" class="property_form" method="post" action=".#properties">
-							{% if properties_form.errors %}
-								<p>Please correct following error{{ properties_form.errors|pluralize }}</p>
-							{% endif %}
-						
-							<table>
-								{{ properties_form.as_table }}
-							</table>
-							<input type="submit" value="Apply" />
-						</form>
-					</div>
-    						
-					<div id="dublincore" style="float:right">
-						<form id="dublincore_form" class="property_form" method="post" action=".#properties">
-							{% if dublincore_form.errors %}
-								<p>Please correct following error{{ dublincore_form.errors|pluralize }}</p>
-							{% endif %}
-							
-							<table>
-								{{ dublincore_form.as_table }}
-							</table>
-						
-							<input type="submit" value="Apply" />
-						</form>
-					</div>
-					<div style="clear:both"></div>
-				</div>
-			</div>
-		<img style="position:absolute;z-index:-1;margin-top:-289px;margin-left:-3px;" src="{% get_static_prefix %}images/mz/authoring_shadow_bottom.png" alt="" />
+		<span class="button"><a href="#_preview">Vorschau</a></span>
 	</div>
 	
-	<div id="box_right">
-	<div style="position:fixed">
-		<h2>Werkzeuge</h2>
-		{% render_idevicepane idevices %}
+	<div id="navi-right">
+		<span class="button"><a href="#_preferences">Projekt-Eigenschaften</a></span>
 	</div>
+</div>
+{% endblock %}
+
+{% block h2 %}Inhalt{% endblock %}
+
+{% block content %}
+<div id="selectStyle" style="display:none">
+{% render_styles %}
+</div>
+
+<div style="width:100%;min-height:600px;" id="authoring" name="authoringIFrame1">
+</div>
+
+<div id="properties" style="display:none;">
+	<div id="package_properties" style="float:left">
+		<form id="properties_form" class="property_form" method="post" action=".#properties">
+			{% if properties_form.errors %}
+			<p>Please correct following error{{ properties_form.errors|pluralize }}</p>
+			{% endif %}
+				
+			<table>
+			{{ properties_form.as_table }}
+			</table>
+				
+			<input type="submit" value="Apply" />
+		</form>
+	</div>
+	
+	<div id="dublincore" style="float:right">
+		<form id="dublincore_form" class="property_form" method="post" action=".#properties">
+			{% if dublincore_form.errors %}
+			<p>Please correct following error{{ dublincore_form.errors|pluralize }}</p>
+			{% endif %}
+			
+			<table>
+				{{ dublincore_form.as_table }}
+			</table>
+			
+			<input type="submit" value="Apply" />
+		</form>
 	</div>
 	
 	<div style="clear:both"></div>
-	
-	<div id="footer">
-		<a href="#impressum">Impressum</a>
-		<img src="{% get_static_prefix %}images/mz/help.png" alt="Hilfe" align="right">
-	</div>
-	<div id="package_id" style="display: none">
-		{{package.id}}
-	</div>
-	
-	<div id="package_style" style="display:none">{{package.style}}</div>
 </div>
 {% endblock %}
 
+{% block append %}
+<div id="package_id" style="display: none">{{package.id}}</div>
+<div id="package_style" style="display:none">{{package.style}}</div>
+{% endblock %}
