@@ -115,7 +115,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'grappelli',
-    #'filebrowser',
+    'filebrowser',
     'registration',
     'django.contrib.admin',
     'django.contrib.staticfiles',
