@@ -101,11 +101,18 @@ jQuery(document).ready(function() {
                   "plugins" : ["themes", "html_data", "ui", "crrm"]});
                 get_outline_pane().jstree('open_all', $('#outline_pane>ul'));
                 //bind actions to outline nodes
-                get_outline_pane().bind("select_node.jstree", 
-                      handle_select_node);
+                // get_outline_pane().bind("select_node.jstree", 
+                      // handle_select_node);
                 get_outline_pane().delegate("a", "dblclick", rename_current_node);
                 //bind renaming event
                 get_outline_pane().bind("rename_node.jstree", handle_renamed_current_node);
+                //don't folow tree links
+                get_outline_pane().find("ul > li > a").on("click", function(event){
+                	get_outline_pane().jstree("select_node", "#" + $(this).attr("id"), true);
+                	handle_select_node(event);
+                	$.pjax.click(event, {container: "#authoring"});
+                	return false;
+                	});
                 // handle theme selection
                 $("#style_selector").change(handle_select_style);
                 
@@ -308,8 +315,11 @@ function add_idevice() {
 
 function handle_select_node(event, data) {
 
-    var node = get_current_node();
-    set_current_node(node);
+	// for (key in data){alert(key);};
+	if (data == undefined) {
+	    var node = get_current_node();
+	    set_current_node(node);
+   	}
 }
 
 function handle_select_style() {

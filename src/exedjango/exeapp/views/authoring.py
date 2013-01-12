@@ -6,7 +6,8 @@ Created on May 17, 2011
 from django.contrib.auth.decorators import login_required
 from exeapp.shortcuts import get_package_by_id_or_error
 from exeapp import shortcuts
-from django.http import HttpResponse, HttpResponseRedirect, Http404
+from django.http import HttpResponse, HttpResponseRedirect, Http404, \
+    HttpResponseNotAllowed
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render_to_response
 from exeapp.views.blocks.blockfactory import block_factory
@@ -18,7 +19,7 @@ from exeapp.models.package import Package
 
 @login_required
 @get_package_by_id_or_error
-def authoring(request, package, current_node, partial=False):
+def authoring(request, package, current_node):
     '''Handles calls to authoring iframe. Renders exe/authoring.html'''
 
     if "idevice_id" in request.GET:
@@ -35,12 +36,11 @@ def authoring(request, package, current_node, partial=False):
         except ObjectDoesNotExist, e:
             raise Http404(e)
     # if partial is set return only content of body
-    partial = partial or \
-                "_pjax" in request.GET
-    if partial and "media" in request.GET and request.GET['media'] == "true":
+    elif "media" in request.GET and request.GET['media'] == "true":
         return HttpResponse(get_media_list(current_node, ajax=True),
                              content_type="text/javascript")
-    return render_to_response('exe/authoring.html', locals())
+    else:
+        return HttpResponseNotAllowed()
 
 
 @login_required

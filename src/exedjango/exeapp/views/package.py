@@ -78,8 +78,9 @@ def change_properties(request, package):
         if request.is_ajax():
             return HttpResponse("")
         else:
-            return HttpResponseRedirect(reverse('exeapp.views.package.package_main',
-                                             args=[package.id]))
+            return HttpResponseRedirect(reverse(
+                                        'exeapp.views.package.package_root',
+                                        args=[package.id]))
     else:
         if request.is_ajax():
             return HttpResponse(form.as_table())
@@ -90,14 +91,14 @@ def change_properties(request, package):
 
 @login_required
 @get_package_by_id_or_error
-def package_main(request, package, node, properties_form=None):
+def package_main(request, package, current_node, properties_form=None):
     '''Handle calls to package site. Renders exe/mainpage.html.'''
     if request.method == 'POST':
         return change_properties(request, package)
     elif request.GET.get('_pjax'):
-        return authoring(request, package.id, node.id)
+        return render_to_response("exe/authoring.html", locals())
     else:
-        return generate_package_main(request, package, node)
+        return generate_package_main(request, package, current_node)
 
 
 @login_required
