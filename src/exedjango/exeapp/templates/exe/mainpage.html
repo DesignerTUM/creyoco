@@ -68,7 +68,7 @@
 		
 		<div id="download" style="margin-left:0;display:none;background-color:white;width:130px;border:1px solid rgb(155, 155, 155)">
 			{% for type, title in exporter_type_title_map.items %}
-			<a class="export_link" href="{% url exeapp.views.package.export package.id "" %}{{type}}">{{title}}</a>
+						<a class="export_link" href="{% url exeapp.views.package.export package.id type %}">{{title}}</a>
 			{% endfor %}
 		</div>
 	</div>

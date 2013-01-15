@@ -86,7 +86,7 @@ def change_properties(request, package):
             return HttpResponse(form.as_table())
         else:
             return generate_package_main(request, package,
-                                         **{form.form_type : form})
+                                         **{form.form_type: form})
 
 
 @login_required
@@ -121,8 +121,8 @@ def export(request, package, export_format):
     exporter.export()
     zip_file = file_obj.getvalue()
     file_obj.close()
-    response = HttpResponse(content_type="application/zip_file")
-    response['Content-Disposition'] = 'attachment; filename=%s.zip_file'\
+    response = HttpResponse(content_type="application/zip")
+    response['Content-Disposition'] = 'attachment; filename=%s.zip'\
                                 % package.title
     response['Content-Length'] = len(zip_file)
     response.write(zip_file)
