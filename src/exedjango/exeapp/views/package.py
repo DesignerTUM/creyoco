@@ -95,7 +95,7 @@ def package_main(request, package, current_node, properties_form=None):
     '''Handle calls to package site. Renders exe/mainpage.html.'''
     if request.method == 'POST':
         return change_properties(request, package)
-    elif request.GET.get('_pjax'):
+    elif request.META.get('HTTP_X_PJAX'):
         return render_to_response("exe/authoring.html", locals())
     else:
         return generate_package_main(request, package, current_node)
