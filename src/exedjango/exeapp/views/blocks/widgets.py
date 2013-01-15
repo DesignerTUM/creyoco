@@ -7,7 +7,7 @@ from django.forms.widgets import TextInput
 from django.template.loader import render_to_string
 from django import forms
 from django.core.urlresolvers import reverse
-from BeautifulSoup import BeautifulSoup
+from bs4 import BeautifulSoup
 
 class FreeTextWidget(TinyMCE):
 

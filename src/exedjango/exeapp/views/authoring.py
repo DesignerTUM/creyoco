@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from exeapp.shortcuts import get_package_by_id_or_error
 from exeapp import shortcuts
 from django.http import HttpResponse, HttpResponseRedirect, Http404, \
-    HttpResponseNotAllowed
+    HttpResponseNotAllowed, HttpResponseBadRequest
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render_to_response
 from exeapp.views.blocks.blockfactory import block_factory
@@ -40,7 +40,7 @@ def authoring(request, package, current_node):
         return HttpResponse(get_media_list(current_node, ajax=True),
                              content_type="text/javascript")
     else:
-        return HttpResponseNotAllowed()
+        return HttpResponseBadRequest("No idevice id given.")
 
 
 @login_required

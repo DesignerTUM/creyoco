@@ -28,8 +28,11 @@ Tested in exeapp.tests.ShortcutsTestCase. '''
             package = Package.objects.get(pk=package_id)
             node = None
             if node_id is not None:
-                node_id = int(node_id)
-                node = Node.objects.get(pk=node_id)
+                try:
+                    node_id = int(node_id)
+                    node = Node.objects.get(pk=node_id)
+                except ObjectDoesNotExist:
+                    raise Http404("Node {} not found".format(node_id))
         except ObjectDoesNotExist:
             raise Http404("Package {} not found".format(package_id))
         username = request.user.username

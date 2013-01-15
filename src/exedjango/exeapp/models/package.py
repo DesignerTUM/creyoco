@@ -39,7 +39,7 @@ from exedjango.utils.path      import Path, TempDirPath, toUnicode
 from exeapp.models        import Node
 # from exe.engine.genericidevice import GenericIdevice
 
-from BeautifulSoup  import BeautifulSoup
+from bs4  import BeautifulSoup
 
 log = logging.getLogger()
 

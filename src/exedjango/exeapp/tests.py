@@ -42,7 +42,7 @@ from exeapp.views.export.scormexport import ScormExport, COMMONCARTRIDGE, \
     SCORM12, SCORM2004
 from exeapp.views.blocks.widgets import FreeTextWidget
 from exeapp.views.blocks.blockfactory import block_factory
-
+from bs4 import BeautifulSoup
 
 
 PACKAGE_COUNT = 3
@@ -50,11 +50,13 @@ PACKAGE_NAME_TEMPLATE = '%s\'s Package %s'
 TEST_USER = "test_admin"
 TEST_PASSWORD = "password"
 
+
 def _create_packages(user, package_count=PACKAGE_COUNT,
                       package_name_template=PACKAGE_NAME_TEMPLATE):
         for x in xrange(package_count):
             Package.objects.create(title=package_name_template % (user.username, x),
                                    user=user)
+
 
 def _create_basic_database():
     '''Creates 2 users (admin, user) with 5 packages each for testing'''
@@ -66,7 +68,6 @@ def _create_basic_database():
     user.save()
     _create_packages(admin)
     _create_packages(user)
-
 
 
 class MainPageTestCase(TestCase):
@@ -132,29 +133,41 @@ class PackagesPageTestCase(TestCase):
         self.assertContains(response, 'current_node="%s"' % self.NODE_ID)
 
     @mock.patch.object(Package.objects, 'get')
-    def test_rpc_calls(self, mock_get):
+    @mock.patch.object(Node.objects, 'get')
+    def test_rpc_calls(self, mock_node_get, mock_package_get):
         NODE_ID = 42
         NODE_TITLE = "Node"
+        PARENT_ID = 1
+        PARENT_TITLE = "Parent"
+
         # mock node
         new_node = Mock()
         new_node.id = NODE_ID
         new_node.title = NODE_TITLE
 
+        parent_node = Mock()
+        parent_node.id = PARENT_ID
+        parent_node.title = PARENT_TITLE
+        parent_node.create_child.return_value = new_node
+
         # mock package
         package = Mock()
-        package.add_child_node.return_value = new_node
         package.user.username = TEST_USER
 
         # mock get query
-        mock_get.return_value = package
+        mock_node_get.return_value = parent_node
+        mock_package_get.return_value = package
+        parent_node.package = package
 
-        r = self.s.package.add_child_node(# username=TEST_USER,
-                                     #       password=TEST_PASSWORD,
-                                            package_id=1)
+        r = self.s.package.add_child_node(
+                                    # username=TEST_USER,
+                                    #       password=TEST_PASSWORD,
+                                    package_id="1",
+                                    node_id=str(PARENT_ID))
         result = r['result']
         self.assertEquals(result['id'], NODE_ID)
         self.assertEquals(result['title'], NODE_TITLE)
-        self.assertTrue(package.add_child_node.called)
+        self.assertTrue(parent_node.create_child.called)
 
     def test_idevice_pane(self):
         response = self.c.get(self.PAGE_URL % (self.PACKAGE_ID, self.NODE_ID))
@@ -163,9 +176,12 @@ class PackagesPageTestCase(TestCase):
 
     def test_authoring(self):
         response = self.c.get(self.PAGE_URL % (self.PACKAGE_ID,
-                                               self.NODE_ID) + "authoring/")
-        self.assertContains(response, "Authoring")
+                                               self.NODE_ID),
+                              HTTP_X_PJAX='True')
+        self.assertContains(response, "package_id")
+        self.assertContains(response, "node_id")
         self.assertContains(response, self.PACKAGE_ID)
+        self.assertContains(response, self.NODE_ID)
 
     def test_404_on_wrong_package(self):
         # # this id shouldn't be created
@@ -296,8 +312,16 @@ view, this tests should be also merged'''
     def test_basic_elements(self):
         '''Basic tests aimed to determine if this view works at all'''
         response = self.c.get(self.VIEW_URL)
-        self.assertContains(response, 'Package %s' % self.TEST_PACKAGE_ID)
-        self.assertContains(response, 'Rendering node %s' % self.TEST_NODE_ID)
+        soup = BeautifulSoup(response.content)
+        self.assertEqual(int(soup.find("div", {'id': 'package_id'}).text),
+                                                     self.TEST_PACKAGE_ID)
+        self.assertEqual(int(soup.find("div", {'id': 'node_id'}).text),
+                                                     self.TEST_NODE_ID)
+#
+#        self.assertContains(response, 'Package %s' % self.TEST_PACKAGE_ID)
+#        self.assertContains(response,
+#            """<div id="node_id" style="display: none">{}</div>""".format(
+#                                                         self.TEST_NODE_ID))
         self.assertContains(response, self.TEST_NODE_TITLE)
 
     def test_idevice(self):
@@ -403,7 +427,6 @@ view, this tests should be also merged'''
         self.assertEquals(simplejson.loads(response.content),
                           [reverse('tinymce-filebrowser')])
 
-
     def test_resource_finding(self):
         RESOURCE = 'test.jpg'
         CONTENT = 'src="/exeapp/media/uploads/%s/%s"' % \
@@ -414,7 +437,6 @@ view, this tests should be also merged'''
         test_idevice = Idevice.objects.get(id=IDEVICE_ID).as_child()
         test_idevice.content = CONTENT
         self.assertEquals(test_idevice.resources, set([RESOURCE]))
-
 
     def test_export_resource_substitution(self):
         RESOURCE = 'test.jpg'
@@ -437,7 +459,7 @@ view, this tests should be also merged'''
         self.assertTrue("<textarea" in block.renderEdit())
 
     def test_link_list(self):
-        response = self.c.get('%slink_list/' % self.VIEW_URL)
+        response = self.c.get('{}{}'.format(self.VIEW_URL, settings.LINK_LIST))
         self.assertContains(response, 'tinyMCELinkList')
         try:
             # remove trailing semi-colon at the end
@@ -449,8 +471,6 @@ view, this tests should be also merged'''
             simplejson.loads(link_list)
         except:
             raise AssertionError("Couldn't parse %s" % link_list)
-
-
 
 
 class ExportTestCase(TestCase):
@@ -466,7 +486,6 @@ class ExportTestCase(TestCase):
 
     def tearDown(self):
         User.objects.all().delete()
-
 
     def test_basic_export(self):
         '''Exports a package'''
