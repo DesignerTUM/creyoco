@@ -123,7 +123,9 @@ function reload_authoring() {
 	get_media("authoring/?partial=true&media=true");
 	
 	url = "/exeapp/package/" + get_package_id() + "/" + get_current_node_id() + "/";
-	$("#authoring").load(url);
+	$("#authoring").load(url, function() {
+		initialize_authoring();
+	});
 }
 
 function get_media(request_url) {

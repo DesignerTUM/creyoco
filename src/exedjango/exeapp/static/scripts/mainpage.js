@@ -106,6 +106,8 @@ jQuery(document).ready(function() {
                 get_outline_pane().delegate("a", "dblclick", rename_current_node);
                 //bind renaming event
                 get_outline_pane().bind("rename_node.jstree", handle_renamed_current_node);
+                //refresh pjax on every request
+                $.pjax.defaults.maxCacheLength = 0;
                 //don't folow tree links
                 get_outline_pane().find("ul > li > a").on("click", function(event){
                 	get_outline_pane().jstree("select_node", "#" + $(this).attr("id"), true);
