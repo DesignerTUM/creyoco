@@ -443,7 +443,6 @@ function set_current_node(node) {
   get_outline_pane().attr('current_node', get_current_node().attr('nodeid'));
   updateTitle();
   reload_authoring();
-  update_preview();
 }
 
 function update_preview() {
@@ -456,7 +455,6 @@ function set_current_style() {
 		{success: function(results){
 			var style_val = results.result.style;
 			$("#style_selector").val(style_val);
-			update_preview();
 		}});
 }
 

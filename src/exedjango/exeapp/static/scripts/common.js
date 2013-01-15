@@ -66,11 +66,16 @@ $('html').ajaxSend(function(event, xhr, settings) {
 });
 
 jQuery(document).ready(function() {
-	$(document).on("pjax:success", function() {
+	$(document).on("pjax:success", function(event, data) {
 		initialize_authoring();
 		while (tinyMCE.activeEditor && tinyMCE.activeEditor != "undefined"){
 		tinyMCE.activeEditor.remove();
 		}
+	});
+	$(document).on("pjax:popstate", function(event) {
+		var current_url = event.state.url;
+		var current_node_id = current_url.match(/.*\/(\d+)\//)[1]
+		get_outline_pane().jstree("select_node", "#node" + current_node_id, true);
 	});
 	$.jsonRPC.setup({
            endPoint: '/exeapp/json/',
