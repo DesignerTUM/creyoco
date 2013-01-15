@@ -97,18 +97,15 @@ class MainPageTestCase(TestCase):
         p = Package.objects.get(title=PACKAGE_NAME)
         self.assertTrue(p.user.username == self.TEST_USER)
 
-
     def test_require_login(self):
         self.c.logout()
         response = self.c.get('/exeapp/main')
         self.assertFalse('Main Page' in response.content)
 
 
-
-
 class PackagesPageTestCase(TestCase):
 
-    PAGE_URL = '/exeapp/package/%s/'
+    PAGE_URL = '/exeapp/package/%s/%s/'
     PACKAGE_ID = 1
     NODE_ID = 1
 
@@ -124,15 +121,15 @@ class PackagesPageTestCase(TestCase):
         User.objects.all().delete()
 
     def test_basic_structure(self):
-        response = self.c.get(self.PAGE_URL % self.PACKAGE_ID)
+        response = self.c.get(self.PAGE_URL % (self.PACKAGE_ID, self.NODE_ID))
         package_title = Package.objects.get(id=self.PACKAGE_ID).title
         self.assertContains(response, escape(package_title))
 
     def test_outline_pane(self):
-        response = self.c.get(self.PAGE_URL % self.PACKAGE_ID)
+        response = self.c.get(self.PAGE_URL % (self.PACKAGE_ID,
+                                                    self.NODE_ID))
         self.assertContains(response, "outline_pane")
         self.assertContains(response, 'current_node="%s"' % self.NODE_ID)
-
 
     @mock.patch.object(Package.objects, 'get')
     def test_rpc_calls(self, mock_get):
@@ -151,8 +148,6 @@ class PackagesPageTestCase(TestCase):
         # mock get query
         mock_get.return_value = package
 
-
-
         r = self.s.package.add_child_node(# username=TEST_USER,
                                      #       password=TEST_PASSWORD,
                                             package_id=1)
@@ -162,44 +157,44 @@ class PackagesPageTestCase(TestCase):
         self.assertTrue(package.add_child_node.called)
 
     def test_idevice_pane(self):
-        response = self.c.get(self.PAGE_URL % self.PACKAGE_ID)
+        response = self.c.get(self.PAGE_URL % (self.PACKAGE_ID, self.NODE_ID))
         self.assertContains(response, "outline_pane")
         self.assertContains(response, "Free Text")
 
     def test_authoring(self):
-        response = self.c.get(self.PAGE_URL % self.PACKAGE_ID + "authoring/")
+        response = self.c.get(self.PAGE_URL % (self.PACKAGE_ID,
+                                               self.NODE_ID) + "authoring/")
         self.assertContains(response, "Authoring")
         self.assertContains(response, self.PACKAGE_ID)
 
     def test_404_on_wrong_package(self):
         # # this id shouldn't be created
         WRONG_PACKAGE_ID = PACKAGE_COUNT * 2 + 1
-        response = self.c.get(self.PAGE_URL % WRONG_PACKAGE_ID)
+        response = self.c.get(self.PAGE_URL % (WRONG_PACKAGE_ID, self.NODE_ID))
         self.assertTrue(isinstance(response, HttpResponseNotFound))
-
 
     def test_403_on_wrong_user(self):
         USERS_PACKAGE_ID = PACKAGE_COUNT + 1
-        response = self.c.get(self.PAGE_URL % USERS_PACKAGE_ID)
+        response = self.c.get(self.PAGE_URL % (USERS_PACKAGE_ID, self.NODE_ID))
         self.assertTrue(isinstance(response, HttpResponseForbidden))
-
 
     def test_properties(self):
         '''Test if the properties page is rendered propertly'''
-        response = self.c.get(self.PAGE_URL % self.PACKAGE_ID)
+        response = self.c.get(self.PAGE_URL % (self.PACKAGE_ID, self.NODE_ID))
         self.assertContains(response, 'properties_form')
 
     def test_change_properties(self):
         AUTHOR_NAME = "Meeee"
         PACKAGE_TITLE = "Sample_Title"
 
-        response = self.c.post(self.PAGE_URL % self.PACKAGE_ID ,
-                               data={'title' : PACKAGE_TITLE,
-                                       'author' : AUTHOR_NAME,
-                                       'form_type_field' : PackagePropertiesForm.form_type})
+        response = self.c.post(self.PAGE_URL % (self.PACKAGE_ID, self.NODE_ID),
+                               data={'title': PACKAGE_TITLE,
+                                   'author': AUTHOR_NAME,
+                                   'form_type_field': PackagePropertiesForm.\
+                                                                form_type})
         self.assertEquals(response.status_code, 302)
         self.assertTrue(response['location'].endswith(
-                           self.PAGE_URL % self.PACKAGE_ID))
+                           self.PAGE_URL % (self.PACKAGE_ID, self.NODE_ID)))
         package = Package.objects.get(id=self.PACKAGE_ID)
         self.assertTrue(package.author == AUTHOR_NAME)
         self.assertTrue(package.title == PACKAGE_TITLE)
@@ -285,9 +280,8 @@ view, this tests should be also merged'''
     TEST_NODE_TITLE = "Home"
     IDEVICE_TYPE = "FreeTextIdevice"
 
-
-    VIEW_URL = "/exeapp/package/%s/authoring/" % TEST_PACKAGE_ID
-
+    VIEW_URL = "/exeapp/package/%s/%s/" % \
+                (TEST_PACKAGE_ID, TEST_NODE_ID)
 
     def setUp(self):
         self.c = Client()
@@ -310,7 +304,6 @@ view, this tests should be also merged'''
         '''Tests if idevice is rendered properly'''
         IDEVICE_ID = 1
 
-
         self.root.add_idevice(self.IDEVICE_TYPE)
         response = self.c.get(self.VIEW_URL)
         self.assertContains(response, 'idevice_id="%s"' % IDEVICE_ID)
@@ -326,8 +319,6 @@ view, this tests should be also merged'''
                             'exeapp/package/%s/authoring/' % self.package.id))
             self.assertEquals(self.package.current_node, node)
 
-
-
     def test_idevice_move_up(self):
         FIRST_IDEVICE_ID = 1
         SECOND_IDEVICE_ID = 2
@@ -340,14 +331,16 @@ view, this tests should be also merged'''
 
     @mock.patch.object(shortcuts, 'render_idevice')
     @mock.patch.object(Package.objects, 'get')
-    def test_submit_idevice_action(self, mock_get, mock_render):
+    @mock.patch.object(Node.objects, 'get')
+    def test_submit_idevice_action(self, mock_node_get, mock_package_get, mock_render):
         '''Test if a POST request is delegated to package'''
-        IDEVICE_ID = "1"
-        IDEVICE_ACTION = "save"
-        mock_get.return_value.user.username = TEST_USER
-        action_args = {"test" : "a", "test2" : "1",
-                       'idevice_id' : IDEVICE_ID,
-                       'idevice_action' : IDEVICE_ACTION}
+        idevice_id = "1"
+        idevice_action = "save"
+        mock_package_get.return_value.user.username = TEST_USER
+        mock_node_get.return_value.package = mock_package_get.return_value
+        action_args = {"test": "a", "test2": "1",
+                       'idevice_id': idevice_id,
+                       'idevice_action': idevice_action}
 
         def mock_render_idevice(idevice):
             return idevice.content
@@ -358,8 +351,8 @@ view, this tests should be also merged'''
         self.assertEquals(response.status_code, 200)
         test_args = QueryDict("").copy()
         test_args.update(action_args)
-        mock_get.return_value.handle_action.assert_called_with(
-                                            unicode(IDEVICE_ID),
+        mock_node_get.return_value.handle_action.assert_called_with(
+                                            unicode(idevice_id),
                                             "save",
                                             test_args)
 

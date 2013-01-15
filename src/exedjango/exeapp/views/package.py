@@ -68,7 +68,7 @@ def generate_package_main(request, package, current_node, **kwargs):
     return render_to_response('exe/mainpage.html', locals())
 
 
-def change_properties(request, package):
+def change_properties(request, package, current_node):
     '''Parses post requests and applies changes to the package'''
     form_type = request.POST['form_type_field']
     if form_type == PackagePropertiesForm.form_type:
@@ -81,8 +81,8 @@ def change_properties(request, package):
             return HttpResponse("")
         else:
             return HttpResponseRedirect(reverse(
-                                        'exeapp.views.package.package_root',
-                                        args=[package.id]))
+                                        'exeapp.views.package.package_main',
+                                        args=[package.id, current_node.id]))
     else:
         if request.is_ajax():
             return HttpResponse(form.as_table())
@@ -97,7 +97,7 @@ def change_properties(request, package):
 def package_main(request, package, current_node, properties_form=None):
     '''Handle calls to package site. Renders exe/mainpage.html.'''
     if request.method == 'POST':
-        return change_properties(request, package)
+        return change_properties(request, package, current_node)
     elif request.META.get('HTTP_X_PJAX') or request.is_ajax():
         return render_to_response("exe/authoring.html", locals())
     else:
