@@ -67,10 +67,10 @@ $('html').ajaxSend(function(event, xhr, settings) {
 
 jQuery(document).ready(function() {
 	$(document).on("pjax:success", function(event, data) {
+		// while (tinyMCE.activeEditor && tinyMCE.activeEditor != "undefined"){
+		// tinyMCE.activeEditor.remove();
+		// }
 		initialize_authoring();
-		while (tinyMCE.activeEditor && tinyMCE.activeEditor != "undefined"){
-		tinyMCE.activeEditor.remove();
-		}
 	});
 	$(document).on("pjax:popstate", function(event) {
 		var current_url = event.state.url;
@@ -123,10 +123,7 @@ function reload_authoring() {
 	get_media("authoring/?partial=true&media=true");
 	
 	url = "/exeapp/package/" + get_package_id() + "/" + get_current_node_id() + "/";
-	// $.pjax({url: url,
-		// container: "#authoring"
-		// }
-	// );
+	$("#authoring").load(url);
 }
 
 function get_media(request_url) {
