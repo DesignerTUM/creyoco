@@ -5,9 +5,15 @@
 
 {% load static %}
 
-{% block title %}{{ package.title }}{% endblock %}
+{% block title %}Package Page: {{ package.title }}{% endblock %}
 
-{% block head_javascript %}
+{% block head%}
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/ui-lightness/jquery-ui-1.8.4.custom.css" />
+<link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/mz/style.min.css" />
+<!--<link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/styles/base.css">
+<link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/editing.css">-->
+<!-- SCRIPTS -->
 <script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.js"></script>
 <script type="text/javascript" src="{% get_static_prefix %}scripts/jquery-ui.custom.min.js"></script>
 <script type="text/javascript" src="{% get_static_prefix %}scripts/mainpage.js"></script>

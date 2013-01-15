@@ -1,5 +1,5 @@
 # ===========================================================================
-# eXe 
+# eXe
 # Copyright 2004-2006, University of Auckland
 #
 # This program is free software; you can redistribute it and/or modify
@@ -29,14 +29,16 @@ from django.utils.safestring import mark_safe
 from exedjango.utils import common
 log = logging.getLogger(__name__)
 
+
 class IdeviceActionNotFound(Exception):
     '''Specified action with given arguments was not found'''
     pass
 
+
 def _(value):
     return value
 
-# ===========================================================================
+
 class Block(object):
     """
     Block is the base class for the classes which are responsible for 
@@ -44,21 +46,21 @@ class Block(object):
     """
     nextId = 0
     Edit, Preview, View, Hidden = range(4)
-    BlockForm = None # redefined by the child
+    BlockForm = None  # redefined by the child
     BlockFormset = None
-    
+
     def __init__(self, idevice):
         """
         Initialize a new Block object
         """
         self.idevice = idevice
-        self.id      = idevice.id
+        self.id = idevice.id
         self.purpose = idevice.purpose
-        self.tip     = idevice.tip
+        self.tip = idevice.tip
         self.package = self.idevice.parent_node.package
 
     def process(self, action, data):
-        
+
         if action == 'move_up':
             self.save_form(data)
             self.idevice.move_up()
@@ -77,14 +79,14 @@ class Block(object):
             return self.render(form=form)
         else:
             raise IdeviceActionNotFound("Action %s not found" % action)
-        
+
     def save_form(self, data):
         form = self.BlockForm(data, instance=self.idevice)
         if form.is_valid():
             form.save(commit=False)
-                
+
         return form
-        
+
     @property
     def media(self):
         '''Returns a list of media files used in iDevice's HTML'''
@@ -92,7 +94,7 @@ class Block(object):
             return self.BlockForm().media
         else:
             return self.BlockForm().view_media
-    
+
     def render(self, **kwargs):
         """
         Returns the appropriate XHTML string for whatever mode this block is in.
@@ -105,7 +107,6 @@ class Block(object):
             html += self.renderPreview()
         return mark_safe(html)
 
-
     def renderEdit(self, form=None):
         """
         Returns an XHTML string with the BlockForm element for editing this block
@@ -113,18 +114,17 @@ class Block(object):
         log.error(u"renderEdit called directly")
         return u"ERROR Block.renderEdit called directly"
 
-
     def renderPreview(self):
         """
         Returns an XHTML string for previewing this block during editing
         """
         raise NotImplemented
-    
+
     def renderExport(self):
         '''
         Returns the export representation of the block. Implemented in child
 classes.
         '''
         raise NotImplemented
-    
+
 # ===========================================================================
