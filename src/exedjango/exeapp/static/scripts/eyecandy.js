@@ -107,8 +107,8 @@ $(document).ready(function() {
 		if($(this).attr('href') == '#_preview') {
 			$('#previewIFrame').attr("src", $('#previewIFrame').attr("src"));
 			$('#preview').show();
+			$('body').css('overflow', 'hidden');
 			$('#previewIFrame').css({
-				overflow: 'hidden',
 				width: '0px',
 				height: '0px',
 				opacity: 0

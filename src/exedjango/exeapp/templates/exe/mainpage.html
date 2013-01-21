@@ -6,7 +6,10 @@
 {% load static %}
 
 {% block title %}{{ package.title }}{% endblock %}
-
+{% block head_css %}
+<link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/mz/style.min.css">
+<link rel="stylesheet" href="http://fortawesome.github.com/Font-Awesome/assets/css/font-awesome.css">
+{% endblock %}
 {% block head_javascript %}
 <script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.js"></script>
 <script type="text/javascript" src="{% get_static_prefix %}scripts/jquery-ui.custom.min.js"></script>
@@ -31,6 +34,7 @@
 	<option value='{{ package_iter.get_absolute_url }}'>{{ package_iter.title }}</option>
 	{% endif %}
 	{% endfor %}
+	<option value='/exeapp'>Zurück zur Kursübersicht</option>
 </select>
 		
 <h1>creyoco</h1>
@@ -43,7 +47,7 @@
 	
 	<div id="outline">
 		{% render_outline package %}
-		<hr style="border:1px solid white;width:168px;margin-left:0px;margin-top:40px;margin-bottom:15px;">
+		<hr>
 		<img id="settings_button" src="{% get_static_prefix %}images/mz/settings.png" style="cursor:pointer;margin-right:10px;" alt="Einstellungen">
 		<img id="download_button" src="{% get_static_prefix %}images/mz/download.png" alt="Download" style="cursor:pointer">
 		
@@ -98,7 +102,7 @@
 {% render_styles %}
 </div>
 
-<div style="width:100%;min-height:600px;" id="authoring" name="authoringIFrame1">
+<div style="width:100%;min-height:400px;" id="authoring" name="authoringIFrame1">
 </div>
 
 <div id="properties" style="display:none;">
@@ -133,7 +137,15 @@
 	<div style="clear:both"></div>
 </div>
 {% endblock %}
-
+{% block footer %}
+<div style="text-align:left;float:left">
+	<a href="/accounts/logout/" style="text-align:left">Logout</a>
+</div>
+<div style="text-align:right;">
+	<a href="#impressum">Impressum</a> 
+	<img style="margin-left:10px" src="{% get_static_prefix %}images/mz/help.png" alt="Hilfe">
+</div>
+{% endblock %}
 {% block append %}
 <div id="package_id" style="display: none">{{package.id}}</div>
 <div id="package_style" style="display:none">{{package.style}}</div>

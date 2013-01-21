@@ -6,34 +6,79 @@
 
 {% block title %}creyoco | Kursübersicht{% endblock %}
 
+{% block head_css %}
+<link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/mz/style.min.css">
+<link rel="stylesheet" href="http://fortawesome.github.com/Font-Awesome/assets/css/font-awesome.css">
+{% endblock %}
+
 {% block head_javascript %}
 <script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.js"></script>
-<script type="text/javascript" src="{% get_static_prefix %}scripts/jquery-ui.custom.min.js"></script>
-<script type="text/javascript" src="{% get_static_prefix %}scripts/mainpage.js"></script>
+<script type="text/javascript" src="{% get_static_prefix %}scripts/main.js"></script>
 <script type='text/javascript' src="{% get_static_prefix %}scripts/jquery.jsonrpc.js"></script>
-<script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.form.js"></script>
-<script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.cookie.js"></script>
-<script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.jstree.js"></script>
-<script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.confirm.js"></script>
+<script>
+$(document).ready(function() {
+	$('ul#package_list li').click( function() {
+		if($(this).children('input[type="checkbox"]').attr('checked')) {
+			$(this).children('input[type="checkbox"]').removeAttr('checked');
+		}
+		else {
+			$(this).children('input[type="checkbox"]').attr('checked', true);
+		}
+		
+		/*$('input[type="checkbox"]').each( function() {
+			if($(this).attr('checked')) {
+				$('#delete_selected_packages').show();
+				alert('bla');
+			}
+			else {
+				$('#delete_selected_packages').hide();
+			}
+		});*/
+		if($("input[type='checkbox']").is(":checked")) {
+		    $("#delete_selected_packages").show();
+	    }
+	    else {
+		    $("#delete_selected_packages").hide();
+	    }
+	});
+});
+</script>
 {% endblock %}
+
+
 
 {% block h2 %}Kursübersicht{% endblock %}
 
 {% block content %}
-<p>Logged in as {{ user.username }}</p>
+<br>
+<!--<p>Logged in as {{ user.username }}</p>-->
+<button style="margin-right:10px;" type='submit' id='create_package'>
+	<i class="icon-pencil"></i> Neuen Kurs erstellen
+</button>
 
+<button style="margin-right:10px;display:none" type='submit' id='delete_selected_packages'>
+	<i class="icon-trash"></i> Gewählte Kurse löschen
+</button>
+
+<br><br><br>
 <ul id="package_list">
+	<!--{{ package_list }}-->
 	{% for package in package_list %}
 	<li class='package' id="package{{ package.id }}">
-		<input type="checkbox" class="package_checkbox" packageid="{{ package.id }}" />
+		<input type="checkbox" class="package_checkbox" packageid="{{ package.id }}">
 		<a href="{{ package.get_absolute_url }}">{{ package.title }}</a>
 	</li>
 	{% endfor %}
 </ul>
-<div id='createPackage'>
-	<p><input type='submit' id='create_package' value='Create'></p>
-	<p><input type='submit' id='delete_selected_packages' value='Delete Selected'></p>
-</div>
-<a href="/accounts/logout/">Logout</a>
+<!--<a href="/accounts/logout/">Logout</a>-->
 
+{% endblock %}
+{% block footer %}
+<div style="text-align:left;float:left">
+	<a href="/accounts/logout/" style="text-align:left">Logout</a>
+</div>
+<div style="text-align:right;">
+	<a href="#impressum">Impressum</a> 
+	<img style="margin-left:10px" src="{% get_static_prefix %}images/mz/help.png" alt="Hilfe">
+</div>
 {% endblock %}

@@ -18,7 +18,7 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 // ===========================================================================
 
-// This file contains all the js related to the main xul page
+// This file contains all the js related to the<a href="OWA"></a> main xul page
 
 // Set it to false upon deployement
 DEBUG = true;
@@ -153,45 +153,7 @@ jQuery(document).ready(function() {
                 	// }
                 // })
                 set_current_style()
-                
-                //
-                //Package overview handling
-                //
-                $(".remove_package").bind("click", delete_package);
-                $("#create_new_package").bind("click", create_package);
             });
-
-// Called after successful package deletion
-function callback_delete_package(id) {
-  var package_li = $(".package[package_id=" + id + "]");
-  package_li.remove();
-}
-
-// Promps a new package new and sens a "main.create_package" call via 
-// rpc
-function create_package(){
-  var package_title = prompt('Enter package title');
-    $.jsonRPC.request('create_package', [package_title], {
-      success: function(results){
-        window.open(results.result.url, "_self");
-      }
-    });
-}
-
-function delete_package(){
-    var package_id = $(this).parent().attr('package_id');
-    $.jsonRPC.request('delete_package', [package_id], {
-      success: function(results) {
-        var deleted_package_id = results.result.package_id;
-          if (deleted_package_id > 0) {
-            // Just a pre-caution that we remove the same package as the
-            // server
-          callback_delete_package(deleted_package_id);
-        }
-      }
-    })
-}
-
 
 // Adds a new node to current one
 function add_child_node() {
