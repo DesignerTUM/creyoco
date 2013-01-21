@@ -109,12 +109,7 @@ jQuery(document).ready(function() {
                 //refresh pjax on every request
                 $.pjax.defaults.maxCacheLength = 0;
                 //don't folow tree links
-                get_outline_pane().find("ul > li > a").on("click", function(event){
-                	get_outline_pane().jstree("select_node", "#" + $(this).attr("id"), true);
-                	handle_select_node(event);
-                	$.pjax.click(event, {container: "#authoring"});
-                	return false;
-                	});
+				bind_pjax();
                 // handle theme selection
                 $("#style_selector").change(handle_select_style);
                 
@@ -174,6 +169,18 @@ jQuery(document).ready(function() {
 function callback_delete_package(id) {
   var package_li = $(".package[package_id=" + id + "]");
   package_li.remove();
+}
+
+//Bind pjax to a's of outline pane
+function bind_pjax() {
+	var $nodes = get_outline_pane().find("ul > li > a");
+	$nodes.off("click");
+    $nodes.on("click", function(event){
+		get_outline_pane().jstree("select_node", "#" + $(this).attr("id"), true);
+		handle_select_node(event);
+		$.pjax.click(event, {container: "#authoring"});
+		return false;
+	});
 }
 
 // Promps a new package new and sens a "main.create_package" call via 
@@ -384,17 +391,25 @@ function get_package_id(){
 // selected node
 function callback_add_child_node(nodeid, title) {
     var current_li = get_current_node().parent();
-    var new_node = {'data' : {'title' : title, 
-        'attr': {'id' : 'node' + nodeid, 'nodeid' : nodeid}}}
+    var new_node = {'data': {'title' : title, 
+        'attr': {'id': 'node' + nodeid,
+        'nodeid': nodeid,
+        'href': "/exeapp/package/" + get_package_id() + "/" + nodeid + "/"}}}
+    get_outline_pane().on("create_node.jstree", function(event, data) {
+    var id_attr = data.rslt.obj.find("a").attr('id');
+	    bind_pjax();
+    	$("#" + id_attr).click();	
+    });
     get_outline_pane().jstree("create_node",current_li, "last", new_node);
     get_outline_pane().jstree("open_node", current_li);
-    get_outline_pane().jstree("select_node", $("#node" + nodeid), true);
+    // get_outline_pane().jstree("select_node", $("#node" + nodeid), true);
 }
 
 // Delete the currently selected node
 function callback_delete_current_node(new_node_id) {
 	
     get_outline_pane().jstree("delete_node", "#node" + get_current_node_id());
+    get_outline_pane().jstree("select_node", "#node" + new_node_id, true);
     var url = "/exeapp/package/" + get_package_id() + "/" + new_node_id + "/" ;
     $.pjax({url: url,
     		container: "#authoring",
