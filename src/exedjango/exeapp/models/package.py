@@ -282,7 +282,7 @@ class PackageManager(models.Manager):
         package.dublincore = dublincore
         package.save()
         root = Node(package=package, parent=None,
-                    title="Home", is_current_node=True, is_root=True)
+                    title="Home", is_root=True)
         root.save()
         return package
 

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 This file contains the tests for important views in exedjango.
 Notice, that your tests should always clear package_storage shoudl be cleared,
@@ -89,8 +90,8 @@ class MainPageTestCase(TestCase):
 
     def test_basic_elements(self):
         response = self.c.get('/exeapp/')
-        self.assertContains(response, "Main Page")
-        self.assertContains(response, "Package")
+        self.assertContains(response, "Kursübersicht")
+        self.assertContains(response, "creyoco")
 
     def _test_create_package(self):
         PACKAGE_NAME = '%s Package post' % self.TEST_USER
@@ -482,7 +483,7 @@ class ExportTestCase(TestCase):
         _create_basic_database()
         self.data = Package.objects.get(id=self.TEST_PACKAGE_ID)
         for x in range(3):
-            self.data.add_child_node()
+            self.data.root.create_child()
 
     def tearDown(self):
         User.objects.all().delete()
@@ -555,8 +556,7 @@ class ExportTestCase(TestCase):
         IDEVICE_TYPE = "FreeTextIdevice"
         IDEVICE_ID = 1
 
-        self.assertEquals(self.data.root, self.data.current_node)
-        self.data.add_idevice(IDEVICE_TYPE)
+        self.data.root.add_idevice(IDEVICE_TYPE)
         exporter = Mock()
         exporter.pages = []
         websitepage = WebsitePage(self.data.root, 0, exporter)
