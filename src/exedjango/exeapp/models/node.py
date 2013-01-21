@@ -37,8 +37,7 @@ log = logging.getLogger()
 
 class NodeManager(models.Manager):
 
-    def create(self, package, parent, title="", is_root=False,
-               is_current_node=False):
+    def create(self, package, parent, title="", is_root=False):
         if not title:
             level = parent.level + 1
             if level > 3:
@@ -46,7 +45,7 @@ class NodeManager(models.Manager):
             else:
                 title = getattr(package, "level%s" % level)
         node = Node(package=package, parent=parent, title=title,
-                    is_root=is_root, is_current_node=is_current_node)
+                    is_root=is_root)
         node.save()
         return node
 
@@ -60,7 +59,6 @@ class Node(models.Model):
                                blank=True, null=True)
     title = models.CharField(max_length=50)
     is_root = models.BooleanField(default=False)
-    is_current_node = models.BooleanField(default=False)
 
     objects = NodeManager()
 
@@ -453,7 +451,6 @@ KeyError, if idevice_type is not found
         node_order.insert(sibling_index, self.pk)
         self.parent.set_node_order(node_order)
 
-
     def promote(self):
         """
         Convenience function. Moves the node one step 
@@ -470,7 +467,6 @@ Returns True is successful
             return True
 
         return False
-
 
     def demote(self):
         """
@@ -490,7 +486,6 @@ Returns True is successful
 
         return False
 
-
     def up(self):
         """
         Moves the node up one node vertically, keeping to the same level in 
@@ -506,7 +501,6 @@ Returns True is successful
             self.move(self.parent, prev_sibling)
             return True
         return False
-
 
     def down(self):
         """
@@ -527,6 +521,17 @@ Returns True is successful
         self.move(self.parent, next_next_sibling)
         return True
 
+    def delete(self):
+        """Checks if the node is root, deletes it otherwise.
+        Returns parents id"""
+        if self.is_root:
+            return 0
+        else:
+            parent_id = self.parent.id
+            super(Node, self).delete()
+            return parent_id
+
+
 
 
     def walkDescendants(self):
@@ -537,7 +542,6 @@ Returns True is successful
             yield child
             for descendant in child.walkDescendants():
                 yield descendant
-
 
 
     def launch_testForZombies(self):

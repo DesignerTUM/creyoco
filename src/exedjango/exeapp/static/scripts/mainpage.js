@@ -218,9 +218,10 @@ function add_child_node() {
 function delete_current_node() {
   $.jsonRPC.request('delete_current_node', [get_package_id(), get_current_node_id()], {
     success: function(results) {
-      if (results.result.deleted == 1) {
-        callback_delete_current_node();
-      }
+	  var new_node_id = results.result.new_node;
+	  if (new_node_id != 0) {
+	    callback_delete_current_node(new_node_id);
+	  }
     }
   })
 }
@@ -391,10 +392,13 @@ function callback_add_child_node(nodeid, title) {
 }
 
 // Delete the currently selected node
-function callback_delete_current_node() {
-    var currentNode = get_current_node();
-    // parent ul
-    get_outline_pane().jstree("delete_node", currentNode);
+function callback_delete_current_node(new_node_id) {
+	
+    get_outline_pane().jstree("delete_node", "#node" + get_current_node_id());
+    var url = "/exeapp/package/" + get_package_id() + "/" + new_node_id + "/" ;
+    $.pjax({url: url,
+    		container: "#authoring",
+    		});
     updateTitle();
 }
 

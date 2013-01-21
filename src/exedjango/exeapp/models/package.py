@@ -325,16 +325,6 @@ i.e. the "package".
 
     # Property Handlers
 
-    def delete_current_node(self, node):
-        '''Removes current node. Sets current node to deleted node's 
-parent'''
-        if node is not self.root:
-            self.current_node = node.parent
-            node.delete()
-            return "1"
-        else:
-            return "0"
-
     def get_idevice_for_partial(self, idevice_id):
         '''Returns a idevice only in case its on the current node of this
 package'''

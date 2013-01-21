@@ -26,8 +26,8 @@ to package_node_id as child of the current one and selectes it'''
 def delete_current_node(request, package, node):
     '''Handles jsonRPC request "package.delete_current_node". Removes current
 node'''
-    deleted_status = package.delete_current_node(node)
-    return {'deleted': deleted_status}
+    new_node_id = node.delete()
+    return {'new_node': new_node_id}
 
 
 @jsonrpc_authernticating_method('package.rename_current_node')
