@@ -101,11 +101,20 @@ jQuery(document).ready(function() {
                   "plugins" : ["themes", "html_data", "ui", "crrm"]});
                 get_outline_pane().jstree('open_all', $('#outline_pane>ul'));
                 //bind actions to outline nodes
-                get_outline_pane().bind("select_node.jstree", 
-                      handle_select_node);
+                // get_outline_pane().bind("select_node.jstree", 
+                      // handle_select_node);
                 get_outline_pane().delegate("a", "dblclick", rename_current_node);
                 //bind renaming event
                 get_outline_pane().bind("rename_node.jstree", handle_renamed_current_node);
+                //refresh pjax on every request
+                $.pjax.defaults.maxCacheLength = 0;
+                //don't folow tree links
+                get_outline_pane().find("ul > li > a").on("click", function(event){
+                	get_outline_pane().jstree("select_node", "#" + $(this).attr("id"), true);
+                	handle_select_node(event);
+                	$.pjax.click(event, {container: "#authoring"});
+                	return false;
+                	});
                 // handle theme selection
                 $("#style_selector").change(handle_select_style);
                 
@@ -196,7 +205,7 @@ function delete_package(){
 // Adds a new node to current one
 function add_child_node() {
   
-  $.jsonRPC.request('add_child_node', [get_package_id()], {
+  $.jsonRPC.request('add_child_node', [get_package_id(), get_current_node_id()], {
     success: function(results) {
       callback_add_child_node(results.result.id, results.result.title);
     }
@@ -207,7 +216,7 @@ function add_child_node() {
 
 //Removes current node
 function delete_current_node() {
-  $.jsonRPC.request('delete_current_node', [get_package_id()], {
+  $.jsonRPC.request('delete_current_node', [get_package_id(), get_current_node_id()], {
     success: function(results) {
       if (results.result.deleted == 1) {
         callback_delete_current_node();
@@ -233,7 +242,7 @@ function promote_current_node(){
               alert(CANT_MOVE_NODE_FURTHER);
               return -1;
             }
-  $.jsonRPC.request('promote_current_node', [get_package_id()], {
+  $.jsonRPC.request('promote_current_node', [get_package_id(), get_current_node_id()], {
     success: function(results){
       if (results.result.promoted != "1") {
         alert(NODE_WAS_NOT_MOVED);
@@ -253,7 +262,7 @@ function demote_current_node() {
     if (get_current_node().parent().prev().length == 0) {
       alert ("No previous node, can't demote.");
     } else {
-      $.jsonRPC.request('demote_current_node', [get_package_id()], {
+      $.jsonRPC.request('demote_current_node', [get_package_id(), get_current_node_id()], {
         success: function(results) {
           if (results.result.demoted != "1") {
             alert(NODE_WAS_NOT_MOVED);
@@ -271,7 +280,7 @@ function move_current_node_up(){
   if (get_current_node().parent().prev().length == 0) {
     alert(CANT_MOVE_NODE_FURTHER);
   }
-  $.jsonRPC.request('move_current_node_up', [get_package_id()], {
+  $.jsonRPC.request('move_current_node_up', [get_package_id(), get_current_node_id()], {
       success: callback_move_current_node_up,
       error: function(result) { alert (NODE_WAS_NOT_MOVED); }
     });
@@ -283,7 +292,7 @@ function move_current_node_down() {
     alert(CANT_MOVE_NODE_FURTHER);
     return -1;
   }
-  $.jsonRPC.request('move_current_node_down', [get_package_id()], {
+  $.jsonRPC.request('move_current_node_down', [get_package_id(), get_current_node_id()], {
     success: function(results) {
       if (results.result.moved != '1'){
         alert(NODE_WAN_NOT_MOVED);
@@ -296,7 +305,7 @@ function move_current_node_down() {
 
 function add_idevice() {
   var ideviceid = $("#idevice_pane").jstree("get_selected").find(">a").attr('ideviceid');
-  $.jsonRPC.request('add_idevice', [get_package_id(), ideviceid],{
+  $.jsonRPC.request('add_idevice', [get_package_id(), get_current_node_id(), ideviceid],{
     success: function(results) {
     	insert_idevice(
     		results.result.idevice_id
@@ -306,18 +315,13 @@ function add_idevice() {
   return false;
 } 
 
-// Handles outline_pane selection event. Calls package.change_current_node
-// via rpc. 
 function handle_select_node(event, data) {
 
-    var node = get_current_node();
-    $.jsonRPC.request('change_current_node',
-    [get_package_id(), $(node).attr("nodeId")], {
-        success: function(results) {
-              set_current_node(node);
-        }
-    });
-    return false;
+	// for (key in data){alert(key);};
+	if (data == undefined) {
+	    var node = get_current_node();
+	    set_current_node(node);
+   	}
 }
 
 function handle_select_style() {
@@ -328,7 +332,7 @@ function handle_select_style() {
 //handle renamed node event. Calls package.rename_node over rpc.
 function handle_renamed_current_node(e, data){
   var new_title = data.rslt.name;
-  $.jsonRPC.request('rename_current_node', [get_package_id(), new_title], {
+  $.jsonRPC.request('rename_current_node', [get_package_id(), get_current_node_id(), new_title], {
     success: function(results){
       var server_title = ""
       if ("title" in results.result){
@@ -441,12 +445,11 @@ function set_current_node(node) {
   get_outline_pane().attr('current_node', get_current_node().attr('nodeid'));
   updateTitle();
   reload_authoring();
-  update_preview();
 }
 
 function update_preview() {
   var url = window.location.protocol + '//' + location.host + location.pathname;
-  $('#preview > iframe').attr('src', url + "preview/" + get_outline_pane().attr("current_node") + '/');
+  $('#preview > iframe').attr('src', url + "preview/");	
 }
 
 function set_current_style() {
@@ -454,13 +457,17 @@ function set_current_style() {
 		{success: function(results){
 			var style_val = results.result.style;
 			$("#style_selector").val(style_val);
-			update_preview();
 		}});
 }
 
 function get_current_node() {
     var selected = get_outline_pane().jstree("get_selected").find(">a");
     return selected;
+}
+
+function get_current_node_id() {
+	node = get_current_node();
+	return node.attr('id').match(/node(\d+)/)[1]
 }
 
 function get_outline_pane() {

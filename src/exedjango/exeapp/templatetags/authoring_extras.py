@@ -6,12 +6,14 @@ from exeapp.views.authoring import get_media_list
 
 register = template.Library()
 
+
 @register.simple_tag
 def render_idevice(idevice):
     '''Convinience filter, just renders calls render function of a
 block'''
-    
+
     return shortcut_render_idevice(idevice)
+
 
 @register.simple_tag
 def render_form_media(node):

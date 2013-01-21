@@ -6,7 +6,8 @@ Created on May 17, 2011
 from django.contrib.auth.decorators import login_required
 from exeapp.shortcuts import get_package_by_id_or_error
 from exeapp import shortcuts
-from django.http import HttpResponse, HttpResponseRedirect, Http404
+from django.http import HttpResponse, HttpResponseRedirect, Http404, \
+    HttpResponseNotAllowed, HttpResponseBadRequest
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render_to_response
 from exeapp.views.blocks.blockfactory import block_factory
@@ -18,13 +19,13 @@ from exeapp.models.package import Package
 
 @login_required
 @get_package_by_id_or_error
-def authoring(request, package, partial=False):
+def authoring(request, package, current_node):
     '''Handles calls to authoring iframe. Renders exe/authoring.html'''
 
     if "idevice_id" in request.GET:
         try:
-            idevice = package.get_idevice_for_partial\
-                        (request.GET['idevice_id'])
+            idevice = current_node.idevices.get(
+                                pk=(request.GET['idevice_id']))
             if request.GET.get("media", "") == "true":
                 json = simplejson.dumps(get_unique_media_list(
                                         idevice.parent_node, idevice))
@@ -35,27 +36,22 @@ def authoring(request, package, partial=False):
         except ObjectDoesNotExist, e:
             raise Http404(e)
     # if partial is set return only content of body
-    partial = partial or \
-                "partial" in request.GET and request.GET['partial'] == "true"
-    if partial and "media" in request.GET and request.GET['media'] == "true":
-        return HttpResponse(get_media_list(package.current_node, ajax=True),
+    elif "media" in request.GET and request.GET['media'] == "true":
+        return HttpResponse(get_media_list(current_node, ajax=True),
                              content_type="text/javascript")
-    return render_to_response('exe/authoring.html', locals())
-
-
+    else:
+        return HttpResponseBadRequest("No idevice id given.")
 
 
 @login_required
 @get_package_by_id_or_error
-def handle_action(request, package):
+def handle_action(request, package, node):
     '''Handles post action sent from authoring'''
     if request.method == "POST":
         post_dict = dict(request.POST)
-        if 'content' in request.POST:
-            content = request.POST['content']
         idevice_id = post_dict.pop('idevice_id')[0]
         action = post_dict.pop('idevice_action')[0]
-        response = package.handle_action(idevice_id,
+        response = node.handle_action(idevice_id,
                                           action, request.POST)
         return HttpResponse(response)
     return HttpResponse()
@@ -104,18 +100,3 @@ def link_list(request, package):
     html = "var tinyMCELinkList = %s;" % \
         simplejson.dumps(package.link_list)
     return HttpResponse(html, content_type="application/x-javascript")
-
-
-@login_required
-@get_package_by_id_or_error
-def change_page(request, package, page_name):
-    try:
-        package.set_current_node_by_unique_name(page_name)
-    except KeyError:
-        raise Http404
-    if request.is_ajax():
-        return HttpResponse("")
-    else:
-        return HttpResponseRedirect(\
-                        reverse('exeapp.views.authoring.authoring', \
-                        args=[package.id]))

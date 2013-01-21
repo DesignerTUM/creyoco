@@ -28,22 +28,22 @@ from time import sleep
 import logging
 import traceback
 import shutil
-#from exe.xului.propertiespage    import PropertiesPage
-#from exe.webui.authoringpage     import AuthoringPage
-#from exe.export.websiteexport    import WebsiteExport
-#from exe.export.textexport       import TextExport
-#from exe.export.singlepageexport import SinglePageExport
-#from exe.export.scormexport      import ScormExport
-##from exe.export.imsexport        import IMSExport
-#from exe.export.ipodexport       import IpodExport
-#from exe.export.presentationexport  import PresentationExport
-#from exe.export.handoutexport    import HandoutExport
+# from exe.xului.propertiespage    import PropertiesPage
+# from exe.webui.authoringpage     import AuthoringPage
+# from exe.export.websiteexport    import WebsiteExport
+# from exe.export.textexport       import TextExport
+# from exe.export.singlepageexport import SinglePageExport
+# from exe.export.scormexport      import ScormExport
+# #from exe.export.imsexport        import IMSExport
+# from exe.export.ipodexport       import IpodExport
+# from exe.export.presentationexport  import PresentationExport
+# from exe.export.handoutexport    import HandoutExport
 from exedjango.utils.path             import Path, toUnicode
-#from exe                         import globals as G
+# from exe                         import globals as G
 from tempfile                    import mkdtemp
-#from exe.engine.mimetex          import compile
-#from exe.engine.pdfidevice       import PdfIdevice
-#from pyPdf                       import PdfFileReader
+# from exe.engine.mimetex          import compile
+# from exe.engine.pdfidevice       import PdfIdevice
+# from pyPdf                       import PdfFileReader
 import re, subprocess, shutil
 
 from jsonrpc import jsonrpc_method
@@ -53,28 +53,32 @@ from exeapp.models import idevice_store
 
 log = logging.getLogger(__name__)
 
+
 @jsonrpc_authernticating_method('package.get_current_style')
 def get_current_style(request, package):
-    return {"style" : package.style}
+    return {"style": package.style}
+
 
 @jsonrpc_authernticating_method('package.set_package_style')
-def set_package_style(request, package, style_id):
+def set_package_style(request, package, node, style_id):
     package.set_style(style_id)
 
-@jsonrpc_authernticating_method('package.add_idevice')
-def add_idevice(request, package, idevice_type):
-    '''Adds a idevice of given type to the current node'''
-    
-    idevice = package.add_idevice(idevice_type)
-    return {'idevice_id' : idevice.id}
-    
-@jsonrpc_authernticating_method('package.testPrintMessage')
-def testPrintMessage(request, package, message):
 
+@jsonrpc_authernticating_method('package.add_idevice')
+def add_idevice(request, package, node, idevice_type):
+    '''Adds a idevice of given type to the current node'''
+
+    idevice = node.add_idevice(idevice_type)
+    return {'idevice_id': idevice.id}
+
+
+@jsonrpc_authernticating_method('package.testPrintMessage')
+def testPrintMessage(request, package, node, message):
     """ 
     Prints a test message, and yup, that's all! 
-    """ 
+    """
     print "Test Message: ", message, " [eol, eh!]"
+
 
 @jsonrpc_authernticating_method('package.handleDblNode')
 def handleDblNode (request, package):
@@ -93,6 +97,7 @@ def handleDblNode (request, package):
         client.sendScript(u'top.location = "/%s"' % \
                       package.name)
 
+
 @jsonrpc_authernticating_method('package.setEditorsWidth')
 def setEditorsWidth(request, package, width):
 
@@ -106,7 +111,7 @@ def setEditorsWidth(request, package, width):
                           package.name)
     except ValueError, e:
         client.sendScript(u"alert('Please, enter a number');")
-        
+
 @jsonrpc_authernticating_method('package.serveDocument')
 def serveDocument(request, package):
 
@@ -118,11 +123,11 @@ def serveDocument(request, package):
             not self.servController.running:
         path = os.path.join(G.application.lastExportPath, package.name)
         self.servController.startServing(path)
-    client.sendScript('document.getElementById("serving-elem").' +\
+    client.sendScript('document.getElementById("serving-elem").' + \
                       'setAttribute("label", "Serving")')
-    #client.sendScript('document.getElementById("serving-elem").' +\
+    # client.sendScript('document.getElementById("serving-elem").' +\
     #                  'oncommand = stopServing')
-    client.sendScript('document.getElementById("quick-export").' +\
+    client.sendScript('document.getElementById("quick-export").' + \
                       'setAttribute("disabled", "true");')
     client.sendScript('alert("Serving exported Document to port ' + \
                       str(self.servController.PORT) + '");')
@@ -140,9 +145,9 @@ def stopServing(request, package):
 
     if self.servController.running:
         self.servController.stopServing()
-        client.sendScript('document.getElementById("serving-elem").' +\
+        client.sendScript('document.getElementById("serving-elem").' + \
                       'setAttribute("label", "Start Serving")')
-        client.sendScript('document.getElementById("serving-elem").' +\
+        client.sendScript('document.getElementById("serving-elem").' + \
                       'oncommand = serveDocument')
 
 
@@ -153,7 +158,7 @@ def openNewTab(request, package):
     """
     Opens new tab with new exe instance running in it
     """
-    
+
     exeStarter = G.application.config.exePath
     # on windows exePath links to exe dir, on linux to executable
     if os.path.isdir(exeStarter):
@@ -178,11 +183,11 @@ def importStyle(request, package, src):
     print client
     localeStyleDir = G.application.config.configDir / "style"
     styleName = os.path.basename(src)
-    shutil.copytree(src, localeStyleDir / styleName) 
+    shutil.copytree(src, localeStyleDir / styleName)
     G.application.config.loadStyles()
     client.sendScript(u'top.location = "/%s"' % package.name)
 
-    
+
 
 @jsonrpc_authernticating_method('package.outlineClicked')
 def outlineClicked(request, package):
@@ -191,8 +196,8 @@ def outlineClicked(request, package):
     Sets documents title to package name + page
     """
 
-    client.sendScript(u'setDocumentTitle("%s")' % package.name) 
-    
+    client.sendScript(u'setDocumentTitle("%s")' % package.name)
+
 
 
 @jsonrpc_authernticating_method('package.importPDF')
@@ -240,7 +245,7 @@ def is_package_dirty(request, package):
     ifDirty is JavaScript to be evaled on the client if the package has not
     been changed
     """
-    return {"dirty" : package.isChanged}
+    return {"dirty": package.isChanged}
 
 
 @jsonrpc_authernticating_method('package.getPackageFileName')
@@ -258,7 +263,7 @@ def getPackageFileName(request, package, onDone, onDoneParam):
 @jsonrpc_authernticating_method('package.save_package')
 def save_package(request, package):
     package.save_data_package()
-    
+
 @jsonrpc_authernticating_method('package.unload_data_package')
 def unload_package(request, package):
     '''Handles event "package.stopServing'. Unloads given data packages'''
@@ -384,16 +389,16 @@ def ClearParentTempPrintDirs(request, client, log_dir_warnings):
     # (eventually may want to allow this information to be configured by
     #  the user, stored in globals, etc.)
     web_dirname = G.application.tempWebDir
-    under_dirname = os.path.join(web_dirname,"temp_print_dirs")
+    under_dirname = os.path.join(web_dirname, "temp_print_dirs")
     clear_tempdir = 0
     dir_warnings = ""
 
-    # but first need to ensure that under_dirname itself is available; 
+    # but first need to ensure that under_dirname itself is available;
     # if not, create it:
-    if cmp(under_dirname,"") != 0:
+    if cmp(under_dirname, "") != 0:
         if os.path.exists(under_dirname):
             if (os.path.isdir(under_dirname)):
-                # Yes, this directory already exists.  
+                # Yes, this directory already exists.
                 # pre-clean it, keeping the clutter down:
                 clear_tempdir = 1
             else:
@@ -408,9 +413,9 @@ def ClearParentTempPrintDirs(request, client, log_dir_warnings):
                 under_dirname = web_dirname
                 # but, we can't just put the tempdirs directly underneath
                 # the webDir, since no server object exists for it.
-                # So, as a quick and dirty solution, go ahead and put 
+                # So, as a quick and dirty solution, go ahead and put
                 # them in the images folder:
-                under_dirname = os.path.join(under_dirname,"images")
+                under_dirname = os.path.join(under_dirname, "images")
 
                 dir_warnings += "    RECOMMENDATION: please " \
                         + "remove/rename this file to allow eXe easier "\
@@ -418,7 +423,7 @@ def ClearParentTempPrintDirs(request, client, log_dir_warnings):
                 dir_warnings += "     eXe will create the temporary " \
                        + "printing directory directly under \"" \
                        + under_dirname + "\" instead, but this might "\
-                       +"leave some files around after eXe terminates..."
+                       + "leave some files around after eXe terminates..."
                 if log_dir_warnings:
                     log.warn("    RECOMMENDATION: please remove/rename "\
                         + "this file to allow eXe easier management of "\
@@ -428,24 +433,25 @@ def ClearParentTempPrintDirs(request, client, log_dir_warnings):
                         + "instead, but this might leave some files " \
                         + "around after eXe terminates...", \
                         under_dirname)
-                # and note that we do NOT want to clear_tempdir 
+                # and note that we do NOT want to clear_tempdir
                 # on the config dir itself!!!!!
         else:
             os.makedirs(under_dirname)
             # and while we could clear_tempdir on it, there's no need to.
-    if clear_tempdir : 
-        # before making this particular print job's temporary print 
-        # directory underneath the now-existing temp_print_dirs, 
-        # go ahead and clear out temp_print_dirs such that we have 
+    if clear_tempdir:
+        # before making this particular print job's temporary print
+        # directory underneath the now-existing temp_print_dirs,
+        # go ahead and clear out temp_print_dirs such that we have
         # AT MOST one old temporary set of print job files still existing
         # once eXe terminates:
-        rm_topdir = "0"  
-        # note: rm_topdir is passed in as a STRING since 
-        # handleRemoveTempDir expects as such from nevow's 
+        rm_topdir = "0"
+        # note: rm_topdir is passed in as a STRING since
+        # handleRemoveTempDir expects as such from nevow's
         # clientToServerEvent() call:
         self.handleRemoveTempDir(client, under_dirname, rm_topdir)
 
     return under_dirname, dir_warnings
+
 
 @jsonrpc_authernticating_method('package.makeTempPrintDir')
 def makeTempPrintDir(request, package, suffix, prefix, \
@@ -455,15 +461,15 @@ def makeTempPrintDir(request, package, suffix, prefix, \
     Makes a temporary printing directory, and yup, that's pretty much it!
     """
 
-    # First get the name of the parent temp directory, after making it 
+    # First get the name of the parent temp directory, after making it
     # (if necessary) and clearing (if applicable):
-    log_dir_warnings = 1  
-    (under_dirname, dir_warnings) = self.ClearParentTempPrintDirs( \
+    log_dir_warnings = 1
+    (under_dirname, dir_warnings) = self.ClearParentTempPrintDirs(\
                                          client, log_dir_warnings)
 
-    # Next, go ahead and create this particular print job's temporary 
+    # Next, go ahead and create this particular print job's temporary
     # directory under the parent temp directory:
-    temp_dir = mkdtemp(suffix, prefix, under_dirname) 
+    temp_dir = mkdtemp(suffix, prefix, under_dirname)
 
     # Finally, pass the created temp_dir back to the expecting callback:
     client.call(callback, temp_dir, dir_warnings)
@@ -485,24 +491,24 @@ def previewTinyMCEimage(request, package, tinyMCEwin, tinyMCEwin_name, \
     callback_errors = ""
     errors = 0
 
-    log.debug('handleTinyMCEimageChoice: image local = ' + local_filename 
+    log.debug('handleTinyMCEimageChoice: image local = ' + local_filename
             + ', base=' + os.path.basename(local_filename))
 
-    webDir     = Path(G.application.tempWebDir)
-    previewDir  = webDir.joinpath('previews')
+    webDir = Path(G.application.tempWebDir)
+    previewDir = webDir.joinpath('previews')
 
     if not previewDir.exists():
         log.debug("image previews directory does not yet exist; " \
                 + "creating as %s " % previewDir)
         previewDir.makedirs()
     elif not previewDir.isdir():
-        client.alert( \
+        client.alert(\
             _(u'Preview directory %s is a file, cannot replace it') \
             % previewDir)
-        log.error("Couldn't preview tinyMCE-chosen image: "+
+        log.error("Couldn't preview tinyMCE-chosen image: " +
                   "Preview dir %s is a file, cannot replace it" \
                   % previewDir)
-        callback_errors =  "Preview dir is a file, cannot replace"
+        callback_errors = "Preview dir is a file, cannot replace"
         errors += 1
 
     if errors == 0:
@@ -516,7 +522,7 @@ def previewTinyMCEimage(request, package, tinyMCEwin, tinyMCEwin_name, \
         log.debug('handleTinyMCEimageChoice: after Path, localImagePath= '
                 + localImagePath);
         if not localImagePath.exists() or not localImagePath.isfile():
-            client.alert( \
+            client.alert(\
                  _(u'Local file %s is not found, cannot preview it') \
                  % localImagePath)
             log.error("Couldn't find tinyMCE-chosen image: %s" \
@@ -527,7 +533,7 @@ def previewTinyMCEimage(request, package, tinyMCEwin, tinyMCEwin_name, \
 
     try:
         # joinpath needs its join arguments to already be in Unicode:
-        #preview_filename = toUnicode(preview_filename);
+        # preview_filename = toUnicode(preview_filename);
         # but that's okay, cuz preview_filename is now URI safe, right?
         log.debug('URIencoded preview filename=' + preview_filename);
 
@@ -538,13 +544,13 @@ def previewTinyMCEimage(request, package, tinyMCEwin, tinyMCEwin_name, \
         shutil.copyfile(local_filename, \
                 server_filename.abspath());
 
-        # new optional description file to provide the 
+        # new optional description file to provide the
         # actual base filename, such that once it is later processed
         # copied into the resources directory, it can be done with
         # only the basename.   Otherwise the resource filenames
         # are too long for some users, preventing them from making
         # backup CDs of the content, for example.
-        # 
+        #
         # Remember that the full path of the
         # file is only used here as an easy way to keep the names
         # unique WITHOUT requiring a roundtrip call from the Javascript
@@ -554,22 +560,22 @@ def previewTinyMCEimage(request, package, tinyMCEwin, tinyMCEwin_name, \
         # to just its basename, since the resource parts have their
         # own unique-ification mechanisms already in place.
 
-        descrip_file_path = Path(server_filename+".exe_info")
+        descrip_file_path = Path(server_filename + ".exe_info")
         log.debug("handleTinyMCEimageChoice creating preview " \
                 + "description file \'" \
                 + descrip_file_path.abspath() + "\'.");
         descrip_file = open(descrip_file_path, 'wb')
 
-        # safety measures against TinyMCE, otherwise it will 
+        # safety measures against TinyMCE, otherwise it will
         # later take ampersands and entity-escape them into '&amp;',
         # and filenames with hash signs will not be found, etc.:
-        unspaced_filename  = local_filename.replace(' ','_')
-        unhashed_filename  = unspaced_filename.replace('#', '_num_')
-        unamped_local_filename  = unhashed_filename.replace('&', '_and_')
-        log.debug("and setting new file basename as: " 
+        unspaced_filename = local_filename.replace(' ', '_')
+        unhashed_filename = unspaced_filename.replace('#', '_num_')
+        unamped_local_filename = unhashed_filename.replace('&', '_and_')
+        log.debug("and setting new file basename as: "
                 + unamped_local_filename);
         my_basename = os.path.basename(unamped_local_filename)
-        descrip_file.write((u"basename="+my_basename).encode('utf-8'))
+        descrip_file.write((u"basename=" + my_basename).encode('utf-8'))
 
         descrip_file.flush()
         descrip_file.close()
@@ -577,7 +583,7 @@ def previewTinyMCEimage(request, package, tinyMCEwin, tinyMCEwin_name, \
     except Exception, e:
         client.alert(_('SAVE FAILED!\n%s' % str(e)))
         log.error("handleTinyMCEimageChoice unable to copy local image "\
-                +"file to server prevew, error = " + str(e))
+                + "file to server prevew, error = " + str(e))
         raise
 
 @jsonrpc_authernticating_method('package.generateTinyMCEmath')
@@ -596,24 +602,24 @@ def generateTinyMCEmath(request, package, tinyMCEwin, tinyMCEwin_name, \
     callback_errors = ""
     errors = 0
 
-    webDir     = Path(G.application.tempWebDir)
-    previewDir  = webDir.joinpath('previews')
+    webDir = Path(G.application.tempWebDir)
+    previewDir = webDir.joinpath('previews')
 
     if not previewDir.exists():
         log.debug("image previews directory does not yet exist; " \
                 + "creating as %s " % previewDir)
         previewDir.makedirs()
     elif not previewDir.isdir():
-        client.alert( \
+        client.alert(\
             _(u'Preview directory %s is a file, cannot replace it') \
             % previewDir)
-        log.error("Couldn't preview tinyMCE-chosen image: "+
+        log.error("Couldn't preview tinyMCE-chosen image: " +
                   "Preview dir %s is a file, cannot replace it" \
                   % previewDir)
-        callback_errors =  "Preview dir is a file, cannot replace"
+        callback_errors = "Preview dir is a file, cannot replace"
         errors += 1
 
-    #if errors == 0:
+    # if errors == 0:
     #    localImagePath = Path(local_filename)
     #    if not localImagePath.exists() or not localImagePath.isfile():
     #        client.alert( \
@@ -642,14 +648,14 @@ def generateTinyMCEmath(request, package, tinyMCEwin, tinyMCEwin_name, \
         math_file.close()
 
 
-        try: 
+        try:
             use_latex_sourcefile = math_filename_str
             tempFileName = compile(use_latex_sourcefile, math_fontsize, \
                     latex_is_file=True)
         except Exception, e:
             client.alert(_('MimeTeX compile failed!\n%s' % str(e)))
             log.error("handleTinyMCEmath unable to compile LaTeX using "\
-                +"mimetex, error = " + str(e))
+                + "mimetex, error = " + str(e))
             raise
 
         # copy the file into previews
@@ -660,7 +666,7 @@ def generateTinyMCEmath(request, package, tinyMCEwin, tinyMCEwin_name, \
         shutil.copyfile(tempFileName, \
                 server_filename.abspath().encode('utf-8'));
 
-        # Delete the temp file made by compile 
+        # Delete the temp file made by compile
         Path(tempFileName).remove()
     return
 
@@ -673,8 +679,8 @@ def quickExport(request, package):
     """
 
     if G.application.lastExportType:
-        self.handleExport(client, G.application.lastExportType, 
-                    G.application.lastExportPath, quick=True) 
+        self.handleExport(client, G.application.lastExportType,
+                    G.application.lastExportPath, quick=True)
 
 @jsonrpc_authernticating_method('package.exportPackage')
 def exportPackage(request, package, exportType, filename, print_callback='', quick=False):
@@ -685,7 +691,7 @@ def exportPackage(request, package, exportType, filename, print_callback='', qui
     'exportType' can be one of 'singlePage' 'webSite' 'zipFile' 'ipod'
                  'textFile' 'scorm' or 'presentation'
     'filename' is a file for scorm pages, and a directory for websites
-    """ 
+    """
     G.application.lastExportType = exportType
     G.application.lastExportPath = filename
     client.sendScript('document.getElementById("quick-export")' + \
@@ -696,13 +702,13 @@ def exportPackage(request, package, exportType, filename, print_callback='', qui
                       '.setAttribute("label", "Start Serving");')
     client.sendScript('document.getElementById("serving-elem")' + \
                     '.setAttribute("oncommand", "serveDocument\(\)");')
-    client.sendScript('document.getElementById("quick-export").' +\
+    client.sendScript('document.getElementById("quick-export").' + \
                       'setAttribute("disabled", "false");')
     log.info("Filename to export" + filename)
-    webDir     = Path(self.config.webDir)
+    webDir = Path(self.config.webDir)
     if package.style.find("locale/") != -1:
         # local style loaded
-        stylesDir  = self.config.configDir / "style"
+        stylesDir = self.config.configDir / "style"
         # delete "locale/" from style name
         stylesDir /= package.style[package.style.find\
                                         ("locale/") + len("locale/"):]
@@ -711,7 +717,7 @@ def exportPackage(request, package, exportType, filename, print_callback='', qui
         stylesDir = webDir / "style"
         stylesDir /= package.style
 
-    exportDir  = Path(filename).dirname()
+    exportDir = Path(filename).dirname()
     if exportDir and not exportDir.exists():
         client.alert(_(u'Cannot access directory named ') +
                      unicode(exportDir) +
@@ -731,7 +737,7 @@ def exportPackage(request, package, exportType, filename, print_callback='', qui
         # already exists (printing always goes to a new temp dir, though):
         if printit == 1 and not exported_dir is None:
             web_printdir = self.get_printdir_relative2web(exported_dir)
-            # now that this has ben exported, go ahead and trigger 
+            # now that this has ben exported, go ahead and trigger
             # the requested printing callback:
             client.call(print_callback, filename, exported_dir, \
                         web_printdir)
@@ -745,9 +751,9 @@ def exportPackage(request, package, exportType, filename, print_callback='', qui
         exported_dir = self.printHandout(client, filename, stylesDir)
         print exported_dir
         web_printdir = self.get_printdir_relative2web(exported_dir)
-        client.call(print_callback, filename, exported_dir, 
+        client.call(print_callback, filename, exported_dir,
             web_printdir)
-        
+
     elif exportType == 'zipFile':
         filename = self.b4save(client, filename, '.zip', _(u'EXPORT FAILED!'))
         self.exportWebZip(client, filename, stylesDir)
@@ -775,10 +781,10 @@ def quit(request, package):
     """
     Stops the server
     """
-    # first, go ahead and clear out any temp job files still in 
+    # first, go ahead and clear out any temp job files still in
     # the temporary print directory:
-    log_dir_warnings = 0  
-    # don't warn of any issues with the directories at quit, 
+    log_dir_warnings = 0
+    # don't warn of any issues with the directories at quit,
     # since already warned at initial directory creation
     (parent_temp_print_dir, dir_warnings) = \
             self.ClearParentTempPrintDirs(client, log_dir_warnings)
@@ -832,7 +838,7 @@ def insertPackage(request, package, filename):
     """
     loadedPackage = self._loadPackage(client, filename, newLoad=False,
                                       destinationPackage=package)
-    newNode = loadedPackage.root.copyToPackage(package, 
+    newNode = loadedPackage.root.copyToPackage(package,
                                                package.currentNode)
     # trigger a rename of all of the internal nodes and links,
     # and to add any such anchors into the dest package via isMerge:
@@ -852,7 +858,7 @@ def extractPackage(request, package, filename, existOk):
     Create a new package consisting of the current node and export
     'existOk' means the user has been informed of existance and ok'd it
     """
-    filename  = Path(filename)
+    filename = Path(filename)
     saveDir = filename.dirname()
     if saveDir and not saveDir.exists():
         client.alert(_(u'Cannot access directory named ') + unicode(saveDir) + _(u'. Please use ASCII names.'))
@@ -875,7 +881,7 @@ def extractPackage(request, package, filename, existOk):
         # and to remove any old anchors from the dest package,
         # and remove any zombie links via isExtract:
         newNode = newPackage.root
-        if newNode: 
+        if newNode:
             newNode.RenamedNodePath(isExtract=True)
 
         # Save the new package
@@ -897,8 +903,8 @@ def exportSinglePage(request, client, filename, webDir, stylesDir, \
                 (and whatever else that might mean)
     """
     try:
-        imagesDir    = webDir.joinpath('images')
-        scriptsDir   = webDir.joinpath('scripts')
+        imagesDir = webDir.joinpath('images')
+        scriptsDir = webDir.joinpath('scripts')
         templatesDir = webDir.joinpath('templates')
         # filename is a directory where we will export the website to
         # We assume that the user knows what they are doing
@@ -911,15 +917,15 @@ def exportSinglePage(request, client, filename, webDir, stylesDir, \
         if not filename.exists():
             filename.makedirs()
         elif not filename.isdir():
-            client.alert(_(u'Filename %s is a file, cannot replace it') % 
+            client.alert(_(u'Filename %s is a file, cannot replace it') %
                          filename)
-            log.error("Couldn't export web page: "+
+            log.error("Couldn't export web page: " +
                       "Filename %s is a file, cannot replace it" % filename)
             return
         else:
             client.alert(_(u'Folder name %s already exists. '
-                            'Please choose another one or delete existing one then try again.') % filename)           
-            return 
+                            'Please choose another one or delete existing one then try again.') % filename)
+            return
         # Now do the export
         singlePageExport = SinglePageExport(stylesDir, filename, \
                                      imagesDir, scriptsDir, templatesDir)
@@ -930,12 +936,12 @@ def exportSinglePage(request, client, filename, webDir, stylesDir, \
     # Show the newly exported web site in a new window
     if not printFlag:
        self._startFile(client, filename)
-    # and return a string of the actual directory name, 
+    # and return a string of the actual directory name,
     # in case the package name was added, etc.:
     return filename.abspath().encode('utf-8')
     # WARNING: the above only returns the RELATIVE pathname
 
-    
+
 def exportPresentation(request, client, filename, stylesDir):
     """
     export client to a DOM presentation
@@ -955,7 +961,7 @@ def exportPresentation(request, client, filename, stylesDir):
         elif not filename.isdir():
             client.alert(_(u'Filename %s is a file, cannot replace it') %
                          filename)
-            log.error("Couldn't export web page: "+
+            log.error("Couldn't export web page: " +
                       "Filename %s is a file, cannot replace it" % filename)
             return
         else:
@@ -1035,9 +1041,9 @@ def exportWebZip(request, client, filename, stylesDir):
         client.alert(_('EXPORT FAILED!\n%s' % str(e)))
         raise
     client.alert(_(u'Exported to %s') % filename)
-    
+
 def exportText(self, client, filename):
-    try: 
+    try:
         filename = Path(filename)
         log.debug(u"exportWebsite, filename=%s" % filename)
         # Append an extension if required
@@ -1054,7 +1060,7 @@ def exportText(self, client, filename):
         client.alert(_('EXPORT FAILED!\n%s' % str(e)))
         raise
     client.alert(_(u'Exported to %s') % filename)
-    
+
 def exportIpod(request, client, filename):
     """
     Export 'client' to an iPod Notes folder tree
@@ -1072,15 +1078,15 @@ def exportIpod(request, client, filename):
         if not filename.exists():
             filename.makedirs()
         elif not filename.isdir():
-            client.alert(_(u'Filename %s is a file, cannot replace it') % 
+            client.alert(_(u'Filename %s is a file, cannot replace it') %
                          filename)
-            log.error("Couldn't export web page: "+
+            log.error("Couldn't export web page: " +
                       "Filename %s is a file, cannot replace it" % filename)
             return
         else:
             client.alert(_(u'Folder name %s already exists. '
-                            'Please choose another one or delete existing one then try again.') % filename)           
-            return 
+                            'Please choose another one or delete existing one then try again.') % filename)
+            return
         # Now do the export
         ipodExport = IpodExport(self.config, filename)
         ipodExport.export(package)

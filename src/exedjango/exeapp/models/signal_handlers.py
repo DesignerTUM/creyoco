@@ -10,6 +10,7 @@ import os
 import shutil
 from exeapp.models import Package
 
+
 def create_debug_superuser(app, created_models, **kwargs):
     if settings.DEBUG and not getattr(settings, "TEST", False):
         SU_LOGIN = "admin"
@@ -28,6 +29,7 @@ if settings.DEBUG and not getattr(settings, "TEST", False):
     signals.post_syncdb.connect(create_debug_superuser,
             sender=auth_models, dispatch_uid='common.models.create_testuser')
 
+
 @receiver(signal=signals.post_save, sender=auth_models.User)
 def user_post_save(sender, instance, created, **kwargs):
     if created:
@@ -41,6 +43,7 @@ def user_post_save(sender, instance, created, **kwargs):
                 print "Folder for user {0} at {1} was not created".\
                     format(profile, profile.media_path)
                 raise e
+
 
 @receiver(signal=signals.pre_delete, sender=auth_models.User)
 def user_pre_delete(sender, instance, **kwargs):

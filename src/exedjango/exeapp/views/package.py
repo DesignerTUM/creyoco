@@ -6,6 +6,9 @@ from django.http import HttpResponse, HttpResponseBadRequest, \
 from django.core.servers.basehttp import FileWrapper
 from django.contrib.staticfiles.views import serve
 from django.conf import settings
+from django.views.decorators.cache import never_cache, patch_cache_control
+
+
 
 from exeapp.models import User, idevice_store, Package
 from exeapp.shortcuts import get_package_by_id_or_error
@@ -15,6 +18,7 @@ from exeapp.models.package import DublinCore
 from exeapp.views.export.exporter_factory import exporter_factory, exporter_map
 from exeapp.models.node import Node
 from django.utils.encoding import smart_str
+from exeapp.views.authoring import authoring
 
 try:
     from cStringIO import StringIO
@@ -37,6 +41,7 @@ class PackagePropertiesForm(forms.ModelForm):
         model = Package
         fields = ('title', 'author', 'email', 'description')
 
+
 class DublinCoreForm(forms.ModelForm):
     form_type = "dublincore_form"
     form_type_field = forms.CharField(initial=form_type,
@@ -46,7 +51,7 @@ class DublinCoreForm(forms.ModelForm):
         model = DublinCore
 
 
-def generate_package_main(request, package, **kwargs):
+def generate_package_main(request, package, current_node, **kwargs):
     '''Generates main page, can take additional keyword args to
     create forms'''
 
@@ -63,7 +68,8 @@ def generate_package_main(request, package, **kwargs):
     package_list = Package.objects.filter(user=user)
     return render_to_response('exe/mainpage.html', locals())
 
-def change_properties(request, package):
+
+def change_properties(request, package, current_node):
     '''Parses post requests and applies changes to the package'''
     form_type = request.POST['form_type_field']
     if form_type == PackagePropertiesForm.form_type:
@@ -75,23 +81,36 @@ def change_properties(request, package):
         if request.is_ajax():
             return HttpResponse("")
         else:
-            return HttpResponseRedirect(reverse('exeapp.views.package.package_main',
-                                             args=[package.id]))
+            return HttpResponseRedirect(reverse(
+                                        'exeapp.views.package.package_main',
+                                        args=[package.id, current_node.id]))
     else:
         if request.is_ajax():
             return HttpResponse(form.as_table())
         else:
             return generate_package_main(request, package,
-                                         **{form.form_type : form})
+                                         **{form.form_type: form})
+
+
+@never_cache
+@login_required
+@get_package_by_id_or_error
+def package_main(request, package, current_node, properties_form=None):
+    '''Handle calls to package site. Renders exe/mainpage.html.'''
+    if request.method == 'POST':
+        return change_properties(request, package, current_node)
+    elif request.META.get('HTTP_X_PJAX') or request.is_ajax():
+        return render_to_response("exe/authoring.html", locals())
+    else:
+        return generate_package_main(request, package, current_node)
+
 
 @login_required
 @get_package_by_id_or_error
-def package_main(request, package, properties_form=None):
-    '''Handle calls to package site. Renders exe/mainpage.html.'''
-    if request.method == 'POST':
-        return change_properties(request, package)
-    else:
-        return generate_package_main(request, package)
+def package_root(request, package):
+    current_node = package.root
+    return HttpResponseRedirect(reverse(package_main, args=[package.id,
+                                                            current_node.id]))
 
 
 @login_required
@@ -106,8 +125,8 @@ def export(request, package, export_format):
     exporter.export()
     zip_file = file_obj.getvalue()
     file_obj.close()
-    response = HttpResponse(content_type="application/zip_file")
-    response['Content-Disposition'] = 'attachment; filename=%s.zip_file'\
+    response = HttpResponse(content_type="application/zip")
+    response['Content-Disposition'] = 'attachment; filename=%s.zip'\
                                 % package.title
     response['Content-Length'] = len(zip_file)
     response.write(zip_file)
@@ -116,15 +135,12 @@ def export(request, package, export_format):
 
 @login_required
 @get_package_by_id_or_error
-def preview(request, package, node_id):
-    node_id = int(node_id)
+def preview(request, package, node):
+    node_id = node.id
     exporter = exporter_factory("website", package, None)
     exporter.create_pages()
-    print exporter.pages
-    print node_id
     for page in exporter.pages:
-        print page.node.id
-        if page.node.id == int(node_id):
+        if page.node.id == node_id:
             found_page = page
             break
     return HttpResponse(found_page.render(full_style_url=True))
@@ -132,9 +148,8 @@ def preview(request, package, node_id):
 
 @login_required
 @get_package_by_id_or_error
-def preview_static(request, package, node_id, path):
-    node_id = int(node_id)
-    if Node.objects.get(pk=node_id).package.user != request.user:
+def preview_static(request, package, node, path):
+    if node.package != package or package.user != request.user:
         return HttpResponseForbidden()
     user_media_url = request.user.get_profile().media_url
     return HttpResponsePermanentRedirect(user_media_url + path)

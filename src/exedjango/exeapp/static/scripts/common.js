@@ -66,13 +66,23 @@ $('html').ajaxSend(function(event, xhr, settings) {
 });
 
 jQuery(document).ready(function() {
+	$(document).on("pjax:success", function(event, data) {
+		// while (tinyMCE.activeEditor && tinyMCE.activeEditor != "undefined"){
+		// tinyMCE.activeEditor.remove();
+		// }
+		initialize_authoring();
+	});
+	$(document).on("pjax:popstate", function(event) {
+		var current_url = event.state.url;
+		var current_node_id = current_url.match(/.*\/(\d+)\//)[1]
+		get_outline_pane().jstree("select_node", "#node" + current_node_id, true);
+	});
 	$.jsonRPC.setup({
            endPoint: '/exeapp/json/',
            namespace: 'package',
         });
     initialize_authoring();
     node_id = $("#node_id").text();
-    //window.parent.get_outline_pane().jstree("select_node", $("#node" + nodeid), true);
 })
 
 function initialize_authoring() {
@@ -85,7 +95,7 @@ function initialize_authoring() {
 	 			tinyMCE.execCommand("mceRemoveControl", true, $(this).attr("id"));
 	 		});
 		if (responseText){
-			get_media(".authoring/?idevice_id=" + idevice_id + "&media=true");
+			get_media("authoring/?idevice_id=" + idevice_id + "&media=true");
 	 		$form.html(responseText);
 		} else {
 			reload_authoring();
@@ -111,10 +121,11 @@ function scroll_to_element(element){
 function reload_authoring() {
 	// dynamically load scripts for idevices
 	get_media("authoring/?partial=true&media=true");
-			
-	$("#authoring").load('authoring/?partial=true', function() {
+	
+	url = "/exeapp/package/" + get_package_id() + "/" + get_current_node_id() + "/";
+	$("#authoring").load(url, function() {
 		initialize_authoring();
-		});
+	});
 }
 
 function get_media(request_url) {
@@ -138,9 +149,9 @@ function get_media(request_url) {
 
 function insert_idevice(idevice_id) {
 	// dynamically load scripts for idevices
-	get_media(".authoring/?idevice_id=" + idevice_id + "&media=true");
+	get_media("authoring/?idevice_id=" + idevice_id + "&media=true");
 	    $.ajax({
-	    url: ".authoring/?idevice_id=" + idevice_id,
+	    url: "authoring/?idevice_id=" + idevice_id,
 	    dataType: 'html',
 	    success: function (data) {
 	    	 $('#authoring').append(data);
