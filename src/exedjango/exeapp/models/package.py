@@ -325,11 +325,6 @@ i.e. the "package".
 
     # Property Handlers
 
-    def get_idevice_for_partial(self, idevice_id):
-        '''Returns a idevice only in case its on the current node of this
-package'''
-        return self.current_node.idevices.get(id=int(idevice_id))
-
     def set_backgroundImg(self, value):
         """Set the background image for this package"""
         if self._backgroundImg:

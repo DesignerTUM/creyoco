@@ -1,5 +1,5 @@
 # ===========================================================================
-# eXe 
+# eXe
 # Copyright 2004-2005, University of Auckland
 # Copyright 2004-2008 eXe Project, http://eXeLearning.org/
 #
@@ -32,9 +32,9 @@ import re
 from zipfile                       import ZipFile, ZIP_DEFLATED
 from exedjango.utils import common
 from django.template.loader import render_to_string
-#from exe.webui.blockfactory        import g_blockFactory
-#from exe.engine.error              import Error
-from utils.path import Path 
+# from exe.webui.blockfactory        import g_blockFactory
+# from exe.engine.error              import Error
+from utils.path import Path
 from exeapp.views.export.pages import Page
 from exeapp.views.blocks.blockfactory import block_factory
 
@@ -54,12 +54,12 @@ class Manifest(object):
         'output_dir' is the directory that we read the html from and also output
         the mainfest.xml 
         """
-        self.output_dir    = outputDir
-        self.package      = package
+        self.output_dir = outputDir
+        self.package = package
         self.generate_id = uuid.uuid4
-        self.pages        = pages
-        self.itemStr      = ""
-        self.resStr       = ""
+        self.pages = pages
+        self.itemStr = ""
+        self.resStr = ""
 
 
     def save(self):
@@ -67,7 +67,7 @@ class Manifest(object):
         Save a imsmanifest file and metadata to self.output_dir
         """
         filename = "imsmanifest.xml"
-        out = open(self.output_dir/filename, "wb")
+        out = open(self.output_dir / filename, "wb")
         out.write(self.createXML().encode('utf8'))
         out.close()
         # if user did not supply metadata title, description or creator
@@ -85,10 +85,10 @@ class Manifest(object):
         if lrm.get('creator', '') == '':
             lrm['creator'] = self.package.author
         # Metadata
-        templateFilename = Path(settings.STATIC_ROOT)/'templates'/'dublincore.xml'
+        templateFilename = Path(settings.STATIC_ROOT) / 'templates' / 'dublincore.xml'
         template = open(templateFilename, 'rb').read()
         xml = template % lrm
-        out = open(self.output_dir/'dublincore.xml', 'wb')
+        out = open(self.output_dir / 'dublincore.xml', 'wb')
         out.write(xml.encode('utf8'))
         out.close()
 
@@ -97,7 +97,7 @@ class Manifest(object):
         returning XLM string for manifest file
         """
         manifest_id = self.generate_id()
-        org_id      = self.generate_id()
+        org_id = self.generate_id()
         depth = 0
         for page in self.pages:
             while depth >= page.depth:
@@ -105,11 +105,11 @@ class Manifest(object):
                 depth -= 1
             self.genItemResStr(page)
             depth = page.depth
-        
+
         while depth >= 1:
             self.itemStr += "</item>\n"
             depth -= 1
-        
+
 
         manifest = self
         return render_to_string("exe/export/ims_manifest.html",
@@ -117,7 +117,7 @@ class Manifest(object):
                                  "manifest_id" : manifest_id,
                                  "org_id" : org_id,
                                  })
-                    
+
     def genItemResStr(self, page):
         """
         Returning xml string for items and resources
@@ -126,12 +126,12 @@ class Manifest(object):
                    "res_id" : "RES-%s" % self.generate_id(),
                    "filename" : "%s.html" % page.name,
                    "page" : page,
-                   } 
-            
-        
+                   }
+
+
         self.itemStr += render_to_string("exe/export/ims_manifest_item.html",
                                          context)
-        
+
         self.resStr += render_to_string("exe/export/ims_manifest_resource.html",
                                         context)
 
@@ -150,26 +150,22 @@ class IMSPage(Page):
                                 {"current_page" : self})
 
 
-
-        
-        
-# ===========================================================================
 class IMSExport(WebsiteExport):
     """
     Exports an eXe package as a SCORM package
     """
     title = "IMS Package"
-    
+
     def __init__(self, *args, **kwargs):
         """ Initialize
         'style_dir' is the directory from which we will copy our style sheets
         (and some gifs)
         """
         super(IMSExport, self).__init__(*args, **kwargs)
-        
+
         static_dir = Path(settings.STATIC_ROOT)
         self.templatesDir = static_dir / "templates"
-        self.schemasDir   = static_dir / "schemas/ims"
+        self.schemasDir = static_dir / "schemas/ims"
         self.page_class = IMSPage
 
     def export(self):
@@ -181,15 +177,15 @@ class IMSExport(WebsiteExport):
 
         manifest = Manifest(self.output_dir, self.package, self.pages)
         manifest.save()
-        
-        self.copyFiles()
-        
+
+        self.copy_files()
+
         self.doZip(self.file_obj, self.output_dir)
         # Clean up the temporary dir
         self.output_dir.rmtree()
-        
-    def copyFiles(self):
-        super(IMSExport, self).copyFiles()
+
+    def copy_files(self):
+        super(IMSExport, self).copy_files()
         self.schemasDir.copylist(('imscp_v1p1.xsd',
                                   'imsmd_v1p2p2.xsd',
                                   'ims_xml.xsd'), self.output_dir)

@@ -334,22 +334,24 @@ view, this tests should be also merged'''
         self.assertContains(response, 'idevice_id="%s"' % IDEVICE_ID)
 
     def test_post_page_change(self):
-        child_node = self.package.add_child_node()
+        TEST_TITLE = "Test"
 
-        for node in [self.root, child_node]:
-            page_name = "%s.html" % node.unique_name()
-            response = self.c.post("%s%s" % (self.VIEW_URL, page_name))
-            self.assertEquals(response.status_code, 302)
-            self.assertTrue(response['Location'].endswith(\
-                            'exeapp/package/%s/authoring/' % self.package.id))
-            self.assertEquals(self.package.current_node, node)
+        response = self.c.post(self.VIEW_URL,
+                   {'form_type_field': PackagePropertiesForm.form_type,
+                    'title': TEST_TITLE})
+        self.assertEquals(response.status_code, 302)
+        self.assertTrue(response['Location'].endswith(\
+                        'exeapp/package/{}/{}/'.format(self.package.id,
+                       self.package.root.id)))
 
     def test_idevice_move_up(self):
         FIRST_IDEVICE_ID = 1
         SECOND_IDEVICE_ID = 2
         self.root.add_idevice(self.IDEVICE_TYPE)
         self.root.add_idevice(self.IDEVICE_TYPE)
-        self.package.handle_action(SECOND_IDEVICE_ID, "move_up", QueryDict(""))
+        self.package.root.handle_action(SECOND_IDEVICE_ID,
+                                        "move_up",
+                                        QueryDict(""))
         content = self.c.get(self.VIEW_URL).content
         self.assertTrue(content.index('idevice_id="%s"' % FIRST_IDEVICE_ID) \
                         > content.index('idevice_id="%s"' % SECOND_IDEVICE_ID))
@@ -398,33 +400,38 @@ view, this tests should be also merged'''
                               (idevice.parent_node.unique_name(), anchor))
             counter += 1
 
-
     @mock.patch.object(shortcuts, 'render_idevice')
     @mock.patch.object(Package.objects, 'get')
-    def test_render_idevice_partial(self, mock_get, mock_render):
+    @mock.patch.object(Node.objects, 'get')
+    def test_render_idevice_partial(self, mock_node_get,
+                                    mock_package_get,
+                                    mock_render):
         '''Test rendering of a single idevice if idevice_id is given'''
         IDEVICE_ID = 1
         IDEVICE_CONTENT = "Test idevice"
         # patch render_idevice
+
         def mock_render_idevice(idevice):
             return idevice.content
         mock_render.side_effect = mock_render_idevice
 
-        # mock user
-        package = mock_get.return_value
+        package = mock_package_get.return_value
         package.user.username = TEST_USER
-        # mock package return function
-        package.get_idevice_for_partial.return_value.content\
- = IDEVICE_CONTENT
 
-        response = self.c.get(self.VIEW_URL, data={"idevice_id" : IDEVICE_ID})
+        node = mock_node_get.return_value
+        node.package = package
+
+        node.idevices.get.return_value.content = IDEVICE_CONTENT
+
+        response = self.c.get(self.VIEW_URL + "authoring/", data={"idevice_id": IDEVICE_ID})
         self.assertEquals(response.status_code, 200)
-        self.assertTrue(package.get_idevice_for_partial.called)
+        self.assertTrue(node.idevices.get.called)
         self.assertTrue(IDEVICE_CONTENT in response.content)
 
     def test_partial_resource_loading(self):
         self.root.add_idevice(self.IDEVICE_TYPE)
-        response = self.c.get("%s?partial=true&media=true" % self.VIEW_URL)
+        response = self.c.get("{}authoring/?partial=true&media=true".format(
+                                                        self.VIEW_URL))
         self.assertEquals(simplejson.loads(response.content),
                           [reverse('tinymce-filebrowser')])
 

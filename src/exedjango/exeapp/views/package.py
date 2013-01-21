@@ -85,11 +85,12 @@ def change_properties(request, package, current_node):
                                         'exeapp.views.package.package_main',
                                         args=[package.id, current_node.id]))
     else:
+        print form.errors
         if request.is_ajax():
             return HttpResponse(form.as_table())
         else:
-            return generate_package_main(request, package,
-                                         **{form.form_type: form})
+            return generate_package_main(request, package, current_node,
+                                         ** {form.form_type: form})
 
 
 @never_cache
