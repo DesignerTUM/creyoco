@@ -5,15 +5,9 @@
 
 {% load static %}
 
-{% block title %}Package Page: {{ package.title }}{% endblock %}
+{% block title %}{{ package.title }}{% endblock %}
 
-{% block head%}
-<!-- CSS -->
-<link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/ui-lightness/jquery-ui-1.8.4.custom.css" />
-<link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/mz/style.min.css" />
-<!--<link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/styles/base.css">
-<link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/editing.css">-->
-<!-- SCRIPTS -->
+{% block head_javascript %}
 <script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.js"></script>
 <script type="text/javascript" src="{% get_static_prefix %}scripts/jquery-ui.custom.min.js"></script>
 <script type="text/javascript" src="{% get_static_prefix %}scripts/mainpage.js"></script>
@@ -27,7 +21,7 @@
 <script type="text/javascript" src="{% get_static_prefix %}scripts/chosen.jquery.min.js"></script>
 <script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.pjax.js"></script>
 <script type="text/javascript" src="{% get_static_prefix %}scripts/eyecandy.js"></script>
-{% render_form_media package.current_node %}
+{% render_form_media current_node %}
 {% endblock %}
 
 {% block header %}
@@ -49,7 +43,7 @@
 	<h2>Themenkatalog</h2>
 	
 	<div id="outline">
-		{% render_outline package %}
+		{% render_outline package current_node %}
 		<hr style="border:1px solid white;width:168px;margin-left:0px;margin-top:40px;margin-bottom:15px;">
 		<img id="settings_button" src="{% get_static_prefix %}images/mz/settings.png" style="cursor:pointer;margin-right:10px;" alt="Einstellungen">
 		<img id="download_button" src="{% get_static_prefix %}images/mz/download.png" alt="Download" style="cursor:pointer">
@@ -68,7 +62,7 @@
 		
 		<div id="download" style="margin-left:0;display:none;background-color:white;width:130px;border:1px solid rgb(155, 155, 155)">
 			{% for type, title in exporter_type_title_map.items %}
-						<a class="export_link" href="{% url exeapp.views.package.export package.id type %}">{{title}}</a>
+			<a class="export_link" href="{% url exeapp.views.package.export package.id type %}">{{title}}</a>
 			{% endfor %}
 		</div>
 	</div>
@@ -97,11 +91,6 @@
 	</div>
 </div>
 {% endblock %}
-{% block content %}
-				<div id="preview" style="display:none">
-					
-					<div id="modal-dialog-bg"></div>
-					<iframe scrolling="auto" class="modal-dialog" id="previewIFrame" name="previewIFrame"></iframe>
 
 {% block h2 %}Inhalt{% endblock %}
 
@@ -110,17 +99,8 @@
 {% render_styles %}
 </div>
 
-<div id="wrapper">
-	<div id="box_left">
-		<div style="position:fixed">
-		<h2>Themenkatalog</h2>
-		<div id="outline">
-			{% render_outline package %}
-			
-			<hr style="border:1px solid white;width:168px;margin-left:0px;margin-top:40px;margin-bottom:15px;">
-			
-			<img id="settings_button" src="{% get_static_prefix %}images/mz/settings.png" style="cursor:pointer;margin-right:10px;" alt="Einstellungen">
-			<img id="download_button" src="{% get_static_prefix %}images/mz/download.png" alt="Download" style="cursor:pointer">
+<div style="width:100%;min-height:600px;" id="authoring" name="authoringIFrame1">
+</div>
 
 <div id="properties" style="display:none;">
 	<div id="package_properties" style="float:left">
@@ -152,16 +132,6 @@
 	</div>
 	
 	<div style="clear:both"></div>
-	
-	<div id="footer">
-		<a href="#impressum">Impressum</a>
-		<img src="{% get_static_prefix %}images/mz/help.png" alt="Hilfe" align="right">
-	</div>
-	<div id="package_id" style="display: none">
-		{{package.id}}
-	</div>
-	
-	<div id="package_style" style="display:none">{{package.style}}</div>
 </div>
 {% endblock %}
 
