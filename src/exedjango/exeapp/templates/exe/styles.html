@@ -1,13 +1,13 @@
 {% load static %}
-	{% for style in styles %}
+	<!--{% for style in styles %}
 	<input class="SelectStyle" id="{{style}}" type="image" src="{% get_static_prefix %}images/mz/themes/{{style}}.png" />
-	{% endfor %}
+	{% endfor %}-->
 
-<!-- 	<input class="SelectStyle" id="vhb" type="image" src="{% get_static_prefix %}images/mz/themes/vhb.png" value="vhb" style="margin-right:35px;margin-bottom:35px;">
+ 	<input class="SelectStyle" id="vhb" type="image" src="{% get_static_prefix %}images/mz/themes/vhb.png" value="vhb" style="margin-right:35px;margin-bottom:35px;">
 	<input class="SelectStyle" id="garden" type="image" src="{% get_static_prefix %}images/mz/themes/garden.png" value="garden" style="margin-bottom:35px;">
 	<input class="SelectStyle" id="default" type="image" src="{% get_static_prefix %}images/mz/themes/default.png" value="default" style="margin-right:35px;margin-bottom:35px;">
 	<input class="SelectStyle" id="silver" type="image" src="{% get_static_prefix %}images/mz/themes/silver.png" value="silver" style="margin-bottom:35px;">
-	 -->
+	 
 	<script>
 		$("input.SelectStyle").click(function () {
 			var style = $(this).val();

@@ -1036,19 +1036,19 @@
 					t = this.get_text(obj),
 					h1 = $("<div>", { css : { "position" : "absolute", "top" : "-200px", "left" : (rtl ? "0px" : "-1000px"), "visibility" : "hidden" } }).appendTo("body"),
 					h2 = obj.css("position","relative").append(
-					$("<input>", { 
+					$('<input>', { 
 						"value" : t,
 						// "size" : t.length,
 						"css" : {
-							"padding" : "0",
-							"border" : "1px solid silver",
+							//"padding" : "0",
+							//"border" : "1px solid silver",
 							"position" : "absolute",
-							"left"  : (rtl ? "auto" : (w1 + w2 + 4) + "px"),
+							"left"  : (rtl ? "auto" : (w1 + w2 - 14) + "px"),
 							"right" : (rtl ? (w1 + w2 + 4) + "px" : "auto"),
 							"top" : "0px",
-							"height" : (this.data.core.li_height - 2) + "px",
-							"lineHeight" : (this.data.core.li_height - 2) + "px",
-							"width" : "150px" // will be set a bit further down
+							//"height" : (this.data.core.li_height - 2) + "px",
+							//"lineHeight" : (this.data.core.li_height - 2) + "px",
+							//"width" : "150px" // will be set a bit further down
 						},
 						"blur" : $.proxy(function () {
 							var i = obj.children("input"),
@@ -1060,6 +1060,7 @@
 							callback.call(this, obj, v, t);
 							obj.css("position","");
 						}, this),
+						"type" : 'text',
 						"keyup" : function (event) {
 							var key = event.keyCode || event.which;
 							if(key == 27) { this.value = t; this.blur(); return; }

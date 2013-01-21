@@ -157,12 +157,6 @@ jQuery(document).ready(function() {
                 	// }
                 // })
                 set_current_style()
-                
-                //
-                //Package overview handling
-                //
-                $(".remove_package").bind("click", delete_package);
-                $("#create_new_package").bind("click", create_package);
             });
 
 // Called after successful package deletion
@@ -323,6 +317,8 @@ function add_idevice() {
   return false;
 } 
 
+// Handles outline_pane selection event. Calls package.change_current_node
+// via rpc. 
 function handle_select_node(event, data) {
 
 	// for (key in data){alert(key);};
