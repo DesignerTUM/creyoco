@@ -6,7 +6,8 @@ from django.http import HttpResponse, HttpResponseBadRequest, \
 from django.core.servers.basehttp import FileWrapper
 from django.contrib.staticfiles.views import serve
 from django.conf import settings
-from django.views.decorators.cache import never_cache
+from django.views.decorators.cache import never_cache, patch_cache_control
+
 
 
 from exeapp.models import User, idevice_store, Package
@@ -91,8 +92,8 @@ def change_properties(request, package, current_node):
                                          **{form.form_type: form})
 
 
-@login_required
 @never_cache
+@login_required
 @get_package_by_id_or_error
 def package_main(request, package, current_node, properties_form=None):
     '''Handle calls to package site. Renders exe/mainpage.html.'''
