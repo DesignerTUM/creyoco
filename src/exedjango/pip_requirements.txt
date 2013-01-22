@@ -1,13 +1,15 @@
 BeautifulSoup4
-Django==1.4.1
+Django>=1.4
 PIL==1.1.7
-argparse==1.2.1
-distribute==0.6.24
-django-extensions==0.9
-ipython==0.13
-mock==1.0b1
-wsgiref==0.1.2
+argparse
+distribute
+django-extensions
+ipython>=0.13
+mock
+wsgiref
 django-registration
 django-grappelli
 django-tinymce
 django-filebrowser
+-e git://github.com/samuraisam/django-json-rpc.git@ffcedec1e6cb05400d92ddde550905458e5119f6#egg=django_json_rpc-dev
+
