@@ -118,6 +118,8 @@ $(document).ready(function() {
 				width: '1024px',
 				opacity: 1
         	}, 1000);
+        	//load preview iframe
+        	update_preview();
 		}
 		else if($(this).attr('href') == '#_editor') {
 			$('#middle-row').children().hide();

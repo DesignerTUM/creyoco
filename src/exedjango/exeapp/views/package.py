@@ -150,7 +150,5 @@ def preview(request, package, node):
 @login_required
 @get_package_by_id_or_error
 def preview_static(request, package, node, path):
-    if node.package != package or package.user != request.user:
-        return HttpResponseForbidden()
     user_media_url = request.user.get_profile().media_url
     return HttpResponsePermanentRedirect(user_media_url + path)

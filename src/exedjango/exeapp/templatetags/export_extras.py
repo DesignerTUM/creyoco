@@ -12,6 +12,7 @@ from django.conf import settings
 
 register = template.Library()
 
+
 @register.simple_tag
 def export_idevice(idevice):
     '''Convinience filter, just renders calls render function of a
@@ -20,7 +21,7 @@ block'''
     block = block_factory(idevice.as_child())
     return block.renderView()
 
-#@register.inclusion_tag('navigation_bar.html')
+# @register.inclusion_tag('navigation_bar.html')
 
 
 @register.simple_tag
@@ -28,6 +29,7 @@ def navigation_bar(current_page, full_url):
     """
     Generate the left navigation string for this page
     """
+    package = current_page.node.package
     depth = 1
     pages = current_page.exporter.pages
     nodePath = [None] + list(current_page.node.ancestors()) + [current_page.node]
@@ -47,6 +49,7 @@ def navigation_bar(current_page, full_url):
             html += render_to_string("exe/export/navigation_bar_item.html",
                                      {"page": page,
                                       "current_page": current_page,
+                                      "package": package,
                                       "full_url": full_url,
                                       })
 

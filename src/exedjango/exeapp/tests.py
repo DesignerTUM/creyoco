@@ -216,6 +216,11 @@ class PackagesPageTestCase(TestCase):
         self.assertTrue(package.author == AUTHOR_NAME)
         self.assertTrue(package.title == PACKAGE_TITLE)
 
+    def test_preview(self):
+        response = self.c.get("{}preview/".format(self.PAGE_URL % \
+                                             (self.PACKAGE_ID, self.NODE_ID)))
+        self.assertContains(response, "Home", status_code=200)
+
 
 class ShortcutTestCase(TestCase):
     PACKAGE_ID = 1
