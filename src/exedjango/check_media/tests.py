@@ -35,6 +35,8 @@ class BasicTest(TestCase):
         response = self.client.get(self.file_url)
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, self.CONTENT)
+#        from IPython import embed; embed()
+        self.assertTrue(response)
 
     def test_403_on_illegal(self):
         wrong_name = 'user2'
