@@ -72,7 +72,7 @@ MEDIA_ROOT = _get_file_from_root('exeapp_media')
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = '/media/'
+MEDIA_URL = '/exeapp/media/'
 
 STATIC_URL = '/static/'
 
@@ -181,3 +181,5 @@ FILEBROWSER_URL_TINYMCE = "%stiny_mce/" % STATIC_URL
 FILEBROWSER_PATH_TINYMCE = "/tinymce/"
 
 FILEBROWSER_CONVERT_FILENAME = False
+
+SENDFILE_BACKEND = 'sendfile.backends.development'

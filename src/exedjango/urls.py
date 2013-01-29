@@ -16,12 +16,14 @@ urlpatterns = patterns('',
     (r'^exeapp/', include('exeapp.urls')),
     (r'^admin/', include(admin.site.urls)),
     (r'^accounts/', include('registration.backends.simple.urls')),
+    (r'^media/', include('check_media.urls'),
+     )
 
 )
 
-if settings.DEBUG:
-    urlpatterns += patterns('',
-        url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
-            'document_root': settings.MEDIA_ROOT,
-        }, name="media-url"),
-   )
+# if settings.DEBUG:
+#    urlpatterns += patterns('',
+#        url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
+#            'document_root': settings.MEDIA_ROOT,
+#        }, name="media-url"),
+#   )

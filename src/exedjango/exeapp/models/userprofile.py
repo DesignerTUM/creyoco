@@ -10,9 +10,9 @@ class UserProfile(models.Model):
 
     @property
     def media_path(self):
-        return os.path.join(settings.MEDIA_ROOT,
+        return os.path.abspath(os.path.join(settings.MEDIA_ROOT,
                             "uploads",
-                            self.user.username)
+                            self.user.username))
 
     @property
     def media_url(self):
