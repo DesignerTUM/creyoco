@@ -16,7 +16,6 @@ urlpatterns = patterns('',
             url(r'^json/$', jsonrpc_site.dispatch, name="jsonrpc_mountpoint"),
             (r'package/$', redirect_to, {'url': '/exeapp/'}),
             (r'package/(?P<package_id>\d+)/', include('exeapp.package_urls')),
-            (r'media/(?P<path>.+)', 'exeapp.views.package.serve_media'),
         )
 
 if settings.DEBUG:
