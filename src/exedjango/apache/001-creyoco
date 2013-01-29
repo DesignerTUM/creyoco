@@ -12,4 +12,6 @@
 	
 	WSGIScriptAlias / /home/dimitri/creyoco/src/exedjango/apache/django.wsgi
 
+    XSendFile on
+
 </VirtualHost>
