@@ -48,7 +48,7 @@ function callback_create_package(id, title){
   // Append link to the package
   .attr('packageid', id))
   .append($('<a />')
-  .attr('href', 'package/' + id + '/')
+  .attr('href', '/exeapp/package/' + id + '/')
   .text(title))
   
   .appendTo('#package_list')
