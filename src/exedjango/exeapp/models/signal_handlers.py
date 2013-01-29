@@ -39,10 +39,8 @@ def user_post_save(sender, instance, created, **kwargs):
         try:
             os.mkdir(profile.media_path)
         except Exception, e:
-            if not getattr(settings, "TEST", False):
-                print "Folder for user {0} at {1} was not created".\
+                print "Folder for user {0} at {1} already exists.".\
                     format(profile, profile.media_path)
-                raise e
 
 
 @receiver(signal=signals.pre_delete, sender=auth_models.User)
