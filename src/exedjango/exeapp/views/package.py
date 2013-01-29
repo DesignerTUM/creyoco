@@ -145,7 +145,7 @@ def preview(request, package, node):
             found_page = page
             break
     return HttpResponse(found_page.render(full_style_url=True))
-`
+
 
 @login_required
 @get_package_by_id_or_error
