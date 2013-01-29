@@ -4,7 +4,7 @@
 	#Alias /robots.txt /usr/local/wsgi/static/robots.txt
 	#Alias /favicon.ico /usr/local/wsgi/static/favicon.ico
 	
-	Alias /media/ /home/dimitri/creyoco/src/exedjango/exeapp_media/
+	#Alias /media/ /home/dimitri/creyoco/src/exedjango/exeapp_media/
 	
 	Alias /static/ /home/dimitri/creyoco/src/exedjango/static/
 
@@ -12,6 +12,7 @@
 	
 	WSGIScriptAlias / /home/dimitri/creyoco/src/exedjango/apache/django.wsgi
 
-    XSendFile on
+    	XSendFile on
+	XSendFilePath /home/dimitri/creyoco/src/exedjango/exeapp_media/
 
 </VirtualHost>
