@@ -145,8 +145,13 @@ def preview(request, package, node):
             found_page = page
             break
     return HttpResponse(found_page.render(full_style_url=True))
-
-
+    
+@login_required
+@get_package_by_id_or_error
+def preview_root(request, package):
+    current_node = package.root
+    return HttpResponseRedirect(reverse(preview, args=[package.id,
+                                                            current_node.id]))
 @login_required
 @get_package_by_id_or_error
 def preview_static(request, package, node, path):

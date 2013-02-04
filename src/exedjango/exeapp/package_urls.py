@@ -13,4 +13,5 @@ urlpatterns = patterns('exeapp.views',
    (r'download/(?P<export_format>\w*)/$', 'package.export'),
    (r'(?P<node_id>\d+)/preview/(?P<path>.+)$', 'package.preview_static'),
    (r'(?P<node_id>\d+)/preview/$', 'package.preview'),
+   (r'preview/$', 'package.preview_root'),
 )
