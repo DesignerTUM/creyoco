@@ -20,7 +20,7 @@ function create_package(){
 
 // Deletes packages which idicated by selected checkboxes
 function delete_selected_packages(){
-  $(".package_checkbox:checked").
+  $(".active").
   each(function (i){
     var package_id = $(this).attr("packageid");
     $.jsonRPC.request('delete_package', [package_id], {
@@ -38,20 +38,7 @@ function delete_selected_packages(){
 
 // Called after successful package creation
 function callback_create_package(id, title){
-  $("<li />")
-  .addClass('package')
-  .attr("id", "package" + id)
-  // Append checkbox
-  .append($('<input />')
-  .attr('type', 'checkbox')
-  .addClass('package_checkbox')
-  // Append link to the package
-  .attr('packageid', id))
-  .append($('<a />')
-  .attr('href', 'package/' + id + '/')
-  .text(title))
-  
-  .appendTo('#package_list')
+  $("<li />").addClass('package').attr("id", "package" + id).attr('packageid', id).append($('<a />').attr('href', 'exeapp/package/' + id + '/').text(title)).appendTo('#package_list');
 }
 
 // Called after successful package deletion

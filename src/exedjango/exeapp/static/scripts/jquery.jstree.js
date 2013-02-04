@@ -64,7 +64,7 @@
 				return tmp.sheet || tmp.styleSheet;
 			}
 			if(opts.url) {
-				if(document.createStyleSheet) {
+				/*if(document.createStyleSheet) {
 					try { tmp = document.createStyleSheet(opts.url); } catch (e) { }
 				}
 				else {
@@ -75,7 +75,7 @@
 					tmp.href	= opts.url;
 					document.getElementsByTagName("head")[0].appendChild(tmp);
 					return tmp.styleSheet;
-				}
+				}*/
 			}
 		}
 	};
@@ -286,7 +286,7 @@
 		if(/msie/.test(u) && parseInt(v, 10) == 7) { 
 			css_string += '.jstree li a { border-width:0 !important; padding:0px 2px !important; } ';
 		}
-		$.vakata.css.add_sheet({ str : css_string });
+		//$.vakata.css.add_sheet({ str : css_string });
 	});
 
 	// core functions (open, close, create, update, delete)
@@ -1243,7 +1243,7 @@
 	// include the themes plugin by default
 	$.jstree.defaults.plugins.push("themes");
 })(jQuery);
-//*/
+
 
 /*
  * jsTree hotkeys plugin 1.0
@@ -1892,7 +1892,7 @@
 	};
 	$(function() {
 		var css_string = '#vakata-dragged { display:block; margin:0 0 0 0; padding:4px 4px 4px 24px; position:absolute; top:-2000px; line-height:16px; z-index:10000; } ';
-		$.vakata.css.add_sheet({ str : css_string });
+		//$.vakata.css.add_sheet({ str : css_string });
 	});
 
 	$.jstree.plugin("dnd", {
@@ -2205,7 +2205,7 @@
 			'#vakata-dragged .jstree-ok { background:green; } ' + 
 			'#vakata-dragged .jstree-invalid { background:red; } ' + 
 			'#jstree-marker { padding:0; margin:0; line-height:12px; font-size:1px; overflow:hidden; height:12px; width:8px; position:absolute; top:-30px; z-index:10000; background-repeat:no-repeat; display:none; background-color:silver; } ';
-		$.vakata.css.add_sheet({ str : css_string });
+		//$.vakata.css.add_sheet({ str : css_string });
 		m = $("<div>").attr({ id : "jstree-marker" }).hide().appendTo("body");
 		$(document).bind("drag_start.vakata", function (e, data) {
 			if(data.data.jstree) { 
@@ -2908,7 +2908,7 @@
 			'#vakata-contextmenu .right { right:100%; left:auto; } ' + 
 			'#vakata-contextmenu .bottom { bottom:-1px; top:auto; } ' + 
 			'#vakata-contextmenu li.vakata-separator { min-height:0; height:1px; line-height:1px; font-size:1px; overflow:hidden; margin:0 2px; background:silver; /* border-top:1px solid #fefefe; */ padding:0; } ';
-		$.vakata.css.add_sheet({ str : css_string });
+		//$.vakata.css.add_sheet({ str : css_string });
 		$.vakata.context.cnt
 			.delegate("a","click", function (e) { e.preventDefault(); })
 			.delegate("a","mouseup", function (e) {
@@ -3432,7 +3432,7 @@
 	});
 	$(function() {
 		var css_string = '.jstree .ui-icon { overflow:visible; } .jstree a { padding:0 2px; }';
-		$.vakata.css.add_sheet({ str : css_string });
+		//$.vakata.css.add_sheet({ str : css_string });
 	});
 })(jQuery);
 //*/

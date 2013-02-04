@@ -17,12 +17,16 @@
 <script type='text/javascript' src="{% get_static_prefix %}scripts/jquery.jsonrpc.js"></script>
 <script>
 $(document).ready(function() {
-	$('ul#package_list li').click( function() {
-		if($(this).children('input[type="checkbox"]').attr('checked')) {
-			$(this).children('input[type="checkbox"]').removeAttr('checked');
+	$('ul#package_list li span .check').click( function() {
+		if($(this).parent().parent().hasClass('active')) {
+			$(this).removeClass('icon-check');
+			$(this).addClass('icon-check-empty');
+			$(this).parent().parent().removeClass('active');
 		}
 		else {
-			$(this).children('input[type="checkbox"]').attr('checked', true);
+			$(this).removeClass('icon-check-empty');
+			$(this).addClass('icon-check');
+			$(this).parent().parent().addClass('active');
 		}
 		
 		/*$('input[type="checkbox"]').each( function() {
@@ -34,7 +38,7 @@ $(document).ready(function() {
 				$('#delete_selected_packages').hide();
 			}
 		});*/
-		if($("input[type='checkbox']").is(":checked")) {
+		if($('li').hasClass('active')) {
 		    $("#delete_selected_packages").show();
 	    }
 	    else {
@@ -45,7 +49,15 @@ $(document).ready(function() {
 </script>
 {% endblock %}
 
-
+{% block dialog %}
+		<div id="preview" style="display:none">
+			<div id="modal-dialog-bg"></div>
+			<div class="modal-dialog">
+				<i class="icon-remove icon-2x pull-right" style="cursor:pointer;position: absolute;right: 0;top: 0;margin-right: 10px;margin-top: 5px;" onclick="$(this).parent().parent().hide()"></i>
+				<iframe scrolling="auto" id="previewIFrame" src=""></iframe>
+			</div>
+		</div>
+{% endblock %}
 
 {% block h2 %}Kursübersicht{% endblock %}
 
@@ -64,13 +76,20 @@ $(document).ready(function() {
 <ul id="package_list">
 	<!--{{ package_list }}-->
 	{% for package in package_list %}
-	<li class='package' id="package{{ package.id }}">
-		<input type="checkbox" class="package_checkbox" packageid="{{ package.id }}">
-		<a href="{{ package.get_absolute_url }}">{{ package.title }}</a>
+	<li class='package' id="package{{ package.id }}" packageid="{{ package.id }}">
+		<span id="" style="display:block;float:left">
+			<i class="check icon-check-empty"></i>
+			<a href="{{ package.get_absolute_url }}">{{ package.title }}</a>
+		</span>
+		<span id="qs">
+			<i onclick="$('#preview').show();$('#previewIFrame').attr('src', '{{ package.get_absolute_url }}preview')" class="icon-eye-open"></i>
+			<i class="icon-pencil"></i>
+			<i class="icon-download"></i>
+			<i class="icon-cog"></i>
+		</span>
 	</li>
 	{% endfor %}
 </ul>
-<!--<a href="/accounts/logout/">Logout</a>-->
 
 {% endblock %}
 {% block footer %}

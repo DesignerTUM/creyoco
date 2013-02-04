@@ -13,20 +13,16 @@
 	</head>
 	<body>
 		{% block dialog %}
-		<div id="preview" style="display:none">
-			<div id="modal-dialog-bg"></div>
-			<iframe scrolling="auto" class="modal-dialog" id="previewIFrame" name="previewIFrame"></iframe>
-		</div>
 		{% endblock %}
 		
-		<div id="header">
+		<header>
 			<div>
 			{% block header %}
 				<h1>creyoco</h1>
 				<hr>
 			{% endblock %}
 			</div>
-		</div>
+		</header>
 		
 		<div id="wrapper">
 			<div id="box_left">
@@ -53,15 +49,15 @@
 				{% block box_right %}{% endblock %}
 			</div>
 			<div style="clear:both"></div>
-			<div id="footer">
-				{% block footer %}
-				<div style="text-align:right;">
-					<a href="#impressum">Impressum</a> 
-					<img style="margin-left:10px" src="{% get_static_prefix %}images/mz/help.png" alt="Hilfe">
-				</div>
-				{% endblock %}
-			</div>
 		</div>
+		<footer>
+			{% block footer %}
+			<div style="text-align:right;">
+				<a href="#impressum">Impressum</a> |
+				<a href="">Hilfe <i class="icon-question-sign"></i></a>
+			</div>
+			{% endblock %}
+		</footer>
 		{% block append %}{% endblock %}
 	</body>
 </html>

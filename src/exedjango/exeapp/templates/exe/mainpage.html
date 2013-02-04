@@ -5,10 +5,9 @@
 
 {% load static %}
 
-{% block title %}{{ package.title }}{% endblock %}
+{% block title %}{{ package.title }} | creyoco{% endblock %}
 {% block head_css %}
 <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/mz/style.min.css">
-<link rel="stylesheet" href="http://fortawesome.github.com/Font-Awesome/assets/css/font-awesome.css">
 {% endblock %}
 {% block head_javascript %}
 <script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.js"></script>
@@ -27,38 +26,41 @@
 {% render_form_media current_node %}
 {% endblock %}
 
-{% block header %}
-<select data-placeholder="Wählen Sie einen Kurs" class="chzn-select" tabindex="-1" id="select_course">
-	<option value="{{ package.get_absolute_url }}">{{ package.title }}</option>
-	{% for package_iter in package_list %}
-	{% if package_iter != package %}
-	<option value='{{ package_iter.get_absolute_url }}'>{{ package_iter.title }}</option>
-	{% endif %}
-	{% endfor %}
-	<option value='/exeapp'>Zurück zur Kursübersicht</option>
-</select>
-		
-<h1>creyoco</h1>
-<hr>
+{% block dialog %}
+		<div id="preview" style="display:none">
+			<div id="modal-dialog-bg"></div>
+			<div class="modal-dialog">
+				<i class="icon-remove icon-2x pull-right" style="cursor:pointer;position: absolute;right: 0;top: 0;margin-right: 10px;margin-top: 5px;" onclick="$(this).parent().parent().hide()"></i>
+				<iframe scrolling="auto" id="previewIFrame" src="preview"></iframe>
+			</div>
+		</div>
 {% endblock %}
 
 {% block box_left %}
-<div style="position:fixed">
-	<h2>Themenkatalog</h2>
+<div class="sidebar">
+	<select data-placeholder="Wählen Sie einen Kurs" class="chzn-select" tabindex="-1" id="select_course">
+		<option value="{{ package.get_absolute_url }}">{{ package.title }}</option>
+		{% for package_iter in package_list %}
+		{% if package.title != package_iter.title %}
+		<option value='{{ package_iter.get_absolute_url }}'>{{ package_iter.title }}</option>
+		{% endif %}
+		{% endfor %}
+		<option value='/exeapp'>Kursübersicht</option>
+	</select>
 	
 	<div id="outline">
-	<button id="btnAdd" class="newline-first"><i class="icon-plus-sign icon-large"></i></button>
-	<button id="btnRemove"><i class="icon-remove-sign icon-large"></i></button>
-	<button id="btnRename" action="RenameNode"><i class="icon-pencil icon-large"></i></button>
-	<button id="btnDuplicate"><i class="icon-copy icon-large"></i></button>
-	<button class="last" onclick="$('.secondary').toggle(800);"><i class="icon-sitemap icon-large"></i></button>
+		<button class="first" id="btnAdd" class="newline-first"><i class="icon-plus-sign icon-large"></i></button>
+		<button id="btnRemove"><i class="icon-remove-sign icon-large"></i></button>
+		<button id="btnRename" action="RenameNode"><i class="icon-pencil icon-large"></i></button>
+		<button id="btnDuplicate"><i class="icon-copy icon-large"></i></button>
+		<button class="last" onclick="$('.secondary').toggle(800);"><i class="icon-sitemap icon-large"></i></button>
 	
-	<div class="secondary">
-		<button id="btnDemote" class="newline-first"><i class="icon-arrow-right icon-large"></i></button>
-		<button id="btnPromote"><i class="icon-arrow-left icon-large"></i></button>
-		<button id="btnUp"><i class="icon-chevron-up icon-large"></i></button>
-		<button id="btnDown" class="last"><i class="icon-chevron-down icon-large"></i></button>
-	</div>
+		<div class="secondary">
+			<button class="first" id="btnDemote"><i class="icon-arrow-right icon-large"></i></button>
+			<button id="btnPromote"><i class="icon-arrow-left icon-large"></i></button>
+			<button id="btnUp"><i class="icon-chevron-up icon-large"></i></button>
+			<button class="last" id="btnDown"><i class="icon-chevron-down icon-large"></i></button>
+		</div>
 		{% render_outline package current_node %}
 
 		<div id="download" style="margin-left:0;display:none;background-color:white;width:130px;border:1px solid rgb(155, 155, 155)">
@@ -71,19 +73,18 @@
 {% endblock %}
 
 {% block box_right %}
-<div style="position:fixed">
+<div class="sidebar">
 	<h2>Werkzeuge</h2>
 	{% render_idevicepane idevices %}
 </div>
 {% endblock %}
 
 {% block navi %}
-				<ul id="navi">
-					<li class="active"><a href="">Inhalt bearbeiten</a></li>
-					<li><a href="">Layout wählen</a></li>
-					<li><a href="">Export & Download</a></li>
-					<li><a href="">Eigenschaften</a></li>
-				</ul>
+<ul id="navi">
+	<li id="edit" class="active">Inhalt bearbeiten</li>
+	<li id="layout">Layout wählen</li>
+	<li id="export">Export & Download</li>
+</ul>
 {% endblock %}
 
 {% block h2 %}Inhalt{% endblock %}
@@ -93,7 +94,7 @@
 {% render_styles %}
 </div>
 
-<div style="width:100%;min-height:400px;" id="authoring" name="authoringIFrame1">
+<div style="min-height:400px;" id="authoring">
 	{% include "exe/authoring.html" %}
 </div>
 
@@ -105,7 +106,7 @@
 			{% endif %}
 				
 			<table>
-			{{ properties_form.as_table }}
+			{{ properties_form.as_p }}
 			</table>
 				
 			<input type="submit" value="Apply" />
@@ -119,7 +120,7 @@
 			{% endif %}
 			
 			<table>
-				{{ dublincore_form.as_table }}
+				{{ dublincore_form.as_p }}
 			</table>
 			
 			<input type="submit" value="Apply" />
@@ -134,8 +135,8 @@
 	<a href="/accounts/logout/" style="text-align:left">Logout</a>
 </div>
 <div style="text-align:right;">
-	<a href="#impressum">Impressum</a> 
-	<img style="margin-left:10px" src="{% get_static_prefix %}images/mz/help.png" alt="Hilfe">
+	<a href="#impressum">Impressum</a> |
+	<a href="">Hilfe <i class="icon-question-sign"></i></a>
 </div>
 {% endblock %}
 {% block append %}

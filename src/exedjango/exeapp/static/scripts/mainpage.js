@@ -88,7 +88,7 @@ jQuery(document).ready(function() {
                 });
                 $("a.bigButton, a.smallButton").button();
                 // Initialize outline tree
-                $.jstree._themes = "/static/css/themes/"
+                //$.jstree._themes = false;
                 get_outline_pane().jstree({
                   "core" : {	"animation" : 200
                   },
@@ -464,7 +464,7 @@ function set_current_node(node) {
 
 function update_preview() {
   var url = window.location.protocol + '//' + location.host + location.pathname;
-  $('#preview > iframe').attr('src', url + "preview/");	
+  $('#previewIFrame').attr('src', url + "preview/");	
 }
 
 function set_current_style() {
