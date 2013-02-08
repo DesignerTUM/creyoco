@@ -8,7 +8,6 @@
 
 {% block head_css %}
 <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/mz/style.min.css">
-<link rel="stylesheet" href="http://fortawesome.github.com/Font-Awesome/assets/css/font-awesome.css">
 {% endblock %}
 
 {% block head_javascript %}
@@ -29,15 +28,6 @@ $(document).ready(function() {
 			$(this).parent().parent().addClass('active');
 		}
 		
-		/*$('input[type="checkbox"]').each( function() {
-			if($(this).attr('checked')) {
-				$('#delete_selected_packages').show();
-				alert('bla');
-			}
-			else {
-				$('#delete_selected_packages').hide();
-			}
-		});*/
 		if($('li').hasClass('active')) {
 		    $("#delete_selected_packages").show();
 	    }
@@ -91,13 +81,4 @@ $(document).ready(function() {
 	{% endfor %}
 </ul>
 
-{% endblock %}
-{% block footer %}
-<div style="text-align:left;float:left">
-	<a href="/accounts/logout/" style="text-align:left">Logout</a>
-</div>
-<div style="text-align:right;">
-	<a href="#impressum">Impressum</a> 
-	<img style="margin-left:10px" src="{% get_static_prefix %}images/mz/help.png" alt="Hilfe">
-</div>
 {% endblock %}
