@@ -81,9 +81,9 @@
 
 {% block navi %}
 <ul id="navi">
-	<li id="edit" class="active">Inhalt bearbeiten</li>
-	<li id="layout">Layout wählen</li>
-	<li id="export">Export & Download</li>
+	<li id="edit" class="active"><a href="{{ package.get_absolute_url }}{{ current_node.id }}/edit">Inhalt bearbeiten</a></li>
+	<li id="layout"><a href="{{ package.get_absolute_url }}{{ current_node.id }}/layout">Layout wählen</a></li>
+	<li id="export"><a href="{{ package.get_absolute_url }}{{ current_node.id }}/export">Export & Download</a></li>
 </ul>
 {% endblock %}
 
@@ -94,39 +94,143 @@
 {% render_styles %}
 </div>
 
-<div style="min-height:400px;" id="authoring">
+<div id="authoring">
 	{% include "exe/authoring.html" %}
 </div>
 
 <div id="properties" style="display:none;">
-	<div id="package_properties" style="float:left">
+	<div id="package_properties">
 		<form id="properties_form" class="property_form" method="post" action=".#properties">
-			{% if properties_form.errors %}
-			<p>Please correct following error{{ properties_form.errors|pluralize }}</p>
-			{% endif %}
+			{{ properties_form.errors }}
+			{% for hidden in properties_form.hidden_fields %}
+			{{ hidden }}
+			{% endfor %}
+
+			<div style="width:49%;box-sizing:border-box;float:left">
+				<label for="title">Kursname</label>
+				<input style="width:100%;box-sizing:border-box;" placeholder="" name="title" type="text" value="{{ properties_form.title.value }}">
+	
 				
-			<table>
-			{{ properties_form.as_p }}
-			</table>
+				<div style="float:left;width:48%;box-sizing:border-box;">
+					<label for="author">Autor</label>
+					<input style="width:100%;box-sizing:border-box;" placeholder="" name="author" type="text" value="{{ properties_form.author.value }}">
+				</div>
 				
-			<input type="submit" value="Apply" />
+				<div style="float:right;width:48%;box-sizing:border-box;">
+					<label for="email">Email</label>
+					<input style="width:100%;box-sizing:border-box;" placeholder="" name="email" type="text" value="{{ properties_form.email.value }}">
+				</div>
+
+				<input style="width:48%;box-sizing:border-box;float:right" type="reset" value="Abbrechen">
+				<input style="width:48%;box-sizing:border-box;float:left" type="submit" value="Übernehmen">
+			</div>
+			<div style="width:49%;float:right">
+				<div style="float:right;width:100%;box-sizing:border-box;">
+					<label for="description">Beschreibung</label>
+					<textarea style="box-sizing:border-box;max-width:100%;height:81px;" name="description">{{ properties_form.description.value }}</textarea>
+				</div>
+			</div>
+			<!--{% for field in properties_form.visible_fields %}
+			<div>
+				<label for="{{ field.html_name }}">{{ field.label }}</label>
+				<input placeholder="" name="{{ field.html_name }}" type="text" value="{{ field.value }}">
+			</div>
+			{% endfor %}-->
 		</form>
+		<div style="clear:both"></div>
 	</div>
 	
-	<div id="dublincore" style="float:right">
+
+		
+	<h3 style="margin-top:30px;cursor:pointer" onclick="$('#dublincore').toggle('slow');"><i class="icon-caret-right" style="margin-right:10px;"></i>Dublin Core</h3>
+		
+		<div id="dublincore">
 		<form id="dublincore_form" class="property_form" method="post" action=".#properties">
-			{% if dublincore_form.errors %}
-			<p>Please correct following error{{ dublincore_form.errors|pluralize }}</p>
-			{% endif %}
+			{{ dublincore_form.errors }}
+				{% for hidden in dublincore_form.hidden_fields %}
+			{{ hidden }}
+			{% endfor %}
 			
-			<table>
-				{{ dublincore_form.as_p }}
-			</table>
+
+			<div style="width:49%;float:left">
+				<label for="title">Title</label>
+				<input placeholder="" name="title" type="text" value="{{ dublincore_form.title.value }}">
+			</div>
 			
-			<input type="submit" value="Apply" />
+			<div style="width:49%;float:right">			
+				<label for="creator">Creator</label>
+				<input placeholder="" name="creator" type="text" value="{{ dublincore_form.creator.value }}">
+			</div>
+
+			<div style="width:49%;float:left">			
+				<label for="subject">Subject</label>
+				<input placeholder="" name="subject" type="text" value="{{ dublincore_form.subject.value }}">
+			</div>
+
+			<div style="width:49%;float:right">			
+				<label for="description">Description</label>
+				<input placeholder="" name="description" type="text" value="{{ dublincore_form.description.value }}">
+			</div>
+
+			<div style="width:49%;float:left">			
+				<label for="publisher">Publisher</label>
+				<input placeholder="" name="publisher" type="text" value="{{ dublincore_form.publisher.value }}">
+			</div>
+
+			<div style="width:49%;float:right">			
+				<label for="contributors">Contributors</label>
+				<input placeholder="" name="contributors" type="text" value="{{ dublincore_form.contributors.value }}">
+			</div>
+
+			<div style="width:49%;float:left">			
+				<label for="date">Date</label>
+				<input placeholder="" name="date" type="text" value="2013-01-29">
+			<input type="hidden" name="initial-date" value="2013-01-29" id="initial-id_date" />
+			</div>
+
+			<div style="width:49%;float:right">			
+				<label for="type">Type</label>
+				<input placeholder="" name="type" type="text" value="{{ dublincore_form.type.value }}">
+			</div>
+
+			<div style="width:49%;float:left">			
+				<label for="format">Format</label>
+				<input placeholder="" name="format" type="text" value="{{ dublincore_form.format.value }}">
+			</div>
+
+			<div style="width:49%;float:right">			
+				<label for="identifier">Identifier</label>
+				<input placeholder="" name="identifier" type="text" value="{{ dublincore_form.identifier.value }}">
+			</div>
+			
+			<div style="width:49%;float:left">			
+				<label for="source">Source</label>
+				<input placeholder="" name="source" type="text" value="{{ dublincore_form.source.value }}">
+			</div>
+			
+			<div style="width:49%;float:right">			
+				<label for="language">Language</label>
+				<input placeholder="" name="language" type="text" value="{{ dublincore_form.language.value }}">
+			</div>
+			
+			<div style="width:49%;float:left">
+				<label for="relation">Relation</label>
+				<input placeholder="" name="relation" type="text" value="{{ dublincore_form.relation.value }}">
+			</div>
+			
+			<div style="width:49%;float:right">			
+				<label for="coverage">Coverage</label>
+				<input placeholder="" name="coverage" type="text" value="{{ dublincore_form.coverage.value }}">
+			</div>
+			
+			<div style="width:49%;float:left">			
+				<label for="rights">Rights</label>
+				<input placeholder="" name="rights" type="text" value="{{ dublincore_form.rights.value }}">
+			</div>
+			
+			<input style="width:49%;float:right;margin-top:37px;" type="submit" value="Änderungen übernehmen">
 		</form>
 	</div>
-	
 	<div style="clear:both"></div>
 </div>
 {% endblock %}
