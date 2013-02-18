@@ -1,0 +1,88 @@
+<form id="dublincore_form" class="clearfix" method="post" action=".#properties">
+	{% if dublincore_form.errors %}
+		<p>Please correct following error{{ dublincore_form.errors|pluralize }}</p>
+	{% endif %}
+	
+	{% for hidden in dublincore_form.hidden_fields %}
+		{{ hidden }}
+	{% endfor %}
+	
+
+	<div class="pull-left">
+		<label for="title">Title</label>
+		<input placeholder="" name="title" type="text" value="{{ dublincore_form.title.value }}">
+	</div>
+	
+	<div class="pull-right">			
+		<label for="creator">Creator</label>
+		<input placeholder="" name="creator" type="text" value="{{ dublincore_form.creator.value }}">
+	</div>
+
+	<div class="pull-left">			
+		<label for="subject">Subject</label>
+		<input placeholder="" name="subject" type="text" value="{{ dublincore_form.subject.value }}">
+	</div>
+
+	<div class="pull-right">			
+		<label for="description">Description</label>
+		<input placeholder="" name="description" type="text" value="{{ dublincore_form.description.value }}">
+	</div>
+
+	<div class="pull-left">			
+		<label for="publisher">Publisher</label>
+		<input placeholder="" name="publisher" type="text" value="{{ dublincore_form.publisher.value }}">
+	</div>
+
+	<div class="pull-right">			
+		<label for="contributors">Contributors</label>
+		<input placeholder="" name="contributors" type="text" value="{{ dublincore_form.contributors.value }}">
+	</div>
+
+	<div class="pull-left">
+		<label for="date">Date</label>
+		{{ dublincore_form.date.errors }}	
+		{{ dublincore_form.date }}
+	</div>
+
+	<div class="pull-right">			
+		<label for="type">Type</label>
+		<input placeholder="" name="type" type="text" value="{{ dublincore_form.type.value }}">
+	</div>
+
+	<div class="pull-left">			
+		<label for="format">Format</label>
+		<input placeholder="" name="format" type="text" value="{{ dublincore_form.format.value }}">
+	</div>
+
+	<div class="pull-right">			
+		<label for="identifier">Identifier</label>
+		<input placeholder="" name="identifier" type="text" value="{{ dublincore_form.identifier.value }}">
+	</div>
+	
+	<div class="pull-left">			
+		<label for="source">Source</label>
+		<input placeholder="" name="source" type="text" value="{{ dublincore_form.source.value }}">
+	</div>
+	
+	<div class="pull-right">			
+		<label for="language">Language</label>
+		<input placeholder="" name="language" type="text" value="{{ dublincore_form.language.value }}">
+	</div>
+	
+	<div class="pull-left">
+		<label for="relation">Relation</label>
+		<input placeholder="" name="relation" type="text" value="{{ dublincore_form.relation.value }}">
+	</div>
+	
+	<div class="pull-right">			
+		<label for="coverage">Coverage</label>
+		<input placeholder="" name="coverage" type="text" value="{{ dublincore_form.coverage.value }}">
+	</div>
+	
+	<div class="pull-left">			
+		<label for="rights">Rights</label>
+		<input placeholder="" name="rights" type="text" value="{{ dublincore_form.rights.value }}">
+	</div>
+	
+	<input type="submit" value="Änderungen übernehmen" class="pull-right submit">
+</form>
