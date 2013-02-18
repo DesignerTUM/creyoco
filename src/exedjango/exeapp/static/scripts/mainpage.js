@@ -134,10 +134,10 @@ jQuery(document).ready(function() {
                 $("#btnDown").click(move_current_node_down);
                 
                 // init ajax forms
-                $(".property_form").ajaxForm(function (responseText, statusText, xhr, form){
+                $("#properties_form, #dublincore_form").ajaxForm(function (responseText, statusText, xhr, form){
                  	$(".errorlist").hide();
                  	if (responseText != ""){
-                 		form.find("table").html(responseText);
+                 		form.html(responseText);
                  	}
                  });
 
