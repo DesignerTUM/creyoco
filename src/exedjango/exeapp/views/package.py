@@ -8,8 +8,6 @@ from django.contrib.staticfiles.views import serve
 from django.conf import settings
 from django.views.decorators.cache import never_cache, patch_cache_control
 
-
-
 from exeapp.models import User, idevice_store, Package
 from exeapp.shortcuts import get_package_by_id_or_error
 from django import forms
@@ -19,6 +17,7 @@ from exeapp.views.export.exporter_factory import exporter_factory, exporter_map
 from exeapp.models.node import Node
 from django.utils.encoding import smart_str
 from exeapp.views.authoring import authoring
+from django.template.loader import render_to_string
 
 try:
     from cStringIO import StringIO
@@ -87,7 +86,8 @@ def change_properties(request, package, current_node):
     else:
         print form.errors
         if request.is_ajax():
-            return HttpResponse(form.as_table())
+            return HttpResponse(render_to_string("exe/{}.html".format(form_type),
+                                                 {form_type: form}))
         else:
             return generate_package_main(request, package, current_node,
                                          ** {form.form_type: form})
@@ -145,7 +145,7 @@ def preview(request, package, node):
             found_page = page
             break
     return HttpResponse(found_page.render(full_style_url=True))
-    
+
 @login_required
 @get_package_by_id_or_error
 def preview_root(request, package):

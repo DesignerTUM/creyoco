@@ -1,0 +1,43 @@
+<form id="properties_form" class="clearfix" method="post" action=".#properties">{% csrf_token %}
+	{% if properties_form.errors %}
+	<p>Please correct following error{{ properties_form.errors|pluralize }}</p>
+	{% endif %}
+	
+	{{ forms.errors.as_text }}
+	
+	{% for hidden in properties_form.hidden_fields %}
+	{{ hidden }}
+	{% endfor %}
+
+	<div class="pull-left">
+		<label for="title">Kursname</label>
+		{% if properties_form.title.errors %}
+			{{properties_form.title.errors}}
+		{% endif %}
+		<input placeholder="Kursname" name="title" type="text" value="{{ properties_form.title.value }}">
+		
+		<div class="pull-left">
+			<label for="author">Autor</label>
+			{% if properties_form.author.errors %}
+				{{properties_form.author.errors}}
+			{% endif %}
+			<input placeholder="Der Autor des Kurses." name="author" type="text" value="{{ properties_form.author.value }}">
+		</div>
+		
+		<div class="pull-right">
+			
+			<label for="email">Email</label>
+			{% if properties_form.email.errors %}
+				{{properties_form.email.errors}}
+			{% endif %}
+			<input placeholder="eMail-Adresse." name="email" type="text" value="{{ properties_form.email.value }}">
+		</div>
+
+		<input class="pull-left submit" type="reset" value="Abbrechen">
+		<input class="pull-right submit" type="submit" value="Übernehmen">
+	</div>
+	<div class="pull-right">
+			<label for="description">Beschreibung</label>
+			<textarea placeholder="Ihre Beschreibung des Kurses." name="description">{{ properties_form.description.value }}</textarea>
+	</div>
+</form>
