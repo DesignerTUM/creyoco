@@ -49,13 +49,14 @@
 	</select>
 	
 	<div id="outline">
-		<button class="first" id="btnAdd" class="newline-first"><i class="icon-plus-sign icon-large"></i></button>
-		<button id="btnRemove"><i class="icon-remove-sign icon-large"></i></button>
-		<button id="btnRename" action="RenameNode"><i class="icon-pencil icon-large"></i></button>
-		<button id="btnDuplicate"><i class="icon-copy icon-large"></i></button>
-		<button class="last" onclick="$('.secondary').toggle(800);"><i class="icon-sitemap icon-large"></i></button>
-	
-		<div class="secondary">
+		<div class="clearfix">
+			<button class="first" id="btnAdd" class="newline-first"><i class="icon-plus-sign icon-large"></i></button>
+			<button id="btnRemove"><i class="icon-remove-sign icon-large"></i></button>
+			<button id="btnRename" action="RenameNode"><i class="icon-pencil icon-large"></i></button>
+			<button id="btnDuplicate"><i class="icon-copy icon-large"></i></button>
+			<button class="last" onclick="$('.secondary').toggle(800);"><i class="icon-sitemap icon-large"></i></button>
+		</div>
+		<div class="secondary clearfix">
 			<button class="first" id="btnDemote"><i class="icon-arrow-right icon-large"></i></button>
 			<button id="btnPromote"><i class="icon-arrow-left icon-large"></i></button>
 			<button id="btnUp"><i class="icon-chevron-up icon-large"></i></button>
