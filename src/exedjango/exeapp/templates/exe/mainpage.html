@@ -81,7 +81,7 @@
 {% endblock %}
 
 {% block navi %}
-<ul id="navi">
+<ul id="navi" class="clearfix">
 	<li id="edit" class="active"><a href="{{ package.get_absolute_url }}{{ current_node.id }}/edit">Inhalt bearbeiten</a></li>
 	<li id="layout"><a href="{{ package.get_absolute_url }}{{ current_node.id }}/layout">Layout wählen</a></li>
 	<li id="export"><a href="{{ package.get_absolute_url }}{{ current_node.id }}/export">Export & Download</a></li>
@@ -92,7 +92,9 @@
 
 {% block content %}
 <div id="selectStyle" style="display:none">
+<div class="clearfix">
 {% render_styles %}
+</div>
 </div>
 
 <div id="authoring">

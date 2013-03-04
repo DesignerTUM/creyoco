@@ -10,8 +10,29 @@
 		{% endblock %}
 		
 		{% block head_javascript %}{% endblock %}
+				
+		<!-- Start Open Web Analytics Tracker -->
+		<script type="text/javascript">
+		//<![CDATA[
+		var owa_baseUrl = 'http://tassiloweidner.com/owa/';
+		var owa_cmds = owa_cmds || [];
+		owa_cmds.push(['setSiteId', '2b9aed5c6c833b9c2ef0235780e55ff2']);
+		owa_cmds.push(['trackPageView']);
+		owa_cmds.push(['trackClicks']);
+		owa_cmds.push(['trackDomStream']);
+		
+		(function() {
+			var _owa = document.createElement('script'); _owa.type = 'text/javascript'; _owa.async = true;
+			owa_baseUrl = ('https:' == document.location.protocol ? window.owa_baseSecUrl || owa_baseUrl.replace(/http:/, 'https:') : owa_baseUrl );
+			_owa.src = owa_baseUrl + 'modules/base/js/owa.tracker-combined-min.js';
+			var _owa_s = document.getElementsByTagName('script')[0]; _owa_s.parentNode.insertBefore(_owa, _owa_s);
+		}());
+		//]]>
+		</script>
+		<!-- End Open Web Analytics Code -->
 	</head>
 	<body>
+		<a href=""><img style="position: fixed;  bottom: 0;left: 0; border: 0;z-index: 2;" src="{% get_static_prefix %}images/mz/beta_ribbon.png" alt="Fork me on GitHub"></a>
 		{% block dialog %}
 		{% endblock %}
 		
@@ -31,19 +52,16 @@
 			
 			<div id="content">
 				<h2>{% block h2 %}{% endblock %}</h2>
-				
-				<div class="basic-right-shadow"></div>
 
 				{% block navi %}{% endblock %}
 				
-				<div style="clear:both"></div>
-				
+				<div class="shadow-top-right"></div>
 				<div id="middle-row">
 					{% block content %}{% endblock %}
 				</div>
 				
-				<div class="basic-bottom-shadow">
-				</div>
+				<div class="shadow-bottom-left"></div>
+				<div class="shadow-bottom-right"></div>
 			</div>
 			<div id="box_right">
 				{% block box_right %}{% endblock %}

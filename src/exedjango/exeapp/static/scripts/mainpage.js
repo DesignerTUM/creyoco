@@ -329,8 +329,7 @@ function handle_select_node(event, data) {
 }
 
 function handle_select_style() {
-	
-	$.jsonRPC.request("set_package_style", [get_package_id(), $("#style_selector").val()]);
+	$.jsonRPC.request("set_package_style", [get_package_id(), $(this).attr('id')]);
 }
 
 //handle renamed node event. Calls package.rename_node over rpc.
@@ -471,7 +470,7 @@ function set_current_style() {
 	$.jsonRPC.request('get_current_style', [get_package_id()],
 		{success: function(results){
 			var style_val = results.result.style;
-			$("#style_selector").val(style_val);
+			$("#" + style_val).addClass("selected");
 		}});
 }
 

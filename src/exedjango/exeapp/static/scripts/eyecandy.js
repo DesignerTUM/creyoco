@@ -76,18 +76,14 @@ $(document).ready(function() {
 		}
 	});
 
-	if($('#package_style').text() == 'vhb') {
-		$("#vhb").addClass("StyleActive");
-	}
-	else if($('#package_style').text() == 'garden') {
-		$("#garden").addClass("StyleActive");
-	}
-	else if($('#package_style').text() == 'silver') {
-		$("#silver").addClass("StyleActive");
-	}
-	else if($('#package_style').text() == 'default') {
-		$("#default").addClass("StyleActive");
-	}
+	$('.theme').click( function() {
+		$('#preview').show();
+		$('.theme').removeClass('selected');
+		$(this).addClass('selected');
+		
+		handle_select_style();
+		update_preview();
+	});
 	
 	$('#outline img').click( function() {
 		if($(this).attr('id') == 'settings_button') {

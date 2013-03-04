@@ -5,31 +5,34 @@
 	
 	{{ forms.errors.as_text }}
 	
+	{% if properties_form.title.errors %}
+		{{properties_form.title.errors}}
+	{% endif %}
+	
+	{% if properties_form.author.errors %}
+		{{properties_form.author.errors}}
+	{% endif %}
+	
+	{% if properties_form.email.errors %}
+		{{properties_form.email.errors}}
+	{% endif %}
+	
 	{% for hidden in properties_form.hidden_fields %}
 	{{ hidden }}
 	{% endfor %}
 
 	<div class="pull-left">
 		<label for="title">Kursname</label>
-		{% if properties_form.title.errors %}
-			{{properties_form.title.errors}}
-		{% endif %}
+
 		<input placeholder="Kursname" name="title" type="text" value="{{ properties_form.title.value }}">
 		
 		<div class="pull-left">
 			<label for="author">Autor</label>
-			{% if properties_form.author.errors %}
-				{{properties_form.author.errors}}
-			{% endif %}
 			<input placeholder="Der Autor des Kurses." name="author" type="text" value="{{ properties_form.author.value }}">
 		</div>
 		
-		<div class="pull-right">
-			
+		<div class="pull-right">		
 			<label for="email">Email</label>
-			{% if properties_form.email.errors %}
-				{{properties_form.email.errors}}
-			{% endif %}
 			<input placeholder="eMail-Adresse." name="email" type="text" value="{{ properties_form.email.value }}">
 		</div>
 

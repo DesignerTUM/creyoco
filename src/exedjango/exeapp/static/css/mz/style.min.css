@@ -54,9 +54,9 @@ a img {
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
   display: block; }
 
-/* line 66, sprites/basic/*.png */
-.basic-sprite, .basic-bottom-shadow, .basic-right-shadow, ul#navi li, ul#navi li.active {
-  background: url('/static/images/mz/sprites/basic-sa28465cc45.png') no-repeat; }
+/* line 82, sprites/basic/*.png */
+.basic-sprite, .shadow-top-right, .shadow-bottom-right, .shadow-bottom-left, ul#navi li, ul#navi li.active {
+  background: url('/static/images/mz/sprites/basic-safcf6de5c0.png') no-repeat; }
 
 @font-face {
   font-family: "Open Sans";
@@ -1528,51 +1528,54 @@ a:hover .btn [class*=" icon-"].icon-large.icon-question-sign {
 .chzn-container-multi .chzn-drop .result-selected {
   display: none; }
 
-/* line 16, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
+/* line 15, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
+#properties label .errorlist {
+  color: #a71e20 !important; }
+/* line 20, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
 #properties input[type='text'], #properties input[type='password'] {
   display: block;
   margin: 0;
   letter-spacing: 0.08em; }
-/* line 25, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
+/* line 29, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
 #properties label {
   margin-top: 20px;
   margin-bottom: 5px;
   display: inline-block;
   letter-spacing: 0.1em; }
-/* line 36, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
+/* line 40, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
 #properties input,
 #properties textarea {
   box-sizing: border-box;
   width: 100%; }
-/* line 41, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
+/* line 45, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
 #properties #dublincore_form {
   display: none; }
-  /* line 44, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
+  /* line 48, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
   #properties #dublincore_form div {
     width: 49%; }
-  /* line 48, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
+  /* line 52, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
   #properties #dublincore_form .submit {
     width: 49%;
     margin-top: 37px; }
-/* line 55, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
+/* line 59, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
 #properties #properties_form div {
   width: 49%; }
-  /* line 57, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
+  /* line 61, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
   #properties #properties_form div > div {
     width: 48%; }
-  /* line 60, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
+  /* line 64, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
   #properties #properties_form div .submit {
     width: 48%;
     margin-top: 20px; }
-/* line 66, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
+/* line 70, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
 #properties #properties_form textarea {
   height: 81px; }
-/* line 71, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
+/* line 75, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
 #properties h3 {
   margin-top: 30px;
   cursor: pointer; }
 
-/* line 79, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
+/* line 83, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
 input[type='text'], input[type='password'] {
   width: 250px;
   padding-top: 2px;
@@ -1589,7 +1592,7 @@ input[type='text'], input[type='password'] {
   outline: none;
   border: 1px solid #a6a6a6;
   background-color: white; }
-  /* line 93, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
+  /* line 97, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
   input[type='text']:focus, input[type='password']:focus {
     border: 1px solid #a71e20; }
   /* line 3, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
@@ -1602,7 +1605,7 @@ input[type='text'], input[type='password'] {
   input[type='text']::-webkit-input-placeholder, input[type='password']::-webkit-input-placeholder {
     color: #b3b3b3; }
 
-/* line 101, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
+/* line 105, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
 textarea {
   width: 250px;
   line-height: 22px;
@@ -1617,7 +1620,7 @@ textarea {
   outline: none;
   border: 1px solid #a6a6a6;
   resize: none; }
-  /* line 113, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
+  /* line 117, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
   textarea:focus {
     border: 1px solid #a71e20; }
   /* line 3, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
@@ -1630,20 +1633,20 @@ textarea {
   textarea::-webkit-input-placeholder {
     color: #b3b3b3; }
 
-/* line 120, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
+/* line 124, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
 select {
   width: 190px; }
 
-/* line 124, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
+/* line 128, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
 .no_margin {
   margin: 0; }
 
-/* line 128, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
+/* line 132, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
 .login_password {
   width: 145px !important;
   margin-bottom: 0px !important; }
 
-/* line 135, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
+/* line 139, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
 input[type='reset'],
 input[type='submit'],
 button {
@@ -1664,13 +1667,13 @@ button {
   outline: none;
   border: 1px solid #a6a6a6;
   margin: 0; }
-  /* line 153, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
+  /* line 157, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
   input[type='reset']:hover,
   input[type='submit']:hover,
   button:hover {
     color: #a71e20; }
 
-/* line 158, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
+/* line 162, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
 #box_left button {
   width: 20%;
   margin-right: 0;
@@ -1689,38 +1692,38 @@ button {
   	margin-left: 0;
   }
   */ }
-  /* line 176, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
+  /* line 180, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
   #box_left button.last {
     margin-right: 0;
     padding-right: 0; }
 
-/* line 182, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
+/* line 186, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
 #header button {
   width: 145px;
   margin-right: 10px;
   float: left; }
-  /* line 187, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
+  /* line 191, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
   #header button .left {
     margin-right: 30px; }
-  /* line 191, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
+  /* line 195, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
   #header button .right {
     margin-left: 20px; }
 
-/* line 197, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
+/* line 201, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
 .login_submit {
   display: inline-block;
   width: 90px;
   margin-left: 10px; }
 
-/* line 203, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
+/* line 207, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
 .reg_submit {
   width: 262px; }
 
-/* line 207, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
+/* line 211, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
 textarea {
   height: 100px; }
 
-/* line 211, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
+/* line 215, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
 .forgot_pw {
   font-size: 10px;
   color: #e6e6e6;
@@ -1728,7 +1731,7 @@ textarea {
   display: inline-block;
   margin-top: 10px; }
 
-/* line 219, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
+/* line 223, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
 .error {
   position: absolute;
   top: 50%;
@@ -1741,13 +1744,13 @@ textarea {
   white-space: nowrap;
   background: rgba(167, 30, 32, 0.8); }
 
-/* line 232, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
+/* line 236, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
 .error-after {
   content: '';
   display: block;
   margin: 6px 0px 0px 0px; }
 
-/* line 238, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
+/* line 242, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
 .error-left {
   position: absolute;
   top: 50%;
@@ -1761,7 +1764,7 @@ textarea {
   background: rgba(167, 30, 32, 0.8);
   right: 100%;
   margin-right: 9px; }
-  /* line 252, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
+  /* line 256, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
   .error-left::after {
     content: '';
     display: block;
@@ -1774,7 +1777,7 @@ textarea {
     border-right: 0;
     border-left: 5px solid rgba(167, 30, 32, 0.8); }
 
-/* line 266, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
+/* line 270, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
 .error-right {
   position: absolute;
   top: 50%;
@@ -1788,7 +1791,7 @@ textarea {
   background: rgba(167, 30, 32, 0.8);
   left: 100%;
   margin-left: 9px; }
-  /* line 280, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
+  /* line 284, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/forms.scss */
   .error-right::after {
     content: '';
     display: block;
@@ -1937,10 +1940,11 @@ body {
   margin: 180px auto 0;
   min-height: 280px;
   max-width: 1200px;
+  min-width: 960px;
   padding-left: 30px;
   padding-right: 30px;
   color: #8c8c8c; }
-  /* line 81, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+  /* line 82, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
   #wrapper h2 {
     color: #a71e20;
     font-family: 'PT Sans',sans-serif;
@@ -1949,17 +1953,17 @@ body {
     letter-spacing: 0.2em;
     text-transform: uppercase;
     margin-bottom: 100px; }
-  /* line 90, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+  /* line 91, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
   #wrapper h3 {
     color: #a71e20;
     font-weight: 700; }
-  /* line 97, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+  /* line 98, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
   #wrapper #box_left {
     float: left;
     width: 14.60526315%;
     padding-right: 2%;
     min-height: 20px; }
-    /* line 102, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+    /* line 103, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
     #wrapper #box_left hr {
       border-style: none;
       border-top: 1px solid #e6e6e6;
@@ -1968,30 +1972,30 @@ body {
       margin-left: 0px;
       margin-top: 5px;
       margin-bottom: 29px; }
-    /* line 115, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+    /* line 116, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
     #wrapper #box_left h2 i {
       margin-left: 15px; }
-    /* line 119, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+    /* line 120, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
     #wrapper #box_left .secondary {
       display: none;
       overflow: auto; }
-    /* line 123, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+    /* line 124, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
     #wrapper #box_left #outline_pane {
       margin-top: 25px; }
-  /* line 127, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+  /* line 128, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
   #wrapper #box_right {
     float: right;
     width: 14.60526315%;
     padding-left: 2%; }
 
-/* line 134, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+/* line 135, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
 header {
   position: fixed;
   top: 0;
   width: 100%;
   background-color: #f6f6f6;
   z-index: 1; }
-  /* line 140, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+  /* line 141, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
   header h1 {
     text-align: right;
     font-family: 'Exo';
@@ -2001,12 +2005,13 @@ header {
     color: #8c8c8c;
     margin-right: 65px;
     margin-top: 8px; }
-  /* line 150, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+  /* line 151, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
   header > div {
     max-width: 1200px;
+    min-width: 960px;
     margin: 0 auto;
     padding: 100px 30px 0 30px; }
-    /* line 155, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+    /* line 157, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
     header > div hr {
       display: block;
       -webkit-margin-before: 0;
@@ -2019,7 +2024,7 @@ header {
       border-bottom: 1px dotted #8c8c8c;
       width: 100%; }
 
-/* line 161, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+/* line 163, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
 #content {
   background: url('/static/images/mz/content-bg.png?1359032041') repeat-y;
   background-size: 100% 100%;
@@ -2027,7 +2032,7 @@ header {
   width: 70.7894737%;
   padding-left: 30px;
   padding-right: 30px; }
-  /* line 168, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+  /* line 170, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
   #content #middle-row {
     background-image: -webkit-gradient(linear, 0% 50%, 100% 50%, color-stop(0%, #ffffff), color-stop(50%, #e8e8e8), color-stop(100%, #ffffff));
     background-image: -webkit-linear-gradient(left, #ffffff, #e8e8e8, #ffffff);
@@ -2044,11 +2049,11 @@ header {
     	margin: 0px 5px 0px 5px;
     	cursor:pointer;
     }*/ }
-    /* line 174, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+    /* line 176, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
     #content #middle-row #authoring {
       padding-left: 0px;
       padding-right: 0px; }
-      /* line 177, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+      /* line 179, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
       #content #middle-row #authoring h2 {
         color: inherit;
         font-family: inherit;
@@ -2057,32 +2062,61 @@ header {
         letter-spacing: inherit;
         text-transform: inherit;
         margin-bottom: 10px; }
+    /* line 189, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+    #content #middle-row .theme {
+      width: 48.5%;
+      margin-bottom: 15px;
+      border: 3px solid #e6e6e6; }
+      /* line 194, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+      #content #middle-row .theme.selected {
+        border: 3px solid #a71e20; }
+    /* line 199, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+    #content #middle-row .theme:nth-child(odd) {
+      float: left; }
+    /* line 203, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+    #content #middle-row .theme:nth-child(even) {
+      float: right; }
 
-/* line 196, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
-.basic-bottom-shadow {
-  position: absolute;
-  background-position: 0 0;
-  height: 272px;
-  width: 779px;
-  margin-top: -289px;
-  margin-left: -3px;
-  z-index: -1; }
-
-/* line 204, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
-.basic-right-shadow {
-  position: absolute;
-  background-position: 0 -272px;
+/* line 215, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+.shadow-top-right {
+  position: relative;
+  background-position: 0 -544px;
   height: 183px;
   width: 28px;
-  margin-left: 747px;
-  margin-top: 14px;
-  z-index: 0; }
+  margin-bottom: -183px;
+  display: block;
+  left: 100%;
+  z-index: -1; }
 
-/* line 213, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+/* line 224, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+.shadow-bottom-right {
+  position: relative;
+  display: block;
+  background-position: 0 -272px;
+  height: 272px;
+  width: 405px;
+  left: 100%;
+  margin-top: -290px;
+  margin-left: -375px;
+  z-index: -1; }
+
+/* line 234, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+.shadow-bottom-left {
+  position: relative;
+  display: block;
+  background-position: 0 -727px;
+  height: 23px;
+  width: 374px;
+  float: left;
+  left: 0;
+  margin-top: -40px;
+  z-index: -1; }
+
+/* line 245, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
 ul#navi li {
   float: left;
   margin-right: 8px;
-  background-position: 0 -477px;
+  background-position: 0 -772px;
   height: 21px;
   width: 169px;
   color: #8c8c8c;
@@ -2097,28 +2131,28 @@ ul#navi li {
   	margin-right: 0px;
   	float: right;
   }*/ }
-  /* line 232, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+  /* line 264, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
   ul#navi li a:hover {
     color: #a71e20;
     cursor: pointer; }
-  /* line 242, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+  /* line 274, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
   ul#navi li.active {
-    background-position: 0 -455px; }
-    /* line 244, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+    background-position: 0 -750px; }
+    /* line 276, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
     ul#navi li.active a {
       color: white;
       text-shadow: #8c8c8c 0 1px 0; }
-      /* line 247, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+      /* line 279, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
       ul#navi li.active a:hover {
         color: white; }
 
-/* line 256, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+/* line 288, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
 .transparent {
   zoom: 1;
   filter: alpha(opacity=50);
   opacity: 0.5; }
 
-/* line 262, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+/* line 294, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
 .tip {
   font-size: 0.923em;
   display: none;
@@ -2133,7 +2167,7 @@ ul#navi li {
   white-space: nowrap;
   background: rgba(0, 0, 0, 0.7); }
 
-/* line 277, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+/* line 309, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
 .idevice_form {
   background-color: #fff;
   border: 1px solid #e6e6e6;
@@ -2141,11 +2175,11 @@ ul#navi li {
   min-height: 80px;
   padding: 20px;
   margin-bottom: 20px; }
-  /* line 284, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+  /* line 316, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
   .idevice_form p:last-child {
     margin-top: 15px; }
 
-/* line 289, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+/* line 321, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
 #modal-dialog-bg {
   position: fixed;
   top: 0;
@@ -2156,7 +2190,7 @@ ul#navi li {
   background-color: white;
   z-index: 3; }
 
-/* line 300, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+/* line 332, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
 .modal-dialog {
   position: fixed;
   top: 50%;
@@ -2176,32 +2210,32 @@ ul#navi li {
   outline: 0;
   padding: 30px;
   z-index: 4; }
-  /* line 318, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+  /* line 350, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
   .modal-dialog iframe {
     height: 100%;
     width: 100%; }
 
-/* line 324, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+/* line 356, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
 strong {
   font-weight: 700; }
 
-/* line 328, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+/* line 360, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
 em {
   font-style: italic; }
 
-/* line 333, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+/* line 365, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
 ul#package_list li {
   width: 100%;
   line-height: 30px;
   list-style: none;
   border-top: 1px solid #e6e6e6; }
-  /* line 338, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+  /* line 370, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
   ul#package_list li:hover {
     background-color: rgba(255, 255, 255, 0.5); }
-  /* line 344, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+  /* line 376, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
   ul#package_list li:last-child {
     border-bottom: 1px solid #e6e6e6; }
-  /* line 347, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+  /* line 379, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
   ul#package_list li a {
     text-decoration: none;
     color: #8c8c8c;
@@ -2212,14 +2246,14 @@ ul#package_list li {
     				cursor: pointer;
     
     			}*/ }
-    /* line 350, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+    /* line 382, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
     ul#package_list li a:hover {
       color: #a71e20; }
-  /* line 361, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+  /* line 393, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
   ul#package_list li .check {
     cursor: pointer;
     margin-right: 5px; }
-  /* line 365, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+  /* line 397, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
   ul#package_list li.active {
     /*a {
     	&::before {
@@ -2230,27 +2264,28 @@ ul#package_list li {
     	}
     }*/
     background-color: rgba(255, 255, 255, 0.5); }
-    /* line 366, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+    /* line 398, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
     ul#package_list li.active .check {
       color: #a71e20; }
-  /* line 379, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+  /* line 411, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
   ul#package_list li #qs {
     display: block;
     text-align: right;
     line-height: 30px; }
-    /* line 380, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+    /* line 412, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
     ul#package_list li #qs i {
       margin: 0px 5px 0px 5px;
       cursor: pointer; }
 
-/* line 396, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+/* line 428, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
 footer {
   max-width: 1200px;
+  min-width: 960px;
   margin: 0 auto;
   margin-top: 20px;
   padding-left: 30px;
   padding-right: 30px; }
-  /* line 404, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+  /* line 437, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
   footer hr {
     display: block;
     -webkit-margin-before: 0;
@@ -2262,6 +2297,10 @@ footer {
     padding-bottom: 16px;
     border-bottom: 1px dotted #8c8c8c;
     width: 100%; }
-  /* line 408, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+  /* line 441, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
   footer div {
     padding-top: 10px; }
+
+/* line 446, ../../../../../../../../../Dropbox/• Projekte/creyoco/sass/style.min.scss */
+#15_field_content {
+  width: 50px; }
