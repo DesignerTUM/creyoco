@@ -111,7 +111,7 @@ jQuery(document).ready(function() {
                 //don't folow tree links
 				bind_pjax();
                 // handle theme selection
-                $("#style_selector").change(handle_select_style);
+                $(".theme").click(handle_select_style);
                 
                 // Initialize idevice Tree
                 $("#idevice_pane").jstree({"themes" : {	"dots" : false,
