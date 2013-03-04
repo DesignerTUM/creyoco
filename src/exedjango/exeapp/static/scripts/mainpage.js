@@ -329,7 +329,7 @@ function handle_select_node(event, data) {
 }
 
 function handle_select_style() {
-	$.jsonRPC.request("set_package_style", [get_package_id(), $(this).attr('id')]);
+	$.jsonRPC.request("set_package_style", [get_package_id(), get_current_node_id(), $(this).attr('id')]);
 }
 
 //handle renamed node event. Calls package.rename_node over rpc.

@@ -339,14 +339,12 @@ i.e. the "package".
         else:
             self._backgroundImg = u''
 
-
     def get_footerImg(self):
         """Get the footer image for this package"""
         if self._footerImg:
             return "file://" + self._footerImg.path
         else:
             return ""
-
 
     def set_footerImg(self, value):
         """Set the footer image for this package"""
