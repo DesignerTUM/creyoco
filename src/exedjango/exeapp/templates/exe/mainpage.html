@@ -27,11 +27,20 @@
 {% endblock %}
 
 {% block dialog %}
-		<div id="preview" style="display:none">
+		<div id="lightbox" style="display:none">
 			<div id="modal-dialog-bg"></div>
 			<div class="modal-dialog">
 				<i class="icon-remove icon-2x pull-right" style="cursor:pointer;position: absolute;right: 0;top: 0;margin-right: 10px;margin-top: 5px;" onclick="$(this).parent().parent().hide()"></i>
-				<iframe scrolling="auto" id="previewIFrame" src="preview"></iframe>
+					<iframe scrolling="auto" id="previewIFrame" src="preview">
+						
+					</iframe>
+					
+					<div id="download_box">
+					<h3>Wählen Sie das Dateiformat für den Kurs-Export.</h3>
+					{% for type, title in exporter_type_title_map.items %}
+						<a class="export_link" href="{% url exeapp.views.package.export package.id type %}"><i class="icon-arrow-right"></i> {{title}}</a>
+					{% endfor %}
+					</div>
 			</div>
 		</div>
 {% endblock %}
@@ -63,12 +72,6 @@
 			<button class="last" id="btnDown"><i class="icon-chevron-down icon-large"></i></button>
 		</div>
 		{% render_outline package current_node %}
-
-		<div id="download" style="margin-left:0;display:none;background-color:white;width:130px;border:1px solid rgb(155, 155, 155)">
-			{% for type, title in exporter_type_title_map.items %}
-			<a class="export_link" href="{% url exeapp.views.package.export package.id type %}">{{title}}</a>
-			{% endfor %}
-		</div>
 	</div>
 </div>
 {% endblock %}
@@ -84,7 +87,8 @@
 <ul id="navi" class="clearfix">
 	<li id="edit" class="active"><a href="{{ package.get_absolute_url }}{{ current_node.id }}/edit">Inhalt bearbeiten</a></li>
 	<li id="layout"><a href="{{ package.get_absolute_url }}{{ current_node.id }}/layout">Layout wählen</a></li>
-	<li id="export"><a href="{{ package.get_absolute_url }}{{ current_node.id }}/export">Export & Download</a></li>
+	<li id="download"><a>Kurs herunterladen</a></li>
+	<li id="export" style="float:right;margin-right:0"><a href="{{ package.get_absolute_url }}{{ current_node.id }}/export">Metadaten</a></li>
 </ul>
 {% endblock %}
 
@@ -102,6 +106,18 @@
 </div>
 
 <div id="properties" style="display:none;">
+		<!--<div id="download" style="margin-left:0;background-color:white;width:130px;border:1px solid rgb(155, 155, 155)">
+			{% for type, title in exporter_type_title_map.items %}
+			<a class="export_link" href="{% url exeapp.views.package.export package.id type %}">{{title}}</a>
+			{% endfor %}
+		</div>
+		<div id="download">
+			<h3>In welchem Format möchten Sie ihren Kurs herunterladen?</h3>
+			{% for type, title in exporter_type_title_map.items %}
+			<a href="#">{{title}}</a>
+			{% endfor %}
+		</div>-->
+		
 	{% include "exe/properties_form.html" %}
 	
 	<h3 onclick="$('#dublincore_form').toggle('slow');$(this).find('i').removeClass('icon-caret-right').addClass('icon-caret-down');"><i class="icon-caret-right" style="margin-right:10px;"></i>Dublin Core</h3>

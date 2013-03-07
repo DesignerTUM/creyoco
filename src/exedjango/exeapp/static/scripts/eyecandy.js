@@ -75,15 +75,6 @@ $(document).ready(function() {
 			}
 		}
 	});
-
-	$('.theme').click( function() {
-		$('#preview').show();
-		$('.theme').removeClass('selected');
-		$(this).addClass('selected');
-		
-		handle_select_style();
-		update_preview();
-	});
 	
 	$('#outline img').click( function() {
 		if($(this).attr('id') == 'settings_button') {
@@ -119,7 +110,7 @@ $(document).ready(function() {
 	
 	$(document).keyup(function(e) {
 		if (e.keyCode == 27) {
-			$('#preview').hide();
+			$('#lightbox').hide();
 			$('body').css('overflow', 'auto');
 		}
 	});
@@ -150,4 +141,53 @@ $(document).ready(function() {
 			$('#navi li').removeClass('active');
 			$(this).parent().addClass('active');
 	});
+	
+	function lightbox(width, height) {
+		$(".modal-dialog")
+		//.height(400)
+		//.width(400)
+		.css({
+			'width' : width+'px',
+			'height' : height+'px',
+			'margin-left' : -width/2+'px',
+			'margin-top' : -height/2+'px'
+			
+			
+		});
+		$('#lightbox').show();
+	}
+	
+	$('#download').click( function () {
+		$('#download_box').show();
+		$('.modal-dialog iframe').hide();
+		lightbox(365, 200);
+	});
+	
+	$('.theme').click( function() {
+		$('.modal-dialog iframe').show();
+		lightbox(960, 765);
+		$('#download_box').hide();
+		$('.theme').removeClass('selected');
+		$(this).addClass('selected');
+		
+		handle_select_style();
+		update_preview();
+	});
+	/*$('#download').click( function(){
+	var width, height;
+	width = 400;
+	height = 400;
+		$(".modal-dialog")
+		//.height(400)
+		//.width(400)
+		.css({
+			'width' : width+'px',
+			'height' : height+'px',
+			'margin-left' : -width/2+'px',
+			'margin-top' : -height/2+'px'
+			
+			
+		});
+	
+	});*/
 });
