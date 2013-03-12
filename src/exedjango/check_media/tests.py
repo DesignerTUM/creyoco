@@ -35,8 +35,6 @@ class BasicTest(TestCase):
         response = self.client.get(self.file_url)
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, self.CONTENT)
-#        from IPython import embed; embed()
-        self.assertTrue(response)
 
     def test_403_on_illegal(self):
         wrong_name = 'user2'
@@ -46,3 +44,15 @@ class BasicTest(TestCase):
         self.client.login(username=wrong_name, password=wrong_password)
         response = self.client.get(self.file_url)
         self.assertEqual(response.status_code, 403)
+
+    def test_superuser(self):
+        superlogin = 'admin'
+        superpass = 'secret'
+        superuser = User.objects.create_superuser(superlogin,
+                                                 "super@creyoco.com",
+                                                 superpass)
+
+        self.client.login(username=superlogin, password=superpass)
+        response = self.client.get(self.file_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, self.CONTENT)

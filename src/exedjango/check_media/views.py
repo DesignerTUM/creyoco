@@ -14,7 +14,7 @@ def serve_media(request, path):
     user_media_path = request.user.get_profile().media_path
     requested_path = os.path.abspath(os.path.join(settings.MEDIA_ROOT, path))
     print user_media_path, requested_path
-    if requested_path.startswith(user_media_path):
+    if request.user.is_staff or requested_path.startswith(user_media_path):
         return sendfile(request, requested_path)
     else:
         return HttpResponseForbidden("Can't access the file")
