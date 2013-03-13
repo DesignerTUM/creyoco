@@ -171,7 +171,9 @@ TINYMCE_DEFAULT_CONFIG = {
    "theme_advanced_statusbar_location": "bottom",
        "theme_advanced_resize_horizontal": True,
        "theme_advanced_resizing": True,
-       "width": "100%"
+       "width": "100%",
+    "remove_script_host": False,
+    "convert_urls": False
 }
 
 # filebrowser settings
@@ -180,6 +182,8 @@ FILEBROWSER_URL_FILEBROWSER_MEDIA = "%sfilebrowser/" % STATIC_URL
 
 FILEBROWSER_URL_TINYMCE = "%stiny_mce/" % STATIC_URL
 FILEBROWSER_PATH_TINYMCE = "/tinymce/"
+
+FILEBROWSER_SAVE_FULL_URL = True
 
 FILEBROWSER_CONVERT_FILENAME = False
 

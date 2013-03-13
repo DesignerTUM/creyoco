@@ -383,7 +383,7 @@ i.e. the "package".
     @property
     def resources(self):
         # ask each node to its resources to desceare coupling
-        # implement as direct quety, should performance be too bad
+        # implement as direct query, should performance be too bad
         resources = set()
         for node in self.nodes.all():
             resources.update(node.resources)

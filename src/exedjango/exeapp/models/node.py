@@ -376,6 +376,7 @@ with it'''
         """
         log.debug(u"getResources ")
         resources = set()
+#        from IPython import embed; embed()
         for idevice in self.idevices.all():
 
             resources.update(idevice.as_child().resources)
