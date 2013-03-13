@@ -1,5 +1,5 @@
 # ===========================================================================
-# eXe 
+# eXe
 # Copyright 2004-2005, University of Auckland
 # Copyright 2004-2008 eXe Project, http://eXeLearning.org/
 #
@@ -56,13 +56,13 @@ class Manifest(object):
         'outputDir' is the directory that we read the html from and also output
         the mainfest.xml 
         """
-        self.outputDir    = outputDir
-        self.package      = package
-        self.idGenerator  = UniqueIdGenerator()
-        self.pages        = pages
-        self.itemStr      = ""
-        self.resStr       = ""
-        self.scorm_type    = scormType
+        self.outputDir = outputDir
+        self.package = package
+        self.idGenerator = UniqueIdGenerator()
+        self.pages = pages
+        self.itemStr = ""
+        self.resStr = ""
+        self.scorm_type = scormType
         self.dependencies = {}
 
 
@@ -80,7 +80,7 @@ class Manifest(object):
         else:
             raise AttributeError("Can't create metadata for %s" \
                                  % self.scorm_type)
-            
+
         static_dir = Path(settings.STATIC_ROOT)
         templateFilename = static_dir / 'templates' / template_name
         template = open(templateFilename, 'rb').read()
@@ -108,20 +108,20 @@ class Manifest(object):
         """
         Save a imsmanifest file to self.outputDir
         """
-        out = open(self.outputDir/filename, "w")
+        out = open(self.outputDir / filename, "w")
         if filename == "imsmanifest.xml":
             out.write(self.createXML().encode('utf8'))
         out.close()
         if self.scorm_type == SCORM12:
             xml = self.createMetaData()
-            out = open(self.outputDir/'imslrm.xml', 'wb')
+            out = open(self.outputDir / 'imslrm.xml', 'wb')
             out.write(xml.encode('utf8'))
             out.close()
-    
+
     def createXML(self):
         manifestId = unicode(self.idGenerator.generate())
-        orgId      = unicode(self.idGenerator.generate())
-        
+        orgId = unicode(self.idGenerator.generate())
+
         if self.scorm_type == COMMONCARTRIDGE:
             # FIXME flatten hierarchy
             for page in self.pages:
@@ -139,7 +139,7 @@ class Manifest(object):
             while depth >= 1:
                 self.itemStr += "</item>\n"
                 depth -= 1
-        
+
         return render_to_string("exe/export/scorm_manifest.html",
                                 {"SCORM12" : SCORM12,
                                  "SCORM2004" : SCORM2004,
@@ -147,25 +147,25 @@ class Manifest(object):
                                  "manifestId" : manifestId,
                                  "orgId" : orgId,
                                  "manifest" : self})
-            
+
     def genItemResStr(self, page):
         """
         Returning xml string for items and resources
         """
-        itemId   = "ITEM-"+unicode(self.idGenerator.generate())
-        resId    = "RES-"+unicode(self.idGenerator.generate())
-        filename = page.name+".html"
-            
-        
-        self.itemStr += '<item identifier="'+itemId+'" '
+        itemId = "ITEM-" + unicode(self.idGenerator.generate())
+        resId = "RES-" + unicode(self.idGenerator.generate())
+        filename = page.name + ".html"
+
+
+        self.itemStr += '<item identifier="' + itemId + '" '
         if self.scorm_type != COMMONCARTRIDGE:
             self.itemStr += 'isvisible="true" '
-        self.itemStr += 'identifierref="'+resId+'">\n'
+        self.itemStr += 'identifierref="' + resId + '">\n'
         self.itemStr += "    <title>"
         self.itemStr += page.node.titleShort
         self.itemStr += "</title>\n"
-        
-        self.resStr += "  <resource identifier=\""+resId+"\" "
+
+        self.resStr += "  <resource identifier=\"" + resId + "\" "
         self.resStr += "type=\"webcontent\" "
 
         # FIXME force dependency on popup_bg.gif on every page
@@ -185,7 +185,7 @@ class Manifest(object):
             self.dependencies["popup_bg.gif"] = True
         else:
             self.resStr += "adlcp:scormtype=\"sco\" "
-            self.resStr += "href=\""+filename+"\"> \n"
+            self.resStr += "href=\"" + filename + "\"> \n"
             self.resStr += """\
     <file href="%s"/>
     <file href="base.css"/>
@@ -196,8 +196,8 @@ class Manifest(object):
         self.resStr += "\n"
         fileStr = ""
 
-        for resource in page.node.resources:            
-            fileStr += "    <file href=\""+os.path.basename(resource)+"\"/>\n"
+        for resource in page.node.resources:
+            fileStr += "    <file href=\"" + os.path.basename(resource) + "\"/>\n"
             self.dependencies[resource] = True
 
         self.resStr += fileStr
@@ -214,8 +214,8 @@ class ScormPage(Page):
             self.scorm_type = kwargs['scorm_type']
             del kwargs["scorm_type"]
         else:
-            self.scorm_type = SCORM12 
-        
+            self.scorm_type = SCORM12
+
         super(ScormPage, self).__init__(*args, **kwargs)
 
     def render(self):
@@ -241,14 +241,14 @@ class ScormExport(WebsiteExport):
             del kwargs["scorm_type"]
         else:
             raise TypeError("ScormExport requires a kw argument scorm_type")
-        
+
         super(ScormExport, self).__init__(*args, **kwargs)
         static_dir = Path(settings.STATIC_ROOT)
-        self.imagesDir    = static_dir / "images"
+        self.imagesDir = static_dir / "images"
         self.templatesDir = static_dir / "templates"
-        self.schemasDir   = static_dir /"schemas"
-        self.hasForum     = False
-        
+        self.schemasDir = static_dir / "schemas"
+        self.hasForum = False
+
         self.page_class = ScormPage
 
 
@@ -257,7 +257,8 @@ class ScormExport(WebsiteExport):
         Export SCORM package
         """
         self.create_pages({"scorm_type" : self.scorm_type})
-        
+        self.save_pages()
+
         for page in self.pages:
             if not self.hasForum:
                 for idevice in page.node.idevices.all():
@@ -271,39 +272,39 @@ class ScormExport(WebsiteExport):
         self.doZip()
         # Clean up the temporary dir
         self.output_dir.rmtree()
-        
+
     def copyFiles(self):
-        
+
         manifest = Manifest(self.output_dir, self.package,
                              self.pages, self.scorm_type)
         manifest.save("imsmanifest.xml")
         if self.hasForum:
             manifest.save("discussionforum.xml")
-            
+
         if self.scorm_type == COMMONCARTRIDGE:
             self.style_dir.copylist(manifest.dependencies.keys(),
                                      self.output_dir)
         else:
             self.copy_style_files()
-            
+
         self.copy_resources()
         if self.scorm_type == COMMONCARTRIDGE:
             self.scripts_dir.copylist(('libot_drag.js',
                                       'common.js'), self.output_dir)
         else:
-            self.scripts_dir.copylist(('APIWrapper.js', 
-                                      'SCOFunctions.js', 
+            self.scripts_dir.copylist(('APIWrapper.js',
+                                      'SCOFunctions.js',
                                       'libot_drag.js',
                                       'common.js'), self.output_dir)
         schemasDir = ""
         if self.scorm_type == SCORM12:
-            schemasDir = self.schemasDir/SCORM12
+            schemasDir = self.schemasDir / SCORM12
             schemasDir.copylist(('imscp_rootv1p1p2.xsd',
                                 'imsmd_rootv1p2p1.xsd',
                                 'adlcp_rootv1p2.xsd',
                                 'ims_xml.xsd'), self.output_dir)
         elif self.scorm_type == SCORM2004:
-            schemasDir = self.schemasDir/SCORM2004
+            schemasDir = self.schemasDir / SCORM2004
             schemasDir.copylist(('imscp_rootv1p1p2.xsd',
                                 'imsmd_rootv1p2p1.xsd',
                                 'adlcp_rootv1p2.xsd',
@@ -311,25 +312,25 @@ class ScormExport(WebsiteExport):
         self.copy_players()
         if self.scorm_type == SCORM12 or self.scorm_type == SCORM2004:
             self.copy_licence()
-            
+
 class ScormExport12(ScormExport):
     title = "Scorm 1.2"
-    
+
     def __init__(self, *args, **kwargs):
         kwargs['scorm_type'] = SCORM12
         super(ScormExport12, self).__init__(*args, **kwargs)
-    
-        
+
+
 class ScormExport2004(ScormExport):
     title = "Scorm 2004"
-    
+
     def __init__(self, *args, **kwargs):
         kwargs['scorm_type'] = SCORM2004
         super(ScormExport2004, self).__init__(*args, **kwargs)
-        
+
 class CommonCartridge(ScormExport):
     title = "Common Cartridge"
-    
+
     def __init__(self, *args, **kwargs):
         kwargs['scorm_type'] = SCORM12
         super(CommonCartridge, self).__init__(*args, **kwargs)

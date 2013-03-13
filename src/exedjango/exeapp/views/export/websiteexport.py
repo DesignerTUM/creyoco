@@ -1,5 +1,5 @@
 # ===========================================================================
-# eXe 
+# eXe
 # Copyright 2004-2005, University of Auckland
 # Copyright 2004-2008 eXe Project, http://eXeLearning.org/
 #
@@ -61,6 +61,7 @@ class WebsiteExport(object):
         self.page_class = WebsitePage
 
         self.output_dir = Path(tempfile.mkdtemp())
+        print self.output_dir
 
     def export(self):
         """

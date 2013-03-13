@@ -59,6 +59,7 @@ def navigation_bar(current_page, full_url):
     html += "</ul>\n"
     return html
 
+
 @register.inclusion_tag("exe/export/licence.html")
 def render_licence(current_page):
     """
@@ -96,15 +97,17 @@ def render_licence(current_page):
     licence = current_page.node.package.license
     licence_url = licences.get(licence)
 
-    return {"licences" : licences,
-            "licence" : licence,
-            "licence_url" : licence_url,
+    return {"licences": licences,
+            "licence": licence,
+            "licence_url": licence_url,
             }
+
 
 @register.filter
 @stringfilter
 def basename(value):
     return os.path.basename(value)
+
 
 @register.simple_tag
 def view_media(page):

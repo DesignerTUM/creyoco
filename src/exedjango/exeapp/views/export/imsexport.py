@@ -174,6 +174,7 @@ class IMSExport(WebsiteExport):
         """
 
         self.create_pages()
+        self.save_pages()
 
         manifest = Manifest(self.output_dir, self.package, self.pages)
         manifest.save()
