@@ -35,6 +35,7 @@ from exeapp.views.blocks.formsetblock import FormsetBlockFactory
 from exeapp.models import CaseStudyIdevice
 from exeapp.models.idevices.casestudyidevice import CaseActivity
 from exeapp.views.blocks.glossaryblock import GlossaryBlock
+from exeapp.views.blocks.tocblock import TOCBlock
 
 idevice_map = {
           FreeTextIdevice: GenericBlock,
@@ -42,7 +43,7 @@ idevice_map = {
           GlossaryIdevice: GlossaryBlock,
           ReadingActivityIdevice: GenericBlock,
           ReflectionIdevice: GenericBlock,
-          TOCIdevice: GenericBlock,
+          TOCIdevice: TOCBlock,
           WikipediaIdevice: WikipediaBlock,
           PDFIdevice: PDFBlock,
           ObjectivesIdevice: GenericBlock,

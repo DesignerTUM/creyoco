@@ -16,29 +16,7 @@ class TOCIdevice(GenericIdevice):
     content = fields.RichTextField(blank=True, default="")
     author = _("Technical University Munich")
     icon = u"icon_inter.gif"
+    edit_message = _("Can not edit this iDevice")
 
-    def save(self, *args, **kwargs):
-        self.content = self.populate_toc()
-        super(TOCIdevice, self).save(*args, **kwargs)
-
-    def populate_toc(self):
-        package = self.parent_node.package
-        toc_list = [self._generate_item(package.root)]
-        if package.root.children.exists():
-            toc_list.append(self._generate_toc_tree(package.root))
-        return '<ul class="toc">%s</ul>' % unordered_list(toc_list)
-
-    def _generate_toc_tree(self, node):
-        list = []
-        for child in node.children.all():
-            list.append(self._generate_item(child))
-            if child.children.exists():
-                list.append(self._generate_toc_tree(child))
-
-        return list
-
-    def _generate_item(self, node):
-        return '<a href="%s.html">%s</a>' %\
-                    (node.unique_name(), node.title)
     class Meta:
         app_label = "exeapp"
