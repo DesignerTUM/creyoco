@@ -1,17 +1,18 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="de">
 	<head>
 		<meta charset="UTF-8">
 		<title>{% block title %}{% endblock %}</title>
-		
+
 		{% block head_css %}
 			<link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/mz/style.min.css">
 		{% endblock %}
-		
+
 		{% block head_javascript %}{% endblock %}
-				
-				
+
+
 		<!-- Start Open Web Analytics Tracker -->
 		<script type="text/javascript">
 		//<![CDATA[
@@ -21,7 +22,7 @@
 		owa_cmds.push(['trackPageView']);
 		owa_cmds.push(['trackClicks']);
 		owa_cmds.push(['trackDomStream']);
-		
+
 		(function() {
 			var _owa = document.createElement('script'); _owa.type = 'text/javascript'; _owa.async = true;
 			owa_baseUrl = ('https:' == document.location.protocol ? window.owa_baseSecUrl || owa_baseUrl.replace(/http:/, 'https:') : owa_baseUrl );
@@ -36,7 +37,7 @@
 		<a href=""><img style="position: fixed;  bottom: 0;left: 0; border: 0;z-index: 2;" src="{% get_static_prefix %}images/mz/beta_ribbon.png" alt="Fork me on GitHub"></a>
 		{% block dialog %}
 		{% endblock %}
-		
+
 		<header>
 			<div>
 			{% block header %}
@@ -45,22 +46,22 @@
 			{% endblock %}
 			</div>
 		</header>
-		
+
 		<div id="wrapper">
 			<div id="box_left">
 				{% block box_left %}{% endblock %}
 			</div>
-			
+
 			<div id="content">
 				<h2>{% block h2 %}{% endblock %}</h2>
 
 				{% block navi %}{% endblock %}
-				
+
 				<div class="shadow-top-right"></div>
 				<div id="middle-row">
 					{% block content %}{% endblock %}
 				</div>
-				
+
 				<div class="shadow-bottom-left"></div>
 				<div class="shadow-bottom-right"></div>
 			</div>
@@ -72,8 +73,8 @@
 		<footer>
 			{% block footer %}
 			<div style="text-align:right;">
-				<a href="#impressum">Impressum</a> |
-				<a href="">Hilfe <i class="icon-question-sign"></i></a>
+				<a href="#impressum">{% trans "Site notice" %}</a> |
+				<a href="">{% trans "Help" %}<i class="icon-question-sign"></i></a>
 			</div>
 			{% endblock %}
 		</footer>

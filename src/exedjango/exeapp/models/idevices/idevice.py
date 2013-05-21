@@ -1,5 +1,5 @@
 # ===========================================================================
-# eXe 
+# eXe
 # Copyright 2004-2006, University of Auckland
 # Copyright 2004-2007 eXe Project, New Zealand Tertiary Education Commission
 #
@@ -25,6 +25,7 @@ The base class for all iDevices
 
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
+from django.utils.translation import ugettext_lazy as _
 
 import logging
 #from exe.engine.translate import lateTranslate
@@ -36,18 +37,19 @@ log = logging.getLogger(__name__)
 class Idevice(models.Model):
     """
     The base model for all iDevices
-iDevices are mini templates which the user uses to create content in the 
+iDevices are mini templates which the user uses to create content in the
 package
     """
 
     # Class attributes
-    # see derieved classes for persistenceVersion 
+    # see derieved classes for persistenceVersion
     NOEMPHASIS, SOMEEMPHASIS, STRONGEMPHASIS = range(3)
     CONTENT, DIDACTICS, COMMUNICATION,  TEST, MEDIA, UNKNOWN = \
-            "Content", "Didactics", "Communication", "Test", "Media", "Unknown"
-    
+            _("Content"), _("Didactics"), _("Communication"), _("Test"),\
+            _("Media"), _("Unknown")
+
     GROUP_ORDER = [CONTENT, DIDACTICS, COMMUNICATION,  TEST, MEDIA, UNKNOWN]
-             
+
     # should be overwritten by child classes
     title = ""
     emphasis = NOEMPHASIS
@@ -55,13 +57,13 @@ package
     purpose = ""
     tip = ""
     system_resources = []
-             
+
     edit = models.BooleanField(default=True)
     icon = ""
     parent_node = models.ForeignKey('Node', related_name='idevices')
-    
+
     child_type = models.CharField(max_length=32, editable=False, blank=True)
-    
+
 #    rawTitle = lateTranslate('title')
 #    author   = lateTranslate('author')
 #    purpose  = lateTranslate('purpose')
@@ -77,17 +79,17 @@ package
             klass = str(self.as_child().__class__).split('.')[-1]
             return klass[:-2]
     klass = property(get_klass)
-    
+
     def icon_url(self):
         icon_url = "%scss/styles/%s/%s" % (settings.STATIC_URL,
                                            self.parent_node.package.style,
                                            self.icon)
         return icon_url
-    
+
     @property
     def base_idevice(self):
         return Idevice.objects.get(pk=self.pk)
-    
+
     @property
     def resources(self):
         '''Safe attritube, which checks if idevice owner has the right to
@@ -101,28 +103,28 @@ reference the resources'''
                                        self.parent_node.package.style,
                                        self.icon))
         return resources
-    
+
     def _resources(self):
-        '''Should be overridden in children to specify resource 
+        '''Should be overridden in children to specify resource
 finding. Returns a set'''
         return set()
-    
+
     @property
     def link_list(self):
-        '''Should be overridden in children to specify resource 
+        '''Should be overridden in children to specify resource
 finding. Returns a list of (name, url) tuples'''
         return []
-    
+
     def edit_mode(self):
         '''Sets idevice mode to edit'''
         self.edit = True
-        
+
     def delete(self):
         super(Idevice, self).delete()
-        
+
     def apply_changes(self, agruments):
         self.edit = False
-        
+
 
     def is_first(self):
         """
@@ -136,7 +138,7 @@ finding. Returns a list of (name, url) tuples'''
         Return true if this is the last iDevice in this node
         """
         return self._order == \
-            len(self.parent_node.idevices.get_query_set()) - 1       
+            len(self.parent_node.idevices.get_query_set()) - 1
 
     def move_up(self):
         """
@@ -160,14 +162,14 @@ finding. Returns a list of (name, url) tuples'''
         prev_idevice._order, self._order = self._order, prev_idevice._order
         prev_idevice.save()
         self.save()
-            
+
     # Kudos to crucialfelix for djangosnippet 1031
-    # http://djangosnippets.org/snippets/1031/        
+    # http://djangosnippets.org/snippets/1031/
     def save(self, *args, **kwargs):
         if (not self.child_type):
             self.child_type = self.__class__.__name__.lower()
         self.save_base(*args, **kwargs)
-    
+
     def as_child(self):
         return getattr(self, self.child_type)
 
@@ -189,10 +191,10 @@ finding. Returns a list of (name, url) tuples'''
     def ChangedParentNode(self, old_node, new_node):
         """
         To update all fo the anchors (if any) that are defined within
-        any of this iDevice's various fields, and any 
+        any of this iDevice's various fields, and any
         internal link_list corresponding to those anchors.
         This is essentially a variation of Node:RenamedNode()
-        It also removes any internal link_list from the data structures as well, 
+        It also removes any internal link_list from the data structures as well,
         if this iDevice is being deleted
         """
         my_fields = self.getRichTextFields()
@@ -202,14 +204,14 @@ finding. Returns a list of (name, url) tuples'''
             if hasattr(this_field, 'anchor_names') \
             and len(this_field.anchor_names) > 0:
                 # okay, this is an applicable field with some anchors:
-                this_field.ReplaceAllInternalAnchorsLinks(oldNode=old_node, 
+                this_field.ReplaceAllInternalAnchorsLinks(oldNode=old_node,
                         newNode=new_node)
 
                 if new_node:
                     # add this particular anchor field into the new node's list:
                     if not hasattr(new_node, 'anchor_fields'):
                         new_node.anchor_fields = []
-                    if this_field not in new_node.anchor_fields: 
+                    if this_field not in new_node.anchor_fields:
                         new_node.anchor_fields.append(this_field)
                     if new_package:
                         if not hasattr(new_package, 'anchor_nodes'):
@@ -244,9 +246,9 @@ finding. Returns a list of (name, url) tuples'''
 
     def getRichTextFields(self):
         """
-        Like getResourcesField(), a general helper to allow nodes to search 
+        Like getResourcesField(), a general helper to allow nodes to search
         through all of their fields without having to know the specifics of each
-        iDevice type.  
+        iDevice type.
         Currently used by Extract to find all fields which have internal link_list.
         """
         # in the parent iDevice class, merely return an empty list,
@@ -255,11 +257,11 @@ finding. Returns a list of (name, url) tuples'''
                 + "implementation available for this particular iDevice "
                 + "class: " + repr(self) )
         return []
-    
+
     def __unicode__(self):
         return "FreeTextIdevice: %s" % self.id
-        
-        
+
+
     class Meta:
         order_with_respect_to = 'parent_node'
         app_label = "exeapp"

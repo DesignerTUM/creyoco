@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-21 11:59+0200\n"
+"POT-Creation-Date: 2013-05-21 12:42+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,7 +31,7 @@ msgstr "Aufgabe"
 #: models/idevices/freetextidevice.py:44
 #: models/idevices/objectivesidevice.py:12
 #: models/idevices/readingactidevice.py:13
-#: models/idevices/reflectionidevice.py:11 models/idevices/wikiidevice.py:22
+#: models/idevices/reflectionidevice.py:11 models/idevices/wikiidevice.py:20
 msgid "University of Auckland"
 msgstr ""
 
@@ -71,7 +71,7 @@ msgstr "Fallstudie"
 
 #: models/idevices/casestudyidevice.py:17
 #: models/idevices/glossaryidevice.py:17 models/idevices/pdfidevice.py:11
-#: models/idevices/tocidevice.py:16
+#: models/idevices/tocidevice.py:17
 msgid "Technical University Munich"
 msgstr ""
 
@@ -236,6 +236,30 @@ msgstr ""
 msgid "Enter defintion of the term"
 msgstr ""
 
+#: models/idevices/idevice.py:48 templates/exe/mainpage.html:96
+msgid "Content"
+msgstr "Inhalt"
+
+#: models/idevices/idevice.py:48
+msgid "Didactics"
+msgstr "Didaktik"
+
+#: models/idevices/idevice.py:48
+msgid "Communication"
+msgstr "Kommunikation"
+
+#: models/idevices/idevice.py:48
+msgid "Test"
+msgstr "Test"
+
+#: models/idevices/idevice.py:49
+msgid "Media"
+msgstr "Medien"
+
+#: models/idevices/idevice.py:49
+msgid "Unknown"
+msgstr "Unbekannt"
+
 #: models/idevices/objectivesidevice.py:10
 msgid "Objectives"
 msgstr "Lernziele"
@@ -396,15 +420,15 @@ msgid ""
 "connection and try again."
 msgstr ""
 
-#: models/idevices/tocidevice.py:9
+#: models/idevices/tocidevice.py:10
 msgid "Table Of Content"
 msgstr "Inhaltsangabe"
 
-#: models/idevices/wikiidevice.py:20
+#: models/idevices/wikiidevice.py:18
 msgid "Wiki Article"
 msgstr "Wikipedia Artikel"
 
-#: models/idevices/wikiidevice.py:23
+#: models/idevices/wikiidevice.py:21
 msgid ""
 "<p>The Wikipedia iDevice allows you to locate\n"
 "existing content from within Wikipedia and download this content into your "
@@ -419,18 +443,42 @@ msgid ""
 "is covered by the GNU free documentation license.</p>"
 msgstr ""
 
-#: models/idevices/wikiidevice.py:33
+#: models/idevices/wikiidevice.py:31
 msgid ""
 "Enter a phrase or term you wish to search\n"
 "within Wikipedia."
 msgstr ""
 
-#: models/idevices/wikiidevice.py:60 models/idevices/wikiidevice.py:91
+#: models/idevices/wikiidevice.py:58 models/idevices/wikiidevice.py:89
 #, python-format
 msgid ""
 "Unable to download from %s <br/>Please check the spelling and connection and "
 "try again."
 msgstr ""
+
+#: templates/base.html:76
+msgid "Site notice"
+msgstr "Impressum"
+
+#: templates/base.html:77
+msgid "Help"
+msgstr "Hilfe"
+
+#: templates/main.html:8 templates/main.html.py:47
+msgid "Overview"
+msgstr "Übersicht"
+
+#: templates/main.html:53
+msgid "Create a new course"
+msgstr "Neuen Kurs erstellen"
+
+#: templates/main.html:57
+msgid "Remove selected courses"
+msgstr "Gewählte Kurse löschen"
+
+#: templates/exe/mainpage.html:82
+msgid "Tools"
+msgstr "Werkzeuge"
 
 #: templatetags/common.py:71
 msgid "eXe : elearning XHTML editor"
@@ -446,7 +494,7 @@ msgstr ""
 
 #: templatetags/common.py:327 templatetags/common.py:328
 msgid "Close"
-msgstr ""
+msgstr "Schließen"
 
 #: views/handlers/package_rpc.py:92
 msgid "Can't dublicate root element"

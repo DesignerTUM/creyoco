@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+{% load i18n %}
 {% load mainpage_extras %}
 {% load authoring_extras %}
 
@@ -32,9 +33,9 @@
 			<div class="modal-dialog">
 				<i class="icon-remove icon-2x pull-right" style="cursor:pointer;position: absolute;right: 0;top: 0;margin-right: 10px;margin-top: 5px;" onclick="$(this).parent().parent().hide()"></i>
 					<iframe scrolling="auto" id="previewIFrame" src="preview">
-						
+
 					</iframe>
-					
+
 					<div id="download_box">
 					<h3>Wählen Sie das Dateiformat für den Kurs-Export.</h3>
 					{% for type, title in exporter_type_title_map.items %}
@@ -56,7 +57,7 @@
 		{% endfor %}
 		<option value='/exeapp'>Kursübersicht</option>
 	</select>
-	
+
 	<div id="outline">
 		<div class="clearfix">
 			<button class="first" id="btnAdd" class="newline-first"><i class="icon-plus-sign icon-large"></i></button>
@@ -78,7 +79,7 @@
 
 {% block box_right %}
 <div class="sidebar">
-	<h2>Werkzeuge</h2>
+	<h2>{% trans "Tools" %}</h2>
 	{% render_idevicepane idevices %}
 </div>
 {% endblock %}
@@ -92,7 +93,7 @@
 </ul>
 {% endblock %}
 
-{% block h2 %}Inhalt{% endblock %}
+{% block h2 %}{% trans "Content" %}{% endblock %}
 
 {% block content %}
 <div id="selectStyle" style="display:none">
@@ -117,9 +118,9 @@
 			<a href="#">{{title}}</a>
 			{% endfor %}
 		</div>-->
-		
+
 	{% include "exe/properties_form.html" %}
-	
+
 	<h3 onclick="$('#dublincore_form').toggle('slow');$(this).find('i').removeClass('icon-caret-right').addClass('icon-caret-down');"><i class="icon-caret-right" style="margin-right:10px;"></i>Dublin Core</h3>
 	{% include "exe/dublincore_form.html" %}
 </div>
