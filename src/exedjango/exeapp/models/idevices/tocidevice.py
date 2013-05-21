@@ -1,4 +1,5 @@
 from exeapp.models.idevices.genericidevice import GenericIdevice
+from django.utils.translation import ugettext_lazy as _
 from exeapp.models.idevices.idevice import Idevice
 from django.db import models
 from django.utils.translation import ugettext_lazy as _

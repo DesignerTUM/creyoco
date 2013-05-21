@@ -24,7 +24,7 @@ msgstr ""
 
 #: models/idevices/activityidevice.py:10
 msgid "Activity"
-msgstr ""
+msgstr "Aufgabe"
 
 #: models/idevices/activityidevice.py:12 models/idevices/clozeidevice.py:12
 #: models/idevices/externalurlidevice.py:10
@@ -49,7 +49,7 @@ msgstr ""
 
 #: models/idevices/appletidevice.py:9
 msgid "Java Applet iDevice"
-msgstr ""
+msgstr "Java Applet iDevice"
 
 #: models/idevices/appletidevice.py:11 models/idevices/commentidevice.py:11
 msgid "TU Munich"
@@ -67,7 +67,7 @@ msgstr ""
 
 #: models/idevices/casestudyidevice.py:15
 msgid "Case Study"
-msgstr ""
+msgstr "Fallstudie"
 
 #: models/idevices/casestudyidevice.py:17
 #: models/idevices/glossaryidevice.py:17 models/idevices/pdfidevice.py:11
@@ -119,7 +119,7 @@ msgstr ""
 
 #: models/idevices/clozeidevice.py:10
 msgid "Cloze"
-msgstr ""
+msgstr "Lückentext"
 
 #: models/idevices/clozeidevice.py:13
 msgid ""
@@ -161,7 +161,7 @@ msgstr ""
 
 #: models/idevices/commentidevice.py:9
 msgid "Remark"
-msgstr ""
+msgstr "Anmerkung"
 
 #: models/idevices/commentidevice.py:12
 msgid "Leave a commentary for others who work on this package."
@@ -176,7 +176,7 @@ msgstr ""
 
 #: models/idevices/externalurlidevice.py:8
 msgid "External Web Site"
-msgstr ""
+msgstr "Externe Web Seite"
 
 #: models/idevices/externalurlidevice.py:11
 msgid ""
@@ -196,7 +196,7 @@ msgstr ""
 
 #: models/idevices/feedbackidevice.py:7 templatetags/common.py:239
 msgid "Feedback"
-msgstr ""
+msgstr "Feedback"
 
 #: models/idevices/feedbackidevice.py:9
 msgid "Dimitri Vorona"
@@ -208,7 +208,7 @@ msgstr ""
 
 #: models/idevices/freetextidevice.py:42 models/idevices/freetextidevice.py:43
 msgid "Free Text"
-msgstr ""
+msgstr "Textfeld"
 
 #: models/idevices/freetextidevice.py:45
 msgid ""
@@ -222,7 +222,7 @@ msgstr ""
 
 #: models/idevices/glossaryidevice.py:15
 msgid "Glossary"
-msgstr ""
+msgstr "Glossar"
 
 #: models/idevices/glossaryidevice.py:18
 msgid "Adds a alphabethicaly sorted glossary"
@@ -238,7 +238,7 @@ msgstr ""
 
 #: models/idevices/objectivesidevice.py:10
 msgid "Objectives"
-msgstr ""
+msgstr "Lernziele"
 
 #: models/idevices/objectivesidevice.py:13
 msgid ""
@@ -254,7 +254,7 @@ msgstr ""
 
 #: models/idevices/pdfidevice.py:9
 msgid "Pdf iDevice"
-msgstr ""
+msgstr "PDF iDevice"
 
 #: models/idevices/pdfidevice.py:12
 msgid ""
@@ -270,7 +270,7 @@ msgstr ""
 
 #: models/idevices/preknowledgeidevice.py:9
 msgid "Preknowledge"
-msgstr ""
+msgstr "Vorwissen"
 
 #: models/idevices/preknowledgeidevice.py:11
 msgid ""
@@ -292,7 +292,7 @@ msgstr ""
 
 #: models/idevices/readingactidevice.py:11
 msgid "Reading Activity"
-msgstr ""
+msgstr "Textaufgabe"
 
 #: models/idevices/readingactidevice.py:14
 msgid ""
@@ -330,7 +330,7 @@ msgstr ""
 
 #: models/idevices/reflectionidevice.py:9
 msgid "Reflection"
-msgstr ""
+msgstr "Reflektion"
 
 #: models/idevices/reflectionidevice.py:12
 msgid ""
@@ -356,7 +356,7 @@ msgstr ""
 
 #: models/idevices/rssidevice.py:11
 msgid "RSS"
-msgstr ""
+msgstr "RSS"
 
 #: models/idevices/rssidevice.py:13
 msgid "Auckland University of Technology"
@@ -398,11 +398,11 @@ msgstr ""
 
 #: models/idevices/tocidevice.py:9
 msgid "Table Of Content"
-msgstr ""
+msgstr "Inhaltsangabe"
 
 #: models/idevices/wikiidevice.py:20
 msgid "Wiki Article"
-msgstr ""
+msgstr "Wikipedia Artikel"
 
 #: models/idevices/wikiidevice.py:23
 msgid ""

@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
 from exeapp.models.idevices.genericidevice import GenericIdevice
 from exeapp.models.idevices.idevice import Idevice
 import urllib
@@ -12,9 +13,6 @@ class UrlOpener(urllib.FancyURLopener):
     """
     version = "eXe/exe@exelearning.org"
 urllib._urlopener = UrlOpener()
-
-def _(value):
-    return value
 
 class WikipediaIdevice(GenericIdevice):
     name =_("Wiki Article")

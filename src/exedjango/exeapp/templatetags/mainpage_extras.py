@@ -17,11 +17,11 @@ register = template.Library()
 def idevice_ul(groups, group_order):
     idevice_list = []
     for group in group_order:
-        idevice_list.append("<a>%s</a>" % group)
+        idevice_list.append(u"<a>%s</a>" % group)
         prototype_list = []
         for prototype in groups[group]:
-            prototype_list.append('<a class="ideviceItem" href="#"' + \
-                ' ideviceid="%s">%s</a>' % (prototype.__name__,
+            prototype_list.append(u'<a class="ideviceItem" href="#"' + \
+                u' ideviceid="%s">%s</a>' % (prototype.__name__,
                                              prototype.name))
         idevice_list.append(prototype_list)
 
