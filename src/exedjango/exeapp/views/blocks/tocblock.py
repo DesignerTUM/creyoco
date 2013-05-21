@@ -40,6 +40,6 @@ class TOCBlock(GenericBlock):
         if export_url:
             node_url = node.unique_name() + ".html"
         else:
-            node_url = "../../{}/".format(node.id)
+            node_url = node.url()
         return '<a href="%s">%s</a>' %\
                     (node_url, node.title)

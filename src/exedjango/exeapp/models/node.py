@@ -16,6 +16,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 # ===========================================================================
+from django.core.urlresolvers import reverse
 from django.template.loader import render_to_string
 import re
 """
@@ -89,7 +90,7 @@ with it'''
         A general purpose single-line node-naming convention,
         currently only used for the anchor names, to
         provide a path to its specific node.
-        Create this path in an HTML-safe name, to closely match 
+        Create this path in an HTML-safe name, to closely match
         the names used upon export of the corresponding files.
         Optional new_node_title allows the determination of the
         full path name should this node's name change.
@@ -120,10 +121,10 @@ with it'''
     def RenamedNodePath(self, isMerge=False, isExtract=False):
         """
         To update all of the anchors (if any) that are defined within
-        any of this node's various iDevice fields, and any 
+        any of this node's various iDevice fields, and any
         internal links corresponding to those anchors.
         Called AFTER the actual rename has occurred.
-        NOTE: isMerge & isExtract will also attempt to connect all the data 
+        NOTE: isMerge & isExtract will also attempt to connect all the data
         structures, and isExtract will also try to clear out any orphaned links.
         AND: especially for extracts, continue on through all the child nodes
         even if the node names & path appear to be the same, since the objects
@@ -323,7 +324,7 @@ with it'''
     def copyToPackage(self, newPackage, newParentNode=None):
         """
         Clone a node just like this one, still belonging to this package.
-        if 'newParentNode' is None, the newly created node will replace the 
+        if 'newParentNode' is None, the newly created node will replace the
             root of 'newPackage'
 
         The newly inserted node is automatically selected.
@@ -454,7 +455,7 @@ KeyError, if idevice_type is not found
 
     def promote(self):
         """
-        Convenience function. Moves the node one step 
+        Convenience function. Moves the node one step
 closer to the tree root.
 Returns True is successful
         """
@@ -471,7 +472,7 @@ Returns True is successful
 
     def demote(self):
         """
-        Convenience function. Moves the node one step further away 
+        Convenience function. Moves the node one step further away
 from its parent, tries to keep the same position in the tree.
 Returns True is successful
         """
@@ -489,7 +490,7 @@ Returns True is successful
 
     def up(self):
         """
-        Moves the node up one node vertically, keeping to the same level in 
+        Moves the node up one node vertically, keeping to the same level in
         the tree.
         Returns True is successful.
         """
@@ -548,7 +549,7 @@ Returns True is successful
     def launch_testForZombies(self):
         """
         a wrapper to testForZombieNodes(self), such that it might be called
-        after the package has been loaded and upgraded.  Otherwise, due 
+        after the package has been loaded and upgraded.  Otherwise, due
         to the seemingly random upgrading of the package and resource objects,
         this might be called too early.
         """
@@ -564,9 +565,9 @@ Returns True is successful
             G.application.afterUpgradeHandlers.append(self.testForZombieNodes)
 
     def testForZombieNodes(self):
-        """ 
-        testing a possible post-load confirmation that this resource 
-        is indeed attached to something.  
+        """
+        testing a possible post-load confirmation that this resource
+        is indeed attached to something.
         to be called from twisted/persist/styles.py upon load of a Node.
         """
         # remembering that this is only launched for this nodes
@@ -597,6 +598,10 @@ Returns True is successful
                 page_name = "__"
             page_name = "%s_%s" % (page_name, self.id)
             return page_name
+
+    def url(self):
+        return reverse("exeapp.views.package.package_main",
+                       args=[self.package.id, self.id])
 
     def __unicode__(self):
         """
