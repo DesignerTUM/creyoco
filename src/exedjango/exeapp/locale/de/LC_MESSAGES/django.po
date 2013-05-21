@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-21 12:42+0200\n"
+"POT-Creation-Date: 2013-05-21 13:05+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -479,6 +479,70 @@ msgstr "Gewählte Kurse löschen"
 #: templates/exe/mainpage.html:82
 msgid "Tools"
 msgstr "Werkzeuge"
+
+#: templates/registration/login.html:10
+msgid "Welcome to creyoco!"
+msgstr "Willkommen bei creyoco!"
+
+#: templates/registration/login.html:14
+msgid "Have an account?"
+msgstr "Bereits Mitglied?"
+
+#: templates/registration/login.html:14
+msgid "Login!"
+msgstr "Medle dich an!"
+
+#: templates/registration/login.html:20
+msgid "Username or..."
+msgstr "Benutzername oder..."
+
+#: templates/registration/login.html:23 templates/registration/login.html:44
+#: templates/registration/register.html:14
+msgid "Username"
+msgstr "Benutzername"
+
+#: templates/registration/login.html:27
+msgid "password is wrong."
+msgstr "Password ist falsch."
+
+#: templates/registration/login.html:31 templates/registration/login.html:46
+#: templates/registration/register.html:19
+msgid "Password"
+msgstr "Passwort"
+
+#: templates/registration/login.html:32
+#, fuzzy
+msgid "Login"
+msgstr "Anmelden"
+
+#: templates/registration/login.html:36
+msgid "Recover password"
+msgstr "Passwort vergessen?"
+
+#: templates/registration/login.html:40
+msgid "New to creyoco?"
+msgstr "Neu bei creyoco?"
+
+#: templates/registration/login.html:40
+msgid "Register now!"
+msgstr "Registriere dich jetzt!"
+
+#: templates/registration/login.html:45
+msgid "E-Mail"
+msgstr "E-Mail"
+
+#: templates/registration/login.html:47
+#: templates/registration/register.html:24
+msgid "Password (again)"
+msgstr "Passwort (wiederholen)"
+
+#: templates/registration/login.html:48
+msgid "Create account"
+msgstr "Benutzerkonto erstellen"
+
+#: templates/registration/register.html:8
+msgid "Please correct the errors below"
+msgstr "Bitte, beseitigen Sie folgende Fehler"
 
 #: templatetags/common.py:71
 msgid "eXe : elearning XHTML editor"

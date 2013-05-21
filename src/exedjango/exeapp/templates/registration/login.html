@@ -1,50 +1,51 @@
 {% extends "base.html" %}
 {% load static %}
+{% load i18n %}
 
 {% block title %}creyoco | create your course{% endblock %}
 
 {% block box_left %}{% endblock %}
 {% block box_right %}{% endblock %}
 
-{% block h2 %}Willkommen bei creyoco!{% endblock %}
+{% block h2 %}{% trans "Welcome to creyoco!" %}{% endblock %}
 {% block dialog %}{% endblock %}
 {% block content %}
 <div style="margin-top:40px;margin-left:50px;margin-right:85px;width:262px;float:left;">
-	<div style="font-size:13px;font-weight:500;margin-bottom:25px">Bereits Mitglied?<span style="color:rgba(0,0,0,0.5)"> Melde dich an!</span></div>
+	<div style="font-size:13px;font-weight:500;margin-bottom:25px">{% trans "Have an account?" %}<span style="color:rgba(0,0,0,0.5)"> {% trans "Login!" %}</span></div>
 
 	<form action='/accounts/login/' method='post'>
 		{% csrf_token %}
 		{% if form.errors %}
 		<div style="position:relative;">
-			<div class="error-left"><span>Benutzername oder…</span></div>
+			<div class="error-left"><span>{% trans "Username or..." %}</span></div>
 		</div>
 		{% endif %}
-		<input class="username" type="text" name="username" placeholder="Benutzername" value="{{ form.username.value|default_if_none:"" }}">
-			
+		<input class="username" type="text" name="username" placeholder="{% trans "Username" %}" value="{{ form.username.value|default_if_none:"" }}">
+
 		{% if form.errors %}
 		<div style="position:relative">
-			<div class="error-left"><span>Passwort falsch!</span></div>
+			<div class="error-left"><span>{% trans "password is wrong." %}</span></div>
 		</div>
 		{% endif %}
-			
-		<input class="login_password" type="password" name="password" placeholder="Passwort" value="{{ form.username.value|default_if_none:"" }}">
-		<input class="login_submit" type="submit" value="Einloggen">
+
+		<input class="login_password" type="password" name="password" placeholder="{% trans "Password" %}" value="{{ form.username.value|default_if_none:"" }}">
+		<input class="login_submit" type="submit" value="{% trans "Login" %}">
 		<input type="hidden" name="next" value="/">
 	</form>
-		
-	<a class="forgot_pw" href="">Passwort vergessen?</a>
+
+	<a class="forgot_pw" href="">{% trans "Recover password" %}</a>
 </div>
 
 <div style="margin-top:40px;margin-right:50px;float:left;width:262px;">
-	<div style="font-size:13px;font-weight:500;margin-bottom:25px">Neu bei creyoco? <span style="color:rgba(0,0,0,0.5)"> Registriere dich jetzt!</span></div>
-		
+	<div style="font-size:13px;font-weight:500;margin-bottom:25px">{% trans "New to creyoco?" %} <span style="color:rgba(0,0,0,0.5)"> {% trans "Register now!" %}</span></div>
+
 	<form action='/accounts/register/' method='post'>
 		{% csrf_token %}
-		<input class="reg_username" type="text" name="username" placeholder="Benutzername">
-		<input class="reg_email" type="text" name="email" placeholder="E-Mail">
-		<input class="reg_password" type="password" name="password1" placeholder="Passwort">
-		<input class="reg_password_return" type="password" name="password2" placeholder="Passwort wiederholen">
-		<input class="reg_submit" type="submit" value="Benutzerkonto erstellen">
+		<input class="reg_username" type="text" name="username" placeholder="{% trans "Username" %}" />
+		<input class="reg_email" type="text" name="email" placeholder="{% trans "E-Mail" %}" />
+		<input class="reg_password" type="password" name="password1" placeholder="{% trans "Password" %}" />
+		<input class="reg_password_return" type="password" name="password2" placeholder="{% trans "Password (again)" %}">
+		<input class="reg_submit" type="submit" value="{% trans "Create account" %}">
 		<input type="hidden" name="next" value="/">
 	</form>
 </div>
