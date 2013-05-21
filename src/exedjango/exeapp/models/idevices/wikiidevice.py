@@ -62,16 +62,14 @@ within Wikipedia."""))
         # FIXME avoid problems with numeric entities in attributes
         page = page.replace(u'&#160;', u'&nbsp;')
 
-        # avoidParserProblems is set to False because BeautifulSoup's
-        # cleanup was causing a "concatenating Null+Str" error,
-        # and Wikipedia's HTML doesn't need cleaning up.
-        # BeautifulSoup is faster this way too.
-        soup = BeautifulSoup(page, False)
-        content = soup.first('div', {'id': "content"})
+        soup = BeautifulSoup(page)
+        content = soup.find('div', {'id': "content"})
 
         # remove the wiktionary, wikimedia commons, and categories boxes
         #  and the protected icon and the needs citations box
+        print content
         if content:
+            content['id'] = 'wiki_content'
             infoboxes = content.findAll('div',
                     {'class' : 'infobox sisterproject'})
             [infobox.extract() for infobox in infoboxes]
