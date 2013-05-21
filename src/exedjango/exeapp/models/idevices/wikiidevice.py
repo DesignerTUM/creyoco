@@ -17,21 +17,21 @@ def _(value):
     return value
 
 class WikipediaIdevice(GenericIdevice):
-    name = "Wiki Article"
+    name =_("Wiki Article")
     title = models.CharField(max_length=100, default=name)
-    author = "University of Auckland"
-    purpose = """<p>The Wikipedia iDevice allows you to locate 
-existing content from within Wikipedia and download this content into your eXe 
-resource. The Wikipedia Article iDevice takes a snapshot copy of the article 
-content. Changes in Wikipedia will not automatically update individual snapshot 
-copies in eXe, a fresh copy of the article will need to be taken. Likewise, 
-changes made in eXe will not be updated in Wikipedia. </p> <p>Wikipedia content 
-is covered by the GNU free documentation license.</p>"""
+    author = _("University of Auckland")
+    purpose = _("""<p>The Wikipedia iDevice allows you to locate
+existing content from within Wikipedia and download this content into your eXe
+resource. The Wikipedia Article iDevice takes a snapshot copy of the article
+content. Changes in Wikipedia will not automatically update individual snapshot
+copies in eXe, a fresh copy of the article will need to be taken. Likewise,
+changes made in eXe will not be updated in Wikipedia. </p> <p>Wikipedia content
+is covered by the GNU free documentation license.</p>""")
     emphasis = Idevice.NOEMPHASIS
     group = Idevice.CONTENT
     article_name = fields.URLField(max_length=100, blank=True, default="",
-                        help_text="""Enter a phrase or term you wish to search 
-within Wikipedia.""")
+                        help_text=_("""Enter a phrase or term you wish to search
+within Wikipedia."""))
     content = fields.RichTextField(blank=True, default="")
     site = "http://en.wikipedia.org/wiki/"
     icon = u"icon_inter.gif"

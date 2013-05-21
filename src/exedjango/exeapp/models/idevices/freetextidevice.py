@@ -1,5 +1,5 @@
 # ===========================================================================
-# eXe 
+# eXe
 # Copyright 2004-2006, University of Auckland
 # Copyright 2004-2008 eXe Project, http://eXeLearning.org/
 #
@@ -21,10 +21,7 @@
 """
 FreeTextIdevice: just has a block of text
 """
-from django.db import models
-from django.contrib.contenttypes import generic
-from django.conf import settings
-
+from django.utils.translation import ugettext_lazy as _
 import logging
 from exeapp.models.idevices import fields
 from exeapp.models.idevices.idevice import Idevice
@@ -36,29 +33,25 @@ log = logging.getLogger(__name__)
 # ===========================================================================
 
 NOEXPORT, PRESENTATION, HANDOUT = "1", "2", "3"
- 
-def x_(arg):
-    '''Placeholder for translation'''
-    return arg
 
 class FreeTextIdevice(GenericIdevice):
     """
     FreeTextIdevice: just has a block of text
     """
     group = Idevice.CONTENT
-    name = "Free Text"
-    title = "Free Text"
-    author = "University of Auckland"
-    purpose = """The majority of a learning resource will be 
+    name = _("Free Text")
+    title = _("Free Text")
+    author = _("University of Auckland")
+    purpose = _("""The majority of a learning resource will be
 establishing context, delivering instructions and providing general information.
-This provides the framework within which the learning activities are built and 
-delivered."""
+This provides the framework within which the learning activities are built and
+delivered.""")
     emphasis = Idevice.NOEMPHASIS
     content = fields.RichTextField(blank=True, default="")
-    
+
     class Meta:
         app_label = "exeapp"
-    
-   
+
+
 # ===========================================================================
 

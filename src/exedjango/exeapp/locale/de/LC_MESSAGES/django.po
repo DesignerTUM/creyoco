@@ -1,0 +1,563 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-05-21 11:59+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+
+#: models/package.py:407
+msgid "?????"
+msgstr ""
+
+#: models/idevices/activityidevice.py:10
+msgid "Activity"
+msgstr ""
+
+#: models/idevices/activityidevice.py:12 models/idevices/clozeidevice.py:12
+#: models/idevices/externalurlidevice.py:10
+#: models/idevices/freetextidevice.py:44
+#: models/idevices/objectivesidevice.py:12
+#: models/idevices/readingactidevice.py:13
+#: models/idevices/reflectionidevice.py:11 models/idevices/wikiidevice.py:22
+msgid "University of Auckland"
+msgstr ""
+
+#: models/idevices/activityidevice.py:13
+msgid ""
+"An activity can be defined as a task or set of tasks a\n"
+"learner must complete. Provide a clear statement of the task and consider\n"
+"any conditions that may help or hinder the learner in the performance of\n"
+"the task."
+msgstr ""
+
+#: models/idevices/activityidevice.py:20
+msgid "Describe the tasks the learners should complete."
+msgstr ""
+
+#: models/idevices/appletidevice.py:9
+msgid "Java Applet iDevice"
+msgstr ""
+
+#: models/idevices/appletidevice.py:11 models/idevices/commentidevice.py:11
+msgid "TU Munich"
+msgstr ""
+
+#: models/idevices/appletidevice.py:12
+msgid ""
+"Import java applets and display them\n"
+"    Requires Java plugin."
+msgstr ""
+
+#: models/idevices/appletidevice.py:15
+msgid "Java Applet"
+msgstr ""
+
+#: models/idevices/casestudyidevice.py:15
+msgid "Case Study"
+msgstr ""
+
+#: models/idevices/casestudyidevice.py:17
+#: models/idevices/glossaryidevice.py:17 models/idevices/pdfidevice.py:11
+#: models/idevices/tocidevice.py:16
+msgid "Technical University Munich"
+msgstr ""
+
+#: models/idevices/casestudyidevice.py:18
+msgid ""
+"A case study is a device that provides learners\n"
+"with a simulation that has an educational basis. It takes a situation, "
+"generally\n"
+"based in reality, and asks learners to demonstrate or describe what action "
+"they\n"
+"would take to complete a task or resolve a situation. The case study allows\n"
+"learners apply their own knowledge and experience to completing the tasks\n"
+"assigned. when designing a case study consider the following:<ul>\n"
+"<li>    What educational points are conveyed in the story</li>\n"
+"<li>    What preparation will the learners need to do prior to working on "
+"the\n"
+"case study</li>\n"
+"<li>    Where the case study fits into the rest of the course</li>\n"
+"<li>    How the learners will interact with the materials and each other e."
+"g.\n"
+"if run in a classroom situation can teams be setup to work on different "
+"aspects\n"
+"of the case and if so how are ideas feed back to the class</li></ul>"
+msgstr ""
+
+#: models/idevices/casestudyidevice.py:35
+msgid ""
+"Create the case story. A good case is one\n"
+"that describes a controversy or sets the scene by describing the characters\n"
+"involved and the situation. It should also allow for some action to be "
+"taken\n"
+"in order to gain resolution of the situation."
+msgstr ""
+
+#: models/idevices/casestudyidevice.py:52
+msgid ""
+"Describe the activity tasks relevant to the case story provided. These could "
+"be in the form of questions or instructions for activity which may lead the "
+"learner to resolving a dilemma presented. "
+msgstr ""
+
+#: models/idevices/casestudyidevice.py:54
+msgid "Provide relevant feedback on the situation"
+msgstr ""
+
+#: models/idevices/clozeidevice.py:10
+msgid "Cloze"
+msgstr ""
+
+#: models/idevices/clozeidevice.py:13
+msgid ""
+"<p>Cloze exercises are texts or\n"
+"                    sentences where students must fill in\n"
+"                    missing words. They are often used for the\n"
+"                    following purposes:</p>\n"
+"                    <ol>\n"
+"                    <li>To check knowledge of core course\n"
+"                    concepts (this could be a pre-check,\n"
+"                    formative exercise, or summative check).</li>\n"
+"                    <li>To check reading comprehension.</li>\n"
+"                    <li>To check vocabulary knowledge.</li>\n"
+"                    <li>To check word formation and/or grammatical\n"
+"                    competence. </li></ol>"
+msgstr ""
+
+#: models/idevices/clozeidevice.py:28
+msgid ""
+"Provide instruction on how the cloze activity should be\n"
+"completed. Default text will be entered if there are no changes to this "
+"field.\n"
+msgstr ""
+
+#: models/idevices/clozeidevice.py:32
+msgid ""
+"Enter the text for the cloze activity in to the cloze field\n"
+"by either pasting text from another source or by typing text directly into "
+"the\n"
+"field.To select words to hide, double click on the word to select it and\n"
+"click on the Hide/Show Word button below."
+msgstr ""
+
+#: models/idevices/clozeidevice.py:37
+msgid ""
+"Enter any feedback you wish to provide the learner\n"
+"                with-in the feedback field. This field can be left blank."
+msgstr ""
+
+#: models/idevices/commentidevice.py:9
+msgid "Remark"
+msgstr ""
+
+#: models/idevices/commentidevice.py:12
+msgid "Leave a commentary for others who work on this package."
+msgstr ""
+
+#: models/idevices/commentidevice.py:17
+msgid ""
+"Use this field to leave a\n"
+"comment for people who works on this package with you.\n"
+"This iDevice won't be exported"
+msgstr ""
+
+#: models/idevices/externalurlidevice.py:8
+msgid "External Web Site"
+msgstr ""
+
+#: models/idevices/externalurlidevice.py:11
+msgid ""
+"The external website iDevice loads an external website\n"
+"into an inline frame in your eXe content rather then opening it in a popup "
+"box.\n"
+"This means learners are not having to juggle windows.\n"
+"This iDevice should only be used if your content\n"
+"will be viewed by learners online."
+msgstr ""
+
+#: models/idevices/externalurlidevice.py:19
+msgid ""
+"Enter the URL you wish to display\n"
+"and select the size of the area to display it in."
+msgstr ""
+
+#: models/idevices/feedbackidevice.py:7 templatetags/common.py:239
+msgid "Feedback"
+msgstr ""
+
+#: models/idevices/feedbackidevice.py:9
+msgid "Dimitri Vorona"
+msgstr ""
+
+#: models/idevices/feedbackidevice.py:10
+msgid "Use it to put a feedback link to your documents"
+msgstr ""
+
+#: models/idevices/freetextidevice.py:42 models/idevices/freetextidevice.py:43
+msgid "Free Text"
+msgstr ""
+
+#: models/idevices/freetextidevice.py:45
+msgid ""
+"The majority of a learning resource will be\n"
+"establishing context, delivering instructions and providing general "
+"information.\n"
+"This provides the framework within which the learning activities are built "
+"and\n"
+"delivered."
+msgstr ""
+
+#: models/idevices/glossaryidevice.py:15
+msgid "Glossary"
+msgstr ""
+
+#: models/idevices/glossaryidevice.py:18
+msgid "Adds a alphabethicaly sorted glossary"
+msgstr ""
+
+#: models/idevices/glossaryidevice.py:35
+msgid "Enter term you want to describe"
+msgstr ""
+
+#: models/idevices/glossaryidevice.py:37
+msgid "Enter defintion of the term"
+msgstr ""
+
+#: models/idevices/objectivesidevice.py:10
+msgid "Objectives"
+msgstr ""
+
+#: models/idevices/objectivesidevice.py:13
+msgid ""
+"Objectives describe the expected outcomes of the learning \"\n"
+"    \"and should define what the learners will be able to do when they have "
+"\"\n"
+"    \"completed the learning tasks."
+msgstr ""
+
+#: models/idevices/objectivesidevice.py:19
+msgid "Type the learning objectives for this resource."
+msgstr ""
+
+#: models/idevices/pdfidevice.py:9
+msgid "Pdf iDevice"
+msgstr ""
+
+#: models/idevices/pdfidevice.py:12
+msgid ""
+"Import local pdf and display them.\n"
+"    Requires Acrobat Reader plugin."
+msgstr ""
+
+#: models/idevices/pdfidevice.py:21
+msgid ""
+"Input coma-separated pages or page rangesto import. For example: 1,2,3-8. "
+"Leave empty to import all pages"
+msgstr ""
+
+#: models/idevices/preknowledgeidevice.py:9
+msgid "Preknowledge"
+msgstr ""
+
+#: models/idevices/preknowledgeidevice.py:11
+msgid ""
+"Prerequisite knowledge refers to the knowledge learners\n"
+"    should already have in order to be able to effectively complete the\n"
+"    learning. Examples of pre-nowledge can be:\n"
+"    <ul>\n"
+"        <li>Learners must have level 4 English </li>\n"
+"        <li>Learners must be able to assemble standard power tools </li>\n"
+"    </ul>\n"
+"    "
+msgstr ""
+
+#: models/idevices/preknowledgeidevice.py:22
+msgid ""
+"Describe the prerequisite knowledge learners\n"
+"                        should have to effectively complete this learning."
+msgstr ""
+
+#: models/idevices/readingactidevice.py:11
+msgid "Reading Activity"
+msgstr ""
+
+#: models/idevices/readingactidevice.py:14
+msgid ""
+"<p>The Reading Activity will primarily\n"
+"be used to check a learner's comprehension of a given text. This can be "
+"done\n"
+"by asking the learner to reflect on the reading and respond to questions "
+"about\n"
+"the reading, or by having them complete some other possibly more physical "
+"task\n"
+"based on the reading.</p>"
+msgstr ""
+
+#: models/idevices/readingactidevice.py:22
+msgid ""
+"Enter the details of the reading\n"
+"    including reference details. The\n"
+"    referencing style used will depend on the preference of your faculty or\n"
+"    department."
+msgstr ""
+
+#: models/idevices/readingactidevice.py:28
+msgid ""
+"Describe the tasks related to the reading learners should undertake.\n"
+"        This helps demonstrate relevance for learners."
+msgstr ""
+
+#: models/idevices/readingactidevice.py:32
+msgid ""
+"Use feedback to provide a summary of the points covered in the reading,\n"
+"or as a starting point for further analysis of the reading by posing a "
+"question\n"
+"or providing a statement to begin a debate."
+msgstr ""
+
+#: models/idevices/reflectionidevice.py:9
+msgid "Reflection"
+msgstr ""
+
+#: models/idevices/reflectionidevice.py:12
+msgid ""
+"Reflection is a teaching method often used to\n"
+"connect theory to practice. Reflection tasks often provide learners with an\n"
+"opportunity to observe and reflect on their observations before presenting\n"
+"these as a piece of academic work. Journals, diaries, profiles and "
+"portfolios\n"
+"are useful tools for collecting observation data. Rubrics and guides can be\n"
+"effective feedback tools."
+msgstr ""
+
+#: models/idevices/reflectionidevice.py:22
+msgid "Enter a question for learners to reflect upon."
+msgstr ""
+
+#: models/idevices/reflectionidevice.py:25
+msgid ""
+"Describe how learners will assess how\n"
+"they have done in the exercise. (Rubrics are useful devices for providing\n"
+"reflective feedback.)"
+msgstr ""
+
+#: models/idevices/rssidevice.py:11
+msgid "RSS"
+msgstr ""
+
+#: models/idevices/rssidevice.py:13
+msgid "Auckland University of Technology"
+msgstr ""
+
+#: models/idevices/rssidevice.py:14
+msgid ""
+"The RSS iDevice is used\n"
+"to provide new content to an individual users machine. Using this\n"
+"iDevice you can provide links from a feed you select for learners to view."
+msgstr ""
+
+#: models/idevices/rssidevice.py:21
+msgid ""
+"Enter an RSS URL for the RSS feed you\n"
+"want to attach to your content. Feeds are often identified by a small "
+"graphic\n"
+" icon (often like this <img src=\"/static/images/feed-icon.png\" />) or the "
+"text \"RSS\". Clicking on the\n"
+" icon or text label will display an RSS feed right in your browser. You can "
+"copy and paste the\n"
+"URL into this field. Alternately, right clicking on the link or graphic will "
+"open a menu box;\n"
+"click on COPY LINK LOCATION or Copy Shortcut. Back in eXe open the RSS "
+"bookmark iDevice and Paste the URL\n"
+"into the RSS URL field and click the LOAD button. This will extract the "
+"titles from your feed and\n"
+"display them as links in your content. From here you can edit the bookmarks "
+"and add\n"
+" instructions or additional learning information."
+msgstr ""
+
+#: models/idevices/rssidevice.py:47 models/idevices/rssidevice.py:50
+#, python-format
+msgid ""
+"Unable to load RSS feed from %s <br/>Please check the spelling and "
+"connection and try again."
+msgstr ""
+
+#: models/idevices/tocidevice.py:9
+msgid "Table Of Content"
+msgstr ""
+
+#: models/idevices/wikiidevice.py:20
+msgid "Wiki Article"
+msgstr ""
+
+#: models/idevices/wikiidevice.py:23
+msgid ""
+"<p>The Wikipedia iDevice allows you to locate\n"
+"existing content from within Wikipedia and download this content into your "
+"eXe\n"
+"resource. The Wikipedia Article iDevice takes a snapshot copy of the "
+"article\n"
+"content. Changes in Wikipedia will not automatically update individual "
+"snapshot\n"
+"copies in eXe, a fresh copy of the article will need to be taken. Likewise,\n"
+"changes made in eXe will not be updated in Wikipedia. </p> <p>Wikipedia "
+"content\n"
+"is covered by the GNU free documentation license.</p>"
+msgstr ""
+
+#: models/idevices/wikiidevice.py:33
+msgid ""
+"Enter a phrase or term you wish to search\n"
+"within Wikipedia."
+msgstr ""
+
+#: models/idevices/wikiidevice.py:60 models/idevices/wikiidevice.py:91
+#, python-format
+msgid ""
+"Unable to download from %s <br/>Please check the spelling and connection and "
+"try again."
+msgstr ""
+
+#: templatetags/common.py:71
+msgid "eXe : elearning XHTML editor"
+msgstr ""
+
+#: templatetags/common.py:312
+msgid "Instructions"
+msgstr ""
+
+#: templatetags/common.py:318 templatetags/common.py:322
+msgid "Click for completion instructions"
+msgstr ""
+
+#: templatetags/common.py:327 templatetags/common.py:328
+msgid "Close"
+msgstr ""
+
+#: views/handlers/package_rpc.py:92
+msgid "Can't dublicate root element"
+msgstr ""
+
+#: views/handlers/package_rpc.py:506 views/handlers/package_rpc.py:614
+#, python-format
+msgid "Preview directory %s is a file, cannot replace it"
+msgstr ""
+
+#: views/handlers/package_rpc.py:526
+#, python-format
+msgid "Local file %s is not found, cannot preview it"
+msgstr ""
+
+#: views/handlers/package_rpc.py:584 views/handlers/package_rpc.py:934
+#, python-format
+msgid ""
+"SAVE FAILED!\n"
+"%s"
+msgstr ""
+
+#: views/handlers/package_rpc.py:656
+#, python-format
+msgid ""
+"MimeTeX compile failed!\n"
+"%s"
+msgstr ""
+
+#: views/handlers/package_rpc.py:722 views/handlers/package_rpc.py:864
+msgid "Cannot access directory named "
+msgstr ""
+
+#: views/handlers/package_rpc.py:724 views/handlers/package_rpc.py:864
+msgid ". Please use ASCII names."
+msgstr ""
+
+#: views/handlers/package_rpc.py:758 views/handlers/package_rpc.py:765
+#: views/handlers/package_rpc.py:768 views/handlers/package_rpc.py:771
+#: views/handlers/package_rpc.py:774 views/handlers/package_rpc.py:1037
+msgid "EXPORT FAILED!"
+msgstr ""
+
+#: views/handlers/package_rpc.py:872 views/handlers/package_rpc.py:1053
+#: views/handlers/package_rpc.py:1109 views/handlers/package_rpc.py:1130
+#, python-format
+msgid ""
+"\"%s\" already exists.\n"
+"Please try again with a different filename"
+msgstr ""
+
+#: views/handlers/package_rpc.py:873 views/handlers/package_rpc.py:890
+#, python-format
+msgid ""
+"EXTRACT FAILED!\n"
+"%s"
+msgstr ""
+
+#: views/handlers/package_rpc.py:892
+#, python-format
+msgid "Package extracted to: %s"
+msgstr ""
+
+#: views/handlers/package_rpc.py:920 views/handlers/package_rpc.py:962
+#: views/handlers/package_rpc.py:1081
+#, python-format
+msgid "Filename %s is a file, cannot replace it"
+msgstr ""
+
+#: views/handlers/package_rpc.py:926 views/handlers/package_rpc.py:968
+#: views/handlers/package_rpc.py:1087
+#, python-format
+msgid ""
+"Folder name %s already exists. Please choose another one or delete existing "
+"one then try again."
+msgstr ""
+
+#: views/handlers/package_rpc.py:976 views/handlers/package_rpc.py:1041
+#: views/handlers/package_rpc.py:1054 views/handlers/package_rpc.py:1060
+#: views/handlers/package_rpc.py:1094 views/handlers/package_rpc.py:1110
+#: views/handlers/package_rpc.py:1116 views/handlers/package_rpc.py:1131
+#: views/handlers/package_rpc.py:1137
+#, python-format
+msgid ""
+"EXPORT FAILED!\n"
+"%s"
+msgstr ""
+
+#: views/handlers/package_rpc.py:1043 views/handlers/package_rpc.py:1062
+#: views/handlers/package_rpc.py:1096 views/handlers/package_rpc.py:1118
+#: views/handlers/package_rpc.py:1139
+#, python-format
+msgid "Exported to %s"
+msgstr ""
+
+#: views/handlers/package_rpc.py:1169
+#, python-format
+msgid "File %s does not exist or is not readable."
+msgstr ""
+
+#: views/handlers/package_rpc.py:1173
+msgid "Couldn't load file, please email file to bugs@exelearning.org"
+msgstr ""
+
+#: views/handlers/package_rpc.py:1176
+#, python-format
+msgid ""
+"Sorry, wrong file format:\n"
+"%s"
+msgstr ""
+
+#: views/handlers/package_rpc.py:1178
+msgid "Sorry, wrong file format"
+msgstr ""
