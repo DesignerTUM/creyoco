@@ -354,7 +354,7 @@ msgstr ""
 
 #: models/idevices/reflectionidevice.py:9
 msgid "Reflection"
-msgstr "Reflektion"
+msgstr "Reflexion"
 
 #: models/idevices/reflectionidevice.py:12
 msgid ""
@@ -470,7 +470,7 @@ msgstr "Übersicht"
 
 #: templates/main.html:53
 msgid "Create a new course"
-msgstr "Neuen Kurs erstellen"
+msgstr "Neues Lernmodul erstellen"
 
 #: templates/main.html:57
 msgid "Remove selected courses"
