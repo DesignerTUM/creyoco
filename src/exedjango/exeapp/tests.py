@@ -2,7 +2,7 @@
 """
 This file contains the tests for important views in exedjango.
 Notice, that your tests should always clear package_storage shoudl be cleared,
-to prevent conflicts with package creation in another tests. You can use 
+to prevent conflicts with package creation in another tests. You can use
 _clean_up_database_and_store for it.
 """
 
@@ -44,6 +44,7 @@ from exeapp.views.export.scormexport import ScormExport, COMMONCARTRIDGE, \
 from exeapp.views.blocks.widgets import FreeTextWidget
 from exeapp.views.blocks.blockfactory import block_factory
 from bs4 import BeautifulSoup
+from django.utils.translation import ugettext_lazy as _
 
 
 PACKAGE_COUNT = 3
@@ -90,7 +91,7 @@ class MainPageTestCase(TestCase):
 
     def test_basic_elements(self):
         response = self.c.get('/exeapp/')
-        self.assertContains(response, "Kursübersicht")
+        self.assertContains(response, _("Overview"))
         self.assertContains(response, "creyoco")
 
     def _test_create_package(self):
@@ -173,7 +174,7 @@ class PackagesPageTestCase(TestCase):
     def test_idevice_pane(self):
         response = self.c.get(self.PAGE_URL % (self.PACKAGE_ID, self.NODE_ID))
         self.assertContains(response, "outline_pane")
-        self.assertContains(response, "Free Text")
+        self.assertContains(response, _("Free Text"))
 
     def test_authoring(self):
         response = self.c.get(self.PAGE_URL % (self.PACKAGE_ID,

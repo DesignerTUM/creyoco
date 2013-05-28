@@ -466,7 +466,7 @@ msgstr "Hilfe"
 
 #: templates/main.html:8 templates/main.html.py:47
 msgid "Overview"
-msgstr "Übersicht"
+msgstr "Kursübersicht"
 
 #: templates/main.html:53
 msgid "Create a new course"
