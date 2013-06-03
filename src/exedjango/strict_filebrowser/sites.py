@@ -29,6 +29,9 @@ class StrictFilebrowserSite(FileBrowserSite):
     """Overrides filebrowser's default directory selection.
     Bases it on the user name"""
 
+    def browse(self, *args, **kwargs):
+        return super(StrictFilebrowserSite, self).browse(*args, **kwargs)
+
     def filebrowser_view(self, view):
         super_view = super(StrictFilebrowserSite, self).filebrowser_view(
             view

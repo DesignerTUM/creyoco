@@ -39,7 +39,7 @@
 					<div id="download_box">
 					<h3>Wählen Sie das Dateiformat für den Kurs-Export.</h3>
 					{% for type, title in exporter_type_title_map.items %}
-						<a class="export_link" href="{% url exeapp.views.package.export package.id type %}"><i class="icon-arrow-right"></i> {{title}}</a>
+						<a class="export_link" href="{% url "exeapp.views.package.export" package.id type %}"><i class="icon-arrow-right"></i> {{title}}</a>
 					{% endfor %}
 					</div>
 			</div>
@@ -109,7 +109,7 @@
 <div id="properties" style="display:none;">
 		<!--<div id="download" style="margin-left:0;background-color:white;width:130px;border:1px solid rgb(155, 155, 155)">
 			{% for type, title in exporter_type_title_map.items %}
-			<a class="export_link" href="{% url exeapp.views.package.export package.id type %}">{{title}}</a>
+			<a class="export_link" href="{% url "exeapp.views.package.export" package.id type %}">{{title}}</a>
 			{% endfor %}
 		</div>
 		<div id="download">

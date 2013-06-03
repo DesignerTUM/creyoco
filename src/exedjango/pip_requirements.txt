@@ -1,5 +1,5 @@
 BeautifulSoup4
-Django>=1.4
+Django>=1.5
 PIL==1.1.7
 argparse
 distribute
@@ -7,7 +7,7 @@ django-extensions
 ipython>=0.13
 mock
 wsgiref
-django-registration
+hg+https://bitbucket.org/ubernostrum/django-registration#egg=registration
 django-grappelli
 django-tinymce
 django-filebrowser
