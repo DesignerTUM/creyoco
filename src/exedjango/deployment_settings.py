@@ -2,7 +2,7 @@
 
 from settings import *
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 #DATABASES = {
@@ -26,5 +26,7 @@ DATABASES = {
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
+
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '129.187.81.136']
 
 SENDFILE_BACKEND = 'sendfile.backends.xsendfile'
