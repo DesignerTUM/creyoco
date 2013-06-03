@@ -17,7 +17,7 @@ from exeapp.models.tests.test_package import UserandPackageTestCase
 
 __all__ = ['UserProfile',
            'Package', 'DublinCore', 'UserandPackageTestCase',
-           'idevice_store', 
+           'idevice_store',
            'User',
            'Node',
            'idevice_store',
