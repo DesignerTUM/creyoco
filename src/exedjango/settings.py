@@ -125,6 +125,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'tinymce',
     'check_media',
+    'strict_filebrowser',
     'exeapp',
 )
 
@@ -186,5 +187,7 @@ FILEBROWSER_PATH_TINYMCE = "/tinymce/"
 FILEBROWSER_SAVE_FULL_URL = True
 
 FILEBROWSER_CONVERT_FILENAME = False
+FILEBROWSER_STRICT_PIL = True
+
 
 SENDFILE_BACKEND = 'sendfile.backends.development'
