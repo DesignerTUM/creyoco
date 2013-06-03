@@ -4,11 +4,14 @@ from django.contrib.auth.management import create_superuser
 from django.db.models import signals
 from django.dispatch import receiver
 
-
 from exeapp.models import UserProfile
 import os
 import shutil
 from exeapp.models import Package
+
+import logging
+
+log = logging.getLogger(__file__)
 
 
 def create_debug_superuser(app, created_models, **kwargs):
@@ -18,10 +21,10 @@ def create_debug_superuser(app, created_models, **kwargs):
         su = auth_models.User.objects.create_superuser(SU_LOGIN, "admin@exe.org",
                                                   SU_PASSWORD)
         Package.objects.create(title="test", user=su)
-        print "Created superuser %s with password %s" % (SU_LOGIN, SU_PASSWORD)
+        log.info("Created superuser {} with password {}".format(SU_LOGIN,
+                                                                SU_PASSWORD))
 
 if settings.DEBUG and not getattr(settings, "TEST", False):
-    print "DISABLING SUPERUSER CREATIONG"
     signals.post_syncdb.disconnect(
         create_superuser,
         sender=auth_models,
@@ -39,8 +42,8 @@ def user_post_save(sender, instance, created, **kwargs):
         try:
             os.mkdir(profile.media_path)
         except Exception, e:
-                print "Folder for user {0} at {1} already exists.".\
-                    format(profile, profile.media_path)
+                log.info("Folder for user {0} at {1} already exists.".\
+                    format(profile, profile.media_path))
 
 
 @receiver(signal=signals.pre_delete, sender=auth_models.User)
@@ -49,7 +52,7 @@ def user_pre_delete(sender, instance, **kwargs):
     try:
         shutil.rmtree(profile.media_path)
     except OSError, e:
-        print e
+        log.error(str(e))
     profile.delete()
 
 
