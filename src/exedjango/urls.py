@@ -5,7 +5,7 @@ from django.views.generic.simple import redirect_to
 from django.contrib import admin
 from django.core.urlresolvers import reverse
 
-from filebrowser.sites import site
+from strict_filebrowser.sites import site
 admin.autodiscover()
 
 urlpatterns = patterns('',
