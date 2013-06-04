@@ -62,6 +62,8 @@ def _create_packages(user, package_count=PACKAGE_COUNT,
 
 def _create_basic_database():
     '''Creates 2 users (admin, user) with 5 packages each for testing'''
+    if not os.path.exists(settings.MEDIA_ROOT):
+        os.mkdir(settings.MEDIA_ROOT)
     admin = User.objects.create_superuser(username=TEST_USER, email='admin@exe.org',
                                           password=TEST_PASSWORD)
     admin.save()
@@ -70,7 +72,6 @@ def _create_basic_database():
     user.save()
     _create_packages(admin)
     _create_packages(user)
-
 
 class MainPageTestCase(TestCase):
 

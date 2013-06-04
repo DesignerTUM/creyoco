@@ -11,4 +11,4 @@ install:
   - pip install -r src/exedjango/pip_requirements.txt --use-mirrors
 
 script:
-  - python src/exedjango/manage.py test exeapp check_media strict_filebrowser
+  - cd src/exedjango/ ; python manage.py test exeapp check_media strict_filebrowser --settings=test_settings

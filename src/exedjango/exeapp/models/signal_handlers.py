@@ -40,7 +40,7 @@ def user_post_save(sender, instance, created, **kwargs):
                     objects.create(user=instance)
         profile.save()
         try:
-            os.mkdir(profile.media_path)
+            os.makedirs(profile.media_path)
         except Exception, e:
                 log.info("Folder for user {0} at {1} already exists.".\
                     format(profile, profile.media_path))
