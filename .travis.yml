@@ -9,6 +9,7 @@ env:
 install:
   - pip install -q Django==$DJANGO
   - pip install -r src/exedjango/pip_requirements.txt --use-mirrors
+  - python src/exedjango/manage.py collectstatic --noinput -l
 
 script:
   - cd src/exedjango/ ; python manage.py test exeapp check_media strict_filebrowser --settings=test_settings
