@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.contrib.auth import models as auth_models
 from django.contrib.auth.management import create_superuser
+from django.db import IntegrityError
 from django.db.models import signals
 from django.dispatch import receiver
 
@@ -18,11 +19,14 @@ def create_debug_superuser(app, created_models, **kwargs):
     if settings.DEBUG and not getattr(settings, "TEST", False):
         SU_LOGIN = "admin"
         SU_PASSWORD = "admin"
-        su = auth_models.User.objects.create_superuser(SU_LOGIN, "admin@exe.org",
-                                                  SU_PASSWORD)
-        Package.objects.create(title="test", user=su)
-        log.info("Created superuser {} with password {}".format(SU_LOGIN,
-                                                                SU_PASSWORD))
+        try:
+            su = auth_models.User.objects.create_superuser(SU_LOGIN, "admin@exe.org",
+                                                      SU_PASSWORD)
+            Package.objects.create(title="test", user=su)
+            log.info("Created superuser {} with password {}".format(SU_LOGIN,
+                                                                    SU_PASSWORD))
+        except IntegrityError as error:
+            log.error(str(error))
 
 if settings.DEBUG and not getattr(settings, "TEST", False):
     signals.post_syncdb.disconnect(
