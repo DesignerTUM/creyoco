@@ -92,16 +92,16 @@ jQuery(document).ready(function() {
                 get_outline_pane().jstree({
                   "core" : {	"animation" : 200
                   },
-                  "ui" : {		"select_limit" : 1, 
+                  "ui" : {		"select_limit" : 1,
                       			"initially_select" : ["node" + get_outline_pane().attr("current_node")]
                   },
                   "themes" : {	"dots" : false,
-                  				"icons" : false, 
+                  				"icons" : false,
                   },
                   "plugins" : ["themes", "html_data", "ui", "crrm"]});
                 get_outline_pane().jstree('open_all', $('#outline_pane>ul'));
                 //bind actions to outline nodes
-                // get_outline_pane().bind("select_node.jstree", 
+                // get_outline_pane().bind("select_node.jstree",
                       // handle_select_node);
                 get_outline_pane().delegate("a", "dblclick", rename_current_node);
                 //bind renaming event
@@ -112,27 +112,27 @@ jQuery(document).ready(function() {
 				bind_pjax();
                 // handle theme selection
                 $(".theme").click(handle_select_style);
-                
+
                 // Initialize idevice Tree
                 $("#idevice_pane").jstree({"themes" : {	"dots" : false,
-                  										"icons" : false, 
+                  										"icons" : false,
                   							},
                   							"plugins" : ["themes", "html_data", "ui"]
                   						});
                 $("#idevice_pane").jstree('open_all', $('#idevice_pane>ul'));
-                                   
-                
+
+
                 //bind actions to outline buttons
                 $("#btnAdd").click(add_child_node)
                 $("#btnRemove").click(delete_current_node)
                 $("#btnRename").click(rename_current_node);
                 $("#btnDuplicate").click(function() {alert(NOT_IMPLEMENTED);});
-                
+
                 $("#btnPromote").click(promote_current_node);
                 $("#btnDemote").click(demote_current_node);
                 $("#btnUp").click(move_current_node_up);
                 $("#btnDown").click(move_current_node_down);
-                
+
                 // init ajax forms
                 $("#properties_form, #dublincore_form").ajaxForm(function (responseText, statusText, xhr, form){
                  	$(".errorlist").hide();
@@ -141,7 +141,7 @@ jQuery(document).ready(function() {
                  	}
                  });
 
-                
+
                 //$(".bigButton:not(#btnRename), .smallButton").each(function(index) {
                 //    bindButtonClicked(this);
                 //});
@@ -149,7 +149,7 @@ jQuery(document).ready(function() {
                 $("#idevice_pane").delegate(".ideviceItem", "click", add_idevice);
                 $("#middle").tabs();
                 updateTitle();
-                
+
                 // $("#authoringIFrame1").load(function() {
                 	// var node_id = $("#authoringIFrame1").contents().find("#node_id").text();
                 	// if (current_outline_id() != node_id){
@@ -168,8 +168,8 @@ function callback_delete_package(id) {
 //Bind pjax to a's of outline pane
 function bind_pjax() {
 	var $nodes = get_outline_pane().find("ul > li > a");
-	$nodes.off("click");
-    $nodes.on("click", function(event){
+//	$nodes.off("click");
+    $nodes.on("click", function(event) {
 		get_outline_pane().jstree("select_node", "#" + $(this).attr("id"), true);
 		handle_select_node(event);
 		$.pjax.click(event, {container: "#authoring"});
@@ -177,7 +177,7 @@ function bind_pjax() {
 	});
 }
 
-// Promps a new package new and sens a "main.create_package" call via 
+// Promps a new package new and sens a "main.create_package" call via
 // rpc
 function create_package(){
   var package_title = prompt('Enter package title');
@@ -205,7 +205,7 @@ function delete_package(){
 
 // Adds a new node to current one
 function add_child_node() {
-  
+
   $.jsonRPC.request('add_child_node', [get_package_id(), get_current_node_id()], {
     success: function(results) {
       callback_add_child_node(results.result.id, results.result.title);
@@ -239,7 +239,7 @@ function rename_current_node(){
 // Promotes current node to a sibling of it's parent.
 function promote_current_node(){
   // check if the current node is the root or a child of the root
-  if (is_root(get_current_node()) || 
+  if (is_root(get_current_node()) ||
   is_root(get_current_node().parent().parent().parent())) {
               alert(CANT_MOVE_NODE_FURTHER);
               return -1;
@@ -259,7 +259,7 @@ function demote_current_node() {
   // Check if current node if a root
   if (is_root(get_current_node())) {
     alert("Can't demote the root.");
-  } else 
+  } else
     // Check if there are any nodes before current one on the same level
     if (get_current_node().parent().prev().length == 0) {
       alert ("No previous node, can't demote.");
@@ -315,10 +315,10 @@ function add_idevice() {
     }
   });
   return false;
-} 
+}
 
 // Handles outline_pane selection event. Calls package.change_current_node
-// via rpc. 
+// via rpc.
 function handle_select_node(event, data) {
 
 	// for (key in data){alert(key);};
@@ -386,14 +386,14 @@ function get_package_id(){
 // selected node
 function callback_add_child_node(nodeid, title) {
     var current_li = get_current_node().parent();
-    var new_node = {'data': {'title' : title, 
+    var new_node = {'data': {'title' : title,
         'attr': {'id': 'node' + nodeid,
         'nodeid': nodeid,
         'href': "/exeapp/package/" + get_package_id() + "/" + nodeid + "/"}}}
     get_outline_pane().on("create_node.jstree", function(event, data) {
     var id_attr = data.rslt.obj.find("a").attr('id');
 	    bind_pjax();
-    	$("#" + id_attr).click();	
+    	$("#" + id_attr).click();
     });
     get_outline_pane().jstree("create_node",current_li, "last", new_node);
     get_outline_pane().jstree("open_node", current_li);
@@ -402,7 +402,7 @@ function callback_add_child_node(nodeid, title) {
 
 // Delete the currently selected node
 function callback_delete_current_node(new_node_id) {
-	
+
     get_outline_pane().jstree("delete_node", "#node" + get_current_node_id());
     get_outline_pane().jstree("select_node", "#node" + new_node_id, true);
     var url = "/exeapp/package/" + get_package_id() + "/" + new_node_id + "/" ;
@@ -453,7 +453,7 @@ function is_root(node) {
   return (node.parent().parent().attr('id') == 'outline_pane');
 }
 
-// called to synchronize current_node attribute of outline_pane with 
+// called to synchronize current_node attribute of outline_pane with
 // currently selected node. Refreshes authoring
 function set_current_node(node) {
   get_outline_pane().attr('current_node', get_current_node().attr('nodeid'));
@@ -463,7 +463,7 @@ function set_current_node(node) {
 
 function update_preview() {
   var url = window.location.protocol + '//' + location.host + location.pathname;
-  $('#previewIFrame').attr('src', url + "preview/");	
+  $('#previewIFrame').attr('src', url + "preview/");
 }
 
 function set_current_style() {
