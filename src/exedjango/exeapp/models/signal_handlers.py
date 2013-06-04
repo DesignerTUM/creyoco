@@ -28,13 +28,13 @@ def create_debug_superuser(app, created_models, **kwargs):
         except IntegrityError as error:
             log.error(str(error))
 
-if settings.DEBUG and not getattr(settings, "TEST", False):
-    signals.post_syncdb.disconnect(
-        create_superuser,
-        sender=auth_models,
-        dispatch_uid='django.contrib.auth.management.create_superuser')
-    signals.post_syncdb.connect(create_debug_superuser,
-            sender=auth_models, dispatch_uid='common.models.create_testuser')
+# if settings.DEBUG and not getattr(settings, "TEST", False):
+#     signals.post_syncdb.disconnect(
+#         create_superuser,
+#         sender=auth_models,
+#         dispatch_uid='django.contrib.auth.management.create_superuser')
+#     signals.post_syncdb.connect(create_debug_superuser,
+#             sender=auth_models, dispatch_uid='common.models.create_testuser')
 
 
 @receiver(signal=signals.post_save, sender=auth_models.User)
