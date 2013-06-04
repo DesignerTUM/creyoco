@@ -1,6 +1,11 @@
 from django.db import models
 from exeapp.views.blocks.widgets import *
+from south.modelsinspector import add_introspection_rules
 
+add_introspection_rules([], ["^exeapp\.models\.idevices\.fields\.RichTextField"])
+add_introspection_rules([], ["^exeapp\.models\.idevices\.fields\.FeedbackField"])
+add_introspection_rules([], ["^exeapp\.models\.idevices\.fields\.URLField"])
+add_introspection_rules([], ["^exeapp\.models\.idevices\.fields\.ClozeTextField"])
 
 class RichTextField(models.TextField):
     def formfield(self, **kwargs):

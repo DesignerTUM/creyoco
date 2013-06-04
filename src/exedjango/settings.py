@@ -108,6 +108,7 @@ ROOT_URLCONF = 'exedjango.urls'
 TEMPLATE_DIRS = (_get_file_from_root('exeapp_templates'),
                  )
 
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -116,6 +117,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'grappelli',
     'filebrowser',
+    'south',
     'registration',
     'django.contrib.admin',
     'django.contrib.staticfiles',
@@ -128,7 +130,6 @@ INSTALLED_APPS = (
     'strict_filebrowser',
     'exeapp',
 )
-
 ABSOLUTE_URL_OVERRIDES = {
         'auth.user': lambda user: '/',
         }
