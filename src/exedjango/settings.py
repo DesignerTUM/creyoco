@@ -98,6 +98,7 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.csrf.CsrfResponseMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 
     # handling of 403 exception
     'exedjango.base.middleware.Http403Middleware',
@@ -108,13 +109,13 @@ ROOT_URLCONF = 'exedjango.urls'
 TEMPLATE_DIRS = (_get_file_from_root('exeapp_templates'),
                  )
 
-
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
+    'django.contrib.flatpages',
     'grappelli',
     'filebrowser',
     'south',
@@ -130,6 +131,7 @@ INSTALLED_APPS = (
     'strict_filebrowser',
     'exeapp',
 )
+
 ABSOLUTE_URL_OVERRIDES = {
         'auth.user': lambda user: '/',
         }
