@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-21 13:05+0200\n"
+"POT-Creation-Date: 2013-06-11 15:19+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
-#: models/package.py:407
+#: tests.py:95 templates/main.html:8 templates/main.html.py:42
+msgid "Overview"
+msgstr "Kursübersicht"
+
+#: tests.py:178 models/idevices/freetextidevice.py:42
+#: models/idevices/freetextidevice.py:43
+msgid "Free Text"
+msgstr "Textfeld"
+
+#: models/package.py:415
 msgid "?????"
 msgstr ""
 
@@ -206,10 +215,6 @@ msgstr ""
 msgid "Use it to put a feedback link to your documents"
 msgstr ""
 
-#: models/idevices/freetextidevice.py:42 models/idevices/freetextidevice.py:43
-msgid "Free Text"
-msgstr "Textfeld"
-
 #: models/idevices/freetextidevice.py:45
 msgid ""
 "The majority of a learning resource will be\n"
@@ -236,7 +241,7 @@ msgstr ""
 msgid "Enter defintion of the term"
 msgstr ""
 
-#: models/idevices/idevice.py:48 templates/exe/mainpage.html:96
+#: models/idevices/idevice.py:48 templates/exe/mainpage.html:92
 msgid "Content"
 msgstr "Inhalt"
 
@@ -424,6 +429,13 @@ msgstr ""
 msgid "Table Of Content"
 msgstr "Inhaltsangabe"
 
+#: models/idevices/tocidevice.py:19
+msgid ""
+"The content of this iDevice is automatically generatedshould not be edited "
+"directly."
+msgstr "Der Inhalt von diesem iDevice wird automatisch generiert und kann "
+"nicht manuell geändert werden"
+
 #: models/idevices/wikiidevice.py:18
 msgid "Wiki Article"
 msgstr "Wikipedia Artikel"
@@ -449,34 +461,30 @@ msgid ""
 "within Wikipedia."
 msgstr ""
 
-#: models/idevices/wikiidevice.py:58 models/idevices/wikiidevice.py:89
+#: models/idevices/wikiidevice.py:58 models/idevices/wikiidevice.py:87
 #, python-format
 msgid ""
 "Unable to download from %s <br/>Please check the spelling and connection and "
 "try again."
 msgstr ""
 
-#: templates/base.html:76
+#: templates/base.html:83
 msgid "Site notice"
 msgstr "Impressum"
 
-#: templates/base.html:77
+#: templates/base.html:84
 msgid "Help"
 msgstr "Hilfe"
 
-#: templates/main.html:8 templates/main.html.py:47
-msgid "Overview"
-msgstr "Kursübersicht"
-
-#: templates/main.html:53
+#: templates/main.html:48
 msgid "Create a new course"
 msgstr "Neues Lernmodul erstellen"
 
-#: templates/main.html:57
+#: templates/main.html:52
 msgid "Remove selected courses"
 msgstr "Gewählte Kurse löschen"
 
-#: templates/exe/mainpage.html:82
+#: templates/exe/mainpage.html:78
 msgid "Tools"
 msgstr "Werkzeuge"
 
