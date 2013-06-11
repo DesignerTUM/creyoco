@@ -1,4 +1,4 @@
-<VirtualHost *:878>
+<VirtualHost *:80>
 	#ServerName 129.187.81.137
 	ServerAlias *.creyoco.com creyoco.com
 	
