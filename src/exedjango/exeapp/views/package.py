@@ -84,7 +84,6 @@ def change_properties(request, package, current_node):
                                         'exeapp.views.package.package_main',
                                         args=[package.id, current_node.id]))
     else:
-        print form.errors
         if request.is_ajax():
             return HttpResponse(render_to_string("exe/{}.html".format(form_type),
                                                  {form_type: form}))
