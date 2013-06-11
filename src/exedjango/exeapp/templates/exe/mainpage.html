@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "auth_base.html" %}
 
 {% load i18n %}
 {% load mainpage_extras %}
@@ -123,16 +123,6 @@
 
 	<h3 onclick="$('#dublincore_form').toggle('slow');$(this).find('i').removeClass('icon-caret-right').addClass('icon-caret-down');"><i class="icon-caret-right" style="margin-right:10px;"></i>Dublin Core</h3>
 	{% include "exe/dublincore_form.html" %}
-</div>
-{% endblock %}
-{% block footer %}
-<hr>
-<div class="pull-left">
-	<a href="/accounts/logout/" style="text-align:left">Logout</a>
-</div>
-<div class="pull-right">
-	<a href="#impressum">Impressum</a> |
-	<a href="">Hilfe <i class="icon-question-sign"></i></a>
 </div>
 {% endblock %}
 

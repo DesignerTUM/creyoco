@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+<!-- Base template for pages which require authentication -->
+{% block footer %}
+<hr>
+<div class="pull-left">
+	<a href="/accounts/logout/" style="text-align:left">Logout</a>
+</div>
+<div class="pull-right">
+	<a href="#impressum">Impressum</a> |
+	<a href="">Hilfe <i class="icon-question-sign"></i></a>
+</div>
+{% endblock %}
