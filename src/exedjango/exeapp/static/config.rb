@@ -2,10 +2,10 @@
 project_type = :stand_alone
 # Set this to the root of your project when deployed:
 http_path = "/"
-css_path = "/src/exedjango/exeapp/static/css/mz"
+css_path = "css/mz"
 sass_dir = "sass"
-images_dir = "static/images/mz"
-fonts_dir = "static/fonts"
+images_dir = "images/mz"
+fonts_dir = "fonts"
 
 output_style = :nested
 
