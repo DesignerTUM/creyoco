@@ -17,6 +17,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 # ===========================================================================
+import os
 from django.db import models
 import datetime
 
@@ -27,6 +28,7 @@ i.e. the "package".
 
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
+from django.conf import settings
 
 
 import logging
@@ -373,6 +375,12 @@ i.e. the "package".
         node.save()
 
     def set_style(self, style):
+        if not style in [os.path.basename(style) for style in \
+              os.listdir(settings.STYLE_DIR) \
+              # style dir has to be joined because of a bug on windows
+              # with abapath resolving
+              if os.path.isdir(os.path.join(settings.STYLE_DIR, style))]:
+            raise ValueError("Style {} cannot be found".format(style))
         self.style = style
         self.save()
 
@@ -585,7 +593,7 @@ i.e. the "package".
     def findResourceByName(self, queryName):
         """
         Support for merging, and anywhere else that unique names might be
-        checked before actually comparing against the files (as will be 
+        checked before actually comparing against the files (as will be
         done by the resource class itself in its _addOurselvesToPackage() )
         """
         foundResource = None

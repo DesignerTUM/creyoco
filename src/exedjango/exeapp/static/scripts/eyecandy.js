@@ -172,7 +172,6 @@ $(document).ready(function() {
 		$('.theme').removeClass('selected');
 		$(this).addClass('selected');
 
-		handle_select_style();
 		update_preview();
 	});
 	/*$('#download').click( function(){

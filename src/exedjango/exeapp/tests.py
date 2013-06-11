@@ -311,6 +311,9 @@ view, this tests should be also merged'''
         self.c = Client()
         _create_basic_database()
         self.c.login(username=TEST_USER, password=TEST_PASSWORD)
+        self.s = TestingServiceProxy(self.c,
+                        reverse("jsonrpc_mountpoint"),
+                        version="2.0")
         self.package = Package.objects.get(pk=self.TEST_PACKAGE_ID)
         self.root = self.package.root
 
@@ -486,6 +489,10 @@ view, this tests should be also merged'''
             simplejson.loads(link_list)
         except:
             raise AssertionError("Couldn't parse %s" % link_list)
+
+    def test_style_invalid(self):
+        self.assertRaises(ValueError, self.s.package.set_package_style,
+                          1, 1, 'BS')
 
 
 class ExportTestCase(TestCase):
