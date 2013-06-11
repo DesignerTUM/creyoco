@@ -161,10 +161,9 @@ $(document).ready(function() {
 	});
 
 	$('#download').click( function () {
-		$('#download_box').show();
-		$('.modal-dialog iframe').hide();
-		show_lightbox(365, 200);
-	});
+        show_lightbox(365, 200);
+        $('#download_box').show();
+    });
 
 	$('.theme').click(function() {
         show_lightbox(960, 765);
