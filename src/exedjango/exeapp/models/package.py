@@ -375,11 +375,11 @@ i.e. the "package".
         node.save()
 
     def set_style(self, style):
-        if not style in [os.path.basename(style) for style in \
+        if not style in [os.path.basename(exist_style) for exist_style in \
               os.listdir(settings.STYLE_DIR) \
               # style dir has to be joined because of a bug on windows
               # with abapath resolving
-              if os.path.isdir(os.path.join(settings.STYLE_DIR, style))]:
+              if os.path.isdir(os.path.join(settings.STYLE_DIR, exist_style))]:
             raise ValueError("Style {} cannot be found".format(style))
         self.style = style
         self.save()
