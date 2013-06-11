@@ -1,3 +1,21 @@
+function show_lightbox(width, height) {
+    $(".modal-dialog")
+    //.height(400)
+    //.width(400)
+    .css({
+        'width' : width+'px',
+        'height' : height+'px',
+        'margin-left' : -width/2+'px',
+        'margin-top' : -height/2+'px'
+
+
+    });
+    $(".modal-dialog").children().each(function() {
+        $(this).hide();
+    });
+    $('#lightbox').show();
+}
+
 $(document).ready(function() {
 	$(document).on('click', '#navi li a', function(e){
         e.preventDefault();
@@ -21,7 +39,7 @@ $(document).ready(function() {
 		$('#navi li').removeClass('active');
 		$('#edit').addClass('active');
 	}
-	
+
 	if (url.search("layout") > 0) {
 		$('#middle-row').children().hide();
 		$('#selectStyle').show();
@@ -33,15 +51,15 @@ $(document).ready(function() {
 	$('#select_course').change( function() {
 		location.href = $(this).val();
 	});
-	
+
 	$('#settings_button').qtip ({
 		content: 'Hinzufuegen, loeschen oder verschieben der Themen', // Noti ce that content.text is long-hand for simply declaring content as a string
-		
-		style: { 
+
+		style: {
 			tip: true,
 			classes: 'tip'
 		},
-		
+
 		show: {
 			delay: 500,
 			effect: function(offset) {
@@ -54,16 +72,16 @@ $(document).ready(function() {
 		}
 	}
 	});
-	
+
 	$('#download_button').qtip ({
 		content: 'Formatauswahl und herunterladen des Paketes', // Noti ce that content.text is long-hand for simply declaring content as a string
-		
-		style: { 
+
+		style: {
 			tip: true,
 			classes: 'tip'
 		},
-		
-		show: { 
+
+		show: {
 			delay: 500,
 			effect: function(offset) {
 				$(this).slideDown(200); // "this" refers to the tooltip
@@ -75,7 +93,7 @@ $(document).ready(function() {
 			}
 		}
 	});
-	
+
 	$('#outline img').click( function() {
 		if($(this).attr('id') == 'settings_button') {
 			$(this).removeClass('transparent');
@@ -107,19 +125,19 @@ $(document).ready(function() {
 
 		}
 	});
-	
+
 	$(document).keyup(function(e) {
 		if (e.keyCode == 27) {
 			$('#lightbox').hide();
 			$('body').css('overflow', 'auto');
 		}
 	});
-	
+
 	$('#modal-dialog-bg').click( function(){
 		$('#preview').hide();
 		$('body').css('overflow', 'auto');
 	});
-	
+
 
 	$('#edit a').click( function(){
 		$('#middle-row').children().hide();
@@ -127,49 +145,34 @@ $(document).ready(function() {
 		$('#navi li').removeClass('active');
 		$(this).parent().addClass('active');
 	});
-	
+
 	$('#layout a').click( function(){
 			$('#middle-row').children().hide();
 			$('#selectStyle').show();
 			$('#navi li').removeClass('active');
 			$(this).parent().addClass('active');
 	});
-	
+
 	$('#export a').click( function(){
 			$('#middle-row').children().hide();
 			$('#properties').show();
 			$('#navi li').removeClass('active');
 			$(this).parent().addClass('active');
 	});
-	
-	function lightbox(width, height) {
-		$(".modal-dialog")
-		//.height(400)
-		//.width(400)
-		.css({
-			'width' : width+'px',
-			'height' : height+'px',
-			'margin-left' : -width/2+'px',
-			'margin-top' : -height/2+'px'
-			
-			
-		});
-		$('#lightbox').show();
-	}
-	
+
 	$('#download').click( function () {
 		$('#download_box').show();
 		$('.modal-dialog iframe').hide();
-		lightbox(365, 200);
+		show_lightbox(365, 200);
 	});
-	
-	$('.theme').click( function() {
-		$('.modal-dialog iframe').show();
-		lightbox(960, 765);
-		$('#download_box').hide();
+
+	$('.theme').click(function() {
+        show_lightbox(960, 765);
+        $('.modal-dialog > #previewIFrame').show();
+        ;
 		$('.theme').removeClass('selected');
 		$(this).addClass('selected');
-		
+
 		handle_select_style();
 		update_preview();
 	});
@@ -185,9 +188,9 @@ $(document).ready(function() {
 			'height' : height+'px',
 			'margin-left' : -width/2+'px',
 			'margin-top' : -height/2+'px'
-			
-			
+
+
 		});
-	
+
 	});*/
 });

@@ -15,33 +15,28 @@
 <script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.js"></script>
 <script type="text/javascript" src="{% get_static_prefix %}scripts/main.js"></script>
 <script type='text/javascript' src="{% get_static_prefix %}scripts/jquery.jsonrpc.js"></script>
+<script type="text/javascript" src="{% get_static_prefix %}scripts/chosen.jquery.min.js"></script>
+<script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.qtip.min.js"></script>
+<script type="text/javascript" src="{% get_static_prefix %}scripts/eyecandy.js"></script>
+
 {% endblock %}
 
 {% block dialog %}
-		<div id="lightbox" style="display:none">
-			<div id="modal-dialog-bg"></div>
-			<div class="modal-dialog">
-				<i class="icon-remove icon-2x pull-right" style="cursor:pointer;position: absolute;right: 0;top: 0;margin-right: 10px;margin-top: 5px;" onclick="$(this).parent().parent().hide()"></i>
-					<iframe scrolling="auto" id="previewIFrame" src="preview">
+                {{ block.super }}
+                <iframe scrolling="auto" id="previewIFrame" src="">
 
-					</iframe>
+                </iframe>
 
-					<div id="download_box">
-						<h3>Wählen Sie das Dateiformat für den Kurs-Export.</h3>
+                <div id="download_box">
+                    <h3>Wählen Sie das Dateiformat für den Kurs-Export.</h3>
 
-						<a class="export_link" dl_type="website" href=""><i class="icon-arrow-right"></i> Website (Zip)</a>
+                    <a class="export_link" dl_type="website" href=""><i class="icon-arrow-right"></i> Website (Zip)</a>
+                    <a class="export_link" dl_type="cc" href=""><i class="icon-arrow-right"></i> Common Cartridge</a>
+                    <a class="export_link" dl_type="ims" href=""><i class="icon-arrow-right"></i> IMS Package</a>
+                    <a class="export_link" dl_type="scorm12" href=""><i class="icon-arrow-right"></i> Scorm 1.2</a>
+                    <a class="export_link" dl_type="scorm2004" href=""><i class="icon-arrow-right"></i> Scorm 2004</a>
 
-						<a class="export_link" dl_type="cc" href=""><i class="icon-arrow-right"></i> Common Cartridge</a>
-
-						<a class="export_link" dl_type="ims" href=""><i class="icon-arrow-right"></i> IMS Package</a>
-
-						<a class="export_link" dl_type="scorm12" href=""><i class="icon-arrow-right"></i> Scorm 1.2</a>
-
-						<a class="export_link" dl_type="scorm2004" href=""><i class="icon-arrow-right"></i> Scorm 2004</a>
-
-					</div>
-			</div>
-		</div>
+                </div>
 {% endblock %}
 
 {% block h2 %}{% trans "Overview" %}{% endblock %}
@@ -67,7 +62,7 @@
 			<a href="{{ package.get_absolute_url }}">{{ package.title }}</a>
 		</span>
 		<span id="qs">
-			<i onclick="lightbox(960, 756);$('#previewIFrame').show().attr('src', '{{ package.get_absolute_url }}preview');$('#download_box').hide();" class="icon-eye-open"></i>
+			<i onclick="show_lightbox(960, 756);$('#previewIFrame').show().attr('src', '{{ package.get_absolute_url }}preview');$('#download_box').hide();" class="icon-eye-open"></i>
 			<i class="icon-pencil"></i>
 			<i class="icon-download"></i>
 			<i class="icon-cog"></i>

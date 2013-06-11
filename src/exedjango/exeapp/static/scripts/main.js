@@ -10,7 +10,7 @@ $(document).ready(function() {
 			$(this).addClass('icon-check');
 			$(this).parent().parent().addClass('active');
 		}
-		
+
 		if($('li').hasClass('active')) {
 		    $("#delete_selected_packages").show();
 	    }
@@ -19,14 +19,14 @@ $(document).ready(function() {
 	    }
 	});
 
-	
+
 	$.jsonRPC.setup({
     endPoint: '/exeapp/json/',
     namespace: 'main',
   });
   $("#create_package").click(create_package);
   $("#delete_selected_packages").click(delete_selected_packages);
-  
+
 	$('.icon-download').click( function() {
 		var bla = $(this).parent().parent().attr('packageid');
 		$('#download_box a').each(function() {
@@ -46,14 +46,14 @@ $(document).ready(function() {
 				$(this).attr('href', '/exeapp/package/' + bla + '/download/scorm2004/');
 			}
 		});
-		
+
 		$('#download_box').show();
 		$('.modal-dialog iframe').hide();
 		lightbox(365, 200);
 	});
 })
 
-// Promps a new package new and sens a "main.create_package" call via 
+// Promps a new package new and sens a "main.create_package" call via
 // rpc
 function create_package(){
   var package_title = prompt('Enter package title');
@@ -92,27 +92,13 @@ function callback_delete_package(id) {
   var package_li = $("#package" + id);
   package_li.remove();
 }
-	function lightbox(width, height) {
-		$(".modal-dialog")
-		//.height(400)
-		//.width(400)
-		.css({
-			'width' : width+'px',
-			'height' : height+'px',
-			'margin-left' : -width/2+'px',
-			'margin-top' : -height/2+'px'
-			
-			
-		});
-		$('#lightbox').show();
-	}
-	
+
 	function download_box() {
 		/*var bla = $(this).parent().parent().attr('packageid');
 		$('#download_box a').each(function() {
 			$(this).attr('href', '/exeapp/package/' + bla + $(this).attr('href'));
 		});
-		
+
 		$('#download_box').show();
 		$('.modal-dialog iframe').hide();
 		lightbox(365, 200);*/

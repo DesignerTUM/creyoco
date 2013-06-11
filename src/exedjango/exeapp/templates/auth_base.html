@@ -1,5 +1,20 @@
 {% extends "base.html" %}
 <!-- Base template for pages which require authentication -->
+{% block static_javascript %}
+    <script>
+        $(document).ready(function(event) {
+            $("#help_trigger").on("click", function() {
+                show_lightbox(960, 756);
+                $('#helpIFrame').
+                        show();
+                return false;
+            });
+        });
+    </script>
+{% endblock %}
+{% block dialog %}
+    <iframe scrolling="auto" id="helpIFrame" src="{% url "django.contrib.flatpages.views.flatpage" url="/help/" %}"></iframe>
+{% endblock %}
 {% block footer %}
 <hr>
 <div class="pull-left">
@@ -7,6 +22,6 @@
 </div>
 <div class="pull-right">
 	<a href="#impressum">Impressum</a> |
-	<a href="{% url "django.contrib.flatpages.views.flatpage" url="/help/" %}">Hilfe <i class="icon-question-sign"></i></a>
+	<a id="help_trigger" href="{% url "django.contrib.flatpages.views.flatpage" url="/help/" %}">Hilfe <i class="icon-question-sign"></i></a>
 </div>
 {% endblock %}

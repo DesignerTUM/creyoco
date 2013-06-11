@@ -1,6 +1,41 @@
-{% extends "base.html" %}
 <!DOCTYPE html>
-{% block title %}{{ flatpage.title }}{% endblock %}
-{% block content %}
-{{ flatpage.content }}
-{% endblock %}
+{% load static %}
+<html>
+    <head>
+        <title>{{ flatpage.title }}</title>
+        <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/mz/style.min.css">
+
+        <!-- Start Open Web Analytics Tracker -->
+		<script type="text/javascript">
+		//<![CDATA[
+		var owa_baseUrl = 'http://tassiloweidner.com/owa/';
+		var owa_cmds = owa_cmds || [];
+		owa_cmds.push(['setSiteId', '013b6dca1fb8d3d7ac152e34660b990f']);
+		owa_cmds.push(['trackPageView']);
+		owa_cmds.push(['trackClicks']);
+		owa_cmds.push(['trackDomStream']);
+
+		(function() {
+			var _owa = document.createElement('script'); _owa.type = 'text/javascript'; _owa.async = true;
+			owa_baseUrl = ('https:' == document.location.protocol ? window.owa_baseSecUrl || owa_baseUrl.replace(/http:/, 'https:') : owa_baseUrl );
+			_owa.src = owa_baseUrl + 'modules/base/js/owa.tracker-combined-min.js';
+			var _owa_s = document.getElementsByTagName('script')[0]; _owa_s.parentNode.insertBefore(_owa, _owa_s);
+		}());
+		//]]>
+		</script>
+		<!-- End Open Web Analytics Code -->
+    </head>
+    <body>
+    		<header>
+			<div>
+				<h1>{{ flatpage.title }}</h1>
+				<hr>
+			</div>
+		</header>
+        <div id="wrapper">
+            <div id="content">
+                {{ flatpage.content }}
+            </div>
+        </div>
+    </body>
+</html>
