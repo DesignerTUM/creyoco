@@ -178,4 +178,9 @@ $(document).ready(function() {
 
 		update_preview();
 	});
+    $("#help_trigger").on("click", function() {
+                show_lightbox(960, 756, $('#helpIFrame'));
+                return false;
+           }
+    );
 });

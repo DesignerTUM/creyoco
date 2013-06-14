@@ -1,15 +1,5 @@
 {% extends "base.html" %}
 <!-- Base template for pages which require authentication -->
-{% block static_javascript %}
-    <script>
-        $(document).ready(function(event) {
-            $("#help_trigger").on("click", function() {
-                show_lightbox(960, 756, $('#helpIFrame'));
-                return false;
-            });
-        });
-    </script>
-{% endblock %}
 {% block dialog %}
     <iframe scrolling="auto" id="helpIFrame" src="{% url "django.contrib.flatpages.views.flatpage" url="/help/" %}"></iframe>
 {% endblock %}
