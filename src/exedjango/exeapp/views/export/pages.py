@@ -1,5 +1,5 @@
 # ===========================================================================
-# eXe 
+# eXe
 # Copyright 2004-2005, University of Auckland
 # Copyright 2004-2008 eXe Project, http://eXeLearning.org/
 #
@@ -18,7 +18,7 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 # ===========================================================================
 import codecs
-from exedjango.exeapp.views.blocks.blockfactory import block_factory
+from exeapp.views.blocks.blockfactory import block_factory
 from django import forms
 """
 Export Pages functions

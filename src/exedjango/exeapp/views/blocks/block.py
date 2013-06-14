@@ -19,14 +19,14 @@
 from exeapp.models.idevices.idevice import Idevice
 from django.template.loader import render_to_string
 """
-Block is the base class for the classes which are responsible for 
+Block is the base class for the classes which are responsible for
 rendering and processing Idevices in XHTML
 """
 
 import logging
 from django.conf import settings
 from django.utils.safestring import mark_safe
-from exedjango.utils import common
+from exeapp.utils import common
 log = logging.getLogger(__name__)
 
 
@@ -41,7 +41,7 @@ def _(value):
 
 class Block(object):
     """
-    Block is the base class for the classes which are responsible for 
+    Block is the base class for the classes which are responsible for
     rendering and processing Idevices in XHTML
     """
     nextId = 0

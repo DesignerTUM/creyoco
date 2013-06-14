@@ -37,7 +37,7 @@ import zipfile
 import re
 from collections import defaultdict
 from xml.dom                   import minidom
-from exedjango.utils.path      import Path, TempDirPath, toUnicode
+from exeapp.utils.path      import Path, TempDirPath, toUnicode
 from exeapp.models        import Node
 # from exe.engine.genericidevice import GenericIdevice
 

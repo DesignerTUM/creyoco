@@ -4,7 +4,7 @@ from django.template.loader import render_to_string
 from django.template.defaultfilters import unordered_list, stringfilter
 from django.utils.safestring import mark_safe
 
-from exedjango.utils import common
+from exeapp.utils import common
 from exeapp.views.blocks.blockfactory import block_factory
 
 import os

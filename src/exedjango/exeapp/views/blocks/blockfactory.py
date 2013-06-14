@@ -7,7 +7,7 @@ Provides block_factory. Returns block object based on given idevice.
 '''
 
 
-from exedjango.exeapp.views.blocks.genericblock import GenericBlock
+from exeapp.views.blocks.genericblock import GenericBlock
 from exeapp.models.idevices import FreeTextIdevice
 from exeapp.models.idevices.activityidevice import ActivityIdevice
 from exeapp.models.idevices.glossaryidevice import GlossaryIdevice, GlossaryTerm

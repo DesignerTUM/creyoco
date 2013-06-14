@@ -1,7 +1,7 @@
 from django.template.loader import render_to_string
 from django.template.base import TemplateDoesNotExist
 from exeapp.views.blocks.block import Block
-from exedjango.exeapp.views.blocks.ideviceform import IdeviceFormFactory
+from exeapp.views.blocks.ideviceform import IdeviceFormFactory
 
 
 class TemplateNotDefined(BaseException):
@@ -18,7 +18,7 @@ class GenericBlock(Block):
     view_template = "exe/idevices/generic/export.html"
 
     # Use these templates if the export and preview version of
-    # an iDevice has the same content 
+    # an iDevice has the same content
     use_common_content = False
     COMMON_PREVIEW = "exe/idevices/generic/common/preview.html"
     COMMON_EXPORT = "exe/idevices/generic/common/preview.html"

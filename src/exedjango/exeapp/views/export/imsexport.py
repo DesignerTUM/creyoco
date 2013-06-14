@@ -30,11 +30,10 @@ Exports an eXe package as an IMS Content Package
 import logging
 import re
 from zipfile                       import ZipFile, ZIP_DEFLATED
-from exedjango.utils import common
+from exeapp.utils import common, Path
 from django.template.loader import render_to_string
 # from exe.webui.blockfactory        import g_blockFactory
 # from exe.engine.error              import Error
-from utils.path import Path
 from exeapp.views.export.pages import Page
 from exeapp.views.blocks.blockfactory import block_factory
 
@@ -52,7 +51,7 @@ class Manifest(object):
         """
         Initialize
         'output_dir' is the directory that we read the html from and also output
-        the mainfest.xml 
+        the mainfest.xml
         """
         self.output_dir = outputDir
         self.package = package
@@ -139,7 +138,7 @@ class Manifest(object):
 # ===========================================================================
 class IMSPage(Page):
     """
-    This class transforms an eXe node into a SCO 
+    This class transforms an eXe node into a SCO
     """
 
     def render(self):
@@ -169,7 +168,7 @@ class IMSExport(WebsiteExport):
         self.page_class = IMSPage
 
     def export(self):
-        """ 
+        """
         Export SCORM package
         """
 
