@@ -353,6 +353,16 @@ ul#navi {
 	padding: 30px;
 	z-index: 4;
 
+    &.loading {
+      background-image: image-url("ajax-loader.gif");
+      background-position: center;
+      background-repeat: no-repeat;
+
+        * {
+          display: none !important;
+        }
+    }
+
 	iframe {
 		height: 100%;
 		width: 100%;

@@ -1,4 +1,4 @@
-function show_lightbox(width, height) {
+function show_lightbox(width, height, el) {
     $(".modal-dialog")
     //.height(400)
     //.width(400)
@@ -14,6 +14,7 @@ function show_lightbox(width, height) {
         $(this).hide();
     });
     $('#lightbox').show();
+    $(el).show();
 }
 
 $(document).ready(function() {
@@ -161,34 +162,20 @@ $(document).ready(function() {
 	});
 
 	$('#download').click( function () {
-        show_lightbox(365, 200);
-        $('#download_box').show();
+        show_lightbox(365, 200, $("#download_box"));
     });
 
 	$('.theme').click(function() {
         show_lightbox(960, 765);
-        $('.modal-dialog > #previewIFrame').show();
-        ;
+        $('.modal-dialog > #previewIFrame')
+            .show()
+            .load(function(){
+                $(this).parent().removeClass("loading")
+            })
+            .parent().addClass("loading");
 		$('.theme').removeClass('selected');
 		$(this).addClass('selected');
 
 		update_preview();
 	});
-	/*$('#download').click( function(){
-	var width, height;
-	width = 400;
-	height = 400;
-		$(".modal-dialog")
-		//.height(400)
-		//.width(400)
-		.css({
-			'width' : width+'px',
-			'height' : height+'px',
-			'margin-left' : -width/2+'px',
-			'margin-top' : -height/2+'px'
-
-
-		});
-
-	});*/
 });

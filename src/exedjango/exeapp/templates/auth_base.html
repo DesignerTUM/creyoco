@@ -4,9 +4,7 @@
     <script>
         $(document).ready(function(event) {
             $("#help_trigger").on("click", function() {
-                show_lightbox(960, 756);
-                $('#helpIFrame').
-                        show();
+                show_lightbox(960, 756, $('#helpIFrame'));
                 return false;
             });
         });
