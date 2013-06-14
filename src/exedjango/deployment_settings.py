@@ -27,6 +27,6 @@ DATABASES = {
 #     }
 # }
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '129.187.81.136']
+ALLOWED_HOSTS = ['129.187.81.136', '129.187.81.137']
 
 SENDFILE_BACKEND = 'sendfile.backends.xsendfile'
