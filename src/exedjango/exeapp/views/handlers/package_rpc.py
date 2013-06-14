@@ -38,7 +38,7 @@ import shutil
 # from exe.export.ipodexport       import IpodExport
 # from exe.export.presentationexport  import PresentationExport
 # from exe.export.handoutexport    import HandoutExport
-from exedjango.utils.path             import Path, toUnicode
+from exeapp.utils.path             import Path, toUnicode
 # from exe                         import globals as G
 from tempfile                    import mkdtemp
 # from exe.engine.mimetex          import compile
@@ -74,8 +74,8 @@ def add_idevice(request, package, node, idevice_type):
 
 @jsonrpc_authernticating_method('package.testPrintMessage')
 def testPrintMessage(request, package, node, message):
-    """ 
-    Prints a test message, and yup, that's all! 
+    """
+    Prints a test message, and yup, that's all!
     """
     print "Test Message: ", message, " [eol, eh!]"
 
@@ -241,7 +241,7 @@ def is_package_dirty(request, package):
     """
     Called by js to know if the package is dirty or not.
     ifClean is JavaScript to be evaled on the client if the package has
-    been changed 
+    been changed
     ifDirty is JavaScript to be evaled on the client if the package has not
     been changed
     """
@@ -376,11 +376,11 @@ def get_printdir_relative2web(request, exported_dir):
 
 def ClearParentTempPrintDirs(request, client, log_dir_warnings):
     """
-    Determine the parent temporary printing directory, and clear them 
+    Determine the parent temporary printing directory, and clear them
     if safe to do so (i.e., if not the config dir itself, for example)
-    Makes (if necessary), and clears out (if applicable) the parent 
+    Makes (if necessary), and clears out (if applicable) the parent
     temporary directory.
-    The calling handleClearAndMakeTempPrintDir() shall then make a 
+    The calling handleClearAndMakeTempPrintDir() shall then make a
     specific print-job subdirectory.
     """
     #
@@ -479,12 +479,12 @@ def previewTinyMCEimage(request, package, tinyMCEwin, tinyMCEwin_name, \
                          tinyMCEfield, local_filename, preview_filename):
 
     """
-    Once an image is selected in the file browser that is spawned by the 
-    TinyMCE image dialog, copy this file (which is local to the user's 
-    machine) into the server space, under a preview directory 
+    Once an image is selected in the file browser that is spawned by the
+    TinyMCE image dialog, copy this file (which is local to the user's
+    machine) into the server space, under a preview directory
     (after checking if this exists, and creating it if necessary).
-    Note that this IS a "cheat", in violation of the client-server 
-    separation, but can be done since we know that the eXe server is 
+    Note that this IS a "cheat", in violation of the client-server
+    separation, but can be done since we know that the eXe server is
     actually sitting on the client host.
     """
     server_filename = ""
@@ -592,8 +592,8 @@ def generateTinyMCEmath(request, package, tinyMCEwin, tinyMCEwin_name, \
                          preview_image_filename, preview_math_srcfile):
 
     """
-    Based off of handleTinyMCEimageChoice(), 
-    handleTinyMCEmath() is similar in that it places a .gif math image 
+    Based off of handleTinyMCEimageChoice(),
+    handleTinyMCEmath() is similar in that it places a .gif math image
     (and a corresponding .tex LaTeX source file) into the previews dir.
     Rather than copying the image from a user-selected directory, though,
     this routine actually generates the math image using mimetex.
@@ -686,7 +686,7 @@ def quickExport(request, package):
 def exportPackage(request, package, exportType, filename, print_callback='', quick=False):
 
     """
-    Called by js. 
+    Called by js.
     Exports the current package to one of the above formats
     'exportType' can be one of 'singlePage' 'webSite' 'zipFile' 'ipod'
                  'textFile' 'scorm' or 'presentation'
@@ -724,7 +724,7 @@ def exportPackage(request, package, exportType, filename, print_callback='', qui
                      _(u'. Please use ASCII names.'))
         return
 
-    """ 
+    """
     adding the print feature in using the same export functionality:
     """
     if exportType == 'singlePage' or exportType == 'printSinglePage':
@@ -796,7 +796,7 @@ def quit(request, package):
 def browseURL(request, package, url):
 
     """visit the specified URL using the system browser
-    
+
     if the URL contains %s, substitute the local webDir
     if the URL contains %t, show a temp file containing NEWS and README """
     if '%t' in url.find:
@@ -899,7 +899,7 @@ def exportSinglePage(request, client, filename, webDir, stylesDir, \
     Export 'client' to a single web page,
     'webDir' is just read from config.webDir
     'stylesDir' is where to copy the style sheet information from
-    'printFlag' indicates whether or not this is for print 
+    'printFlag' indicates whether or not this is for print
                 (and whatever else that might mean)
     """
     try:
