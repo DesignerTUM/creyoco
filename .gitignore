@@ -10,10 +10,10 @@ ehthumbs.db
 Thumbs.db
 
 *.db
-/src/exedjango/static/
-src/exedjango/exeapp_media/
-src/exedjango/exeapp_media_testing/
-src/exedjango/sqlite.*
+/src/exedjango/exedjango/static/
+src/exedjango/exedjango/exeapp_media/
+src/exedjango/exedjango/exeapp_media_testing/
+src/exedjango/exedjango/sqlite.*
 .project
 .pydevproject
 *.pyc
