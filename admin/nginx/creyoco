@@ -22,8 +22,8 @@ server {
     }
     # what to serve if upstream is not available or crashes
 
-    location /media/ {
+    location /protected {
         internal;
-        root /home/medienzentrum/creyoco/src/exedjango/exeapp_media;
+        root /home/medienzentrum/creyoco/src/exedjango/exedjango/exeapp_media;
     }
 }
