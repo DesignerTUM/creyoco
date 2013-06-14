@@ -13,5 +13,5 @@ test -d $LOGDIR || mkdir -p $LOGDIR
 touch $LOGFILE
 cd $DJANGO_PATH
 gunicorn_django -w $NUM_WORKERS --user=$USER --group=$GROUP --log-level=debug \
-    --log-file=$LOGFILE
+    --log-file=$LOGFILE 2>$LOGFILE
 echo "Gunicorn started"
