@@ -18,6 +18,11 @@ function show_lightbox(width, height, el) {
 }
 
 $(document).ready(function() {
+    $(".icon-remove, #modal-dialog-bg").click(function(){
+        $("#lightbox").hide();
+        $('body').css('overflow', 'auto');
+    });
+
 	$(document).on('click', '#navi li a', function(e){
         e.preventDefault();
         history.pushState({page: this.href}, '', this.href);
@@ -130,15 +135,9 @@ $(document).ready(function() {
 	$(document).keyup(function(e) {
 		if (e.keyCode == 27) {
 			$('#lightbox').hide();
-			$('body').css('overflow', 'auto');
+       		$('body').css('overflow', 'auto');
 		}
 	});
-
-	$('#modal-dialog-bg').click( function(){
-		$('#preview').hide();
-		$('body').css('overflow', 'auto');
-	});
-
 
 	$('#edit a').click( function(){
 		$('#middle-row').children().hide();
