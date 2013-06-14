@@ -1,7 +1,7 @@
 from fabric.api import *
 
 env.use_ssh_config = True
-env.hosts = ['creyoco_dev']
+env.hosts = ['creyoco_dev', 'creyoco_test']
 env.code_dir = '/home/dimitri/creyoco/src/exedjango'
 
 
@@ -17,6 +17,7 @@ def push():
 def update():
     execute(push)
     execute(pull)
+    execute(restart)
 
 
 def copy_site():
@@ -24,4 +25,4 @@ def copy_site():
 
 
 def restart():
-    run("sudo service apache2 restart")
+    run("kill -HUP $(cat /tmp/creyoco.pid)")
