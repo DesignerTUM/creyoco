@@ -9,7 +9,6 @@ NUM_WORKERS=5
 USER=$(whoami)
 GROUP=$USER
 
-workon creyoco
 test -d $LOGDIR || mkdir -p $LOGDIR
 touch $LOGFILE
 cd $DJANGO_PATH
