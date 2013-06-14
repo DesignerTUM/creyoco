@@ -8,7 +8,7 @@ env:
 
 install:
   - pip install -q Django==$DJANGO
-  - pip install -r src/exedjango/pip_requirements.txt --use-mirrors
+  - pip install -r pip-requirements.txt --use-mirrors
   - python src/exedjango/manage.py collectstatic --noinput -l
 
 script:
