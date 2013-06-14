@@ -24,6 +24,6 @@ server {
 
     location /media/ {
         internal;
-        root /home/medienzentrum/creyoco/src/exedjango/exeapp_media/;
+        root /home/medienzentrum/creyoco/src/exedjango/exeapp_media;
     }
 }
