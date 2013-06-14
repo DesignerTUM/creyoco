@@ -1,5 +1,5 @@
 #!/bin/bash
-source ~/.bashrc
+source /usr/local/bin/virtualenvwrapper.sh
 PROJECT_DIR=~/creyoco/
 DJANGO_PATH=$PROJECT_DIR/src/exedjango/
 LOGFILE=$PROJECT_DIR/log/creyoco.log
