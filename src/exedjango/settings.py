@@ -130,6 +130,7 @@ INSTALLED_APPS = (
     'check_media',
     'strict_filebrowser',
     'exeapp',
+    'gunicorn',
 )
 
 ABSOLUTE_URL_OVERRIDES = {
