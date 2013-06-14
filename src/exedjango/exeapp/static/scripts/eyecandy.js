@@ -10,7 +10,7 @@ function show_lightbox(width, height) {
 
 
     });
-    $(".modal-dialog").children().each(function() {
+    $(".modal-dialog > :not(.icon-remove)").each(function() {
         $(this).hide();
     });
     $('#lightbox').show();
