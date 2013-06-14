@@ -1,5 +1,5 @@
 #!/bin/bash
-$GUNICORN_PATH=/home/medienzentrum/.virtualenvs/creyoco/bin/gunicorn_django
+GUNICORN_PATH=/home/medienzentrum/.virtualenvs/creyoco/bin/gunicorn_django
 PID=/tmp/creyoco.pid
 PROJECT_DIR=~/creyoco/
 DJANGO_PATH=$PROJECT_DIR/src/exedjango/
