@@ -25,7 +25,7 @@ WebsiteExport will export a package as a website of HTML pages
 from django.conf import settings
 
 import logging
-from utils.path import Path
+from exeapp.utils.path import Path
 from exeapp.views.export.websitepage import WebsitePage
 from zipfile import ZipFile, ZIP_DEFLATED
 import tempfile

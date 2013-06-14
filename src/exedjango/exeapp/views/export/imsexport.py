@@ -30,7 +30,7 @@ Exports an eXe package as an IMS Content Package
 import logging
 import re
 from zipfile                       import ZipFile, ZIP_DEFLATED
-from exeapp.utils import common, Path
+from exeapp.utils.path import Path
 from django.template.loader import render_to_string
 # from exe.webui.blockfactory        import g_blockFactory
 # from exe.engine.error              import Error

@@ -17,7 +17,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 # ===========================================================================
-from utils.uniqueidgenerator import UniqueIdGenerator
+from exeapp.utils.uniqueidgenerator import UniqueIdGenerator
 from django.conf import settings
 from exeapp.views.export.websiteexport import WebsiteExport
 from django.template.loader import render_to_string
@@ -30,9 +30,7 @@ Exports an eXe package as a SCORM package
 import logging
 import re
 import time
-from zipfile                       import ZipFile, ZIP_DEFLATED
-from utils                     import common
-from utils.path               import Path
+from exeapp.utils.path               import Path
 from exeapp.views.export.pages              import Page
 
 log = logging.getLogger(__name__)
@@ -54,7 +52,7 @@ class Manifest(object):
         """
         Initialize
         'outputDir' is the directory that we read the html from and also output
-        the mainfest.xml 
+        the mainfest.xml
         """
         self.outputDir = outputDir
         self.package = package
@@ -231,7 +229,7 @@ class ScormExport(WebsiteExport):
     Exports an eXe package as a SCORM package
     """
     def __init__(self, *args, **kwargs):
-        """ 
+        """
         Initialize
         'styleDir' is the directory from which we will copy our style sheets
         (and some gifs)
@@ -253,7 +251,7 @@ class ScormExport(WebsiteExport):
 
 
     def export(self):
-        """ 
+        """
         Export SCORM package
         """
         self.create_pages({"scorm_type" : self.scorm_type})

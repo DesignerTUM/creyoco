@@ -27,7 +27,7 @@ from exeapp.models import User, Package
 from exeapp.templatetags.tests import MainpageExtrasTestCase
 from exeapp.views.export.websiteexport import WebsiteExport
 from exeapp import shortcuts
-from exedjango.exeapp.shortcuts import get_package_by_id_or_error
+from exeapp.shortcuts import get_package_by_id_or_error
 from exedjango.base.http import Http403
 from exeapp.views.export.websitepage import WebsitePage
 from django.core.urlresolvers import reverse
