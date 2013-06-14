@@ -29,4 +29,4 @@ DATABASES = {
 
 ALLOWED_HOSTS = ['129.187.81.136', '129.187.81.137']
 
-SENDFILE_BACKEND = 'sendfile.backends.xsendfile'
+SENDFILE_BACKEND = 'sendfile.backends.nginx'

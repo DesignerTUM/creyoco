@@ -1,8 +1,8 @@
 from fabric.api import *
 
 env.use_ssh_config = True
-env.hosts = ['creyoco_dev', 'creyoco_test']
-env.code_dir = '/home/dimitri/creyoco/src/exedjango'
+# env.hosts = ['creyoco_dev', 'creyoco_test']
+env.code_dir = '/home/medienzentrum/creyoco/'
 
 
 def pull():
