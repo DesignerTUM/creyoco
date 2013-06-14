@@ -1,5 +1,5 @@
 #!/bin/bash
-source /usr/local/bin/virtualenvwrapper.sh
+$GUNICORN_PATH=/home/medienzentrum/.virtualenvs/creyoco/bin/gunicorn_django
 PID=/tmp/creyoco.pid
 PROJECT_DIR=~/creyoco/
 DJANGO_PATH=$PROJECT_DIR/src/exedjango/
@@ -13,7 +13,7 @@ workon creyoco
 test -d $LOGDIR || mkdir -p $LOGDIR
 touch $LOGFILE
 cd $DJANGO_PATH
-gunicorn_django -w $NUM_WORKERS --user=$USER --group=$GROUP --log-level=debug \
+exec $GUNICORN_PATH -w $NUM_WORKERS --user=$USER --group=$GROUP --log-level=debug \
     --log-file=$LOGFILE --pythonpath=. --settings=exedjango.deployment_settings \
     --pid $PID 2>$LOGFILE
 echo "Gunicorn started"
