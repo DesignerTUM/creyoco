@@ -24,6 +24,6 @@ server {
 
     location /protected {
         internal;
-        root /home/medienzentrum/creyoco/src/exedjango/exedjango/exeapp_media;
+        alias /home/medienzentrum/creyoco/src/exedjango/exedjango/exeapp_media;
     }
 }
