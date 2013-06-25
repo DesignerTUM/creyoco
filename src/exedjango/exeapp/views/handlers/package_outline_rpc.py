@@ -16,7 +16,7 @@ __all__ = ['add_node', 'delete_current_node', 'change_current_node',
 
 @jsonrpc_authernticating_method('package.add_child_node')
 def add_node(request, package, node):
-    '''Handles jsonRPC request "package.add_node". Adds a new node 
+    '''Handles jsonRPC request "package.add_node". Adds a new node
 to package_node_id as child of the current one and selectes it'''
     newNode = node.create_child()
     return {'id': newNode.id, 'title': newNode.title}
@@ -38,6 +38,15 @@ node to it's title'''
     return {'title': node_title}
 
 
+@jsonrpc_authernticating_method('package.duplicate_node')
+def duplicate_node(request, package, node):
+    '''Duplicate the node and append it to the same root'''
+    new_node = node.duplicate()
+    return {'id': new_node.pk}
+
+
+
+
 @jsonrpc_authernticating_method('package.promote_current_node')
 def promote_current_node(request, package, node):
     '''Handles jsonRPC request "package.promote_current_node". Moves current
@@ -56,7 +65,7 @@ if successful'''
 
 @jsonrpc_authernticating_method('package.move_current_node_up')
 def move_current_node_up(request, package, node):
-    '''Handles jsonRPC request "package.move_current_node_up". Moves the 
+    '''Handles jsonRPC request "package.move_current_node_up". Moves the
 current node up leaving it on the same level. Returns json variable moved = 1
 if successful'''
     return {"moved": node.up()}
@@ -64,7 +73,7 @@ if successful'''
 
 @jsonrpc_authernticating_method('package.move_current_node_down')
 def move_current_node_down(request, package, node):
-    '''Handles jsonRPC request "package.move_current_node_down". Moves the 
+    '''Handles jsonRPC request "package.move_current_node_down". Moves the
 current node down leaving it on the same level. Returns json variable moved = 1
 if successful'''
     return {"moved": node.down()}

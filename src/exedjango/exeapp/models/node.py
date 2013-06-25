@@ -420,6 +420,12 @@ with it'''
         log.debug(u"create_child ")
         return Node.objects.create(package=self.package, parent=self)
 
+    def duplicate(self):
+        """Create a copy of this node"""
+        log.debug("Duplicate node")
+        return Node.objects.create(package=self.package, parent=self.parent,
+                                   title=self.title)
+
     def add_idevice(self, idevice_type):
         """
         Add the idevice to this node, sets idevice's parentNode. Throws

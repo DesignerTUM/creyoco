@@ -6,33 +6,24 @@ to prevent conflicts with package creation in another tests. You can use
 _clean_up_database_and_store for it.
 """
 
-import os, sys, shutil
+import os
 import mock
 from mock import Mock
-import json
-import uuid
 
 from django.test import TestCase, Client
-from django.test.client import FakePayload
-from django.contrib import auth
 from django.utils import simplejson
 from django.utils.html import escape
 from django.conf import settings
-from django.http import HttpResponseNotFound, HttpResponseForbidden, Http404, QueryDict
+from django.http import HttpResponseNotFound, HttpResponseForbidden, QueryDict
 from jsonrpc.proxy import TestingServiceProxy
-from jsonrpc.types import *
 
-from exeapp import models
 from exeapp.models import User, Package
-from exeapp.templatetags.tests import MainpageExtrasTestCase
 from exeapp.views.export.websiteexport import WebsiteExport
 from exeapp import shortcuts
 from exeapp.shortcuts import get_package_by_id_or_error
 from exedjango.base.http import Http403
 from exeapp.views.export.websitepage import WebsitePage
 from django.core.urlresolvers import reverse
-from exeapp.views import authoring
-from exeapp.views.blocks.ideviceform import IdeviceForm
 from exeapp.models.idevices.idevice import Idevice
 from exeapp.views.package import PackagePropertiesForm
 from exeapp.views.export.imsexport import IMSExport
@@ -41,7 +32,6 @@ from exeapp.models.idevices.freetextidevice import FreeTextIdevice
 from exeapp.models.node import Node
 from exeapp.views.export.scormexport import ScormExport, COMMONCARTRIDGE, \
     SCORM12, SCORM2004
-from exeapp.views.blocks.widgets import FreeTextWidget
 from exeapp.views.blocks.blockfactory import block_factory
 from bs4 import BeautifulSoup
 from django.utils.translation import ugettext_lazy as _
@@ -97,7 +87,7 @@ class MainPageTestCase(TestCase):
 
     def _test_create_package(self):
         PACKAGE_NAME = '%s Package post' % self.TEST_USER
-        response = self.s.app.register(PACKAGE_NAME)
+        self.s.app.register(PACKAGE_NAME)
         p = Package.objects.get(title=PACKAGE_NAME)
         self.assertTrue(p.user.username == self.TEST_USER)
 
@@ -575,7 +565,6 @@ class ExportTestCase(TestCase):
 
     def test_websitepage(self):
         IDEVICE_TYPE = "FreeTextIdevice"
-        IDEVICE_ID = 1
 
         self.data.root.add_idevice(IDEVICE_TYPE)
         exporter = Mock()
@@ -584,6 +573,7 @@ class ExportTestCase(TestCase):
         exporter.pages.append(websitepage)
         self.assertTrue('class="%s" id="id1"' % IDEVICE_TYPE \
                         in websitepage.render())
+
 
 class MiddleWareTestCase(TestCase):
 
@@ -603,3 +593,46 @@ Should set status code to 403'''
         c = Client()
         response = c.get('/exeapp/test/')
         self.assertEquals(response.status_code, 403)
+
+
+class OutlineTestCase(TestCase):
+    """Tests basic outline function"""
+
+    TEST_PACKAGE_ID = 1
+
+    def setUp(self):
+        _create_basic_database()
+        self.data = Package.objects.get(id=self.TEST_PACKAGE_ID)
+        self.c = Client()
+        self.c.login(username=TEST_USER, password=TEST_PASSWORD)
+        self.s = TestingServiceProxy(self.c,
+                        reverse("jsonrpc_mountpoint"),
+                        version="2.0")
+        for x in range(3):
+            self.data.root.create_child()
+
+    def tearDown(self):
+        User.objects.all().delete()
+
+    def test_add_node(self):
+        PARENT_ID = Node.objects.all()[0].pk
+        r = self.s.package.add_child_node(
+                            # username=TEST_USER,
+                            #       password=TEST_PASSWORD,
+                            package_id="1",
+                            node_id=str(PARENT_ID))
+        self.assertEqual(r['result']['title'], Package.DEFAULT_LEVEL_NAMES[0])
+
+    def test_duplicated_node(self):
+        parent = Node.objects.all()[0]
+        test_child = Node.objects.create(self.data, parent, "Test Child")
+        old_child_number = len(parent.children.all())
+        r = self.s.package.duplicate_node(
+                                package_id="1",
+                                node_id=test_child.pk,
+        )
+        self.assertEqual(len(parent.children.all()), old_child_number + 1)
+        self.assertIsNotNone(r['result'])
+        self.assertTrue('id' in r['result'])
+        new_id = r['result']['id']
+        self.assertEqual(Node.objects.get(pk=new_id).title, test_child.title)
