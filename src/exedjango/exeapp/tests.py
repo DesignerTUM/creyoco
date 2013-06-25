@@ -635,4 +635,6 @@ class OutlineTestCase(TestCase):
         self.assertIsNotNone(r['result'])
         self.assertTrue('id' in r['result'])
         new_id = r['result']['id']
+        self.assertTrue('title' in r['result'])
         self.assertEqual(Node.objects.get(pk=new_id).title, test_child.title)
+        self.assertEquals(r['result']['title'], test_child.title)

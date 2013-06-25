@@ -126,7 +126,7 @@ jQuery(document).ready(function() {
                 $("#btnAdd").click(add_child_node)
                 $("#btnRemove").click(delete_current_node)
                 $("#btnRename").click(rename_current_node);
-                $("#btnDuplicate").click(function() {alert(NOT_IMPLEMENTED);});
+                $("#btnDuplicate").click(duplicate_node);
 
                 $("#btnPromote").click(promote_current_node);
                 $("#btnDemote").click(demote_current_node);
@@ -211,6 +211,16 @@ function add_child_node() {
       callback_add_child_node(results.result.id, results.result.title);
     }
   })
+}
+
+//Duplcates current node
+function duplicate_node() {
+    $.jsonRPC.request('duplicate_node', [get_package_id(), get_current_node_id()],
+    {
+        success: function(results) {
+            callback_duplicate_node(results.result.id, results.result.title);
+        }
+    });
 }
 
 
@@ -398,6 +408,24 @@ function callback_add_child_node(nodeid, title) {
     get_outline_pane().jstree("create_node",current_li, "last", new_node);
     get_outline_pane().jstree("open_node", current_li);
     // get_outline_pane().jstree("select_node", $("#node" + nodeid), true);
+}
+
+//Duplicate current node
+function callback_duplicate_node(new_id, title) {
+    var current_node = get_current_node();
+    var current_li = current_node.parent().parent().parent();
+    var new_node = {'data': {'title': title,
+        'attr': {
+            'id': 'node' + new_id,
+            'nodeid': new_id,
+            'href': "/exeapp/package/" + get_package_id() + "/" + new_id + "/"}}};
+    get_outline_pane().on("create_node.jstree", function(event, data) {
+        var id_attr = data.rslt.obj.find("a").attr('id');
+        bind_pjax();
+        $("#" + id_attr).click();
+    });
+    get_outline_pane().jstree("create_node",current_li, "last", new_node);
+    get_outline_pane().jstree("open_node", current_li);
 }
 
 // Delete the currently selected node

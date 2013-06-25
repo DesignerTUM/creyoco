@@ -42,7 +42,7 @@ node to it's title'''
 def duplicate_node(request, package, node):
     '''Duplicate the node and append it to the same root'''
     new_node = node.duplicate()
-    return {'id': new_node.pk}
+    return {'id': new_node.pk, 'title': new_node.title}
 
 
 
