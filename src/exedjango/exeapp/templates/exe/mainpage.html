@@ -82,10 +82,10 @@
 
 {% block navi %}
 <ul id="navi" class="clearfix">
-	<li id="edit" class="active"><a href="{{ package.get_absolute_url }}{{ current_node.id }}/edit">Inhalt bearbeiten</a></li>
-	<li id="layout"><a href="{{ package.get_absolute_url }}{{ current_node.id }}/layout">Layout wählen</a></li>
+	<li id="edit" class="active"><a href="{{ package.get_absolute_url }}{{ current_node.id }}/edit/">Inhalt bearbeiten</a></li>
+	<li id="layout"><a href="{{ package.get_absolute_url }}{{ current_node.id }}/layout/">Layout wählen</a></li>
 	<li id="download"><a>Kurs herunterladen</a></li>
-	<li id="export" style="float:right;margin-right:0"><a href="{{ package.get_absolute_url }}{{ current_node.id }}/export">Metadaten</a></li>
+	<li id="export" style="float:right;margin-right:0"><a href="{{ package.get_absolute_url }}{{ current_node.id }}/export/">Metadaten</a></li>
 </ul>
 {% endblock %}
 
