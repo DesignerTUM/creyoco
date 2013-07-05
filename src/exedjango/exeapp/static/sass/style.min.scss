@@ -176,6 +176,8 @@ header {
 		@include background-image(linear-gradient(left, white, #e8e8e8, white));
 		border: 1px dotted $darkgrey;
 		min-height: 400px;
+        max-height: 500px;
+        overflow: auto;
 		margin-bottom: 40px;
 		padding: 15px;
 		#authoring {

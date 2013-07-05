@@ -103,25 +103,29 @@ function initialize_authoring() {
 		initialize_authoring();
  	},
  	beforeSerialize: function() {
- 		 tinyMCE.triggerSave(true, true);},
+ 		 tinyMCE.triggerSave(true, true);}
  	});
 }
 
 function scroll_to_element(element){
-	var offset = element.offset().top - $(window).scrollTop();
+    var middle_row = $("#middle-row");
+    var middle_row_pos = middle_row.offset().top;
+    console.log(middle_row_pos);
+	var offset = element.offset().top - middle_row_pos;
+    console.log(offset);
 
-	if(offset > window.innerHeight){
+	if(offset + element.innerHeight() > middle_row.height()){
     	// Not in view so scroll to it
-    	$('html,body').animate({scrollTop: offset}, 1000);
+    	$('#middle-row').animate({scrollTop: offset}, 1000);
 	} else if (offset < 0) {
-		$('html,body').animate({scrollTop: element.offset().top - 100}, 1000);
-	} 
+		$('#middle-row').animate({scrollTop: middle_row.scrollTop() + offset - 100}, 1000);
+	}
 }
 
 function reload_authoring() {
 	// dynamically load scripts for idevices
 	get_media("authoring/?partial=true&media=true");
-	
+
 	url = "/exeapp/package/" + get_package_id() + "/" + get_current_node_id() + "/";
 	$("#authoring").load(url, function() {
 		initialize_authoring();
@@ -145,7 +149,7 @@ function get_media(request_url) {
 				}
 			});
 		}});
-}	
+}
 
 function insert_idevice(idevice_id) {
 	// dynamically load scripts for idevices
@@ -180,7 +184,7 @@ function get_package_id(){
 }
 
 // Returns a dictionary of all elements of the idevice with non-empty
-// values. 
+// values.
 function get_arguments(idevice_block) {
   var args = {};
   idevice_block.find(":input").each(function() {
@@ -193,7 +197,7 @@ function get_arguments(idevice_block) {
 }
 
 // contentForm to the server
-function submitLink(action, idevice_id, changed, arguments) 
+function submitLink(action, idevice_id, changed, arguments)
 {
     $.jsonRPC.request("idevice_action",
       [get_package_id(), idevice_id, action, arguments],
