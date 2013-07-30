@@ -10,10 +10,9 @@ ehthumbs.db
 Thumbs.db
 
 *.db
-/src/exedjango/exedjango/static/
-src/exedjango/exedjango/exeapp_media/
-src/exedjango/exedjango/exeapp_media_testing/
-src/exedjango/exedjango/sqlite.*
+/exedjango/static/
+/exedjango/exeapp_media_testing/
+/exedjango/sqlite.*
 .project
 .pydevproject
 *.pyc
@@ -21,3 +20,5 @@ src/exedjango/exedjango/sqlite.*
 *.lnk
 .externalToolBuilders
 .settings
+.idea
+.Gemfile.lock

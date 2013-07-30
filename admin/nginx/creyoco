@@ -2,7 +2,7 @@ server {
     listen   80;
     server_name 129.187.81.137;
     # no security problem here, since / is alway passed to upstream
-    root /home/medienzentrum/creyoco/src/exedjango;
+    root /home/medienzentrum/creyoco/exedjango/;
     # serve directly - analogous for static/staticfiles
     location /static/ {
         # if asset versioning is used
@@ -24,6 +24,6 @@ server {
 
     location /protected {
         internal;
-        alias /home/medienzentrum/creyoco/src/exedjango/exedjango/exeapp_media;
+        alias /home/medienzentrum/creyoco/exedjango/exeapp_media;
     }
 }

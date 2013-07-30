@@ -4,7 +4,7 @@ import site
 
 
 
-sys.path += ['/home/dimitri/creyoco/src/exedjango/', '/home/dimitri/creyoco/src/']
+sys.path += ['/home/dimitri/creyoco/', '/home/dimitri/creyoco/src/']
 
 site.addsitedir("/home/dimitri/.virtualenvs/creyoco/lib/python2.7/site-packages/")
 

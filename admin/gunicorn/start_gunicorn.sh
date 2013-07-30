@@ -2,7 +2,7 @@
 GUNICORN_PATH=/home/medienzentrum/.virtualenvs/creyoco/bin/gunicorn_django
 PID=/tmp/creyoco.pid
 PROJECT_DIR=~/creyoco/
-DJANGO_PATH=$PROJECT_DIR/src/exedjango/
+DJANGO_PATH=$PROJECT_DIR
 LOGFILE=$PROJECT_DIR/log/creyoco.log
 LOGDIR=$(dirname $LOGFILE)
 NUM_WORKERS=5
