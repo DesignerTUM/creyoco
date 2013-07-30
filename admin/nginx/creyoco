@@ -10,6 +10,11 @@ server {
             expires max;
         }
     }
+
+    location /favicon.ico {
+        expires 30d;
+    }
+
     location / {
         proxy_pass_header Server;
         proxy_set_header Host $http_host;
