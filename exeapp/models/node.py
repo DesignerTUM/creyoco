@@ -27,14 +27,10 @@ from django.db import models
 
 from exeapp.models import idevice_store
 
-
 import logging
 from copy               import deepcopy
-from urllib             import quote
 
-# from exe.webui                import common
 log = logging.getLogger()
-
 
 class NodeManager(models.Manager):
 
@@ -420,16 +416,26 @@ with it'''
         log.debug(u"create_child ")
         return Node.objects.create(package=self.package, parent=self)
 
-    def duplicate(self):
+    def duplicate(self, parent=None):
         """Create a copy of this node"""
-        log.debug("Duplicate node")
-        return Node.objects.create(package=self.package, parent=self.parent,
-                                   title=self.title)
+        log.debug("Duplicate node {}".format(self.pk))
+        children = list(self.children.all())
+        idevices = list(self.idevices.all())
+        node = self
+        node.pk = None
+        if parent is not None:
+            node.parent = parent
+        node.save()
+        for idevice in idevices:
+            new_idevice = idevice.as_child().clone()
+            new_idevice.parent_node = node
+            new_idevice.save()
+        return node
 
     def add_idevice(self, idevice_type):
         """
         Add the idevice to this node, sets idevice's parentNode. Throws
-KeyError, if idevice_type is not found
+        KeyError, if idevice_type is not found
         """
         log.debug(u"add_idevice %s" % idevice_type)
         try:
@@ -538,9 +544,6 @@ Returns True is successful
             parent_id = self.parent.id
             super(Node, self).delete()
             return parent_id
-
-
-
 
     def walkDescendants(self):
         """

@@ -19,6 +19,8 @@
 # ===========================================================================
 import os
 from django.conf import settings
+from django.db.models.fields import AutoField
+
 """
 The base class for all iDevices
 """
@@ -37,8 +39,8 @@ log = logging.getLogger(__name__)
 class Idevice(models.Model):
     """
     The base model for all iDevices
-iDevices are mini templates which the user uses to create content in the
-package
+    iDevices are mini templates which the user uses to create content in the
+    package
     """
 
     # Class attributes
@@ -63,11 +65,6 @@ package
     parent_node = models.ForeignKey('Node', related_name='idevices')
 
     child_type = models.CharField(max_length=32, editable=False, blank=True)
-
-#    rawTitle = lateTranslate('title')
-#    author   = lateTranslate('author')
-#    purpose  = lateTranslate('purpose')
-#    tip      = lateTranslate('tip')
 
     def get_klass(self):
         if hasattr(self, 'class_'):
@@ -162,6 +159,13 @@ finding. Returns a list of (name, url) tuples'''
         prev_idevice._order, self._order = self._order, prev_idevice._order
         prev_idevice.save()
         self.save()
+
+    def clone(self):
+        initial = {field.name: getattr(self, field.name)
+                    for field in self._meta.fields
+                    if not isinstance(field, AutoField) and
+                       not field in self._meta.parents.values()}
+        return self.__class__(**initial)
 
     # Kudos to crucialfelix for djangosnippet 1031
     # http://djangosnippets.org/snippets/1031/
