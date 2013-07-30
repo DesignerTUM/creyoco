@@ -100,7 +100,6 @@ function initialize_authoring() {
 		} else {
 			reload_authoring();
 		}
-		initialize_authoring();
  	},
  	beforeSerialize: function() {
  		 tinyMCE.triggerSave(true, true);}
