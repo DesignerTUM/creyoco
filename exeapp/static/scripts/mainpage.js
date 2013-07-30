@@ -168,7 +168,7 @@ function callback_delete_package(id) {
 //Bind pjax to a's of outline pane
 function bind_pjax() {
 	var $nodes = get_outline_pane().find("ul > li > a");
-//	$nodes.off("click");
+	$nodes.off("click");
     $nodes.on("click", function(event) {
 		get_outline_pane().jstree("select_node", "#" + $(this).attr("id"), true);
 		handle_select_node(event);
