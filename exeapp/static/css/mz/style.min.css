@@ -5230,8 +5230,8 @@ button:hover .icon-remove-sign {
     -moz-box-shadow: none;
     box-shadow: none;
     /*&.first {
-  	padding-left: 0;
-  	margin-left: 0;
+      padding-left: 0;
+      margin-left: 0;
   }
   */
 }
@@ -5301,7 +5301,7 @@ button:hover .icon-remove-sign {
     }
 
     line {
-        font-family: \00003220
+        font-family: \00003219
     }
 }
 
@@ -5317,7 +5317,7 @@ button:hover .icon-remove-sign {
     }
 
     line {
-        font-family: \00003226
+        font-family: \00003225
     }
 }
 
@@ -5331,7 +5331,7 @@ button:hover .icon-remove-sign {
     }
 
     line {
-        font-family: \00003230
+        font-family: \00003229
     }
 }
 
@@ -5345,7 +5345,7 @@ textarea {
     }
 
     line {
-        font-family: \00003234
+        font-family: \00003233
     }
 }
 
@@ -5363,7 +5363,7 @@ textarea {
     }
 
     line {
-        font-family: \00003242
+        font-family: \00003241
     }
 }
 
@@ -5386,7 +5386,7 @@ textarea {
     }
 
     line {
-        font-family: \00003255
+        font-family: \00003254
     }
 }
 
@@ -5402,7 +5402,7 @@ textarea {
     }
 
     line {
-        font-family: \00003261
+        font-family: \00003260
     }
 }
 
@@ -5427,7 +5427,7 @@ textarea {
     }
 
     line {
-        font-family: \00003275
+        font-family: \00003274
     }
 }
 
@@ -5450,7 +5450,7 @@ textarea {
     }
 
     line {
-        font-family: \00003289
+        font-family: \00003288
     }
 }
 
@@ -5475,7 +5475,7 @@ textarea {
     }
 
     line {
-        font-family: \00003303
+        font-family: \00003302
     }
 }
 
@@ -5648,6 +5648,7 @@ textarea {
 ins.jstree-icon {
     margin-right: 0;
     background-image: none !important;
+    cursor: default;
 }
 
 @media -sass-debug-info {
@@ -5656,7 +5657,7 @@ ins.jstree-icon {
     }
 
     line {
-        font-family: \0000362
+        font-family: \0000363
     }
 }
 
@@ -5670,7 +5671,7 @@ li.jstree-open > ul {
     }
 
     line {
-        font-family: \0000366
+        font-family: \0000367
     }
 }
 
@@ -5684,7 +5685,7 @@ li.jstree-closed > ul {
     }
 
     line {
-        font-family: \0000371
+        font-family: \0000372
     }
 }
 
@@ -5699,7 +5700,7 @@ li.jstree-closed > ul {
     }
 
     line {
-        font-family: \0000376
+        font-family: \0000377
     }
 }
 
@@ -5713,7 +5714,7 @@ li.jstree-closed > ul {
     }
 
     line {
-        font-family: \0000382
+        font-family: \0000383
     }
 }
 
@@ -5728,7 +5729,7 @@ li.jstree-closed > ul {
     }
 
     line {
-        font-family: \0000389
+        font-family: \0000390
     }
 }
 
@@ -5743,7 +5744,7 @@ li.jstree-closed > ul {
     }
 
     line {
-        font-family: \0000395
+        font-family: \0000396
     }
 }
 
@@ -5758,7 +5759,7 @@ li.jstree-closed > ul {
     }
 
     line {
-        font-family: \00003100
+        font-family: \00003101
     }
 }
 
@@ -5772,7 +5773,7 @@ li.jstree-closed > ul {
     }
 
     line {
-        font-family: \00003106
+        font-family: \00003107
     }
 }
 
@@ -5786,7 +5787,7 @@ li.jstree-closed > ul {
     }
 
     line {
-        font-family: \00003108
+        font-family: \00003109
     }
 }
 
@@ -5802,7 +5803,7 @@ li.jstree-closed > ul {
     }
 
     line {
-        font-family: \00003115
+        font-family: \00003116
     }
 }
 
@@ -5816,7 +5817,7 @@ li.jstree-closed > ul {
     }
 
     line {
-        font-family: \00003117
+        font-family: \00003118
     }
 }
 
@@ -5832,7 +5833,7 @@ li.jstree-closed > ul {
     }
 
     line {
-        font-family: \00003125
+        font-family: \00003126
     }
 }
 
