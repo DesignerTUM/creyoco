@@ -1,115 +1,116 @@
 .jstree ul, .jstree li {
-	display:block;
-	margin:0 0 0 0;
-	padding:0 0 0 0;
-	list-style-type:none;
+  display: block;
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  list-style-type: none;
 }
 
 .jstree li {
-	display:block;
-	min-height:18px;
-	line-height:18px;
-	white-space:nowrap;
+  display: block;
+  min-height: 18px;
+  line-height: 18px;
+  white-space: nowrap;
 }
 
 .jstree-rtl li {
-	margin-left:0;
+  margin-left: 0;
 }
 
 .jstree > ul > li {
-	margin-left:0px;
+  margin-left: 0px;
 }
 
 .jstree-rtl > ul > li {
-	margin-right:0px;
+  margin-right: 0px;
 }
 
 .jstree ins {
-	display:inline-block;
-	text-decoration:none;
-	height:18px;
-	width:0;
-	margin:0 0 0 0;
-	padding:0;
+  display: inline-block;
+  text-decoration: none;
+  height: 18px;
+  width: 0;
+  margin: 0 0 0 0;
+  padding: 0;
 }
 
 .jstree a {
-	display:inline-block;
-	line-height:16px;
-	height:16px;
-	white-space:nowrap;
-	text-decoration:none;
-	margin:0;
+  display: inline-block;
+  line-height: 16px;
+  height: 16px;
+  white-space: nowrap;
+  text-decoration: none;
+  margin: 0;
 }
 
 .jstree a:focus {
-	outline: none;
+  outline: none;
 }
 
 .jstree a > ins {
-	height:16px;
-	color:black;
+  height: 16px;
+  color: black;
 }
 
 .jstree a > .jstree-icon {
 }
 
 .jstree-rtl a > .jstree-icon {
-	margin-right:0;
+  margin-right: 0;
 }
 
 li.jstree-open > ul {
-	display:block;
+  display: block;
 }
 
-
 li.jstree-closed > ul {
-	display:none;
+  display: none;
 }
 
 #box_right {
-	.jstree > ul > li > a {
-		font-weight: 700;
-		color: lighten(black, 40%);
-	}
+  .jstree > ul > li > a {
+    font-weight: 700;
+    color: lighten(black, 40%);
+  }
 
-	.jstree > ul > li > ul {
-		margin-bottom: 10px;
-	}
+  .jstree > ul > li > ul {
+    margin-bottom: 10px;
+  }
 }
 
 #box_left {
-	.jstree-clicked {
-		color:$red;
-		font-weight: 700;
-	}
+  .jstree-clicked {
+    color: $red;
+    font-weight: 700;
+  }
 }
 
 li.jstree-open > ul,
 li.jstree-closed > ul {
-	margin-left: 13px;
+  margin-left: 0px;
 }
 
-.jstree-default .jstree-no-dots .jstree-open > ins {
-	margin-right: 12px;
-	&::before {
-		font-family: "FontAwesome";
-		content: "";
-		font-size: 90%;
-		//content: "";
-		//content: "";
-		//content: "";
-	}
-}
+.jstree-default .jstree-no-dots {
+  .jstree-open > ins {
+    margin-right: 0px;
+    &::before {
+      font-family: "FontAwesome";
+      content: "";
+      font-size: 90%;
+    }
+  }
 
-.jstree-default .jstree-no-dots .jstree-closed > ins {
-	margin-right: 12px;
-	&::before {
-		font-family: "FontAwesome";
-		content: "";
-		font-size: 90%;
-		//content: "";
-		//content: "";
-		//content: "";
-	}
+  .jstree-closed > ins {
+    margin-right: 0px;
+    &::before {
+      font-family: "FontAwesome";
+      content: "";
+      font-size: 90%;
+    }
+  }
+
+  a {
+    > ins {
+      display: none;
+    }
+  }
 }

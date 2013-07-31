@@ -1,11 +1,11 @@
 /*
 Syntax error: Undefined mixin 'font-face'.
-        on line 29 of /home/alendit/creyoco/src/exedjango/exeapp/static/sass/fontawesome.scss, in `font-face'
-        from line 29 of /home/alendit/creyoco/src/exedjango/exeapp/static/sass/fontawesome.scss
+        on line 29 of /home/alendit/creyoco/exeapp/static/sass/fontawesome.scss, in `font-face'
+        from line 29 of /home/alendit/creyoco/exeapp/static/sass/fontawesome.scss
 
 Backtrace:
-/home/alendit/creyoco/src/exedjango/exeapp/static/sass/fontawesome.scss:29:in `font-face'
-/home/alendit/creyoco/src/exedjango/exeapp/static/sass/fontawesome.scss:29
+/home/alendit/creyoco/exeapp/static/sass/fontawesome.scss:29:in `font-face'
+/home/alendit/creyoco/exeapp/static/sass/fontawesome.scss:29
 /var/lib/gems/1.9.1/gems/sass-3.2.9/lib/sass/tree/visitors/perform.rb:253:in `visit_mixin'
 /var/lib/gems/1.9.1/gems/sass-3.2.9/lib/sass/tree/visitors/base.rb:37:in `visit'
 /var/lib/gems/1.9.1/gems/sass-3.2.9/lib/sass/tree/visitors/perform.rb:100:in `visit'
@@ -48,6 +48,7 @@ Backtrace:
 /usr/local/bin/compass:23:in `<main>'
 */
 body:before {
-  white-space: pre;
-  font-family: monospace;
-  content: "Syntax error: Undefined mixin 'font-face'.\A         on line 29 of /home/alendit/creyoco/src/exedjango/exeapp/static/sass/fontawesome.scss, in `font-face'\A         from line 29 of /home/alendit/creyoco/src/exedjango/exeapp/static/sass/fontawesome.scss"; }
+    white-space: pre;
+    font-family: monospace;
+    content: "Syntax error: Undefined mixin 'font-face'.\A         on line 29 of /home/alendit/creyoco/exeapp/static/sass/fontawesome.scss, in `font-face'\A         from line 29 of /home/alendit/creyoco/exeapp/static/sass/fontawesome.scss";
+}

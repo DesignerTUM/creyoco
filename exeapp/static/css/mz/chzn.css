@@ -1,9 +1,9 @@
 /*
 Syntax error: Undefined variable: "$darkgrey".
-        on line 17 of /home/alendit/creyoco/src/exedjango/exeapp/static/sass/chzn.scss
+        on line 17 of /home/alendit/creyoco/exeapp/static/sass/chzn.scss
 
 Backtrace:
-/home/alendit/creyoco/src/exedjango/exeapp/static/sass/chzn.scss:17
+/home/alendit/creyoco/exeapp/static/sass/chzn.scss:17
 /var/lib/gems/1.9.1/gems/sass-3.2.9/lib/sass/script/variable.rb:49:in `_perform'
 /var/lib/gems/1.9.1/gems/sass-3.2.9/lib/sass/script/node.rb:40:in `perform'
 /var/lib/gems/1.9.1/gems/sass-3.2.9/lib/sass/script/list.rb:70:in `block in _perform'
@@ -72,6 +72,7 @@ Backtrace:
 /usr/local/bin/compass:23:in `<main>'
 */
 body:before {
-  white-space: pre;
-  font-family: monospace;
-  content: "Syntax error: Undefined variable: \"$darkgrey\".\A         on line 17 of /home/alendit/creyoco/src/exedjango/exeapp/static/sass/chzn.scss"; }
+    white-space: pre;
+    font-family: monospace;
+    content: "Syntax error: Undefined variable: \"$darkgrey\".\A         on line 17 of /home/alendit/creyoco/exeapp/static/sass/chzn.scss";
+}

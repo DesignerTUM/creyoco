@@ -1,11 +1,11 @@
 /*
 Syntax error: Undefined variable: "$darkgrey".
-        on line 1 of /home/alendit/creyoco/src/exedjango/exeapp/static/sass/forms.scss
+        on line 1 of /home/alendit/creyoco/exeapp/static/sass/forms.scss
 
-1: /home/alendit/creyoco/src/exedjango/exeapp/static/sass/forms.scss
+1: /home/alendit/creyoco/exeapp/static/sass/forms.scss
 
 Backtrace:
-/home/alendit/creyoco/src/exedjango/exeapp/static/sass/forms.scss:1
+/home/alendit/creyoco/exeapp/static/sass/forms.scss:1
 /var/lib/gems/1.9.1/gems/sass-3.2.9/lib/sass/script/variable.rb:49:in `_perform'
 /var/lib/gems/1.9.1/gems/sass-3.2.9/lib/sass/script/node.rb:40:in `perform'
 /var/lib/gems/1.9.1/gems/sass-3.2.9/lib/sass/script/funcall.rb:99:in `block in _perform'
@@ -54,6 +54,7 @@ Backtrace:
 /usr/local/bin/compass:23:in `<main>'
 */
 body:before {
-  white-space: pre;
-  font-family: monospace;
-  content: "Syntax error: Undefined variable: \"$darkgrey\".\A         on line 1 of /home/alendit/creyoco/src/exedjango/exeapp/static/sass/forms.scss\A \A 1: /home/alendit/creyoco/src/exedjango/exeapp/static/sass/forms.scss"; }
+    white-space: pre;
+    font-family: monospace;
+    content: "Syntax error: Undefined variable: \"$darkgrey\".\A         on line 1 of /home/alendit/creyoco/exeapp/static/sass/forms.scss\A \A 1: /home/alendit/creyoco/exeapp/static/sass/forms.scss";
+}
