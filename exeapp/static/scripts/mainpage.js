@@ -96,11 +96,16 @@ jQuery(document).ready(function () {
         "ui": {        "select_limit": 1,
             "initially_select": ["node" + get_outline_pane().attr("current_node")]
         },
-        "themes": {    "dots": false,
-            "icons": false,
+        "themes": {
+            "dots": false,
+            "icons": false
         },
         "plugins": ["themes", "json_data", "html_data", "ui", "crrm"]});
-    get_outline_pane().jstree('open_all', $('#outline_pane>ul'));
+
+    get_outline_pane().on("loaded.jstree", function (event, data) {
+        get_outline_pane().jstree('open_all', $('#outline_pane>ul'));
+        bind_pjax();
+    });
     //bind actions to outline nodes
     // get_outline_pane().bind("select_node.jstree",
     // handle_select_node);
@@ -109,18 +114,18 @@ jQuery(document).ready(function () {
     get_outline_pane().bind("rename_node.jstree", handle_renamed_current_node);
     //refresh pjax on every request
     $.pjax.defaults.maxCacheLength = 0;
-    //don't folow tree links
-    bind_pjax();
     // handle theme selection
     $(".theme").click(handle_select_style);
 
     // Initialize idevice Tree
     $("#idevice_pane").jstree({"themes": {    "dots": false,
-        "icons": false,
+        "icons": false
     },
         "plugins": ["themes", "html_data", "ui"]
     });
-    $("#idevice_pane").jstree('open_all', $('#idevice_pane>ul'));
+    $("#idevice_pane").on("loaded.jstree", function (event, data) {
+        $("#idevice_pane").jstree('open_all', $('#idevice_pane>ul'));
+    });
 
 
     //bind actions to outline buttons

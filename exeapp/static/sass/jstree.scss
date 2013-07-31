@@ -54,8 +54,9 @@
 .jstree a > .jstree-icon {
 }
 
-.jstree-rtl a > .jstree-icon {
+ins.jstree-icon {
   margin-right: 0;
+  background-image: none !important;
 }
 
 li.jstree-open > ul {
@@ -69,7 +70,7 @@ li.jstree-closed > ul {
 #box_right {
   .jstree > ul > li > a {
     font-weight: 700;
-    color: lighten(black, 40%);
+    color: lighten(black, 40%) !important;
   }
 
   .jstree > ul > li > ul {
@@ -89,28 +90,41 @@ li.jstree-closed > ul {
   margin-left: 0px;
 }
 
-.jstree-default .jstree-no-dots {
-  .jstree-open > ins {
-    margin-right: 0px;
-    &::before {
-      font-family: "FontAwesome";
-      content: "";
-      font-size: 90%;
-    }
+.jstree-default {
+
+  .jstree-hovered {
+    text-shadow: 0 0 0.6em $lightgrey, 0 0 0.6em $lightgrey;
+    color: $red !important;
   }
 
-  .jstree-closed > ins {
-    margin-right: 0px;
-    &::before {
-      font-family: "FontAwesome";
-      content: "";
-      font-size: 90%;
-    }
+  &.jstree-focused {
+    background: rgba(0, 0, 0, 0) !important;
   }
 
-  a {
-    > ins {
-      display: none;
+  .jstree-no-dots {
+
+    .jstree-open > ins {
+      margin-right: 0px;
+      &::before {
+        font-family: "FontAwesome";
+        content: "";
+        font-size: 90%;
+      }
+    }
+
+    .jstree-closed > ins {
+      margin-right: 0px;
+      &::before {
+        font-family: "FontAwesome";
+        content: "";
+        font-size: 90%;
+      }
+    }
+
+    a {
+      > ins {
+        display: none;
+      }
     }
   }
 }

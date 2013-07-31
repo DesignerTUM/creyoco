@@ -74,7 +74,6 @@ Backtrace:
 /var/lib/gems/1.9.1/gems/listen-0.7.3/lib/listen/adapters/linux.rb:48:in `block in start'
 */
 body:before {
-    white-space: pre;
-    font-family: monospace;
-    content: "Syntax error: Undefined variable: \"$red\".\A         on line 83 of /home/alendit/creyoco/exeapp/static/sass/jstree.scss";
-}
+  white-space: pre;
+  font-family: monospace;
+  content: "Syntax error: Undefined variable: \"$red\".\A         on line 83 of /home/alendit/creyoco/exeapp/static/sass/jstree.scss"; }

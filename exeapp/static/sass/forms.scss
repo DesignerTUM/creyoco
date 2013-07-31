@@ -1,28 +1,28 @@
 $border: lighten($darkgrey, 10%);
 @mixin input-placeholder($color) {
 	&.placeholder {
-		color: $color; 
+		color: $color;
 	}
 	&:-moz-placeholder {
-		color: $color; 
+		color: $color;
 	}
 	&::-webkit-input-placeholder {
-		color: $color; 
-	} 
+		color: $color;
+	}
 }
 
 #properties {
 	label .errorlist {
 		color:$red !important;
 	}
-	
+
 	input {
 		&[type='text'], &[type='password'] {
 			display: block;
 			margin: 0;
 			letter-spacing: 0.08em;
 			&:first-child input + input + input {
-				
+
 			}
 		}
 	}
@@ -43,20 +43,20 @@ $border: lighten($darkgrey, 10%);
 		box-sizing: border-box;
 		width:100%;
 	}
-	
+
 	#dublincore_form {
 		display: none;
-		
+
 		div {
 			width:49%;
 		}
-		
+
 		.submit {
 			width:49%;
 			margin-top:37px;
 		}
 	}
-	
+
 	#properties_form {
 		div {
 			width:49%;
@@ -68,12 +68,12 @@ $border: lighten($darkgrey, 10%);
 				margin-top:20px;
 			}
 		}
-			
+
 		textarea {
 			height:81px;
 		}
 	}
-	
+
 	h3 {
 		margin-top:30px;
 		cursor:pointer;
@@ -108,7 +108,7 @@ input {
 		&:focus {
 			border: 1px solid $red;
 		}
-		
+
 		@include input-placeholder(lighten(black, 70%));
 	}
 }
@@ -128,7 +128,7 @@ textarea {
 	&:focus {
 		border: 1px solid $red;
 	}
-	
+
 	@include input-placeholder(lighten(black, 70%));
 }
 
@@ -164,9 +164,16 @@ button {
 	outline: none;
 	border: 1px solid lighten($darkgrey, 10%);
 	margin: 0;
-	
+
 	&:hover {
 		color: $red;
+        .icon-plus-sign {
+          color: $green;
+        }
+
+      .icon-remove-sign {
+        color: $red;
+      }
 	}
 }
 
@@ -182,7 +189,7 @@ button {
 	border: none;
 	float: left;
 	@include box-shadow(none);
-	
+
 	/*&.first {
 		padding-left: 0;
 		margin-left: 0;
@@ -198,11 +205,11 @@ button {
 	width:145px;
 	margin-right: 10px;
 	float: left;
-	
+
 	.left {
 		margin-right: 30px;
 	}
-	
+
 	.right {
 		margin-left: 20px;
 	}
@@ -263,7 +270,7 @@ textarea {
 	background: rgba(167, 30, 32, 0.8);
 	right: 100%;
 	margin-right: 9px;
-	
+
 	&::after {
 		content: '';
 		display: block;
@@ -291,7 +298,7 @@ textarea {
 	background: rgba(167, 30, 32, 0.8);
 	left: 100%;
 	margin-left: 9px;
-	
+
 	&::after {
 		content: '';
 		display: block;
