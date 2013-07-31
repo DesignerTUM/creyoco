@@ -24,7 +24,7 @@
 DEBUG = true;
 
 // Strings to be translated
-DELETE_  = 'Delete "';
+DELETE_ = 'Delete "';
 NODE_AND_ALL_ITS_CHILDREN_ARE_YOU_SURE_ = '" node and all its children. Are you sure?';
 RENAME_ = 'Rename "';
 ENTER_THE_NEW_NAME = "Enter the new name";
@@ -58,7 +58,7 @@ SAVE_DIRTY_PACKAGE = "Package has been changed. Do you want to save it, before y
 
 
 // set crfs cookie
-$('html').ajaxSend(function(event, xhr, settings) {
+$('html').ajaxSend(function (event, xhr, settings) {
     function getCookie(name) {
         var cookieValue = null;
         if (document.cookie && document.cookie != '') {
@@ -74,6 +74,7 @@ $('html').ajaxSend(function(event, xhr, settings) {
         }
         return cookieValue;
     }
+
     if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
         // Only send the token to relative URLs i.e. locally.
         xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
@@ -81,124 +82,124 @@ $('html').ajaxSend(function(event, xhr, settings) {
 });
 
 // initialize
-jQuery(document).ready(function() {
-                $.jsonRPC.setup({
-                   endPoint: '/exeapp/json/',
-                   namespace: 'package',
-                });
-                $("a.bigButton, a.smallButton").button();
-                // Initialize outline tree
-                //$.jstree._themes = false;
-                get_outline_pane().jstree({
-                  "core" : {	"animation" : 200
-                  },
-                  "ui" : {		"select_limit" : 1,
-                      			"initially_select" : ["node" + get_outline_pane().attr("current_node")]
-                  },
-                  "themes" : {	"dots" : false,
-                  				"icons" : false,
-                  },
-                  "plugins" : ["themes", "html_data", "ui", "crrm"]});
-                get_outline_pane().jstree('open_all', $('#outline_pane>ul'));
-                //bind actions to outline nodes
-                // get_outline_pane().bind("select_node.jstree",
-                      // handle_select_node);
-                get_outline_pane().delegate("a", "dblclick", rename_current_node);
-                //bind renaming event
-                get_outline_pane().bind("rename_node.jstree", handle_renamed_current_node);
-                //refresh pjax on every request
-                $.pjax.defaults.maxCacheLength = 0;
-                //don't folow tree links
-				bind_pjax();
-                // handle theme selection
-                $(".theme").click(handle_select_style);
+jQuery(document).ready(function () {
+    $.jsonRPC.setup({
+        endPoint: '/exeapp/json/',
+        namespace: 'package',
+    });
+    $("a.bigButton, a.smallButton").button();
+    // Initialize outline tree
+    //$.jstree._themes = false;
+    get_outline_pane().jstree({
+        "core": {    "animation": 200
+        },
+        "ui": {        "select_limit": 1,
+            "initially_select": ["node" + get_outline_pane().attr("current_node")]
+        },
+        "themes": {    "dots": false,
+            "icons": false,
+        },
+        "plugins": ["themes", "json_data", "html_data", "ui", "crrm"]});
+    get_outline_pane().jstree('open_all', $('#outline_pane>ul'));
+    //bind actions to outline nodes
+    // get_outline_pane().bind("select_node.jstree",
+    // handle_select_node);
+    get_outline_pane().delegate("a", "dblclick", rename_current_node);
+    //bind renaming event
+    get_outline_pane().bind("rename_node.jstree", handle_renamed_current_node);
+    //refresh pjax on every request
+    $.pjax.defaults.maxCacheLength = 0;
+    //don't folow tree links
+    bind_pjax();
+    // handle theme selection
+    $(".theme").click(handle_select_style);
 
-                // Initialize idevice Tree
-                $("#idevice_pane").jstree({"themes" : {	"dots" : false,
-                  										"icons" : false,
-                  							},
-                  							"plugins" : ["themes", "html_data", "ui"]
-                  						});
-                $("#idevice_pane").jstree('open_all', $('#idevice_pane>ul'));
-
-
-                //bind actions to outline buttons
-                $("#btnAdd").click(add_child_node)
-                $("#btnRemove").click(delete_current_node)
-                $("#btnRename").click(rename_current_node);
-                $("#btnDuplicate").click(duplicate_node);
-
-                $("#btnPromote").click(promote_current_node);
-                $("#btnDemote").click(demote_current_node);
-                $("#btnUp").click(move_current_node_up);
-                $("#btnDown").click(move_current_node_down);
-
-                // init ajax forms
-                $("#properties_form, #dublincore_form").ajaxForm(function (responseText, statusText, xhr, form){
-                 	$(".errorlist").hide();
-                 	if (responseText != ""){
-                 		form.html(responseText);
-                 	}
-                 });
+    // Initialize idevice Tree
+    $("#idevice_pane").jstree({"themes": {    "dots": false,
+        "icons": false,
+    },
+        "plugins": ["themes", "html_data", "ui"]
+    });
+    $("#idevice_pane").jstree('open_all', $('#idevice_pane>ul'));
 
 
-                //$(".bigButton:not(#btnRename), .smallButton").each(function(index) {
-                //    bindButtonClicked(this);
-                //});
-                //bind action to idevice items
-                $("#idevice_pane").delegate(".ideviceItem", "click", add_idevice);
-                $("#middle").tabs();
-                updateTitle();
+    //bind actions to outline buttons
+    $("#btnAdd").click(add_child_node)
+    $("#btnRemove").click(delete_current_node)
+    $("#btnRename").click(rename_current_node);
+    $("#btnDuplicate").click(duplicate_node);
 
-                // $("#authoringIFrame1").load(function() {
-                	// var node_id = $("#authoringIFrame1").contents().find("#node_id").text();
-                	// if (current_outline_id() != node_id){
-                		// get_outline_pane().jstree("select_node", $("#node" + node_id), true);
-                	// }
-                // })
-                set_current_style()
-            });
+    $("#btnPromote").click(promote_current_node);
+    $("#btnDemote").click(demote_current_node);
+    $("#btnUp").click(move_current_node_up);
+    $("#btnDown").click(move_current_node_down);
+
+    // init ajax forms
+    $("#properties_form, #dublincore_form").ajaxForm(function (responseText, statusText, xhr, form) {
+        $(".errorlist").hide();
+        if (responseText != "") {
+            form.html(responseText);
+        }
+    });
+
+
+    //$(".bigButton:not(#btnRename), .smallButton").each(function(index) {
+    //    bindButtonClicked(this);
+    //});
+    //bind action to idevice items
+    $("#idevice_pane").delegate(".ideviceItem", "click", add_idevice);
+    $("#middle").tabs();
+    updateTitle();
+
+    // $("#authoringIFrame1").load(function() {
+    // var node_id = $("#authoringIFrame1").contents().find("#node_id").text();
+    // if (current_outline_id() != node_id){
+    // get_outline_pane().jstree("select_node", $("#node" + node_id), true);
+    // }
+    // })
+    set_current_style()
+});
 
 // Called after successful package deletion
 function callback_delete_package(id) {
-  var package_li = $(".package[package_id=" + id + "]");
-  package_li.remove();
+    var package_li = $(".package[package_id=" + id + "]");
+    package_li.remove();
 }
 
 //Bind pjax to a's of outline pane
 function bind_pjax() {
-	var $nodes = get_outline_pane().find("ul > li > a");
-	$nodes.off("click");
-    $nodes.on("click", function(event) {
-		get_outline_pane().jstree("select_node", "#" + $(this).attr("id"), true);
-		handle_select_node(event);
-		$.pjax.click(event, {container: "#authoring"});
-		return false;
-	});
+    var $nodes = get_outline_pane().find("ul > li > a");
+    $nodes.off("click");
+    $nodes.on("click", function (event) {
+        get_outline_pane().jstree("select_node", "#" + $(this).attr("id"), true);
+        handle_select_node(event);
+        $.pjax.click(event, {container: "#authoring"});
+        return false;
+    });
 }
 
 // Promps a new package new and sens a "main.create_package" call via
 // rpc
-function create_package(){
-  var package_title = prompt('Enter package title');
+function create_package() {
+    var package_title = prompt('Enter package title');
     $.jsonRPC.request('create_package', [package_title], {
-      success: function(results){
-        window.open(results.result.url, "_self");
-      }
+        success: function (results) {
+            window.open(results.result.url, "_self");
+        }
     });
 }
 
-function delete_package(){
+function delete_package() {
     var package_id = $(this).parent().attr('package_id');
     $.jsonRPC.request('delete_package', [package_id], {
-      success: function(results) {
-        var deleted_package_id = results.result.package_id;
-          if (deleted_package_id > 0) {
-            // Just a pre-caution that we remove the same package as the
-            // server
-          callback_delete_package(deleted_package_id);
+        success: function (results) {
+            var deleted_package_id = results.result.package_id;
+            if (deleted_package_id > 0) {
+                // Just a pre-caution that we remove the same package as the
+                // server
+                callback_delete_package(deleted_package_id);
+            }
         }
-      }
     })
 }
 
@@ -206,170 +207,170 @@ function delete_package(){
 // Adds a new node to current one
 function add_child_node() {
 
-  $.jsonRPC.request('add_child_node', [get_package_id(), get_current_node_id()], {
-    success: function(results) {
-      callback_add_child_node(results.result.id, results.result.title);
-    }
-  })
+    $.jsonRPC.request('add_child_node', [get_package_id(), get_current_node_id()], {
+        success: function (results) {
+            callback_add_child_node(results.result.id, results.result.title);
+        }
+    })
 }
 
 //Duplcates current node
 function duplicate_node() {
     $.jsonRPC.request('duplicate_node', [get_package_id(), get_current_node_id()],
-    {
-        success: function(results) {
-            callback_duplicate_node(results.result.id, results.result.title);
-        }
-    });
+        {
+            success: function (results) {
+                callback_duplicate_node(results.result);
+            }
+        });
 }
-
 
 
 //Removes current node
 function delete_current_node() {
-  $.jsonRPC.request('delete_current_node', [get_package_id(), get_current_node_id()], {
-    success: function(results) {
-	  var new_node_id = results.result.new_node;
-	  if (new_node_id != 0) {
-	    callback_delete_current_node(new_node_id);
-	  }
-    }
-  })
+    $.jsonRPC.request('delete_current_node', [get_package_id(), get_current_node_id()], {
+        success: function (results) {
+            var new_node_id = results.result.new_node;
+            if (new_node_id != 0) {
+                callback_delete_current_node(new_node_id);
+            }
+        }
+    })
 }
 
 //Simply triggeds jstree's rename routine
-function rename_current_node(){
-  if (get_current_node().attr('id') != "node" + current_outline_id()) {
-      alert("Somehow you managed to call dblclik event without a single click. Please, reload page!");
-      return null;
-  }
-  get_outline_pane().jstree("rename");
+function rename_current_node() {
+    if (get_current_node().attr('id') != "node" + current_outline_id()) {
+        alert("Somehow you managed to call dblclik event without a single click. Please, reload page!");
+        return null;
+    }
+    get_outline_pane().jstree("rename");
 }
 
 // Promotes current node to a sibling of it's parent.
-function promote_current_node(){
-  // check if the current node is the root or a child of the root
-  if (is_root(get_current_node()) ||
-  is_root(get_current_node().parent().parent().parent())) {
-              alert(CANT_MOVE_NODE_FURTHER);
-              return -1;
-            }
-  $.jsonRPC.request('promote_current_node', [get_package_id(), get_current_node_id()], {
-    success: function(results){
-      if (results.result.promoted != "1") {
-        alert(NODE_WAS_NOT_MOVED);
-      } else {
-        callback_promote_current_node();
-      }
+function promote_current_node() {
+    // check if the current node is the root or a child of the root
+    if (is_root(get_current_node()) ||
+        is_root(get_current_node().parent().parent().parent())) {
+        alert(CANT_MOVE_NODE_FURTHER);
+        return -1;
     }
-  });
+    $.jsonRPC.request('promote_current_node', [get_package_id(), get_current_node_id()], {
+        success: function (results) {
+            if (results.result.promoted != "1") {
+                alert(NODE_WAS_NOT_MOVED);
+            } else {
+                callback_promote_current_node();
+            }
+        }
+    });
 }
 
 function demote_current_node() {
-  // Check if current node if a root
-  if (is_root(get_current_node())) {
-    alert("Can't demote the root.");
-  } else
+    // Check if current node if a root
+    if (is_root(get_current_node())) {
+        alert("Can't demote the root.");
+    } else
     // Check if there are any nodes before current one on the same level
     if (get_current_node().parent().prev().length == 0) {
-      alert ("No previous node, can't demote.");
+        alert("No previous node, can't demote.");
     } else {
-      $.jsonRPC.request('demote_current_node', [get_package_id(), get_current_node_id()], {
-        success: function(results) {
-          if (results.result.demoted != "1") {
-            alert(NODE_WAS_NOT_MOVED);
-          } else {
-            callback_demote_current_node();
-          }
-        }
-      });
+        $.jsonRPC.request('demote_current_node', [get_package_id(), get_current_node_id()], {
+            success: function (results) {
+                if (results.result.demoted != "1") {
+                    alert(NODE_WAS_NOT_MOVED);
+                } else {
+                    callback_demote_current_node();
+                }
+            }
+        });
     }
 }
 
 // Move node up at the same level
-function move_current_node_up(){
-  // Check if there are any nodes before the current one on the same level
-  if (get_current_node().parent().prev().length == 0) {
-    alert(CANT_MOVE_NODE_FURTHER);
-  }
-  $.jsonRPC.request('move_current_node_up', [get_package_id(), get_current_node_id()], {
-      success: callback_move_current_node_up,
-      error: function(result) { alert (NODE_WAS_NOT_MOVED); }
+function move_current_node_up() {
+    // Check if there are any nodes before the current one on the same level
+    if (get_current_node().parent().prev().length == 0) {
+        alert(CANT_MOVE_NODE_FURTHER);
+    }
+    $.jsonRPC.request('move_current_node_up', [get_package_id(), get_current_node_id()], {
+        success: callback_move_current_node_up,
+        error: function (result) {
+            alert(NODE_WAS_NOT_MOVED);
+        }
     });
 }
 
 // Move current node down at the same level
 function move_current_node_down() {
-  if (get_current_node().parent().next().length == 0) {
-    alert(CANT_MOVE_NODE_FURTHER);
-    return -1;
-  }
-  $.jsonRPC.request('move_current_node_down', [get_package_id(), get_current_node_id()], {
-    success: function(results) {
-      if (results.result.moved != '1'){
-        alert(NODE_WAN_NOT_MOVED);
-      } else {
-        callback_move_current_node_down();
-      }
+    if (get_current_node().parent().next().length == 0) {
+        alert(CANT_MOVE_NODE_FURTHER);
+        return -1;
     }
-  });
+    $.jsonRPC.request('move_current_node_down', [get_package_id(), get_current_node_id()], {
+        success: function (results) {
+            if (results.result.moved != '1') {
+                alert(NODE_WAN_NOT_MOVED);
+            } else {
+                callback_move_current_node_down();
+            }
+        }
+    });
 }
 
 function add_idevice() {
-  var ideviceid = $("#idevice_pane").jstree("get_selected").find(">a").attr('ideviceid');
-  $.jsonRPC.request('add_idevice', [get_package_id(), get_current_node_id(), ideviceid],{
-    success: function(results) {
-    	insert_idevice(
-    		results.result.idevice_id
-    	);
-    }
-  });
-  return false;
+    var ideviceid = $("#idevice_pane").jstree("get_selected").find(">a").attr('ideviceid');
+    $.jsonRPC.request('add_idevice', [get_package_id(), get_current_node_id(), ideviceid], {
+        success: function (results) {
+            insert_idevice(
+                results.result.idevice_id
+            );
+        }
+    });
+    return false;
 }
 
 // Handles outline_pane selection event. Calls package.change_current_node
 // via rpc.
 function handle_select_node(event, data) {
 
-	// for (key in data){alert(key);};
-	if (data == undefined) {
-	    var node = get_current_node();
-	    set_current_node(node);
-   	}
+    // for (key in data){alert(key);};
+    if (data == undefined) {
+        var node = get_current_node();
+        set_current_node(node);
+    }
 }
 
 function handle_select_style() {
-	$.jsonRPC.request("set_package_style", [get_package_id(), get_current_node_id(), $(this).attr('id')]);
+    $.jsonRPC.request("set_package_style", [get_package_id(), get_current_node_id(), $(this).attr('id')]);
 }
 
 //handle renamed node event. Calls package.rename_node over rpc.
-function handle_renamed_current_node(e, data){
-  var new_title = data.rslt.name;
-  $.jsonRPC.request('rename_current_node', [get_package_id(), get_current_node_id(), new_title], {
-    success: function(results){
-      var server_title = ""
-      if ("title" in results.result){
-        server_title = results.result.title;
-        reload_authoring();
-      }
-      if (new_title != server_title){
-        alert("Server couldn't rename the node");
-        get_current_node().html($("<ins />").addClass('jstree-icon'));
-        get_current_node().append(server_title);
-      }
-    }});
+function handle_renamed_current_node(e, data) {
+    var new_title = data.rslt.name;
+    $.jsonRPC.request('rename_current_node', [get_package_id(), get_current_node_id(), new_title], {
+        success: function (results) {
+            var server_title = ""
+            if ("title" in results.result) {
+                server_title = results.result.title;
+                reload_authoring();
+            }
+            if (new_title != server_title) {
+                alert("Server couldn't rename the node");
+                get_current_node().html($("<ins />").addClass('jstree-icon'));
+                get_current_node().append(server_title);
+            }
+        }});
 }
 
 // Returns the _exe_nodeid attribute of the currently selected row item
-function current_outline_id(index)
-{
+function current_outline_id(index) {
     return get_current_node().attr('nodeId');
 }
 
 var outlineButtons = new Array('btnAdd', 'btnDel', 'btnRename', 'btnPromote', 'btnDemote', 'btnUp', 'btnDown', 'btnDbl')
 
 function disableButtons(state) {
-    if (state){
+    if (state) {
         //$(".bigButton, .smallButton").button("disable");
         $.blockUI();
     } else {
@@ -380,7 +381,7 @@ function disableButtons(state) {
 
 function addStyle() {
     var src = addDir();
-    $.jsonRPC('importStyle', [get_package_id(),'',src]);
+    $.jsonRPC('importStyle', [get_package_id(), '', src]);
 }
 
 function enableButtons() {
@@ -388,44 +389,68 @@ function enableButtons() {
     $.unblockUI();
 }
 
-function get_package_id(){
-  return $("#package_id").text()
+function get_package_id() {
+    return $("#package_id").text()
 }
 
 // Appends a child node with name and _exe_nodeid to the currently
 // selected node
 function callback_add_child_node(nodeid, title) {
     var current_li = get_current_node().parent();
-    var new_node = {'data': {'title' : title,
-        'attr': {'id': 'node' + nodeid,
-        'nodeid': nodeid,
-        'href': "/exeapp/package/" + get_package_id() + "/" + nodeid + "/"}}}
-    get_outline_pane().on("create_node.jstree", function(event, data) {
-    var id_attr = data.rslt.obj.find("a").attr('id');
-	    bind_pjax();
-    	$("#" + id_attr).click();
-    });
-    get_outline_pane().jstree("create_node",current_li, "last", new_node);
-    get_outline_pane().jstree("open_node", current_li);
-    // get_outline_pane().jstree("select_node", $("#node" + nodeid), true);
-}
-
-//Duplicate current node
-function callback_duplicate_node(new_id, title) {
-    var current_node = get_current_node();
-    var current_li = current_node.parent().parent().parent();
     var new_node = {'data': {'title': title,
-        'attr': {
-            'id': 'node' + new_id,
-            'nodeid': new_id,
-            'href': "/exeapp/package/" + get_package_id() + "/" + new_id + "/"}}};
-    get_outline_pane().on("create_node.jstree", function(event, data) {
+        'attr': {'id': 'node' + nodeid,
+            'nodeid': nodeid,
+            'href': "/exeapp/package/" + get_package_id() + "/" + nodeid + "/"}}}
+    get_outline_pane().on("create_node.jstree", function (event, data) {
         var id_attr = data.rslt.obj.find("a").attr('id');
         bind_pjax();
         $("#" + id_attr).click();
     });
-    get_outline_pane().jstree("create_node",current_li, "last", new_node);
+    get_outline_pane().jstree("create_node", current_li, "last", new_node);
     get_outline_pane().jstree("open_node", current_li);
+    // get_outline_pane().jstree("select_node", $("#node" + nodeid), true);
+}
+
+
+//generates node data from a result object
+function generate_node_data(result) {
+    var children = [];
+    for (child in result.children) {
+        children.push(generate_node_data(result.children[child]));
+    }
+    rslt = {'data': {
+        'title': result.title,
+        'attr': {
+            'id': 'node' + result.id,
+            'nodeid': result.id,
+            'href': "/exeapp/package/" + get_package_id() + "/" + result.id + "/"
+        }
+    },
+        'children': children
+    };
+
+    if (children.length != 0) {
+        rslt['state'] = 'open';
+    }
+    return rslt;
+}
+
+//Duplicate current node
+function callback_duplicate_node(result, parent) {
+    var new_id = result.id;
+    var title = result.title;
+    if (parent == undefined) {
+        var parent = get_current_node();
+    }
+    var current_li = parent.parent().parent().parent();
+    if (current_li[0] === get_outline_pane()[0]) {
+        current_li = parent.parent();
+    }
+    var new_node = generate_node_data(result);
+    var tree = get_outline_pane().jstree("tree-container");
+    current_li.append(tree._parse_json(new_node));
+    tree.clean_node(current_li);
+    bind_pjax();
 }
 
 // Delete the currently selected node
@@ -433,73 +458,72 @@ function callback_delete_current_node(new_node_id) {
 
     get_outline_pane().jstree("delete_node", "#node" + get_current_node_id());
     get_outline_pane().jstree("select_node", "#node" + new_node_id, true);
-    var url = "/exeapp/package/" + get_package_id() + "/" + new_node_id + "/" ;
+    var url = "/exeapp/package/" + get_package_id() + "/" + new_node_id + "/";
     $.pjax({url: url,
-    		container: "#authoring",
-    		});
+        container: "#authoring",
+    });
     updateTitle();
 }
 
 // Move the node to the same level as it's parent and place it after.
 function callback_promote_current_node() {
-  // Move through <li>, <ul> to parent's <li>
-  var parent_container_node = get_current_node().parent().parent().parent()
-  move_current_node_to_neighbour(parent_container_node, "after")
+    // Move through <li>, <ul> to parent's <li>
+    var parent_container_node = get_current_node().parent().parent().parent()
+    move_current_node_to_neighbour(parent_container_node, "after")
 }
 
 function callback_demote_current_node() {
-  var previous_node = get_current_node().parent().prev();
-  move_current_node_to_neighbour(previous_node, "last")
+    var previous_node = get_current_node().parent().prev();
+    move_current_node_to_neighbour(previous_node, "last")
 }
 
 // Move current node before the previous
 function callback_move_current_node_up() {
-  var neighbour_node = get_current_node().parent().prev();
-  move_current_node_to_neighbour(neighbour_node, "before")
+    var neighbour_node = get_current_node().parent().prev();
+    move_current_node_to_neighbour(neighbour_node, "before")
 }
 
 // Move current node after the next
 function callback_move_current_node_down() {
-  var neighbour_node = get_current_node().parent().next();
-  move_current_node_to_neighbour(neighbour_node, "after");
+    var neighbour_node = get_current_node().parent().next();
+    move_current_node_to_neighbour(neighbour_node, "after");
 }
 
 // places the current node to position relatively to neighbour
 function move_current_node_to_neighbour(neighbour_node, position) {
-	var current_node = get_current_node();
-	get_outline_pane().jstree("move_node", current_node, neighbour_node, position);
+    var current_node = get_current_node();
+    get_outline_pane().jstree("move_node", current_node, neighbour_node, position);
 }
-
 
 
 // Checks if node is root, saves a lot parent() in the code
 function is_root(node) {
-  // Get parent li, if node is a <a>-reference
-  if ($(node).is('a')) {
-    node = $(node).parent();
-  }
-  return (node.parent().parent().attr('id') == 'outline_pane');
+    // Get parent li, if node is a <a>-reference
+    if ($(node).is('a')) {
+        node = $(node).parent();
+    }
+    return (node.parent().parent().attr('id') == 'outline_pane');
 }
 
 // called to synchronize current_node attribute of outline_pane with
 // currently selected node. Refreshes authoring
 function set_current_node(node) {
-  get_outline_pane().attr('current_node', get_current_node().attr('nodeid'));
-  updateTitle();
-  reload_authoring();
+    get_outline_pane().attr('current_node', get_current_node().attr('nodeid'));
+    updateTitle();
+    reload_authoring();
 }
 
 function update_preview() {
-  var url = window.location.protocol + '//' + location.host + location.pathname;
-  $('#previewIFrame').attr('src', url + "preview/");
+    var url = window.location.protocol + '//' + location.host + location.pathname;
+    $('#previewIFrame').attr('src', url + "preview/");
 }
 
 function set_current_style() {
-	$.jsonRPC.request('get_current_style', [get_package_id()],
-		{success: function(results){
-			var style_val = results.result.style;
-			$("#" + style_val).addClass("selected");
-		}});
+    $.jsonRPC.request('get_current_style', [get_package_id()],
+        {success: function (results) {
+            var style_val = results.result.style;
+            $("#" + style_val).addClass("selected");
+        }});
 }
 
 function get_current_node() {
@@ -508,12 +532,12 @@ function get_current_node() {
 }
 
 function get_current_node_id() {
-	node = get_current_node();
-	return node.attr('id').match(/node(\d+)/)[1]
+    node = get_current_node();
+    return node.attr('id').match(/node(\d+)/)[1]
 }
 
 function get_outline_pane() {
-  return $("#outline_pane");
+    return $("#outline_pane");
 }
 
 function setDocumentTitle(title) {
@@ -522,11 +546,11 @@ function setDocumentTitle(title) {
 
 //gets editors width in pixel and sets its width accordingly
 function setEditorsWidth() {
-	var width = prompt("Enter editor's new width. 0 or empty to set it to 100%");
-	$.jsonRPC('setEditorsWidth', [get_package_id(),'',width]);
+    var width = prompt("Enter editor's new width. 0 or empty to set it to 100%");
+    $.jsonRPC('setEditorsWidth', [get_package_id(), '', width]);
 }
 
 //Set the page title
 function updateTitle() {
-	;
+    ;
 }

@@ -16,9 +16,10 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 # ===========================================================================
-from django.core.urlresolvers import reverse
-from django.template.loader import render_to_string
 import re
+
+from django.core.urlresolvers import reverse
+
 """
 Nodes provide the structure to the package hierarchy
 """
@@ -28,12 +29,12 @@ from django.db import models
 from exeapp.models import idevice_store
 
 import logging
-from copy               import deepcopy
+from copy import deepcopy
 
 log = logging.getLogger()
 
-class NodeManager(models.Manager):
 
+class NodeManager(models.Manager):
     def create(self, package, parent, title="", is_root=False):
         if not title:
             level = parent.level + 1
@@ -69,6 +70,7 @@ class Node(models.Model):
         Calculates and returns our current level
         """
         return len(list(self.ancestors()))
+
     level = property(getLevel)
 
     def get_idevice(self, idevice_id):
@@ -79,7 +81,8 @@ with it'''
             if idevice.id == idevice_id:
                 return idevice
         raise KeyError("Idevice %s not found" % idevice_id)
-    #
+
+        #
 
     def GetFullNodePath(self, new_node_title=""):
         """
@@ -133,14 +136,14 @@ with it'''
         new_node_path = self.GetFullNodePath()
         self.last_full_node_path = new_node_path
         log.debug('Renaming node path, from "' + old_node_path
-                + '" to "' + new_node_path + '"')
+                  + '" to "' + new_node_path + '"')
 
         current_package = self.package
 
         # First rename all of the source-links to anchors in this node's fields:
         for this_field in self.anchor_fields:
             if (isMerge or isExtract) and hasattr(this_field, 'anchor_names') \
-            and len(this_field.anchor_names) > 0:
+                and len(this_field.anchor_names) > 0:
                 # merging this field into a destination package,
                 # setup the internal linking data structures:
 
@@ -156,17 +159,17 @@ with it'''
 
             # now, for ANY type of node renaming, update corresponding links:
             if hasattr(this_field, 'anchor_names') \
-            and hasattr(this_field, 'anchors_linked_from_fields'):
+                and hasattr(this_field, 'anchors_linked_from_fields'):
                 for this_anchor_name in this_field.anchor_names:
                     old_full_link_name = old_node_path + "#" + this_anchor_name
                     new_full_link_name = new_node_path + "#" + this_anchor_name
 
                     # Remove any linked fields that no longer apply,
                     # using reverse for loop to delete:
-                    num_links = len(this_field.anchors_linked_from_fields[\
-                            this_anchor_name])
+                    num_links = len(this_field.anchors_linked_from_fields[ \
+                        this_anchor_name])
                     for i in range(num_links - 1, -1, -1):
-                        that_field = this_field.anchors_linked_from_fields[\
+                        that_field = this_field.anchors_linked_from_fields[ \
                             this_anchor_name][i]
                         that_field_is_valid = True
                         if isExtract:
@@ -179,20 +182,20 @@ with it'''
                             # unfortunately included with the sub-package, but
                             # are NOT actually listed within its _nodeIdDict!
                             if that_field.idevice is None \
-                            or that_field.idevice.parentNode is None \
-                            or that_field.idevice.parentNode.package \
-                            != current_package \
-                            or that_field.idevice.parentNode.id \
-                            not in current_package._nodeIdDict \
-                            or current_package._nodeIdDict[ \
-                            that_field.idevice.parentNode.id] \
-                            != that_field.idevice.parentNode:
+                                or that_field.idevice.parentNode is None \
+                                or that_field.idevice.parentNode.package \
+                                            != current_package \
+                                or that_field.idevice.parentNode.id \
+                                        not in current_package._nodeIdDict \
+                                or current_package._nodeIdDict[ \
+                                        that_field.idevice.parentNode.id] \
+                                            != that_field.idevice.parentNode:
                                 that_field_is_valid = False
                                 # and remove the corresponding link here.
-                                this_field.anchors_linked_from_fields[\
-                                        this_anchor_name].remove(that_field)
+                                this_field.anchors_linked_from_fields[ \
+                                    this_anchor_name].remove(that_field)
                         if that_field_is_valid:
-                            that_field.RenameInternalLinkToAnchor(\
+                            that_field.RenameInternalLinkToAnchor( \
                                 this_field, unicode(old_full_link_name),
                                 unicode(new_full_link_name))
 
@@ -212,8 +215,8 @@ with it'''
                 self.package.anchor_nodes = []
             if num_links > 0 and self not in self.package.anchor_nodes:
                 self.package.anchor_nodes.append(self)
-        # Remove any linked fields that no longer apply,
-        # using reverse for loop to delete:
+                # Remove any linked fields that no longer apply,
+                # using reverse for loop to delete:
         for i in range(num_links - 1, -1, -1):
             # now, for ANY type of node renaming, update corresponding links:
             that_field = self.top_anchors_linked_from_fields[i]
@@ -228,24 +231,24 @@ with it'''
                 # unfortunately included with the sub-package, but
                 # are NOT actually listed within its _nodeIdDict!
                 if that_field.idevice is None \
-                or that_field.idevice.parentNode is None \
-                or that_field.idevice.parentNode.package \
-                != current_package \
-                or that_field.idevice.parentNode.id \
-                not in current_package._nodeIdDict \
-                or current_package._nodeIdDict[ \
-                that_field.idevice.parentNode.id] \
-                != that_field.idevice.parentNode:
+                    or that_field.idevice.parentNode is None \
+                    or that_field.idevice.parentNode.package \
+                                != current_package \
+                    or that_field.idevice.parentNode.id \
+                            not in current_package._nodeIdDict \
+                    or current_package._nodeIdDict[ \
+                            that_field.idevice.parentNode.id] \
+                                != that_field.idevice.parentNode:
                     that_field_is_valid = False
                     # and remove the corresponding link here.
                     self.top_anchors_linked_from_fields.remove(that_field)
             if that_field_is_valid:
                 # for auto_top, uses the actual Node as the anchor_field:
                 anchor_field = self
-                that_field.RenameInternalLinkToAnchor(\
+                that_field.RenameInternalLinkToAnchor( \
                     anchor_field, unicode(old_full_link_name),
                     unicode(new_full_link_name))
-        # and determine if any links to this node remain
+                # and determine if any links to this node remain
         num_links = len(self.top_anchors_linked_from_fields)
         if num_top_links > 0 and num_links <= 0:
             # there WERE links to this node's auto_top,
@@ -254,7 +257,7 @@ with it'''
             # no need for this node to be in the package's anchor_nodes list:
             if len(self.anchor_fields) <= 0:
                 if self.package and hasattr(self.package, 'anchor_nodes') \
-                and self in self.package.anchor_nodes:
+                    and self in self.package.anchor_nodes:
                     self.package.anchor_nodes.remove(self)
 
         # and for package extractions, also ensure that any internal links
@@ -263,7 +266,7 @@ with it'''
             for this_idevice in self.idevices:
                 for this_field in this_idevice.getRichTextFields():
                     if hasattr(this_field, 'intlinks_to_anchors') \
-                    and len(this_field.intlinks_to_anchors) > 0:
+                        and len(this_field.intlinks_to_anchors) > 0:
 
                         # Remove any linked fields that no longer apply,
                         # using reverse for loop to delete:
@@ -280,32 +283,33 @@ with it'''
                             # are NOT actually listed within its _nodeIdDict!
 
                             # could not import this at the top:
-                            from exe.engine.field         import Field
+                            from exe.engine.field import Field
 
                             this_link_node = None
                             this_anchor_name = common.getAnchorNameFromLinkName(
-                                    this_link_name)
+                                this_link_name)
                             if this_anchor_field \
-                            and isinstance(this_anchor_field, Field) \
-                            and this_anchor_name != u"auto_top":
+                                and isinstance(this_anchor_field, Field) \
+                                and this_anchor_name != u"auto_top":
                                 if this_anchor_field.idevice is not None \
-                                and this_anchor_field.idevice.parentNode:
+                                    and this_anchor_field.idevice.parentNode:
                                     this_link_node = \
                                         this_anchor_field.idevice.parentNode
                             elif this_anchor_field \
-                            and isinstance(this_anchor_field, Node):
+                                and isinstance(this_anchor_field, Node):
                                 # can be a Node for an auto_top link
                                 this_link_node = this_anchor_field
                             if this_link_node is None \
-                            or this_link_node.package != current_package \
-                            or this_link_node.id \
-                            not in current_package._nodeIdDict \
-                            or current_package._nodeIdDict[this_link_node.id] \
-                            != this_link_node:
+                                or this_link_node.package != current_package \
+                                or this_link_node.id \
+                                        not in current_package._nodeIdDict \
+                                or current_package._nodeIdDict[
+                                        this_link_node.id] \
+                                            != this_link_node:
                                 # this internal link points to an anchor
                                 # which is NO LONGER a VALID part of this
                                 # newly extracted sub-package.  Remove it:
-                                this_field.RemoveInternalLinkToRemovedAnchor(\
+                                this_field.RemoveInternalLinkToRemovedAnchor( \
                                     this_anchor_field, unicode(this_link_name))
 
         # Then do the same for all of this node's children nodes:
@@ -331,7 +335,7 @@ with it'''
             # Setting self.parent in the copy to None, so it doesn't
             # go up copying the whole tree
             newNode = deepcopy(self, {id(self._package): newPackage,
-                                  id(self.parent): None})
+                                      id(self.parent): None})
             newNode._id = newPackage._regNewNode(newNode)
         except Exception, e:
             raise
@@ -340,7 +344,7 @@ with it'''
         # Give all the new nodes id's
         for node in newNode.walkDescendants():
             node._id = newPackage._regNewNode(node)
-        # Insert into the new package
+            # Insert into the new package
         if newParentNode is None:
             newNode.parent = None
             newPackage.root = newPackage.currentNode = newNode
@@ -373,9 +377,8 @@ with it'''
         """
         log.debug(u"getResources ")
         resources = set()
-#        from IPython import embed; embed()
+        #        from IPython import embed; embed()
         for idevice in self.idevices.all():
-
             resources.update(idevice.as_child().resources)
 
         return resources
@@ -394,6 +397,7 @@ with it'''
         '''Removes an iDevice or delegates action to it'''
         idevice = self.idevices.get(pk=idevice_id).as_child()
         from exeapp.views.blocks.blockfactory import block_factory
+
         block = block_factory(idevice)
         if action == 'delete':
             idevice.delete()
@@ -422,15 +426,21 @@ with it'''
         children = list(self.children.all())
         idevices = list(self.idevices.all())
         node = self
-        node.pk = None
         if parent is not None:
             node.parent = parent
+        elif node.parent is None and node.is_root:
+            node.is_root = False
+            node.parent = self
+        node.pk = None
         node.save()
         for idevice in idevices:
             new_idevice = idevice.as_child().clone()
             new_idevice.parent_node = node
             new_idevice.save()
-        return node
+        children_return = []
+        for child in children:
+            children_return.append(child.duplicate(parent=node))
+        return {'node': node, "children": children_return}
 
     def add_idevice(self, idevice_type):
         """
@@ -568,8 +578,8 @@ Returns True is successful
             # supposedly the root of a sub-tree, but it could also be a zombie.
             # Allow all of the package to load up and upgrade before testing:
             G.application.afterUpgradeHandlers.append(self.testForZombieNodes)
-        elif not hasattr(self.parent, 'children')\
-        or not self in self.parent.children:
+        elif not hasattr(self.parent, 'children') \
+            or not self in self.parent.children:
             # this seems a child which is not properly connected to its parent:
             G.application.afterUpgradeHandlers.append(self.testForZombieNodes)
 
@@ -581,15 +591,15 @@ Returns True is successful
         """
         # remembering that this is only launched for this nodes
         # with parent==None or not in the parent's children list.
-        if not hasattr(self, '_package') or self._package is None\
-        or not hasattr(self._package, 'root') or self._package.root != self:
+        if not hasattr(self, '_package') or self._package is None \
+            or not hasattr(self._package, 'root') or self._package.root != self:
             log.warn("Found zombie Node \"" + self.getTitle()
-                + "\", nodeId=" + str(self.getId())
-                + " @ " + str(id(self)) + ".")
+                     + "\", nodeId=" + str(self.getId())
+                     + " @ " + str(id(self)) + ".")
             if not hasattr(self, '_title'):
                 # then explicitly set its _title attribute to update below
                 self._title = self.getTitle()
-            # disconnect it from any package, parent, and idevice links,
+                # disconnect it from any package, parent, and idevice links,
             # and go through and delete any and all children nodes:
             zombie_preface = u"ZOMBIE("
             if self._title[0:len(zombie_preface)] != zombie_preface:

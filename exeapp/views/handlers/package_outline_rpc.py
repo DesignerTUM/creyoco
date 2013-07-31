@@ -1,12 +1,14 @@
 '''Handlers for jsonRPC call from package page outline actions'''
 
+import logging
 
 from jsonrpc import jsonrpc_method
-from exeapp.shortcuts import get_package_by_id_or_error, jsonrpc_authernticating_method
-
-import logging
 from django.contrib.auth.models import User
+
+from exeapp.shortcuts import get_package_by_id_or_error, \
+    jsonrpc_authernticating_method
 from exeapp.models.package import Package
+
 
 log = logging.getLogger()
 
@@ -41,10 +43,17 @@ node to it's title'''
 @jsonrpc_authernticating_method('package.duplicate_node')
 def duplicate_node(request, package, node):
     '''Duplicate the node and append it to the same root'''
-    new_node = node.duplicate()
-    return {'id': new_node.pk, 'title': new_node.title}
+    output = node.duplicate()
 
+    def marshal_output(node):
+        children = []
+        for child in node['children']:
+            children.append(marshal_output(child))
+        return {'id': node['node'].id,
+                'title': node['node'].title,
+                'children': children}
 
+    return marshal_output(output)
 
 
 @jsonrpc_authernticating_method('package.promote_current_node')
