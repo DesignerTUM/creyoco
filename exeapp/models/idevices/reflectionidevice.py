@@ -1,6 +1,7 @@
 from django.db import models
-from exeapp.models.idevices.genericidevice import GenericIdevice
 from django.utils.translation import ugettext_lazy as _
+
+from exeapp.models.idevices.genericidevice import GenericIdevice
 from exeapp.models.idevices import fields
 from exeapp.models.idevices.idevice import Idevice
 
@@ -16,13 +17,14 @@ these as a piece of academic work. Journals, diaries, profiles and portfolios
 are useful tools for collecting observation data. Rubrics and guides can be
 effective feedback tools.""")
     emphasis = Idevice.SOMEEMPHASIS
-    group = Idevice.CONTENT
+    group = Idevice.TEST
     activity = fields.RichTextField(blank=True, default="",
-                                      help_text=_(
-                """Enter a question for learners to reflect upon."""))
+                                    help_text=_(
+                                        """Enter a question for learners to
+                                        reflect upon."""))
     answer = fields.FeedbackField(blank=True, default="",
-                                   help_text=
-    _("""Describe how learners will assess how
+                                  help_text=
+                                  _("""Describe how learners will assess how
 they have done in the exercise. (Rubrics are useful devices for providing
 reflective feedback.)"""))
 
