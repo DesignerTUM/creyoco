@@ -11,19 +11,7 @@
 <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/mz/style.min.css">
 {% endblock %}
 {% block head_javascript %}
-<script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.js"></script>
-<script type="text/javascript" src="{% get_static_prefix %}scripts/jquery-ui.custom.min.js"></script>
-<script type="text/javascript" src="{% get_static_prefix %}scripts/mainpage.js"></script>
-<script type='text/javascript' src="{% get_static_prefix %}scripts/jquery.jsonrpc.js"></script>
-<script type="text/javascript" src="{% get_static_prefix %}scripts/common.js"></script>
-<script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.form.js"></script>
-<script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.cookie.js"></script>
-<script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.jstree.js"></script>
-<script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.confirm.js"></script>
-<script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.qtip.min.js"></script>
-<script type="text/javascript" src="{% get_static_prefix %}scripts/chosen.jquery.min.js"></script>
-<script type="text/javascript" src="{% get_static_prefix %}scripts/jquery.pjax.js"></script>
-<script type="text/javascript" src="{% get_static_prefix %}scripts/eyecandy.js"></script>
+<script data-main="{% get_static_prefix %}scripts/main.js" src="{% get_static_prefix %}scripts/bower_components/requirejs/require.js"></script>
 {% render_form_media current_node %}
 {% endblock %}
 
@@ -34,10 +22,10 @@
 					</iframe>
 
 					<div id="download_box">
-					<h3>Wählen Sie das Dateiformat für den Kurs-Export.</h3>
-					{% for type, title in exporter_type_title_map.items %}
-						<a class="export_link" href="{% url "exeapp.views.package.export" package.id type %}"><i class="icon-arrow-right"></i> {{title}}</a>
-					{% endfor %}
+                        <h3>Wählen Sie das Dateiformat für den Kurs-Export.</h3>
+                        {% for type, title in exporter_type_title_map.items %}
+                            <a class="export_link" href="{% url "exeapp.views.package.export" package.id type %}"><i class="icon-arrow-right"></i> {{title}}</a>
+                        {% endfor %}
 					</div>
 
 {% endblock %}

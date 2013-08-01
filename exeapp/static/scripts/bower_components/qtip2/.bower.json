@@ -1,0 +1,22 @@
+{
+  "name": "qtip2",
+  "version": "2.1.1",
+  "description": "Introducing... qTip2. The second generation of the advanced qTip plugin for the ever popular jQuery framework.",
+  "main": "imagesloaded.js",
+  "ignore": [
+    "dist/**/.js"
+  ],
+  "dependencies": {
+    "jquery": ">=1.5.0",
+    "imagesloaded": ">=3.0.0"
+  },
+  "homepage": "https://github.com/Craga89/qTip2",
+  "_release": "2.1.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "v2.1.1",
+    "commit": "97119241d54a0612a7b24ee5b9eda34255954fb4"
+  },
+  "_source": "git://github.com/Craga89/qTip2.git",
+  "_target": "~2.1.1"
+}

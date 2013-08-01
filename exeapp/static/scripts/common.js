@@ -43,163 +43,170 @@ SELECT_KPSE        = "Select kpsewhich"
 SELECT_A_PACKAGE   = "Select a package";
 YOUR_SCORE_IS      = "Your score is ";
 
-$('html').ajaxSend(function(event, xhr, settings) {
-    function getCookie(name) {
-        var cookieValue = null;
-        if (document.cookie && document.cookie != '') {
-            var cookies = document.cookie.split(';');
-            for (var i = 0; i < cookies.length; i++) {
-                var cookie = jQuery.trim(cookies[i]);
-                // Does this cookie string begin with the name we want?
-                if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
+define(['jquery', 'jquery-form', 'jquery-pjax', 'jquery-jsonrpc', 'jquery-cookie'], function($) {
+
+
+    var exports =  {
+        initialize_authoring: function() {
+
+         //$(".action_button").bind("click", handle_action_button)
+         $(".idevice_form").ajaxForm({success: function(responseText, statusText, xhr, $form){
+                var idevice_id = $form.attr("idevice_id");
+                exports.scroll_to_element($form);
+                    $form.find("textarea").each(function() {
+                        tinyMCE.execCommand("mceRemoveControl", true, $(this).attr("id"));
+                    });
+                if (responseText){
+                    exports.get_media("authoring/?idevice_id=" + idevice_id + "&media=true");
+                    $form.html(responseText);
+                } else {
+                    exports.reload_authoring();
                 }
+            },
+            beforeSerialize: function() {
+                 tinyMCE.triggerSave(true, true);}
+            });
+        },
+
+        init: function() {
+
+            jQuery(document).ready(function() {
+                $(document).on("pjax:success", function(event, data) {
+                    // while (tinyMCE.activeEditor && tinyMCE.activeEditor != "undefined"){
+                    // tinyMCE.activeEditor.remove();
+                    // }
+                    exports.initialize_authoring();
+                });
+                $(document).on("pjax:popstate", function(event) {
+                    var current_url = event.state.url;
+                    var current_node_id = current_url.match(/.*\/(\d+)\//)[1]
+                    get_outline_pane().jstree("select_node", "#node" + current_node_id, true);
+                });
+                $.jsonRPC.setup({
+                       endPoint: '/exeapp/json/',
+                       namespace: 'package'
+                    });
+                exports.initialize_authoring();
+                node_id = $("#node_id").text();
+            })
+        },
+
+        scroll_to_element: function(element) {
+            var middle_row = $("#middle-row");
+            var middle_row_pos = middle_row.offset().top;
+            console.log(middle_row_pos);
+            var offset = element.offset().top - middle_row_pos;
+            console.log(offset);
+
+            if(offset + element.innerHeight() > middle_row.height()){
+                // Not in view so scroll to it
+                $('#middle-row').animate({scrollTop: offset}, 1000);
+            } else if (offset < 0) {
+                $('#middle-row').animate({scrollTop: middle_row.scrollTop() + offset - 100}, 1000);
             }
+        },
+
+        get_outline_pane: function() {
+            return $("#outline_pane");
+        },
+
+        get_current_node: function() {
+            var selected = exports.get_outline_pane().jstree("get_selected").find(">a");
+            return selected;
+        },
+
+        get_current_node_id: function() {
+            node = exports.get_current_node();
+            return node.attr('id').match(/node(\d+)/)[1]
+        },
+
+        reload_authoring: function() {
+            // dynamically load scripts for idevices
+            exports.get_media("authoring/?partial=true&media=true");
+
+            url = "/exeapp/package/" + exports.get_package_id() + "/" + exports.get_current_node_id() + "/";
+            $("#authoring").load(url, function() {
+                exports.initialize_authoring();
+            });
+        },
+
+        get_media: function(request_url) {
+            $.ajax({
+                url: request_url,
+                dataType: 'json',
+                async: false,
+                success: function(data){
+                    $.each(data, function(key, val) {
+                        if (/\.css$/.test(val)){
+                            if (!($("link[href='" + val + "']")).length > 0) {
+                                $('<link rel="stylesheet" href="' + val + '">')
+                                        .appendTo("head");
+                            }
+                        } else {
+                            $.getScript(val);
+                        }
+                    });
+                }});
+        },
+
+        insert_idevice: function(idevice_id) {
+            // dynamically load scripts for idevices
+            exports.get_media("authoring/?idevice_id=" + idevice_id + "&media=true");
+                $.ajax({
+                url: "authoring/?idevice_id=" + idevice_id,
+                dataType: 'html',
+                success: function (data) {
+                     $('#authoring').append(data);
+                     exports.initialize_authoring();
+                     var element = $('#authoring').children().last();
+                     exports.scroll_to_element(element);
+                     }
+                });
+        },
+
+
+        // Takes a jQuery object and returns the id of the idevice it
+        // belongs to
+        get_idevice_id: function(obj){
+          re_idevice_id = /idevice(\d*)/;
+          return re_idevice_id.exec(get_idevice(obj).attr("id"))[1];
+        },
+
+        // Takes a jQuery object and returns it's idevice block
+        get_idevice: function(obj) {
+          return obj.closest(".block");
+        },
+
+        get_package_id: function(){
+          return $("#package_id").text()
+        },
+
+        // Returns a dictionary of all elements of the idevice with non-empty
+        // values.
+        get_arguments: function(idevice_block) {
+          var args = {};
+          idevice_block.find(":input").each(function() {
+            // Don't post elements without name
+            if ($(this).attr("name") != undefined) {
+              args[$(this).attr("name")] = $(this).val();
+            }
+          });
+          return args;
+        },
+
+        // contentForm to the server
+        submitLink: function(action, idevice_id, changed, arguments)
+        {
+            $.jsonRPC.request("idevice_action", {
+                params: [
+                    exports.get_package_id(),
+                    idevice_id,
+                    action,
+                    arguments],
+                success: reload_authoring
+            });
+
         }
-        return cookieValue;
-    }
-    if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
-        // Only send the token to relative URLs i.e. locally.
-        xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
-    }
+    };
+    return exports ;
 });
-
-jQuery(document).ready(function() {
-	$(document).on("pjax:success", function(event, data) {
-		// while (tinyMCE.activeEditor && tinyMCE.activeEditor != "undefined"){
-		// tinyMCE.activeEditor.remove();
-		// }
-		initialize_authoring();
-	});
-	$(document).on("pjax:popstate", function(event) {
-		var current_url = event.state.url;
-		var current_node_id = current_url.match(/.*\/(\d+)\//)[1]
-		get_outline_pane().jstree("select_node", "#node" + current_node_id, true);
-	});
-	$.jsonRPC.setup({
-           endPoint: '/exeapp/json/',
-           namespace: 'package',
-        });
-    initialize_authoring();
-    node_id = $("#node_id").text();
-})
-
-function initialize_authoring() {
-
- //$(".action_button").bind("click", handle_action_button)
- $(".idevice_form").ajaxForm({success: function(responseText, statusText, xhr, $form){
-	 	var idevice_id = $form.attr("idevice_id");
-	 	scroll_to_element($form);
-	 		$form.find("textarea").each(function() {
-	 			tinyMCE.execCommand("mceRemoveControl", true, $(this).attr("id"));
-	 		});
-		if (responseText){
-			get_media("authoring/?idevice_id=" + idevice_id + "&media=true");
-	 		$form.html(responseText);
-		} else {
-			reload_authoring();
-		}
- 	},
- 	beforeSerialize: function() {
- 		 tinyMCE.triggerSave(true, true);}
- 	});
-}
-
-function scroll_to_element(element){
-    var middle_row = $("#middle-row");
-    var middle_row_pos = middle_row.offset().top;
-    console.log(middle_row_pos);
-	var offset = element.offset().top - middle_row_pos;
-    console.log(offset);
-
-	if(offset + element.innerHeight() > middle_row.height()){
-    	// Not in view so scroll to it
-    	$('#middle-row').animate({scrollTop: offset}, 1000);
-	} else if (offset < 0) {
-		$('#middle-row').animate({scrollTop: middle_row.scrollTop() + offset - 100}, 1000);
-	}
-}
-
-function reload_authoring() {
-	// dynamically load scripts for idevices
-	get_media("authoring/?partial=true&media=true");
-
-	url = "/exeapp/package/" + get_package_id() + "/" + get_current_node_id() + "/";
-	$("#authoring").load(url, function() {
-		initialize_authoring();
-	});
-}
-
-function get_media(request_url) {
-	$.ajax({
-		url: request_url,
-		dataType: 'json',
-		async: false,
-		success: function(data){
-			$.each(data, function(key, val) {
-				if (/\.css$/.test(val)){
-					if (!($("link[href='" + val + "']")).length > 0) {
-						$('<link rel="stylesheet" href="' + val + '">')
-								.appendTo("head");
-					}
-				} else {
-					$.getScript(val);
-				}
-			});
-		}});
-}
-
-function insert_idevice(idevice_id) {
-	// dynamically load scripts for idevices
-	get_media("authoring/?idevice_id=" + idevice_id + "&media=true");
-	    $.ajax({
-	    url: "authoring/?idevice_id=" + idevice_id,
-	    dataType: 'html',
-	    success: function (data) {
-	    	 $('#authoring').append(data);
-	    	 initialize_authoring();
-	    	 var element = $('#authoring').children().last();
-	    	 scroll_to_element(element);
-	    	 }
-		});
-}
-
-
-// Takes a jQuery object and returns the id of the idevice it
-// belongs to
-function get_idevice_id(obj){
-  re_idevice_id = /idevice(\d*)/;
-  return re_idevice_id.exec(get_idevice(obj).attr("id"))[1];
-}
-
-// Takes a jQuery object and returns it's idevice block
-function get_idevice(obj) {
-  return obj.closest(".block");
-}
-
-function get_package_id(){
-  return $("#package_id").text()
-}
-
-// Returns a dictionary of all elements of the idevice with non-empty
-// values.
-function get_arguments(idevice_block) {
-  var args = {};
-  idevice_block.find(":input").each(function() {
-    // Don't post elements without name
-    if ($(this).attr("name") != undefined) {
-      args[$(this).attr("name")] = $(this).val();
-    }
-  });
-  return args;
-}
-
-// contentForm to the server
-function submitLink(action, idevice_id, changed, arguments)
-{
-    $.jsonRPC.request("idevice_action",
-      [get_package_id(), idevice_id, action, arguments],
-      {success: reload_authoring });
-
-}
