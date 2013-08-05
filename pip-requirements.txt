@@ -1,7 +1,6 @@
 BeautifulSoup4
 cymysql
 Django>=1.5
-Pillow>=2.0
 argparse
 distribute
 django-extensions
@@ -12,7 +11,7 @@ django-tinymce
 django-sendfile
 -e git+https://github.com/alendit/django-json-rpc.git@python3#egg=django-json-rpc
 -e git+https://github.com/alendit/django-filebrowser.git#egg=django-filebrowser
--e https://github.com/alendit/Pillow.git#egg=Pillow
+-e git+https://github.com/alendit/Pillow.git#egg=Pillow
 south
 gunicorn
 feedparser
