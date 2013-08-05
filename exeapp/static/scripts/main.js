@@ -2,6 +2,8 @@ require.config({
     baseUrl: '/static/scripts/',
     paths:
         {
+          "eventEmitter": "bower_components/eventEmitter/EventEmitter.js",
+          "eventie": "bower_components/eventie/eventie.js",
           "chosen": "thirdparty/chosen.jquery",
           "imagesloaded": "//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.0.4/jquery.imagesloaded.min",
           "jquery-pjax": "bower_components/jquery-pjax/jquery.pjax",

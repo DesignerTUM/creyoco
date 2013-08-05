@@ -48,7 +48,6 @@ Backtrace:
 /usr/local/bin/compass:23:in `<main>'
 */
 body:before {
-    white-space: pre;
-    font-family: monospace;
-    content: "Syntax error: Undefined mixin 'font-face'.\A         on line 29 of /home/alendit/creyoco/exeapp/static/sass/fontawesome.scss, in `font-face'\A         from line 29 of /home/alendit/creyoco/exeapp/static/sass/fontawesome.scss";
-}
+  white-space: pre;
+  font-family: monospace;
+  content: "Syntax error: Undefined mixin 'font-face'.\A         on line 29 of /home/alendit/creyoco/exeapp/static/sass/fontawesome.scss, in `font-face'\A         from line 29 of /home/alendit/creyoco/exeapp/static/sass/fontawesome.scss"; }

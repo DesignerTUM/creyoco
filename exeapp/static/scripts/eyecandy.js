@@ -1,5 +1,5 @@
 define(['jquery', 'chosen', 'qtip2'], function($) {
-    var eyecandy_exports = {
+    var exports = {
         show_lightbox: function(width, height, el) {
             $(".modal-dialog")
             //.height(400)
@@ -187,5 +187,5 @@ define(['jquery', 'chosen', 'qtip2'], function($) {
             });
         }
     };
-    return eyecandy_exports;
+    return exports;
 });
