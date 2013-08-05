@@ -1,13 +1,16 @@
-from django.template.defaultfilters import unordered_list
-from django.template.loader import render_to_string
-from django import template
-from django.conf import settings
-
+from __future__ import print_function
 from collections import defaultdict
 from logging import getLogger
 import os
 
+from django.template.defaultfilters import unordered_list
+from django.template.loader import render_to_string
+from django import template
+from django.conf import settings
+from django.utils.encoding import force_text
+
 from exeapp.models.idevices.idevice import Idevice
+
 
 log = getLogger()
 register = template.Library()
@@ -17,14 +20,15 @@ register = template.Library()
 def idevice_ul(groups, group_order):
     idevice_list = []
     for group in group_order:
-        idevice_list.append("<a>%s</a>" % group)
+        idevice_list.append("<a>%s</a>" % force_text(group))
         prototype_list = []
         for prototype in groups[group]:
             prototype_list.append('<a class="ideviceItem" href="#"' + \
-                ' ideviceid="%s">%s</a>' % (prototype.__name__,
-                                             prototype.name))
+                                  ' ideviceid="%s">%s</a>' % (
+                                  prototype.__name__,
+                                  force_text(prototype.name)))
         idevice_list.append(prototype_list)
-
+    print(idevice_list)
     return unordered_list(idevice_list)
 
 
@@ -85,27 +89,28 @@ def render_idevicepane(idevices):
 @register.inclusion_tag("exe/styles.html")
 def render_styles():
     styles = sorted([os.path.basename(style) for style in \
-              os.listdir(settings.STYLE_DIR) \
-              # style dir has to be joined because of a bug on windows
-              # with abapath resolving
-              if os.path.isdir(os.path.join(settings.STYLE_DIR, style))])
+                     os.listdir(settings.STYLE_DIR) \
+                     # style dir has to be joined because of a bug on windows
+                     # with abapath resolving
+                     if os.path.isdir(os.path.join(settings.STYLE_DIR, style))])
     return locals()
 
 
-def _create_children_list(node, template=None,):
-        """Creates a list of all children from the root recursively.
-Root node has to be appended manually in a higher level function. List items will
+def _create_children_list(node, template=None, ):
+    """Creates a list of all children from the root recursively.
+Root node has to be appended manually in a higher level function. List items
+will
 be rendered using given template. """
-        children_list = []
+    children_list = []
 
-        if node.children.all():
-            for child in node.children.all():
-                if template is None:
-                    node_item = child.title
-                else:
-                    node_item = render_to_string(template, {"node" : child})
-                children_list.append(node_item)
-                if child.children.all():
-                    children_list.append(_create_children_list(child,
-                            template))
-        return children_list
+    if node.children.all():
+        for child in node.children.all():
+            if template is None:
+                node_item = child.title
+            else:
+                node_item = render_to_string(template, {"node": child})
+            children_list.append(node_item)
+            if child.children.all():
+                children_list.append(_create_children_list(child,
+                                                           template))
+    return children_list

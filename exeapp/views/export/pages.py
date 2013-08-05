@@ -18,15 +18,16 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 # ===========================================================================
 import codecs
-from exeapp.views.blocks.blockfactory import block_factory
+
 from django import forms
+
+from exeapp.views.blocks.blockfactory import block_factory
+
 """
 Export Pages functions
 """
 
 import logging
-from urllib.parse                   import quote
-
 
 log = logging.getLogger(__name__)
 
@@ -37,8 +38,9 @@ class Page(object):
     This is an abstraction for a page containing a node
     e.g. in a SCORM package or Website
     """
+
     def __init__(self, node, depth, exporter, prev_page=None, next_page=None,
-                  has_children=False):
+                 has_children=False):
         """
         Initialize
         """

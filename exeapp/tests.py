@@ -7,8 +7,18 @@ _clean_up_database_and_store for it.
 """
 
 import os
-from unittest import mock
-from unittest.mock import Mock
+import sys
+
+PY2 = sys.version_info[0] == 2
+try:
+    from unittest import mock
+    from unittest.mock import Mock
+except ImportError:
+    if PY2:
+        import mock
+        from mock import Mock
+    else:
+        raise
 
 from django.test import TestCase, Client
 from django.utils import simplejson
@@ -45,34 +55,35 @@ TEST_PASSWORD = "password"
 
 
 def _create_packages(user, package_count=PACKAGE_COUNT,
-                      package_name_template=PACKAGE_NAME_TEMPLATE):
-        for x in range(package_count):
-            Package.objects.create(title=package_name_template % (user.username, x),
-                                   user=user)
+                     package_name_template=PACKAGE_NAME_TEMPLATE):
+    for x in range(package_count):
+        Package.objects.create(title=package_name_template % (user.username, x),
+                               user=user)
 
 
 def _create_basic_database():
     '''Creates 2 users (admin, user) with 5 packages each for testing'''
     if not os.path.exists(settings.MEDIA_ROOT):
         os.mkdir(settings.MEDIA_ROOT)
-    admin = User.objects.create_superuser(username=TEST_USER, email='admin@exe.org',
+    admin = User.objects.create_superuser(username=TEST_USER,
+                                          email='admin@exe.org',
                                           password=TEST_PASSWORD)
     admin.save()
     user = User.objects.create_user(username='user', email='admin@exe.org',
-                                          password='user')
+                                    password='user')
     user.save()
     _create_packages(admin)
     _create_packages(user)
 
-class MainPageTestCase(TestCase):
 
+class MainPageTestCase(TestCase):
     def _create_packages(self, user):
         for x in range(self.COUNT):
-            Package.objects.create(title=self.PACKAGE_NAME_TEMPLATE % (user.username, x),
-                                   user=user)
+            Package.objects.create(
+                title=self.PACKAGE_NAME_TEMPLATE % (user.username, x),
+                user=user)
 
     def setUp(self):
-
         _create_basic_database()
         self.c = Client()
         # login
@@ -99,7 +110,6 @@ class MainPageTestCase(TestCase):
 
 
 class PackagesPageTestCase(TestCase):
-
     PAGE_URL = '/exeapp/package/%s/%s/'
     PACKAGE_ID = 1
     NODE_ID = 1
@@ -109,8 +119,8 @@ class PackagesPageTestCase(TestCase):
         _create_basic_database()
         self.c.login(username=TEST_USER, password=TEST_PASSWORD)
         self.s = TestingServiceProxy(self.c,
-                                reverse("jsonrpc_mountpoint"),
-                                version="2.0")
+                                     reverse("jsonrpc_mountpoint"),
+                                     version="2.0")
 
     def tearDown(self):
         User.objects.all().delete()
@@ -122,7 +132,7 @@ class PackagesPageTestCase(TestCase):
 
     def test_outline_pane(self):
         response = self.c.get(self.PAGE_URL % (self.PACKAGE_ID,
-                                                    self.NODE_ID))
+                                               self.NODE_ID))
         self.assertContains(response, "outline_pane")
         self.assertContains(response, 'current_node="%s"' % self.NODE_ID)
 
@@ -154,10 +164,10 @@ class PackagesPageTestCase(TestCase):
         parent_node.package = package
 
         r = self.s.package.add_child_node(
-                                    # username=TEST_USER,
-                                    #       password=TEST_PASSWORD,
-                                    package_id="1",
-                                    node_id=str(PARENT_ID))
+            # username=TEST_USER,
+            #       password=TEST_PASSWORD,
+            package_id="1",
+            node_id=str(PARENT_ID))
         result = r['result']
         self.assertEquals(result['id'], NODE_ID)
         self.assertEquals(result['title'], NODE_TITLE)
@@ -199,19 +209,20 @@ class PackagesPageTestCase(TestCase):
 
         response = self.c.post(self.PAGE_URL % (self.PACKAGE_ID, self.NODE_ID),
                                data={'title': PACKAGE_TITLE,
-                                   'author': AUTHOR_NAME,
-                                   'form_type_field': PackagePropertiesForm.\
-                                                                form_type})
+                                     'author': AUTHOR_NAME,
+                                     'form_type_field': PackagePropertiesForm. \
+                                         form_type})
         self.assertEquals(response.status_code, 302)
         self.assertTrue(response['location'].endswith(
-                           self.PAGE_URL % (self.PACKAGE_ID, self.NODE_ID)))
+            self.PAGE_URL % (self.PACKAGE_ID, self.NODE_ID)))
         package = Package.objects.get(id=self.PACKAGE_ID)
         self.assertTrue(package.author == AUTHOR_NAME)
         self.assertTrue(package.title == PACKAGE_TITLE)
 
     def test_preview(self):
         response = self.c.get("{}preview/".format(self.PAGE_URL % \
-                                             (self.PACKAGE_ID, self.NODE_ID)))
+                                                  (self.PACKAGE_ID,
+                                                   self.NODE_ID)))
         self.assertContains(response, "Home", status_code=200)
 
 
@@ -281,7 +292,7 @@ decorator'''
             return package
 
         self.assertRaises(Http403, mock_view, request,
-                           self.PACKAGE_ID, NODE_ID)
+                          self.PACKAGE_ID, NODE_ID)
         mock_get_package.assert_called_with(pk=self.PACKAGE_ID)
         mock_get_node.assert_called_with(pk=NODE_ID)
 
@@ -296,15 +307,15 @@ view, this tests should be also merged'''
     IDEVICE_TYPE = "FreeTextIdevice"
 
     VIEW_URL = "/exeapp/package/%s/%s/" % \
-                (TEST_PACKAGE_ID, TEST_NODE_ID)
+               (TEST_PACKAGE_ID, TEST_NODE_ID)
 
     def setUp(self):
         self.c = Client()
         _create_basic_database()
         self.c.login(username=TEST_USER, password=TEST_PASSWORD)
         self.s = TestingServiceProxy(self.c,
-                        reverse("jsonrpc_mountpoint"),
-                        version="2.0")
+                                     reverse("jsonrpc_mountpoint"),
+                                     version="2.0")
         self.package = Package.objects.get(pk=self.TEST_PACKAGE_ID)
         self.root = self.package.root
 
@@ -316,14 +327,17 @@ view, this tests should be also merged'''
         response = self.c.get(self.VIEW_URL)
         soup = BeautifulSoup(response.content)
         self.assertEqual(int(soup.find("div", {'id': 'package_id'}).text),
-                                                     self.TEST_PACKAGE_ID)
+                         self.TEST_PACKAGE_ID)
         self.assertEqual(int(soup.find("div", {'id': 'node_id'}).text),
-                                                     self.TEST_NODE_ID)
-#
-#        self.assertContains(response, 'Package %s' % self.TEST_PACKAGE_ID)
-#        self.assertContains(response,
-#            """<div id="node_id" style="display: none">{}</div>""".format(
-#                                                         self.TEST_NODE_ID))
+                         self.TEST_NODE_ID)
+        #
+        #        self.assertContains(response, 'Package %s' % self
+        # .TEST_PACKAGE_ID)
+        #        self.assertContains(response,
+        #            """<div id="node_id" style="display: none">{}</div>"""
+        # .format(
+        #                                                         self
+        # .TEST_NODE_ID))
         self.assertContains(response, self.TEST_NODE_TITLE)
 
     def test_idevice(self):
@@ -338,12 +352,14 @@ view, this tests should be also merged'''
         TEST_TITLE = "Test"
 
         response = self.c.post(self.VIEW_URL,
-                   {'form_type_field': PackagePropertiesForm.form_type,
-                    'title': TEST_TITLE})
+                               {
+                               'form_type_field': PackagePropertiesForm
+                               .form_type,
+                               'title': TEST_TITLE})
         self.assertEquals(response.status_code, 302)
-        self.assertTrue(response['Location'].endswith(\
-                        'exeapp/package/{}/{}/'.format(self.package.id,
-                       self.package.root.id)))
+        self.assertTrue(response['Location'].endswith( \
+            'exeapp/package/{}/{}/'.format(self.package.id,
+                                           self.package.root.id)))
 
     def test_idevice_move_up(self):
         FIRST_IDEVICE_ID = 1
@@ -355,13 +371,15 @@ view, this tests should be also merged'''
                                         QueryDict(""))
         content = smart_text(self.c.get(self.VIEW_URL).content)
         self.assertTrue(content.index(
-                'idevice_id="{}"'.format(FIRST_IDEVICE_ID)) \
-                > content.index('idevice_id="{}"'.format(SECOND_IDEVICE_ID)))
+            'idevice_id="{}"'.format(FIRST_IDEVICE_ID)) \
+                        > content.index(
+            'idevice_id="{}"'.format(SECOND_IDEVICE_ID)))
 
     @mock.patch.object(shortcuts, 'render_idevice')
     @mock.patch.object(Package.objects, 'get')
     @mock.patch.object(Node.objects, 'get')
-    def test_submit_idevice_action(self, mock_node_get, mock_package_get, mock_render):
+    def test_submit_idevice_action(self, mock_node_get, mock_package_get,
+                                   mock_render):
         '''Test if a POST request is delegated to package'''
         idevice_id = "1"
         idevice_action = "save"
@@ -373,6 +391,7 @@ view, this tests should be also merged'''
 
         def mock_render_idevice(idevice):
             return idevice.content
+
         mock_render.side_effect = mock_render_idevice
 
         response = self.c.post('%shandle_action/' % self.VIEW_URL,
@@ -381,9 +400,9 @@ view, this tests should be also merged'''
         test_args = QueryDict("").copy()
         test_args.update(action_args)
         mock_node_get.return_value.handle_action.assert_called_with(
-                                            str(idevice_id),
-                                            "save",
-                                            test_args)
+            str(idevice_id),
+            "save",
+            test_args)
 
     def test_idevice_link_list(self):
         IDEVICE_ID = 1
@@ -397,9 +416,9 @@ view, this tests should be also merged'''
         for anchor in ANCHORS:
             name, url = link_list[counter]
             self.assertEquals(name, "%s::%s" % \
-                               (idevice.parent_node.title, anchor))
+                                    (idevice.parent_node.title, anchor))
             self.assertEquals(url, "%s.html#%s" % \
-                              (idevice.parent_node.unique_name(), anchor))
+                                   (idevice.parent_node.unique_name(), anchor))
             counter += 1
 
     @mock.patch.object(shortcuts, 'render_idevice')
@@ -415,6 +434,7 @@ view, this tests should be also merged'''
 
         def mock_render_idevice(idevice):
             return idevice.content
+
         mock_render.side_effect = mock_render_idevice
 
         package = mock_package_get.return_value
@@ -425,7 +445,8 @@ view, this tests should be also merged'''
 
         node.idevices.get.return_value.content = IDEVICE_CONTENT
 
-        response = self.c.get(self.VIEW_URL + "authoring/", data={"idevice_id": IDEVICE_ID})
+        response = self.c.get(self.VIEW_URL + "authoring/",
+                              data={"idevice_id": IDEVICE_ID})
         self.assertEquals(response.status_code, 200)
         self.assertTrue(node.idevices.get.called)
         self.assertTrue(IDEVICE_CONTENT in smart_text(response.content))
@@ -433,14 +454,14 @@ view, this tests should be also merged'''
     def test_partial_resource_loading(self):
         self.root.add_idevice(self.IDEVICE_TYPE)
         response = self.c.get("{}authoring/?partial=true&media=true".format(
-                                                        self.VIEW_URL))
+            self.VIEW_URL))
         self.assertEquals(simplejson.loads(smart_text(response.content)),
                           [reverse('tinymce-filebrowser')])
 
     def test_resource_finding(self):
         RESOURCE = 'test.jpg'
         CONTENT = 'src="/exeapp/media/uploads/%s/%s"' % \
-                        (self.package.user.username, RESOURCE)
+                  (self.package.user.username, RESOURCE)
         IDEVICE_ID = 1
 
         self.root.add_idevice(self.IDEVICE_TYPE)
@@ -450,8 +471,9 @@ view, this tests should be also merged'''
 
     def test_export_resource_substitution(self):
         RESOURCE = 'test.jpg'
-        CONTENT = 'src="/exeapp/media/uploads/%s/%s"' % (self.package.user.username,
-                                                  RESOURCE)
+        CONTENT = 'src="/exeapp/media/uploads/%s/%s"' % (
+        self.package.user.username,
+        RESOURCE)
         IDEVICE_ID = 1
 
         self.root.add_idevice(self.IDEVICE_TYPE)
@@ -476,7 +498,7 @@ view, this tests should be also merged'''
             link_list = smart_text(response.content).split('=')[-1][:-1]
         except IndexError:
             raise AssertionError("Couldn't find link array in {}".format(
-                                 response.content))
+                response.content))
         try:
             simplejson.loads(link_list)
         except:
@@ -488,7 +510,6 @@ view, this tests should be also merged'''
 
 
 class ExportTestCase(TestCase):
-
     TEST_PACKAGE_ID = 1
     IDEVICE_TYPE = "FreeTextIdevice"
 
@@ -526,6 +547,7 @@ class ExportTestCase(TestCase):
 
     def test_pages_generation(self):
         '''Tests generation of the page nested list'''
+
         class MockNode(object):
             def __init__(self, title):
                 self.id = random.randint(1, 100)
@@ -574,12 +596,10 @@ class ExportTestCase(TestCase):
         websitepage = WebsitePage(self.data.root, 0, exporter)
         exporter.pages.append(websitepage)
         self.assertTrue('class="%s" id="id1"' % IDEVICE_TYPE \
-                        in websitepage.render())
+            in websitepage.render())
 
 
 class MiddleWareTestCase(TestCase):
-
-
     def test_403_middleware(self):
         '''Test the HTTP403 handlingmiddle ware.
 Should set status code to 403'''
@@ -591,7 +611,7 @@ Should set status code to 403'''
         views.test = Mock()
         views.test.side_effect = Http403
         urlpatterns += patterns('',
-                            ("test/$", 'exeapp.views.test'))
+                                ("test/$", 'exeapp.views.test'))
         c = Client()
         response = c.get('/exeapp/test/')
         self.assertEquals(response.status_code, 403)
@@ -608,8 +628,8 @@ class OutlineTestCase(TestCase):
         self.c = Client()
         self.c.login(username=TEST_USER, password=TEST_PASSWORD)
         self.s = TestingServiceProxy(self.c,
-                        reverse("jsonrpc_mountpoint"),
-                        version="2.0")
+                                     reverse("jsonrpc_mountpoint"),
+                                     version="2.0")
         for x in range(3):
             self.data.root.create_child()
 
@@ -619,10 +639,10 @@ class OutlineTestCase(TestCase):
     def test_add_node(self):
         PARENT_ID = Node.objects.all()[0].pk
         r = self.s.package.add_child_node(
-                            # username=TEST_USER,
-                            #       password=TEST_PASSWORD,
-                            package_id="1",
-                            node_id=str(PARENT_ID))
+            # username=TEST_USER,
+            #       password=TEST_PASSWORD,
+            package_id="1",
+            node_id=str(PARENT_ID))
         self.assertEqual(r['result']['title'], Package.DEFAULT_LEVEL_NAMES[0])
 
     def test_duplicated_node(self):
@@ -630,8 +650,8 @@ class OutlineTestCase(TestCase):
         test_child = Node.objects.create(self.data, parent, "Test Child")
         old_child_number = len(parent.children.all())
         r = self.s.package.duplicate_node(
-                                package_id="1",
-                                node_id=test_child.pk,
+            package_id="1",
+            node_id=test_child.pk,
         )
         self.assertEqual(len(parent.children.all()), old_child_number + 1)
         self.assertIsNotNone(r['result'])

@@ -17,29 +17,27 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 # ===========================================================================
-import tempfile
+import uuid
+
 from django.conf import settings
 from django.forms.models import model_to_dict
-from exeapp.models.idevices.idevice import Idevice
+
 from exeapp.views.export.websiteexport import WebsiteExport
-import uuid
+
 """
 Exports an eXe package as an IMS Content Package
 """
 
 import logging
-import re
-from zipfile                       import ZipFile, ZIP_DEFLATED
+from zipfile import ZipFile, ZIP_DEFLATED
 from exeapp.utils.path import Path
 from django.template.loader import render_to_string
-# from exe.webui.blockfactory        import g_blockFactory
-# from exe.engine.error              import Error
 from exeapp.views.export.pages import Page
-from exeapp.views.blocks.blockfactory import block_factory
+from codecs import open
 
 log = logging.getLogger(__name__)
 
-_ = lambda x : x
+_ = lambda x: x
 
 
 # ===========================================================================
@@ -47,6 +45,7 @@ class Manifest(object):
     """
     Represents an imsmanifest xml file
     """
+
     def __init__(self, outputDir, package, pages):
         """
         Initialize
@@ -83,8 +82,9 @@ class Manifest(object):
             lrm['description'] = self.package.title
         if lrm.get('creator', '') == '':
             lrm['creator'] = self.package.author
-        # Metadata
-        templateFilename = Path(settings.STATIC_ROOT) / 'templates' / 'dublincore.xml'
+            # Metadata
+        templateFilename = Path(
+            settings.STATIC_ROOT) / 'templates' / 'dublincore.xml'
         template = open(templateFilename, 'r', encoding='utf-8').read()
         xml = template % lrm
         out = open(self.output_dir / 'dublincore.xml', 'wb')
@@ -109,24 +109,22 @@ class Manifest(object):
             self.itemStr += "</item>\n"
             depth -= 1
 
-
         manifest = self
         return render_to_string("exe/export/ims_manifest.html",
-                                {"manifest" : manifest,
-                                 "manifest_id" : manifest_id,
-                                 "org_id" : org_id,
-                                 })
+                                {"manifest": manifest,
+                                 "manifest_id": manifest_id,
+                                 "org_id": org_id,
+                                })
 
     def genItemResStr(self, page):
         """
         Returning xml string for items and resources
         """
-        context = {"item_id" : "ITEM-%s" % self.generate_id(),
-                   "res_id" : "RES-%s" % self.generate_id(),
-                   "filename" : "%s.html" % page.name,
-                   "page" : page,
-                   }
-
+        context = {"item_id": "ITEM-%s" % self.generate_id(),
+                   "res_id": "RES-%s" % self.generate_id(),
+                   "filename": "%s.html" % page.name,
+                   "page": page,
+        }
 
         self.itemStr += render_to_string("exe/export/ims_manifest_item.html",
                                          context)
@@ -146,7 +144,7 @@ class IMSPage(Page):
         Returns an XHTML string rendering this page.
         """
         return render_to_string("exe/export/imspage.html",
-                                {"current_page" : self})
+                                {"current_page": self})
 
 
 class IMSExport(WebsiteExport):
@@ -197,7 +195,7 @@ class IMSExport(WebsiteExport):
         zipped = ZipFile(fileObj, "w")
         for scormFile in outputDir.files():
             zipped.write(scormFile,
-                    scormFile.basename(), ZIP_DEFLATED)
+                         scormFile.basename(), ZIP_DEFLATED)
         zipped.close()
 
 # ===========================================================================

@@ -1,21 +1,46 @@
+import re
+import sys
+
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from bs4 import BeautifulSoup
+
 from exeapp.models.idevices.genericidevice import GenericIdevice
 from exeapp.models.idevices.idevice import Idevice
-import urllib.request, urllib.parse, urllib.error
-from bs4 import  BeautifulSoup
-import re
 from exeapp.models.idevices import fields
 
-class UrlOpener(urllib.request.FancyURLopener):
+
+PY2 = sys.version_info[0] == 2
+try:
+    from urllib.request import urlopen, FancyURLopener
+    from urllib.parse import quote
+except ImportError:
+    if PY2:  # python2
+        from urllib import quote, FancyURLopener, urlopen
+    else:
+        raise
+
+
+class UrlOpener(FancyURLopener):
     """
     Set a distinctive User-Agent, so Wikipedia.org knows we're not spammers
     """
     version = "eXe/exe@exelearning.org"
-urllib.request._urlopener = UrlOpener()
+
+
+try:
+    import urllib.request
+
+    urllib.request._urlopener = UrlOpener()
+except ImportError:
+    if PY2:
+        import urllib
+
+        urllib._urlopener = UrlOpener()
+
 
 class WikipediaIdevice(GenericIdevice):
-    name =_("Wiki Article")
+    name = _("Wiki Article")
     title = models.CharField(max_length=100, default=name)
     author = _("University of Auckland")
     purpose = _("""<p>The Wikipedia iDevice allows you to locate
@@ -28,7 +53,8 @@ is covered by the GNU free documentation license.</p>""")
     emphasis = Idevice.NOEMPHASIS
     group = Idevice.CONTENT
     article_name = fields.URLField(max_length=100, blank=True, default="",
-                        help_text=_("""Enter a phrase or term you wish to search
+                                   help_text=_("""Enter a phrase or term you
+                                   wish to search
 within Wikipedia."""))
     content = fields.RichTextField(blank=True, default="")
     site = "http://en.wikipedia.org/wiki/"
@@ -37,7 +63,7 @@ within Wikipedia."""))
     # TODO FDL has to be in the package
     # systemResources += ["fdl.html"]
     #    self._langInstruc      = x_(u"""Select the appropriate language version
-# of Wikipedia to search and enter search term.""")
+    # of Wikipedia to search and enter search term.""")
 
     def load_article(self, title):
         """
@@ -55,7 +81,9 @@ within Wikipedia."""))
             page = net.read()
             net.close()
         except IOError as error:
-            self.content = _("Unable to download from %s <br/>Please check the spelling and connection and try again.") % url
+            self.content = _(
+                "Unable to download from %s <br/>Please check the spelling "
+                "and connection and try again.") % url
             return
 
         # FIXME avoid problems with numeric entities in attributes
@@ -70,20 +98,22 @@ within Wikipedia."""))
         if content:
             content['id'] = 'wiki_content'
             infoboxes = content.findAll('div',
-                    {'class' : 'infobox sisterproject'})
+                                        {'class': 'infobox sisterproject'})
             [infobox.extract() for infobox in infoboxes]
-            catboxes = content.findAll('div', {'id' : 'catlinks'})
+            catboxes = content.findAll('div', {'id': 'catlinks'})
             [catbox.extract() for catbox in catboxes]
             amboxes = content.findAll('table',
-                    {'class' : re.compile(r'.*\bambox\b.*')})
+                                      {'class': re.compile(r'.*\bambox\b.*')})
             [ambox.extract() for ambox in amboxes]
-            protecteds = content.findAll('div', {'id' : 'protected-icon'})
+            protecteds = content.findAll('div', {'id': 'protected-icon'})
             [protected.extract() for protected in protecteds]
         else:
             content = soup.first('body')
 
         if not content:
-            self.content = _("Unable to download from %s <br/>Please check the spelling and connection and try again.") % url
+            self.content = _(
+                "Unable to download from %s <br/>Please check the spelling "
+                "and connection and try again.") % url
             # set the other elements as well
             return
 
@@ -101,7 +131,9 @@ within Wikipedia."""))
         Changes links, etc
         """
         content = re.sub(r'href="/', r'href="%s/' % netloc, content)
-        content = re.sub(r'<(span|div)\s+(id|class)="(editsection|jump-to-nav)".*?</\1>', '', content)
+        content = re.sub(
+            r'<(span|div)\s+(id|class)="(editsection|jump-to-nav)".*?</\1>', '',
+            content)
         # TODO Find a way to remove scripts without removing newlines
         content = content.replace("\n", " ")
         content = re.sub(r'<script.*?</script>', '', content)

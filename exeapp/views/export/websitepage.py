@@ -1,5 +1,5 @@
 # ===========================================================================
-# eXe 
+# eXe
 # Copyright 2004-2005, University of Auckland
 # Copyright 2004-2007 eXe Project, New Zealand Tertiary Education Commission
 #
@@ -18,16 +18,15 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 # ===========================================================================
 from django.template.loader import render_to_string
-from django.conf import settings
+
 """
 This class transforms an eXe node into a page on a self-contained website
 """
 
 import logging
-from urllib.parse                   import quote
-from exeapp.views.export.pages         import Page
-log = logging.getLogger(__name__)
+from exeapp.views.export.pages import Page
 
+log = logging.getLogger(__name__)
 
 # ===========================================================================
 class WebsitePage(Page):

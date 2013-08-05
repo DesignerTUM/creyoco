@@ -1,13 +1,13 @@
-from exeapp.models.idevices import fields
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from exeapp.models.idevices.idevice import Idevice
 import feedparser
+
+from exeapp.models.idevices.idevice import Idevice
+from exeapp.models.idevices import fields
 from exeapp.models.idevices.genericidevice import GenericIdevice
 
 
 class RSSIdevice(GenericIdevice):
-
     name = _("RSS")
     title = models.CharField(max_length=100, default=name)
     author = _("Auckland University of Technology")
@@ -18,14 +18,21 @@ iDevice you can provide links from a feed you select for learners to view.""")
     group = Idevice.COMMUNICATION
     icon = "icon_inter.gif"
     rss_url = fields.URLField(max_length=200, blank=True, default="",
-                help_text=_("""Enter an RSS URL for the RSS feed you
+                              help_text=_("""Enter an RSS URL for the RSS
+                              feed you
 want to attach to your content. Feeds are often identified by a small graphic
- icon (often like this <img src="/static/images/feed-icon.png" />) or the text "RSS". Clicking on the
- icon or text label will display an RSS feed right in your browser. You can copy and paste the
-URL into this field. Alternately, right clicking on the link or graphic will open a menu box;
-click on COPY LINK LOCATION or Copy Shortcut. Back in eXe open the RSS bookmark iDevice and Paste the URL
-into the RSS URL field and click the LOAD button. This will extract the titles from your feed and
-display them as links in your content. From here you can edit the bookmarks and add
+ icon (often like this <img src="/static/images/feed-icon.png" />) or the
+ text "RSS". Clicking on the
+ icon or text label will display an RSS feed right in your browser. You can
+ copy and paste the
+URL into this field. Alternately, right clicking on the link or graphic will
+open a menu box;
+click on COPY LINK LOCATION or Copy Shortcut. Back in eXe open the RSS
+bookmark iDevice and Paste the URL
+into the RSS URL field and click the LOAD button. This will extract the
+titles from your feed and
+display them as links in your content. From here you can edit the bookmarks
+and add
  instructions or additional learning information."""))
     content = fields.RichTextField(blank=True, default="")
 
@@ -39,15 +46,19 @@ display them as links in your content. From here you can edit the bookmarks and 
         try:
             rssDic = feedparser.parse(url)
             length = len(rssDic['entries'])
-            if length > 0 :
+            if length > 0:
                 for i in range(0, length):
-                    content += '<p><A href="%s">%s</A></P>' %(
+                    content += '<p><A href="%s">%s</A></P>' % (
                         rssDic['entries'][i].link, rssDic['entries'][i].title)
         except IOError as error:
-            content += _("Unable to load RSS feed from %s <br/>Please check the spelling and connection and try again.") % url
+            content += _(
+                "Unable to load RSS feed from %s <br/>Please check the "
+                "spelling and connection and try again.") % url
 
         if content == "":
-            content += _("Unable to load RSS feed from %s <br/>Please check the spelling and connection and try again.") % url
+            content += _(
+                "Unable to load RSS feed from %s <br/>Please check the "
+                "spelling and connection and try again.") % url
         self.content = content
 
     class Meta:

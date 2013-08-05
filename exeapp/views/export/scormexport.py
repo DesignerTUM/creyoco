@@ -17,12 +17,15 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 # ===========================================================================
-from exeapp.utils.uniqueidgenerator import UniqueIdGenerator
+import os
+
 from django.conf import settings
-from exeapp.views.export.websiteexport import WebsiteExport
 from django.template.loader import render_to_string
 from django.forms.models import model_to_dict
-import os
+
+from exeapp.utils.uniqueidgenerator import UniqueIdGenerator
+from exeapp.views.export.websiteexport import WebsiteExport
+
 """
 Exports an eXe package as a SCORM package
 """
@@ -30,10 +33,12 @@ Exports an eXe package as a SCORM package
 import logging
 import re
 import time
-from exeapp.utils.path               import Path
-from exeapp.views.export.pages              import Page
+from exeapp.utils.path import Path
+from exeapp.views.export.pages import Page
+from codecs import open
 
 log = logging.getLogger(__name__)
+
 
 def _(value):
     return value
@@ -44,10 +49,12 @@ SCORM12 = "scorm1.2"
 SCORM2004 = "scorm2004"
 COMMONCARTRIDGE = "commoncartridge"
 
+
 class Manifest(object):
     """
     Represents an imsmanifest xml file
     """
+
     def __init__(self, outputDir, package, pages, scormType):
         """
         Initialize
@@ -95,7 +102,7 @@ class Manifest(object):
             lrm['creator'] = self.package.author
         if lrm['date'] == '':
             lrm['date'] = time.strftime('%Y-%m-%d')
-        # if they don't look like VCARD entries, coerce to fn:
+            # if they don't look like VCARD entries, coerce to fn:
         for f in ('creator', 'publisher', 'contributors'):
             if re.match('.*[:;]', lrm[f]) == None:
                 lrm[f] = 'FN:' + lrm[f]
@@ -139,12 +146,12 @@ class Manifest(object):
                 depth -= 1
 
         return render_to_string("exe/export/scorm_manifest.html",
-                                {"SCORM12" : SCORM12,
-                                 "SCORM2004" : SCORM2004,
-                                 "COMMONCARTRIDGE" : COMMONCARTRIDGE,
-                                 "manifestId" : manifestId,
-                                 "orgId" : orgId,
-                                 "manifest" : self})
+                                {"SCORM12": SCORM12,
+                                 "SCORM2004": SCORM2004,
+                                 "COMMONCARTRIDGE": COMMONCARTRIDGE,
+                                 "manifestId": manifestId,
+                                 "orgId": orgId,
+                                 "manifest": self})
 
     def genItemResStr(self, page):
         """
@@ -153,7 +160,6 @@ class Manifest(object):
         itemId = "ITEM-" + str(self.idGenerator.generate())
         resId = "RES-" + str(self.idGenerator.generate())
         filename = page.name + ".html"
-
 
         self.itemStr += '<item identifier="' + itemId + '" '
         if self.scorm_type != COMMONCARTRIDGE:
@@ -177,7 +183,7 @@ class Manifest(object):
     <file href="popup_bg.gif"/>""" % (filename, filename)
             if page.node.package.backgroundImg:
                 self.resStr += '\n    <file href="%s"/>' % \
-                        page.node.package.backgroundImg.basename()
+                               page.node.package.backgroundImg.basename()
             self.dependencies["../base.css"] = True
             self.dependencies["content.css"] = True
             self.dependencies["popup_bg.gif"] = True
@@ -195,7 +201,8 @@ class Manifest(object):
         fileStr = ""
 
         for resource in page.node.resources:
-            fileStr += "    <file href=\"" + os.path.basename(resource) + "\"/>\n"
+            fileStr += "    <file href=\"" + os.path.basename(
+                resource) + "\"/>\n"
             self.dependencies[resource] = True
 
         self.resStr += fileStr
@@ -207,6 +214,7 @@ class ScormPage(Page):
     """
     This class transforms an eXe node into a SCO
     """
+
     def __init__(self, *args, **kwargs):
         if "scorm_type" in kwargs:
             self.scorm_type = kwargs['scorm_type']
@@ -221,13 +229,14 @@ class ScormPage(Page):
         Returns an XHTML string rendering this page.
         """
         return render_to_string("exe/export/scormpage.html",
-                                {"current_page" : self})
+                                {"current_page": self})
 
 # ===========================================================================
 class ScormExport(WebsiteExport):
     """
     Exports an eXe package as a SCORM package
     """
+
     def __init__(self, *args, **kwargs):
         """
         Initialize
@@ -254,7 +263,7 @@ class ScormExport(WebsiteExport):
         """
         Export SCORM package
         """
-        self.create_pages({"scorm_type" : self.scorm_type})
+        self.create_pages({"scorm_type": self.scorm_type})
         self.save_pages()
 
         for page in self.pages:
@@ -274,42 +283,43 @@ class ScormExport(WebsiteExport):
     def copyFiles(self):
 
         manifest = Manifest(self.output_dir, self.package,
-                             self.pages, self.scorm_type)
+                            self.pages, self.scorm_type)
         manifest.save("imsmanifest.xml")
         if self.hasForum:
             manifest.save("discussionforum.xml")
 
         if self.scorm_type == COMMONCARTRIDGE:
             self.style_dir.copylist(list(manifest.dependencies.keys()),
-                                     self.output_dir)
+                                    self.output_dir)
         else:
             self.copy_style_files()
 
         self.copy_resources()
         if self.scorm_type == COMMONCARTRIDGE:
             self.scripts_dir.copylist(('libot_drag.js',
-                                      'common.js'), self.output_dir)
+                                       'common.js'), self.output_dir)
         else:
             self.scripts_dir.copylist(('APIWrapper.js',
-                                      'SCOFunctions.js',
-                                      'libot_drag.js',
-                                      'common.js'), self.output_dir)
+                                       'SCOFunctions.js',
+                                       'libot_drag.js',
+                                       'common.js'), self.output_dir)
         schemasDir = ""
         if self.scorm_type == SCORM12:
             schemasDir = self.schemasDir / SCORM12
             schemasDir.copylist(('imscp_rootv1p1p2.xsd',
-                                'imsmd_rootv1p2p1.xsd',
-                                'adlcp_rootv1p2.xsd',
-                                'ims_xml.xsd'), self.output_dir)
+                                 'imsmd_rootv1p2p1.xsd',
+                                 'adlcp_rootv1p2.xsd',
+                                 'ims_xml.xsd'), self.output_dir)
         elif self.scorm_type == SCORM2004:
             schemasDir = self.schemasDir / SCORM2004
             schemasDir.copylist(('imscp_rootv1p1p2.xsd',
-                                'imsmd_rootv1p2p1.xsd',
-                                'adlcp_rootv1p2.xsd',
-                                'ims_xml.xsd'), self.output_dir)
+                                 'imsmd_rootv1p2p1.xsd',
+                                 'adlcp_rootv1p2.xsd',
+                                 'ims_xml.xsd'), self.output_dir)
         self.copy_players()
         if self.scorm_type == SCORM12 or self.scorm_type == SCORM2004:
             self.copy_licence()
+
 
 class ScormExport12(ScormExport):
     title = "Scorm 1.2"
@@ -325,6 +335,7 @@ class ScormExport2004(ScormExport):
     def __init__(self, *args, **kwargs):
         kwargs['scorm_type'] = SCORM2004
         super(ScormExport2004, self).__init__(*args, **kwargs)
+
 
 class CommonCartridge(ScormExport):
     title = "Common Cartridge"

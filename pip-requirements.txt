@@ -14,3 +14,4 @@ django-sendfile
 -e git://github.com/samuraisam/django-json-rpc.git@ffcedec1e6cb05400d92ddde550905458e5119f6#egg=django_json_rpc-dev
 south
 gunicorn
+feedparser
