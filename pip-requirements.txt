@@ -9,7 +9,6 @@ ipython>=0.13
 django-registration
 django-grappelli
 django-tinymce
-django-filebrowser
 django-sendfile
 -e git+https://github.com/alendit/django-json-rpc.git@python3#egg=django-json-rpc
 -e git+https://github.com/alendit/django-filebrowser.git#egg=django-filebrowser
