@@ -45,7 +45,7 @@ class Block(object):
     rendering and processing Idevices in XHTML
     """
     nextId = 0
-    Edit, Preview, View, Hidden = range(4)
+    Edit, Preview, View, Hidden = list(range(4))
     BlockForm = None  # redefined by the child
     BlockFormset = None
 
@@ -111,8 +111,8 @@ class Block(object):
         """
         Returns an XHTML string with the BlockForm element for editing this block
         """
-        log.error(u"renderEdit called directly")
-        return u"ERROR Block.renderEdit called directly"
+        log.error("renderEdit called directly")
+        return "ERROR Block.renderEdit called directly"
 
     def renderPreview(self):
         """

@@ -79,14 +79,14 @@ class BaseFormsetBlock(GenericBlock):
                                            "formset" : formset,
                                            "self" : self,
                                            })
-        except Exception, e:
-            print e
+        except Exception as e:
+            print(e)
         else:
             return html
         
 def FormsetBlockFactory(model, fields):
     metaclass = FormsetBlockMetaclassFactory(model, fields)
-    class FormsetBlock(BaseFormsetBlock):
-        __metaclass__ = metaclass
+    class FormsetBlock(BaseFormsetBlock, metaclass=metaclass):
+        pass
         
     return FormsetBlock

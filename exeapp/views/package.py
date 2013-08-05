@@ -15,14 +15,14 @@ from django.core.urlresolvers import reverse
 from exeapp.models.package import DublinCore
 from exeapp.views.export.exporter_factory import exporter_factory, exporter_map
 from exeapp.models.node import Node
-from django.utils.encoding import smart_str
+from django.utils.encoding import smart_bytes
 from exeapp.views.authoring import authoring
 from django.template.loader import render_to_string
 
 try:
-    from cStringIO import StringIO
+    from io import StringIO
 except ImportError:
-    from StringIO import StringIO
+    from io import StringIO
 
 import logging
 
@@ -56,9 +56,9 @@ def generate_package_main(request, package, current_node, **kwargs):
 
     log.info("%s accesses package of %s" % (request.user.username,
                                             package.user.username))
-    idevices = idevice_store.values()
+    idevices = list(idevice_store.values())
     exporter_type_title_map = dict(((export_type, exporter.title) \
-                        for export_type, exporter in exporter_map.items()))
+                        for export_type, exporter in list(exporter_map.items())))
     properties_form = kwargs.get(PackagePropertiesForm.form_type,
                                  PackagePropertiesForm(instance=package))
     dublincore_form = kwargs.get(DublinCoreForm.form_type,

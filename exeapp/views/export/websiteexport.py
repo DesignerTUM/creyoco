@@ -61,7 +61,7 @@ class WebsiteExport(object):
         self.page_class = WebsitePage
 
         self.output_dir = Path(tempfile.mkdtemp())
-        print self.output_dir
+        print((self.output_dir))
 
     def export(self):
         """
@@ -83,8 +83,7 @@ class WebsiteExport(object):
         """
         zipped = ZipFile(self.file_obj, "w")
         for scormFile in self.output_dir.files():
-            zipped.write(scormFile, scormFile.basename().\
-                         encode('utf8'), ZIP_DEFLATED)
+            zipped.write(scormFile, scormFile.basename(), ZIP_DEFLATED)
         zipped.close()
 
     def copy_style_files(self):
@@ -114,7 +113,8 @@ class WebsiteExport(object):
         # Copy the style sheet files to the output dir
         self.copy_style_files()
         self.copy_resources()
-        self.scripts_dir.copylist(('libot_drag.js', 'jquery.js'),
+        self.scripts_dir.copylist(('libot_drag.js',
+                                   'bower_components/jquery/jquery.js'),
                                   self.output_dir)
         self.copy_players()
 

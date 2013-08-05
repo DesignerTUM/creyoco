@@ -85,7 +85,7 @@ class Manifest(object):
             lrm['creator'] = self.package.author
         # Metadata
         templateFilename = Path(settings.STATIC_ROOT) / 'templates' / 'dublincore.xml'
-        template = open(templateFilename, 'rb').read()
+        template = open(templateFilename, 'r', encoding='utf-8').read()
         xml = template % lrm
         out = open(self.output_dir / 'dublincore.xml', 'wb')
         out.write(xml.encode('utf8'))
@@ -197,7 +197,7 @@ class IMSExport(WebsiteExport):
         zipped = ZipFile(fileObj, "w")
         for scormFile in outputDir.files():
             zipped.write(scormFile,
-                    scormFile.basename().encode('utf8'), ZIP_DEFLATED)
+                    scormFile.basename(), ZIP_DEFLATED)
         zipped.close()
 
 # ===========================================================================

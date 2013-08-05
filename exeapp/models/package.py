@@ -37,7 +37,7 @@ import zipfile
 import re
 from collections import defaultdict
 from xml.dom                   import minidom
-from exeapp.utils.path      import Path, TempDirPath, toUnicode
+from exeapp.utils.path      import Path, TempDirPath
 from exeapp.models        import Node
 # from exe.engine.genericidevice import GenericIdevice
 
@@ -155,7 +155,7 @@ def loadNodesIdevices(node, s):
 
 def test_for_node(html_content):
     # to see if this html really is an exe-generated node
-    exe_string = u"<!-- Created using eXe: http://exelearning.org -->"
+    exe_string = "<!-- Created using eXe: http://exelearning.org -->"
     if html_content.decode('utf-8').find(exe_string) >= 0:
         return True
     else:
@@ -339,7 +339,7 @@ i.e. the "package".
             imgFile = Path(value)
             self._backgroundImg = Resource(self, Path(imgFile))
         else:
-            self._backgroundImg = u''
+            self._backgroundImg = ''
 
     def get_footerImg(self):
         """Get the footer image for this package"""
@@ -358,7 +358,7 @@ i.e. the "package".
             imgFile = Path(value)
             self._footerImg = Resource(self, Path(imgFile))
         else:
-            self._footerImg = u''
+            self._footerImg = ''
 
 
     # Properties
@@ -412,7 +412,7 @@ i.e. the "package".
         if level < len(self._levelNames):
             return _(self._levelNames[level])
         else:
-            return _(u"?????")
+            return _("?????")
 
 
     def updateRecentDocuments(self, filename):
@@ -467,7 +467,7 @@ i.e. the "package".
 
         try:
             # Get the jellied package data
-            toDecode = zippedFile.read(u"content.data")
+            toDecode = zippedFile.read("content.data")
         except KeyError:
             log.info("no content.data, trying Common Cartridge/Content Package")
             newPackage = loadCC(zippedFile, filename)
@@ -482,7 +482,7 @@ i.e. the "package".
 
         # Extract resource files from package to temporary directory
         for fn in zippedFile.namelist():
-            if unicode(fn, 'utf8') != u"content.data":
+            if str(fn, 'utf8') != "content.data":
                 outFile = open(resourceDir / fn, "wb")
                 outFile.write(zippedFile.read(fn))
                 outFile.flush()
@@ -586,7 +586,7 @@ i.e. the "package".
             return
 
         existingFiles = set([fn.basename() for fn in self.resourceDir.files()])
-        usedFiles = set([reses[0].storageName for reses in self.resources.values()])
+        usedFiles = set([reses[0].storageName for reses in list(self.resources.values())])
         for fn in existingFiles - usedFiles:
             (self.resourceDir / fn).remove()
 

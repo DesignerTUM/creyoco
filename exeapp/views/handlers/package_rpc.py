@@ -38,7 +38,8 @@ import shutil
 # from exe.export.ipodexport       import IpodExport
 # from exe.export.presentationexport  import PresentationExport
 # from exe.export.handoutexport    import HandoutExport
-from exeapp.utils.path             import Path, toUnicode
+from django.utils.encoding import force_text
+from exeapp.utils.path             import Path
 # from exe                         import globals as G
 from tempfile                    import mkdtemp
 # from exe.engine.mimetex          import compile
@@ -77,7 +78,7 @@ def testPrintMessage(request, package, node, message):
     """
     Prints a test message, and yup, that's all!
     """
-    print "Test Message: ", message, " [eol, eh!]"
+    print(("Test Message: ", message, " [eol, eh!]"))
 
 
 @jsonrpc_authernticating_method('package.handleDblNode')
@@ -94,7 +95,7 @@ def handleDblNode (request, package):
         newPackage = package.extractNode()
         newNode = newPackage.root.copyToPackage(package, root)
         newNode.RenamedNodePath(isMerge=True)
-        client.sendScript(u'top.location = "/%s"' % \
+        client.sendScript('top.location = "/%s"' % \
                       package.name)
 
 
@@ -107,10 +108,10 @@ def setEditorsWidth(request, package, width):
     """
     try:
         G.application.editorsWidth = int(width)
-        client.sendScript(u'top.location = "/%s"' % \
+        client.sendScript('top.location = "/%s"' % \
                           package.name)
-    except ValueError, e:
-        client.sendScript(u"alert('Please, enter a number');")
+    except ValueError as e:
+        client.sendScript("alert('Please, enter a number');")
 
 @jsonrpc_authernticating_method('package.serveDocument')
 def serveDocument(request, package):
@@ -131,7 +132,7 @@ def serveDocument(request, package):
                       'setAttribute("disabled", "true");')
     client.sendScript('alert("Serving exported Document to port ' + \
                       str(self.servController.PORT) + '");')
-    client.sendScript(u'top.location = "/%s"' % \
+    client.sendScript('top.location = "/%s"' % \
                       package.name)
 
 
@@ -173,19 +174,19 @@ def openNewTab(request, package):
     port = f.read()
     f.close()
     os.remove(portFile)
-    client.sendScript(u"openNewTab('%s')" % port)
+    client.sendScript("openNewTab('%s')" % port)
 
 @jsonrpc_authernticating_method('package.importStyle')
 def importStyle(request, package, src):
 
     '''imports a user style in config directory'''
 
-    print client
+    print(client)
     localeStyleDir = G.application.config.configDir / "style"
     styleName = os.path.basename(src)
     shutil.copytree(src, localeStyleDir / styleName)
     G.application.config.loadStyles()
-    client.sendScript(u'top.location = "/%s"' % package.name)
+    client.sendScript('top.location = "/%s"' % package.name)
 
 
 
@@ -196,7 +197,7 @@ def outlineClicked(request, package):
     Sets documents title to package name + page
     """
 
-    client.sendScript(u'setDocumentTitle("%s")' % package.name)
+    client.sendScript('setDocumentTitle("%s")' % package.name)
 
 
 
@@ -232,7 +233,7 @@ def importPDF(request, package, path, importString):
         package.currentNode.idevices[0].pages = str(x + 1)
         package.currentNode.idevices[0].uploadFile()
         package.currentNode = root
-    client.sendScript((u'top.location = "/%s"' % package.name).encode('utf8'))
+    client.sendScript(('top.location = "/%s"' % package.name).encode('utf8'))
 
 
 @jsonrpc_authernticating_method('package.is_package_dirty')
@@ -258,7 +259,7 @@ def getPackageFileName(request, package, onDone, onDoneParam):
     'onDoneParam' will be passed to onDone as a param after the
     filename
     """
-    client.call(onDone, unicode(package.filename), onDoneParam)
+    client.call(onDone, str(package.filename), onDoneParam)
 
 @jsonrpc_authernticating_method('package.save_package')
 def save_package(request, package):
@@ -277,7 +278,7 @@ def loadPackage(request, package, filename):
     packageStore = self.webServer.application.packageStore
     packageStore.addPackage(package)
     self.root.bindNewPackage(package)
-    client.sendScript((u'top.location = "/%s"' % \
+    client.sendScript(('top.location = "/%s"' % \
                       package.name).encode('utf8'))
 
 @jsonrpc_authernticating_method('package.loadRecent')
@@ -317,9 +318,9 @@ def setLocale(request, package, locale):
     Set locale using Nevow instead of a POST
     """
     G.application.config.locale = locale
-    G.application.config.locales[locale].install(unicode=True)
+    G.application.config.locales[locale].install(str=True)
     G.application.config.configParser.set('user', 'locale', locale)
-    client.sendScript((u'top.location = "/%s"' % \
+    client.sendScript(('top.location = "/%s"' % \
                       package.name).encode('utf8'))
 
 @jsonrpc_authernticating_method('package.setInternalAnchors')
@@ -330,7 +331,7 @@ def setInternalAnchors(request, package, internalAnchors):
     """
     G.application.config.internalAnchors = internalAnchors
     G.application.config.configParser.set('user', 'internalAnchors', internalAnchors)
-    client.sendScript((u'top.location = "/%s"' % \
+    client.sendScript(('top.location = "/%s"' % \
                       package.name).encode('utf8'))
 
 @jsonrpc_authernticating_method('package.removeTempDir')
@@ -503,7 +504,7 @@ def previewTinyMCEimage(request, package, tinyMCEwin, tinyMCEwin_name, \
         previewDir.makedirs()
     elif not previewDir.isdir():
         client.alert(\
-            _(u'Preview directory %s is a file, cannot replace it') \
+            _('Preview directory %s is a file, cannot replace it') \
             % previewDir)
         log.error("Couldn't preview tinyMCE-chosen image: " +
                   "Preview dir %s is a file, cannot replace it" \
@@ -514,7 +515,7 @@ def previewTinyMCEimage(request, package, tinyMCEwin, tinyMCEwin_name, \
     if errors == 0:
         log.debug('handleTinyMCEimageChoice: originally, local_filename='
                 + local_filename)
-        local_filename = unicode(local_filename, 'utf-8')
+        local_filename = str(local_filename, 'utf-8')
         log.debug('handleTinyMCEimageChoice: in unicode, local_filename='
                 + local_filename)
 
@@ -523,7 +524,7 @@ def previewTinyMCEimage(request, package, tinyMCEwin, tinyMCEwin_name, \
                 + localImagePath);
         if not localImagePath.exists() or not localImagePath.isfile():
             client.alert(\
-                 _(u'Local file %s is not found, cannot preview it') \
+                 _('Local file %s is not found, cannot preview it') \
                  % localImagePath)
             log.error("Couldn't find tinyMCE-chosen image: %s" \
                     % localImagePath)
@@ -575,12 +576,12 @@ def previewTinyMCEimage(request, package, tinyMCEwin, tinyMCEwin_name, \
         log.debug("and setting new file basename as: "
                 + unamped_local_filename);
         my_basename = os.path.basename(unamped_local_filename)
-        descrip_file.write((u"basename=" + my_basename).encode('utf-8'))
+        descrip_file.write(("basename=" + my_basename).encode('utf-8'))
 
         descrip_file.flush()
         descrip_file.close()
 
-    except Exception, e:
+    except Exception as e:
         client.alert(_('SAVE FAILED!\n%s' % str(e)))
         log.error("handleTinyMCEimageChoice unable to copy local image "\
                 + "file to server prevew, error = " + str(e))
@@ -611,7 +612,7 @@ def generateTinyMCEmath(request, package, tinyMCEwin, tinyMCEwin_name, \
         previewDir.makedirs()
     elif not previewDir.isdir():
         client.alert(\
-            _(u'Preview directory %s is a file, cannot replace it') \
+            _('Preview directory %s is a file, cannot replace it') \
             % previewDir)
         log.error("Couldn't preview tinyMCE-chosen image: " +
                   "Preview dir %s is a file, cannot replace it" \
@@ -632,7 +633,7 @@ def generateTinyMCEmath(request, package, tinyMCEwin, tinyMCEwin_name, \
     #        errors += 1
 
     # the mimetex usage code was swiped from the Math iDevice:
-    if latex_source <> "":
+    if latex_source != "":
 
         # first write the latex_source out into the preview_math_srcfile,
         # such that it can then be passed into the compile command:
@@ -652,7 +653,7 @@ def generateTinyMCEmath(request, package, tinyMCEwin, tinyMCEwin_name, \
             use_latex_sourcefile = math_filename_str
             tempFileName = compile(use_latex_sourcefile, math_fontsize, \
                     latex_is_file=True)
-        except Exception, e:
+        except Exception as e:
             client.alert(_('MimeTeX compile failed!\n%s' % str(e)))
             log.error("handleTinyMCEmath unable to compile LaTeX using "\
                 + "mimetex, error = " + str(e))
@@ -719,9 +720,9 @@ def exportPackage(request, package, exportType, filename, print_callback='', qui
 
     exportDir = Path(filename).dirname()
     if exportDir and not exportDir.exists():
-        client.alert(_(u'Cannot access directory named ') +
-                     unicode(exportDir) +
-                     _(u'. Please use ASCII names.'))
+        client.alert(_('Cannot access directory named ') +
+                     str(exportDir) +
+                     _('. Please use ASCII names.'))
         return
 
     """
@@ -749,29 +750,29 @@ def exportPackage(request, package, exportType, filename, print_callback='', qui
         self.exportPresentation(client, filename, stylesDir)
     elif exportType == 'printHandout':
         exported_dir = self.printHandout(client, filename, stylesDir)
-        print exported_dir
+        print(exported_dir)
         web_printdir = self.get_printdir_relative2web(exported_dir)
         client.call(print_callback, filename, exported_dir,
             web_printdir)
 
     elif exportType == 'zipFile':
-        filename = self.b4save(client, filename, '.zip', _(u'EXPORT FAILED!'))
+        filename = self.b4save(client, filename, '.zip', _('EXPORT FAILED!'))
         self.exportWebZip(client, filename, stylesDir)
     elif exportType == 'textFile':
         self.exportText(client, filename)
     elif exportType == 'ipod':
         self.exportIpod(client, filename)
     elif exportType == "scorm":
-        filename = self.b4save(client, filename, '.zip', _(u'EXPORT FAILED!'))
+        filename = self.b4save(client, filename, '.zip', _('EXPORT FAILED!'))
         self.exportScorm(client, filename, stylesDir, "scorm1.2")
     elif exportType == "scorm2004":
-        filename = self.b4save(client, filename, '.zip', _(u'EXPORT FAILED!'))
+        filename = self.b4save(client, filename, '.zip', _('EXPORT FAILED!'))
         self.exportScorm(client, filename, stylesDir, "scorm2004")
     elif exportType == "commoncartridge":
-        filename = self.b4save(client, filename, '.zip', _(u'EXPORT FAILED!'))
+        filename = self.b4save(client, filename, '.zip', _('EXPORT FAILED!'))
         self.exportScorm(client, filename, stylesDir, "commoncartridge")
     else:
-        filename = self.b4save(client, filename, '.zip', _(u'EXPORT FAILED!'))
+        filename = self.b4save(client, filename, '.zip', _('EXPORT FAILED!'))
         self.exportIMS(client, filename, stylesDir)
 
 @jsonrpc_authernticating_method('package.quit')
@@ -821,7 +822,7 @@ def browseURL(request, package, url):
         url = url.replace('%t', release_notes)
     else:
         url = url.replace('%s', self.config.webDir)
-    log.debug(u'browseURL: ' + url)
+    log.debug('browseURL: ' + url)
     if hasattr(os, 'startfile'):
         os.startfile(url)
     elif sys.platform[:6] == "darwin":
@@ -844,10 +845,10 @@ def insertPackage(request, package, filename):
     # and to add any such anchors into the dest package via isMerge:
     try:
         newNode.RenamedNodePath(isMerge=True)
-    except Exception, e:
+    except Exception as e:
         client.alert(str(e))
 
-    client.sendScript((u'top.location = "/%s"' % \
+    client.sendScript(('top.location = "/%s"' % \
                       package.name).encode('utf8'))
 
 
@@ -861,7 +862,7 @@ def extractPackage(request, package, filename, existOk):
     filename = Path(filename)
     saveDir = filename.dirname()
     if saveDir and not saveDir.exists():
-        client.alert(_(u'Cannot access directory named ') + unicode(saveDir) + _(u'. Please use ASCII names.'))
+        client.alert(_('Cannot access directory named ') + str(saveDir) + _('. Please use ASCII names.'))
         return
 
     # Add the extension if its not already there
@@ -869,8 +870,8 @@ def extractPackage(request, package, filename, existOk):
         filename += '.elp'
 
     if Path(filename).exists() and existOk != 'true':
-        msg = _(u'"%s" already exists.\nPlease try again with a different filename') % filename
-        client.alert(_(u'EXTRACT FAILED!\n%s' % msg))
+        msg = _('"%s" already exists.\nPlease try again with a different filename') % filename
+        client.alert(_('EXTRACT FAILED!\n%s' % msg))
         return
 
     try:
@@ -886,10 +887,10 @@ def extractPackage(request, package, filename, existOk):
 
         # Save the new package
         newPackage.save(filename)
-    except Exception, e:
+    except Exception as e:
         client.alert(_('EXTRACT FAILED!\n%s' % str(e)))
         raise
-    client.alert(_(u'Package extracted to: %s' % filename))
+    client.alert(_('Package extracted to: %s' % filename))
 
 # Public Methods
 
@@ -917,20 +918,20 @@ def exportSinglePage(request, client, filename, webDir, stylesDir, \
         if not filename.exists():
             filename.makedirs()
         elif not filename.isdir():
-            client.alert(_(u'Filename %s is a file, cannot replace it') %
+            client.alert(_('Filename %s is a file, cannot replace it') %
                          filename)
             log.error("Couldn't export web page: " +
                       "Filename %s is a file, cannot replace it" % filename)
             return
         else:
-            client.alert(_(u'Folder name %s already exists. '
+            client.alert(_('Folder name %s already exists. '
                             'Please choose another one or delete existing one then try again.') % filename)
             return
         # Now do the export
         singlePageExport = SinglePageExport(stylesDir, filename, \
                                      imagesDir, scriptsDir, templatesDir)
         singlePageExport.export(package, printFlag)
-    except Exception, e:
+    except Exception as e:
         client.alert(_('SAVE FAILED!\n%s' % str(e)))
         raise
     # Show the newly exported web site in a new window
@@ -959,20 +960,20 @@ def exportPresentation(request, client, filename, stylesDir):
         if not filename.exists():
             filename.makedirs()
         elif not filename.isdir():
-            client.alert(_(u'Filename %s is a file, cannot replace it') %
+            client.alert(_('Filename %s is a file, cannot replace it') %
                          filename)
             log.error("Couldn't export web page: " +
                       "Filename %s is a file, cannot replace it" % filename)
             return
         else:
-            client.alert(_(u'Folder name %s already exists. '
+            client.alert(_('Folder name %s already exists. '
                             'Please choose another one or delete existing one then try again.') % filename)
             return
         # Now do the export
         presentationExport = PresentationExport(self.config, stylesDir,
             filename)
         presentationExport.export(package)
-    except Exception, e:
+    except Exception as e:
         client.alert(_('EXPORT FAILED!\n%s') % str(e))
         raise
 
@@ -985,7 +986,7 @@ def printHandout(request, client, exportDir, stylesDir):
     export client to a DOM presentation
     """
 
-    print exportDir
+    print(exportDir)
     handoutExport = HandoutExport(self.config, stylesDir,
         exportDir)
     handoutExport.export(package)
@@ -1025,41 +1026,41 @@ def exportWebSite2(request, client, filename, stylesDir):
         websiteExport = WebsiteExport(self.config, stylesDir, filename)
         websiteExport.export(package)
         self._startFile(client, filename)
-    except Exception, e:
+    except Exception as e:
         log.error("EXPORT FAILED! %s" % filename)
         raise
 
 def exportWebZip(request, client, filename, stylesDir):
     try:
-        log.debug(u"exportWebsite, filename=%s" % filename)
+        log.debug("exportWebsite, filename=%s" % filename)
         filename = Path(filename)
         # Do the export
-        filename = self.b4save(client, filename, '.zip', _(u'EXPORT FAILED!'))
+        filename = self.b4save(client, filename, '.zip', _('EXPORT FAILED!'))
         websiteExport = WebsiteExport(self.config, stylesDir, filename)
         websiteExport.export(package)
-    except Exception, e:
+    except Exception as e:
         client.alert(_('EXPORT FAILED!\n%s' % str(e)))
         raise
-    client.alert(_(u'Exported to %s') % filename)
+    client.alert(_('Exported to %s') % filename)
 
 def exportText(self, client, filename):
     try:
         filename = Path(filename)
-        log.debug(u"exportWebsite, filename=%s" % filename)
+        log.debug("exportWebsite, filename=%s" % filename)
         # Append an extension if required
         if not filename.lower().endswith('.txt'):
             filename += '.txt'
             if Path(filename).exists():
-                msg = _(u'"%s" already exists.\nPlease try again with a different filename') % filename
-                client.alert(_(u'EXPORT FAILED!\n%s' % msg))
+                msg = _('"%s" already exists.\nPlease try again with a different filename') % filename
+                client.alert(_('EXPORT FAILED!\n%s' % msg))
                 return
         # Do the export
         textExport = TextExport(filename)
         textExport.export(package)
-    except Exception, e:
+    except Exception as e:
         client.alert(_('EXPORT FAILED!\n%s' % str(e)))
         raise
-    client.alert(_(u'Exported to %s') % filename)
+    client.alert(_('Exported to %s') % filename)
 
 def exportIpod(request, client, filename):
     """
@@ -1078,22 +1079,22 @@ def exportIpod(request, client, filename):
         if not filename.exists():
             filename.makedirs()
         elif not filename.isdir():
-            client.alert(_(u'Filename %s is a file, cannot replace it') %
+            client.alert(_('Filename %s is a file, cannot replace it') %
                          filename)
             log.error("Couldn't export web page: " +
                       "Filename %s is a file, cannot replace it" % filename)
             return
         else:
-            client.alert(_(u'Folder name %s already exists. '
+            client.alert(_('Folder name %s already exists. '
                             'Please choose another one or delete existing one then try again.') % filename)
             return
         # Now do the export
         ipodExport = IpodExport(self.config, filename)
         ipodExport.export(package)
-    except Exception, e:
+    except Exception as e:
         client.alert(_('EXPORT FAILED!\n%s') % str(e))
         raise
-    client.alert(_(u'Exported to %s') % filename)
+    client.alert(_('Exported to %s') % filename)
 
 def exportScorm(request, client, filename, stylesDir, scormType):
     """
@@ -1101,42 +1102,42 @@ def exportScorm(request, client, filename, stylesDir, scormType):
     """
     try:
         filename = Path(filename)
-        log.debug(u"exportScorm, filename=%s" % filename)
+        log.debug("exportScorm, filename=%s" % filename)
         # Append an extension if required
         if not filename.lower().endswith('.zip'):
             filename += '.zip'
             if Path(filename).exists():
-                msg = _(u'"%s" already exists.\nPlease try again with a different filename') % filename
-                client.alert(_(u'EXPORT FAILED!\n%s' % msg))
+                msg = _('"%s" already exists.\nPlease try again with a different filename') % filename
+                client.alert(_('EXPORT FAILED!\n%s' % msg))
                 return
         # Do the export
         scormExport = ScormExport(self.config, stylesDir, filename, scormType)
         scormExport.export(package)
-    except Exception, e:
+    except Exception as e:
         client.alert(_('EXPORT FAILED!\n%s' % str(e)))
         raise
-    client.alert(_(u'Exported to %s') % filename)
+    client.alert(_('Exported to %s') % filename)
 
 def exportIMS(request, client, filename, stylesDir):
     """
     Exports this package to a ims package file
     """
     try:
-        log.debug(u"exportIMS")
+        log.debug("exportIMS")
         # Append an extension if required
         if not filename.lower().endswith('.zip'):
             filename += '.zip'
             if Path(filename).exists():
-                msg = _(u'"%s" already exists.\nPlease try again with a different filename') % filename
-                client.alert(_(u'EXPORT FAILED!\n%s' % msg))
+                msg = _('"%s" already exists.\nPlease try again with a different filename') % filename
+                client.alert(_('EXPORT FAILED!\n%s' % msg))
                 return
         # Do the export
         imsExport = IMSExport(self.config, stylesDir, filename)
         imsExport.export(package)
-    except Exception, e:
+    except Exception as e:
         client.alert(_('EXPORT FAILED!\n%s' % str(e)))
         raise
-    client.alert(_(u'Exported to %s' % filename))
+    client.alert(_('Exported to %s' % filename))
 
 # Utility methods
 def _startFile(request, client, filename):
@@ -1156,28 +1157,28 @@ def _loadPackage(request, client, filename, newLoad=True,
         encoding = sys.getfilesystemencoding()
         if encoding is None:
             encoding = 'utf-8'
-        filename2 = toUnicode(filename, encoding)
+        filename2 = force_text(filename, encoding)
         log.debug("filename and path" + filename2)
         # see if the file exists AND is readable by the user
         try:
             open(filename2, 'rb').close()
         except IOError:
-            filename2 = toUnicode(filename, 'utf-8')
+            filename2 = force_text(filename)
             try:
                 open(filename2, 'rb').close()
             except IOError:
-                client.alert(_(u'File %s does not exist or is not readable.') % filename2)
+                client.alert(_('File %s does not exist or is not readable.') % filename2)
                 return None
         package = Package.load(filename2, newLoad, destinationPackage)
         if package is None:
             raise Exception(_("Couldn't load file, please email file to bugs@exelearning.org"))
-    except Exception, exc:
+    except Exception as exc:
         if log.getEffectiveLevel() == logging.DEBUG:
-            client.alert(_(u'Sorry, wrong file format:\n%s') % unicode(exc))
+            client.alert(_('Sorry, wrong file format:\n%s') % str(exc))
         else:
-            client.alert(_(u'Sorry, wrong file format'))
-        log.error(u'Error loading package "%s": %s' % (filename2, unicode(exc)))
-        log.error(u'Traceback:\n%s' % traceback.format_exc())
+            client.alert(_('Sorry, wrong file format'))
+        log.error('Error loading package "%s": %s' % (filename2, str(exc)))
+        log.error('Traceback:\n%s' % traceback.format_exc())
         raise
     return package
 

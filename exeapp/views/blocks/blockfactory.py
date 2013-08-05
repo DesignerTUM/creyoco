@@ -61,7 +61,7 @@ idevice_map = {
           }
 
 
-block_map = dict((v, k) for k, v in idevice_map.items())
+block_map = dict((v, k) for k, v in list(idevice_map.items()))
 
 
 block_factory = lambda idevice: idevice_map[idevice.__class__](idevice)

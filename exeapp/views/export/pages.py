@@ -25,7 +25,7 @@ Export Pages functions
 """
 
 import logging
-from urllib                   import quote
+from urllib.parse                   import quote
 
 
 log = logging.getLogger(__name__)

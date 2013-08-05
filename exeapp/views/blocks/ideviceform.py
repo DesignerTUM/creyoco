@@ -18,7 +18,7 @@ class IdeviceForm(forms.ModelForm):
         '''Decouples field rendering from the purpose'''
         html = ""
         renderer_name = "render_%s" % purpose
-        for name, field_object in self.fields.items():
+        for name, field_object in list(self.fields.items()):
             if hasattr(field_object.widget, renderer_name):
                 renderer = getattr(field_object.widget, renderer_name)
                 html += renderer(self.initial[name])
@@ -31,7 +31,7 @@ class IdeviceForm(forms.ModelForm):
     @property
     def view_media(self):
         media = Media()
-        for field in self.fields.values():
+        for field in list(self.fields.values()):
             if hasattr(field.widget, "view_media"):
                     media += field.widget.view_media
         return media

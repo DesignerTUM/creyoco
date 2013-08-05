@@ -1,13 +1,11 @@
 BeautifulSoup4
-mysql-python
+cymysql
 Django>=1.5
-pillow>=2.0
+Pillow>=2.0
 argparse
 distribute
 django-extensions
 ipython>=0.13
-mock
-wsgiref
 hg+https://bitbucket.org/ubernostrum/django-registration#egg=registration
 django-grappelli
 django-tinymce

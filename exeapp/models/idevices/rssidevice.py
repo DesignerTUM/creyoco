@@ -1,8 +1,8 @@
+from exeapp.models.idevices import fields
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from exeapp.models.idevices.idevice import Idevice
-from exeapp.models.idevices import fields
-from exeapp.models.idevices import feedparser
+import feedparser
 from exeapp.models.idevices.genericidevice import GenericIdevice
 
 
@@ -43,11 +43,11 @@ display them as links in your content. From here you can edit the bookmarks and 
                 for i in range(0, length):
                     content += '<p><A href="%s">%s</A></P>' %(
                         rssDic['entries'][i].link, rssDic['entries'][i].title)
-        except IOError, error:
-            content += _(u"Unable to load RSS feed from %s <br/>Please check the spelling and connection and try again.") % url
+        except IOError as error:
+            content += _("Unable to load RSS feed from %s <br/>Please check the spelling and connection and try again.") % url
 
         if content == "":
-            content += _(u"Unable to load RSS feed from %s <br/>Please check the spelling and connection and try again.") % url
+            content += _("Unable to load RSS feed from %s <br/>Please check the spelling and connection and try again.") % url
         self.content = content
 
     class Meta:

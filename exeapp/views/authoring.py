@@ -33,7 +33,7 @@ def authoring(request, package, current_node):
 
             idevice_html = shortcuts.render_idevice(idevice)
             return HttpResponse(idevice_html)
-        except ObjectDoesNotExist, e:
+        except ObjectDoesNotExist as e:
             raise Http404(e)
     # if partial is set return only content of body
     elif "media" in request.GET and request.GET['media'] == "true":

@@ -45,7 +45,7 @@ def user_post_save(sender, instance, created, **kwargs):
         profile.save()
         try:
             os.makedirs(profile.media_path)
-        except Exception, e:
+        except Exception as e:
                 log.info("Folder for user {0} at {1} already exists.".\
                     format(profile, profile.media_path))
 
@@ -55,7 +55,7 @@ def user_pre_delete(sender, instance, **kwargs):
     profile = instance.userprofile
     try:
         shutil.rmtree(profile.media_path)
-    except OSError, e:
+    except OSError as e:
         log.error(str(e))
     profile.delete()
 

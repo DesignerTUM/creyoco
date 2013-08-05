@@ -7,11 +7,12 @@ _clean_up_database_and_store for it.
 """
 
 import os
-import mock
-from mock import Mock
+from unittest import mock
+from unittest.mock import Mock
 
 from django.test import TestCase, Client
 from django.utils import simplejson
+from django.utils.encoding import smart_text
 from django.utils.html import escape
 from django.conf import settings
 from django.http import HttpResponseNotFound, HttpResponseForbidden, QueryDict
@@ -45,7 +46,7 @@ TEST_PASSWORD = "password"
 
 def _create_packages(user, package_count=PACKAGE_COUNT,
                       package_name_template=PACKAGE_NAME_TEMPLATE):
-        for x in xrange(package_count):
+        for x in range(package_count):
             Package.objects.create(title=package_name_template % (user.username, x),
                                    user=user)
 
@@ -66,7 +67,7 @@ def _create_basic_database():
 class MainPageTestCase(TestCase):
 
     def _create_packages(self, user):
-        for x in xrange(self.COUNT):
+        for x in range(self.COUNT):
             Package.objects.create(title=self.PACKAGE_NAME_TEMPLATE % (user.username, x),
                                    user=user)
 
@@ -94,7 +95,7 @@ class MainPageTestCase(TestCase):
     def test_require_login(self):
         self.c.logout()
         response = self.c.get('/exeapp/main')
-        self.assertFalse('Main Page' in response.content)
+        self.assertFalse('Main Page' in smart_text(response.content))
 
 
 class PackagesPageTestCase(TestCase):
@@ -352,9 +353,10 @@ view, this tests should be also merged'''
         self.package.root.handle_action(SECOND_IDEVICE_ID,
                                         "move_up",
                                         QueryDict(""))
-        content = self.c.get(self.VIEW_URL).content
-        self.assertTrue(content.index('idevice_id="%s"' % FIRST_IDEVICE_ID) \
-                        > content.index('idevice_id="%s"' % SECOND_IDEVICE_ID))
+        content = smart_text(self.c.get(self.VIEW_URL).content)
+        self.assertTrue(content.index(
+                'idevice_id="{}"'.format(FIRST_IDEVICE_ID)) \
+                > content.index('idevice_id="{}"'.format(SECOND_IDEVICE_ID)))
 
     @mock.patch.object(shortcuts, 'render_idevice')
     @mock.patch.object(Package.objects, 'get')
@@ -379,7 +381,7 @@ view, this tests should be also merged'''
         test_args = QueryDict("").copy()
         test_args.update(action_args)
         mock_node_get.return_value.handle_action.assert_called_with(
-                                            unicode(idevice_id),
+                                            str(idevice_id),
                                             "save",
                                             test_args)
 
@@ -426,13 +428,13 @@ view, this tests should be also merged'''
         response = self.c.get(self.VIEW_URL + "authoring/", data={"idevice_id": IDEVICE_ID})
         self.assertEquals(response.status_code, 200)
         self.assertTrue(node.idevices.get.called)
-        self.assertTrue(IDEVICE_CONTENT in response.content)
+        self.assertTrue(IDEVICE_CONTENT in smart_text(response.content))
 
     def test_partial_resource_loading(self):
         self.root.add_idevice(self.IDEVICE_TYPE)
         response = self.c.get("{}authoring/?partial=true&media=true".format(
                                                         self.VIEW_URL))
-        self.assertEquals(simplejson.loads(response.content),
+        self.assertEquals(simplejson.loads(smart_text(response.content)),
                           [reverse('tinymce-filebrowser')])
 
     def test_resource_finding(self):
@@ -471,10 +473,10 @@ view, this tests should be also merged'''
         self.assertContains(response, 'tinyMCELinkList')
         try:
             # remove trailing semi-colon at the end
-            link_list = response.content[response.content.find('=') + 1:-1]
-        except:
-            raise AssertionError("Couldn't find link array in %s" \
-                                 % response.content)
+            link_list = smart_text(response.content).split('=')[-1][:-1]
+        except IndexError:
+            raise AssertionError("Couldn't find link array in {}".format(
+                                 response.content))
         try:
             simplejson.loads(link_list)
         except:

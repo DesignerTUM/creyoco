@@ -67,7 +67,7 @@ class GenericBlock(Block):
                                                "self" : self,
                                                }
                                     )
-        except TemplateDoesNotExist, e:
+        except TemplateDoesNotExist as e:
             if template:
                 raise e
             else:

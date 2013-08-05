@@ -36,7 +36,7 @@ class TOCBlock(GenericBlock):
         return list
 
     def _generate_item(self, node, export_url):
-        print export_url
+        print(export_url)
         if export_url:
             node_url = node.unique_name() + ".html"
         else:

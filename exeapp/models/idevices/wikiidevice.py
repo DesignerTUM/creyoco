@@ -2,17 +2,17 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from exeapp.models.idevices.genericidevice import GenericIdevice
 from exeapp.models.idevices.idevice import Idevice
-import urllib
+import urllib.request, urllib.parse, urllib.error
 from bs4 import  BeautifulSoup
 import re
 from exeapp.models.idevices import fields
 
-class UrlOpener(urllib.FancyURLopener):
+class UrlOpener(urllib.request.FancyURLopener):
     """
     Set a distinctive User-Agent, so Wikipedia.org knows we're not spammers
     """
     version = "eXe/exe@exelearning.org"
-urllib._urlopener = UrlOpener()
+urllib.request._urlopener = UrlOpener()
 
 class WikipediaIdevice(GenericIdevice):
     name =_("Wiki Article")
@@ -32,7 +32,7 @@ is covered by the GNU free documentation license.</p>""")
 within Wikipedia."""))
     content = fields.RichTextField(blank=True, default="")
     site = "http://en.wikipedia.org/wiki/"
-    icon = u"icon_inter.gif"
+    icon = "icon_inter.gif"
     userResources = []
     # TODO FDL has to be in the package
     # systemResources += ["fdl.html"]
@@ -45,29 +45,28 @@ within Wikipedia."""))
         """
         self.articleName = title
         url = ""
-        title = urllib.quote(title.replace(" ", "_").encode('utf-8'))
+        title = urllib.parse.quote(title.replace(" ", "_").encode('utf-8'))
         try:
             url = (self.site or self.ownUrl)
-            if not url.endswith('/') and title <> '': url += '/'
+            if not url.endswith('/') and title != '': url += '/'
             if '://' not in url: url = 'http://' + url
             url += title
-            net = urllib.urlopen(url)
+            net = urllib.request.urlopen(url)
             page = net.read()
             net.close()
-        except IOError, error:
-            self.content = _(u"Unable to download from %s <br/>Please check the spelling and connection and try again.") % url
+        except IOError as error:
+            self.content = _("Unable to download from %s <br/>Please check the spelling and connection and try again.") % url
             return
 
-        page = unicode(page, "utf8")
         # FIXME avoid problems with numeric entities in attributes
-        page = page.replace(u'&#160;', u'&nbsp;')
+        page = page.replace('&#160;', '&nbsp;')
 
         soup = BeautifulSoup(page)
         content = soup.find('div', {'id': "content"})
 
         # remove the wiktionary, wikimedia commons, and categories boxes
         #  and the protected icon and the needs citations box
-        print content
+        print(content)
         if content:
             content['id'] = 'wiki_content'
             infoboxes = content.findAll('div',
@@ -84,13 +83,13 @@ within Wikipedia."""))
             content = soup.first('body')
 
         if not content:
-            self.content = _(u"Unable to download from %s <br/>Please check the spelling and connection and try again.") % url
+            self.content = _("Unable to download from %s <br/>Please check the spelling and connection and try again.") % url
             # set the other elements as well
             return
 
         bits = url.split('/')
         netloc = '%s//%s' % (bits[0], bits[2])
-        self.content = self.reformatArticle(netloc, unicode(content))
+        self.content = self.reformatArticle(netloc, content)
         # now that these are supporting images, any direct manipulation
         # of the content field must also store this updated information
         # into the other corresponding fields of TextAreaField:

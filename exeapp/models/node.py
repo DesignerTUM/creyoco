@@ -196,12 +196,12 @@ with it'''
                                     this_anchor_name].remove(that_field)
                         if that_field_is_valid:
                             that_field.RenameInternalLinkToAnchor( \
-                                this_field, unicode(old_full_link_name),
-                                unicode(new_full_link_name))
+                                this_field, str(old_full_link_name),
+                                str(new_full_link_name))
 
         # And a variation of the above, for all source-links to #auto_top,
         # which is directly to this node, and not to any of its fields:
-        this_anchor_name = u"auto_top"
+        this_anchor_name = "auto_top"
         old_full_link_name = old_node_path + "#" + this_anchor_name
         new_full_link_name = new_node_path + "#" + this_anchor_name
         if not hasattr(self, 'top_anchors_linked_from_fields'):
@@ -246,8 +246,8 @@ with it'''
                 # for auto_top, uses the actual Node as the anchor_field:
                 anchor_field = self
                 that_field.RenameInternalLinkToAnchor( \
-                    anchor_field, unicode(old_full_link_name),
-                    unicode(new_full_link_name))
+                    anchor_field, str(old_full_link_name),
+                    str(new_full_link_name))
                 # and determine if any links to this node remain
         num_links = len(self.top_anchors_linked_from_fields)
         if num_top_links > 0 and num_links <= 0:
@@ -270,7 +270,7 @@ with it'''
 
                         # Remove any linked fields that no longer apply,
                         # using reverse for loop to delete:
-                        these_link_names = this_field.intlinks_to_anchors.keys()
+                        these_link_names = list(this_field.intlinks_to_anchors.keys())
                         num_links = len(these_link_names)
                         for i in range(num_links - 1, -1, -1):
                             this_link_name = these_link_names[i]
@@ -290,7 +290,7 @@ with it'''
                                 this_link_name)
                             if this_anchor_field \
                                 and isinstance(this_anchor_field, Field) \
-                                and this_anchor_name != u"auto_top":
+                                and this_anchor_name != "auto_top":
                                 if this_anchor_field.idevice is not None \
                                     and this_anchor_field.idevice.parentNode:
                                     this_link_node = \
@@ -310,7 +310,7 @@ with it'''
                                 # which is NO LONGER a VALID part of this
                                 # newly extracted sub-package.  Remove it:
                                 this_field.RemoveInternalLinkToRemovedAnchor( \
-                                    this_anchor_field, unicode(this_link_name))
+                                    this_anchor_field, str(this_link_name))
 
         # Then do the same for all of this node's children nodes:
         for child_node in self.children:
@@ -329,7 +329,7 @@ with it'''
 
         The newly inserted node is automatically selected.
         """
-        log.debug(u"clone " + self.title)
+        log.debug("clone " + self.title)
 
         try:
             # Setting self.parent in the copy to None, so it doesn't
@@ -337,7 +337,7 @@ with it'''
             newNode = deepcopy(self, {id(self._package): newPackage,
                                       id(self.parent): None})
             newNode._id = newPackage._regNewNode(newNode)
-        except Exception, e:
+        except Exception as e:
             raise
 
         # return nonpersistables to normal status:
@@ -375,7 +375,7 @@ with it'''
         """
         Return the resource files used by this node
         """
-        log.debug(u"getResources ")
+        log.debug("getResources ")
         resources = set()
         #        from IPython import embed; embed()
         for idevice in self.idevices.all():
@@ -417,7 +417,7 @@ with it'''
         """
         Create a child node
         """
-        log.debug(u"create_child ")
+        log.debug("create_child ")
         return Node.objects.create(package=self.package, parent=self)
 
     def duplicate(self, parent=None):
@@ -447,7 +447,7 @@ with it'''
         Add the idevice to this node, sets idevice's parentNode. Throws
         KeyError, if idevice_type is not found
         """
-        log.debug(u"add_idevice %s" % idevice_type)
+        log.debug("add_idevice %s" % idevice_type)
         try:
             idevice_class = idevice_store[idevice_type]
         except KeyError:
@@ -481,7 +481,7 @@ with it'''
 closer to the tree root.
 Returns True is successful
         """
-        log.debug(u"promote ")
+        log.debug("promote ")
         if self.parent and self.parent.parent:
             try:
                 next_sibling = self.parent.get_next_in_order()
@@ -498,7 +498,7 @@ Returns True is successful
 from its parent, tries to keep the same position in the tree.
 Returns True is successful
         """
-        log.debug(u"demote ")
+        log.debug("demote ")
         if self.parent:
             try:
                 new_parent = self.get_previous_in_order()
@@ -516,7 +516,7 @@ Returns True is successful
         the tree.
         Returns True is successful.
         """
-        log.debug(u"up ")
+        log.debug("up ")
         try:
             prev_sibling = self.get_previous_in_order()
         except Node.DoesNotExist:
@@ -531,7 +531,7 @@ Returns True is successful
         Moves the node down one vertically, keeping its level the same.
         Returns True is successful.
         """
-        log.debug(u"down ")
+        log.debug("down ")
         try:
             next_sibling = self.get_next_in_order()
         except Node.DoesNotExist:
@@ -601,7 +601,7 @@ Returns True is successful
                 self._title = self.getTitle()
                 # disconnect it from any package, parent, and idevice links,
             # and go through and delete any and all children nodes:
-            zombie_preface = u"ZOMBIE("
+            zombie_preface = "ZOMBIE("
             if self._title[0:len(zombie_preface)] != zombie_preface:
                 self._title = zombie_preface + self._title + ")"
             G.application.afterUpgradeZombies2Delete.append(self)

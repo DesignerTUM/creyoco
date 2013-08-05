@@ -81,7 +81,7 @@ class Manifest(object):
 
         static_dir = Path(settings.STATIC_ROOT)
         templateFilename = static_dir / 'templates' / template_name
-        template = open(templateFilename, 'rb').read()
+        template = open(templateFilename, 'r', encoding='utf-8').read()
         lrm = model_to_dict(self.package.dublincore)
         if lrm.get('title', '') == '':
             lrm['title'] = self.package.title
@@ -98,7 +98,7 @@ class Manifest(object):
         # if they don't look like VCARD entries, coerce to fn:
         for f in ('creator', 'publisher', 'contributors'):
             if re.match('.*[:;]', lrm[f]) == None:
-                lrm[f] = u'FN:' + lrm[f]
+                lrm[f] = 'FN:' + lrm[f]
         xml = template % lrm
         return xml
 
@@ -108,7 +108,7 @@ class Manifest(object):
         """
         out = open(self.outputDir / filename, "w")
         if filename == "imsmanifest.xml":
-            out.write(self.createXML().encode('utf8'))
+            out.write(self.createXML())
         out.close()
         if self.scorm_type == SCORM12:
             xml = self.createMetaData()
@@ -117,8 +117,8 @@ class Manifest(object):
             out.close()
 
     def createXML(self):
-        manifestId = unicode(self.idGenerator.generate())
-        orgId = unicode(self.idGenerator.generate())
+        manifestId = str(self.idGenerator.generate())
+        orgId = str(self.idGenerator.generate())
 
         if self.scorm_type == COMMONCARTRIDGE:
             # FIXME flatten hierarchy
@@ -150,8 +150,8 @@ class Manifest(object):
         """
         Returning xml string for items and resources
         """
-        itemId = "ITEM-" + unicode(self.idGenerator.generate())
-        resId = "RES-" + unicode(self.idGenerator.generate())
+        itemId = "ITEM-" + str(self.idGenerator.generate())
+        resId = "RES-" + str(self.idGenerator.generate())
         filename = page.name + ".html"
 
 
@@ -280,7 +280,7 @@ class ScormExport(WebsiteExport):
             manifest.save("discussionforum.xml")
 
         if self.scorm_type == COMMONCARTRIDGE:
-            self.style_dir.copylist(manifest.dependencies.keys(),
+            self.style_dir.copylist(list(manifest.dependencies.keys()),
                                      self.output_dir)
         else:
             self.copy_style_files()

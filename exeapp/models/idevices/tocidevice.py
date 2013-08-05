@@ -15,7 +15,7 @@ class TOCIdevice(GenericIdevice):
     group = Idevice.CONTENT
     content = fields.RichTextField(blank=True, default="")
     author = _("Technical University Munich")
-    icon = u"icon_inter.gif"
+    icon = "icon_inter.gif"
     edit_message = _("The content of this iDevice is automatically generated"
                     "should not be edited directly.")
 

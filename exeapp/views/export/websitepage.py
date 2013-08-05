@@ -24,7 +24,7 @@ This class transforms an eXe node into a page on a self-contained website
 """
 
 import logging
-from urllib                   import quote
+from urllib.parse                   import quote
 from exeapp.views.export.pages         import Page
 log = logging.getLogger(__name__)
 

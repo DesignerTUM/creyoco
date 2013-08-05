@@ -45,7 +45,7 @@ class Idevice(models.Model):
 
     # Class attributes
     # see derieved classes for persistenceVersion
-    NOEMPHASIS, SOMEEMPHASIS, STRONGEMPHASIS = range(3)
+    NOEMPHASIS, SOMEEMPHASIS, STRONGEMPHASIS = list(range(3))
     CONTENT, DIDACTICS, COMMUNICATION,  TEST, MEDIA, UNKNOWN = \
             _("Content"), _("Didactics"), _("Communication"), _("Test"),\
             _("Media"), _("Unknown")
@@ -69,9 +69,9 @@ class Idevice(models.Model):
     def get_klass(self):
         if hasattr(self, 'class_'):
             if self.class_ == '':
-                return u'customIdevice'
+                return 'customIdevice'
             else:
-                return self.class_ + u'Idevice'
+                return self.class_ + 'Idevice'
         else:
             klass = str(self.as_child().__class__).split('.')[-1]
             return klass[:-2]
@@ -164,7 +164,7 @@ finding. Returns a list of (name, url) tuples'''
         initial = {field.name: getattr(self, field.name)
                     for field in self._meta.fields
                     if not isinstance(field, AutoField) and
-                       not field in self._meta.parents.values()}
+                       not field in list(self._meta.parents.values())}
         return self.__class__(**initial)
 
     # Kudos to crucialfelix for djangosnippet 1031

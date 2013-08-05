@@ -92,7 +92,7 @@ class Resource(models.Model):
                 # (as might in corrupt files)
                 while self in siblings: 
                     siblings.remove(self) 
-            except Exception, e:
+            except Exception as e:
                 # this can occur with old corrupt files, wherein the resource 
                 # was not actually properly connected to the package.  
                 # Proceed anyhow, as if it just removed...
@@ -194,7 +194,7 @@ class Resource(models.Model):
             self._storageName = newName
         else:
             if Path(oldPath).dirname() == self._package.resourceDir:
-                log.debug(u"StorageName=%s was already in self._package resources" % self._storageName)
+                log.debug("StorageName=%s was already in self._package resources" % self._storageName)
             else:
                 filename = (self._package.resourceDir/oldPath.basename())
                 storageName = self._fn2ascii(filename)
@@ -239,7 +239,7 @@ class Resource(models.Model):
         miniMe = self.__class__.__new__(self.__class__)
         others[id(self)] = miniMe
         # Do normal deep copy
-        for key, val in self.__dict__.items():
+        for key, val in list(self.__dict__.items()):
             if id(val) in others:
                 setattr(miniMe, key, others[id(val)])
             else:

@@ -3,11 +3,9 @@ from exeapp.views.blocks.formsetblock import BaseFormsetBlock,\
 from exeapp.models.idevices.glossaryidevice import GlossaryTerm
 from django.template.loader import render_to_string
 
-class GlossaryBlock(BaseFormsetBlock):
-    __metaclass__ = FormsetBlockMetaclassFactory(
+class GlossaryBlock(BaseFormsetBlock, metaclass=FormsetBlockMetaclassFactory(
                                 GlossaryTerm,
-                                ("title", "definition"))
-    
+                                ("title", "definition"))):
     preview_template = "exe/idevices/glossary/preview.html"
     view_template = "exe/idevices/glossary/export.html"
     
