@@ -5,14 +5,14 @@ when you run "manage.py test".
 Replace this with more appropriate tests for your application.
 """
 
+import os
+
 from django.test import TestCase
 from django.contrib.auth.models import User
-import os
 from django.test import Client
 
 
 class BasicTest(TestCase):
-
     TEST_USER = 'user'
     TEST_PASSWORD = 'password'
     CONTENT = "test test test"
@@ -20,9 +20,9 @@ class BasicTest(TestCase):
 
     def setUp(self):
         user = User.objects.create_user(username=self.TEST_USER,
-                               password=self.TEST_PASSWORD)
+                                        password=self.TEST_PASSWORD)
         media_path = user.get_profile().media_path
-        file(os.path.join(media_path, self.FILE_NAME), 'w').write(self.CONTENT)
+        open(os.path.join(media_path, self.FILE_NAME), 'w').write(self.CONTENT)
         self.file_url = user.get_profile().media_url + self.FILE_NAME
         self.client = Client()
 
@@ -49,8 +49,8 @@ class BasicTest(TestCase):
         superlogin = 'admin'
         superpass = 'secret'
         superuser = User.objects.create_superuser(superlogin,
-                                                 "super@creyoco.com",
-                                                 superpass)
+                                                  "super@creyoco.com",
+                                                  superpass)
 
         self.client.login(username=superlogin, password=superpass)
         response = self.client.get(self.file_url)
