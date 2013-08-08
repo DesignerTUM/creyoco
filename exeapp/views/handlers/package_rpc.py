@@ -28,29 +28,12 @@ from time import sleep
 import logging
 import traceback
 import shutil
-# from exe.xului.propertiespage    import PropertiesPage
-# from exe.webui.authoringpage     import AuthoringPage
-# from exe.export.websiteexport    import WebsiteExport
-# from exe.export.textexport       import TextExport
-# from exe.export.singlepageexport import SinglePageExport
-# from exe.export.scormexport      import ScormExport
-# #from exe.export.imsexport        import IMSExport
-# from exe.export.ipodexport       import IpodExport
-# from exe.export.presentationexport  import PresentationExport
-# from exe.export.handoutexport    import HandoutExport
 from django.utils.encoding import force_text
-from exeapp.utils.path             import Path
-# from exe                         import globals as G
-from tempfile                    import mkdtemp
-# from exe.engine.mimetex          import compile
-# from exe.engine.pdfidevice       import PdfIdevice
-# from pyPdf                       import PdfFileReader
-import re, subprocess, shutil
+from exeapp.utils.path import Path
+from tempfile import mkdtemp
+import re, subprocess
 
-from jsonrpc import jsonrpc_method
-from exeapp.shortcuts import jsonrpc_authernticating_method, render_idevice
-from exeapp.views.handlers import package_outline_rpc
-from exeapp.models import idevice_store
+from exeapp.shortcuts import jsonrpc_authernticating_method
 
 log = logging.getLogger(__name__)
 
@@ -83,7 +66,6 @@ def testPrintMessage(request, package, node, message):
 
 @jsonrpc_authernticating_method('package.handleDblNode')
 def handleDblNode (request, package):
-
     """
     Dublicates a tree element
     """

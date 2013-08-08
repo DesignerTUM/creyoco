@@ -22,28 +22,28 @@ $(document).ready(function() {
 
 	$.jsonRPC.setup({
     endPoint: '/exeapp/json/',
-    namespace: 'main',
+    namespace: 'main'
   });
   $("#create_package").click(create_package);
   $("#delete_selected_packages").click(delete_selected_packages);
 
 	$('.icon-download').click( function() {
-		var bla = $(this).parent().parent().attr('packageid');
+		var packageid = $(this).parent().parent().attr('packageid');
 		$('#download_box a').each(function() {
 			if($(this).attr('dl_type') == 'website') {
-				$(this).attr('href', '/exeapp/package/' + bla + '/download/website/');
+				$(this).attr('href', '/exeapp/package/' + packageid + '/download/website/');
 			}
 			if($(this).attr('dl_type') == 'cc') {
-				$(this).attr('href', '/exeapp/package/' + bla + '/download/commoncartridge/');
+				$(this).attr('href', '/exeapp/package/' + packageid + '/download/commoncartridge/');
 			}
 			if($(this).attr('dl_type') == 'ims') {
-				$(this).attr('href', '/exeapp/package/' + bla + '/download/ims/');
+				$(this).attr('href', '/exeapp/package/' + packageid + '/download/ims/');
 			}
 			if($(this).attr('dl_type') == 'scorm12') {
-				$(this).attr('href', '/exeapp/package/' + bla + '/download/scorm12/');
+				$(this).attr('href', '/exeapp/package/' + packageid + '/download/scorm12/');
 			}
 			if($(this).attr('dl_type') == 'scorm2004') {
-				$(this).attr('href', '/exeapp/package/' + bla + '/download/scorm2004/');
+				$(this).attr('href', '/exeapp/package/' + packageid + '/download/scorm2004/');
 			}
 		});
 

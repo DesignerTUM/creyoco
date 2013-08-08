@@ -56,8 +56,9 @@ TEST_PASSWORD = "password"
 
 def _create_packages(user, package_count=PACKAGE_COUNT,
                      package_name_template=PACKAGE_NAME_TEMPLATE):
-    for x in range(package_count):
-        Package.objects.create(title=package_name_template % (user.username, x),
+    for counter in range(package_count):
+        Package.objects.create(title=package_name_template % (user.username,
+                                                              counter),
                                user=user)
 
 
@@ -77,17 +78,15 @@ def _create_basic_database():
 
 
 class MainPageTestCase(TestCase):
-    def _create_packages(self, user):
-        for x in range(self.COUNT):
-            Package.objects.create(
-                title=self.PACKAGE_NAME_TEMPLATE % (user.username, x),
-                user=user)
 
     def setUp(self):
         _create_basic_database()
         self.c = Client()
         # login
         self.c.login(username=TEST_USER, password=TEST_PASSWORD)
+        self.s = TestingServiceProxy(self.c,
+                                     reverse("jsonrpc_mountpoint"),
+                                     version="2.0")
 
     def tearDown(self):
         User.objects.all().delete()
@@ -97,11 +96,11 @@ class MainPageTestCase(TestCase):
         self.assertContains(response, _("Overview"))
         self.assertContains(response, "creyoco")
 
-    def _test_create_package(self):
-        PACKAGE_NAME = '%s Package post' % self.TEST_USER
-        self.s.app.register(PACKAGE_NAME)
-        p = Package.objects.get(title=PACKAGE_NAME)
-        self.assertTrue(p.user.username == self.TEST_USER)
+    def test_create_package(self):
+        package_name = '%s Package post' % TEST_USER
+        self.s.main.create_package(package_name)
+        p = Package.objects.get(title=package_name)
+        self.assertTrue(p.user.username == TEST_USER)
 
     def test_require_login(self):
         self.c.logout()
@@ -210,8 +209,8 @@ class PackagesPageTestCase(TestCase):
         response = self.c.post(self.PAGE_URL % (self.PACKAGE_ID, self.NODE_ID),
                                data={'title': PACKAGE_TITLE,
                                      'author': AUTHOR_NAME,
-                                     'form_type_field': PackagePropertiesForm. \
-                                         form_type})
+                                     'form_type_field': PackagePropertiesForm.
+                                     form_type})
         self.assertEquals(response.status_code, 302)
         self.assertTrue(response['location'].endswith(
             self.PAGE_URL % (self.PACKAGE_ID, self.NODE_ID)))
@@ -220,7 +219,7 @@ class PackagesPageTestCase(TestCase):
         self.assertTrue(package.title == PACKAGE_TITLE)
 
     def test_preview(self):
-        response = self.c.get("{}preview/".format(self.PAGE_URL % \
+        response = self.c.get("{}preview/".format(self.PAGE_URL %
                                                   (self.PACKAGE_ID,
                                                    self.NODE_ID)))
         self.assertContains(response, "Home", status_code=200)
@@ -353,13 +352,18 @@ view, this tests should be also merged'''
 
         response = self.c.post(self.VIEW_URL,
                                {
-                               'form_type_field': PackagePropertiesForm
-                               .form_type,
-                               'title': TEST_TITLE})
+                                   'form_type_field': PackagePropertiesForm
+                                   .form_type,
+                                   'title': TEST_TITLE
+                               })
         self.assertEquals(response.status_code, 302)
-        self.assertTrue(response['Location'].endswith( \
-            'exeapp/package/{}/{}/'.format(self.package.id,
-                                           self.package.root.id)))
+        self.assertTrue(response['Location'].endswith(
+            'exeapp/package/{}/{}/'.format(
+                self.package.id,
+                self.package.root.id
+                )
+            )
+        )
 
     def test_idevice_move_up(self):
         FIRST_IDEVICE_ID = 1
@@ -371,9 +375,9 @@ view, this tests should be also merged'''
                                         QueryDict(""))
         content = smart_text(self.c.get(self.VIEW_URL).content)
         self.assertTrue(content.index(
-            'idevice_id="{}"'.format(FIRST_IDEVICE_ID)) \
-                        > content.index(
-            'idevice_id="{}"'.format(SECOND_IDEVICE_ID)))
+            'idevice_id="{}"'.format(FIRST_IDEVICE_ID))
+            > content.index(
+                'idevice_id="{}"'.format(SECOND_IDEVICE_ID)))
 
     @mock.patch.object(shortcuts, 'render_idevice')
     @mock.patch.object(Package.objects, 'get')
@@ -415,9 +419,9 @@ view, this tests should be also merged'''
         counter = 0
         for anchor in ANCHORS:
             name, url = link_list[counter]
-            self.assertEquals(name, "%s::%s" % \
+            self.assertEquals(name, "%s::%s" %
                                     (idevice.parent_node.title, anchor))
-            self.assertEquals(url, "%s.html#%s" % \
+            self.assertEquals(url, "%s.html#%s" %
                                    (idevice.parent_node.unique_name(), anchor))
             counter += 1
 
@@ -472,8 +476,8 @@ view, this tests should be also merged'''
     def test_export_resource_substitution(self):
         RESOURCE = 'test.jpg'
         CONTENT = 'src="/exeapp/media/uploads/%s/%s"' % (
-        self.package.user.username,
-        RESOURCE)
+            self.package.user.username,
+            RESOURCE)
         IDEVICE_ID = 1
 
         self.root.add_idevice(self.IDEVICE_TYPE)
@@ -595,8 +599,8 @@ class ExportTestCase(TestCase):
         exporter.pages = []
         websitepage = WebsitePage(self.data.root, 0, exporter)
         exporter.pages.append(websitepage)
-        self.assertTrue('class="%s" id="id1"' % IDEVICE_TYPE \
-            in websitepage.render())
+        self.assertTrue('class="%s" id="id1"' % IDEVICE_TYPE
+                        in websitepage.render())
 
 
 class MiddleWareTestCase(TestCase):
