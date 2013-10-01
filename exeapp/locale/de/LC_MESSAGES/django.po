@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-11 15:19+0200\n"
+"POT-Creation-Date: 2013-10-01 12:31+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
-#: tests.py:95 templates/main.html:8 templates/main.html.py:42
+#: tests.py:96 templates/main.html:8 templates/main.html.py:42
 msgid "Overview"
 msgstr "Kursübersicht"
 
@@ -40,7 +40,7 @@ msgstr "Aufgabe"
 #: models/idevices/freetextidevice.py:44
 #: models/idevices/objectivesidevice.py:12
 #: models/idevices/readingactidevice.py:13
-#: models/idevices/reflectionidevice.py:11 models/idevices/wikiidevice.py:20
+#: models/idevices/reflectionidevice.py:12 models/idevices/wikiidevice.py:45
 msgid "University of Auckland"
 msgstr ""
 
@@ -204,6 +204,7 @@ msgid ""
 msgstr ""
 
 #: models/idevices/feedbackidevice.py:7 templatetags/common.py:239
+#: utils/common.py:248
 msgid "Feedback"
 msgstr "Feedback"
 
@@ -241,27 +242,27 @@ msgstr ""
 msgid "Enter defintion of the term"
 msgstr ""
 
-#: models/idevices/idevice.py:48 templates/exe/mainpage.html:92
+#: models/idevices/idevice.py:50 templates/exe/mainpage.html:86
 msgid "Content"
 msgstr "Inhalt"
 
-#: models/idevices/idevice.py:48
+#: models/idevices/idevice.py:50
 msgid "Didactics"
 msgstr "Didaktik"
 
-#: models/idevices/idevice.py:48
+#: models/idevices/idevice.py:50
 msgid "Communication"
 msgstr "Kommunikation"
 
-#: models/idevices/idevice.py:48
+#: models/idevices/idevice.py:50
 msgid "Test"
 msgstr "Test"
 
-#: models/idevices/idevice.py:49
+#: models/idevices/idevice.py:51
 msgid "Media"
 msgstr "Medien"
 
-#: models/idevices/idevice.py:49
+#: models/idevices/idevice.py:51
 msgid "Unknown"
 msgstr "Unbekannt"
 
@@ -357,11 +358,11 @@ msgid ""
 "or providing a statement to begin a debate."
 msgstr ""
 
-#: models/idevices/reflectionidevice.py:9
+#: models/idevices/reflectionidevice.py:10
 msgid "Reflection"
 msgstr "Reflexion"
 
-#: models/idevices/reflectionidevice.py:12
+#: models/idevices/reflectionidevice.py:13
 msgid ""
 "Reflection is a teaching method often used to\n"
 "connect theory to practice. Reflection tasks often provide learners with an\n"
@@ -372,11 +373,13 @@ msgid ""
 "effective feedback tools."
 msgstr ""
 
-#: models/idevices/reflectionidevice.py:22
-msgid "Enter a question for learners to reflect upon."
+#: models/idevices/reflectionidevice.py:23
+msgid ""
+"Enter a question for learners to\n"
+"                                        reflect upon."
 msgstr ""
 
-#: models/idevices/reflectionidevice.py:25
+#: models/idevices/reflectionidevice.py:27
 msgid ""
 "Describe how learners will assess how\n"
 "they have done in the exercise. (Rubrics are useful devices for providing\n"
@@ -400,25 +403,27 @@ msgstr ""
 
 #: models/idevices/rssidevice.py:21
 msgid ""
-"Enter an RSS URL for the RSS feed you\n"
+"Enter an RSS URL for the RSS\n"
+"                              feed you\n"
 "want to attach to your content. Feeds are often identified by a small "
 "graphic\n"
-" icon (often like this <img src=\"/static/images/feed-icon.png\" />) or the "
-"text \"RSS\". Clicking on the\n"
-" icon or text label will display an RSS feed right in your browser. You can "
-"copy and paste the\n"
-"URL into this field. Alternately, right clicking on the link or graphic will "
+" icon (often like this <img src=\"/static/images/feed-icon.png\" />) or the\n"
+" text \"RSS\". Clicking on the\n"
+" icon or text label will display an RSS feed right in your browser. You can\n"
+" copy and paste the\n"
+"URL into this field. Alternately, right clicking on the link or graphic "
+"will\n"
 "open a menu box;\n"
-"click on COPY LINK LOCATION or Copy Shortcut. Back in eXe open the RSS "
+"click on COPY LINK LOCATION or Copy Shortcut. Back in eXe open the RSS\n"
 "bookmark iDevice and Paste the URL\n"
-"into the RSS URL field and click the LOAD button. This will extract the "
+"into the RSS URL field and click the LOAD button. This will extract the\n"
 "titles from your feed and\n"
-"display them as links in your content. From here you can edit the bookmarks "
+"display them as links in your content. From here you can edit the bookmarks\n"
 "and add\n"
 " instructions or additional learning information."
 msgstr ""
 
-#: models/idevices/rssidevice.py:47 models/idevices/rssidevice.py:50
+#: models/idevices/rssidevice.py:55 models/idevices/rssidevice.py:60
 #, python-format
 msgid ""
 "Unable to load RSS feed from %s <br/>Please check the spelling and "
@@ -433,14 +438,15 @@ msgstr "Inhaltsangabe"
 msgid ""
 "The content of this iDevice is automatically generatedshould not be edited "
 "directly."
-msgstr "Der Inhalt von diesem iDevice wird automatisch generiert und kann "
-"nicht manuell geändert werden"
+msgstr ""
+"Der Inhalt von diesem iDevice wird automatisch generiert und kann nicht "
+"manuell geändert werden"
 
-#: models/idevices/wikiidevice.py:18
+#: models/idevices/wikiidevice.py:43
 msgid "Wiki Article"
 msgstr "Wikipedia Artikel"
 
-#: models/idevices/wikiidevice.py:21
+#: models/idevices/wikiidevice.py:46
 msgid ""
 "<p>The Wikipedia iDevice allows you to locate\n"
 "existing content from within Wikipedia and download this content into your "
@@ -455,26 +461,23 @@ msgid ""
 "is covered by the GNU free documentation license.</p>"
 msgstr ""
 
-#: models/idevices/wikiidevice.py:31
+#: models/idevices/wikiidevice.py:56
 msgid ""
-"Enter a phrase or term you wish to search\n"
+"Enter a phrase or term you\n"
+"                                   wish to search\n"
 "within Wikipedia."
 msgstr ""
 
-#: models/idevices/wikiidevice.py:58 models/idevices/wikiidevice.py:87
+#: models/idevices/wikiidevice.py:85 models/idevices/wikiidevice.py:115
 #, python-format
 msgid ""
 "Unable to download from %s <br/>Please check the spelling and connection and "
 "try again."
 msgstr ""
 
-#: templates/base.html:83
+#: templates/base.html:82
 msgid "Site notice"
 msgstr "Impressum"
-
-#: templates/base.html:84
-msgid "Help"
-msgstr "Hilfe"
 
 #: templates/main.html:48
 msgid "Create a new course"
@@ -484,7 +487,20 @@ msgstr "Neues Lernmodul erstellen"
 msgid "Remove selected courses"
 msgstr "Gewählte Kurse löschen"
 
-#: templates/exe/mainpage.html:78
+#: templates/exe/mainpage.html:37
+msgid "Enter a new node name"
+msgstr "Geben Sie den Namen für die neue Seite ein!"
+
+#: templates/exe/mainpage.html:38
+msgid "New name:"
+msgstr "Seitenname:"
+
+#: templates/exe/mainpage.html:39
+#, fuzzy
+msgid "Create"
+msgstr "Erstellen"
+
+#: templates/exe/mainpage.html:72
 msgid "Tools"
 msgstr "Werkzeuge"
 
@@ -552,132 +568,144 @@ msgstr "Benutzerkonto erstellen"
 msgid "Please correct the errors below"
 msgstr "Bitte, beseitigen Sie folgende Fehler"
 
-#: templatetags/common.py:71
+#: templatetags/common.py:71 utils/common.py:70
 msgid "eXe : elearning XHTML editor"
 msgstr ""
 
-#: templatetags/common.py:312
+#: templatetags/common.py:312 utils/common.py:321
 msgid "Instructions"
 msgstr ""
 
-#: templatetags/common.py:318 templatetags/common.py:322
+#: templatetags/common.py:318 templatetags/common.py:322 utils/common.py:327
+#: utils/common.py:331
 msgid "Click for completion instructions"
 msgstr ""
 
-#: templatetags/common.py:327 templatetags/common.py:328
+#: templatetags/common.py:327 templatetags/common.py:328 utils/common.py:336
+#: utils/common.py:337
 msgid "Close"
 msgstr "Schließen"
 
-#: views/handlers/package_rpc.py:92
+#: utils/path.py:635
+#, python-format
+msgid ""
+"%s\n"
+"%s unchanged"
+msgstr ""
+
+#: views/handlers/package_rpc.py:75
 msgid "Can't dublicate root element"
 msgstr ""
 
-#: views/handlers/package_rpc.py:506 views/handlers/package_rpc.py:614
+#: views/handlers/package_rpc.py:489 views/handlers/package_rpc.py:597
 #, python-format
 msgid "Preview directory %s is a file, cannot replace it"
 msgstr ""
 
-#: views/handlers/package_rpc.py:526
+#: views/handlers/package_rpc.py:509
 #, python-format
 msgid "Local file %s is not found, cannot preview it"
 msgstr ""
 
-#: views/handlers/package_rpc.py:584 views/handlers/package_rpc.py:934
+#: views/handlers/package_rpc.py:567 views/handlers/package_rpc.py:917
 #, python-format
 msgid ""
 "SAVE FAILED!\n"
 "%s"
 msgstr ""
 
-#: views/handlers/package_rpc.py:656
+#: views/handlers/package_rpc.py:639
 #, python-format
 msgid ""
 "MimeTeX compile failed!\n"
 "%s"
 msgstr ""
 
-#: views/handlers/package_rpc.py:722 views/handlers/package_rpc.py:864
+#: views/handlers/package_rpc.py:705 views/handlers/package_rpc.py:847
 msgid "Cannot access directory named "
 msgstr ""
 
-#: views/handlers/package_rpc.py:724 views/handlers/package_rpc.py:864
+#: views/handlers/package_rpc.py:707 views/handlers/package_rpc.py:847
 msgid ". Please use ASCII names."
 msgstr ""
 
-#: views/handlers/package_rpc.py:758 views/handlers/package_rpc.py:765
-#: views/handlers/package_rpc.py:768 views/handlers/package_rpc.py:771
-#: views/handlers/package_rpc.py:774 views/handlers/package_rpc.py:1037
+#: views/handlers/package_rpc.py:741 views/handlers/package_rpc.py:748
+#: views/handlers/package_rpc.py:751 views/handlers/package_rpc.py:754
+#: views/handlers/package_rpc.py:757 views/handlers/package_rpc.py:1020
 msgid "EXPORT FAILED!"
 msgstr ""
 
-#: views/handlers/package_rpc.py:872 views/handlers/package_rpc.py:1053
-#: views/handlers/package_rpc.py:1109 views/handlers/package_rpc.py:1130
+#: views/handlers/package_rpc.py:855 views/handlers/package_rpc.py:1036
+#: views/handlers/package_rpc.py:1092 views/handlers/package_rpc.py:1113
 #, python-format
 msgid ""
 "\"%s\" already exists.\n"
 "Please try again with a different filename"
 msgstr ""
 
-#: views/handlers/package_rpc.py:873 views/handlers/package_rpc.py:890
+#: views/handlers/package_rpc.py:856 views/handlers/package_rpc.py:873
 #, python-format
 msgid ""
 "EXTRACT FAILED!\n"
 "%s"
 msgstr ""
 
-#: views/handlers/package_rpc.py:892
+#: views/handlers/package_rpc.py:875
 #, python-format
 msgid "Package extracted to: %s"
 msgstr ""
 
-#: views/handlers/package_rpc.py:920 views/handlers/package_rpc.py:962
-#: views/handlers/package_rpc.py:1081
+#: views/handlers/package_rpc.py:903 views/handlers/package_rpc.py:945
+#: views/handlers/package_rpc.py:1064
 #, python-format
 msgid "Filename %s is a file, cannot replace it"
 msgstr ""
 
-#: views/handlers/package_rpc.py:926 views/handlers/package_rpc.py:968
-#: views/handlers/package_rpc.py:1087
+#: views/handlers/package_rpc.py:909 views/handlers/package_rpc.py:951
+#: views/handlers/package_rpc.py:1070
 #, python-format
 msgid ""
 "Folder name %s already exists. Please choose another one or delete existing "
 "one then try again."
 msgstr ""
 
-#: views/handlers/package_rpc.py:976 views/handlers/package_rpc.py:1041
-#: views/handlers/package_rpc.py:1054 views/handlers/package_rpc.py:1060
-#: views/handlers/package_rpc.py:1094 views/handlers/package_rpc.py:1110
-#: views/handlers/package_rpc.py:1116 views/handlers/package_rpc.py:1131
-#: views/handlers/package_rpc.py:1137
+#: views/handlers/package_rpc.py:959 views/handlers/package_rpc.py:1024
+#: views/handlers/package_rpc.py:1037 views/handlers/package_rpc.py:1043
+#: views/handlers/package_rpc.py:1077 views/handlers/package_rpc.py:1093
+#: views/handlers/package_rpc.py:1099 views/handlers/package_rpc.py:1114
+#: views/handlers/package_rpc.py:1120
 #, python-format
 msgid ""
 "EXPORT FAILED!\n"
 "%s"
 msgstr ""
 
-#: views/handlers/package_rpc.py:1043 views/handlers/package_rpc.py:1062
-#: views/handlers/package_rpc.py:1096 views/handlers/package_rpc.py:1118
-#: views/handlers/package_rpc.py:1139
+#: views/handlers/package_rpc.py:1026 views/handlers/package_rpc.py:1045
+#: views/handlers/package_rpc.py:1079 views/handlers/package_rpc.py:1101
+#: views/handlers/package_rpc.py:1122
 #, python-format
 msgid "Exported to %s"
 msgstr ""
 
-#: views/handlers/package_rpc.py:1169
+#: views/handlers/package_rpc.py:1152
 #, python-format
 msgid "File %s does not exist or is not readable."
 msgstr ""
 
-#: views/handlers/package_rpc.py:1173
+#: views/handlers/package_rpc.py:1156
 msgid "Couldn't load file, please email file to bugs@exelearning.org"
 msgstr ""
 
-#: views/handlers/package_rpc.py:1176
+#: views/handlers/package_rpc.py:1159
 #, python-format
 msgid ""
 "Sorry, wrong file format:\n"
 "%s"
 msgstr ""
 
-#: views/handlers/package_rpc.py:1178
+#: views/handlers/package_rpc.py:1161
 msgid "Sorry, wrong file format"
 msgstr ""
+
+#~ msgid "Help"
+#~ msgstr "Hilfe"
