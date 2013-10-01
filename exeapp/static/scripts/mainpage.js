@@ -229,7 +229,7 @@ define(['jquery', "common", "eyecandy", 'jquery-pjax', 'jquery-cookie', 'jquery-
         function add_child_node(new_name) {
 
             $.jsonRPC.request('add_child_node', {
-                params: [get_package_id(), common.get_current_node_id()],
+                params: [get_package_id(), common.get_current_node_id(), new_name],
                 success: function (results) {
                     callback_add_child_node(results.result.id, results.result.title, new_name);
                 }
@@ -423,7 +423,7 @@ define(['jquery', "common", "eyecandy", 'jquery-pjax', 'jquery-cookie', 'jquery-
 
         // Appends a child node with name and _exe_nodeid to the currently
         // selected node
-        function callback_add_child_node(nodeid, title, new_name) {
+        function callback_add_child_node(nodeid, title) {
             var current_li = common.get_current_node().parent();
             var new_node = {'data': {'title': title,
                 'attr': {'id': 'node' + nodeid,
@@ -434,11 +434,9 @@ define(['jquery', "common", "eyecandy", 'jquery-pjax', 'jquery-cookie', 'jquery-
                 bind_pjax();
                 var node = $("#" + id_attr);
                 node.click();
-                common.get_outline_pane().jstree("rename_node", node, new_name);
             });
             common.get_outline_pane().jstree("create_node", current_li, "last", new_node);
             common.get_outline_pane().jstree("open_node", current_li);
-            // common.get_outline_pane().jstree("select_node", $("#node" + nodeid), true);
         }
 
 

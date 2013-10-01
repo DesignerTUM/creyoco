@@ -17,10 +17,10 @@ __all__ = ['add_node', 'delete_current_node', 'change_current_node',
 
 
 @jsonrpc_authernticating_method('package.add_child_node')
-def add_node(request, package, node):
+def add_node(request, package, node, new_name=None):
     '''Handles jsonRPC request "package.add_node". Adds a new node
 to package_node_id as child of the current one and selectes it'''
-    newNode = node.create_child()
+    newNode = node.create_child(new_name)
     return {'id': newNode.id, 'title': newNode.title}
 
 
