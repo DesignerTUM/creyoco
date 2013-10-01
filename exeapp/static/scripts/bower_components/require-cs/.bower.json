@@ -12,5 +12,6 @@
     "commit": "d4fd32d3a664d440df9f9e7e12b6c738818728d6"
   },
   "_source": "git://github.com/jrburke/require-cs.git",
-  "_target": "~0.4.4"
+  "_target": "~0.4.4",
+  "_originalSource": "git://github.com/jrburke/require-cs.git"
 }

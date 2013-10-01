@@ -8,5 +8,6 @@
     "commit": "b5a7af5b1eb158f0ba6c6105db24e9b50b72effd"
   },
   "_source": "git://github.com/spekkionu/jstree-dist.git",
-  "_target": "*"
+  "_target": "*",
+  "_originalSource": "git://github.com/spekkionu/jstree-dist.git"
 }

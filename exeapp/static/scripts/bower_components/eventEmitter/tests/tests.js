@@ -152,6 +152,15 @@
 			ee.removeListener('foo', fn1);
 			assert.deepEqual(ee.flattenListeners(ee.getListeners('foo')), []);
 		});
+
+		test('can not cause infinite recursion', function () {
+			ee.addOnceListener('foo', function() {
+				counter += 1;
+				this.emitEvent('foo');
+			});
+			ee.trigger('foo');
+			assert.strictEqual(counter, 1);
+		});
 	});
 
 	suite('removeListener', function() {
@@ -345,6 +354,18 @@
 
 			assert.lengthOf(listeners, 1);
 			assert.strictEqual(listeners[0].listener(), 'foo');
+		});
+
+		test('can be used through the alias, removeAllListeners', function() {
+			ee.removeAllListeners('bar');
+			assert.deepEqual(ee.flattenListeners(ee.getListeners('foo')), [fn1, fn2]);
+			assert.deepEqual(ee.flattenListeners(ee.getListeners('bar')), []);
+			assert.deepEqual(ee.flattenListeners(ee.getListeners('baz')), [fn5]);
+
+			ee.removeAllListeners('baz');
+			assert.deepEqual(ee.flattenListeners(ee.getListeners('foo')), [fn1, fn2]);
+			assert.deepEqual(ee.flattenListeners(ee.getListeners('bar')), []);
+			assert.deepEqual(ee.flattenListeners(ee.getListeners('baz')), []);
 		});
 	});
 
@@ -723,6 +744,25 @@
 			ee.emitEvent('baz');
 
 			assert.strictEqual(flattenCheck(check), '1,1,2,2,3,3,4,4,5,6,6');
+		});
+	});
+
+	suite('alias', function () {
+		test('that it works when overwriting target method', function () {
+			var addListener = EventEmitter.prototype.addListener;
+			var res;
+			var rand = Math.random();
+
+			EventEmitter.prototype.addListener = function () {
+				res = rand;
+			};
+
+			var ee = new EventEmitter();
+			ee.on();
+
+			assert.strictEqual(res, rand);
+
+			EventEmitter.prototype.addListener = addListener;
 		});
 	});
 

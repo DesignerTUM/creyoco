@@ -1,12 +1,11 @@
 /*!
- * EventEmitter v4.2.1 - git.io/ee
+ * EventEmitter v4.2.4 - git.io/ee
  * Oliver Caldwell
  * MIT license
  * @preserve
  */
 
 (function () {
-	// Place the script in strict mode
 	'use strict';
 
 	/**
@@ -39,6 +38,19 @@
 		}
 
 		return -1;
+	}
+
+	/**
+	 * Alias a method while keeping the context correct, to allow for overwriting of target method.
+	 *
+	 * @param {String} name The name of the target method.
+	 * @return {Function} The aliased method
+	 * @api private
+	 */
+	function alias(name) {
+		return function aliasClosure() {
+			return this[name].apply(this, arguments);
+		};
 	}
 
 	/**
@@ -137,7 +149,7 @@
 	/**
 	 * Alias of addListener
 	 */
-	proto.on = proto.addListener;
+	proto.on = alias('addListener');
 
 	/**
 	 * Semi-alias of addListener. It will add a listener that will be
@@ -157,7 +169,7 @@
 	/**
 	 * Alias of addOnceListener.
 	 */
-	proto.once = proto.addOnceListener;
+	proto.once = alias('addOnceListener');
 
 	/**
 	 * Defines an event name. This is required if you want to use a regex to add a listener to multiple events at once. If you don't do this then how do you expect it to know what event to add to? Should it just add to every possible match for a regex? No. That is scary and bad.
@@ -213,7 +225,7 @@
 	/**
 	 * Alias of removeListener
 	 */
-	proto.off = proto.removeListener;
+	proto.off = alias('removeListener');
 
 	/**
 	 * Adds listeners in bulk using the manipulateListeners method.
@@ -327,6 +339,13 @@
 	};
 
 	/**
+	 * Alias of removeEvent.
+	 *
+	 * Added to mirror the node API.
+	 */
+	proto.removeAllListeners = alias('removeEvent');
+
+	/**
 	 * Emits an event of your choice.
 	 * When emitted, every listener attached to that event will be executed.
 	 * If you pass the optional argument array then those arguments will be passed to every listener upon execution.
@@ -353,8 +372,14 @@
 					// If the listener returns true then it shall be removed from the event
 					// The function is executed either with a basic call or an apply if there is an args array
 					listener = listeners[key][i];
+
+					if (listener.once === true) {
+						this.removeListener(evt, listener.listener);
+					}
+
 					response = listener.listener.apply(this, args || []);
-					if (response === this._getOnceReturnValue() || listener.once === true) {
+
+					if (response === this._getOnceReturnValue()) {
 						this.removeListener(evt, listener.listener);
 					}
 				}
@@ -367,7 +392,7 @@
 	/**
 	 * Alias of emitEvent
 	 */
-	proto.trigger = proto.emitEvent;
+	proto.trigger = alias('emitEvent');
 
 	/**
 	 * Subtly different from emitEvent in that it will pass its arguments on to the listeners, as opposed to taking a single array of arguments to pass on.
@@ -428,7 +453,7 @@
 			return EventEmitter;
 		});
 	}
-	else if (typeof module !== 'undefined' && module.exports){
+	else if (typeof module === 'object' && module.exports){
 		module.exports = EventEmitter;
 	}
 	else {
