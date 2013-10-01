@@ -33,8 +33,10 @@
 
 {% block box_left %}
 <div class="sidebar">
-    <div id="page_name_modal" style="display: none;">
-        <p>Enter ur name</p>
+    <div id="node_name_modal" style="display: none;">
+        <h4>Enter a new node name</h4>
+        <label>New name: </label><input id="node_name" type="text"/>
+        <input type="button" value="Create"/>
     </div>
 	<select data-placeholder="Wählen Sie einen Kurs" class="chzn-select" tabindex="-1" id="select_course">
 		<option value="{{ package.get_absolute_url }}">{{ package.title }}</option>

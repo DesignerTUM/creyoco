@@ -477,3 +477,27 @@ footer {
 .info {
   display: none;
 }
+
+#node_name_modal {
+  h4 {
+    color: $red;
+    font-weight: 700;
+    margin-top: 1.5em;
+    margin-bottom: 1em;
+  }
+  label {
+    font-weight: bold;;
+  }
+  input[type=text] {
+    border: dotted $red 1px;
+  }
+
+  input[type=button] {
+    margin-top: 5px;
+    margin-left: 0px;
+    padding: 3px 5px 3px 5px;
+    border: solid 1px $darkgrey;
+    border-radius: 3px;
+    background-color: $lightgrey;
+  }
+}
