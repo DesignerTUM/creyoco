@@ -649,6 +649,17 @@ class OutlineTestCase(TestCase):
             node_id=str(PARENT_ID))
         self.assertEqual(r['result']['title'], Package.DEFAULT_LEVEL_NAMES[0])
 
+    def test_add_node_with_title(self):
+        PARENT_ID = Node.objects.all()[0].pk
+        NODE_TITLE = "Test title"
+        r = self.s.package.add_child_node(
+            # username=TEST_USER,
+            #       password=TEST_PASSWORD,
+            package_id="1",
+            node_id=str(PARENT_ID),
+            new_name=NODE_TITLE)
+        self.assertEqual(r['result']['title'], NODE_TITLE)
+
     def test_duplicated_node(self):
         parent = Node.objects.all()[0]
         test_child = Node.objects.create(self.data, parent, "Test Child")
