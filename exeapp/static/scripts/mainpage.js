@@ -123,7 +123,7 @@ define(['jquery', "common", "eyecandy", 'jquery-pjax', 'jquery-cookie', 'jquery-
 
             //bind actions to outline buttons
             $("#btnAdd").click(ask_child_node_name);
-            $("#btnRemove").click(delete_current_node);
+            $("#btnRemove").click(ask_delete_confirmation);
             $("#btnRename").click(rename_current_node);
             $("#btnDuplicate").click(duplicate_node);
 
@@ -206,18 +206,19 @@ define(['jquery', "common", "eyecandy", 'jquery-pjax', 'jquery-cookie', 'jquery-
 
 
         function ask_child_node_name() {
-            var modal = $("#node_name_modal");
+            var modal = $("#node_name");
             var button = modal.find("input[type=button]");
             var text = modal.find("input[type=text]");
             modal.modal();
+            text.val("");
             text.focus();
 
-            button.click(function () {
+            button.off("click").click(function () {
                 var new_name = text.val();
                 $.modal.close();
                 add_child_node(new_name);
             });
-            text.keypress(function (e) {
+            text.off("keypress").keypress(function (e) {
                 var code = (e.keyCode ? e.keyCode : e.which);
                 if (code === 13) {
                     button.click();
@@ -246,6 +247,20 @@ define(['jquery', "common", "eyecandy", 'jquery-pjax', 'jquery-cookie', 'jquery-
             });
         }
 
+        function ask_delete_confirmation() {
+            var modal = $("#confirm_removal");
+            var yes = modal.find(".btnyes");
+            var no = modal.find(".btnno");
+            var nodename = modal.find("#removenode");
+            nodename.text(common.get_current_node().text());
+            modal.modal();
+            no.focus();
+            yes.off("click").click(function () {
+                delete_current_node();
+                $.modal.close();
+            });
+            no.off("click").click($.modal.close);
+        }
 
         //Removes current node
         function delete_current_node() {

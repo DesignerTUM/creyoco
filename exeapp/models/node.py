@@ -36,7 +36,7 @@ log = logging.getLogger()
 
 class NodeManager(models.Manager):
     def create(self, package, parent, title=None, is_root=False):
-        if title is None:
+        if not title:
             level = parent.level + 1
             if level > 3:
                 title = "???"

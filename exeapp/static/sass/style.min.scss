@@ -478,18 +478,32 @@ footer {
   display: none;
 }
 
-#node_name_modal {
+.modal {
+  display: none;
+  padding: 0px;
+
+  .modcontainer {
+    border: solid 1px $red;
+    padding: 10px 20px 10px 20px;
+    margin-left: -10px;
+    margin-right: -10px;
+    border-radius: 5px;
+  }
+
   h4 {
     color: $red;
     font-weight: 700;
     margin-top: 1.5em;
     margin-bottom: 1em;
   }
+
   label {
     font-weight: bold;;
+    margin-right: 5px;
   }
   input[type=text] {
     border: dotted $red 1px;
+    margin-right: 10px;
   }
 
   input[type=button] {
@@ -499,5 +513,6 @@ footer {
     border: solid 1px $darkgrey;
     border-radius: 3px;
     background-color: $lightgrey;
+    width: 50px;
   }
 }
