@@ -11,6 +11,7 @@ require.config({
         "qtip2": "//cdnjs.cloudflare.com/ajax/libs/qtip2/2.1.1/jquery.qtip.min",
         "jquery-jsonrpc": "thirdparty/jquery.jsonrpc",
         "jquery-form": "bower_components/jquery-form/jquery.form",
+        "jquery-modal": "bower_components/jquery-modal/jquery.modal",
         "jstree": "bower_components/jstree-dist/jquery.jstree"
     },
 
@@ -29,6 +30,10 @@ require.config({
         "jquery-form": {
             "deps": ['jquery'],
             "exports": "jQuery.fn.form"
+        },
+        "jquery-modal": {
+            "deps": ['jquery'],
+            "exports": "jQuery.fn.modal"
         },
         "jstree": {
             "deps": ['jquery'],

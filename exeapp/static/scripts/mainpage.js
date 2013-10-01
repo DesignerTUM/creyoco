@@ -56,7 +56,7 @@ CANT_MOVE_NODE_FURTHER = "Can't move up any farther"
 NOT_IMPLEMENTED = "This function is not implemented yet."
 SAVE_DIRTY_PACKAGE = "Package has been changed. Do you want to save it, before you leave?"
 
-define(['jquery', "common", "eyecandy", 'jquery-pjax', 'jquery-cookie', 'jquery-jsonrpc', "jstree"],
+define(['jquery', "common", "eyecandy", 'jquery-pjax', 'jquery-cookie', 'jquery-jsonrpc', "jstree", 'jquery-modal'],
     function ($, common, eyecandy) {
         // set crfs cookie
         function csrfSafeMethod(method) {
@@ -259,7 +259,7 @@ define(['jquery', "common", "eyecandy", 'jquery-pjax', 'jquery-cookie', 'jquery-
             }
             $.jsonRPC.request('promote_current_node', {
                 params: [get_package_id(), common.get_current_node_id()],
-                success: function (results) {
+                success: function (results, event) {
                     if (results.result.promoted != "1") {
                         alert(NODE_WAS_NOT_MOVED);
                     } else {
@@ -416,6 +416,7 @@ define(['jquery', "common", "eyecandy", 'jquery-pjax', 'jquery-cookie', 'jquery-
             });
             common.get_outline_pane().jstree("create_node", current_li, "last", new_node);
             common.get_outline_pane().jstree("open_node", current_li);
+            common.get_outline_pane().jstree("rename");
             // common.get_outline_pane().jstree("select_node", $("#node" + nodeid), true);
         }
 
@@ -516,7 +517,7 @@ define(['jquery', "common", "eyecandy", 'jquery-pjax', 'jquery-cookie', 'jquery-
         // called to synchronize current_node attribute of outline_pane with
         // currently selected node. Refreshes authoring
         function set_current_node(node) {
-            common.get_outline_pane().attr('current_node', common.get_current_node().attr('nodeid'));
+//            common.get_outline_pane().attr('current_node', common.get_current_node().attr('nodeid'));
             updateTitle();
             common.reload_authoring();
         }

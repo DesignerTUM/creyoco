@@ -9,6 +9,7 @@
 {% block title %}{{ package.title }} | creyoco{% endblock %}
 {% block head_css %}
 <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/mz/style.min.css">
+<link rel="stylesheet" href="{% get_static_prefix %}/scripts/bower_components/jquery-modal/jquery.modal.css" type="text/css" media="screen" />
 {% endblock %}
 {% block head_javascript %}
 <script data-main="{% get_static_prefix %}scripts/main.js" src="{% get_static_prefix %}scripts/bower_components/requirejs/require.js"></script>
@@ -32,6 +33,9 @@
 
 {% block box_left %}
 <div class="sidebar">
+    <div id="page_name_modal" style="display: none;">
+        <p>Enter ur name</p>
+    </div>
 	<select data-placeholder="Wählen Sie einen Kurs" class="chzn-select" tabindex="-1" id="select_course">
 		<option value="{{ package.get_absolute_url }}">{{ package.title }}</option>
 		{% for package_iter in package_list %}
