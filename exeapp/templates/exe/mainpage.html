@@ -17,37 +17,37 @@
 {% endblock %}
 
 {% block dialog %}
-                {{ block.super }}
-					<iframe scrolling="auto" id="previewIFrame" src="preview">
+    {{ block.super }}
+        <div id="node_name" class="modal">
+            <div class="modcontainer">
+                <h4>{% trans "Enter a new node name " %}</h4>
+                <label>{% trans "New name:" %}</label><input id="node_name"
+                                                             type="text"/>
+                <input type="button" value="{% trans "Create" %}"/>
+            </div>
+        </div>
+        <div id="confirm_removal" class="modal">
+            <div class="modcontainer">
+                <h4>{% trans "Do you really want to remove node" %}<span
+                        id="removenode"></span>?</h4>
+                <input class="btnno" type="button" value="{% trans "No" %}"/>
+                <input class="btnyes" type="button" value="{% trans "Yes" %}"/>
+            </div>
+        </div>
+        <div id="previewIFrame" class="modal" >
+            <iframe scrolling="auto" src="preview"></iframe>
+        </div>
 
-					</iframe>
-
-					<div id="download_box">
-                        <h3>Wählen Sie das Dateiformat für den Kurs-Export.</h3>
-                        {% for type, title in exporter_type_title_map.items %}
-                            <a class="export_link" href="{% url "exeapp.views.package.export" package.id type %}"><i class="icon-arrow-right"></i> {{title}}</a>
-                        {% endfor %}
-					</div>
+        <div id="download_box" class="modal">
+            <h3>Wählen Sie das Dateiformat für den Kurs-Export.</h3>
+            {% for type, title in exporter_type_title_map.items %}
+                <a class="export_link" href="{% url "exeapp.views.package.export" package.id type %}"><i class="icon-arrow-right"></i> {{title}}</a>
+            {% endfor %}
+        </div>
 
 {% endblock %}
 
 {% block box_left %}
-    <div id="node_name" class="modal">
-        <div class="modcontainer">
-            <h4>{% trans "Enter a new node name " %}</h4>
-            <label>{% trans "New name:" %}</label><input id="node_name"
-                                                         type="text"/>
-            <input type="button" value="{% trans "Create" %}"/>
-        </div>
-    </div>
-    <div id="confirm_removal" class="modal">
-        <div class="modcontainer">
-            <h4>{% trans "Do you really want to remove node" %}<span
-                    id="removenode"></span>?</h4>
-            <input class="btnno" type="button" value="{% trans "No" %}"/>
-            <input class="btnyes" type="button" value="{% trans "Yes" %}"/>
-        </div>
-    </div>
     <div class="sidebar">
     <select data-placeholder="Wählen Sie einen Kurs" class="chzn-select" tabindex="-1" id="select_course">
 		<option value="{{ package.get_absolute_url }}">{{ package.title }}</option>

@@ -1,35 +1,14 @@
-define(['jquery', 'chosen', 'qtip2'], function($) {
+define(['jquery', 'chosen', 'qtip2', 'jquery-modal'], function($) {
     var exports = {
         show_lightbox: function(width, height, el) {
-            $(".modal-dialog")
-            //.height(400)
-            //.width(400)
-            .css({
-                'width' : width+'px',
-                'height' : height+'px',
-                'margin-left' : -width/2+'px',
-                'margin-top' : -height/2+'px'
-
-
-            });
-            $(".modal-dialog > :not(.icon-remove)").each(function() {
-                $(this).hide();
-            });
-            $('#lightbox').show();
-            $(el).show();
+            el.modal();
         },
 
         init: function() {
             $(document).ready(function() {
-            $(".icon-remove, #modal-dialog-bg").click(function(){
-                $("#lightbox").hide();
-                $('body').css('overflow', 'auto');
-            });
-
             $(document).on('click', '#navi li a', function(e){
                 e.preventDefault();
                 history.pushState({page: this.href}, '', this.href);
-              //  loadPage('body', this.href);
             });
             $(window).on('popstate', function(e){
               //  loadPage('#frontPage', location.pathname);
@@ -168,16 +147,10 @@ define(['jquery', 'chosen', 'qtip2'], function($) {
             });
 
             $('.theme').click(function() {
-                exports.show_lightbox(960, 765);
-                $('.modal-dialog > #previewIFrame')
-                    .show()
-                    .load(function(){
-                        $(this).parent().removeClass("loading")
-                    })
-                    .parent().addClass("loading");
+                exports.show_lightbox(0,0, $("#previewIFrame"));
+                $("#previewIFrame").addClass("loading")
                 $('.theme').removeClass('selected');
                 $(this).addClass('selected');
-
                 update_preview();
             });
             $("#help_trigger").on("click", function() {

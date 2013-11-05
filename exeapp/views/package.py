@@ -18,11 +18,7 @@ from exeapp.models.node import Node
 from django.utils.encoding import smart_bytes
 from exeapp.views.authoring import authoring
 from django.template.loader import render_to_string
-
-try:
-    from io import StringIO
-except ImportError:
-    from io import StringIO
+from io import BytesIO
 
 import logging
 
@@ -117,7 +113,7 @@ def package_root(request, package):
 @get_package_by_id_or_error
 def export(request, package, export_format):
 
-    file_obj = StringIO()
+    file_obj = BytesIO()
     try:
         exporter = exporter_factory(export_format, package, file_obj)
     except KeyError:

@@ -369,22 +369,6 @@ ul#navi {
     height: 100%;
     width: 100%;
   }
-
-  #download_box {
-    a {
-      line-height: 21px;
-      display: block;
-
-      i {
-        margin-right: 10px;
-      }
-    }
-
-    h3 {
-      color: $red;
-      margin-bottom: 20px;
-    }
-  }
 }
 
 strong {
@@ -482,6 +466,18 @@ footer {
   display: none;
   padding: 0px;
 
+  &#previewIFrame {
+    width: 1024px;
+    height: 800px;
+
+    iframe {
+      margin-left:5%;
+      margin-right: 5%;
+      width: 90%;
+      height: 750px;
+    }
+  }
+
   .modcontainer {
     border: solid 1px $red;
     padding: 10px 20px 10px 20px;
@@ -510,9 +506,24 @@ footer {
     margin-top: 5px;
     margin-left: 0px;
     padding: 3px 5px 3px 5px;
-    border: solid 1px $darkgrey;
+    border: solid 1px $red;
     border-radius: 3px;
     background-color: $lightgrey;
     width: 50px;
+  }
+  &#download_box {
+    a.export_link {
+      line-height: 21px;
+      display: block;
+
+      i {
+        margin-right: 10px;
+      }
+    }
+
+    h3 {
+      color: $red;
+      margin-bottom: 20px;
+    }
   }
 }
