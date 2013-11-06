@@ -5,6 +5,7 @@ from django.template.defaultfilters import unordered_list, stringfilter
 from django.utils.safestring import mark_safe
 
 from exeapp.utils import common
+from exeapp.views.authoring import get_media_list
 from exeapp.views.blocks.blockfactory import block_factory
 
 import os
@@ -112,15 +113,10 @@ def basename(value):
 
 
 @register.simple_tag
-def view_media(page):
-    js_list = []
-    css_list = []
-    for js in page.view_media._js:
-        js_list.append(os.path.basename(js))
-    for css in page.view_media._css.get('all', []):
-        css_list.append(os.path.basename(css))
-    html_media = str(forms.Media(js=js_list, css={'all' : css_list}))
-    html_media = html_media.replace(settings.STATIC_URL, "")
+def view_media(page, full_url):
+    html_media = get_media_list(page.node)
+    if not full_url:
+        html_media = html_media.replace(settings.STATIC_URL, "")
     return html_media
 
 

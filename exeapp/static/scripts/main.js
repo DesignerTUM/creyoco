@@ -1,18 +1,19 @@
 require.config({
     baseUrl: '/static/scripts/',
     paths: {
+        "jquery": "bower_components/jquery/jquery",
         "eventEmitter": "bower_components/eventEmitter",
         "eventie": "bower_components/eventie",
         "chosen": "thirdparty/chosen.jquery",
-        "imagesloaded": "//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.0.4/jquery.imagesloaded.min",
+        "imagesloaded": "bower_components/imagesloaded/imagesloaded",
         "jquery-pjax": "bower_components/jquery-pjax/jquery.pjax",
         "jquery-cookie": "bower_components/jquery.cookie/jquery.cookie",
-        "jquery": "bower_components/jquery/jquery",
         "qtip2": "//cdnjs.cloudflare.com/ajax/libs/qtip2/2.1.1/jquery.qtip.min",
         "jquery-jsonrpc": "thirdparty/jquery.jsonrpc",
         "jquery-form": "bower_components/jquery-form/jquery.form",
         "jquery-modal": "bower_components/jquery-modal/jquery.modal",
-        "jstree": "bower_components/jstree-dist/jquery.jstree"
+        "jstree": "bower_components/jstree-dist/jquery.jstree",
+        "feedback": "widgets/feedback"
     },
 
     shim: {
@@ -43,7 +44,6 @@ require.config({
             "deps": ['jquery'],
             "exports": "jQuery.fn.chosen"
         }
-
     },
 
     packages: [

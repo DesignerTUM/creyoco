@@ -90,10 +90,11 @@ class Block(object):
     @property
     def media(self):
         '''Returns a list of media files used in iDevice's HTML'''
-        if self.idevice.edit:
-            return self.BlockForm().media
-        else:
-            return self.BlockForm().view_media
+        return self.BlockForm().media
+
+    @property
+    def js_modules(self):
+        return self.BlockForm().js_modules
 
     def render(self, **kwargs):
         """

@@ -68,8 +68,15 @@ class BaseFormsetBlock(GenericBlock):
     def media(self):
         media = super(BaseFormsetBlock, self).media
         if not self.idevice.edit:
-            media += self.BlockFormset().form().view_media
+            media += self.BlockFormset().form().media
         return media
+
+    @property
+    def js_modules(self):
+        modules = super(BaseFormsetBlock, self).js_modules
+        if not self.idevice.edit:
+            modules += self.BlockFormset().form().js_modules
+        return modules
 
 
     def _render_view(self, template, form=None, formset=None):

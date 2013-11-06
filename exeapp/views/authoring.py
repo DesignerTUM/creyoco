@@ -3,6 +3,7 @@ Created on May 17, 2011
 
 @author: Alendit
 '''
+import json as simplejson
 from django.contrib.auth.decorators import login_required
 from exeapp.shortcuts import get_package_by_id_or_error
 from exeapp import shortcuts
@@ -11,7 +12,6 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404, \
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render_to_response
 from exeapp.views.blocks.blockfactory import block_factory
-from django.utils import simplejson
 from django.core.urlresolvers import reverse
 from django import forms
 from exeapp.models.package import Package
@@ -59,39 +59,40 @@ def handle_action(request, package, node):
 
 def get_media_list(node, ajax=False):
     '''Returns the idevice-specific media list for a given node. Always
-includes tinymce compressor, since it can't be loaded dynamically'''
-    # always load tinymce compressor
-#    media = forms.Media(js=[reverse('tinymce-compressor')])
+    includes tinymce compressor, since it can't be loaded dynamically'''
     media = forms.Media(js=["/static/tiny_mce/tiny_mce.js"])
-#    media = forms.Media()
+    js_modules = set()
     for idevice in node.idevices.all():
         idevice = idevice.as_child()
         block = block_factory(idevice)
         media += block.media
-        # print "#" * 10
-        # print media._js
+        js_modules = js_modules.union(block.js_modules)
     if ajax:
         # don't include tinymce js in ajax script loading
         if "/static/tiny_mce/tiny_mce.js" in media._js:
             media._js.remove("/static/tiny_mce/tiny_mce.js")
-        return simplejson.dumps(media._js + media._css.get('all', []))
+        return simplejson.dumps(
+            {"js": media._js,
+             "css": media._css.get('all', []),
+             "js_modules": list(js_modules)
+            })
     else:
         return str(media)
 
 
-def get_unique_media_list(node, idevice=None):
+def get_unique_media_list(node, idevice):
     '''Returns a list of media which is used only by this idevice'''
     block = block_factory(idevice.as_child())
-    media = block.media._js + block.media._css.get('all', [])
+    media = block.media
+    js_modules = block.js_modules
     # compressor is always loaded per default
-    if "/static/tiny_mce/tiny_mce.js" in media:
-        media.remove("/static/tiny_mce/tiny_mce.js")
-    for idevice in node.idevices.exclude(id=idevice.id):
-        block = block_factory(idevice.as_child())
-        for js in block.media._js + block.media._css.get('all', []):
-            if js in media:
-                media.remove(js)
-    return media
+    if "/static/tiny_mce/tiny_mce.js" in media._js:
+        media._js.remove("/static/tiny_mce/tiny_mce.js")
+    return {
+        'js': media._js,
+        'css': media._css,
+        'js_modules': js_modules
+    }
 
 
 @login_required

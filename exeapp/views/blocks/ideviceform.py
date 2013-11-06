@@ -27,14 +27,13 @@ class IdeviceForm(forms.ModelForm):
                 html += ""
         return mark_safe(html)
 
-
     @property
-    def view_media(self):
-        media = Media()
+    def js_modules(self):
+        modules = []
         for field in list(self.fields.values()):
-            if hasattr(field.widget, "view_media"):
-                    media += field.widget.view_media
-        return media
+            if hasattr(field.widget, "js_modules"):
+                    modules += field.widget.js_modules
+        return modules
 
 class IdeviceFormFactory(object):
     def __init__(self, model, fields, form_class=IdeviceForm, widgets={}):

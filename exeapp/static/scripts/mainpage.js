@@ -79,7 +79,9 @@ require(['jquery', "common", "eyecandy", 'jquery-pjax', 'jquery-cookie', 'jquery
                 endPoint: '/exeapp/json/',
                 namespace: 'package'
             });
-//        Initialize outline tree
+            // Load idevice media
+            common.get_media("authoring/?media=true");
+            // Initialize outline tree
             common.get_outline_pane().jstree({
                 "core": {    "animation": 200
                 },

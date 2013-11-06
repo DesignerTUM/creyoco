@@ -1,7 +1,16 @@
-jQuery(document).ready(function() {
-	$(".toggle_feedback").live("click", function(e){
-		$(this).next(".feedback").toggle();
-		return false;
-	});
-	}
-	);
+exports = {
+    init: function() {
+        $(document).ready(function() {
+            $(".toggle_feedback").off("click").on("click", function(e){
+                $(this).next(".feedback").toggle();
+                return false;
+            });
+        });
+    }
+}
+if (typeof(requirejs) !== "undefined") {
+    define("feedback", ['jquery'], function($) {
+        return exports;
+    })} else {
+        exports.init();
+    }

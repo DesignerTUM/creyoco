@@ -13,6 +13,7 @@
 {% endblock %}
 {% block head_javascript %}
 <script data-main="{% get_static_prefix %}scripts/main.js" src="{% get_static_prefix %}scripts/bower_components/requirejs/require.js"></script>
+<script src="{% get_static_prefix %}tiny_mce/tiny_mce.js"></script>
 {% render_form_media current_node %}
 {% endblock %}
 
@@ -97,10 +98,10 @@
 {% block h2 %}{% trans "Content" %}{% endblock %}
 
 {% block content %}
-<div id="selectStyle" style="display:none">
-<div class="clearfix">
-{% render_styles %}
-</div>
+    <div id="selectStyle" style="display:none">
+    <div class="clearfix">
+        {% render_styles %}
+    </div>
 </div>
 
 <div id="authoring">

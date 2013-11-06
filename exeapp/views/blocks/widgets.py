@@ -52,10 +52,11 @@ class FreeTextWidget(TinyMCE):
 
 
 class FeedbackWidget(FreeTextWidget):
-    view_media = forms.Media(
+    media = forms.Media(
             js=["%sscripts/widgets/feedback.js" % settings.STATIC_URL],
             css={"all" : ["%scss/widgets/feedback.css" % \
                           settings.STATIC_URL]})
+    js_modules=['feedback']
 
     def render_preview(self, content):
         return render_to_string("exe/idevices/widgets/feedback.html",

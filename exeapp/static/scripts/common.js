@@ -136,32 +136,33 @@ define(['jquery', 'jquery-form', 'jquery-pjax', 'jquery-jsonrpc', 'jquery-cookie
                 dataType: 'json',
                 async: false,
                 success: function(data){
-                    $.each(data, function(key, val) {
-                        if (/\.css$/.test(val)){
+                    $.each(data['css'], function(key, val) {
                             if (!($("link[href='" + val + "']")).length > 0) {
                                 $('<link rel="stylesheet" href="' + val + '">')
                                         .appendTo("head");
-                            }
-                        } else {
-                            $.getScript(val);
                         }
                     });
+                    $.each(data['js_modules'], function(key, module_name) {
+                        requirejs([module_name], function(module) {
+                            module.init();
+                        })
+                    })
                 }});
         },
 
         insert_idevice: function(idevice_id) {
             // dynamically load scripts for idevices
             exports.get_media("authoring/?idevice_id=" + idevice_id + "&media=true");
-                $.ajax({
-                url: "authoring/?idevice_id=" + idevice_id,
-                dataType: 'html',
-                success: function (data) {
-                     $('#authoring').append(data);
-                     exports.initialize_authoring();
-                     var element = $('#authoring').children().last();
-                     exports.scroll_to_element(element);
-                     }
-                });
+            $.ajax({
+            url: "authoring/?idevice_id=" + idevice_id,
+            dataType: 'html',
+            success: function (data) {
+                 $('#authoring').append(data);
+                 exports.initialize_authoring();
+                 var element = $('#authoring').children().last();
+                 exports.scroll_to_element(element);
+                 }
+            });
         },
 
 
