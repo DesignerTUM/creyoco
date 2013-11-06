@@ -464,7 +464,7 @@ view, this tests should be also merged'''
 
     def test_resource_finding(self):
         RESOURCE = 'test.jpg'
-        CONTENT = 'src="/exeapp/media/uploads/%s/%s"' % \
+        CONTENT = '<img src="/media/uploads/%s/%s" />' % \
                   (self.package.user.username, RESOURCE)
         IDEVICE_ID = 1
 
