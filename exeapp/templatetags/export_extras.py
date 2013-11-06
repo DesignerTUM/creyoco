@@ -31,7 +31,8 @@ def navigation_bar(current_page, full_url):
     """
     package = current_page.node.package
     pages = current_page.exporter.pages
-    nodePath = [None] + list(current_page.node.ancestors()) + [current_page.node]
+    nodePath = [None] + list(current_page.node.package.root.children.all()) + \
+               list(current_page.node.ancestors()) + [current_page.node]
 
     html = "<ul>\n"
 

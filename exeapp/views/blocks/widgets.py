@@ -8,6 +8,7 @@ from django.template.loader import render_to_string
 from django import forms
 from django.core.urlresolvers import reverse
 from bs4 import BeautifulSoup
+from urllib.request import unquote
 
 class FreeTextWidget(TinyMCE):
 
@@ -27,8 +28,24 @@ class FreeTextWidget(TinyMCE):
         return mark_safe(content)
 
     def _replace_sources(self, content):
-        reg_exp = r'src=".*%s.*/(.*?)"' % settings.MEDIA_URL
-        return re.sub(reg_exp, r'src="\g<1>"', content)
+        soup = BeautifulSoup(content)
+        imgs = soup.findAll("img")
+        for img in imgs:
+            if img['src'].startswith(settings.MEDIA_URL):
+                img['src'] = img['src'].split("/")[-1]
+        objs = soup.findAll("object")
+        for obj in objs:
+            obj['data'] = obj['data'].split("/")[-1]
+            src = obj.find("param", attrs={'name': 'src'})
+            src['value'] = src['value'].split("/")[-1]
+            flashvars = obj.find("param", attrs={'name': 'flashvars'})
+            reg_ex = r'url=.*/(.*?)&.*"'
+            flashvars['value'] = re.sub(
+                        reg_ex,
+                        lambda match: "url=/{}".format(unquote(match.group(1))),
+                        flashvars['value'])
+        return str(soup)
+
 
     def render_export(self, content):
         return self._replace_sources(self.render_preview(content))
