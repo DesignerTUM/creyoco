@@ -107,6 +107,9 @@ require(['jquery', "common", "eyecandy", 'jquery-pjax', 'jquery-cookie', 'jquery
             $.pjax.defaults.maxCacheLength = 0;
             // handle theme selection
             $(".theme").click(handle_select_style);
+            $("#previewIFrame iframe")[0].onload = function() {
+                $('#previewIFrame').removeClass("loading");
+            };
 
 //        Initialize idevice Tree
             $("#idevice_pane").jstree({"themes": {
@@ -384,7 +387,16 @@ require(['jquery', "common", "eyecandy", 'jquery-pjax', 'jquery-cookie', 'jquery
         }
 
         function handle_select_style() {
-            $.jsonRPC.request("set_package_style", {params: [get_package_id(), common.get_current_node_id(), $(this).attr('id')]});
+            $.jsonRPC.request("set_package_style", {
+                params: [get_package_id(), common.get_current_node_id(), $(this).attr('id')],
+                success: function() {
+                    $("#previewIFrame").addClass("loading");
+                    common.update_preview();
+                    eyecandy.show_lightbox(0,0, $("#previewIFrame"));
+                    $('.theme').removeClass('selected');
+                    $(this).addClass('selected');
+                }
+            });
         }
 
         //handle renamed node event. Calls package.rename_node over rpc.
@@ -554,11 +566,6 @@ require(['jquery', "common", "eyecandy", 'jquery-pjax', 'jquery-cookie', 'jquery
 //            common.get_outline_pane().attr('current_node', common.get_current_node().attr('nodeid'));
             updateTitle();
             common.reload_authoring();
-        }
-
-        function update_preview() {
-            var url = window.location.protocol + '//' + location.host + location.pathname;
-            $('#previewIFrame').attr('src', url + "preview/");
         }
 
         function set_current_style() {

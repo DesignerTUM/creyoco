@@ -206,6 +206,10 @@ define(['jquery', 'jquery-form', 'jquery-pjax', 'jquery-jsonrpc', 'jquery-cookie
                 success: reload_authoring
             });
 
+        },
+        update_preview: function() {
+            var url = window.location.protocol + '//' + location.host + location.pathname;
+            $('#previewIFrame iframe').attr('src', url + "preview/");
         }
     };
     return exports ;

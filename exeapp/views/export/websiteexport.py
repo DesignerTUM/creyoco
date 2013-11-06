@@ -123,7 +123,7 @@ class WebsiteExport(object):
     def create_pages(self, additional_kwargs={}):
         self.pages.append(self.page_class(self.package.root, 1, exporter=self,
                                           **additional_kwargs))
-        self.generate_pages(self.package.root, 2, additional_kwargs)
+        self.generate_pages(self.package.root, 1, additional_kwargs)
 
     def save_pages(self):
         for page in self.pages:

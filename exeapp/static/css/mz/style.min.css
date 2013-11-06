@@ -2352,37 +2352,43 @@ footer {
   display: none;
   padding: 0px; }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/home\/alendit\/creyoco\/exeapp\/static\/sass\/style\.min\.scss}line{font-family:\00003469}}
+  .modal.loading {
+    background-image: url('/static/images/mz/ajax-loader.gif?1375177814');
+    background-position: center;
+    background-repeat: no-repeat; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/alendit\/creyoco\/exeapp\/static\/sass\/style\.min\.scss}line{font-family:\00003474}}
+    .modal.loading *:not(.close-modal) {
+      display: none !important; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/alendit\/creyoco\/exeapp\/static\/sass\/style\.min\.scss}line{font-family:\00003479}}
   .modal#previewIFrame {
-    width: 1024px;
+    width: 1600px;
     height: 800px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/alendit\/creyoco\/exeapp\/static\/sass\/style\.min\.scss}line{font-family:\00003473}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/alendit\/creyoco\/exeapp\/static\/sass\/style\.min\.scss}line{font-family:\00003483}}
     .modal#previewIFrame iframe {
-      margin-left: 5%;
-      margin-right: 5%;
-      width: 90%;
+      width: 100%;
       height: 750px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/alendit\/creyoco\/exeapp\/static\/sass\/style\.min\.scss}line{font-family:\00003481}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/alendit\/creyoco\/exeapp\/static\/sass\/style\.min\.scss}line{font-family:\00003489}}
   .modal .modcontainer {
     border: solid 1px #a71e20;
     padding: 10px 20px 10px 20px;
     margin-left: -10px;
     margin-right: -10px;
     border-radius: 5px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/alendit\/creyoco\/exeapp\/static\/sass\/style\.min\.scss}line{font-family:\00003489}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/alendit\/creyoco\/exeapp\/static\/sass\/style\.min\.scss}line{font-family:\00003497}}
   .modal h4 {
     color: #a71e20;
     font-weight: 700;
     margin-top: 1.5em;
     margin-bottom: 1em; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/alendit\/creyoco\/exeapp\/static\/sass\/style\.min\.scss}line{font-family:\00003496}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/alendit\/creyoco\/exeapp\/static\/sass\/style\.min\.scss}line{font-family:\00003504}}
   .modal label {
     font-weight: bold;
     margin-right: 5px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/alendit\/creyoco\/exeapp\/static\/sass\/style\.min\.scss}line{font-family:\00003500}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/alendit\/creyoco\/exeapp\/static\/sass\/style\.min\.scss}line{font-family:\00003508}}
   .modal input[type=text] {
     border: dotted #a71e20 1px;
     margin-right: 10px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/alendit\/creyoco\/exeapp\/static\/sass\/style\.min\.scss}line{font-family:\00003505}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/alendit\/creyoco\/exeapp\/static\/sass\/style\.min\.scss}line{font-family:\00003513}}
   .modal input[type=button] {
     margin-top: 5px;
     margin-left: 0px;
@@ -2391,14 +2397,14 @@ footer {
     border-radius: 3px;
     background-color: #e6e6e6;
     width: 50px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/alendit\/creyoco\/exeapp\/static\/sass\/style\.min\.scss}line{font-family:\00003515}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/alendit\/creyoco\/exeapp\/static\/sass\/style\.min\.scss}line{font-family:\00003523}}
   .modal#download_box a.export_link {
     line-height: 21px;
     display: block; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/alendit\/creyoco\/exeapp\/static\/sass\/style\.min\.scss}line{font-family:\00003519}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/alendit\/creyoco\/exeapp\/static\/sass\/style\.min\.scss}line{font-family:\00003527}}
     .modal#download_box a.export_link i {
       margin-right: 10px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/alendit\/creyoco\/exeapp\/static\/sass\/style\.min\.scss}line{font-family:\00003524}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/alendit\/creyoco\/exeapp\/static\/sass\/style\.min\.scss}line{font-family:\00003532}}
   .modal#download_box h3 {
     color: #a71e20;
     margin-bottom: 20px; }

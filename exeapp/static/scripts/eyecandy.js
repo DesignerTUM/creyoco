@@ -1,4 +1,4 @@
-define(['jquery', 'chosen', 'qtip2', 'jquery-modal'], function($) {
+define(['jquery', 'common', 'chosen', 'qtip2', 'jquery-modal'], function($, common) {
     var exports = {
         show_lightbox: function(width, height, el) {
             el.modal();
@@ -97,6 +97,7 @@ define(['jquery', 'chosen', 'qtip2', 'jquery-modal'], function($) {
                         }
                     });
                 }
+
                 else if($(this).attr('id') == 'download_button') {
                     $(this).removeClass('transparent');
                     $('#settings').hide();
@@ -146,13 +147,6 @@ define(['jquery', 'chosen', 'qtip2', 'jquery-modal'], function($) {
                 exports.show_lightbox(365, 200, $("#download_box"));
             });
 
-            $('.theme').click(function() {
-                exports.show_lightbox(0,0, $("#previewIFrame"));
-                $("#previewIFrame").addClass("loading")
-                $('.theme').removeClass('selected');
-                $(this).addClass('selected');
-                update_preview();
-            });
             $("#help_trigger").on("click", function() {
                         exports.show_lightbox(960, 756, $('#helpIFrame'));
                         return false;

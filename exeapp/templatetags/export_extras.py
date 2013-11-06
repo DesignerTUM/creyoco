@@ -30,20 +30,22 @@ def navigation_bar(current_page, full_url):
     Generate the left navigation string for this page
     """
     package = current_page.node.package
-    depth = 1
     pages = current_page.exporter.pages
     nodePath = [None] + list(current_page.node.ancestors()) + [current_page.node]
 
-    html = "<ul id=\"navlist\">\n"
+    html = "<ul>\n"
 
+    depth = 1
+    html += "<li>"
     for page in pages:
         if page.node.parent in nodePath:
+            if depth == page.depth:
+                html += '</li><li>'
             while depth < page.depth:
-                if page.depth > 2:
-                    html += "<div id=\"subnav\">"
+                html += "<ul><li>"
                 depth += 1
             while depth > page.depth:
-                html += "</div>\n"
+                html += "</li></ul><li>\n"
                 depth -= 1
 
             html += render_to_string("exe/export/navigation_bar_item.html",
@@ -52,10 +54,9 @@ def navigation_bar(current_page, full_url):
                                       "package": package,
                                       "full_url": full_url,
                                       })
-
-    while depth > 2:
-            html += "</div>\n"
-            depth -= 1
+    while depth > 0:
+        html += "</li>\n"
+        depth -= 1
     html += "</ul>\n"
     return html
 
