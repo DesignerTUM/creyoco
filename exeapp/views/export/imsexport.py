@@ -178,7 +178,7 @@ class IMSExport(WebsiteExport):
 
         self.copy_files()
 
-        self.doZip(self.file_obj, self.output_dir)
+        self.do_zip(self.file_obj, self.output_dir)
         # Clean up the temporary dir
         self.output_dir.rmtree()
 
@@ -188,7 +188,7 @@ class IMSExport(WebsiteExport):
                                   'imsmd_v1p2p2.xsd',
                                   'ims_xml.xsd'), self.output_dir)
 
-    def doZip(self, fileObj, outputDir):
+    def do_zip(self, fileObj, outputDir):
         """
         Actually does the zipping of the file. Called by 'Path.safeSave'
         """

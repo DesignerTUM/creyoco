@@ -276,7 +276,7 @@ class ScormExport(WebsiteExport):
             else:
                 break
         self.copyFiles()
-        self.doZip()
+        self.do_zip()
         # Clean up the temporary dir
         self.output_dir.rmtree()
 

@@ -17,7 +17,6 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 # ===========================================================================
-from exeapp.models.idevices.idevice import Idevice
 """
 WebsiteExport will export a package as a website of HTML pages
 """
@@ -61,7 +60,7 @@ class WebsiteExport(object):
         self.page_class = WebsitePage
 
         self.output_dir = Path(tempfile.mkdtemp())
-        print((self.output_dir))
+        print(self.output_dir)
 
     def export(self):
         """
@@ -73,23 +72,34 @@ class WebsiteExport(object):
 
         self.copy_files()
         # Zip up the website package
-        self.doZip()
+        self.do_zip()
         # Clean up the temporary dir
         self.output_dir.rmtree()
 
-    def doZip(self):
+    def do_zip(self):
         """
         Actually saves the zip data. Called by 'Path.safeSave'
         """
         zipped = ZipFile(self.file_obj, "w")
-        for scormFile in self.output_dir.files():
-            zipped.write(scormFile, scormFile.basename(), ZIP_DEFLATED)
+        self.add_dir_to_zip(zipped, Path(self.output_dir))
         zipped.close()
+
+    def add_dir_to_zip(self, zipped, path, rel_path=Path(".")):
+        """
+            Recursively adds the dir in path + relpath and all its child dirs
+            to zipped
+        """
+        for scormFile in (path / rel_path).files():
+            zipped.write(scormFile,
+                         rel_path / scormFile.basename(),
+                         ZIP_DEFLATED)
+        for directory in (path / rel_path).dirs():
+            self.add_dir_to_zip(zipped, path, rel_path / directory.basename())
 
     def copy_style_files(self):
         """Copy style fiels to the export package"""
-        style_files = ["%s/../base.css" % self.style_dir]
-        style_files.append("%s/../popup_bg.gif" % self.style_dir)
+        style_files = ["%s/../base.css" % self.style_dir,
+                       "%s/../popup_bg.gif" % self.style_dir]
         style_files += self.style_dir.files("*.css")
         style_files += self.style_dir.files("*.jpg")
         style_files += self.style_dir.files("*.gif")
@@ -98,13 +108,17 @@ class WebsiteExport(object):
         style_files += self.style_dir.files("*.js")
         style_files += self.style_dir.files("*.html")
         self.style_dir.copylist(style_files, self.output_dir)
+        if (self.style_dir / "img").exists():
+            (self.style_dir / "img").copytree(self.output_dir / "img")
+        if (self.style_dir / "js").exists():
+            (self.style_dir / "js").copytree(self.output_dir / "js")
 
     def copy_licence(self):
         """Copy licence file"""
         if self.package.license == "GNU Free Documentation License":
             # include a copy of the GNU Free Documentation Licence
-            (self.templatesDir / 'fdl.html').copyfile(\
-                                    self.output_dir / 'fdl.html')
+            (self.templatesDir / 'fdl.html').copyfile(
+                self.output_dir / 'fdl.html')
 
     def copy_files(self):
         """
@@ -117,10 +131,10 @@ class WebsiteExport(object):
                                    'bower_components/jquery/jquery.js'),
                                   self.output_dir)
         self.copy_players()
-
         self.copy_licence()
 
-    def create_pages(self, additional_kwargs={}):
+    def create_pages(self, additional_kwargs=None):
+        additional_kwargs = additional_kwargs or {}
         self.pages.append(self.page_class(self.package.root, 1, exporter=self,
                                           **additional_kwargs))
         self.generate_pages(self.package.root, 1, additional_kwargs)
@@ -140,7 +154,7 @@ class WebsiteExport(object):
                 break
             for idevice in page.node.idevices.all():
                 resources = idevice.as_child().system_resources
-                if (has_flowplayer and has_magnifier and has_xspfplayer):
+                if has_flowplayer and has_magnifier and has_xspfplayer:
                     is_break = True
                     break
                 if not has_flowplayer:
@@ -163,16 +177,17 @@ class WebsiteExport(object):
         Path(settings.STATIC_ROOT).copylist(view_media, self.output_dir)
         self.media_dir.copylist(self.package.resources, self.output_dir)
 
-    def generate_pages(self, node, depth, kwargs={}):
+    def generate_pages(self, node, depth, kwargs=None):
         """
         Recursively generate pages and store in pages member variable
 for retrieving later. Kwargs will be used at page creation.
         """
+        kwargs = kwargs or {}
         for child in node.children.all():
             page = self.page_class(child, depth,
-                           exporter=self,
-                           has_children=child.children.exists(),
-                           **kwargs)
+                                   exporter=self,
+                                   has_children=child.children.exists(),
+                                   **kwargs)
 
             last_page = self.pages[-1] if self.pages else None
             if last_page:
