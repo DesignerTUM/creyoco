@@ -114,11 +114,19 @@ def basename(value):
 
 @register.simple_tag
 def view_media(page, full_url):
-    html_media = get_media_list(page.node)
-    if not full_url:
-        html_media = html_media.replace(settings.STATIC_URL, "")
-    return html_media
-
+    if full_url:
+        return get_media_list(page.node)
+    else:
+        js = set()
+        css = set()
+        for idevice in page.node.idevices.all():
+            block = block_factory(idevice.as_child())
+            for each in block.media._js:
+                js.add("<script src='{}'></script>".format(each.split('/')[-1]))
+            for each in block.media._css.get('all', []):
+                css.add("<link rel='stylesheet' href='{}' />".format(
+                                                each.split('/')[-1]))
+        return "\n".join(css) + "\n" + "\n".join(js)
 
 @register.filter
 def process_internal_links(html, package):

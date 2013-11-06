@@ -20,7 +20,8 @@ class GenericIdevice(Idevice):
             soup = BeautifulSoup(field)
             imgs = soup.findAll("img")
             for img in imgs:
-                resource_list.add(img['src'].replace(media_url, ""))
+                if not img['src'].startswith("data:image"):
+                    resource_list.add(img['src'].replace(media_url, ""))
             objs = soup.findAll("object")
             for obj in objs:
                 resource_list.add(obj['data'].replace(

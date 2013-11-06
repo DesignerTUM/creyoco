@@ -168,12 +168,13 @@ class WebsiteExport(object):
                         has_xspfplayer = True
 
     def copy_resources(self):
-        view_media = []
+        view_media = set()
         for page in self.pages:
-            view_media += page.view_media._js
-            view_media += page.view_media._css.get('all', [])
+            view_media = view_media.union(page.view_media._js).\
+                            union(page.view_media._css.get('all', []))
         view_media = [medium.replace(settings.STATIC_URL, "") \
-                      for medium in view_media]
+                      for medium in view_media\
+                      if not "tinymce" in medium]
         Path(settings.STATIC_ROOT).copylist(view_media, self.output_dir)
         self.media_dir.copylist(self.package.resources, self.output_dir)
 
