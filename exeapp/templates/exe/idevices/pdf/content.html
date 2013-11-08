@@ -1,5 +1,5 @@
 {% if idevice.pdf_file %}
-	<embed height="500" width="100%" src="{{idevice.pdf_file.url}}"></embed>
+	<object height="700" width="100%" data="{{idevice.pdf_file.url}}" type='application/pdf'></object>
 {% else %}
 	<strong>File not found</strong>
 {% endif %}

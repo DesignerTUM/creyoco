@@ -21,7 +21,7 @@ class GenericBlock(Block):
     # an iDevice has the same content
     use_common_content = False
     COMMON_PREVIEW = "exe/idevices/generic/common/preview.html"
-    COMMON_EXPORT = "exe/idevices/generic/common/preview.html"
+    COMMON_EXPORT = "exe/idevices/generic/common/export.html"
     content_template = ""
 
     def __init__(self, idevice, fields=()):

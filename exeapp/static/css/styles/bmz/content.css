@@ -97,7 +97,8 @@ h2 {
 
 /* line 52, sass/content.scss */
 h3 {
-  color: #737373;
+  color: #7cb22d;
+  font-size: 14px;
   font-weight: bold; }
 
 /* line 58, sass/content.scss */
@@ -171,7 +172,7 @@ header {
       margin-bottom: 10px;
       background: url("img/right_logo.png");
       width: 200px;
-      height: 245px; }
+      height: 311px; }
   /* line 143, sass/content.scss */
   .content article {
     width: 728px;

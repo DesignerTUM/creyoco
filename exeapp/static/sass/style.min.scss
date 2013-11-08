@@ -535,3 +535,9 @@ footer {
     }
   }
 }
+
+.fb_show {
+    @extend [class^="icon-"];
+    @extend .icon-upload;
+    margin-left: .5em;
+}
