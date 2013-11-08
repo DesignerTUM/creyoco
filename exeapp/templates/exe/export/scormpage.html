@@ -12,13 +12,13 @@
 	@import url(content.css);
 	</style>
 	<script type="text/javascript" src="jquery.js"></script>
-    {% view_media current_page %}
+    {% view_media current_page False %}
 	</head>
 	{% if current_page.scormType == 'commoncartridge' %}
 	    <body>
 	{% else %}
 	    <script type="text/javascript" src="APIWrapper.js"></script>
-	    <script type="text/javascript" src="SCOFunctions.js"></script>        
+	    <script type="text/javascript" src="SCOFunctions.js"></script>
 	    <body onload="loadPage()" onunload="unloadPage()">
 	{% endif %}
 	<div id=\"outer\">
