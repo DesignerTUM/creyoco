@@ -41,6 +41,12 @@ class MultiChoiceIdevice(Idevice):
         assert chosen_option.idevice == self
         return chosen_option.right_answer
 
+    def is_multioptional(self):
+        """
+        Returns true, if the question has more than one correct option
+        """
+        return self.options.filter(right_answer=True).count() > 1
+
 
 class MultiChoiceOptionIdevice(models.Model):
     option = fields.MultiChoiceOptionField(

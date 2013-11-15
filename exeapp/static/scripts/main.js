@@ -13,7 +13,8 @@ require.config({
         "jquery-form": "bower_components/jquery-form/jquery.form",
         "jquery-modal": "bower_components/jquery-modal/jquery.modal",
         "jstree": "bower_components/jstree-dist/jquery.jstree",
-        "feedback": "widgets/feedback"
+        "feedback": "widgets/feedback",
+        "multichoice": "blocks/multichoice"
     },
 
     shim: {

@@ -17,13 +17,22 @@ class MultiChoiceFormsetBlock(BaseFormsetBlock):
         else:
             return super(MultiChoiceFormsetBlock, self).process(action, data)
 
+    def _render_view(self, template, form=None, formset=None):
+        self.BlockFormset.form.Meta.multioptional\
+            =  self.idevice.is_multioptional()
+        return super(MultiChoiceFormsetBlock, self)\
+            ._render_view(template, form, formset)
+
 
 class MultiChoiceForm(IdeviceForm):
+
     def _render_field(self, name, field, renderer_name):
         try:
+            renderer = getattr(field.widget, renderer_name)
+        except AttributeError:
+            return ""
+        else:
             field.widget.attrs['option_id'] = self.instance.pk
             field.widget.attrs['right'] = self.instance.right_answer
-            renderer = getattr(field.widget, renderer_name)
+            field.widget.attrs['multioptional'] = self.Meta.multioptional
             return renderer(self.initial[name])
-        except AttributeError as e:
-            return ""

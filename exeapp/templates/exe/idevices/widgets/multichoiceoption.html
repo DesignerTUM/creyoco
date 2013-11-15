@@ -1,4 +1,4 @@
 <div class="multichoiceoption">
-    <input type="radio" name="option" value="{{ widget.option_id }}"
-           data-right="{{ widget.right }}"/>{{ content|safe }}
+    <input type="{% if widget.multioptional %}checkbox{% else %}radio{% endif %}" name="option" value="{{ widget.option_id }}"
+           data-right="{{ widget.right|lower }}" />{{ content|safe }}
 </div>
