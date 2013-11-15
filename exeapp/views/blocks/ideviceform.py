@@ -1,6 +1,5 @@
 from django import forms
 from django.utils.safestring import mark_safe
-from django.forms.widgets import Media
 
 
 class IdeviceForm(forms.ModelForm):
@@ -16,16 +15,18 @@ class IdeviceForm(forms.ModelForm):
 
     def _render_view(self, purpose):
         '''Decouples field rendering from the purpose'''
-        html = ""
+        html = []
         renderer_name = "render_%s" % purpose
         for name, field_object in list(self.fields.items()):
-            if hasattr(field_object.widget, renderer_name):
-                renderer = getattr(field_object.widget, renderer_name)
-                html += renderer(self.initial[name])
-            else:
-                # dumb widget, shouldn't be exported
-                html += ""
-        return mark_safe(html)
+            html.append(self._render_field(name, field_object, renderer_name))
+        return mark_safe("\n".join(html))
+
+    def _render_field(self, name, field, renderer_name):
+        try:
+            renderer = getattr(field.widget, renderer_name)
+            return renderer(self.initial[name])
+        except AttributeError as e:
+            return ""
 
     @property
     def js_modules(self):
@@ -36,16 +37,16 @@ class IdeviceForm(forms.ModelForm):
         return modules
 
 class IdeviceFormFactory(object):
-    def __init__(self, model, fields, form_class=IdeviceForm, widgets={}):
+    def __init__(self, model, fields, form_class=IdeviceForm, widgets={},
+                 media=None):
 
         self.model = model
         self.fields = fields
         self.widgets = widgets
         self.form = form_class
+        self.media = media
 
-    def __call__(self, *args, **kwargs):
         class NewIdeviceForm(self.form):
-            pass
 
             class Meta:
                 model = self.model
@@ -54,5 +55,12 @@ class IdeviceFormFactory(object):
                 exclude = ("parent_node", "edit")
                 if self.widgets:
                     widgets = self.widgets
+                if self.media is not None:
+                    css = self.media._css
+                    js = self.media._js
 
-        return NewIdeviceForm(*args, **kwargs)
+        self.form_class = NewIdeviceForm
+
+    def __call__(self, *args, **kwargs):
+
+        return self.form_class(*args, **kwargs)

@@ -3,7 +3,7 @@ from south.modelsinspector import add_introspection_rules
 
 from exeapp.views.blocks.widgets import FreeTextWidget, URLWidget, \
     ClozeWidget, \
-    FeedbackWidget
+    FeedbackWidget, MultiChoiceOptionWidget
 
 
 add_introspection_rules([],
@@ -13,6 +13,8 @@ add_introspection_rules([],
 add_introspection_rules([], ["^exeapp\.models\.idevices\.fields\.URLField"])
 add_introspection_rules([],
     ["^exeapp\.models\.idevices\.fields\.ClozeTextField"])
+add_introspection_rules([],
+    ["^exeapp\.models\.idevices\.fields\.MultiChoiceOptionField"])
 
 
 class RichTextField(TextField):
@@ -37,3 +39,9 @@ class ClozeTextField(TextField):
     def formfield(self, **kwargs):
         kwargs["widget"] = ClozeWidget
         return super(ClozeTextField, self).formfield(**kwargs)
+
+
+class MultiChoiceOptionField(TextField):
+    def formfield(self, **kwargs):
+        kwargs["widget"] = MultiChoiceOptionWidget
+        return super(MultiChoiceOptionField, self).formfield(**kwargs)

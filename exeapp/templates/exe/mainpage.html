@@ -8,110 +8,127 @@
 
 {% block title %}{{ package.title }} | creyoco{% endblock %}
 {% block head_css %}
-<link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/mz/style.min.css">
-<link rel="stylesheet" href="{% get_static_prefix %}/scripts/bower_components/jquery-modal/jquery.modal.css" type="text/css" media="screen" />
+    <link rel="stylesheet" type="text/css"
+          href="{% get_static_prefix %}css/mz/style.min.css">
+    <link rel="stylesheet"
+          href="{% get_static_prefix %}/scripts/bower_components/jquery-modal/jquery.modal.css"
+          type="text/css" media="screen"/>
 {% endblock %}
 {% block head_javascript %}
-<script data-main="{% get_static_prefix %}scripts/main.js" src="{% get_static_prefix %}scripts/bower_components/requirejs/require.js"></script>
-<script src="{% get_static_prefix %}tiny_mce/tiny_mce.js"></script>
-{% render_form_media current_node %}
+    <script data-main="{% get_static_prefix %}scripts/main.js"
+            src="{% get_static_prefix %}scripts/bower_components/requirejs/require.js"></script>
+    {% render_form_media current_node %}
 {% endblock %}
 
 {% block dialog %}
     {{ block.super }}
-        <div id="node_name" class="modal">
-            <div class="modcontainer">
-                <h4>{% trans "Enter a new node name " %}</h4>
-                <label>{% trans "New name:" %}</label><input id="node_name"
-                                                             type="text"/>
-                <input type="button" value="{% trans "Create" %}"/>
-            </div>
+    <div id="node_name" class="modal">
+        <div class="modcontainer">
+            <h4>{% trans "Enter a new node name " %}</h4>
+            <label>{% trans "New name:" %}</label><input id="node_name"
+                                                         type="text"/>
+            <input type="button" value="{% trans "Create" %}"/>
         </div>
-        <div id="confirm_removal" class="modal">
-            <div class="modcontainer">
-                <h4>{% trans "Do you really want to remove node" %}<span
-                        id="removenode"></span>?</h4>
-                <input class="btnno" type="button" value="{% trans "No" %}"/>
-                <input class="btnyes" type="button" value="{% trans "Yes" %}"/>
-            </div>
+    </div>
+    <div id="confirm_removal" class="modal">
+        <div class="modcontainer">
+            <h4>{% trans "Do you really want to remove node" %}<span
+                    id="removenode"></span>?</h4>
+            <input class="btnno" type="button" value="{% trans "No" %}"/>
+            <input class="btnyes" type="button" value="{% trans "Yes" %}"/>
         </div>
-        <div id="previewIFrame" class="modal" >
-            <iframe scrolling="auto" src="preview"></iframe>
-        </div>
+    </div>
+    <div id="previewIFrame" class="modal">
+        <iframe scrolling="auto" src="preview"></iframe>
+    </div>
 
-        <div id="download_box" class="modal">
-            <h3>Wählen Sie das Dateiformat für den Kurs-Export.</h3>
-            {% for type, title in exporter_type_title_map.items %}
-                <a class="export_link" href="{% url "exeapp.views.package.export" package.id type %}"><i class="icon-arrow-right"></i> {{title}}</a>
-            {% endfor %}
-        </div>
+    <div id="download_box" class="modal">
+        <h3>Wählen Sie das Dateiformat für den Kurs-Export.</h3>
+        {% for type, title in exporter_type_title_map.items %}
+            <a class="export_link"
+               href="{% url "exeapp.views.package.export" package.id type %}"><i
+                    class="icon-arrow-right"></i> {{ title }}</a>
+        {% endfor %}
+    </div>
 
 {% endblock %}
 
 {% block box_left %}
     <div class="sidebar">
-    <select data-placeholder="Wählen Sie einen Kurs" class="chzn-select" tabindex="-1" id="select_course">
-		<option value="{{ package.get_absolute_url }}">{{ package.title }}</option>
-		{% for package_iter in package_list %}
-		{% if package.title != package_iter.title %}
-		<option value='{{ package_iter.get_absolute_url }}'>{{ package_iter.title }}</option>
-		{% endif %}
-		{% endfor %}
-		<option value='/exeapp'>Kursübersicht</option>
-	</select>
+        <select data-placeholder="Wählen Sie einen Kurs" class="chzn-select"
+                tabindex="-1" id="select_course">
+            <option value="{{ package.get_absolute_url }}">{{ package.title }}</option>
+            {% for package_iter in package_list %}
+                {% if package.title != package_iter.title %}
+                    <option value='{{ package_iter.get_absolute_url }}'>{{ package_iter.title }}</option>
+                {% endif %}
+            {% endfor %}
+            <option value='/exeapp'>Kursübersicht</option>
+        </select>
 
-	<div id="outline">
-		<div class="clearfix">
-			<button class="first" id="btnAdd" class="newline-first"><i class="icon-plus-sign icon-large"></i></button>
-			<button id="btnRemove"><i class="icon-remove-sign icon-large"></i></button>
-			<button id="btnRename" action="RenameNode"><i class="icon-pencil icon-large"></i></button>
-			<button id="btnDuplicate"><i class="icon-copy icon-large"></i></button>
-			<button class="last" onclick="$('.secondary').toggle(800);"><i class="icon-sitemap icon-large"></i></button>
-		</div>
-		<div class="secondary clearfix">
-			<button class="first" id="btnDemote"><i class="icon-arrow-right icon-large"></i></button>
-			<button id="btnPromote"><i class="icon-arrow-left icon-large"></i></button>
-			<button id="btnUp"><i class="icon-chevron-up icon-large"></i></button>
-			<button class="last" id="btnDown"><i class="icon-chevron-down icon-large"></i></button>
-		</div>
-		{% render_outline package current_node %}
-	</div>
-</div>
+        <div id="outline">
+            <div class="clearfix">
+                <button class="first" id="btnAdd" class="newline-first"><i
+                        class="icon-plus-sign icon-large"></i></button>
+                <button id="btnRemove"><i
+                        class="icon-remove-sign icon-large"></i></button>
+                <button id="btnRename" action="RenameNode"><i
+                        class="icon-pencil icon-large"></i></button>
+                <button id="btnDuplicate"><i class="icon-copy icon-large"></i>
+                </button>
+                <button class="last" onclick="$('.secondary').toggle(800);"><i
+                        class="icon-sitemap icon-large"></i></button>
+            </div>
+            <div class="secondary clearfix">
+                <button class="first" id="btnDemote"><i
+                        class="icon-arrow-right icon-large"></i></button>
+                <button id="btnPromote"><i
+                        class="icon-arrow-left icon-large"></i></button>
+                <button id="btnUp"><i class="icon-chevron-up icon-large"></i>
+                </button>
+                <button class="last" id="btnDown"><i
+                        class="icon-chevron-down icon-large"></i></button>
+            </div>
+            {% render_outline package current_node %}
+        </div>
+    </div>
 {% endblock %}
 
 {% block box_right %}
-<div class="sidebar">
-	<h2>{% trans "Tools" %}</h2>
-	{% render_idevicepane idevices %}
-</div>
+    <div class="sidebar">
+        <h2>{% trans "Tools" %}</h2>
+        {% render_idevicepane idevices %}
+    </div>
 {% endblock %}
 
 {% block navi %}
-<ul id="navi" class="clearfix">
-	<li id="edit" class="active"><a href="#edit">Inhalt bearbeiten</a></li>
-	<li id="layout"><a href="#layout">Layout wählen</a></li>
-	<li id="download"><a>Kurs herunterladen</a></li>
-	<li id="export" style="float:right;margin-right:0"><a href="#export">Metadaten</a></li>
-</ul>
+    <ul id="navi" class="clearfix">
+        <li id="edit" class="active"><a href="#edit">Inhalt bearbeiten</a></li>
+        <li id="layout"><a href="#layout">Layout wählen</a></li>
+        <li id="download"><a>Kurs herunterladen</a></li>
+        <li id="export" style="float:right;margin-right:0"><a href="#export">Metadaten</a>
+        </li>
+    </ul>
 {% endblock %}
 
 {% block h2 %}{% trans "Content" %}{% endblock %}
 
 {% block content %}
     <div id="selectStyle" style="display:none">
-    <div class="clearfix">
-        {% render_styles %}
+        <div class="clearfix">
+            {% render_styles %}
+        </div>
     </div>
-</div>
 
-<div id="authoring">
-	{% include "exe/authoring.html" %}
-</div>
+    <div id="authoring">
+        {% include "exe/authoring.html" %}
+    </div>
 
-<div id="properties" style="display:none;">
-		<!--<div id="download" style="margin-left:0;background-color:white;width:130px;border:1px solid rgb(155, 155, 155)">
+    <div id="properties" style="display:none;">
+        <!--<div id="download" style="margin-left:0;background-color:white;width:130px;border:1px solid rgb(155, 155, 155)">
 			{% for type, title in exporter_type_title_map.items %}
-			<a class="export_link" href="{% url "exeapp.views.package.export" package.id type %}">{{title}}</a>
+			<a class="export_link" href="
+            {% url "exeapp.views.package.export" package.id type %}">{{title}}</a>
 			{% endfor %}
 		</div>
 		<div id="download">
@@ -121,14 +138,16 @@
 			{% endfor %}
 		</div>-->
 
-	{% include "exe/properties_form.html" %}
+        {% include "exe/properties_form.html" %}
 
-	<h3 onclick="$('#dublincore_form').toggle('slow');$(this).find('i').removeClass('icon-caret-right').addClass('icon-caret-down');"><i class="icon-caret-right" style="margin-right:10px;"></i>Dublin Core</h3>
-	{% include "exe/dublincore_form.html" %}
-</div>
+        <h3 onclick="$('#dublincore_form').toggle('slow');$(this).find('i').removeClass('icon-caret-right').addClass('icon-caret-down');">
+            <i class="icon-caret-right" style="margin-right:10px;"></i>Dublin
+            Core</h3>
+        {% include "exe/dublincore_form.html" %}
+    </div>
 {% endblock %}
 
 {% block append %}
-<div id="package_id" style="display: none">{{package.id}}</div>
-<div id="package_style" style="display:none">{{package.style}}</div>
+    <div id="package_id" style="display: none">{{ package.id }}</div>
+    <div id="package_style" style="display:none">{{ package.style }}</div>
 {% endblock %}

@@ -16,17 +16,14 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 # ===========================================================================
-from exeapp.models.idevices.idevice import Idevice
-from django.template.loader import render_to_string
 """
 Block is the base class for the classes which are responsible for
 rendering and processing Idevices in XHTML
 """
 
 import logging
-from django.conf import settings
 from django.utils.safestring import mark_safe
-from exeapp.utils import common
+
 log = logging.getLogger(__name__)
 
 
@@ -54,7 +51,7 @@ class Block(object):
         Initialize a new Block object
         """
         self.idevice = idevice
-        self.id = idevice.id
+        self.pk = idevice.pk
         self.purpose = idevice.purpose
         self.tip = idevice.tip
         self.package = self.idevice.parent_node.package
@@ -101,7 +98,7 @@ class Block(object):
         Returns the appropriate XHTML string for whatever mode this block is in.
         Descendants should not override it.
         """
-        html = '<input type="hidden" name="idevice_id" value="%s" />' % self.id
+        html = '<input type="hidden" name="idevice_id" value="%s" />' % self.pk
         if self.idevice.edit == True:
             html += self.renderEdit(**kwargs)
         else:
@@ -110,7 +107,8 @@ class Block(object):
 
     def renderEdit(self, form=None):
         """
-        Returns an XHTML string with the BlockForm element for editing this block
+        Returns an XHTML string with the BlockForm element for editing this
+        block
         """
         log.error("renderEdit called directly")
         return "ERROR Block.renderEdit called directly"

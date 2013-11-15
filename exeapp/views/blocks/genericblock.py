@@ -24,10 +24,10 @@ class GenericBlock(Block):
     COMMON_EXPORT = "exe/idevices/generic/common/export.html"
     content_template = ""
 
-    def __init__(self, idevice, fields=()):
+    def __init__(self, idevice, fields=(), media=None):
         super(GenericBlock, self).__init__(idevice)
         self.BlockForm = IdeviceFormFactory(model=self.idevice.__class__,
-                                                fields=fields)
+                                            fields=fields, media=None)
 
         if not hasattr(self.idevice, 'undo'):
             self.idevice.undo = True
@@ -42,16 +42,16 @@ class GenericBlock(Block):
         """
         Returns an XHTML string for previewing this block
         """
-        template = self.COMMON_PREVIEW if self.use_common_content else\
-                    self.preview_template
+        template = self.COMMON_PREVIEW if self.use_common_content else \
+            self.preview_template
         return self._render_view(template)
 
     def renderView(self):
         """
         Returns an XHTML string for viewing this block
         """
-        template = self.COMMON_EXPORT if self.use_common_content else\
-                    self.view_template
+        template = self.COMMON_EXPORT if self.use_common_content else \
+            self.view_template
         return self._render_view(template)
 
     def _render_view(self, template, form=None):
@@ -59,19 +59,21 @@ class GenericBlock(Block):
         Code reuse function for rendering the correct template
         """
         form = form or self.BlockForm(instance=self.idevice,
-                             auto_id="%s_field_" % self.idevice.id + "%s")
+                                      auto_id="%s_field_" % self.idevice.id +
+                                              "%s")
         try:
-            html = render_to_string(template, {"idevice" : self.idevice,
-                                               "form" : form,
-                                               "content_template" : self.content_template,
-                                               "self" : self,
-                                               }
-                                    )
+            html = render_to_string(template, {"idevice": self.idevice,
+                                               "form": form,
+                                               "content_template": self
+                                               .content_template,
+                                               "self": self,
+            }
+            )
         except TemplateDoesNotExist as e:
             if template:
                 raise e
             else:
                 raise TemplateNotDefined(
-                        "Please define a template for the action")
+                    "Please define a template for the action")
         else:
             return html

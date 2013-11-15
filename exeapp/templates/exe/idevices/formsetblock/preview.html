@@ -1,8 +1,7 @@
 {% extends 'exe/idevices/preview_base.html' %}
 {% block idevice %}
-{{ form.render_preview }}
-<p>test</p>
-{% for formset_form in formset %}
-	{{formset_form.render_preview}}
-{% endfor %}
+    {{ form.render_preview }}
+    {% for formset_form in formset %}
+        {{ formset_form.render_preview }}
+    {% endfor %}
 {% endblock %}

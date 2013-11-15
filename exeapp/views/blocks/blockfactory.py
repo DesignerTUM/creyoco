@@ -5,13 +5,18 @@ Created on Apr 18, 2011
 
 Provides block_factory. Returns block object based on given idevice.
 '''
-
+from django import forms
+from django.conf import settings
+from exeapp.models.idevices.multiplechoice import MultiChoiceIdevice, \
+    MultiChoiceOptionIdevice
 
 from exeapp.views.blocks.genericblock import GenericBlock
 from exeapp.models.idevices import FreeTextIdevice
 from exeapp.models.idevices.activityidevice import ActivityIdevice
-from exeapp.models.idevices.glossaryidevice import GlossaryIdevice, GlossaryTerm
+from exeapp.models.idevices.glossaryidevice import GlossaryIdevice
 from exeapp.models.idevices.pdfidevice import PDFIdevice
+from exeapp.views.blocks.multichoiceformset import MultiChoiceFormsetBlock, \
+    MultiChoiceForm
 from exeapp.views.blocks.pdfblock import PDFBlock
 from exeapp.models.idevices.readingactidevice import ReadingActivityIdevice
 from exeapp.models.idevices.reflectionidevice import ReflectionIdevice
@@ -38,28 +43,38 @@ from exeapp.views.blocks.glossaryblock import GlossaryBlock
 from exeapp.views.blocks.tocblock import TOCBlock
 
 idevice_map = {
-          FreeTextIdevice: GenericBlock,
-          ActivityIdevice: GenericBlock,
-          GlossaryIdevice: GlossaryBlock,
-          ReadingActivityIdevice: GenericBlock,
-          ReflectionIdevice: GenericBlock,
-          TOCIdevice: TOCBlock,
-          WikipediaIdevice: WikipediaBlock,
-          PDFIdevice: PDFBlock,
-          ObjectivesIdevice: GenericBlock,
-          PreknowledgeIdevice: GenericBlock,
-          CommentIdevice: CommentBlock,
-          FeedbackIdevice: FeedbackBlock,
-          RSSIdevice: RSSBlock,
-          ExternalURLIdevice: ExternalURLBlock,
-          AppletIdevice: AppletBlock,
-          ClozeIdevice: GenericBlock,
-          CaseStudyIdevice: FormsetBlockFactory(
-                                CaseActivity,
-                                ("activity", "feedback"),
-                                )
-          }
-
+    FreeTextIdevice: GenericBlock,
+    ActivityIdevice: GenericBlock,
+    GlossaryIdevice: GlossaryBlock,
+    ReadingActivityIdevice: GenericBlock,
+    ReflectionIdevice: GenericBlock,
+    TOCIdevice: TOCBlock,
+    WikipediaIdevice: WikipediaBlock,
+    PDFIdevice: PDFBlock,
+    ObjectivesIdevice: GenericBlock,
+    PreknowledgeIdevice: GenericBlock,
+    CommentIdevice: CommentBlock,
+    FeedbackIdevice: FeedbackBlock,
+    RSSIdevice: RSSBlock,
+    ExternalURLIdevice: ExternalURLBlock,
+    AppletIdevice: AppletBlock,
+    ClozeIdevice: GenericBlock,
+    CaseStudyIdevice: FormsetBlockFactory(
+        CaseActivity,
+        ("activity", "feedback"),
+    ),
+    MultiChoiceIdevice: FormsetBlockFactory(
+        MultiChoiceOptionIdevice,
+        ("option", "right_answer"),
+        forms.Media(
+            js=['{}scripts/blocks/multichoice.js'.format(settings.STATIC_URL)],
+            css={'all': ['{}css/blocks/multichoice.css' \
+                             .format(settings.STATIC_URL)]},
+        ),
+        base=MultiChoiceFormsetBlock,
+        base_form=MultiChoiceForm
+    )
+}
 
 block_map = dict((v, k) for k, v in list(idevice_map.items()))
 

@@ -17,25 +17,29 @@ from exeapp.models.idevices.externalurlidevice import ExternalURLIdevice
 from exeapp.models.idevices.appletidevice import AppletIdevice
 from exeapp.models.idevices.clozeidevice import ClozeIdevice
 from exeapp.models.idevices.casestudyidevice import CaseStudyIdevice
+from exeapp.models.idevices.multiplechoice import MultiChoiceIdevice, \
+    MultiChoiceOptionIdevice
 
-idevice_list = [FreeTextIdevice,
-            ActivityIdevice,
-            GlossaryIdevice,
-            ReadingActivityIdevice,
-            ReflectionIdevice,
-            TOCIdevice,
-            WikipediaIdevice,
-            PDFIdevice,
-            ObjectivesIdevice,
-            PreknowledgeIdevice,
-            CommentIdevice,
-            FeedbackIdevice,
-            RSSIdevice,
-            ExternalURLIdevice,
-            AppletIdevice,
-            ClozeIdevice,
-            CaseStudyIdevice,
-            ]
+idevice_list = [
+    FreeTextIdevice,
+    ActivityIdevice,
+    GlossaryIdevice,
+    ReadingActivityIdevice,
+    ReflectionIdevice,
+    TOCIdevice,
+    WikipediaIdevice,
+    PDFIdevice,
+    ObjectivesIdevice,
+    PreknowledgeIdevice,
+    CommentIdevice,
+    FeedbackIdevice,
+    RSSIdevice,
+    ExternalURLIdevice,
+    AppletIdevice,
+    ClozeIdevice,
+    CaseStudyIdevice,
+    MultiChoiceIdevice,
+]
 
-__all__ = ['Idevice', 'idevice_list'] +\
-                    [idevice.__name__ for idevice in idevice_list]
+__all__ = ['Idevice', 'idevice_list'] + \
+          [idevice.__name__ for idevice in idevice_list]

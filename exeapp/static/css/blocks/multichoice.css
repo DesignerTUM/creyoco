@@ -1,0 +1,12 @@
+.multichoice.right {
+    background-color: green;
+}
+
+.multichoice.wrong {
+    background-color: red;
+}
+
+.multichoice.result {
+    font-weight: bold;
+    color: white;
+}

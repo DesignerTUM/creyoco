@@ -26,7 +26,6 @@ The base class for all iDevices
 """
 
 from django.db import models
-from django.contrib.contenttypes.models import ContentType
 from django.utils.translation import ugettext_lazy as _
 
 import logging
@@ -119,7 +118,7 @@ finding. Returns a list of (name, url) tuples'''
     def delete(self):
         super(Idevice, self).delete()
 
-    def apply_changes(self, agruments):
+    def apply_changes(self, formdata, formsetdata=None):
         self.edit = False
 
 
@@ -191,48 +190,6 @@ finding. Returns a list of (name, url) tuples'''
         # and update any internal anchors and their link_list:
         self.ChangedParentNode(old_node, parentNode)
 
-
-    def ChangedParentNode(self, old_node, new_node):
-        """
-        To update all fo the anchors (if any) that are defined within
-        any of this iDevice's various fields, and any
-        internal link_list corresponding to those anchors.
-        This is essentially a variation of Node:RenamedNode()
-        It also removes any internal link_list from the data structures as well,
-        if this iDevice is being deleted
-        """
-        my_fields = self.getRichTextFields()
-        num_fields = len(my_fields)
-        for field_loop in range(num_fields-1, -1, -1):
-            this_field = my_fields[field_loop]
-            if hasattr(this_field, 'anchor_names') \
-            and len(this_field.anchor_names) > 0:
-                # okay, this is an applicable field with some anchors:
-                this_field.ReplaceAllInternalAnchorsLinks(oldNode=old_node,
-                        newNode=new_node)
-
-                if new_node:
-                    # add this particular anchor field into the new node's list:
-                    if not hasattr(new_node, 'anchor_fields'):
-                        new_node.anchor_fields = []
-                    if this_field not in new_node.anchor_fields:
-                        new_node.anchor_fields.append(this_field)
-                    if new_package:
-                        if not hasattr(new_package, 'anchor_nodes'):
-                            new_package.anchor_nodes = []
-                        if new_node not in new_package.anchor_nodes:
-                            new_package.anchor_nodes.append(new_node)
-
-            # now, regardless of whether or not that field has any anchors,
-            # if this idevice is being deleted (new_node is None), then
-            # go ahead and remove any of its internal link_list
-            # from the corresponding data structures:
-            if not new_node \
-            and hasattr(this_field, 'intlinks_to_anchors') \
-            and len(this_field.intlinks_to_anchors) > 0:
-                this_field.RemoveAllInternalLinks()
-
-        return
 
     def getResourcesField(self, this_resource):
         """

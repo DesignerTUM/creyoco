@@ -3,14 +3,19 @@ from django.template.loader import render_to_string
 
 from exeapp.utils.compat import with_metaclass
 from exeapp.views.blocks.genericblock import GenericBlock
-from exeapp.views.blocks.ideviceform import IdeviceForm
+from exeapp.views.blocks.ideviceform import IdeviceFormFactory
 
 
-def FormsetBlockMetaclassFactory(model, fields):
+def FormsetBlockMetaclassFactory(model, fields, media=None, base_form=None):
     class FormsetBlockMetaclass(type):
-        def __new__(cls, name, bases, dict):
-            dict.update({"model": model, "fields": fields})
-            return type.__new__(cls, name, bases, dict)
+        def __new__(cls, name, bases, cls_dict):
+            cls_dict.update({"formset_media": media})
+            form_dict = {"model": model, "fields": fields}
+            cls_dict.update(form_dict)
+            if base_form is not None:
+                form_dict['form_class'] = base_form
+            cls_dict['form_class'] = IdeviceFormFactory(**form_dict).form_class
+            return type.__new__(cls, name, bases, cls_dict)
 
     return FormsetBlockMetaclass
 
@@ -19,15 +24,8 @@ class BaseFormsetBlock(GenericBlock):
     def __init__(self, *args, **kwargs):
         super(BaseFormsetBlock, self).__init__(*args, **kwargs)
 
-        class FormsetItemForm(IdeviceForm):
-            pass
-
-            class Meta:
-                model = self.model
-                fields = self.fields
-
         self.BlockFormset = modelformset_factory(
-            self.model, FormsetItemForm,
+            self.model, self.form_class,
             fields=self.fields,
             extra=0,
             can_delete=True,
@@ -43,7 +41,7 @@ class BaseFormsetBlock(GenericBlock):
         if action == self.add_action:
             self.handle_apply_changes(data)
             self.idevice.edit = True
-            self.idevice.add_term()
+            self.idevice.add_child()
             return self.render()
         elif action == self.remove_action:
             self.handle_apply_changes(data)
@@ -60,13 +58,14 @@ class BaseFormsetBlock(GenericBlock):
         formset = self.BlockFormset(data)
         if formset.is_valid() and form.is_valid():
             form.save(commit=False)
-            self.idevice.apply_changes(form.cleaned_data)
+            self.idevice.apply_changes(form.cleaned_data, formset.cleaned_data)
             formset.save()
         return form, formset
 
     @property
     def media(self):
         media = super(BaseFormsetBlock, self).media
+        media += self.formset_media
         if not self.idevice.edit:
             media += self.BlockFormset().form().media
         return media
@@ -80,7 +79,9 @@ class BaseFormsetBlock(GenericBlock):
 
 
     def _render_view(self, template, form=None, formset=None):
-        form = form or self.BlockForm(instance=self.idevice)
+        form = form or self.BlockForm(
+            instance=self.idevice,
+            auto_id="%s_field_" % self.idevice.id + "%s")
         formset = formset or self.BlockFormset(queryset=self.model. \
             objects.filter(idevice=self.idevice))
         try:
@@ -95,10 +96,11 @@ class BaseFormsetBlock(GenericBlock):
             return html
 
 
-def FormsetBlockFactory(model, fields):
-    metaclass = FormsetBlockMetaclassFactory(model, fields)
+def FormsetBlockFactory(model, fields, media=None, base=BaseFormsetBlock,
+                        base_form=None):
+    metaclass = FormsetBlockMetaclassFactory(model, fields, media, base_form)
 
-    class FormsetBlock(with_metaclass(metaclass, BaseFormsetBlock)):
+    class FormsetBlock(with_metaclass(metaclass, base)):
         pass
 
     return FormsetBlock

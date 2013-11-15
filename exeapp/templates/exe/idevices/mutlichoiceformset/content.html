@@ -1,0 +1,7 @@
+{{ form.render_preview }}
+{% for formset_form in formset %}
+    {{ formset_form.render_preview }}
+{% endfor %}
+<input type="button" class="check_multichoice" value="Submit"
+       name="idevice_action"/>
+<span class="multichoice result"></span>
