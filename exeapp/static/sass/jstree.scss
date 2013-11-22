@@ -1,3 +1,5 @@
+@import "compass/typography/text/ellipsis";
+
 .jstree ul, .jstree li {
   display: block;
   margin: 0 0 0 0;
@@ -9,11 +11,11 @@
   display: block;
   min-height: 18px;
   line-height: 18px;
-  white-space: nowrap;
 }
 
 .jstree-rtl li {
   margin-left: 0;
+  padding: 0px;
 }
 
 .jstree > ul > li {
@@ -35,9 +37,10 @@
 
 .jstree a {
   display: inline-block;
-  line-height: 16px;
-  height: 16px;
-  white-space: nowrap;
+  width: 100%;
+  line-height: 18px;
+  height: 18px;
+  @include ellipsis;
   text-decoration: none;
   margin: 0;
 }
@@ -69,6 +72,9 @@ li.jstree-closed > ul {
 }
 
 #box_right {
+  h2 {
+    margin-bottom: 53px;
+  }
   .jstree > ul > li > a {
     font-weight: 700;
     color: lighten(black, 40%) !important;

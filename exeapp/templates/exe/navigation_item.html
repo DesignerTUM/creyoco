@@ -1,3 +1,5 @@
 <div>
-  <a class="{%if page.node.children %}withChild{% else %}withoutChild{% endif %}" href="{{page.name}}.html">{{node.title}}</a>
+    <a class="{% if page.node.children %}withChild{% else %}withoutChild{% endif %}"
+       href="{{ page.name }}.html"
+       title="{{ page.node.title }}">{{ node.title }}</a>
 </div>

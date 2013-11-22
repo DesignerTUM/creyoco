@@ -1,16 +1,18 @@
-// meta
-@import 'compass/reset';
-@import 'compass/css3';
-//@import 'compass/css3/box-sizing';
-//@import 'icon/*.png';
-@import 'sprites/basic/*.png';
-
 // Color
 $red: #a71e20;
 $green: #4B9C2D;
 $darkgrey: lighten(black, 35%);
 $lightgrey: lighten(black, 90%);
 $background: #f6f6f6;
+
+$vertical: 'max-height' 50em;
+
+// meta
+@import 'compass/reset';
+@import 'compass/css3';
+//@import 'compass/css3/box-sizing';
+//@import 'icon/*.png';
+@import 'sprites/basic/*.png';
 
 // Sprites
 $basic-sprite-dimensions: true;
@@ -72,9 +74,9 @@ body {
 }
 
 #wrapper {
-  margin: 180px auto 0;
+  margin: 10px auto 0;
   min-height: 280px;
-  max-width: 1200px;
+  max-width: 1800px;
   min-width: 960px;
   padding-left: 30px;
   padding-right: 30px;
@@ -87,7 +89,7 @@ body {
     font-weight: 700;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    margin-bottom: 100px;
+    margin-bottom: 15px;
   }
 
   h3 {
@@ -127,7 +129,7 @@ body {
       overflow: auto;
     }
     #outline_pane {
-      margin-top: 25px;
+      margin-top: 15px;
     }
   }
   #box_right {
@@ -138,13 +140,13 @@ body {
 }
 
 header {
-  position: fixed;
   top: 0;
   width: 100%;
+  margin-bottom: 30px;
   background-color: $background;
   z-index: 1;
   h1 {
-    text-align: right;
+    text-align: left;
     font-family: 'Exo';
     font-weight: 400;
     font-size: 2em;
@@ -154,10 +156,10 @@ header {
     margin-top: 8px;
   }
   > div {
-    max-width: 1200px;
+    max-width: 1800px;
     min-width: 960px;
     margin: 0 auto;
-    padding: 100px 30px 0 30px;
+    padding: 10px 30px 0 30px;
     //border-bottom: 1px dotted $darkgrey;
     hr {
       @include horizontal-rule;
@@ -174,17 +176,18 @@ header {
   padding-right: 30px;
   #middle-row {
     @include background-image(linear-gradient(left, white, #e8e8e8, white));
-    border: 1px dotted $darkgrey;
+    //border: 1px dotted $darkgrey;
+    border-top: none;
     min-height: 400px;
-    max-height: 500px;
+    max-height: 750px;
     overflow: auto;
     margin-bottom: 40px;
     padding: 15px;
     #authoring {
       padding-left: 0px;
       padding-right: 0px;
-      h1, h2 {
-        color: inherit;
+      h2 {
+        color: $red;
         font-family: inherit;
         font-size: 1.3em;
         font-weight: inherit;
@@ -193,14 +196,16 @@ header {
         margin-bottom: 10px;
       }
       h1 {
-      background-color: #fff;
-      border: 1px solid $lightgrey;
-      background-color: white;
-      color: $red;
-      padding-top:15px;
-      padding-bottom: 15px;
-      text-align: center;
-      font-weight: bold;
+        //background-color: #fff;
+        //border: 1px solid $lightgrey;
+        color: $red;
+        font-size: 1.5em;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        padding-left: 20px;
+        margin-bottom: 10px;
+        //text-align: right;
+        //font-weight: bold;
       }
     }
     .theme {
@@ -259,17 +264,21 @@ header {
 }
 
 ul#navi {
+  border-bottom: 1px dotted $darkgrey;
   li {
-    $basic-sprite-dimensions: false;
+    //$basic-sprite-dimensions: false;
 
     float: left;
-    margin-right: 8px;
+    margin-right: .5%;
 
-    @include basic-sprite(navi);
+    //@include basic-sprite(navi);
+    @include transition(background-image 1s ease-in);
     height: 21px;
     //width: 169px;
-    width: 22.5%;
-    color: $darkgrey;
+    @include background-image(linear-gradient(bottom right, white, $lightgrey, white));
+    @include border-radius(5px);
+    width: 24.625%;
+    color: black;
     display: inline-block;
     font-size: 0.923em;
     text-align: center;
@@ -279,25 +288,20 @@ ul#navi {
     @include text-shadow(white 0 1px 0);
 
     a {
+      color: black;
       &:hover {
         color: $red;
         cursor: pointer;
       }
     }
 
-    /*:last-child {
-        margin-right: 0px;
-        float: right;
-    }*/
+    &:last-child {
+      margin-right: 0px;
+    }
     &.active {
-      @include basic-sprite(naviactive);
+      @include background-image(linear-gradient(bottom right, darken($lightgrey, 10%), white, darken($lightgrey, 10%)));
       a {
-        color: white;
-        @include text-shadow($darkgrey 0 1px 0);
-        &:hover {
-          color: white;
-
-        }
+        color: $red;
       }
     }
   }
@@ -448,8 +452,11 @@ a:hover .icon-question-sign {
 }
 
 footer {
-  max-width: 1200px;
+  position: absolute;
+  bottom: 10px;
+  max-width: 1800px;
   min-width: 960px;
+  width: 100%;
   margin: 0 auto;
   //border-top: 1px dotted $darkgrey;
   margin-top: 20px;
@@ -548,7 +555,7 @@ footer {
 }
 
 .fb_show {
-    @extend [class^="icon-"];
-    @extend .icon-upload;
-    margin-left: .5em;
+  @extend [ class ^= "icon-" ];
+  @extend .icon-upload;
+  margin-left: .5em;
 }
