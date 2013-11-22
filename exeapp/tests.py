@@ -459,7 +459,7 @@ view, this tests should be also merged'''
         self.root.add_idevice(self.IDEVICE_TYPE)
         response = self.c.get("{}authoring/?partial=true&media=true".format(
             self.VIEW_URL))
-        self.assertEquals(simplejson.loads(smart_text(response.content)),
+        self.assertEquals(simplejson.loads(smart_text(response.content))['js'],
                           [reverse('tinymce-filebrowser')])
 
     def test_resource_finding(self):
