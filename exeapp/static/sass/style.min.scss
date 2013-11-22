@@ -62,7 +62,7 @@ body {
   font: 400 0.813em / 0.938em 'Open Sans', sans-serif;
   color: $darkgrey;
   a {
-    color: $darkgrey !important;
+    color: $darkgrey;
     text-decoration: none;
     &:hover {
       text-decoration: none;
@@ -183,14 +183,24 @@ header {
     #authoring {
       padding-left: 0px;
       padding-right: 0px;
-      h2 {
+      h1, h2 {
         color: inherit;
         font-family: inherit;
-        font-size: 1.077em;
+        font-size: 1.3em;
         font-weight: inherit;
         letter-spacing: inherit;
         text-transform: inherit;
         margin-bottom: 10px;
+      }
+      h1 {
+      background-color: #fff;
+      border: 1px solid $lightgrey;
+      background-color: white;
+      color: $red;
+      padding-top:15px;
+      padding-bottom: 15px;
+      text-align: center;
+      font-weight: bold;
       }
     }
     .theme {
@@ -377,6 +387,7 @@ strong {
 
 em {
   font-style: italic;
+  color: $red;
 }
 
 ul#package_list {
@@ -491,7 +502,7 @@ footer {
     padding: 10px 20px 10px 20px;
     margin-left: -10px;
     margin-right: -10px;
-    border-radius: 5px;
+    @include border-radius(5px);
   }
 
   h4 {
@@ -515,7 +526,7 @@ footer {
     margin-left: 0px;
     padding: 3px 5px 3px 5px;
     border: solid 1px $red;
-    border-radius: 3px;
+    @include border-radius(3px);
     background-color: $lightgrey;
     width: 50px;
   }

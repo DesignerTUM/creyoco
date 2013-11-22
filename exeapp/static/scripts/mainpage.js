@@ -389,6 +389,7 @@ require(['jquery', "common", "eyecandy", 'jquery-pjax', 'jquery-cookie', 'jquery
         }
 
         function handle_select_style() {
+            var _this = $(this);
             $.jsonRPC.request("set_package_style", {
                 params: [get_package_id(), common.get_current_node_id(), $(this).attr('id')],
                 success: function() {
@@ -396,7 +397,7 @@ require(['jquery', "common", "eyecandy", 'jquery-pjax', 'jquery-cookie', 'jquery
                     common.update_preview();
                     eyecandy.show_lightbox(0,0, $("#previewIFrame"));
                     $('.theme').removeClass('selected');
-                    $(this).addClass('selected');
+                    _this.addClass('selected');
                 }
             });
         }

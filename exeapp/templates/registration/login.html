@@ -11,9 +11,10 @@
 {% block dialog %}{% endblock %}
 {% block content %}
 <div style="margin-top:40px;margin-left:50px;margin-right:85px;width:262px;float:left;">
-	<div style="font-size:13px;font-weight:500;margin-bottom:25px">{% trans "Have an account?" %}<span style="color:rgba(0,0,0,0.5)"> {% trans "Login!" %}</span></div>
+    <div style="font-size:13px;font-weight:500;margin-bottom:25px">{% trans "Have an account?" %}
+    <em> {% trans "Login!" %}</em></div>
 
-	<form action='/accounts/login/' method='post'>
+    <form action='/accounts/login/' method='post'>
 		{% csrf_token %}
 		{% if form.errors %}
 		<div style="position:relative;">
@@ -37,9 +38,10 @@
 </div>
 
 <div style="margin-top:40px;margin-right:50px;float:left;width:262px;">
-	<div style="font-size:13px;font-weight:500;margin-bottom:25px">{% trans "New to creyoco?" %} <span style="color:rgba(0,0,0,0.5)"> {% trans "Register now!" %}</span></div>
+    <div style="font-size:13px;font-weight:500;margin-bottom:25px">{% trans "New to creyoco?" %}
+        <em> {% trans "Register now!" %}</em></div>
 
-	<form action='/accounts/register/' method='post'>
+    <form action='/accounts/register/' method='post'>
 		{% csrf_token %}
 		<input class="reg_username" type="text" name="username" placeholder="{% trans "Username" %}" />
 		<input class="reg_email" type="text" name="email" placeholder="{% trans "E-Mail" %}" />
