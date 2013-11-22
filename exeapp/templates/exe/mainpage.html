@@ -52,19 +52,31 @@
     </div>
 
 {% endblock %}
-
+{% block header %}
+    <div class="user_info">
+        <div class="account">
+            <p>Logged in as: <em>{{ user }}</em>
+                <a href="/accounts/logout/" style="text-align:left">(Logout)</a>
+            </p>
+        </div>
+        <div class="chzn">
+            <select data-placeholder="Wählen Sie einen Kurs" class="chzn-select"
+                    tabindex="-1" id="select_course">
+                <option value="{{ package.get_absolute_url }}">{{ package.title }}</option>
+                {% for package_iter in package_list %}
+                    {% if package.title != package_iter.title %}
+                        <option value='{{ package_iter.get_absolute_url }}'>{{ package_iter.title }}</option>
+                    {% endif %}
+                {% endfor %}
+                <option value='/exeapp'>Kursübersicht</option>
+            </select>
+        </div>
+    </div>
+    {{ block.super }}
+{% endblock %}
 {% block box_left %}
     <div class="sidebar">
-        <select data-placeholder="Wählen Sie einen Kurs" class="chzn-select"
-                tabindex="-1" id="select_course">
-            <option value="{{ package.get_absolute_url }}">{{ package.title }}</option>
-            {% for package_iter in package_list %}
-                {% if package.title != package_iter.title %}
-                    <option value='{{ package_iter.get_absolute_url }}'>{{ package_iter.title }}</option>
-                {% endif %}
-            {% endfor %}
-            <option value='/exeapp'>Kursübersicht</option>
-        </select>
+        <h2>{% trans "Table of Content" %}</h2>
 
         <div id="outline">
             <div class="clearfix">

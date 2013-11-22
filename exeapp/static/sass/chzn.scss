@@ -8,6 +8,7 @@ $chosen-sprite-dimensions: true;
   zoom: 1;
   *display: inline;
   width: 100% !important;
+  cursor: pointer;
 
   /*input[type="text"] {
     height: 15px;
@@ -34,7 +35,7 @@ $chosen-sprite-dimensions: true;
 }
 
 .chosen-container-single {
-  margin-bottom: 15px;
+  margin-bottom: 0px;
   .chosen-single {
     display: block;
     overflow: hidden;

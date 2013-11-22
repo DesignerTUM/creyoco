@@ -3,12 +3,11 @@
 {% block dialog %}
 {% endblock %}
 {% block footer %}
-<hr>
-<div class="pull-left">
-	<a href="/accounts/logout/" style="text-align:left">Logout</a>
-</div>
-<div class="pull-right">
-	<a href="#impressum">Impressum</a> |
-	<a id="help_trigger" href="{% url "django.contrib.flatpages.views.flatpage" url="/help/" %}">Hilfe <i class="icon-question-sign"></i></a>
-</div>
+    <hr>
+    <div class="pull-right">
+        <a href="#impressum">Impressum</a> |
+        <a id="help_trigger"
+           href="{% url "django.contrib.flatpages.views.flatpage" url="/help/" %}">Hilfe
+            <i class="icon-question-sign"></i></a>
+    </div>
 {% endblock %}
