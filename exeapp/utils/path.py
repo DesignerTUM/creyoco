@@ -82,7 +82,7 @@ class Path(str):
 
     # Adding a Path and a string yields a Path.
     def __add__(self, more):
-        return Path(super().__add__(more))
+        return Path(super(Path, self).__add__(more))
 
     # The / operator joins paths.
     def __div__(self, rel):

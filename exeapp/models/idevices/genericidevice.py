@@ -1,9 +1,13 @@
+import sys
 import re
-from urllib.request import unquote
 from exeapp.models.idevices.idevice import Idevice
 from django.db.models.fields import TextField
 from bs4 import BeautifulSoup
 from django.conf import settings
+if sys.version_info >= (3,):
+    from urllib.request import unquote
+else:
+    from urllib import unquote
 
 
 class GenericIdevice(Idevice):

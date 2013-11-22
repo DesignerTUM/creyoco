@@ -1,6 +1,5 @@
+import sys
 import re
-from urllib.request import unquote
-
 from tinymce.widgets import TinyMCE
 from django.conf import settings
 from django.utils.safestring import mark_safe
@@ -8,6 +7,12 @@ from django.forms.widgets import TextInput
 from django.template.loader import render_to_string
 from django import forms
 from bs4 import BeautifulSoup
+
+if sys.version_info >= (3,):
+    from urllib.request import unquote
+else:
+    from urllib import unquote
+
 
 
 class FreeTextWidget(TinyMCE):

@@ -23,11 +23,10 @@ FreeTextIdevice: just has a block of text
 """
 from django.utils.translation import ugettext_lazy as _
 import logging
-from exeapp.models.idevices import fields
 from exeapp.models.idevices.idevice import Idevice
 from exeapp.models.idevices.genericidevice import GenericIdevice
+from exeapp.models.idevices import fields
 
-#from exe.engine.field   import TextAreaField
 log = logging.getLogger(__name__)
 
 # ===========================================================================
