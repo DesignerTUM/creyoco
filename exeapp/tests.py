@@ -607,7 +607,7 @@ class MiddleWareTestCase(TestCase):
     def test_403_middleware(self):
         '''Test the HTTP403 handlingmiddle ware.
 Should set status code to 403'''
-        from django.conf.urls.defaults import patterns
+        from django.conf.urls import patterns
         from exeapp.urls import urlpatterns
         from exeapp import views
 

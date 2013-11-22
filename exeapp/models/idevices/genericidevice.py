@@ -13,8 +13,9 @@ else:
 class GenericIdevice(Idevice):
 
     def _get_text_fields(self):
-        return (getattr(self, field.attname) for field in self._meta._fields() if
-                isinstance(field, TextField))
+        return (getattr(self, field.attname)
+                        for field in self._meta.concrete_fields if
+                            isinstance(field, TextField))
 
     def _resources(self):
         user = self.parent_node.package.user

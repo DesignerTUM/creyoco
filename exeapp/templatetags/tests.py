@@ -1,11 +1,15 @@
 import unittest
-from mock import Mock
+import sys
 from bs4 import BeautifulSoup
 
 from exeapp.templatetags.mainpage_extras import idevice_ul
 from exeapp.templatetags.authoring_extras import *
 from django import template
 
+if sys.version_info >= (3,):
+    from unittest.mock import Mock
+else:
+    from mock import Mock
 
 PACKAGE_ID = 1
 
