@@ -7119,7 +7119,9 @@ footer div {
 }
 
 .modal#previewIFrame {
-    width: 1600px;
+    min-width: 400px;
+    max-width: 1800px;
+    width: 90%;
     height: 800px;
 }
 
@@ -7129,7 +7131,7 @@ footer div {
     }
 
     line {
-        font-family: \00003522
+        font-family: \00003524
     }
 }
 
@@ -7144,7 +7146,7 @@ footer div {
     }
 
     line {
-        font-family: \00003528
+        font-family: \00003530
     }
 }
 
@@ -7164,7 +7166,7 @@ footer div {
     }
 
     line {
-        font-family: \00003536
+        font-family: \00003538
     }
 }
 
@@ -7181,7 +7183,7 @@ footer div {
     }
 
     line {
-        font-family: \00003543
+        font-family: \00003545
     }
 }
 
@@ -7196,7 +7198,7 @@ footer div {
     }
 
     line {
-        font-family: \00003547
+        font-family: \00003549
     }
 }
 
@@ -7211,7 +7213,7 @@ footer div {
     }
 
     line {
-        font-family: \00003552
+        font-family: \00003554
     }
 }
 
@@ -7233,7 +7235,7 @@ footer div {
     }
 
     line {
-        font-family: \00003562
+        font-family: \00003564
     }
 }
 
@@ -7248,7 +7250,7 @@ footer div {
     }
 
     line {
-        font-family: \00003566
+        font-family: \00003568
     }
 }
 
@@ -7262,7 +7264,7 @@ footer div {
     }
 
     line {
-        font-family: \00003571
+        font-family: \00003573
     }
 }
 
@@ -7277,7 +7279,7 @@ footer div {
     }
 
     line {
-        font-family: \00003578
+        font-family: \00003580
     }
 }
 
