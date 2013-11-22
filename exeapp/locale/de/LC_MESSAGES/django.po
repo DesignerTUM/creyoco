@@ -514,7 +514,7 @@ msgstr "Bereits Mitglied?"
 
 #: templates/registration/login.html:14
 msgid "Login!"
-msgstr "Medle dich an!"
+msgstr "Melde dich an!"
 
 #: templates/registration/login.html:20
 msgid "Username or..."
