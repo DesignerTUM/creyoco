@@ -198,9 +198,9 @@ header {
   padding-left: 30px;
   padding-right: 30px;
   #middle-row {
+    border: solid 1px $lightgrey;
     @include background-image(linear-gradient(left, white, #e8e8e8, white));
     //border: 1px dotted $darkgrey;
-    border-top: none;
     min-height: 400px;
     max-height: 750px;
     overflow: auto;
@@ -287,7 +287,6 @@ header {
 }
 
 ul#navi {
-  border-bottom: 1px dotted $darkgrey;
   li {
     //$basic-sprite-dimensions: false;
 
@@ -298,8 +297,9 @@ ul#navi {
     @include transition(background-image 1s ease-in);
     height: 21px;
     //width: 169px;
-    @include background-image(linear-gradient(bottom right, white, $lightgrey, white));
+    @include background-image(linear-gradient(bottom, white, $lightgrey));
     @include border-radius(5px);
+    border: solid 1px $lightgrey;
     width: 24.625%;
     color: black;
     display: inline-block;
@@ -307,7 +307,7 @@ ul#navi {
     text-align: center;
     text-decoration: none;
     line-height: 21px;
-    padding-top: 1px;
+    margin-bottom: 5px;
     @include text-shadow(white 0 1px 0);
 
     a {
@@ -322,7 +322,7 @@ ul#navi {
       margin-right: 0px;
     }
     &.active {
-      @include background-image(linear-gradient(bottom right, darken($lightgrey, 10%), white, darken($lightgrey, 10%)));
+      @include background-image(linear-gradient(bottom right, white, darken($lightgrey, 10%)));
       a {
         color: $red;
       }
