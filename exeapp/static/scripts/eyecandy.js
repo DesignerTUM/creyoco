@@ -146,11 +146,6 @@ define(['jquery', 'common', 'chosen', 'qtip2', 'jquery-modal'], function($, comm
             $('#download').click( function () {
                 exports.show_lightbox(365, 200, $("#download_box"));
             });
-
-            $("#help_trigger").on("click", function() {
-                        exports.show_lightbox(960, 756, $('#helpIFrame'));
-                        return false;
-                   });
             });
         }
     };
