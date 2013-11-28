@@ -104,7 +104,7 @@ body {
   }
   #box_left {
     float: left;
-    width: 14.60526315%;
+    width: 14.6%;
     padding-right: 2%;
     min-height: 20px;
     hr {
@@ -134,7 +134,7 @@ body {
   }
   #box_right {
     float: right;
-    width: 14.60526315%;
+    width: 14.6%;
     padding-left: 2%;
   }
 }
@@ -165,11 +165,13 @@ header {
     //border-bottom: 1px dotted $darkgrey;
     hr {
       @include horizontal-rule;
+      width: 98%;
     }
   }
   .user_info {
     float: right;
     width: 250px;
+    margin-right: 2%;
     .chzn {
       float: right;
     }
@@ -192,7 +194,7 @@ header {
   background: image-url('content-bg.png') repeat-y;
   background-size: 100% 100%;
   float: left;
-  width: 70.7894737%;
+  width: 70.6%;
   padding-left: 30px;
   padding-right: 30px;
   #middle-row {
