@@ -20,23 +20,11 @@ except ImportError:
     else:
         raise
 
-
-class UrlOpener(FancyURLopener):
-    """
-    Set a distinctive User-Agent, so Wikipedia.org knows we're not spammers
-    """
-    version = "eXe/exe@exelearning.org"
-
-
 try:
     import urllib.request
-
-    urllib.request._urlopener = UrlOpener()
 except ImportError:
     if PY2:
         import urllib
-
-        urllib._urlopener = UrlOpener()
 
 
 class WikipediaIdevice(GenericIdevice):
@@ -62,7 +50,7 @@ within Wikipedia."""))
     userResources = []
     # TODO FDL has to be in the package
     # systemResources += ["fdl.html"]
-    #    self._langInstruc      = x_(u"""Select the appropriate language version
+    # self._langInstruc      = x_(u"""Select the appropriate language version
     # of Wikipedia to search and enter search term.""")
 
     def load_article(self, title):
@@ -74,13 +62,15 @@ within Wikipedia."""))
         title = urllib.parse.quote(title.replace(" ", "_").encode('utf-8'))
         try:
             url = (self.site or self.ownUrl)
-            if not url.endswith('/') and title != '': url += '/'
-            if '://' not in url: url = 'http://' + url
+            if not url.endswith('/') and title != '':
+                url += '/'
+            if '://' not in url:
+                url = 'http://' + url
             url += title
             net = urllib.request.urlopen(url)
             page = net.read()
             net.close()
-        except IOError as error:
+        except IOError:
             self.content = _(
                 "Unable to download from %s <br/>Please check the spelling "
                 "and connection and try again.") % url
@@ -132,8 +122,8 @@ within Wikipedia."""))
         """
         content = re.sub(r'href="/', r'href="%s/' % netloc, content)
         content = re.sub(
-            r'<(span|div)\s+(id|class)="(editsection|jump-to-nav)".*?</\1>', '',
-            content)
+            r'<(span|div)\s+(id|class)="(editsection|jump-to-nav)".*?</\1>',
+            '', content)
         # TODO Find a way to remove scripts without removing newlines
         content = content.replace("\n", " ")
         content = re.sub(r'<script.*?</script>', '', content)
@@ -141,7 +131,3 @@ within Wikipedia."""))
 
     class Meta:
         app_label = "exeapp"
-
-
-
-
