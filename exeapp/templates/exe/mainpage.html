@@ -11,11 +11,12 @@
     <link rel="stylesheet" type="text/css"
           href="{% get_static_prefix %}css/mz/style.min.css">
     <link rel="stylesheet"
-          href="{% get_static_prefix %}/scripts/bower_components/jquery-modal/jquery.modal.css"
+          href="{% get_static_prefix %}scripts/bower_components/jquery-modal/jquery.modal.css"
           type="text/css" media="screen"/>
 {% endblock %}
 {% block head_javascript %}
-    {% require_module 'main' %}
+    {#    {% require_module 'main' %}#}
+    <script src="{% get_static_prefix %}/scripts/main-built.js"></script>
     {% render_form_media current_node %}
 {% endblock %}
 

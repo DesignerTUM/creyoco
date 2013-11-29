@@ -14,7 +14,7 @@
      * dependencies will be included in the module's file when the build is
      * done. A minimum module entry is {name: "module_name"}.
      */
-    modules: [],
+//    modules: [],
 
     /*
      * Allow CSS optimizations. Allowed values:
@@ -57,6 +57,8 @@
      * to true if you want to skip optimizing those other non-build layer JS
      * files.
      */
-    skipDirOptimize: true
+    skipDirOptimize: true,
+
+    mainConfigFile: "main.js"
 
 })

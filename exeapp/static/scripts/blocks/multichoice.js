@@ -1,4 +1,4 @@
-exports = {
+multichoice = {
     init: function () {
         $(document).ready(function () {
             $(".check_multichoice").off("click").on("click", function (e) {
@@ -26,8 +26,8 @@ exports = {
 
 if (typeof(requirejs) !== "undefined") {
     define("multichoice", ['jquery'], function ($) {
-        return exports;
+        return multichoice;
     })
 } else {
-    exports.init();
+    multichoice.init();
 }

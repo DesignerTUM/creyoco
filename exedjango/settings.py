@@ -3,7 +3,6 @@
 import os
 import sys
 
-
 def _get_file_from_root(folder_name):
     '''Returns path to a file or folder in root of the project'''
     return os.path.join(os.path.dirname(__file__), folder_name).replace('\\', '/')
@@ -202,3 +201,12 @@ SENDFILE_BACKEND = 'sendfile.backends.development'
 REQUIRE_BASE_URL = "scripts/"
 
 REQUIRE_BUILD_PROFILE = "app.build.js"
+
+ALLOWED_HOSTS = ["*"]
+
+REQUIRE_STANDALONE_MODULES = {
+    "main": {
+        "out": "main-built.js",
+        "build_profile": "app.build.js",
+    }
+}

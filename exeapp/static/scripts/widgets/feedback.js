@@ -1,4 +1,4 @@
-exports = {
+feedback = {
     init: function() {
         $(document).ready(function() {
             $(".toggle_feedback").off("click").on("click", function(e){
@@ -10,7 +10,7 @@ exports = {
 }
 if (typeof(requirejs) !== "undefined") {
     define("feedback", ['jquery'], function($) {
-        return exports;
+        return feedback;
     })} else {
-        exports.init();
-    }
+    feedback.init();
+}

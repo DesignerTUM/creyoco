@@ -1,4 +1,4 @@
-exports = {
+cloze = {
     init: function () {
         $(document).ready(function () {
             $(".cloze_submit").off("click").on("click", submit_cloze);
@@ -51,8 +51,8 @@ exports = {
 
 if (typeof(requirejs) !== "undefined") {
     define("cloze", ['jquery'], function ($) {
-        return exports;
+        return cloze;
     })
 } else {
-    exports.init();
+    cloze.init();
 }

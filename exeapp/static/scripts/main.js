@@ -8,7 +8,7 @@ require.config({
         "imagesloaded": "bower_components/imagesloaded/imagesloaded",
         "jquery-pjax": "bower_components/jquery-pjax/jquery.pjax",
         "jquery-cookie": "bower_components/jquery.cookie/jquery.cookie",
-        "qtip2": "//cdnjs.cloudflare.com/ajax/libs/qtip2/2.1.1/jquery.qtip.min",
+        "qtip2": "bower_components/qtip2/jquery.qtip",
         "jquery-jsonrpc": "thirdparty/jquery.jsonrpc",
         "jquery-form": "bower_components/jquery-form/jquery.form",
         "jquery-modal": "bower_components/jquery-modal/jquery.modal",
