@@ -1,1 +1,7 @@
 .cloze_result {display: none;}
+
+.cloze_gap {
+    width: 30px !important;
+    font-weight: bold !important;
+    text-align: center;
+}

@@ -74,11 +74,15 @@ class URLWidget(TextInput):
         html += '<input type="submit" name="idevice_action" value="Load" />'
         return html
 
+
 class ClozeWidget(FreeTextWidget):
-    view_media = forms.Media(
-            js=["%sscripts/widgets/cloze.js" % settings.STATIC_URL],
-            css={"all": ["%scss/widgets/cloze.css" % settings.STATIC_URL]},
+    media = forms.Media(
+        js=["{}scripts/widgets/cloze.js".format(settings.STATIC_URL)],
+        css={"all": ["{}css/widgets/cloze.css".format(
+            settings.STATIC_URL)
+        ]},
     )
+    js_modules = ['cloze']
 
     def render_preview(self, content):
         gaps = BeautifulSoup(content).findAll(
@@ -97,6 +101,7 @@ class ClozeWidget(FreeTextWidget):
 
 class MultiChoiceOptionWidget(FreeTextWidget):
     media = forms.Media(
+        js=["{}scripts/blocks/multichoice.js".format(settings.STATIC_URL)],
         css={"all": ["{}css/widgets/multichoiceoption.css".format(
             settings.STATIC_URL
         )]}

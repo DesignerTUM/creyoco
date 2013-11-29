@@ -14,6 +14,7 @@ require.config({
         "jquery-modal": "bower_components/jquery-modal/jquery.modal",
         "jstree": "bower_components/jstree-dist/jquery.jstree",
         "feedback": "widgets/feedback",
+        "cloze": "widgets/cloze",
         "multichoice": "blocks/multichoice"
     },
 
