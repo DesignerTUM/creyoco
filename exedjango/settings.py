@@ -115,6 +115,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.flatpages',
+    'require',
     'grappelli',
     'filebrowser',
     'south',
@@ -138,8 +139,12 @@ ABSOLUTE_URL_OVERRIDES = {
 
 
 STATIC_ROOT = _get_file_from_root('static')
+STATICFILES_DIRS = (
+    'require',
+)
 STATIC_URL = '/static/'
 STYLE_DIR = "%s/css/styles/" % STATIC_ROOT
+STATICFILES_STORAGE='require.storage.OptimizedStaticFilesStorage'
 
 TINYMCE_JS_URL = os.path.join(STATIC_URL, 'tiny_mce/tiny_mce.js')
 
@@ -193,3 +198,7 @@ FILEBROWSER_CONVERT_FILENAME = False
 FILEBROWSER_STRICT_PIL = True
 
 SENDFILE_BACKEND = 'sendfile.backends.development'
+
+REQUIRE_BASE_URL = "scripts/"
+
+REQUIRE_BUILD_PROFILE = "app.build.js"

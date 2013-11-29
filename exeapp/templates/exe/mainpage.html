@@ -3,7 +3,7 @@
 {% load i18n %}
 {% load mainpage_extras %}
 {% load authoring_extras %}
-
+{% load require %}
 {% load static %}
 
 {% block title %}{{ package.title }} | creyoco{% endblock %}
@@ -15,8 +15,7 @@
           type="text/css" media="screen"/>
 {% endblock %}
 {% block head_javascript %}
-    <script data-main="{% get_static_prefix %}scripts/main.js"
-            src="{% get_static_prefix %}scripts/bower_components/requirejs/require.js"></script>
+    {% require_module 'main' %}
     {% render_form_media current_node %}
 {% endblock %}
 
