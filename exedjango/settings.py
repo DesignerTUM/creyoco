@@ -3,9 +3,11 @@
 import os
 import sys
 
+
 def _get_file_from_root(folder_name):
     '''Returns path to a file or folder in root of the project'''
-    return os.path.join(os.path.dirname(__file__), folder_name).replace('\\', '/')
+    return os.path.join(os.path.dirname(__file__), folder_name).replace('\\',
+                                                                        '/')
 
 
 DEBUG = True
@@ -17,9 +19,9 @@ if DEBUG:
 import logging
 
 logging.basicConfig(
-            level=DEBUG and logging.DEBUG or logging.INFO,
-            format='%(asctime)s %(levelname)s %(message)s',
-            )
+    level=DEBUG and logging.DEBUG or logging.INFO,
+    format='%(asctime)s %(levelname)s %(message)s',
+)
 
 ADMINS = (
     ('Dmytro Vorona', 'alendit@gmail.com'),
@@ -86,7 +88,7 @@ SECRET_KEY = 'g4c9r)uzvpig@%g5mc+6i$6o6tm-qh@^l=*8=#hw+jo_j_*fl_'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
+    #     'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -105,7 +107,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'exedjango.urls'
 
 TEMPLATE_DIRS = (_get_file_from_root('exeapp_templates'),
-                 )
+)
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -133,9 +135,8 @@ INSTALLED_APPS = (
 )
 
 ABSOLUTE_URL_OVERRIDES = {
-        'auth.user': lambda user: '/',
-        }
-
+    'auth.user': lambda user: '/',
+}
 
 STATIC_ROOT = _get_file_from_root('static')
 STATICFILES_DIRS = (
@@ -143,7 +144,7 @@ STATICFILES_DIRS = (
 )
 STATIC_URL = '/static/'
 STYLE_DIR = "%s/css/styles/" % STATIC_ROOT
-STATICFILES_STORAGE='require.storage.OptimizedStaticFilesStorage'
+STATICFILES_STORAGE = 'require.storage.OptimizedStaticFilesStorage'
 
 TINYMCE_JS_URL = os.path.join(STATIC_URL, 'tiny_mce/tiny_mce.js')
 
@@ -154,32 +155,43 @@ TINYMCE_COMPRESSOR = False
 LINK_LIST = "authoring/link_list"
 
 TINYMCE_DEFAULT_CONFIG = {
-   "content_css": "/static/css/extra.css",
+    "content_css": "/static/css/extra.css",
     "strict_loading_mode": True,
-   "apply_source_formatting": True,
-   "cleanup_on_startup": True,
-   "entity_encoding": "raw",
-   "gecko_spellcheck": True,
-   "external_link_list_url": LINK_LIST,
+    "apply_source_formatting": True,
+    "cleanup_on_startup": True,
+    "entity_encoding": "raw",
+    "gecko_spellcheck": True,
+    "external_link_list_url": LINK_LIST,
     # "mode": "specific_textareas",
     # "editor_selector": "mceEditor",
-    "plugins": "table,save,advhr,advimage,advlink,emotions,media, contextmenu,paste,directionality, heading",
+    "plugins": "table,save,advhr,advimage,advlink,emotions,media, "
+               "contextmenu,paste,directionality, heading",
     "theme": "advanced",
     "theme_advanced_layout_manager": "SimpleLayout",
-   "theme_advanced_toolbar_location": "top",
-    "theme_advanced_buttons1": "newdocument,separator,bold,italic,underline,fontsizeselect,h1,h2,h3,h4,h5,h6,separator,forecolor,backcolor,separator,sub,sup,separator,justifyleft,justifycenter,justifyright,justifyfull,separator,bullist,numlist,outdent,indent,separator,anchor,separator,cut,copy,paste,pastetext,pasteword,help",
-    "theme_advanced_buttons2": "image,media,exemath,advhr,fontselect,tablecontrols,separator,link,unlink,separator, undo,redo,separator,charmap,code,removeformat",
+    "theme_advanced_toolbar_location": "top",
+    "theme_advanced_buttons1": "newdocument,separator,bold,italic,underline,"
+                               "fontsizeselect,h1,h2,h3,h4,h5,h6,separator,"
+                               "forecolor,backcolor,separator,sub,sup,"
+                               "separator,justifyleft,justifycenter,"
+                               "justifyright,justifyfull,separator,bullist,"
+                               "numlist,outdent,indent,separator,anchor,"
+                               "separator,cut,copy,paste,pastetext,pasteword,"
+                               "help",
+    "theme_advanced_buttons2": "image,media,exemath,advhr,fontselect,"
+                               "tablecontrols,separator,link,unlink,"
+                               "separator, undo,redo,separator,charmap,code,"
+                               "removeformat",
     "theme_advanced_buttons3": "",
-   "advimage_image_browser_callback": "chooseImage_viaTinyMCE",
-   "advimage_image2insert_browser_callback": "chooseImage_viaTinyMCE",
-   "media_media_browser_callback": "chooseImage_viaTinyMCE",
-   "media_media2insert_browser_callback": "chooseImage_viaTinyMCE",
-   "advlink_file_browser_callback": "chooseImage_viaTinyMCE",
-   "advlink_file2insert_browser_callback": "chooseImage_viaTinyMCE",
-   "theme_advanced_statusbar_location": "bottom",
-   "theme_advanced_resize_horizontal": False,
-   "theme_advanced_resizing": True,
-       "width": "100%",
+    "advimage_image_browser_callback": "chooseImage_viaTinyMCE",
+    "advimage_image2insert_browser_callback": "chooseImage_viaTinyMCE",
+    "media_media_browser_callback": "chooseImage_viaTinyMCE",
+    "media_media2insert_browser_callback": "chooseImage_viaTinyMCE",
+    "advlink_file_browser_callback": "chooseImage_viaTinyMCE",
+    "advlink_file2insert_browser_callback": "chooseImage_viaTinyMCE",
+    "theme_advanced_statusbar_location": "bottom",
+    "theme_advanced_resize_horizontal": False,
+    "theme_advanced_resizing": True,
+    "width": "100%",
     "remove_script_host": False,
     "convert_urls": False
 }
@@ -202,11 +214,3 @@ REQUIRE_BASE_URL = "scripts/"
 
 REQUIRE_BUILD_PROFILE = "app.build.js"
 
-ALLOWED_HOSTS = ["*"]
-
-REQUIRE_STANDALONE_MODULES = {
-    "main": {
-        "out": "main-built.js",
-        "build_profile": "app.build.js",
-    }
-}

@@ -32,3 +32,12 @@ ALLOWED_HOSTS = ['129.187.81.136', '129.187.81.137']
 SENDFILE_BACKEND = 'sendfile.backends.nginx'
 SENDFILE_ROOT = MEDIA_ROOT
 SENDFILE_URL = '/protected'
+
+ALLOWED_HOSTS = ["*"]
+
+REQUIRE_STANDALONE_MODULES = {
+    "main": {
+        "out": "main-built.js",
+        "build_profile": "app.build.js",
+    }
+}
