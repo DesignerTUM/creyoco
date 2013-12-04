@@ -214,3 +214,13 @@ REQUIRE_BASE_URL = "scripts/"
 
 REQUIRE_BUILD_PROFILE = "app.build.js"
 
+REQUIRE_STANDALONE_MODULES = {
+    "main": {
+        "out": "main-built.js",
+        "build_profile": "app.build.js",
+    }
+}
+
+SOUTH_DATABASE_ADAPTERS = {
+    'default': "south.db.mysql"
+}
