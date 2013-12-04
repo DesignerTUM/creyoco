@@ -7,8 +7,8 @@ TEMPLATE_DEBUG = DEBUG
 
 DATABASES = {
        'default' : {
-               'ENGINE' : 'django.db.backends.mysql',
-               'NAME' : 'creyoco',
+           'ENGINE': 'mysql_cymysql',
+           'NAME' : 'creyoco',
                'USER' : 'root',
                'PASSWORD' : 'ssl20qwerty',
                'HOST' : 'localhost',
