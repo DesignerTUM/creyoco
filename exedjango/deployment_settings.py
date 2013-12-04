@@ -41,3 +41,7 @@ REQUIRE_STANDALONE_MODULES = {
         "build_profile": "app.build.js",
     }
 }
+
+SOUTH_DATABASE_ADAPTERS = {
+    'default': "south.db.mysql"
+}
