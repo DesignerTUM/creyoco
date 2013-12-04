@@ -122,11 +122,12 @@ define(['jquery', 'jquery-form', 'jquery-pjax', 'jquery-jsonrpc', 'jquery-cookie
 
         reload_authoring: function () {
             url = "/exeapp/package/" + exports.get_package_id() + "/" + exports.get_current_node_id() + "/";
-            $("#authoring").load(url, function () {
+            $("#authoring").on("pjax:end", function () {
+                $("#authoring").off("pjax:end");
                 exports.initialize_authoring();
                 exports.get_media("authoring/?partial=true&media=true");
-
             });
+            $.pjax.click(event, {container: "#authoring"});
         },
 
         get_media: function (request_url) {

@@ -15,8 +15,8 @@
           type="text/css" media="screen"/>
 {% endblock %}
 {% block head_javascript %}
-    {#    {% require_module 'main' %}#}
-    <script src="{% get_static_prefix %}/scripts/main-built.js"></script>
+    {% require_module 'main' %}
+    {#    <script src="{% get_static_prefix %}/scripts/main-built.js"></script>#}
     {% render_form_media current_node %}
 {% endblock %}
 
