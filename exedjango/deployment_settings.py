@@ -2,7 +2,7 @@
 
 from .settings import *
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 DATABASES = {
@@ -41,6 +41,8 @@ REQUIRE_STANDALONE_MODULES = {
         "build_profile": "app.build.js",
     }
 }
+
+REQUIRE_DEBUG = False
 
 SOUTH_DATABASE_ADAPTERS = {
     'default': "south.db.mysql"
