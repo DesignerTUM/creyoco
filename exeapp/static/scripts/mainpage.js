@@ -568,7 +568,7 @@ require(['jquery', "common", "eyecandy", 'jquery-pjax', 'jquery-cookie', 'jquery
         function set_current_node(node) {
 //            common.get_outline_pane().attr('current_node', common.get_current_node().attr('nodeid'));
             updateTitle();
-            common.reload_authoring();
+            $.pjax.click(event, {container: "#authoring"});
         }
 
         function set_current_style() {

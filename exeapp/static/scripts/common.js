@@ -44,7 +44,6 @@ YOUR_SCORE_IS = "Your score is ";
 
 define(['jquery', 'jquery-form', 'jquery-pjax', 'jquery-jsonrpc', 'jquery-cookie'], function ($) {
 
-
     var exports = {
         initialize_authoring: function () {
 
@@ -66,15 +65,13 @@ define(['jquery', 'jquery-form', 'jquery-pjax', 'jquery-jsonrpc', 'jquery-cookie
                     tinyMCE.triggerSave(true, true);
                 }
             });
+            exports.get_media("authoring/?partial=true&media=true");
         },
 
         init: function () {
 
             jQuery(document).ready(function () {
                 $(document).on("pjax:success", function (event, data) {
-                    // while (tinyMCE.activeEditor && tinyMCE.activeEditor != "undefined"){
-                    // tinyMCE.activeEditor.remove();
-                    // }
                     exports.initialize_authoring();
                 });
                 $(document).on("pjax:popstate", function (event) {
@@ -122,12 +119,9 @@ define(['jquery', 'jquery-form', 'jquery-pjax', 'jquery-jsonrpc', 'jquery-cookie
 
         reload_authoring: function () {
             url = "/exeapp/package/" + exports.get_package_id() + "/" + exports.get_current_node_id() + "/";
-            $("#authoring").on("pjax:end", function () {
-                $("#authoring").off("pjax:end");
+            $("#authoring").load(url, function () {
                 exports.initialize_authoring();
-                exports.get_media("authoring/?partial=true&media=true");
             });
-            $.pjax.click(event, {container: "#authoring"});
         },
 
         get_media: function (request_url) {
@@ -151,8 +145,6 @@ define(['jquery', 'jquery-form', 'jquery-pjax', 'jquery-jsonrpc', 'jquery-cookie
         },
 
         insert_idevice: function (idevice_id) {
-            // dynamically load scripts for idevices
-            exports.get_media("authoring/?idevice_id=" + idevice_id + "&media=true");
             $.ajax({
                 url: "authoring/?idevice_id=" + idevice_id,
                 dataType: 'html',
