@@ -6114,7 +6114,7 @@ body a:hover {
 #wrapper #box_right {
     float: right;
     width: 14.6%;
-    padding-left: 2.5%;
+    padding-left: 2%;
 }
 
 @media -sass-debug-info {
@@ -6240,7 +6240,7 @@ header .user_info {
 }
 
 header .user_info .chzn {
-    float: right;
+    padding-left: 9px;
 }
 
 @media -sass-debug-info {
