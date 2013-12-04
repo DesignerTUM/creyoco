@@ -176,6 +176,7 @@ require(['jquery', "common", "eyecandy", 'jquery-pjax', 'jquery-cookie', 'jquery
             var $nodes = common.get_outline_pane().find("ul > li > a");
             $nodes.off("click");
             $nodes.on("click", function (event) {
+                common.get_outline_pane().jstree("select_node", "#" + $(this).attr("id"), true);
                 handle_select_node(event);
                 return false;
             });
@@ -379,7 +380,7 @@ require(['jquery', "common", "eyecandy", 'jquery-pjax', 'jquery-cookie', 'jquery
         // Handles outline_pane selection event. Calls package.change_current_node
         // via rpc.
         function handle_select_node(event, data) {
-            common.get_outline_pane().jstree("select_node", "#" + $(this).attr("id"), true);
+
             // for (key in data){alert(key);};
             if (data == undefined) {
                 var node = common.get_current_node();
