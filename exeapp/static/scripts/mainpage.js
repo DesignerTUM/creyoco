@@ -94,7 +94,14 @@ require(['jquery', "common", "eyecandy", 'jquery-pjax', 'jquery-cookie', 'jquery
                     "dots": false,
                     "icons": false
                 },
-                "plugins": ["themes", "json_data", "html_data", "ui", "crrm"]});
+                "plugins": ["themes", "json_data", "html_data", "ui", "crrm", "dnd"]})
+                .on("move_node.jstree", function(event, data, a, b, c, d) {
+                        var current_node_id = data.rslt.o.find("a").attr("nodeid");
+                        var target_node_id = data.rslt.r.find("a").attr("nodeid");
+                        $.jsonRPC.request('move_node_' + data.rslt.p, {
+                            params: [get_package_id(), current_node_id, target_node_id]
+                        });
+                });
 
             common.get_outline_pane().on("loaded.jstree", function (event, data) {
                 common.get_outline_pane().jstree('open_all', $('#outline_pane>ul'));

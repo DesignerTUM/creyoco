@@ -262,17 +262,40 @@ with it'''
             idevice = idevice_class.objects.create(parent_node=self)
             return idevice
 
-    def move(self, new_parent, next_sibling=None):
+    def move(self, new_parent=None, sibling=None, after=False):
         """
-        Moves the node around in the tree.
+        Moves the node around in the tree. next_sibling can be a pk
+        or node object.
+        Places node before the sibling if after is False. If no sibling is
+        given, after is ignored.
         """
+
+        try:
+            sibling = Node.objects.get(pk=int(sibling))
+        except (TypeError, ValueError):
+            assert(sibling is None or isinstance(sibling, Node))
+
+        if new_parent is None:
+            assert(sibling is not None, "Either parent or sibling have to "
+                "be not None")
+            new_parent = sibling.parent
+        else:
+            try:
+                new_parent = Node.objects.get(pk=int(new_parent))
+            except (TypeError, ValueError):
+                isinstance(new_parent, Node)
+            if sibling is not None:
+                assert(new_parent.children.filter(pk=sibling.pk).exists())
 
         self.parent = new_parent
         self.save()
         node_order = self.parent.get_node_order()
         node_order.remove(self.id)
-        if next_sibling is not None:
-            sibling_index = node_order.index(next_sibling.pk)
+        if sibling is not None:
+            sibling_index = node_order.index(sibling.pk)
+            if after:
+                sibling_index += 1
+
         else:
             sibling_index = len(node_order)
         node_order.insert(sibling_index, self.pk)
@@ -347,6 +370,22 @@ Returns True is successful
 
         self.move(self.parent, next_next_sibling)
         return True
+
+    def before(self, target_node):
+        """Places the node before target node"""
+        self.move(sibling=target_node, after=False)
+        return True
+
+    def after(self, target_node):
+        """Places the node after target node"""
+        self.move(sibling=target_node, after=True)
+        return True
+
+    def last(self, target_node):
+        """Places the node as the last child of the target node"""
+        self.move(new_parent=target_node)
+        return True
+
 
     def delete(self):
         """Checks if the node is root, deletes it otherwise.

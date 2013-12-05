@@ -87,12 +87,28 @@ current node down leaving it on the same level. Returns json variable moved = 1
 if successful'''
     return {"moved": node.down()}
 
+@jsonrpc_authernticating_method('package.move_node_before')
+def move_node_before(request, package, node, target):
+    return node.before(target)
+
+
+@jsonrpc_authernticating_method('package.move_node_after')
+def move_node_after(request, package, node, target):
+    return node.after(target)
+
+
+@jsonrpc_authernticating_method('package.move_node_last')
+def move_node_last(request, package, node, target):
+    return node.last(target)
+
 
 @jsonrpc_method('package.create_package', authenticated=True)
 def create_package(request, package_name):
     user = User.objects.get(username=request.user.username)
     p = Package.objects.create(title=package_name, user=user)
     return {'id': p.id, 'title': p.title, 'url': p.get_absolute_url()}
+
+
 
 
 @jsonrpc_method('package.delete_package', authenticated=True)
