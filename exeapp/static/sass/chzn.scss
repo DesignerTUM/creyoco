@@ -46,8 +46,8 @@ $chosen-sprite-dimensions: true;
   }
   .chosen-single {
     span {
-      margin-right: 26px;
-      display: block;
+      margin-right: 15px;
+      display: inline;
       overflow: hidden;
       white-space: nowrap;
       -o-text-overflow: ellipsis;
@@ -63,10 +63,11 @@ $chosen-sprite-dimensions: true;
     }
   }
   .chosen-single div {
-    position: absolute;
-    right: 0;
-    top: 0;
-    display: block;
+    //position: absolute;
+    //right: 0;
+    //top: 0;
+    display: inline;
+    width: 1em;
     height: 100%;
     b::before {
       font-family: "FontAwesome";

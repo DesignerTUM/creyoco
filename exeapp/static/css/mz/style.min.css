@@ -4484,8 +4484,8 @@ a:hover .btn [class*=" icon-"].icon-large.icon-question-sign {
 }
 
 .chosen-container-single .chosen-single span {
-    margin-right: 26px;
-    display: block;
+    margin-right: 15px;
+    display: inline;
     overflow: hidden;
     white-space: nowrap;
     -o-text-overflow: ellipsis;
@@ -4510,10 +4510,8 @@ a:hover .btn [class*=" icon-"].icon-large.icon-question-sign {
 }
 
 .chosen-container-single .chosen-single div {
-    position: absolute;
-    right: 0;
-    top: 0;
-    display: block;
+    display: inline;
+    width: 1em;
     height: 100%;
 }
 
@@ -4523,7 +4521,7 @@ a:hover .btn [class*=" icon-"].icon-large.icon-question-sign {
     }
 
     line {
-        font-family: \0000371
+        font-family: \0000372
     }
 }
 
@@ -4540,7 +4538,7 @@ a:hover .btn [class*=" icon-"].icon-large.icon-question-sign {
     }
 
     line {
-        font-family: \0000378
+        font-family: \0000379
     }
 }
 
@@ -4558,7 +4556,7 @@ a:hover .btn [class*=" icon-"].icon-large.icon-question-sign {
     }
 
     line {
-        font-family: \0000384
+        font-family: \0000385
     }
 }
 
@@ -4585,7 +4583,7 @@ a:hover .btn [class*=" icon-"].icon-large.icon-question-sign {
     }
 
     line {
-        font-family: \00003101
+        font-family: \00003102
     }
 }
 
@@ -4600,7 +4598,7 @@ a:hover .btn [class*=" icon-"].icon-large.icon-question-sign {
     }
 
     line {
-        font-family: \00003113
+        font-family: \00003114
     }
 }
 
@@ -4614,7 +4612,7 @@ a:hover .btn [class*=" icon-"].icon-large.icon-question-sign {
     }
 
     line {
-        font-family: \00003117
+        font-family: \00003118
     }
 }
 
@@ -4634,7 +4632,7 @@ a:hover .btn [class*=" icon-"].icon-large.icon-question-sign {
     }
 
     line {
-        font-family: \00003127
+        font-family: \00003128
     }
 }
 
@@ -4649,7 +4647,7 @@ a:hover .btn [class*=" icon-"].icon-large.icon-question-sign {
     }
 
     line {
-        font-family: \00003133
+        font-family: \00003134
     }
 }
 
@@ -4666,7 +4664,7 @@ a:hover .btn [class*=" icon-"].icon-large.icon-question-sign {
     }
 
     line {
-        font-family: \00003139
+        font-family: \00003140
     }
 }
 
@@ -4681,7 +4679,7 @@ a:hover .btn [class*=" icon-"].icon-large.icon-question-sign {
     }
 
     line {
-        font-family: \00003142
+        font-family: \00003143
     }
 }
 
@@ -4697,7 +4695,7 @@ a:hover .btn [class*=" icon-"].icon-large.icon-question-sign {
     }
 
     line {
-        font-family: \00003149
+        font-family: \00003150
     }
 }
 
@@ -4712,7 +4710,7 @@ a:hover .btn [class*=" icon-"].icon-large.icon-question-sign {
     }
 
     line {
-        font-family: \00003155
+        font-family: \00003156
     }
 }
 
@@ -6211,6 +6209,7 @@ header > div hr {
     border-bottom: 1px dotted #595959;
     width: 100%;
     width: 98%;
+    padding-bottom: 10px;
 }
 
 @media -sass-debug-info {
@@ -6219,7 +6218,7 @@ header > div hr {
     }
 
     line {
-        font-family: \00003175
+        font-family: \00003176
     }
 }
 
@@ -6235,12 +6234,12 @@ header .user_info {
     }
 
     line {
-        font-family: \00003179
+        font-family: \00003180
     }
 }
 
 header .user_info .chzn {
-    padding-left: 9px;
+    padding-left: 0px;
 }
 
 @media -sass-debug-info {
@@ -6249,13 +6248,13 @@ header .user_info .chzn {
     }
 
     line {
-        font-family: \00003182
+        font-family: \00003183
     }
 }
 
 header .user_info .account {
     width: 100%;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     height: 13px;
 }
 
@@ -6265,11 +6264,25 @@ header .user_info .account {
     }
 
     line {
-        font-family: \00003186
+        font-family: \00003187
     }
 }
 
-header .user_info .account p {
+header .user_info .account em {
+    margin-left: 3px;
+}
+
+@media -sass-debug-info {
+    filename {
+        font-family: file\:\/\/\/home\/alendit\/creyoco\/exeapp\/static\/sass\/style\.min\.scss
+    }
+
+    line {
+        font-family: \00003190
+    }
+}
+
+header .user_info .account a {
     float: right;
 }
 
@@ -6279,21 +6292,7 @@ header .user_info .account p {
     }
 
     line {
-        font-family: \00003188
-    }
-}
-
-header .user_info .account p a {
-    margin-left: 10px;
-}
-
-@media -sass-debug-info {
-    filename {
-        font-family: file\:\/\/\/home\/alendit\/creyoco\/exeapp\/static\/sass\/style\.min\.scss
-    }
-
-    line {
-        font-family: \00003197
+        font-family: \00003199
     }
 }
 
@@ -6312,7 +6311,7 @@ header .user_info .account p a {
     }
 
     line {
-        font-family: \00003204
+        font-family: \00003206
     }
 }
 
@@ -6341,7 +6340,7 @@ header .user_info .account p a {
     }
 
     line {
-        font-family: \00003213
+        font-family: \00003215
     }
 }
 
@@ -6356,7 +6355,7 @@ header .user_info .account p a {
     }
 
     line {
-        font-family: \00003216
+        font-family: \00003218
     }
 }
 
@@ -6376,7 +6375,7 @@ header .user_info .account p a {
     }
 
     line {
-        font-family: \00003225
+        font-family: \00003227
     }
 }
 
@@ -6395,7 +6394,7 @@ header .user_info .account p a {
     }
 
     line {
-        font-family: \00003238
+        font-family: \00003240
     }
 }
 
@@ -6411,7 +6410,7 @@ header .user_info .account p a {
     }
 
     line {
-        font-family: \00003243
+        font-family: \00003245
     }
 }
 
@@ -6425,7 +6424,7 @@ header .user_info .account p a {
     }
 
     line {
-        font-family: \00003248
+        font-family: \00003250
     }
 }
 
@@ -6439,7 +6438,7 @@ header .user_info .account p a {
     }
 
     line {
-        font-family: \00003252
+        font-family: \00003254
     }
 }
 
@@ -6453,7 +6452,7 @@ header .user_info .account p a {
     }
 
     line {
-        font-family: \00003264
+        font-family: \00003266
     }
 }
 
@@ -6474,7 +6473,7 @@ header .user_info .account p a {
     }
 
     line {
-        font-family: \00003273
+        font-family: \00003275
     }
 }
 
@@ -6496,7 +6495,7 @@ header .user_info .account p a {
     }
 
     line {
-        font-family: \00003283
+        font-family: \00003285
     }
 }
 
@@ -6518,7 +6517,7 @@ header .user_info .account p a {
     }
 
     line {
-        font-family: \00003294
+        font-family: \00003296
     }
 }
 
@@ -6555,7 +6554,7 @@ ul#navi li {
     }
 
     line {
-        font-family: \00003317
+        font-family: \00003319
     }
 }
 
@@ -6569,7 +6568,7 @@ ul#navi li a {
     }
 
     line {
-        font-family: \00003319
+        font-family: \00003321
     }
 }
 
@@ -6584,7 +6583,7 @@ ul#navi li a:hover {
     }
 
     line {
-        font-family: \00003325
+        font-family: \00003327
     }
 }
 
@@ -6598,7 +6597,7 @@ ul#navi li:last-child {
     }
 
     line {
-        font-family: \00003328
+        font-family: \00003330
     }
 }
 
@@ -6615,7 +6614,7 @@ ul#navi li.active {
     }
 
     line {
-        font-family: \00003330
+        font-family: \00003332
     }
 }
 
@@ -6629,7 +6628,7 @@ ul#navi li.active a {
     }
 
     line {
-        font-family: \00003337
+        font-family: \00003339
     }
 }
 
@@ -6645,7 +6644,7 @@ ul#navi li.active a {
     }
 
     line {
-        font-family: \00003343
+        font-family: \00003345
     }
 }
 
@@ -6670,7 +6669,7 @@ ul#navi li.active a {
     }
 
     line {
-        font-family: \00003358
+        font-family: \00003360
     }
 }
 
@@ -6689,7 +6688,7 @@ ul#navi li.active a {
     }
 
     line {
-        font-family: \00003365
+        font-family: \00003367
     }
 }
 
@@ -6703,7 +6702,7 @@ ul#navi li.active a {
     }
 
     line {
-        font-family: \00003370
+        font-family: \00003372
     }
 }
 
@@ -6724,7 +6723,7 @@ ul#navi li.active a {
     }
 
     line {
-        font-family: \00003381
+        font-family: \00003383
     }
 }
 
@@ -6755,7 +6754,7 @@ ul#navi li.active a {
     }
 
     line {
-        font-family: \00003399
+        font-family: \00003401
     }
 }
 
@@ -6771,7 +6770,7 @@ ul#navi li.active a {
     }
 
     line {
-        font-family: \00003404
+        font-family: \00003406
     }
 }
 
@@ -6785,7 +6784,7 @@ ul#navi li.active a {
     }
 
     line {
-        font-family: \00003409
+        font-family: \00003411
     }
 }
 
@@ -6800,7 +6799,7 @@ ul#navi li.active a {
     }
 
     line {
-        font-family: \00003415
+        font-family: \00003417
     }
 }
 
@@ -6814,7 +6813,7 @@ strong {
     }
 
     line {
-        font-family: \00003419
+        font-family: \00003421
     }
 }
 
@@ -6829,7 +6828,7 @@ em {
     }
 
     line {
-        font-family: \00003425
+        font-family: \00003427
     }
 }
 
@@ -6846,7 +6845,7 @@ ul#package_list li {
     }
 
     line {
-        font-family: \00003430
+        font-family: \00003432
     }
 }
 
@@ -6860,7 +6859,7 @@ ul#package_list li:hover {
     }
 
     line {
-        font-family: \00003436
+        font-family: \00003438
     }
 }
 
@@ -6874,7 +6873,7 @@ ul#package_list li:last-child {
     }
 
     line {
-        font-family: \00003439
+        font-family: \00003441
     }
 }
 
@@ -6889,7 +6888,7 @@ ul#package_list li a {
     }
 
     line {
-        font-family: \00003442
+        font-family: \00003444
     }
 }
 
@@ -6903,7 +6902,7 @@ ul#package_list li a:hover {
     }
 
     line {
-        font-family: \00003446
+        font-family: \00003448
     }
 }
 
@@ -6918,7 +6917,7 @@ ul#package_list li .check {
     }
 
     line {
-        font-family: \00003450
+        font-family: \00003452
     }
 }
 
@@ -6940,7 +6939,7 @@ ul#package_list li.active {
     }
 
     line {
-        font-family: \00003451
+        font-family: \00003453
     }
 }
 
@@ -6954,7 +6953,7 @@ ul#package_list li.active .check {
     }
 
     line {
-        font-family: \00003464
+        font-family: \00003466
     }
 }
 
@@ -6970,7 +6969,7 @@ ul#package_list li #qs {
     }
 
     line {
-        font-family: \00003465
+        font-family: \00003467
     }
 }
 
@@ -6985,7 +6984,7 @@ ul#package_list li #qs i {
     }
 
     line {
-        font-family: \00003481
+        font-family: \00003483
     }
 }
 
@@ -7007,7 +7006,7 @@ footer {
     }
 
     line {
-        font-family: \00003493
+        font-family: \00003495
     }
 }
 
@@ -7030,7 +7029,7 @@ footer hr {
     }
 
     line {
-        font-family: \00003497
+        font-family: \00003499
     }
 }
 
@@ -7044,7 +7043,7 @@ footer div {
     }
 
     line {
-        font-family: \00003502
+        font-family: \00003504
     }
 }
 
@@ -7058,7 +7057,7 @@ footer div {
     }
 
     line {
-        font-family: \00003506
+        font-family: \00003508
     }
 }
 
@@ -7072,7 +7071,7 @@ footer div {
     }
 
     line {
-        font-family: \00003510
+        font-family: \00003512
     }
 }
 
@@ -7087,7 +7086,7 @@ footer div {
     }
 
     line {
-        font-family: \00003514
+        font-family: \00003516
     }
 }
 
@@ -7103,7 +7102,7 @@ footer div {
     }
 
     line {
-        font-family: \00003519
+        font-family: \00003521
     }
 }
 
@@ -7117,7 +7116,7 @@ footer div {
     }
 
     line {
-        font-family: \00003524
+        font-family: \00003526
     }
 }
 
@@ -7134,7 +7133,7 @@ footer div {
     }
 
     line {
-        font-family: \00003531
+        font-family: \00003533
     }
 }
 
@@ -7149,7 +7148,7 @@ footer div {
     }
 
     line {
-        font-family: \00003537
+        font-family: \00003539
     }
 }
 
@@ -7169,7 +7168,7 @@ footer div {
     }
 
     line {
-        font-family: \00003545
+        font-family: \00003547
     }
 }
 
@@ -7186,7 +7185,7 @@ footer div {
     }
 
     line {
-        font-family: \00003552
+        font-family: \00003554
     }
 }
 
@@ -7201,7 +7200,7 @@ footer div {
     }
 
     line {
-        font-family: \00003556
+        font-family: \00003558
     }
 }
 
@@ -7216,7 +7215,7 @@ footer div {
     }
 
     line {
-        font-family: \00003561
+        font-family: \00003563
     }
 }
 
@@ -7238,7 +7237,7 @@ footer div {
     }
 
     line {
-        font-family: \00003571
+        font-family: \00003573
     }
 }
 
@@ -7253,7 +7252,7 @@ footer div {
     }
 
     line {
-        font-family: \00003575
+        font-family: \00003577
     }
 }
 
@@ -7267,7 +7266,7 @@ footer div {
     }
 
     line {
-        font-family: \00003580
+        font-family: \00003582
     }
 }
 
@@ -7282,7 +7281,7 @@ footer div {
     }
 
     line {
-        font-family: \00003587
+        font-family: \00003589
     }
 }
 
