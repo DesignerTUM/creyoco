@@ -1,3 +1,42 @@
+require.config({
+    baseUrl: '/static/scripts/',
+    paths: {
+        "jquery": "bower_components/jquery/jquery",
+        "jquery-jsonrpc": "thirdparty/jquery.jsonrpc",
+        "chosen": "thirdparty/chosen.jquery",
+        "qtip2": "bower_components/qtip2/jquery.qtip",
+        "jquery-modal": "bower_components/jquery-modal/jquery.modal",
+        "jquery-form": "bower_components/jquery-form/jquery.form",
+        "jquery-pjax": "bower_components/jquery-pjax/jquery.pjax",
+        "jquery-cookie": "bower_components/jquery.cookie/jquery.cookie"
+    },
+    shim: {
+        "jquery-jsonrpc": {
+            "deps": ['jquery'],
+            "exports": "jQuery.fn.jsonrpc"
+        },
+        "jquery-modal": {
+            "deps": ['jquery'],
+            "exports": "jQuery.fn.modal"
+        },
+        "chosen": {
+            "deps": ['jquery'],
+            "exports": "jQuery.fn.chosen"
+        },
+        "jquery-cookie": {
+            "deps": ['jquery'],
+            "exports": "jQuery.fn.cookie"
+        },
+        "jquery-pjax": {
+            "deps": ['jquery']
+        },
+        "jquery-form": {
+            "deps": ['jquery'],
+            "exports": "jQuery.fn.form"
+        }
+    }
+});
+
 require(['jquery', 'jquery-jsonrpc', 'eyecandy'], function($, _, eyecandy) {
 
     $(document).ready(function() {
@@ -59,8 +98,9 @@ require(['jquery', 'jquery-jsonrpc', 'eyecandy'], function($, _, eyecandy) {
     // rpc
     function create_package(){
       var package_title = prompt('Enter package title');
-        $.jsonRPC.request('create_package', [package_title], {
-          success: function(results){
+        $.jsonRPC.request('create_package', {
+            params: [package_title],
+            success: function(results){
             callback_create_package(results.result.id, results.result.title)
           }
         });
@@ -71,9 +111,10 @@ require(['jquery', 'jquery-jsonrpc', 'eyecandy'], function($, _, eyecandy) {
       $(".active").
       each(function (i){
         var package_id = $(this).attr("packageid");
-        $.jsonRPC.request('delete_package', [package_id], {
-          success: function(results) {
-            var deleted_package_id = results.result.package_id;
+              $.jsonRPC.request('delete_package', {
+                  params: [package_id],
+                  success: function (results) {
+                      var deleted_package_id = results.result.package_id;
               if (deleted_package_id > 0) {
                 // Just a pre-caution that we remove the same package as the
                 // server

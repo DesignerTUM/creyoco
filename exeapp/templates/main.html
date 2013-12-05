@@ -2,6 +2,7 @@
 
 {% load i18n %}
 {% load mainpage_extras %}
+{% load require %}
 
 {% load static %}
 
@@ -12,7 +13,7 @@
 {% endblock %}
 
 {% block head_javascript %}
-    <script data-main="{% get_static_prefix %}scripts/main.js" src="{% get_static_prefix %}scripts/bower_components/requirejs/require.js"></script>
+    {% require_module "package_list.js" %}
 {% endblock %}
 
 {% block dialog %}
