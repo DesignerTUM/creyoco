@@ -167,14 +167,6 @@ button {
 
   &:hover {
     color: $red;
-    .icon-plus-sign {
-      color: $green;
-    }
-
-    .icon-remove-sign {
-      color: lighten($red, 10%);
-      //text-shadow: 0 0 .1em $red;
-    }
   }
 }
 

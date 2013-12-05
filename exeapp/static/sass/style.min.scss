@@ -29,6 +29,18 @@ $basic-sprite-dimensions: true;
 @import 'forms';
 @import 'jstree';
 
+@-webkit-keyframes colorPulse {
+  0% {color: red;}
+  50% {color: lighten($red, 5%);}
+  100% {color: $red;}
+}
+
+@-moz-keyframes colorPulse {
+  0% {color: red;}
+  50% {color: lighten($red, 5%);}
+  100% {color: $red;}
+}
+
 @mixin horizontal-rule {
   display: block;
   -webkit-margin-before: 0;
@@ -124,6 +136,18 @@ body {
         margin-left: 15px;
       }
     }
+    #btnAdd {
+      &:hover{
+        color: $green;
+      }
+    }
+    #btnRemove {
+      &:hover{
+        color: red;
+        -webkit-animation: colorPulse 2s infinite alternate;
+        -moz-animation: colorPulse 2s infinite alternate;
+      }
+    }
     .secondary {
       display: none;
       overflow: auto;
@@ -132,6 +156,7 @@ body {
       margin-top: 15px;
     }
   }
+
   #box_right {
     float: right;
     width: 14.6%;
