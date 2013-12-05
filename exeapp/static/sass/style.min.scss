@@ -506,6 +506,11 @@ a:hover .icon-question-sign {
   @extend .icon-spin;
 }
 
+.icon-about-to-remove {
+  @extend .icon-exclamation-sign;
+  color: lighten($red, 30%);
+}
+
 footer {
   position: absolute;
   bottom: 10px;

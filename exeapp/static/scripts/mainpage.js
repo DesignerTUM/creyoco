@@ -94,6 +94,28 @@ require(['jquery', "common", "eyecandy", 'jquery-pjax', 'jquery-cookie', 'jquery
                     "dots": false,
                     "icons": false
                 },
+                "dnd": {
+                    "drop_check": function(data) {
+                        if (data.r.parent().attr("id") == "btnRemove") {
+                            data.r
+                                .removeClass("icon-trash")
+                                .addClass("icon-about-to-remove");
+                            return {
+                                after: false,
+                                before: false,
+                                inside: true
+                            }
+                        }
+                        return true;
+                    },
+                    "drop_finish": function(data) {
+                        if (data.r.parent().attr("id") == "btnRemove") {
+                            ask_delete_confirmation(undefined,
+                                data.o.find("a").attr("nodeid"));
+                            $("#btnRemove").mouseleave();
+                        }
+                    }
+                },
                 "plugins": ["themes", "json_data", "html_data", "ui", "crrm", "dnd"]})
                 .on("move_node.jstree", function(event, data, a, b, c, d) {
                         var current_node_id = data.rslt.o.find("a").attr("nodeid");
@@ -103,6 +125,12 @@ require(['jquery', "common", "eyecandy", 'jquery-pjax', 'jquery-cookie', 'jquery
                         });
                 });
 
+            // remove exclamation sign from #btnRemove after mouse leaves it
+            $("#btnRemove").mouseleave(function() {
+                $(this).find("i")
+                    .removeClass("icon-about-to-remove")
+                    .addClass("icon-trash");
+            })
             common.get_outline_pane().on("loaded.jstree", function (event, data) {
                 common.get_outline_pane().jstree('open_all', $('#outline_pane>ul'));
                 bind_pjax();
@@ -259,29 +287,38 @@ require(['jquery', "common", "eyecandy", 'jquery-pjax', 'jquery-cookie', 'jquery
             });
         }
 
-        function ask_delete_confirmation() {
+        function ask_delete_confirmation(event, nodeid) {
+            if (nodeid !== undefined) {
+                var node = $("#node" + nodeid);
+            } else {
+                var node = common.get_current_node();
+            }
+
             var modal = $("#confirm_removal");
             var yes = modal.find(".btnyes");
             var no = modal.find(".btnno");
             var nodename = modal.find("#removenode");
-            nodename.text(common.get_current_node().text());
+            nodename.text(node.text());
             modal.modal();
             no.focus();
             yes.off("click").click(function () {
-                delete_current_node();
+                delete_node(nodeid);
                 $.modal.close();
             });
             no.off("click").click($.modal.close);
         }
 
         //Removes current node
-        function delete_current_node() {
-            $.jsonRPC.request('delete_current_node', {
-                params: [get_package_id(), common.get_current_node_id()],
+        function delete_node(nodeid) {
+            if (nodeid === undefined) {
+                var nodeid = common.get_current_node_id();
+            }
+            $.jsonRPC.request('delete_node', {
+                params: [get_package_id(), nodeid],
                 success: function (results) {
                     var new_node_id = results.result.new_node;
                     if (new_node_id != 0) {
-                        callback_delete_current_node(new_node_id);
+                        callback_delete_current_node(new_node_id, nodeid);
                     }
                 }
             })
@@ -519,9 +556,11 @@ require(['jquery', "common", "eyecandy", 'jquery-pjax', 'jquery-cookie', 'jquery
         }
 
         // Delete the currently selected node
-        function callback_delete_current_node(new_node_id) {
-
-            common.get_outline_pane().jstree("delete_node", "#node" + common.get_current_node_id());
+        function callback_delete_current_node(new_node_id, removed_node_id) {
+            if (removed_node_id === undefined) {
+                removed_node_id = common.get_current_node_id();
+            }
+            common.get_outline_pane().jstree("delete_node", "#node" + removed_node_id);
             common.get_outline_pane().jstree("select_node", "#node" + new_node_id, true);
             var url = "/exeapp/package/" + get_package_id() + "/" + new_node_id + "/";
             $.pjax({url: url,

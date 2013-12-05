@@ -12,7 +12,7 @@ from exeapp.models.package import Package
 
 log = logging.getLogger()
 
-__all__ = ['add_node', 'delete_current_node', 'change_current_node',
+__all__ = ['add_node', 'delete_node', 'change_current_node',
            'rename_current_node', 'move_current_node_up']
 
 
@@ -24,8 +24,8 @@ to package_node_id as child of the current one and selectes it'''
     return {'id': newNode.id, 'title': newNode.title}
 
 
-@jsonrpc_authernticating_method('package.delete_current_node')
-def delete_current_node(request, package, node):
+@jsonrpc_authernticating_method('package.delete_node')
+def delete_node(request, package, node):
     '''Handles jsonRPC request "package.delete_current_node". Removes current
 node'''
     new_node_id = node.delete()
