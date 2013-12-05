@@ -391,7 +391,7 @@ require(['jquery', "common", "eyecandy", 'jquery-pjax', 'jquery-cookie', 'jquery
             // for (key in data){alert(key);};
             if (data == undefined) {
                 var node = common.get_current_node();
-                set_current_node(node);
+                set_current_node(event, node);
             }
         }
 
@@ -572,7 +572,7 @@ require(['jquery', "common", "eyecandy", 'jquery-pjax', 'jquery-cookie', 'jquery
 
         // called to synchronize current_node attribute of outline_pane with
         // currently selected node. Refreshes authoring
-        function set_current_node(node) {
+        function set_current_node(event, node) {
 //            common.get_outline_pane().attr('current_node', common.get_current_node().attr('nodeid'));
             updateTitle();
             $.pjax.click(event, {container: "#authoring"});
