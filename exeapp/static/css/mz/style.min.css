@@ -5609,7 +5609,7 @@ textarea {
 
 .jstree a {
     display: inline-block;
-    width: 100%;
+    width: 90%;
     line-height: 18px;
     height: 18px;
     white-space: nowrap;
@@ -6032,7 +6032,7 @@ body a:hover {
 #wrapper #box_left {
     float: left;
     width: 14.6%;
-    padding-right: 2%;
+    padding-right: 1%;
     min-height: 20px;
 }
 
@@ -6112,7 +6112,7 @@ body a:hover {
 #wrapper #box_right {
     float: right;
     width: 14.6%;
-    padding-left: 2%;
+    padding-left: 1%;
 }
 
 @media -sass-debug-info {
@@ -6208,7 +6208,7 @@ header > div hr {
     padding-bottom: 16px;
     border-bottom: 1px dotted #595959;
     width: 100%;
-    width: 98%;
+    width: 100%;
     padding-bottom: 10px;
 }
 
@@ -6224,8 +6224,7 @@ header > div hr {
 
 header .user_info {
     float: right;
-    width: 250px;
-    margin-right: 2%;
+    width: 13.6%;
 }
 
 @media -sass-debug-info {
@@ -6234,7 +6233,7 @@ header .user_info {
     }
 
     line {
-        font-family: \00003180
+        font-family: \00003181
     }
 }
 
@@ -6248,7 +6247,7 @@ header .user_info .chzn {
     }
 
     line {
-        font-family: \00003183
+        font-family: \00003184
     }
 }
 
@@ -6264,7 +6263,7 @@ header .user_info .account {
     }
 
     line {
-        font-family: \00003187
+        font-family: \00003188
     }
 }
 
@@ -6278,7 +6277,7 @@ header .user_info .account em {
     }
 
     line {
-        font-family: \00003190
+        font-family: \00003191
     }
 }
 
@@ -6292,7 +6291,7 @@ header .user_info .account a {
     }
 
     line {
-        font-family: \00003199
+        font-family: \00003200
     }
 }
 
@@ -6311,7 +6310,7 @@ header .user_info .account a {
     }
 
     line {
-        font-family: \00003206
+        font-family: \00003207
     }
 }
 
@@ -6340,7 +6339,7 @@ header .user_info .account a {
     }
 
     line {
-        font-family: \00003215
+        font-family: \00003216
     }
 }
 
@@ -6355,7 +6354,7 @@ header .user_info .account a {
     }
 
     line {
-        font-family: \00003218
+        font-family: \00003219
     }
 }
 
@@ -6375,7 +6374,7 @@ header .user_info .account a {
     }
 
     line {
-        font-family: \00003227
+        font-family: \00003228
     }
 }
 
@@ -6394,7 +6393,7 @@ header .user_info .account a {
     }
 
     line {
-        font-family: \00003240
+        font-family: \00003241
     }
 }
 
@@ -6410,7 +6409,7 @@ header .user_info .account a {
     }
 
     line {
-        font-family: \00003245
+        font-family: \00003246
     }
 }
 
@@ -6424,7 +6423,7 @@ header .user_info .account a {
     }
 
     line {
-        font-family: \00003250
+        font-family: \00003251
     }
 }
 
@@ -6438,7 +6437,7 @@ header .user_info .account a {
     }
 
     line {
-        font-family: \00003254
+        font-family: \00003255
     }
 }
 
@@ -6452,7 +6451,7 @@ header .user_info .account a {
     }
 
     line {
-        font-family: \00003266
+        font-family: \00003267
     }
 }
 
@@ -6473,7 +6472,7 @@ header .user_info .account a {
     }
 
     line {
-        font-family: \00003275
+        font-family: \00003276
     }
 }
 
@@ -6495,7 +6494,7 @@ header .user_info .account a {
     }
 
     line {
-        font-family: \00003285
+        font-family: \00003286
     }
 }
 
@@ -6517,7 +6516,7 @@ header .user_info .account a {
     }
 
     line {
-        font-family: \00003296
+        font-family: \00003297
     }
 }
 
@@ -6554,7 +6553,7 @@ ul#navi li {
     }
 
     line {
-        font-family: \00003319
+        font-family: \00003320
     }
 }
 
@@ -6568,7 +6567,7 @@ ul#navi li a {
     }
 
     line {
-        font-family: \00003321
+        font-family: \00003322
     }
 }
 
@@ -6583,7 +6582,7 @@ ul#navi li a:hover {
     }
 
     line {
-        font-family: \00003327
+        font-family: \00003328
     }
 }
 
@@ -6597,7 +6596,7 @@ ul#navi li:last-child {
     }
 
     line {
-        font-family: \00003330
+        font-family: \00003331
     }
 }
 
@@ -6614,7 +6613,7 @@ ul#navi li.active {
     }
 
     line {
-        font-family: \00003332
+        font-family: \00003333
     }
 }
 
@@ -6628,7 +6627,7 @@ ul#navi li.active a {
     }
 
     line {
-        font-family: \00003339
+        font-family: \00003340
     }
 }
 
@@ -6644,7 +6643,7 @@ ul#navi li.active a {
     }
 
     line {
-        font-family: \00003345
+        font-family: \00003346
     }
 }
 
@@ -6669,7 +6668,7 @@ ul#navi li.active a {
     }
 
     line {
-        font-family: \00003360
+        font-family: \00003361
     }
 }
 
@@ -6688,7 +6687,7 @@ ul#navi li.active a {
     }
 
     line {
-        font-family: \00003367
+        font-family: \00003368
     }
 }
 
@@ -6702,7 +6701,7 @@ ul#navi li.active a {
     }
 
     line {
-        font-family: \00003372
+        font-family: \00003373
     }
 }
 
@@ -6723,7 +6722,7 @@ ul#navi li.active a {
     }
 
     line {
-        font-family: \00003383
+        font-family: \00003384
     }
 }
 
@@ -6754,7 +6753,7 @@ ul#navi li.active a {
     }
 
     line {
-        font-family: \00003401
+        font-family: \00003402
     }
 }
 
@@ -6770,7 +6769,7 @@ ul#navi li.active a {
     }
 
     line {
-        font-family: \00003406
+        font-family: \00003407
     }
 }
 
@@ -6784,7 +6783,7 @@ ul#navi li.active a {
     }
 
     line {
-        font-family: \00003411
+        font-family: \00003412
     }
 }
 
@@ -6799,7 +6798,7 @@ ul#navi li.active a {
     }
 
     line {
-        font-family: \00003417
+        font-family: \00003418
     }
 }
 
@@ -6813,7 +6812,7 @@ strong {
     }
 
     line {
-        font-family: \00003421
+        font-family: \00003422
     }
 }
 
@@ -6828,7 +6827,7 @@ em {
     }
 
     line {
-        font-family: \00003427
+        font-family: \00003428
     }
 }
 
@@ -6845,7 +6844,7 @@ ul#package_list li {
     }
 
     line {
-        font-family: \00003432
+        font-family: \00003433
     }
 }
 
@@ -6859,7 +6858,7 @@ ul#package_list li:hover {
     }
 
     line {
-        font-family: \00003438
+        font-family: \00003439
     }
 }
 
@@ -6873,7 +6872,7 @@ ul#package_list li:last-child {
     }
 
     line {
-        font-family: \00003441
+        font-family: \00003442
     }
 }
 
@@ -6888,7 +6887,7 @@ ul#package_list li a {
     }
 
     line {
-        font-family: \00003444
+        font-family: \00003445
     }
 }
 
@@ -6902,7 +6901,7 @@ ul#package_list li a:hover {
     }
 
     line {
-        font-family: \00003448
+        font-family: \00003449
     }
 }
 
@@ -6917,7 +6916,7 @@ ul#package_list li .check {
     }
 
     line {
-        font-family: \00003452
+        font-family: \00003453
     }
 }
 
@@ -6939,7 +6938,7 @@ ul#package_list li.active {
     }
 
     line {
-        font-family: \00003453
+        font-family: \00003454
     }
 }
 
@@ -6953,7 +6952,7 @@ ul#package_list li.active .check {
     }
 
     line {
-        font-family: \00003466
+        font-family: \00003467
     }
 }
 
@@ -6969,7 +6968,7 @@ ul#package_list li #qs {
     }
 
     line {
-        font-family: \00003467
+        font-family: \00003468
     }
 }
 
@@ -6984,7 +6983,7 @@ ul#package_list li #qs i {
     }
 
     line {
-        font-family: \00003483
+        font-family: \00003484
     }
 }
 
@@ -7006,7 +7005,7 @@ footer {
     }
 
     line {
-        font-family: \00003495
+        font-family: \00003496
     }
 }
 
@@ -7029,7 +7028,7 @@ footer hr {
     }
 
     line {
-        font-family: \00003499
+        font-family: \00003500
     }
 }
 
@@ -7043,7 +7042,7 @@ footer div {
     }
 
     line {
-        font-family: \00003504
+        font-family: \00003505
     }
 }
 
@@ -7057,7 +7056,7 @@ footer div {
     }
 
     line {
-        font-family: \00003508
+        font-family: \00003509
     }
 }
 
@@ -7071,7 +7070,7 @@ footer div {
     }
 
     line {
-        font-family: \00003512
+        font-family: \00003513
     }
 }
 
@@ -7086,7 +7085,7 @@ footer div {
     }
 
     line {
-        font-family: \00003516
+        font-family: \00003517
     }
 }
 
@@ -7102,7 +7101,7 @@ footer div {
     }
 
     line {
-        font-family: \00003521
+        font-family: \00003522
     }
 }
 
@@ -7116,7 +7115,7 @@ footer div {
     }
 
     line {
-        font-family: \00003526
+        font-family: \00003527
     }
 }
 
@@ -7133,7 +7132,7 @@ footer div {
     }
 
     line {
-        font-family: \00003533
+        font-family: \00003534
     }
 }
 
@@ -7148,7 +7147,7 @@ footer div {
     }
 
     line {
-        font-family: \00003539
+        font-family: \00003540
     }
 }
 
@@ -7168,7 +7167,7 @@ footer div {
     }
 
     line {
-        font-family: \00003547
+        font-family: \00003548
     }
 }
 
@@ -7185,7 +7184,7 @@ footer div {
     }
 
     line {
-        font-family: \00003554
+        font-family: \00003555
     }
 }
 
@@ -7200,7 +7199,7 @@ footer div {
     }
 
     line {
-        font-family: \00003558
+        font-family: \00003559
     }
 }
 
@@ -7215,7 +7214,7 @@ footer div {
     }
 
     line {
-        font-family: \00003563
+        font-family: \00003564
     }
 }
 
@@ -7237,7 +7236,7 @@ footer div {
     }
 
     line {
-        font-family: \00003573
+        font-family: \00003574
     }
 }
 
@@ -7252,7 +7251,7 @@ footer div {
     }
 
     line {
-        font-family: \00003577
+        font-family: \00003578
     }
 }
 
@@ -7266,7 +7265,7 @@ footer div {
     }
 
     line {
-        font-family: \00003582
+        font-family: \00003583
     }
 }
 
@@ -7281,7 +7280,7 @@ footer div {
     }
 
     line {
-        font-family: \00003589
+        font-family: \00003590
     }
 }
 
