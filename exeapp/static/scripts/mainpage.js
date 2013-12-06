@@ -56,7 +56,7 @@ CANT_MOVE_NODE_FURTHER = "Can't move up any farther"
 NOT_IMPLEMENTED = "This function is not implemented yet."
 SAVE_DIRTY_PACKAGE = "Package has been changed. Do you want to save it, before you leave?"
 
-require(['jquery', "common", "eyecandy", 'jquery-pjax', 'jquery-cookie', 'jquery-jsonrpc', "jstree", 'jquery-modal',
+require(['jquery', "common", "eyecandy", 'jquery-pjax', 'jquery-cookie', 'jquery-jsonrpc', "jstree", 'jquery-modal', 'modernizr',
     'multichoice', 'feedback', 'cloze'],
     function ($, common, eyecandy) {
         // set crfs cookie

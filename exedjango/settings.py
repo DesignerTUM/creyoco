@@ -163,7 +163,7 @@ TINYMCE_DEFAULT_CONFIG = {
     "gecko_spellcheck": True,
     "external_link_list_url": LINK_LIST,
     # "mode": "specific_textareas",
-    # "editor_selector": "mceEditor",
+    # "editor_selector": "mceEditmainpageor",
     "plugins": "table,save,advhr,advimage,advlink,emotions,media, "
                "contextmenu,paste,directionality, heading",
     "theme": "advanced",
