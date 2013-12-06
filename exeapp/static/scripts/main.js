@@ -14,6 +14,7 @@ require.config({
         "jquery-form": "bower_components/jquery-form/jquery.form",
         "jquery-modal": "bower_components/jquery-modal/jquery.modal",
         "jstree": "bower_components/jstree-dist/jquery.jstree",
+        "filebrowser": "/static/filebrowser/js/AddFileBrowser",
         "feedback": "widgets/feedback",
         "cloze": "widgets/cloze",
         "multichoice": "blocks/multichoice"
