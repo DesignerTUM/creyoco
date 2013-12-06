@@ -149,7 +149,7 @@ require(['jquery', "common", "eyecandy", 'jquery-pjax', 'jquery-cookie', 'jquery
                 $('#previewIFrame').removeClass("loading");
             };
 
-//        Initialize idevice Tree
+            // Initialize idevice Tree
             $("#idevice_pane").jstree({"themes": {
                 "url": "/static/scripts/themes/default/style.css",
                 "dots": false,
@@ -160,7 +160,6 @@ require(['jquery', "common", "eyecandy", 'jquery-pjax', 'jquery-cookie', 'jquery
             $("#idevice_pane").on("loaded.jstree", function (event, data) {
                 $("#idevice_pane").jstree('open_all', $('#idevice_pane>ul'));
             });
-
 
             //bind actions to outline buttons
             $("#btnAdd").click(ask_child_node_name);
@@ -198,6 +197,7 @@ require(['jquery', "common", "eyecandy", 'jquery-pjax', 'jquery-cookie', 'jquery
             set_current_style();
             common.init();
             eyecandy.init();
+
         });
 
         // Called after successful package deletion

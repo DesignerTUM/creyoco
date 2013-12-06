@@ -135,3 +135,9 @@ li.jstree-closed > ul {
     }
   }
 }
+
+// Fix for drag and drop
+/* menu dragdrop fix for modern browsers */
+#jstree-marker-line {
+    pointer-events: none;
+}

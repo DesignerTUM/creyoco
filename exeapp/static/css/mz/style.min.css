@@ -1942,6 +1942,11 @@ li.jstree-closed > ul {
 .jstree-default .jstree-no-dots a > ins {
   display: none; }
 
+/* menu dragdrop fix for modern browsers */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/alendit\/creyoco\/exeapp\/static\/sass\/jstree\.scss}line{font-family:\00003141}}
+#jstree-marker-line {
+  pointer-events: none; }
+
 @-webkit-keyframes colorPulse {
   /* line 33, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
   0% {
