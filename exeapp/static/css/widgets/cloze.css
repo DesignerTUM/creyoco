@@ -5,3 +5,13 @@
     font-weight: bold !important;
     text-align: center;
 }
+
+.cloze_right {
+    color: green !important;
+    border-color: green !important;
+}
+
+.cloze_wrong {
+    color: red !important;
+    border-color: red !important;
+}

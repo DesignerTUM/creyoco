@@ -7,14 +7,14 @@ cloze = {
                 $(this).parent().parent()
                     .find(".cloze_gap").each(function () {
                         $(this).val("");
-                        $(this).css("backgroundColor", "white");
+                        $(this).removeClass("cloze_right cloze_wrong");
                     });
                 e.preventDefault();
             });
             $(".cloze_show_answers").off("click").on("click", function (e) {
                 $(this).parent().parent().find(".cloze_gap").each(function () {
                     $(this).val(get_right_answer($(this)));
-                    $(this).css("backgroundColor", "green");
+                    $(this).css("color", "green");
                 });
                 e.preventDefault();
             });
@@ -27,12 +27,13 @@ cloze = {
                 gap_count++;
                 var gap_id = /gap_(.*)$/.exec($(this).attr("id"))[1];
                 var right_answer = get_right_answer($(this));
+                $(this).removeClass("cloze_right cloze_wrong");
                 if ($(this).val() == right_answer) {
-                    $(this).css("backgroundColor", "green");
+                    $(this).addClass("cloze_right");
                     right_answer_count++;
                 }
                 else {
-                    $(this).css("backgroundColor", "red");
+                    $(this).addClass("cloze_wrong");
                 }
             });
             var result_string = "Your score is " + right_answer_count + "/" + gap_count + ".";
