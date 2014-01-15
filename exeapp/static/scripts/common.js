@@ -60,12 +60,44 @@ define(['jquery', 'jquery-form', 'jquery-pjax', 'jquery-jsonrpc', 'jquery-cookie
                 } else {
                     exports.reload_authoring();
                 }
-            },
+                },
                 beforeSerialize: function () {
                     tinyMCE.triggerSave(true, true);
+                },
+                beforeSubmit: function(arr, $form, opts) {
+                    for (var i = 0; i < arr.length; i++) {
+                        var el = arr[i];
+                        if (el.name == "idevice_action") {
+                            if (el.value == "delete") {
+                                exports.ask_idevice_delete_confirmation($form, opts);
+                                return false;
+                            } else {
+                                return true;
+                            }
+                        }
+                    }
+                    return true;
                 }
             });
             exports.get_media("authoring/?partial=true&media=true");
+        },
+
+        ask_idevice_delete_confirmation: function($form, opts) {
+            var modal = $("#confirm_removal");
+            var yes= modal.find(".btnyes");
+            var no = modal.find(".btnno");
+            var nodename = modal.find("#removenode");
+            nodename.text("this iDevice");
+            modal.modal();
+            no.focus();
+            yes.off("click").on("click", function() {
+                $.modal.close();
+                opts.data = {idevice_action: "delete"};
+                $form.ajaxSubmit(opts);
+            })
+            no.off("click").click(function() {
+                $.modal.close();
+            });
         },
 
         init: function () {
@@ -91,9 +123,7 @@ define(['jquery', 'jquery-form', 'jquery-pjax', 'jquery-jsonrpc', 'jquery-cookie
         scroll_to_element: function (element) {
             var middle_row = $("#middle-row");
             var middle_row_pos = middle_row.offset().top;
-            console.log(middle_row_pos);
             var offset = element.offset().top - middle_row_pos;
-            console.log(offset);
 
             if (offset + element.innerHeight() > middle_row.height()) {
                 // Not in view so scroll to it

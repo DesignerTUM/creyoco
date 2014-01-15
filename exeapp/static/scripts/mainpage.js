@@ -305,7 +305,7 @@ require(['jquery', "common", "eyecandy", 'jquery-pjax', 'jquery-cookie', 'jquery
             var yes = modal.find(".btnyes");
             var no = modal.find(".btnno");
             var nodename = modal.find("#removenode");
-            nodename.text(node.text());
+            nodename.text("node " + node.text());
             modal.modal();
             no.focus();
             yes.off("click").click(function () {
