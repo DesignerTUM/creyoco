@@ -103,24 +103,24 @@ header {
 					color:$grey;
 					text-decoration: none;
 
-					&:hover {
-						background-color:$green;
-						color:white;
-					}
-				}
-                    a {
-                        &.active {
-                            color:$green;
-                            font-weight: bold;
-                        }
-                    }
-                ul li {
-                    line-height: 25px;
-                    a {
-                        font-size: 90%;
-                        padding-left: 30px;
-                    }
-                }
+
+          &.active {
+            color:$green;
+            font-weight: bold;
+          }
+          &:hover {
+            background-color:$green;
+            color:white;
+          }
+        }
+
+        ul li {
+            line-height: 25px;
+            a {
+                font-size: 90%;
+                padding-left: 30px;
+            }
+        }
 
 
 			}

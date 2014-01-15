@@ -147,14 +147,14 @@ header {
         width: 100%;
         color: #737373;
         text-decoration: none; }
-        /* line 106, sass/content.scss */
+        /* line 107, sass/content.scss */
+        .content .left ul li a.active {
+          color: #7cb22d;
+          font-weight: bold; }
+        /* line 111, sass/content.scss */
         .content .left ul li a:hover {
           background-color: #7cb22d;
           color: white; }
-      /* line 112, sass/content.scss */
-      .content .left ul li a.active {
-        color: #7cb22d;
-        font-weight: bold; }
       /* line 117, sass/content.scss */
       .content .left ul li ul li {
         line-height: 25px; }
