@@ -162,4 +162,4 @@ def preview_static(request, package, node, path):
                          "css/styles/" +\
                          node.package.style +\
                          "/"
-        return HttpResponsePermanentRedirect(node_style_url + path)
+        return HttpResponseRedirect(node_style_url + path)
