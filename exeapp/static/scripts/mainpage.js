@@ -116,6 +116,17 @@ require(['jquery', "common", "eyecandy", 'jquery-pjax', 'jquery-cookie', 'jquery
                         }
                     }
                 },
+                "crrm": {
+                    "move": {
+                        "check_move": function(data) {
+                            if (data.np.attr("id")=="outline_pane") {
+                                return false;
+                            } else {
+                                return true;
+                            }
+                        }
+                    }
+                },
                 "plugins": ["themes", "json_data", "html_data", "ui", "crrm", "dnd"]})
                 .on("move_node.jstree", function(event, data, a, b, c, d) {
                         var current_node_id = data.rslt.o.find("a").attr("nodeid");
