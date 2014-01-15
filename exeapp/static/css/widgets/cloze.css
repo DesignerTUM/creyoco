@@ -1,9 +1,14 @@
 .cloze_result {display: none;}
 
 .cloze_gap {
-    width: 30px !important;
+    display: inline-block;
+    min-width: 30px !important;
+    /*height: 1em;*/
+
     font-weight: bold !important;
     text-align: center;
+    padding: 0px 4px 0px 4px;
+    border: solid 1px;
 }
 
 .cloze_right {

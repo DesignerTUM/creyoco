@@ -88,9 +88,9 @@ class ClozeWidget(FreeTextWidget):
         gaps = BeautifulSoup(content).findAll(
             attrs={"style": "text-decoration: underline;"})
         for gap_number, gap in enumerate(gaps):
-            content = content.replace(str(gap), '<input type="text" '
+            content = content.replace(str(gap), '<span contenteditable="true"'
                                       'class="cloze_gap"' \
-                                      'id="gap_%s" autocomplete="off" />'
+                                      'id="gap_%s" autocomplete="off"></span>'
                                       % gap_number)
 
         gaps_text = enumerate((gap.text for gap in gaps))
