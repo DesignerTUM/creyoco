@@ -146,10 +146,6 @@ require(['jquery', "common", "eyecandy", 'jquery-pjax', 'jquery-cookie', 'jquery
                 common.get_outline_pane().jstree('open_all', $('#outline_pane>ul'));
                 bind_pjax();
             });
-            //bind actions to outline nodes
-            // common.get_outline_pane().bind("select_node.jstree",
-            // handle_select_node);
-            common.get_outline_pane().delegate("a", "dblclick", rename_current_node);
             //bind renaming event
             common.get_outline_pane().bind("rename_node.jstree", handle_renamed_current_node);
             //refresh pjax on every request
