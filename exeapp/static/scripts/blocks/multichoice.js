@@ -6,19 +6,22 @@ multichoice = {
                 var wrong = false;
                 var result_el = $(this).parent().find(".result");
                 $.each(options, function (n, el) {
+                    $(el).next().removeClass("wrong_answer");
                     if (($(el).attr("data-right") == "true") != $(el).prop("checked")) {
-                        result_el.removeClass("right")
-                            .addClass("wrong")
-                            .text("Wrong!");
+                        $(el).next().addClass('wrong_answer');
                         wrong = true;
                     }
                 });
-                if (!wrong) {
+                if (wrong) {
+                    result_el.removeClass("right")
+                        .addClass("wrong")
+                        .text("Incorrect answer!");
+                    return false;
+                } else {
                     result_el.removeClass("wrong")
                         .addClass("right")
-                        .text("Right!");
+                        .text("Correct!");
                 }
-                return false;
             });
         });
     }

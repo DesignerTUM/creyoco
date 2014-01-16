@@ -1,12 +1,16 @@
 .multichoice.right {
-    background-color: green;
+    color: green;
 }
 
 .multichoice.wrong {
-    background-color: red;
+    color: red;
 }
 
 .multichoice.result {
     font-weight: bold;
-    color: white;
+}
+
+.multichoiceoption .wrong_answer {
+    font-style: italic;
+    color: red;
 }
