@@ -83,6 +83,14 @@ define(['jquery', 'jquery-form', 'jquery-pjax', 'jquery-jsonrpc', 'jquery-cookie
         },
 
         ask_idevice_delete_confirmation: function($form, opts) {
+            exports.ask_delete_confirmation("this iDevice", function() {
+                $.modal.close();
+                opts.data = {idevice_action: "delete"};
+                $form.ajaxSubmit(opts);
+            });
+        },
+
+        ask_delete_confirmation: function(name, callback) {
             var modal = $("#confirm_removal");
             var yes= modal.find(".btnyes");
             var no = modal.find(".btnno");
@@ -91,9 +99,7 @@ define(['jquery', 'jquery-form', 'jquery-pjax', 'jquery-jsonrpc', 'jquery-cookie
             modal.modal();
             no.focus();
             yes.off("click").on("click", function() {
-                $.modal.close();
-                opts.data = {idevice_action: "delete"};
-                $form.ajaxSubmit(opts);
+                callback();
             })
             no.off("click").click(function() {
                 $.modal.close();

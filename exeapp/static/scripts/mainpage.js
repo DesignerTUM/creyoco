@@ -301,18 +301,10 @@ require(['jquery', "common", "eyecandy", 'jquery-pjax', 'jquery-cookie', 'jquery
                 var node = common.get_current_node();
             }
 
-            var modal = $("#confirm_removal");
-            var yes = modal.find(".btnyes");
-            var no = modal.find(".btnno");
-            var nodename = modal.find("#removenode");
-            nodename.text("node " + node.text());
-            modal.modal();
-            no.focus();
-            yes.off("click").click(function () {
+            common.ask_delete_confirmation("node " + node.text(), function() {
                 delete_node(nodeid);
                 $.modal.close();
             });
-            no.off("click").click($.modal.close);
         }
 
         //Removes current node
