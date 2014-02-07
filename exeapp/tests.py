@@ -62,7 +62,7 @@ def _create_packages(user, package_count=PACKAGE_COUNT,
                                user=user)
 
 
-def _create_basic_database():
+def create_basic_database():
     '''Creates 2 users (admin, user) with 5 packages each for testing'''
     if not os.path.exists(settings.MEDIA_ROOT):
         os.mkdir(settings.MEDIA_ROOT)
@@ -80,7 +80,7 @@ def _create_basic_database():
 class MainPageTestCase(TestCase):
 
     def setUp(self):
-        _create_basic_database()
+        create_basic_database()
         self.c = Client()
         # login
         self.c.login(username=TEST_USER, password=TEST_PASSWORD)
@@ -115,7 +115,7 @@ class PackagesPageTestCase(TestCase):
 
     def setUp(self):
         self.c = Client()
-        _create_basic_database()
+        create_basic_database()
         self.c.login(username=TEST_USER, password=TEST_PASSWORD)
         self.s = TestingServiceProxy(self.c,
                                      reverse("jsonrpc_mountpoint"),
@@ -310,7 +310,7 @@ view, this tests should be also merged'''
 
     def setUp(self):
         self.c = Client()
-        _create_basic_database()
+        create_basic_database()
         self.c.login(username=TEST_USER, password=TEST_PASSWORD)
         self.s = TestingServiceProxy(self.c,
                                      reverse("jsonrpc_mountpoint"),
@@ -518,7 +518,7 @@ class ExportTestCase(TestCase):
     IDEVICE_TYPE = "FreeTextIdevice"
 
     def setUp(self):
-        _create_basic_database()
+        create_basic_database()
         self.data = Package.objects.get(id=self.TEST_PACKAGE_ID)
         for x in range(3):
             self.data.root.create_child()
@@ -627,7 +627,7 @@ class OutlineTestCase(TestCase):
     TEST_PACKAGE_ID = 1
 
     def setUp(self):
-        _create_basic_database()
+        create_basic_database()
         self.data = Package.objects.get(id=self.TEST_PACKAGE_ID)
         self.c = Client()
         self.c.login(username=TEST_USER, password=TEST_PASSWORD)

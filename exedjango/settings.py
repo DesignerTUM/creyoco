@@ -109,6 +109,13 @@ ROOT_URLCONF = 'exedjango.urls'
 TEMPLATE_DIRS = (_get_file_from_root('exeapp_templates'),
 )
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+    }
+}
+
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
