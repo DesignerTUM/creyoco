@@ -58,7 +58,7 @@ def handle_action(request, package, node):
 def get_media_list(node, ajax=False):
     """Returns the idevice-specific media list for a given node. Always
     includes tinymce compressor, since it can't be loaded dynamically"""
-    media = forms.Media(js=["/static/tiny_mce/tiny_mce.js"])
+    media = forms.Media(js=["/static/tiny_mce/tiny_mce.js", "/tinymce/filebrowser/"])
     js_modules = set()
     for idevice in node.idevices.all():
         idevice = idevice.as_child()
