@@ -22,7 +22,7 @@ class GlossaryIdevice(Idevice):
 
     objects = GlossaryIdeviceManager()
 
-    def add_term(self):
+    def add_child(self):
         GlossaryTerm.objects.create(idevice=self)
 
     class Meta:
