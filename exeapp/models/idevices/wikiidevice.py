@@ -68,7 +68,7 @@ within Wikipedia."""))
                 url = 'http://' + url
             url += title
             net = urllib.request.urlopen(url)
-            page = net.read()
+            page = net.read().decode("utf-8")
             net.close()
         except IOError:
             self.content = _(
@@ -109,7 +109,7 @@ within Wikipedia."""))
 
         bits = url.split('/')
         netloc = '%s//%s' % (bits[0], bits[2])
-        self.content = self.reformatArticle(netloc, content)
+        self.content = self.reformatArticle(netloc, str(content))
         # now that these are supporting images, any direct manipulation
         # of the content field must also store this updated information
         # into the other corresponding fields of TextAreaField:
