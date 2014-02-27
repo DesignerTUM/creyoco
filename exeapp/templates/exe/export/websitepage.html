@@ -44,14 +44,16 @@
         </nav>
         </aside>
         <h1>{{current_page.node.title}}</h1>
+        <div class="middle">
+            {% include NAVIGATION_LINKS %}
+            {% include "exe/export/page_content.html" %}
+            {% include NAVIGATION_LINKS %}
+            {% render_licence current_page %}
+            {% include "exe/export/footer.html" %}
+        </div>
         <aside class="right">
             <div class="rightimages"></div>
         </aside>
-        {% include NAVIGATION_LINKS %}
-        {% include "exe/export/page_content.html" %}
-        {% include NAVIGATION_LINKS %}
-        {% render_licence current_page %}
-        {% include "exe/export/footer.html" %}
     </section>
     <div style="clear:both"></div>
     <footer>

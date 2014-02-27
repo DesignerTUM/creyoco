@@ -174,45 +174,49 @@ header {
       width: 200px;
       height: 311px; }
   /* line 143, sass/content.scss */
+  .content .middle {
+    float: left;
+    width: 728px; }
+  /* line 148, sass/content.scss */
   .content article {
     width: 728px;
     float: left; }
-    /* line 146, sass/content.scss */
+    /* line 151, sass/content.scss */
     .content article p {
       margin-bottom: 20px; }
-    /* line 149, sass/content.scss */
+    /* line 154, sass/content.scss */
     .content article ul {
       list-style-position: inside;
       margin-bottom: 20px; }
-      /* line 151, sass/content.scss */
+      /* line 156, sass/content.scss */
       .content article ul li {
         list-style: square;
         margin-left: 20px; }
-    /* line 158, sass/content.scss */
+    /* line 163, sass/content.scss */
     .content article ol {
       list-style-position: inside;
       margin-bottom: 20px; }
-      /* line 160, sass/content.scss */
+      /* line 165, sass/content.scss */
       .content article ol li {
         list-style: decimal;
         margin-left: 20px; }
-    /* line 166, sass/content.scss */
+    /* line 171, sass/content.scss */
     .content article strong {
       color: #7cb22d;
       font-weight: bold; }
-    /* line 170, sass/content.scss */
+    /* line 175, sass/content.scss */
     .content article .lup {
       float: right;
       margin-left: 20px; }
 
-/* line 178, sass/content.scss */
+/* line 183, sass/content.scss */
 footer .container {
   margin-top: 30px;
   border-top: 1px solid #7cb22d; }
-  /* line 182, sass/content.scss */
+  /* line 187, sass/content.scss */
   footer .container .copyright {
     font-size: 11px;
     color: #737373; }
-    /* line 186, sass/content.scss */
+    /* line 191, sass/content.scss */
     footer .container .copyright strong {
       font-style: italic; }
