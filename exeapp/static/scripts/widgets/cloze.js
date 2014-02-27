@@ -28,7 +28,7 @@ cloze = {
                 var gap_id = /gap_(.*)$/.exec($(this).attr("id"))[1];
                 var right_answer = get_right_answer($(this));
                 $(this).removeClass("cloze_right cloze_wrong");
-                if ($(this).text() == right_answer) {
+                if ($(this).text().toUpperCase() == right_answer.toUpperCase()) {
                     $(this).addClass("cloze_right");
                     right_answer_count++;
                 }
