@@ -3,6 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 from exeapp.models.idevices.idevice import Idevice
 from exeapp.models.idevices import fields
 
+
 class GlossaryIdeviceManager(models.Manager):
     def create(self, *args, **kwargs):
         idevice = GlossaryIdevice(*args, **kwargs)
@@ -10,14 +11,14 @@ class GlossaryIdeviceManager(models.Manager):
         GlossaryTerm.objects.create(title="", definition="", idevice=idevice)
         return idevice
 
-class GlossaryIdevice(Idevice):
 
+class GlossaryIdevice(Idevice):
     name = _("Glossary")
     title = models.CharField(max_length=100, default=name)
     author = _("Technical University Munich")
     purpose = _("Adds a alphabethicaly sorted glossary")
     emphasis = Idevice.SOMEEMPHASIS
-    group    = Idevice.CONTENT
+    group = Idevice.CONTENT
     icon = "icon_summary.gif"
 
     objects = GlossaryIdeviceManager()
@@ -30,11 +31,11 @@ class GlossaryIdevice(Idevice):
 
 
 class GlossaryTerm(models.Model):
-
     title = fields.RichTextField(max_length=100, blank=True, default="",
-                             help_text=_("Enter term you want to describe"))
+                                 help_text=_("Enter term you want to describe"))
     definition = fields.RichTextField(blank=True, default="",
-                                 help_text=_("Enter defintion of the term"))
+                                      help_text=_(
+                                          "Enter definition of the term"))
     idevice = models.ForeignKey("GlossaryIdevice", related_name="terms")
 
     class Meta:
