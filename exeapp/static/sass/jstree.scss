@@ -60,7 +60,9 @@
 ins.jstree-icon {
   margin-right: 0;
   background-image: none !important;
-  cursor: default;
+  cursor: pointer;
+  font-size: 1.5em;
+  vertical-align: 1px;
 }
 
 li.jstree-open > ul {

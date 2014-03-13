@@ -1884,66 +1884,68 @@ textarea {
 ins.jstree-icon {
   margin-right: 0;
   background-image: none !important;
-  cursor: default; }
+  cursor: pointer;
+  font-size: 1.5em;
+  vertical-align: 1px; }
 
-/* line 66, /home/alendit/creyoco/exeapp/static/sass/jstree.scss */
+/* line 68, /home/alendit/creyoco/exeapp/static/sass/jstree.scss */
 li.jstree-open > ul {
   display: block; }
 
-/* line 70, /home/alendit/creyoco/exeapp/static/sass/jstree.scss */
+/* line 72, /home/alendit/creyoco/exeapp/static/sass/jstree.scss */
 li.jstree-closed > ul {
   display: none; }
 
-/* line 75, /home/alendit/creyoco/exeapp/static/sass/jstree.scss */
+/* line 77, /home/alendit/creyoco/exeapp/static/sass/jstree.scss */
 #box_right h2 {
   margin-bottom: 53px; }
-/* line 78, /home/alendit/creyoco/exeapp/static/sass/jstree.scss */
+/* line 80, /home/alendit/creyoco/exeapp/static/sass/jstree.scss */
 #box_right .jstree > ul > li > a {
   font-weight: 700;
   color: #666666 !important; }
-/* line 83, /home/alendit/creyoco/exeapp/static/sass/jstree.scss */
+/* line 85, /home/alendit/creyoco/exeapp/static/sass/jstree.scss */
 #box_right .jstree > ul > li > ul {
   margin-bottom: 10px; }
 
-/* line 89, /home/alendit/creyoco/exeapp/static/sass/jstree.scss */
+/* line 91, /home/alendit/creyoco/exeapp/static/sass/jstree.scss */
 #box_left .jstree-clicked {
   color: #a71e20;
   font-weight: 700; }
 
-/* line 96, /home/alendit/creyoco/exeapp/static/sass/jstree.scss */
+/* line 98, /home/alendit/creyoco/exeapp/static/sass/jstree.scss */
 li.jstree-open > ul,
 li.jstree-closed > ul {
   margin-left: 0px; }
 
-/* line 102, /home/alendit/creyoco/exeapp/static/sass/jstree.scss */
+/* line 104, /home/alendit/creyoco/exeapp/static/sass/jstree.scss */
 .jstree-default .jstree-hovered {
   text-shadow: 0 0 0.6em #e6e6e6, 0 0 0.6em #e6e6e6;
   color: #a71e20 !important; }
-/* line 107, /home/alendit/creyoco/exeapp/static/sass/jstree.scss */
+/* line 109, /home/alendit/creyoco/exeapp/static/sass/jstree.scss */
 .jstree-default.jstree-focused {
   background: rgba(0, 0, 0, 0) !important; }
-/* line 113, /home/alendit/creyoco/exeapp/static/sass/jstree.scss */
+/* line 115, /home/alendit/creyoco/exeapp/static/sass/jstree.scss */
 .jstree-default .jstree-no-dots .jstree-open > ins {
   margin-right: 0px; }
-  /* line 115, /home/alendit/creyoco/exeapp/static/sass/jstree.scss */
+  /* line 117, /home/alendit/creyoco/exeapp/static/sass/jstree.scss */
   .jstree-default .jstree-no-dots .jstree-open > ins::before {
     font-family: "FontAwesome";
     content: "";
     font-size: 90%; }
-/* line 122, /home/alendit/creyoco/exeapp/static/sass/jstree.scss */
+/* line 124, /home/alendit/creyoco/exeapp/static/sass/jstree.scss */
 .jstree-default .jstree-no-dots .jstree-closed > ins {
   margin-right: 0px; }
-  /* line 124, /home/alendit/creyoco/exeapp/static/sass/jstree.scss */
+  /* line 126, /home/alendit/creyoco/exeapp/static/sass/jstree.scss */
   .jstree-default .jstree-no-dots .jstree-closed > ins::before {
     font-family: "FontAwesome";
     content: "";
     font-size: 90%; }
-/* line 132, /home/alendit/creyoco/exeapp/static/sass/jstree.scss */
+/* line 134, /home/alendit/creyoco/exeapp/static/sass/jstree.scss */
 .jstree-default .jstree-no-dots a > ins {
   display: none; }
 
 /* menu dragdrop fix for modern browsers */
-/* line 141, /home/alendit/creyoco/exeapp/static/sass/jstree.scss */
+/* line 143, /home/alendit/creyoco/exeapp/static/sass/jstree.scss */
 #jstree-marker-line {
   pointer-events: none; }
 
