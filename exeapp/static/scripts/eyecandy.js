@@ -122,25 +122,25 @@ define(['jquery', 'common', 'chosen', 'qtip2', 'jquery-modal'], function($, comm
                 }
             });
 
-            $('#edit a').click( function(){
+            $('#edit').click( function(){
                 $('#middle-row').children().hide();
                 $('#authoring').show();
                 $('#navi li').removeClass('active');
-                $(this).parent().addClass('active');
+                $(this).addClass('active');
             });
 
-            $('#layout a').click( function(){
+            $('#layout').click( function(){
                     $('#middle-row').children().hide();
                     $('#selectStyle').show();
                     $('#navi li').removeClass('active');
-                    $(this).parent().addClass('active');
+                    $(this).addClass('active');
             });
 
-            $('#export a').click( function(){
+            $('#export').click( function(){
                     $('#middle-row').children().hide();
                     $('#properties').show();
                     $('#navi li').removeClass('active');
-                    $(this).parent().addClass('active');
+                    $(this).addClass('active');
             });
 
             $('#download').click( function () {

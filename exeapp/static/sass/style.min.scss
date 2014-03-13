@@ -342,6 +342,10 @@ ul#navi {
     margin-bottom: 5px;
     @include text-shadow(white 0 1px 0);
 
+    &:hover {
+      cursor: pointer;
+    }
+
     a {
       color: black;
       &:hover {
