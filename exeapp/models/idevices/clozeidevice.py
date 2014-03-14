@@ -32,7 +32,7 @@ completed. Default text will be entered if there are no changes to this field.
                 help_text=_("""Enter the text for the cloze activity in to the cloze field
 by either pasting text from another source or by typing text directly into the
 field.To select words to hide, double click on the word to select it and
-click on the Hide/Show Word button below."""))
+click on the underscore button in the toolbar."""))
     feedback = fields.FeedbackField(blank=True, default="",
                 help_text=_("""Enter any feedback you wish to provide the learner
                 with-in the feedback field. This field can be left blank."""))

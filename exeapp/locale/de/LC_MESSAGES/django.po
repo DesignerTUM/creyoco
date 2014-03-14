@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-01 12:31+0200\n"
+"POT-Creation-Date: 2014-03-14 13:36+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,12 +18,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
-#: tests.py:96 templates/main.html:8 templates/main.html.py:42
+#: tests.py:96 templates/main.html:9 templates/main.html.py:33
 msgid "Overview"
 msgstr "Kursübersicht"
 
-#: tests.py:178 models/idevices/freetextidevice.py:42
-#: models/idevices/freetextidevice.py:43
+#: tests.py:178 models/idevices/freetextidevice.py:41
+#: models/idevices/freetextidevice.py:42
 msgid "Free Text"
 msgstr "Textfeld"
 
@@ -37,10 +37,10 @@ msgstr "Aufgabe"
 
 #: models/idevices/activityidevice.py:12 models/idevices/clozeidevice.py:12
 #: models/idevices/externalurlidevice.py:10
-#: models/idevices/freetextidevice.py:44
+#: models/idevices/freetextidevice.py:43
 #: models/idevices/objectivesidevice.py:12
 #: models/idevices/readingactidevice.py:13
-#: models/idevices/reflectionidevice.py:12 models/idevices/wikiidevice.py:45
+#: models/idevices/reflectionidevice.py:12 models/idevices/wikiidevice.py:33
 msgid "University of Auckland"
 msgstr ""
 
@@ -74,26 +74,26 @@ msgstr ""
 msgid "Java Applet"
 msgstr ""
 
-#: models/idevices/casestudyidevice.py:15
+#: models/idevices/casestudyidevice.py:16
 msgid "Case Study"
 msgstr "Fallstudie"
 
-#: models/idevices/casestudyidevice.py:17
-#: models/idevices/glossaryidevice.py:17 models/idevices/pdfidevice.py:11
+#: models/idevices/casestudyidevice.py:18
+#: models/idevices/glossaryidevice.py:18 models/idevices/pdfidevice.py:13
 #: models/idevices/tocidevice.py:17
 msgid "Technical University Munich"
 msgstr ""
 
-#: models/idevices/casestudyidevice.py:18
+#: models/idevices/casestudyidevice.py:19
 msgid ""
 "A case study is a device that provides learners\n"
-"with a simulation that has an educational basis. It takes a situation, "
-"generally\n"
-"based in reality, and asks learners to demonstrate or describe what action "
-"they\n"
-"would take to complete a task or resolve a situation. The case study allows\n"
-"learners apply their own knowledge and experience to completing the tasks\n"
-"assigned. when designing a case study consider the following:<ul>\n"
+"with a simulation that has an educational basis. It takes a situation,\n"
+"generally based in reality, and asks learners to demonstrate or describe "
+"what\n"
+"action they would take to complete a task or resolve a situation. The case\n"
+"study allows learners apply their own knowledge and experience to "
+"completing\n"
+"the tasks assigned. when designing a case study consider the following:<ul>\n"
 "<li>    What educational points are conveyed in the story</li>\n"
 "<li>    What preparation will the learners need to do prior to working on "
 "the\n"
@@ -106,23 +106,23 @@ msgid ""
 "of the case and if so how are ideas feed back to the class</li></ul>"
 msgstr ""
 
-#: models/idevices/casestudyidevice.py:35
+#: models/idevices/casestudyidevice.py:39
 msgid ""
 "Create the case story. A good case is one\n"
-"that describes a controversy or sets the scene by describing the characters\n"
-"involved and the situation. It should also allow for some action to be "
-"taken\n"
-"in order to gain resolution of the situation."
+"        that describes a controversy or sets the scene by describing\n"
+"        the characters involved and the situation. It should also allow for\n"
+"        some action to be taken in order to gain resolution of the\n"
+"        situation."
 msgstr ""
 
-#: models/idevices/casestudyidevice.py:52
+#: models/idevices/casestudyidevice.py:58
 msgid ""
-"Describe the activity tasks relevant to the case story provided. These could "
+"Describe the activity tasks relevant to the case storyprovided. These could "
 "be in the form of questions or instructions for activity which may lead the "
 "learner to resolving a dilemma presented. "
 msgstr ""
 
-#: models/idevices/casestudyidevice.py:54
+#: models/idevices/casestudyidevice.py:64
 msgid "Provide relevant feedback on the situation"
 msgstr ""
 
@@ -159,8 +159,10 @@ msgid ""
 "by either pasting text from another source or by typing text directly into "
 "the\n"
 "field.To select words to hide, double click on the word to select it and\n"
-"click on the Hide/Show Word button below."
-msgstr ""
+"click on the underscore button in the toolbar."
+msgstr "Geben Sie der Text füt die Lückentextaktivität ein\n"
+"Um die versteckte Wörter zu wählen, markieren Sie den zu verbergenden "
+"Abschnitt und drücken Sie den 'Unterschreichen'-Knopf."
 
 #: models/idevices/clozeidevice.py:37
 msgid ""
@@ -216,7 +218,7 @@ msgstr ""
 msgid "Use it to put a feedback link to your documents"
 msgstr ""
 
-#: models/idevices/freetextidevice.py:45
+#: models/idevices/freetextidevice.py:44
 msgid ""
 "The majority of a learning resource will be\n"
 "establishing context, delivering instructions and providing general "
@@ -226,11 +228,11 @@ msgid ""
 "delivered."
 msgstr ""
 
-#: models/idevices/glossaryidevice.py:15
+#: models/idevices/glossaryidevice.py:16
 msgid "Glossary"
 msgstr "Glossar"
 
-#: models/idevices/glossaryidevice.py:18
+#: models/idevices/glossaryidevice.py:19
 msgid "Adds a alphabethicaly sorted glossary"
 msgstr ""
 
@@ -238,33 +240,59 @@ msgstr ""
 msgid "Enter term you want to describe"
 msgstr ""
 
-#: models/idevices/glossaryidevice.py:37
-msgid "Enter defintion of the term"
+#: models/idevices/glossaryidevice.py:38
+msgid "Enter definition of the term"
 msgstr ""
 
-#: models/idevices/idevice.py:50 templates/exe/mainpage.html:86
+#: models/idevices/idevice.py:49 templates/exe/mainpage.html:126
 msgid "Content"
 msgstr "Inhalt"
 
-#: models/idevices/idevice.py:50
+#: models/idevices/idevice.py:49
 msgid "Didactics"
 msgstr "Didaktik"
 
-#: models/idevices/idevice.py:50
+#: models/idevices/idevice.py:49
 msgid "Communication"
 msgstr "Kommunikation"
 
-#: models/idevices/idevice.py:50
+#: models/idevices/idevice.py:49
 msgid "Test"
 msgstr "Test"
 
-#: models/idevices/idevice.py:51
+#: models/idevices/idevice.py:50
 msgid "Media"
 msgstr "Medien"
 
-#: models/idevices/idevice.py:51
+#: models/idevices/idevice.py:50
 msgid "Unknown"
 msgstr "Unbekannt"
+
+#: models/idevices/multiplechoice.py:17
+msgid "Multiple Choice"
+msgstr ""
+
+#: models/idevices/multiplechoice.py:19
+msgid "Technische Univesität München"
+msgstr ""
+
+#: models/idevices/multiplechoice.py:20
+msgid ""
+"Create a multiple choice questionary to review the\n"
+"    learned material"
+msgstr ""
+
+#: models/idevices/multiplechoice.py:28
+msgid ""
+"Create a multiple choice questionary to review the\n"
+"    learned material. Click \"Add option\" to add more answer options"
+msgstr ""
+
+#: models/idevices/multiplechoice.py:55
+msgid ""
+"An answer option for the multiple choice question. Check the 'right answer' "
+"checkmark to mark the right option"
+msgstr ""
 
 #: models/idevices/objectivesidevice.py:10
 msgid "Objectives"
@@ -282,19 +310,19 @@ msgstr ""
 msgid "Type the learning objectives for this resource."
 msgstr ""
 
-#: models/idevices/pdfidevice.py:9
+#: models/idevices/pdfidevice.py:11
 msgid "Pdf iDevice"
 msgstr "PDF iDevice"
 
-#: models/idevices/pdfidevice.py:12
+#: models/idevices/pdfidevice.py:14
 msgid ""
 "Import local pdf and display them.\n"
 "    Requires Acrobat Reader plugin."
 msgstr ""
 
-#: models/idevices/pdfidevice.py:21
+#: models/idevices/pdfidevice.py:23
 msgid ""
-"Input coma-separated pages or page rangesto import. For example: 1,2,3-8. "
+"Input coma-separated pages or page ranges to import. For example: 1,2,3-8. "
 "Leave empty to import all pages"
 msgstr ""
 
@@ -442,11 +470,11 @@ msgstr ""
 "Der Inhalt von diesem iDevice wird automatisch generiert und kann nicht "
 "manuell geändert werden"
 
-#: models/idevices/wikiidevice.py:43
+#: models/idevices/wikiidevice.py:31
 msgid "Wiki Article"
 msgstr "Wikipedia Artikel"
 
-#: models/idevices/wikiidevice.py:46
+#: models/idevices/wikiidevice.py:34
 msgid ""
 "<p>The Wikipedia iDevice allows you to locate\n"
 "existing content from within Wikipedia and download this content into your "
@@ -461,46 +489,64 @@ msgid ""
 "is covered by the GNU free documentation license.</p>"
 msgstr ""
 
-#: models/idevices/wikiidevice.py:56
+#: models/idevices/wikiidevice.py:44
 msgid ""
 "Enter a phrase or term you\n"
 "                                   wish to search\n"
 "within Wikipedia."
 msgstr ""
 
-#: models/idevices/wikiidevice.py:85 models/idevices/wikiidevice.py:115
+#: models/idevices/wikiidevice.py:75 models/idevices/wikiidevice.py:105
 #, python-format
 msgid ""
 "Unable to download from %s <br/>Please check the spelling and connection and "
 "try again."
 msgstr ""
 
-#: templates/base.html:82
+#: templates/base.html:76
 msgid "Site notice"
 msgstr "Impressum"
 
-#: templates/main.html:48
+#: templates/main.html:39
 msgid "Create a new course"
 msgstr "Neues Lernmodul erstellen"
 
-#: templates/main.html:52
+#: templates/main.html:43
 msgid "Remove selected courses"
 msgstr "Gewählte Kurse löschen"
 
-#: templates/exe/mainpage.html:37
-msgid "Enter a new node name"
+#: templates/exe/mainpage.html:27
+#, fuzzy
+msgid "Enter a new node name "
 msgstr "Geben Sie den Namen für die neue Seite ein!"
 
-#: templates/exe/mainpage.html:38
+#: templates/exe/mainpage.html:28
 msgid "New name:"
 msgstr "Seitenname:"
 
-#: templates/exe/mainpage.html:39
+#: templates/exe/mainpage.html:30
 #, fuzzy
 msgid "Create"
 msgstr "Erstellen"
 
-#: templates/exe/mainpage.html:72
+#: templates/exe/mainpage.html:35
+msgid "Do you really want to remove "
+msgstr ""
+
+#: templates/exe/mainpage.html:37
+msgid "No"
+msgstr ""
+
+#: templates/exe/mainpage.html:38
+msgid "Yes"
+msgstr ""
+
+#: templates/exe/mainpage.html:79
+#, fuzzy
+msgid "Table of Content"
+msgstr "Inhaltsangabe"
+
+#: templates/exe/mainpage.html:111
 msgid "Tools"
 msgstr "Werkzeuge"
 
@@ -512,55 +558,55 @@ msgstr "Willkommen bei creyoco!"
 msgid "Have an account?"
 msgstr "Bereits Mitglied?"
 
-#: templates/registration/login.html:14
+#: templates/registration/login.html:15
 msgid "Login!"
 msgstr "Melde dich an!"
 
-#: templates/registration/login.html:20
+#: templates/registration/login.html:21
 msgid "Username or..."
 msgstr "Benutzername oder..."
 
-#: templates/registration/login.html:23 templates/registration/login.html:44
+#: templates/registration/login.html:24 templates/registration/login.html:46
 #: templates/registration/register.html:14
 msgid "Username"
 msgstr "Benutzername"
 
-#: templates/registration/login.html:27
+#: templates/registration/login.html:28
 msgid "password is wrong."
 msgstr "Password ist falsch."
 
-#: templates/registration/login.html:31 templates/registration/login.html:46
+#: templates/registration/login.html:32 templates/registration/login.html:48
 #: templates/registration/register.html:19
 msgid "Password"
 msgstr "Passwort"
 
-#: templates/registration/login.html:32
+#: templates/registration/login.html:33
 #, fuzzy
 msgid "Login"
 msgstr "Anmelden"
 
-#: templates/registration/login.html:36
+#: templates/registration/login.html:37
 msgid "Recover password"
 msgstr "Passwort vergessen?"
 
-#: templates/registration/login.html:40
+#: templates/registration/login.html:41
 msgid "New to creyoco?"
 msgstr "Neu bei creyoco?"
 
-#: templates/registration/login.html:40
+#: templates/registration/login.html:42
 msgid "Register now!"
 msgstr "Registriere dich jetzt!"
 
-#: templates/registration/login.html:45
+#: templates/registration/login.html:47
 msgid "E-Mail"
 msgstr "E-Mail"
 
-#: templates/registration/login.html:47
+#: templates/registration/login.html:49
 #: templates/registration/register.html:24
 msgid "Password (again)"
 msgstr "Passwort (wiederholen)"
 
-#: templates/registration/login.html:48
+#: templates/registration/login.html:50
 msgid "Create account"
 msgstr "Benutzerkonto erstellen"
 
@@ -586,7 +632,7 @@ msgstr ""
 msgid "Close"
 msgstr "Schließen"
 
-#: utils/path.py:635
+#: utils/path.py:632
 #, python-format
 msgid ""
 "%s\n"
