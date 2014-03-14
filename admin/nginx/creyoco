@@ -31,4 +31,5 @@ server {
         internal;
         alias /home/medienzentrum/creyoco/exedjango/exeapp_media/;
     }
+    client_max_body_size 50MB;
 }
