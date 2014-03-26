@@ -53,6 +53,10 @@ within Wikipedia."""))
     # self._langInstruc      = x_(u"""Select the appropriate language version
     # of Wikipedia to search and enter search term.""")
 
+    def _resources(self):
+        """Just returns an empty set"""
+        return set()
+
     def load_article(self, title):
         """
         Load the article from Wikipedia
