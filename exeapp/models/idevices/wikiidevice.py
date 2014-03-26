@@ -63,7 +63,7 @@ within Wikipedia."""))
         """
         self.articleName = title
         url = ""
-        title = urllib.parse.quote(title.replace(" ", "_").encode('utf-8'))
+        title = quote(title.replace(" ", "_").encode('utf-8'))
         try:
             url = (self.site or self.ownUrl)
             if not url.endswith('/') and title != '':
@@ -71,7 +71,7 @@ within Wikipedia."""))
             if '://' not in url:
                 url = 'http://' + url
             url += title
-            net = urllib.request.urlopen(url)
+            net = urlopen(url)
             page = net.read().decode("utf-8")
             net.close()
         except IOError:
