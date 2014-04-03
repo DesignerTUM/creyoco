@@ -47,3 +47,5 @@ REQUIRE_DEBUG = False
 SOUTH_DATABASE_ADAPTERS = {
     'default': "south.db.mysql"
 }
+
+FILEBROWSER_MAX_UPLOAD_SIZE = 40 * 1024 * 1024
