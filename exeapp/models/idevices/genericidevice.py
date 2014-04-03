@@ -30,11 +30,11 @@ class GenericIdevice(Idevice):
             objs = soup.findAll("object")
             for obj in objs:
                 # check if it is a full url
-                if obj_path.startswith("http"):
-                    obj_path = "/" + "/".join(obj_path.split("/")[3:])
                 obj_path = obj['data'].replace(
                     settings.STATIC_URL, settings.STATIC_ROOT + "/"
                 )
+                if obj_path.startswith("http"):
+                    obj_path = "/" + "/".join(obj_path.split("/")[3:])
                 obj_path = obj_path.replace(
                     settings.MEDIA_URL, settings.MEDIA_ROOT + "/"
                 )
