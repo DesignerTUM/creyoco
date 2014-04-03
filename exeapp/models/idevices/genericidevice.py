@@ -35,9 +35,6 @@ class GenericIdevice(Idevice):
                 )
                 if obj_path.startswith("http"):
                     obj_path = "/" + "/".join(obj_path.split("/")[3:])
-                obj_path = obj_path.replace(
-                    settings.MEDIA_URL, settings.MEDIA_ROOT + "/"
-                )
                 resource_list.add(obj_path)
                 flashvars = unquote(unquote(obj.findAll(
                     "param",
