@@ -33,7 +33,7 @@ class GenericIdevice(Idevice):
                     settings.STATIC_URL, settings.STATIC_ROOT + "/")
                 # check if it is a full url
                 if obj_path.startswith("http"):
-                    obj_path = "/" + "/".join(obj_path.split("/"))
+                    obj_path = "/" + "/".join(obj_path.split("/")[3:])
                 resource_list.add(obj_path)
                 flashvars = unquote(unquote(obj.findAll(
                     "param",
