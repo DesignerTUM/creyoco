@@ -29,8 +29,12 @@ class GenericIdevice(Idevice):
                     resource_list.add(img['src'].replace(media_url, ""))
             objs = soup.findAll("object")
             for obj in objs:
-                resource_list.add(obj['data'].replace(
-                    settings.STATIC_URL, settings.STATIC_ROOT + "/"))
+                obj_path = obj['data'].replace(
+                    settings.STATIC_URL, settings.STATIC_ROOT + "/")
+                # check if it is a full url
+                if obj_path.startwith("http"):
+                    obj_path = "/" + "/".join(obj_path.split("/"))
+                resource_list.add(obj_path)
                 flashvars = unquote(unquote(obj.findAll(
                     "param",
                     attrs={"name": "flashvars"})[0]['value']))
