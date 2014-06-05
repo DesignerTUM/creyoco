@@ -8,8 +8,7 @@
 
 {% block title %}{{ package.title }} | creyoco{% endblock %}
 {% block head_css %}
-    <link rel="stylesheet" type="text/css"
-          href="{% get_static_prefix %}css/mz/style.min.css">
+    {{ block.super }}
     <link rel="stylesheet"
           href="{% get_static_prefix %}scripts/bower_components/jquery-modal/jquery.modal.css"
           type="text/css" media="screen"/>

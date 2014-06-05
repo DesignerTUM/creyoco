@@ -8,7 +8,7 @@ $background: #f6f6f6;
 $vertical: 'max-height' 50em;
 
 // meta
-@import 'compass/reset';
+//@import 'compass/reset';
 @import 'compass/css3';
 //@import 'compass/css3/box-sizing';
 //@import 'icon/*.png';
@@ -41,6 +41,11 @@ $basic-sprite-dimensions: true;
   100% {color: $red;}
 }
 
+h1, h2, h3, h4 {
+  font-size: 100%;
+  text-shadow: white 0 2px 0;
+}
+
 @mixin horizontal-rule {
   display: block;
   -webkit-margin-before: 0;
@@ -65,6 +70,10 @@ $basic-sprite-dimensions: true;
     display: table;
     clear: both;
   }
+}
+
+table tbody {
+  border: 1px;
 }
 
 html {
@@ -323,9 +332,11 @@ header {
 }
 
 ul#navi {
+  padding: 0px;
+  border: 0px;
+  margin: 0px;
   li {
     //$basic-sprite-dimensions: false;
-
     float: left;
     margin-right: .5%;
 
