@@ -1,9 +1,13 @@
 import sys
 import re
-from exeapp.models.idevices.idevice import Idevice
+
 from django.db.models.fields import TextField
 from bs4 import BeautifulSoup
 from django.conf import settings
+
+from exeapp.models.idevices.idevice import Idevice
+
+
 if sys.version_info >= (3,):
     from urllib.request import unquote
 else:
@@ -11,11 +15,10 @@ else:
 
 
 class GenericIdevice(Idevice):
-
     def _get_text_fields(self):
         return (getattr(self, field.attname)
-                        for field in self._meta.concrete_fields if
-                            isinstance(field, TextField))
+                for field in self._meta.concrete_fields if
+                isinstance(field, TextField))
 
     def _resources(self):
         user = self.parent_node.package.user
@@ -26,7 +29,8 @@ class GenericIdevice(Idevice):
             imgs = soup.findAll("img")
             for img in imgs:
                 if not img['src'].startswith("data:image"):
-                    resource_list.add(img['src'].replace(media_url, ""))
+                    resource_list.add(
+                        unquote(img['src'].replace(media_url, "")))
             objs = soup.findAll("object")
             for obj in objs:
                 # check if it is a full url
@@ -35,7 +39,7 @@ class GenericIdevice(Idevice):
                 )
                 if obj_path.startswith("http"):
                     obj_path = "/" + "/".join(obj_path.split("/")[3:])
-                resource_list.add(obj_path)
+                resource_list.add(unquote(obj_path))
                 flashvars = unquote(unquote(obj.findAll(
                     "param",
                     attrs={"name": "flashvars"})[0]['value']))
@@ -43,7 +47,7 @@ class GenericIdevice(Idevice):
                     name, _, value = var.partition("=")
                     if name == "url":
                         value.replace(media_url, "")
-                        resource_list.add(value.replace(media_url, ""))
+                        resource_list.add(unquote(value.replace(media_url, "")))
                         break
         return resource_list
 
@@ -52,11 +56,11 @@ class GenericIdevice(Idevice):
         parent = self.parent_node
         link_list = []
         for field in self._get_text_fields():
-            link_list += (("%s::%s" % (parent.title, anchor), "%s.html#%s" %\
-                                          (parent.unique_name(), anchor)) \
-                   for anchor in re.findall('<a.*?name=[\"\'](.*?)[\"\']>',
-                                                         field))
-
+            link_list += (("%s::%s" % (parent.title, anchor), "%s.html#%s" % \
+                           (parent.unique_name(), anchor)) \
+                          for anchor in
+                          re.findall('<a.*?name=[\"\'](.*?)[\"\']>',
+                                     field))
 
         return link_list
 

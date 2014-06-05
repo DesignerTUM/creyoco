@@ -28,6 +28,7 @@ from exeapp.utils.path import Path
 from exeapp.views.export.websitepage import WebsitePage
 from zipfile import ZipFile, ZIP_DEFLATED
 import tempfile
+from urllib.parse import unquote
 
 
 def _(value):
@@ -172,8 +173,8 @@ class WebsiteExport(object):
         for page in self.pages:
             view_media = view_media.union(page.view_media._js).\
                             union(page.view_media._css.get('all', []))
-        view_media = [medium.replace(settings.STATIC_URL, "") \
-                      for medium in view_media\
+        view_media = [unquote(medium.replace(settings.STATIC_URL, ""))
+                      for medium in view_media
                       if not "tinymce" in medium]
         Path(settings.STATIC_ROOT).copylist(view_media, self.output_dir)
         self.media_dir.copylist(self.package.resources, self.output_dir)

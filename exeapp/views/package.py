@@ -2,11 +2,9 @@ import os
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseBadRequest, \
-    HttpResponseRedirect, HttpResponsePermanentRedirect, HttpResponseForbidden
-from django.core.servers.basehttp import FileWrapper
-from django.contrib.staticfiles.views import serve
+    HttpResponseRedirect, HttpResponsePermanentRedirect
 from django.conf import settings
-from django.views.decorators.cache import never_cache, patch_cache_control
+from django.views.decorators.cache import never_cache
 
 from exeapp.models import User, idevice_store, Package
 from exeapp.shortcuts import get_package_by_id_or_error
@@ -14,8 +12,6 @@ from django import forms
 from django.core.urlresolvers import reverse
 from exeapp.models.package import DublinCore
 from exeapp.views.export.exporter_factory import exporter_factory, exporter_map
-from exeapp.models.node import Node
-from django.utils.encoding import smart_bytes
 from exeapp.views.authoring import authoring
 from django.template.loader import render_to_string
 from io import BytesIO

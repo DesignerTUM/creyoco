@@ -18,8 +18,10 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 # ===========================================================================
 import os
-from django.db import models
 import datetime
+
+from django.db import models
+
 
 """
 Package represents the collection of resources the user is editing
@@ -30,20 +32,20 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.conf import settings
 
-
 import logging
 import time
 import zipfile
 import re
 from collections import defaultdict
-from xml.dom                   import minidom
-from exeapp.utils.path      import Path, TempDirPath
-from exeapp.models        import Node
+from xml.dom import minidom
+from exeapp.utils.path import Path, TempDirPath
+from exeapp.models import Node
 # from exe.engine.genericidevice import GenericIdevice
 
-from bs4  import BeautifulSoup
+from bs4 import BeautifulSoup
 
 log = logging.getLogger()
+
 
 def _(value):
     '''Placeholder for translation'''
@@ -62,6 +64,7 @@ def clonePrototypeIdevice(title):
 
     return idevice
 
+
 def burstIdevice(idev_type, i, node):
     # given the iDevice type and the BeautifulSoup fragment i, burst it:
     idevice = clonePrototypeIdevice(idev_type)
@@ -70,7 +73,7 @@ def burstIdevice(idev_type, i, node):
         freetext_idevice = clonePrototypeIdevice('Free Text')
         if freetext_idevice is None:
             log.error("unable to clone Free Text for " + idev_type
-                    + " idevice")
+                      + " idevice")
             return
         idevice = freetext_idevice
 
@@ -88,7 +91,7 @@ def loadNodesIdevices(node, s):
 
     if body:
         idevices = body.findAll(name='div',
-                attrs={'class' : re.compile('Idevice$') })
+                                attrs={'class': re.compile('Idevice$')})
         if len(idevices) > 0:
             for i in idevices:
                 # WARNING: none of the idevices yet re-attach their media,
@@ -140,7 +143,7 @@ def loadNodesIdevices(node, s):
                     # NOTE: no custom idevices burst yet,
                     # nor any deprecated idevices. Just burst into a FreeText:
                     log.warn("unburstable idevice " + i.attrMap['class'] +
-                            "; bursting into Free Text")
+                             "; bursting into Free Text")
                     idevice = burstIdevice('Free Text', i, node)
 
         else:
@@ -169,7 +172,9 @@ def loadNode(pass_num, resourceDir, zippedFile, node, doc, item, level):
     titles = item.getElementsByTagName('title')
     node.setTitle(titles[0].firstChild.data)
     node_resource = item.attributes['identifierref'].value
-    log.debug('*' * level + ' ' + titles[0].firstChild.data + '->' + item.attributes['identifierref'].value)
+    log.debug(
+        '*' * level + ' ' + titles[0].firstChild.data + '->' + item.attributes[
+            'identifierref'].value)
 
     for resource in doc.getElementsByTagName('resource'):
         if resource.attributes['identifier'].value == node_resource:
@@ -179,12 +184,12 @@ def loadNode(pass_num, resourceDir, zippedFile, node, doc, item, level):
 
                     is_exe_node_html = False
                     if filename.endswith('.html') \
-                    and filename != "fdl.html" \
-                    and not filename.startswith("galleryPopup"):
+                            and filename != "fdl.html" \
+                            and not filename.startswith("galleryPopup"):
                         # fdl.html is the wikipedia license, ignore it
                         # as well as any galleryPopups:
                         is_exe_node_html = \
-                                test_for_node(zippedFile.read(filename))
+                            test_for_node(zippedFile.read(filename))
 
                     if is_exe_node_html:
                         if pass_num == 1:
@@ -192,7 +197,7 @@ def loadNode(pass_num, resourceDir, zippedFile, node, doc, item, level):
                             log.debug('loading idevices from node: ' + filename)
                             loadNodesIdevices(node, zippedFile.read(filename))
                     elif filename == "fdl.html" or \
-                    filename.startswith("galleryPopup."):
+                            filename.startswith("galleryPopup."):
                         # let these be re-created upon bursting.
                         if pass_num == 0:
                             # 1st pass call to unzip the resources:
@@ -203,21 +208,24 @@ def loadNode(pass_num, resourceDir, zippedFile, node, doc, item, level):
                             try:
                                 zipinfo = zippedFile.getinfo(filename)
                                 log.debug('unzipping resource file: '
-                                        + resourceDir / filename)
+                                          + resourceDir / filename)
                                 outFile = open(resourceDir / filename, "wb")
                                 outFile.write(zippedFile.read(filename))
                                 outFile.flush()
                                 outFile.close()
                             except:
                                 log.warn('error unzipping resource file: '
-                                        + resourceDir / filename)
-                        ##########
-                        # WARNING: the resource is now in the resourceDir,
-                        # BUT it is NOT YET added into any of the project,
-                        # much less to the specific idevices or fields!
-                        # Although they WILL be saved out with the project
-                        # upon the next Save.
-                        ##########
+                                         + resourceDir / filename)
+                                # #########
+                                # WARNING: the resource is now in the
+                                # resourceDir,
+                                # BUT it is NOT YET added into any of the
+                                # project,
+                                # much less to the specific idevices or fields!
+                                # Although they WILL be saved out with the
+                                # project
+                                # upon the next Save.
+                                ##########
             break
 
     # process this node's children
@@ -230,7 +238,7 @@ def loadNode(pass_num, resourceDir, zippedFile, node, doc, item, level):
                 # if this is actually loading the nodes:
                 next_node = node.create_child()
             loadNode(pass_num, resourceDir, zippedFile, next_node,
-                    doc, subitem, level + 1)
+                     doc, subitem, level + 1)
 
 
 def loadCC(zippedFile, filename):
@@ -246,12 +254,12 @@ def loadCC(zippedFile, filename):
     for pass_num in range(2):
         for organizations in organizations_list:
             organization_list = organizations.getElementsByTagName(
-                    'organization')
+                'organization')
             for organization in organization_list:
                 for item in organization.childNodes:
                     if item.nodeName == 'item':
                         loadNode(pass_num, package.resourceDir, zippedFile,
-                                package.root, xmldoc, item, level)
+                                 package.root, xmldoc, item, level)
     return package
 
 
@@ -277,7 +285,6 @@ class DublinCore(models.Model):
 
 
 class PackageManager(models.Manager):
-
     def create(self, *args, **kwargs):
         package = Package(*args, **kwargs)
         dublincore = DublinCore.objects.create()
@@ -302,15 +309,15 @@ i.e. the "package".
     email = models.EmailField(max_length=50, blank=True)
     description = models.CharField(max_length=256, blank=True)
     backgroundImg = models.ImageField(upload_to='background',
-                                           blank=True, null=True)
+                                      blank=True, null=True)
     backgroundImgTile = models.BooleanField(default=False)
     footer = models.CharField(max_length=100, blank=True)
     footerImg = models.ImageField(upload_to='footer',
-                                           blank=True, null=True)
+                                  blank=True, null=True)
     license = models.CharField(max_length=50, blank=True)
     style = models.CharField(max_length=20, default="default")
     resourceDir = models.FileField(upload_to="resources",
-                                    blank=True, null=True)
+                                   blank=True, null=True)
     dublincore = models.OneToOneField(DublinCore)
 
     level1 = models.CharField(max_length=20, default=DEFAULT_LEVEL_NAMES[0])
@@ -319,11 +326,11 @@ i.e. the "package".
 
     objects = PackageManager()
 
-        # self.dublinCore    = DublinCore()
-        # self.license       = "None"
-        # self.footer        = ""
-        # self.sourcerefs    = {}
-        # self.resourceDir = TempDirPath()
+    # self.dublinCore    = DublinCore()
+    # self.license       = "None"
+    # self.footer        = ""
+    # self.sourcerefs    = {}
+    # self.resourceDir = TempDirPath()
 
     # Property Handlers
 
@@ -376,10 +383,12 @@ i.e. the "package".
 
     def set_style(self, style):
         if not style in [os.path.basename(exist_style) for exist_style in \
-              os.listdir(settings.STYLE_DIR) \
-              # style dir has to be joined because of a bug on windows
-              # with abapath resolving
-              if os.path.isdir(os.path.join(settings.STYLE_DIR, exist_style))]:
+                         os.listdir(settings.STYLE_DIR) \
+                         # style dir has to be joined because of a bug on
+                         # windows
+                         # with abapath resolving
+                         if os.path.isdir(
+                    os.path.join(settings.STYLE_DIR, exist_style))]:
             raise ValueError("Style {} cannot be found".format(style))
         self.style = style
         self.save()
@@ -422,7 +431,8 @@ i.e. the "package".
         # TODO Fix the function
         return 0
         # Don't update the list for the generic.data "package"
-        genericData = G.application.config.configDir / 'idevices' / 'generic.data'
+        genericData = G.application.config.configDir / 'idevices' / \
+                      'generic.data'
         if genericData.isfile() or genericData.islink():
             if Path(filename).samefile(genericData):
                 return
@@ -457,13 +467,12 @@ i.e. the "package".
         Load package from disk, returns a package.
         """
         # if not zipfile.is_zipfile(filename):
-        #    return None
+        # return None
         try:
             zippedFile = zipfile.ZipFile(filename, "r")
         except zipfile.BadZipFile:
             log.error("File %s is not a zip file" % file)
             return None
-
 
         try:
             # Get the jellied package data
@@ -490,9 +499,9 @@ i.e. the "package".
 
         try:
             newPackage = decodeObjectRaw(toDecode)
-#            G.application.afterUpgradeHandlers = []
+            #            G.application.afterUpgradeHandlers = []
             newPackage.resourceDir = resourceDir
-#            G.application.afterUpgradeZombies2Delete = []
+            #            G.application.afterUpgradeZombies2Delete = []
 
             if newLoad:
                 # provide newPackage to doUpgrade's versionUpgrade() to
@@ -500,51 +509,52 @@ i.e. the "package".
                 # any corrupt package references to the new package:
 
                 log.debug("load() about to doUpgrade newPackage \""
-                        + newPackage._name + "\" " + repr(newPackage))
+                          + newPackage._name + "\" " + repr(newPackage))
                 if hasattr(newPackage, 'resourceDir'):
                     log.debug("newPackage resourceDir = "
-                            + newPackage.resourceDir)
+                              + newPackage.resourceDir)
                 else:
                     # even though it was just set above? should not get here:
                     log.error("newPackage resourceDir has NO resourceDir!")
 
-#                doUpgrade(newPackage)
+                #                doUpgrade(newPackage)
 
                 # after doUpgrade, compare the largest found field ID:
-#                if G.application.maxFieldId >= Field.nextId:
-#                    Field.nextId = G.application.maxFieldId + 1
+                #                if G.application.maxFieldId >= Field.nextId:
+                #                    Field.nextId = G.application.maxFieldId + 1
 
             else:
                 # and when merging, automatically set package references to
                 # the destinationPackage, into which this is being merged:
 
                 log.debug("load() about to merge doUpgrade newPackage \""
-                        + newPackage._name + "\" " + repr(newPackage)
-                        + " INTO destinationPackage \""
-                        + destinationPackage._name + "\" "
-                        + repr(destinationPackage))
+                          + newPackage._name + "\" " + repr(newPackage)
+                          + " INTO destinationPackage \""
+                          + destinationPackage._name + "\" "
+                          + repr(destinationPackage))
 
                 log.debug("using their resourceDirs:")
                 if hasattr(newPackage, 'resourceDir'):
                     log.debug("   newPackage resourceDir = "
-                            + newPackage.resourceDir)
+                              + newPackage.resourceDir)
                 else:
                     log.error("newPackage has NO resourceDir!")
                 if hasattr(destinationPackage, 'resourceDir'):
                     log.debug("   destinationPackage resourceDir = "
-                            + destinationPackage.resourceDir)
+                              + destinationPackage.resourceDir)
                 else:
                     log.error("destinationPackage has NO resourceDir!")
 
                 doUpgrade(destinationPackage,
-                        isMerge=True, preMergePackage=newPackage)
+                          isMerge=True, preMergePackage=newPackage)
 
                 # after doUpgrade, compare the largest found field ID:
-#                if G.application.maxFieldId >= Field.nextId:
-#                    Field.nextId = G.application.maxFieldId + 1
+            #                if G.application.maxFieldId >= Field.nextId:
+            #                    Field.nextId = G.application.maxFieldId + 1
 
         except:
             import traceback
+
             traceback.print_exc()
             raise
 
@@ -552,7 +562,8 @@ i.e. the "package".
             # newPackage.filename was stored as it's original filename
             newPackage.tempFile = False
         else:
-            # newPackage.filename is the name that the package was last loaded from
+            # newPackage.filename is the name that the package was last
+            # loaded from
             # or saved to
             newPackage.filename = Path(filename)
 
@@ -586,7 +597,8 @@ i.e. the "package".
             return
 
         existingFiles = set([fn.basename() for fn in self.resourceDir.files()])
-        usedFiles = set([reses[0].storageName for reses in list(self.resources.values())])
+        usedFiles = set(
+            [reses[0].storageName for reses in list(self.resources.values())])
         for fn in existingFiles - usedFiles:
             (self.resourceDir / fn).remove()
 

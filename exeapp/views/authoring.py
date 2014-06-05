@@ -4,6 +4,7 @@ Created on May 17, 2011
 @author: Alendit
 """
 import json as simplejson
+
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, Http404, \
     HttpResponseBadRequest
@@ -58,7 +59,10 @@ def handle_action(request, package, node):
 def get_media_list(node, ajax=False):
     """Returns the idevice-specific media list for a given node. Always
     includes tinymce compressor, since it can't be loaded dynamically"""
-    media = forms.Media(js=["/static/tiny_mce/tiny_mce.js", "/tinymce/filebrowser/"])
+    media = forms.Media(
+        js=["/static/tiny_mce/tiny_mce.js", "/tinymce/filebrowser/"])
+    a = 1
+    b = 2
     js_modules = set()
     for idevice in node.idevices.all():
         idevice = idevice.as_child()
@@ -70,10 +74,13 @@ def get_media_list(node, ajax=False):
         if "/static/tiny_mce/tiny_mce.js" in media._js:
             media._js.remove("/static/tiny_mce/tiny_mce.js")
         return simplejson.dumps(
-            {"js": media._js,
-             "css": media._css.get('all', []),
-             "js_modules": list(js_modules)
-            })
+            {
+                "js": media._js,
+                "css": media._css.get('all', []),
+                "js_modules": list(js_modules)
+            }
+        )
+
     else:
         return str(media)
 
