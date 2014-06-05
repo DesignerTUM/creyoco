@@ -2159,7 +2159,11 @@ header {
     #content #middle-row #authoring {
       padding-left: 0px;
       padding-right: 0px; }
-      /* line 244, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
+      /* line 242, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
+      #content #middle-row #authoring ul {
+        list-style: circle;
+        padding-left: 1.6em; }
+      /* line 248, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
       #content #middle-row #authoring h2 {
         color: #a71e20;
         font-family: inherit;
@@ -2168,7 +2172,7 @@ header {
         letter-spacing: inherit;
         text-transform: inherit;
         margin-bottom: 10px; }
-      /* line 253, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
+      /* line 257, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
       #content #middle-row #authoring h1 {
         color: #a71e20;
         font-size: 1.5em;
@@ -2176,22 +2180,22 @@ header {
         padding-bottom: 15px;
         padding-left: 20px;
         margin-bottom: 10px; }
-    /* line 266, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
+    /* line 270, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
     #content #middle-row .theme {
       width: 48.5%;
       margin-bottom: 15px;
       border: 3px solid #e6e6e6; }
-      /* line 271, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
+      /* line 275, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
       #content #middle-row .theme.selected {
         border: 3px solid #a71e20; }
-    /* line 276, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
+    /* line 280, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
     #content #middle-row .theme:nth-child(odd) {
       float: left; }
-    /* line 280, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
+    /* line 284, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
     #content #middle-row .theme:nth-child(even) {
       float: right; }
 
-/* line 292, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
+/* line 296, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
 .shadow-top-right {
   position: relative;
   background-position: 0 -611px;
@@ -2202,7 +2206,7 @@ header {
   left: 100%;
   z-index: -1; }
 
-/* line 301, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
+/* line 305, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
 .shadow-bottom-right {
   position: relative;
   display: block;
@@ -2214,7 +2218,7 @@ header {
   margin-left: -375px;
   z-index: -1; }
 
-/* line 311, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
+/* line 315, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
 .shadow-bottom-left {
   position: relative;
   display: block;
@@ -2226,7 +2230,7 @@ header {
   margin-top: -40px;
   z-index: -1; }
 
-/* line 322, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
+/* line 326, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
 ul#navi li {
   float: left;
   margin-right: .5%;
@@ -2252,9 +2256,6 @@ ul#navi li {
   line-height: 21px;
   margin-bottom: 5px;
   text-shadow: white 0 1px 0; }
-  /* line 345, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
-  ul#navi li:hover {
-    cursor: pointer; }
   /* line 349, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
   ul#navi li a {
     color: black; }
@@ -2414,6 +2415,7 @@ ul#package_list li {
 
 /* line 518, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
 footer {
+  position: absolute;
   bottom: 10px;
   max-width: 1800px;
   min-width: 960px;
@@ -2422,7 +2424,7 @@ footer {
   margin-top: 20px;
   padding-left: 30px;
   padding-right: 30px; }
-  /* line 529, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
+  /* line 530, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
   footer hr {
     display: block;
     -webkit-margin-before: 0;
@@ -2434,41 +2436,41 @@ footer {
     padding-bottom: 16px;
     border-bottom: 1px dotted #595959;
     width: 100%; }
-  /* line 533, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
+  /* line 534, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
   footer div {
     padding-top: 10px; }
 
-/* line 538, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
+/* line 539, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
 #15_field_content {
   width: 50px; }
 
-/* line 542, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
+/* line 543, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
 .info {
   display: none; }
 
-/* line 546, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
+/* line 547, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
 .modal {
   display: none;
   padding: 0px; }
-  /* line 550, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
+  /* line 551, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
   .modal.loading {
     background-image: url('/static/images/mz/ajax-loader.gif?1375177814');
     background-position: center;
     background-repeat: no-repeat; }
-    /* line 555, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
+    /* line 556, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
     .modal.loading *:not(.close-modal) {
       display: none !important; }
-  /* line 560, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
+  /* line 561, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
   .modal#previewIFrame {
     min-width: 400px;
     max-width: 1800px;
     width: 90%;
     height: 800px; }
-    /* line 567, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
+    /* line 568, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
     .modal#previewIFrame iframe {
       width: 100%;
       height: 750px; }
-  /* line 573, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
+  /* line 574, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
   .modal .modcontainer {
     border: solid 1px #a71e20;
     padding: 10px 20px 10px 20px;
@@ -2477,21 +2479,21 @@ footer {
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px; }
-  /* line 581, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
+  /* line 582, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
   .modal h4 {
     color: #a71e20;
     font-weight: 700;
     margin-top: 1.5em;
     margin-bottom: 1em; }
-  /* line 588, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
+  /* line 589, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
   .modal label {
     font-weight: bold;
     margin-right: 5px; }
-  /* line 592, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
+  /* line 593, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
   .modal input[type=text] {
     border: dotted #a71e20 1px;
     margin-right: 10px; }
-  /* line 597, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
+  /* line 598, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
   .modal input[type=button] {
     margin-top: 5px;
     margin-left: 0px;
@@ -2502,18 +2504,18 @@ footer {
     border-radius: 3px;
     background-color: #e6e6e6;
     width: 50px; }
-  /* line 607, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
+  /* line 608, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
   .modal#download_box a.export_link {
     line-height: 21px;
     display: block; }
-    /* line 611, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
+    /* line 612, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
     .modal#download_box a.export_link i {
       margin-right: 10px; }
-  /* line 616, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
+  /* line 617, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
   .modal#download_box h3 {
     color: #a71e20;
     margin-bottom: 20px; }
 
-/* line 623, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
+/* line 624, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
 .fb_show {
   margin-left: .5em; }

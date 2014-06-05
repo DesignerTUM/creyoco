@@ -239,6 +239,10 @@ header {
     margin-bottom: 40px;
     padding: 15px;
     #authoring {
+      ul {
+        list-style: circle;
+        padding-left: 1.6em;
+      }
       padding-left: 0px;
       padding-right: 0px;
       h2 {
@@ -341,10 +345,6 @@ ul#navi {
     line-height: 21px;
     margin-bottom: 5px;
     @include text-shadow(white 0 1px 0);
-
-    &:hover {
-      cursor: pointer;
-    }
 
     a {
       color: black;
@@ -516,6 +516,7 @@ a:hover .icon-question-sign {
 }
 
 footer {
+  position: absolute;
   bottom: 10px;
   max-width: 1800px;
   min-width: 960px;
