@@ -26,5 +26,6 @@ class GlossaryBlock(with_metaclass(FormsetBlockMetaclassFactory(
         return render_to_string(self.view_template,
                                 {"idevice": self.idevice,
                                  "ordered_terms": ordered_terms,
+                                 "self": self
                                 }
         )
