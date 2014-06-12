@@ -16,4 +16,4 @@ pillow
 south
 gunicorn
 feedparser
--e git+https://github.com/alendit/django-require.git#egg=django-require
+django-require
