@@ -1,5 +1,6 @@
 import sys
 import re
+
 from tinymce.widgets import TinyMCE
 from django.conf import settings
 from django.utils.safestring import mark_safe
@@ -8,16 +9,16 @@ from django.template.loader import render_to_string
 from django import forms
 from bs4 import BeautifulSoup
 
+
 if sys.version_info >= (3,):
     from urllib.request import unquote
 else:
     from urllib import unquote
 
 
-
 class FreeTextWidget(TinyMCE):
-
-    def __init__(self, content_language=None, attrs=None, mce_attrs=None, height=None):
+    def __init__(self, content_language=None, attrs=None, mce_attrs=None,
+                 height=None):
         if height is not None:
             style_height = "height: %dpx;" % height
             attrs = attrs or {}
@@ -44,11 +45,16 @@ class FreeTextWidget(TinyMCE):
             src = obj.find("param", attrs={'name': 'src'})
             src['value'] = src['value'].split("/")[-1]
             flashvars = obj.find("param", attrs={'name': 'flashvars'})
-            reg_ex = r'url=.*/(.*?)&.*"'
+            reg_ex = r'url=.*/(.*?)&.*'
             flashvars['value'] = re.sub(
-                        reg_ex,
-                        lambda match: "url=/{}".format(unquote(match.group(1))),
-                        flashvars['value'])
+                reg_ex,
+                lambda match: "url=./{}".format(
+                    unquote(match
+                            .group(1)
+                            .replace(settings.MEDIA_URL, '')
+                    )
+                ),
+                flashvars['value'])
         return str(soup)
 
 
@@ -58,10 +64,10 @@ class FreeTextWidget(TinyMCE):
 
 class FeedbackWidget(FreeTextWidget):
     media = forms.Media(
-            js=["%sscripts/widgets/feedback.js" % settings.STATIC_URL],
-            css={"all" : ["%scss/widgets/feedback.css" % \
-                          settings.STATIC_URL]})
-    js_modules=['feedback']
+        js=["%sscripts/widgets/feedback.js" % settings.STATIC_URL],
+        css={"all": ["%scss/widgets/feedback.css" % \
+                     settings.STATIC_URL]})
+    js_modules = ['feedback']
 
     def render_preview(self, content):
         return render_to_string("exe/idevices/widgets/feedback.html",
@@ -89,14 +95,15 @@ class ClozeWidget(FreeTextWidget):
             attrs={"style": "text-decoration: underline;"})
         for gap_number, gap in enumerate(gaps):
             content = content.replace(str(gap), '<span contenteditable="true"'
-                                      'class="cloze_gap"' \
-                                      'id="gap_%s" autocomplete="off"></span>'
+                                                'class="cloze_gap"' \
+                                                'id="gap_%s" '
+                                                'autocomplete="off"></span>'
                                       % gap_number)
 
         gaps_text = enumerate((gap.text for gap in gaps))
         return render_to_string("exe/idevices/widgets/cloze.html",
-                                {"content" : content,
-                                 "gaps_text" : gaps_text})
+                                {"content": content,
+                                 "gaps_text": gaps_text})
 
 
 class MultiChoiceOptionWidget(FreeTextWidget):
