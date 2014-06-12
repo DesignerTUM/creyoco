@@ -52,7 +52,7 @@ def user_post_save(sender, instance, created, **kwargs):
 
 @receiver(signal=signals.pre_delete, sender=auth_models.User)
 def user_pre_delete(sender, instance, **kwargs):
-    profile = instance.userprofile
+    profile = instance.profile
     try:
         shutil.rmtree(profile.media_path)
     except OSError as e:

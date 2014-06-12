@@ -22,7 +22,7 @@ class GenericIdevice(Idevice):
 
     def _resources(self):
         user = self.parent_node.package.user
-        media_url = user.get_profile().media_url
+        media_url = user.profile.media_url
         resource_list = set()
         for field in self._get_text_fields():
             soup = BeautifulSoup(field)

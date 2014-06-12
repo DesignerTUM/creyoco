@@ -2,11 +2,10 @@ from django.db import models
 from django.contrib.auth.models import User
 import os
 from django.conf import settings
-from django.core.urlresolvers import reverse
 
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(User, related_name='profile')
 
     @property
     def media_path(self):

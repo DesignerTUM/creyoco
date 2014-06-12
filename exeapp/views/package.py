@@ -149,9 +149,9 @@ def preview_root(request, package):
 @login_required
 @get_package_by_id_or_error
 def preview_static(request, package, node, path):
-    media_path = request.user.get_profile().media_path
+    media_path = request.user.profile.media_path
     if os.path.exists(os.path.join(media_path, path)):
-        user_media_url = request.user.get_profile().media_url
+        user_media_url = request.user.profile.media_url
         return HttpResponsePermanentRedirect(user_media_url + path)
     else:
         node_style_url = settings.STATIC_URL +\

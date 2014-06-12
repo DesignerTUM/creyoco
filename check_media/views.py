@@ -11,7 +11,7 @@ def serve_media(request, path):
     """Checks if path is in user's media folder
     and serves it per XAccelRedirec    t
     """
-    user_media_path = request.user.get_profile().media_path
+    user_media_path = request.user.profile.media_path
     requested_path = os.path.abspath(os.path.join(settings.MEDIA_ROOT, path))
     if request.user.is_staff or requested_path.startswith(user_media_path):
         return sendfile(request, requested_path)

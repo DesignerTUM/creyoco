@@ -57,7 +57,7 @@ class WebsiteExport(object):
         self.scripts_dir = static_dir / "scripts"
         self.pages = []
         self.file_obj = file_obj
-        self.media_dir = Path(package.user.get_profile().media_path)
+        self.media_dir = Path(package.user.profile.media_path)
         self.page_class = WebsitePage
 
         self.output_dir = Path(tempfile.mkdtemp())
