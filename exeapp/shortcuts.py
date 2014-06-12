@@ -1,12 +1,13 @@
+from functools import wraps
+
 from django.http import Http404
 from django.core.exceptions import ObjectDoesNotExist
-from functools import wraps
-from jsonrpc import jsonrpc_method
+from django.template.loader import render_to_string
 
+from jsonrpc import jsonrpc_method
 from exeapp.models import Package
 from exedjango.base.http import Http403
 from exeapp.views.blocks.blockfactory import block_factory
-from django.template.loader import render_to_string
 from exeapp.models.node import Node
 
 
@@ -20,7 +21,7 @@ Tested in exeapp.tests.ShortcutsTestCase. '''
 
     @wraps(func)
     def permission_checking_view(request, package_id, node_id=None, *args,
-                                                                     **kwargs):
+                                 **kwargs):
         try:
             # assume we got a standard rpc package view
             # if package_id isn't convertable 500 will be thrown
@@ -36,24 +37,27 @@ Tested in exeapp.tests.ShortcutsTestCase. '''
         except ObjectDoesNotExist:
             raise Http404("Package {} not found".format(package_id))
         username = request.user.username
-        if package.user.username == username:
+        if package.user == request.user or \
+                        request.user in package.collaborators.all():
             if node is not None:
                 if node.package == package:
                     return func(request, package, node, *args, **kwargs)
                 else:
-                    Http404("Requested node not found in package {}".\
-                                            format(package_id))
+                    Http404("Requested node not found in package {}". \
+                            format(package_id))
             else:
                 return func(request, package, *args, **kwargs)
         else:
             raise Http403("User %s may not access package %s" % \
-                           (username, package_id))
+                          (username, package_id))
+
     # Set docstring and name
     return permission_checking_view
 
 
 def jsonrpc_authernticating_method(*args, **kwargs):
     """Chains jsonrpc_method and get_package_by_id_or_error decorators"""
+
     def decorator(func):
         if "authenticated" not in kwargs:
             kwargs['authenticated'] = True
@@ -71,4 +75,4 @@ def render_idevice(idevice):
     leaf_idevice = idevice.as_child()
     block = block_factory(leaf_idevice)
     return render_to_string("exe/authoring_idevice_form.html",
-                            {'block' : block})
+                            {'block': block})

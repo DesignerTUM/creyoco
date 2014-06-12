@@ -276,8 +276,8 @@ with it'''
             assert(sibling is None or isinstance(sibling, Node))
 
         if new_parent is None:
-            assert(sibling is not None, "Either parent or sibling have to "
-                "be not None")
+            assert sibling is not None, \
+                "Either parent or sibling have to be not None"
             new_parent = sibling.parent
         else:
             try:

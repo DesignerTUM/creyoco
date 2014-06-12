@@ -305,6 +305,7 @@ i.e. the "package".
     DEFAULT_LEVEL_NAMES = ["Topic", "Section", "Unit"]
     title = models.CharField(max_length=100)
     user = models.ForeignKey(User)
+    collaborators = models.ManyToManyField(User, related_name="shared_packages")
     author = models.CharField(max_length=50, blank=True)
     email = models.EmailField(max_length=50, blank=True)
     description = models.CharField(max_length=256, blank=True)
