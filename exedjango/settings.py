@@ -137,6 +137,7 @@ INSTALLED_APPS = (
     'strict_filebrowser',
     'exeapp',
     'gunicorn',
+    'django_autobahn',
 )
 
 ABSOLUTE_URL_OVERRIDES = {
