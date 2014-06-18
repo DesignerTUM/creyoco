@@ -1,3 +1,5 @@
+from functools import wraps
+
 from django.dispatch import Signal, receiver
 
 from django_autobahn.helpers import run_client
@@ -22,8 +24,11 @@ class SignalRegistrant:
         )
 
     def receiver(self, signal_name):
+        receiver_wrapper = receiver(signal=self.signals[signal_name])
+
+        @wraps(receiver_wrapper)
         def wrapper(func):
-            return receiver(signal=self.signals[signal_name])(func)
+            return receiver_wrapper(func)
 
         return wrapper
 
