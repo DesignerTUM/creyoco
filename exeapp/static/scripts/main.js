@@ -17,7 +17,10 @@ require.config({
         "filebrowser": "../filebrowser/js/AddFileBrowser",
         "feedback": "widgets/feedback",
         "cloze": "widgets/cloze",
-        "multichoice": "blocks/multichoice"
+        "multichoice": "blocks/multichoice",
+        "autobahn": "thirdparty/autobahn.min",
+        "wamp_handler": "wamp_handler"
+
     },
 
     shim: {

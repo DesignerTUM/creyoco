@@ -1,16 +1,18 @@
+import asyncio
+import os
+import shutil
+import logging
+
 from django.conf import settings
 from django.contrib.auth import models as auth_models
-from django.contrib.auth.management import create_superuser
 from django.db import IntegrityError
 from django.db.models import signals
 from django.dispatch import receiver
 
+from django_autobahn.signals import message_received
 from exeapp.models import UserProfile
-import os
-import shutil
 from exeapp.models import Package
 
-import logging
 
 log = logging.getLogger(__file__)
 
@@ -20,8 +22,9 @@ def create_debug_superuser(app, created_models, **kwargs):
         SU_LOGIN = "admin"
         SU_PASSWORD = "admin"
         try:
-            su = auth_models.User.objects.create_superuser(SU_LOGIN, "admin@exe.org",
-                                                      SU_PASSWORD)
+            su = auth_models.User.objects.create_superuser(SU_LOGIN,
+                                                           "admin@exe.org",
+                                                           SU_PASSWORD)
             Package.objects.create(title="test", user=su)
             log.info("Created superuser {} with password {}".format(SU_LOGIN,
                                                                     SU_PASSWORD))
@@ -32,14 +35,14 @@ def create_debug_superuser(app, created_models, **kwargs):
 @receiver(signal=signals.post_save, sender=auth_models.User)
 def user_post_save(sender, instance, created, **kwargs):
     if created:
-        profile = UserProfile.\
-                    objects.create(user=instance)
+        profile = UserProfile. \
+            objects.create(user=instance)
         profile.save()
         try:
             os.makedirs(profile.media_path)
         except Exception as e:
-                log.info("Folder for user {0} at {1} already exists.".\
-                    format(profile, profile.media_path))
+            log.info("Folder for user {0} at {1} already exists.". \
+                     format(profile, profile.media_path))
 
 
 @receiver(signal=signals.pre_delete, sender=auth_models.User)
@@ -52,3 +55,6 @@ def user_pre_delete(sender, instance, **kwargs):
     profile.delete()
 
 
+@receiver(signal=message_received)
+def message_received(sender, message, **kwargs):
+    log.info("Message: {}".format(message))

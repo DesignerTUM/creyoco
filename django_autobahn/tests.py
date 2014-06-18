@@ -5,8 +5,8 @@ from django.dispatch import receiver
 from autobahn.asyncio import wamp
 
 from django_autobahn.helpers import run_client, run_router
-from django_autobahn.wamp import SimpleServer, SignalServer
-from django_autobahn.signals import message_received
+from django_autobahn.wamp import SimpleSession, SignalSession
+from django_autobahn.signals import message_received, signal_registrant
 
 
 class TestServerCommand(TestCase):
@@ -16,7 +16,7 @@ class TestServerCommand(TestCase):
         """Create a subscriber and connect to it"""
         connected = False
         loop = asyncio.get_event_loop()
-        server = run_router(SimpleServer)
+        server = run_router(SimpleSession)
 
         class SimpleClient(wamp.ApplicationSession):
             def onConnect(self):
@@ -32,12 +32,12 @@ class TestServerCommand(TestCase):
         asyncio.get_event_loop().stop()
 
 
-    def test_message_singnal(self):
+    def test_message_signal(self):
         """Tests message dispatching"""
         loop = asyncio.get_event_loop()
-        server = run_router(SignalServer)
+        server = run_router(SimpleSession)
         message = "hello"
-        channel = "com.dautobahn.message"
+        channel = "message_received"
         received = False
 
         class SendingClient(wamp.ApplicationSession):
@@ -45,15 +45,19 @@ class TestServerCommand(TestCase):
             def onConnect(self):
                 self.join("creyoco")
             def onJoin(self, details):
-                self.publish(channel, message)
+                self.publish("com.dautobahn.%s" % channel, message)
                 self.disconnect()
 
-        @receiver(message_received)
+        signal_registrant.register_signal("message_received")
+
+        @signal_registrant.receiver("message_received")
         def handle_received(sender, **kwargs):
             nonlocal received
             received = True
+            print("Signal received")
             if kwargs['message'] == message:
                 received = True
+
         run_client(SendingClient)
         loop.run_until_complete(asyncio.sleep(.5))
         self.assertTrue(received)

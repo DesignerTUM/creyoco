@@ -3,6 +3,7 @@ from django.conf import settings
 from django.views.generic import RedirectView
 from jsonrpc import jsonrpc_site
 from jsonrpc.views import browse as json_browse
+import asyncio
 
 import exeapp.views.handlers.package_rpc
 import exeapp.views.handlers.package_outline_rpc
@@ -25,3 +26,4 @@ if settings.DEBUG:
                             url(r'^json/browse/', json_browse,
                                 name='jsonrpc_browser'),
     )
+

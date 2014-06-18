@@ -21,7 +21,6 @@ def run_client(application_class):
         loop.create_connection(transport_factory, '127.0.0.1', 8080)
     )
 
-
 def run_router(application_class):
     """Run autobahn router as applicaiton"""
 

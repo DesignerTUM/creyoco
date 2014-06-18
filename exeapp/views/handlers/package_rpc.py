@@ -37,7 +37,6 @@ from exeapp.shortcuts import jsonrpc_authernticating_method
 
 log = logging.getLogger(__name__)
 
-
 @jsonrpc_authernticating_method('package.get_current_style')
 def get_current_style(request, package):
     return {"style": package.style}

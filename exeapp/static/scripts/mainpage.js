@@ -56,9 +56,9 @@ CANT_MOVE_NODE_FURTHER = "Can't move up any farther"
 NOT_IMPLEMENTED = "This function is not implemented yet."
 SAVE_DIRTY_PACKAGE = "Package has been changed. Do you want to save it, before you leave?"
 
-require(['jquery', "common", "eyecandy", 'jquery-pjax', 'jquery-cookie', 'jquery-jsonrpc', "jstree", 'jquery-modal', 'modernizr',
+require(['jquery', "common", "eyecandy", "wamp_handler", 'jquery-pjax', 'jquery-cookie', 'jquery-jsonrpc', "jstree", 'jquery-modal', 'modernizr',
     'multichoice', 'feedback', 'cloze', 'filebrowser'],
-    function ($, common, eyecandy) {
+    function ($, common, eyecandy, wamp_handler) {
         // set crfs cookie
         function csrfSafeMethod(method) {
             // these HTTP methods do not require CSRF protection
@@ -204,6 +204,7 @@ require(['jquery', "common", "eyecandy", 'jquery-pjax', 'jquery-cookie', 'jquery
             set_current_style();
             common.init();
             eyecandy.init();
+            wamp_handler.show_messages();
 
         });
 
