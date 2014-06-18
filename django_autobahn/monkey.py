@@ -1,8 +1,7 @@
 import asyncio
 
 from aiohttp.wsgi import WSGIServerHttpProtocol
-from django_autobahn.client import start_clients
-from django_autobahn.helpers import run_client
+from django_autobahn.signals import signal_registrant
 
 
 def run(addr, port, wsgi_handler, loop=None, **options):
@@ -19,7 +18,7 @@ def run(addr, port, wsgi_handler, loop=None, **options):
     server = loop.run_until_complete(
         loop.create_server(protocol_factory, addr, port)
     )
-    start_clients()
+    signal_registrant.run_clients()
 
     try:
         loop.run_forever()

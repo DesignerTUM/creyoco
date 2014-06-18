@@ -21,6 +21,7 @@ def run_client(application_class):
         loop.create_connection(transport_factory, '127.0.0.1', 8080)
     )
 
+
 def run_router(application_class):
     """Run autobahn router as applicaiton"""
 
@@ -29,7 +30,6 @@ def run_router(application_class):
     session_factory.add(application_class())
     transport_factory = websocket.WampWebSocketServerFactory(session_factory,
                                                              debug=False,
-
                                                              debug_wamp=False)
     loop = asyncio.get_event_loop()
     return loop.run_until_complete(

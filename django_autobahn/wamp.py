@@ -26,16 +26,13 @@ class SignalSession(wamp.ApplicationSession):
     channel = ""
 
     def onConnect(self):
-        print("Connected")
         self.join("creyoco")
 
     @asyncio.coroutine
     def onJoin(self, details):
-        print("Joined realm")
 
         def received_callback(message):
             self.signal.send(sender=self.__class__, message=message)
 
-        print("Subscribing to %s with signal %s" % (self.channel, self.signal))
         yield from self.subscribe(received_callback,
                                   "com.dautobahn.%s" % self.channel)

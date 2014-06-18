@@ -1,4 +1,5 @@
 import asyncio
+import json
 import os
 import shutil
 import logging
@@ -9,7 +10,7 @@ from django.db import IntegrityError
 from django.db.models import signals
 from django.dispatch import receiver
 
-from django_autobahn.signals import message_received
+from django_autobahn.signals import message_received, signal_registrant
 from exeapp.models import UserProfile
 from exeapp.models import Package
 
@@ -55,6 +56,14 @@ def user_pre_delete(sender, instance, **kwargs):
     profile.delete()
 
 
-@receiver(signal=message_received)
-def message_received(sender, message, **kwargs):
-    log.info("Message: {}".format(message))
+# @signal_registrant.receiver_new("message")
+# def message_received(sender, message, **kwargs):
+#     log.info("Message: {}".format(message))
+
+@signal_registrant.receiver_new("idevice_changed")
+def handle_opened_idevice(sender, message, **kwargs):
+    print("#" * 20)
+    data =json.loads(message)
+    idevice_id = data['idevice_id']
+    status = data['status']
+    print("Idevice %s is now %s" % (idevice_id, status))

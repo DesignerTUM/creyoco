@@ -59,6 +59,7 @@ SAVE_DIRTY_PACKAGE = "Package has been changed. Do you want to save it, before y
 require(['jquery', "common", "eyecandy", "wamp_handler", 'jquery-pjax', 'jquery-cookie', 'jquery-jsonrpc', "jstree", 'jquery-modal', 'modernizr',
     'multichoice', 'feedback', 'cloze', 'filebrowser'],
     function ($, common, eyecandy, wamp_handler) {
+        "use strict";
         // set crfs cookie
         function csrfSafeMethod(method) {
             // these HTTP methods do not require CSRF protection
@@ -188,24 +189,14 @@ require(['jquery', "common", "eyecandy", "wamp_handler", 'jquery-pjax', 'jquery-
             });
 
 
-            //$(".bigButton:not(#btnRename), .smallButton").each(function(index) {
-            //    bindButtonClicked(this);
-            //});
             //bind action to idevice items
             $("#idevice_pane").delegate(".ideviceItem", "click", add_idevice);
             updateTitle();
 
-            // $("#authoringIFrame1").load(function() {
-            // var node_id = $("#authoringIFrame1").contents().find("#node_id").text();
-            // if (current_outline_id() != node_id){
-            // common.get_outline_pane().jstree("select_node", $("#node" + node_id), true);
-            // }
-            // })
             set_current_style();
             common.init();
             eyecandy.init();
-            wamp_handler.show_messages();
-
+            wamp_handler.listen_to_idevice_changes();
         });
 
         // Called after successful package deletion
