@@ -8,7 +8,8 @@ require.config({
         "jquery-modal": "bower_components/jquery-modal/jquery.modal",
         "jquery-form": "bower_components/jquery-form/jquery.form",
         "jquery-pjax": "bower_components/jquery-pjax/jquery.pjax",
-        "jquery-cookie": "bower_components/jquery.cookie/jquery.cookie"
+        "jquery-cookie": "bower_components/jquery.cookie/jquery.cookie",
+        "autobahn": "thirdparty/autobahn.min"
     },
     shim: {
         "jquery-jsonrpc": {
