@@ -178,7 +178,7 @@ define(['jquery', 'wamp_handler', 'jquery-form', 'jquery-pjax', 'jquery-jsonrpc'
             },
 
             reload_authoring: function () {
-                url = "/exeapp/package/" + exports.get_package_id() + "/" + exports.get_current_node_id() + "/";
+                var url = "/exeapp/package/" + exports.get_package_id() + "/" + exports.get_current_node_id() + "/";
                 $("#authoring").load(url, function () {
                     exports.initialize_authoring();
                 });
