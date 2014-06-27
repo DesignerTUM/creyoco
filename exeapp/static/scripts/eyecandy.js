@@ -1,7 +1,9 @@
 define(['jquery', 'common', 'chosen', 'qtip2', 'jquery-modal'], function($, common) {
     var exports = {
-        show_lightbox: function(width, height, el) {
-            el.modal();
+        show_lightbox: function(width, height, el) {            
+            el.height(height);
+            el.width(width);
+            el.modal();                        
         },
 
         init: function() {

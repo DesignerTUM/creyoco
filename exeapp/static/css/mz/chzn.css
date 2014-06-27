@@ -1,9 +1,9 @@
 /*
 Syntax error: Undefined variable: "$darkgrey".
-        on line 18 of /home/alendit/creyoco/exeapp/static/sass/chzn.scss
+        on line 18 of /vagrant/creyoco/exeapp/static/sass/chzn.scss
 
 Backtrace:
-/home/alendit/creyoco/exeapp/static/sass/chzn.scss:18
+/vagrant/creyoco/exeapp/static/sass/chzn.scss:18
 /var/lib/gems/1.9.1/gems/sass-3.2.9/lib/sass/script/variable.rb:49:in `_perform'
 /var/lib/gems/1.9.1/gems/sass-3.2.9/lib/sass/script/node.rb:40:in `perform'
 /var/lib/gems/1.9.1/gems/sass-3.2.9/lib/sass/script/list.rb:70:in `block in _perform'
@@ -58,27 +58,18 @@ Backtrace:
 /var/lib/gems/1.9.1/gems/compass-0.13.alpha.4/lib/compass/compiler.rb:107:in `block in run'
 /var/lib/gems/1.9.1/gems/compass-0.13.alpha.4/lib/compass/compiler.rb:132:in `timed'
 /var/lib/gems/1.9.1/gems/compass-0.13.alpha.4/lib/compass/compiler.rb:106:in `run'
-/var/lib/gems/1.9.1/gems/compass-0.13.alpha.4/lib/compass/watcher/compiler.rb:24:in `compile'
-/usr/lib/ruby/1.9.1/forwardable.rb:201:in `compile'
-/var/lib/gems/1.9.1/gems/compass-0.13.alpha.4/lib/compass/watcher/project_watcher.rb:92:in `sass_modified'
-/var/lib/gems/1.9.1/gems/compass-0.13.alpha.4/lib/compass/watcher/project_watcher.rb:85:in `sass_callback'
-/var/lib/gems/1.9.1/gems/compass-0.13.alpha.4/lib/compass/watcher/watch.rb:17:in `call'
-/var/lib/gems/1.9.1/gems/compass-0.13.alpha.4/lib/compass/watcher/watch.rb:17:in `run_callback'
-/var/lib/gems/1.9.1/gems/compass-0.13.alpha.4/lib/compass/watcher/project_watcher.rb:78:in `block (2 levels) in listen_callback'
-/var/lib/gems/1.9.1/gems/compass-0.13.alpha.4/lib/compass/watcher/project_watcher.rb:77:in `each'
-/var/lib/gems/1.9.1/gems/compass-0.13.alpha.4/lib/compass/watcher/project_watcher.rb:77:in `block in listen_callback'
-/var/lib/gems/1.9.1/gems/compass-0.13.alpha.4/lib/compass/watcher/project_watcher.rb:76:in `each'
-/var/lib/gems/1.9.1/gems/compass-0.13.alpha.4/lib/compass/watcher/project_watcher.rb:76:in `listen_callback'
-/var/lib/gems/1.9.1/gems/listen-0.7.3/lib/listen/listener.rb:212:in `call'
-/var/lib/gems/1.9.1/gems/listen-0.7.3/lib/listen/listener.rb:212:in `on_change'
-/var/lib/gems/1.9.1/gems/listen-0.7.3/lib/listen/listener.rb:221:in `block in initialize_adapter'
-/var/lib/gems/1.9.1/gems/listen-0.7.3/lib/listen/adapter.rb:198:in `call'
-/var/lib/gems/1.9.1/gems/listen-0.7.3/lib/listen/adapter.rb:198:in `report_changes'
-/var/lib/gems/1.9.1/gems/listen-0.7.3/lib/listen/adapter.rb:210:in `poll_changed_dirs'
-/var/lib/gems/1.9.1/gems/listen-0.7.3/lib/listen/adapters/linux.rb:48:in `block in start'
+/var/lib/gems/1.9.1/gems/compass-0.13.alpha.4/lib/compass/commands/update_project.rb:45:in `perform'
+/var/lib/gems/1.9.1/gems/compass-0.13.alpha.4/lib/compass/commands/base.rb:18:in `execute'
+/var/lib/gems/1.9.1/gems/compass-0.13.alpha.4/lib/compass/commands/project_base.rb:19:in `execute'
+/var/lib/gems/1.9.1/gems/compass-0.13.alpha.4/lib/compass/exec/sub_command_ui.rb:43:in `perform!'
+/var/lib/gems/1.9.1/gems/compass-0.13.alpha.4/lib/compass/exec/sub_command_ui.rb:15:in `run!'
+/var/lib/gems/1.9.1/gems/compass-0.13.alpha.4/bin/compass:30:in `block in <top (required)>'
+/var/lib/gems/1.9.1/gems/compass-0.13.alpha.4/bin/compass:44:in `call'
+/var/lib/gems/1.9.1/gems/compass-0.13.alpha.4/bin/compass:44:in `<top (required)>'
+/usr/local/bin/compass:23:in `load'
+/usr/local/bin/compass:23:in `<main>'
 */
 body:before {
-    white-space: pre;
-    font-family: monospace;
-    content: "Syntax error: Undefined variable: \"$darkgrey\".\A         on line 18 of /home/alendit/creyoco/exeapp/static/sass/chzn.scss";
-}
+  white-space: pre;
+  font-family: monospace;
+  content: "Syntax error: Undefined variable: \"$darkgrey\".\A         on line 18 of /vagrant/creyoco/exeapp/static/sass/chzn.scss"; }

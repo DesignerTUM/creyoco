@@ -430,7 +430,7 @@ require(['jquery', "common", "eyecandy", "wamp_handler", 'jquery-pjax', 'jquery-
                 success: function() {
                     $("#previewIFrame").addClass("loading");
                     common.update_preview();
-                    eyecandy.show_lightbox(0,0, $("#previewIFrame"));
+                    eyecandy.show_lightbox( $( window ).width()-100, $( window ).height()-100, $("#previewIFrame"));
                     $('.theme').removeClass('selected');
                     _this.addClass('selected');
                 }

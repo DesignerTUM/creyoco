@@ -93,6 +93,14 @@ require(['jquery', 'jquery-jsonrpc', 'eyecandy'], function($, _, eyecandy) {
             $('.modal-dialog iframe').hide();
             lightbox(365, 200);
         });
+
+        $('.icon-eye-open').click( function() {
+            var packageid = $(this).parent().parent().attr('packageid');
+            $('#previewIFrame >iframe').attr('src', '/exeapp/package/' + packageid + '/preview');
+            eyecandy.show_lightbox( $( window ).width()-100, $( window ).height()-100, $('#previewIFrame'));  
+
+            //console.log(w + ',' + h);
+        });
     })
 
     // Promps a new package new and sens a "main.create_package" call via
