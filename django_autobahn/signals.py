@@ -1,10 +1,12 @@
 from functools import wraps
+import logging
 
 from django.dispatch import Signal, receiver
 
 from django_autobahn.helpers import run_client
 from django_autobahn.wamp import SignalSession
 
+log = logging.getLogger(__name__)
 
 message_received = Signal(providing_args=["message"])
 
@@ -59,6 +61,12 @@ class SignalRegistrant:
         Creates connections for the registered clients
         """
         for client in self.clients:
-            run_client(client)
+            try:
+                run_client(client)
+            except Exception as ex:
+                log.info("Couldn't run the registered cliet %s (ERROR: %s)."
+                         " Please make sure the router is running" % (
+                         client, ex))
+
 
 signal_registrant = SignalRegistrant()

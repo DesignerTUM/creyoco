@@ -1,12 +1,11 @@
 import asyncio
 
 from django.test import TestCase
-from django.dispatch import receiver
 from autobahn.asyncio import wamp
 
 from django_autobahn.helpers import run_client, run_router
-from django_autobahn.wamp import SimpleSession, SignalSession
-from django_autobahn.signals import message_received, signal_registrant
+from django_autobahn.wamp import SimpleSession
+from django_autobahn.signals import signal_registrant
 
 
 class TestServerCommand(TestCase):
