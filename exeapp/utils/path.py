@@ -142,7 +142,7 @@ class Path(str):
 
     def _get_namebase(self):
         """Returns everything before the . in the extension"""
-        return Path(os.path.splitext(self.name)[0])
+        return Path(os.path.splitext(self)[0])
 
     def _get_ext(self):
         """Returns the extension only (including the dot)"""
