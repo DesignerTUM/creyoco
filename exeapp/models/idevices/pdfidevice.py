@@ -1,3 +1,4 @@
+from django.forms import widgets
 from fileinput import FileInput
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -17,6 +18,7 @@ class PDFIdevice(Idevice):
     pdf_file = FileBrowseField("PDF", max_length=100,extensions=['.pdf'],
                                blank=True, null=True,
                                )
+    modified_pdf_file = models.FilePathField(blank=True, null=True, editable=False)
 
     #height = models.PositiveIntegerField()
     page_list = models.CharField(max_length=50, blank=True, default="",

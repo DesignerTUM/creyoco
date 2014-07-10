@@ -4,12 +4,12 @@ from PyPDF2 import PdfFileWriter, PdfFileReader
 from exeapp.utils.misc import pages_from_range
 from exeapp.utils.path import Path
 from django.conf import settings
-from django.core.files import File
 
 class PDFBlock(GenericBlock):
 
     use_common_content = True
     content_template = "exe/idevices/pdf/content.html"
+
 
     def renderView(self):
         soup = BeautifulSoup(super(PDFBlock, self).renderView())
@@ -26,15 +26,17 @@ class PDFBlock(GenericBlock):
             print("\n\n######################\n")
             print("render preview ")
             filename = Path.joinpath(Path(settings.MEDIA_ROOT),Path.relpath(self.idevice.pdf_file.path))
-            modified_filename = Path._get_namebase(filename) + "-modified"+ Path._get_ext(filename)
+            modified_filename = Path._get_namebase(filename) + "-modified-"+ str(self.idevice.id)+ Path._get_ext(filename)
             pages = pages_from_range(self.idevice.page_list)
 
             output = PdfFileWriter()
             input = PdfFileReader(open(filename, "rb"))
             for page in pages:
-                output.addPage(input.getPage(page))
+                output.addPage(input.getPage(page-1))
             with open(modified_filename,'wb') as output_pdf:
                 output.write(output_pdf)
+            self.idevice.modified_pdf_file = Path.joinpath(Path(self.idevice.parent_node.package.user.get_profile().media_url), Path.basename(modified_filename))
+
 
             print("\n\n######################\n")
 
