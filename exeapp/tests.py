@@ -63,7 +63,7 @@ def _create_packages(user, package_count=PACKAGE_COUNT,
 
 
 def create_basic_database():
-    '''Creates 2 users (admin, user) with 5 packages each for testing'''
+    '''Creates 3 users (admin, user) with 5 packages each for testing'''
     if not os.path.exists(settings.MEDIA_ROOT):
         os.mkdir(settings.MEDIA_ROOT)
     admin = User.objects.create_superuser(username=TEST_USER,
@@ -152,10 +152,12 @@ class PackagesPageTestCase(TestCase):
         parent_node.id = PARENT_ID
         parent_node.title = PARENT_TITLE
         parent_node.create_child.return_value = new_node
+        parent_node.collaborators.all.return_value = []
 
         # mock package
         package = Mock()
-        package.user.username = TEST_USER
+        package.user = User.objects.get(username=TEST_USER)
+        package.collaborators.all.return_value = []
 
         # mock get query
         mock_node_get.return_value = parent_node
@@ -241,11 +243,15 @@ decorator'''
 
         # mock request
         request = Mock()
-        request.user.username = self.TEST_USER
+        request.user = User.objects.create_user(username=self.TEST_USER,
+                                                password="pass")
 
         # mock package
         package = Mock()
-        package.user.username = self.WRONG_USER
+        wrong_user = User.objects.create_user(username=self.WRONG_USER,
+                                              password="pass")
+        package.user = wrong_user
+        package.collaborators.all.return_value = []
 
         # mock getter
         mock_get.return_value = package
@@ -254,12 +260,6 @@ decorator'''
         def mock_view(request, package):
             return package
 
-        # package, arg = mock_view(request, self.PACKAGE_ID)
-        # self.assertEquals(package.title, self.PACKAGE_TITLE)
-        # self.assertEquals(arg, self.TEST_ARG)
-        # self.assertRaises(Http404, mock_view, request,
-        #                  self.NON_EXISTENT_PACKAGE_ID)
-        # request.user.username = self.WRONG_USER
         self.assertRaises(Http403, mock_view, request,
                           self.PACKAGE_ID)
         mock_get.assert_called_with(pk=self.PACKAGE_ID)
