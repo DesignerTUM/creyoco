@@ -23,13 +23,11 @@ class TestServerCommand(TestCase):
                 connected = True
                 self.disconnect()
 
-
         run_client(SimpleClient)
         loop.run_until_complete(asyncio.sleep(.5))
         self.assertTrue(connected)
         server.close()
         asyncio.get_event_loop().stop()
-
 
     def test_message_signal(self):
         """Tests message dispatching"""
@@ -41,8 +39,10 @@ class TestServerCommand(TestCase):
 
         class SendingClient(wamp.ApplicationSession):
             """Sends a message and closes"""
+
             def onConnect(self):
                 self.join("creyoco")
+
             def onJoin(self, details):
                 self.publish("com.dautobahn.%s" % channel, message)
                 self.disconnect()
