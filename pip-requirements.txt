@@ -13,7 +13,9 @@ django-cymysql
 -e git+https://github.com/alendit/django-json-rpc.git@python3#egg=django-json-rpc
 -e git+https://github.com/alendit/django-filebrowser.git#egg=django-filebrowser
 pillow
-south
+south==0.8.4
 gunicorn
 feedparser
 django-require
+autobahn
+aiohttp
