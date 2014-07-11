@@ -19,3 +19,4 @@ feedparser
 django-require
 autobahn
 aiohttp
+PyPDF2

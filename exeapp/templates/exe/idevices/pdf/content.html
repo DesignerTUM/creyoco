@@ -1,5 +1,13 @@
-{% if idevice.pdf_file %}
-	<object height="700" width="100%" data="{{idevice.pdf_file.url}}" type='application/pdf'></object>
+{% if idevice.page_list %}
+    {% if idevice.modified_pdf_file %}
+	    <object height="700" width="100%" data="{{idevice.modified_pdf_file}}" type='application/pdf'></object>
+    {% else %}
+	    <strong>File not found</strong>
+    {% endif %}
 {% else %}
-	<strong>File not found</strong>
+    {% if idevice.pdf_file %}
+            <object height="700" width="100%" data="{{idevice.pdf_file.url}}" type='application/pdf'></object>
+    {% else %}
+        <strong>File not found</strong>
+    {% endif %}
 {% endif %}
