@@ -78,7 +78,6 @@ def create_basic_database():
 
 
 class MainPageTestCase(TestCase):
-
     def setUp(self):
         create_basic_database()
         self.c = Client()
@@ -166,7 +165,7 @@ class PackagesPageTestCase(TestCase):
 
         r = self.s.package.add_child_node(
             # username=TEST_USER,
-            #       password=TEST_PASSWORD,
+            # password=TEST_PASSWORD,
             package_id="1",
             node_id=str(PARENT_ID))
         result = r['result']
@@ -212,7 +211,7 @@ class PackagesPageTestCase(TestCase):
                                data={'title': PACKAGE_TITLE,
                                      'author': AUTHOR_NAME,
                                      'form_type_field': PackagePropertiesForm.
-                                     form_type})
+                               form_type})
         self.assertEquals(response.status_code, 302)
         self.assertTrue(response['location'].endswith(
             self.PAGE_URL % (self.PACKAGE_ID, self.NODE_ID)))
@@ -330,7 +329,7 @@ view, this tests should be also merged'''
         self.assertEqual(int(soup.find("div", {'id': 'node_id'}).text),
                          self.TEST_NODE_ID)
         #
-        #        self.assertContains(response, 'Package %s' % self
+        # self.assertContains(response, 'Package %s' % self
         # .TEST_PACKAGE_ID)
         #        self.assertContains(response,
         #            """<div id="node_id" style="display: none">{}</div>"""
@@ -353,7 +352,7 @@ view, this tests should be also merged'''
         response = self.c.post(self.VIEW_URL,
                                {
                                    'form_type_field': PackagePropertiesForm
-                                   .form_type,
+                               .form_type,
                                    'title': TEST_TITLE
                                })
         self.assertEquals(response.status_code, 302)
@@ -361,8 +360,8 @@ view, this tests should be also merged'''
             'exeapp/package/{}/{}/'.format(
                 self.package.id,
                 self.package.root.id
-                )
             )
+        )
         )
 
     def test_idevice_move_up(self):
@@ -376,8 +375,8 @@ view, this tests should be also merged'''
         content = smart_text(self.c.get(self.VIEW_URL).content)
         self.assertTrue(content.index(
             'idevice_id="{}"'.format(FIRST_IDEVICE_ID))
-            > content.index(
-                'idevice_id="{}"'.format(SECOND_IDEVICE_ID)))
+                        > content.index(
+            'idevice_id="{}"'.format(SECOND_IDEVICE_ID)))
 
     @mock.patch.object(shortcuts, 'render_idevice')
     @mock.patch.object(Package.objects, 'get')
@@ -387,7 +386,8 @@ view, this tests should be also merged'''
         '''Test if a POST request is delegated to package'''
         idevice_id = "1"
         idevice_action = "save"
-        mock_package_get.return_value.user.username = TEST_USER
+        mock_package_get.return_value.user = User.objects.get(
+            username=TEST_USER)
         mock_node_get.return_value.package = mock_package_get.return_value
         action_args = {"test": "a", "test2": "1",
                        'idevice_id': idevice_id,
@@ -420,9 +420,9 @@ view, this tests should be also merged'''
         for anchor in ANCHORS:
             name, url = link_list[counter]
             self.assertEquals(name, "%s::%s" %
-                                    (idevice.parent_node.title, anchor))
+                              (idevice.parent_node.title, anchor))
             self.assertEquals(url, "%s.html#%s" %
-                                   (idevice.parent_node.unique_name(), anchor))
+                              (idevice.parent_node.unique_name(), anchor))
             counter += 1
 
     @mock.patch.object(shortcuts, 'render_idevice')
@@ -442,7 +442,7 @@ view, this tests should be also merged'''
         mock_render.side_effect = mock_render_idevice
 
         package = mock_package_get.return_value
-        package.user.username = TEST_USER
+        package.user = User.objects.get(username=TEST_USER)
 
         node = mock_node_get.return_value
         node.package = package
@@ -644,7 +644,7 @@ class OutlineTestCase(TestCase):
         PARENT_ID = Node.objects.all()[0].pk
         r = self.s.package.add_child_node(
             # username=TEST_USER,
-            #       password=TEST_PASSWORD,
+            # password=TEST_PASSWORD,
             package_id="1",
             node_id=str(PARENT_ID))
         self.assertEqual(r['result']['title'], Package.DEFAULT_LEVEL_NAMES[0])
@@ -654,7 +654,7 @@ class OutlineTestCase(TestCase):
         NODE_TITLE = "Test title"
         r = self.s.package.add_child_node(
             # username=TEST_USER,
-            #       password=TEST_PASSWORD,
+            # password=TEST_PASSWORD,
             package_id="1",
             node_id=str(PARENT_ID),
             new_name=NODE_TITLE)
