@@ -3,6 +3,7 @@ Collection of useful autobahn helpers
 """
 import asyncio
 
+from autobahn.wamp import router
 from autobahn.asyncio import wamp, websocket
 
 
@@ -24,7 +25,7 @@ def run_client(application_class):
 def run_router(application_class):
     """Run autobahn router as applicaiton"""
 
-    router_factory = wamp.router.RouterFactory()
+    router_factory = router.RouterFactory()
     session_factory = wamp.RouterSessionFactory(router_factory)
     session_factory.add(application_class())
     transport_factory = websocket.WampWebSocketServerFactory(session_factory,
