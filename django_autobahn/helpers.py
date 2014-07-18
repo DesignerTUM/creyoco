@@ -18,7 +18,7 @@ def run_client(application_class):
 
     loop = asyncio.get_event_loop()
     return loop.run_until_complete(
-        loop.create_connection(transport_factory, '127.0.0.1', 8080)
+        loop.create_connection(transport_factory, '0.0.0.0', 8080)
     )
 
 
@@ -33,5 +33,5 @@ def run_router(application_class):
                                                              debug_wamp=False)
     loop = asyncio.get_event_loop()
     return loop.run_until_complete(
-        loop.create_server(transport_factory, '127.0.0.1', 8080)
+        loop.create_server(transport_factory, '0.0.0.0', 8080)
     )
