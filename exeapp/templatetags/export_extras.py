@@ -32,35 +32,32 @@ def navigation_bar(current_page, full_url):
     """
     package = current_page.node.package
     pages = current_page.exporter.pages
-    nodePath = [None] + list(current_page.node.package.root.children.all()) + \
-               list(current_page.node.ancestors()) + [current_page.node]
 
-    html = "<ul>\n"
+    html = ["<ul>"]
 
     depth = 1
-    html += "<li>"
+    html.append("<li>")
     for page in pages:
-        if page.node.parent in nodePath:
-            if depth == page.depth:
-                html += '</li><li>'
-            while depth < page.depth:
-                html += "<ul><li>"
-                depth += 1
-            while depth > page.depth:
-                html += "</li></ul><li>\n"
-                depth -= 1
+        if depth == page.depth:
+            html.append('</li><li>')
+        while depth < page.depth:
+            html.append("<ul><li>")
+            depth += 1
+        while depth > page.depth:
+            html.append("</li></ul><li>")
+            depth -= 1
 
-            html += render_to_string("exe/export/navigation_bar_item.html",
-                                     {"page": page,
-                                      "current_page": current_page,
-                                      "package": package,
-                                      "full_url": full_url,
-                                      })
+        html.append(render_to_string("exe/export/navigation_bar_item.html",
+                                 {"page": page,
+                                  "current_page": current_page,
+                                  "package": package,
+                                  "full_url": full_url,
+                                  }))
     while depth > 0:
-        html += "</li>\n"
+        html.append("</li>")
         depth -= 1
-    html += "</ul>\n"
-    return html
+    html.append("</ul>")
+    return "\n".join(html)
 
 
 @register.inclusion_tag("exe/export/licence.html")
