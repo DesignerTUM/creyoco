@@ -1,4 +1,7 @@
 #!/bin/bash
+#start django_autobahn
+/home/medienzentrum/.virtualenvs/creyoco/bin/python /home/medienzentrum/creyoco/manage.py run_autobahn
+
 GUNICORN_PATH=/home/medienzentrum/.virtualenvs/creyoco/bin/gunicorn_django
 PID=/tmp/creyoco.pid
 PROJECT_DIR=~/creyoco/
