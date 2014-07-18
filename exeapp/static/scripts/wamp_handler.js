@@ -3,7 +3,7 @@ define(["autobahn"], function(autobahn) {
     var exports = {
         create_connection: function() {
             return new autobahn.Connection({
-                            url: "ws://localhost:8080/ws",
+                            url: "ws://" + window.location.hostname + ":8080/ws",
                             realm: "creyoco"
                         });
 
