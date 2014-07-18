@@ -17,6 +17,6 @@ south==0.8.4
 gunicorn
 feedparser
 django-require
-autobahn
+autobahn[asyncio,accelerate]
 aiohttp
 PyPDF2
