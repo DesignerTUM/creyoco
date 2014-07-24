@@ -30,7 +30,7 @@
         <div id="download_box" class="modal">
             <h3>Wählen Sie das Dateiformat für den Kurs-Export.</h3>
             {% for type, title in exporter_type_title_map.items %}
-                <a class="export_link" href="{% url "exeapp.views.package.export" package.id type %}"><i class="icon-arrow-right"></i> {{title}}</a>
+                <a class="export_link" data-exporttype="{{ type }}" href=""><i class="icon-arrow-right"></i> {{title}}</a>
             {% endfor %}
         </div>
 {% endblock %}
@@ -53,11 +53,11 @@
 	<!--{{ package_list }}-->
 	{% for package in package_list %}
 	<li class='package' id="package{{ package.id }}" packageid="{{ package.id }}">
-		<span id="" style="display:block;float:left">
+		<span style="display:block;float:left">
 			<i class="check icon-check-empty"></i>
 			<a href="{{ package.get_absolute_url }}">{{ package.title }}</a>
 		</span>
-		<span id="qs">
+		<span class="qs">
 			<i class="icon-eye-open" ></i>
 			<i class="icon-pencil"></i>
 			<i class="icon-download"></i>

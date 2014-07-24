@@ -7,6 +7,8 @@ from jsonrpc import jsonrpc_method
 
 from exeapp.models import Package, User
 from exeapp.shortcuts import get_package_by_id_or_error
+from exeapp.views.export.exporter_factory import exporter_map
+
 
 @login_required
 def main(request):
@@ -14,6 +16,8 @@ def main(request):
     TODO: Use a generic view'''
     user = User.objects.get(username=request.user.username)
     package_list = Package.objects.filter(user=user)
+    exporter_type_title_map = dict(((export_type, exporter.title) \
+                    for export_type, exporter in list(exporter_map.items())))
 
     return render_to_response('main.html', locals())
 

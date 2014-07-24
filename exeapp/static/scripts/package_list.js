@@ -69,32 +69,16 @@ require(['jquery', 'jquery-jsonrpc', 'eyecandy'], function($, _, eyecandy) {
       $("#create_package").click(create_package);
       $("#delete_selected_packages").click(delete_selected_packages);
 
-        $('.icon-download').click( function() {
+        $('#middle-row').on("click", ".icon-download", function() {
             var packageid = $(this).parent().parent().attr('packageid');
             $('#download_box a').each(function() {
-                if($(this).attr('dl_type') == 'website') {
-                    $(this).attr('href', '/exeapp/package/' + packageid + '/download/website/');
-                }
-                if($(this).attr('dl_type') == 'cc') {
-                    $(this).attr('href', '/exeapp/package/' + packageid + '/download/commoncartridge/');
-                }
-                if($(this).attr('dl_type') == 'ims') {
-                    $(this).attr('href', '/exeapp/package/' + packageid + '/download/ims/');
-                }
-                if($(this).attr('dl_type') == 'scorm12') {
-                    $(this).attr('href', '/exeapp/package/' + packageid + '/download/scorm12/');
-                }
-                if($(this).attr('dl_type') == 'scorm2004') {
-                    $(this).attr('href', '/exeapp/package/' + packageid + '/download/scorm2004/');
-                }
+                $(this).attr('href', '/exeapp/package/' + packageid + '/download/' + $(this).attr("data-exporttype") + '/');
             });
 
-            $('#download_box').show();
-            $('.modal-dialog iframe').hide();
-            lightbox(365, 200);
+            eyecandy.show_lightbox(365, 200, $('#download_box'));
         });
 
-        $('.icon-eye-open').click( function() {
+        $('#middle-row').on("click", ".icon-eye-open", function() {
             var packageid = $(this).parent().parent().attr('packageid');
             $('#previewIFrame >iframe').attr('src', '/exeapp/package/' + packageid + '/preview');
             eyecandy.show_lightbox( $( window ).width()-100, $( window ).height()-100, $('#previewIFrame'));  
@@ -135,10 +119,22 @@ require(['jquery', 'jquery-jsonrpc', 'eyecandy'], function($, _, eyecandy) {
     }
 
     // Called after successful package creation
-    function callback_create_package(id, title){
-      $("<li />").addClass('package').attr("id", "package" + id).attr('packageid', id).append($('<a />').attr('href', 'exeapp/package/' + id + '/').text(title)).appendTo('#package_list');
-    }
 
+    function callback_create_package(id, title){
+        $("<li />").addClass('package').attr("id", "package" + id).attr('packageid', id).append(
+            '<span id="" style="display:block;float:left">\
+                <i class="check icon-check-empty"></i>\
+                <a href="exeapp/package/'+ id + '">' + title + '</a>\
+            </span>\
+            <span class="qs">\
+                <i class="icon-eye-open" ></i>\
+                <i class="icon-pencil"></i>\
+                <i class="icon-download"></i>\
+                <i class="icon-cog"></i>\
+            </span>'
+        ).appendTo('#package_list');
+
+    }
     // Called after successful package deletion
     function callback_delete_package(id) {
       var package_li = $("#package" + id);
