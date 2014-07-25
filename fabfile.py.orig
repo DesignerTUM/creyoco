@@ -24,7 +24,11 @@ def update():
 
 def collectstatic():
     with cd(env.code_dir):
+<<<<<<< HEAD
+        run("{} manage.py collectstatic --noinput --settings=exedjango.deployment_settings".format(env.python_path))
+=======
         run("{} manage.py collectstatic --noinput".format(env.python_path))
+>>>>>>> Added collect static to the fabfile.
 
 
 def copy_site():
