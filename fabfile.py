@@ -24,7 +24,7 @@ def update():
 
 def collectstatic():
     with cd(env.code_dir):
-        run("{} manage.py collectstatic --noinput".format(env.python_path))
+        run("{} manage.py collectstatic --noinput --settings=exedjango.deployment_settings".format(env.python_path))
 
 
 def copy_site():
