@@ -41,7 +41,7 @@ require.config({
 require(['jquery', 'jquery-jsonrpc', 'eyecandy'], function($, _, eyecandy) {
 
     $(document).ready(function() {
-        $('ul#package_list li span .check').click( function() {
+        $('#middle-row').on("click", ".check", function() {
             if($(this).parent().parent().hasClass('active')) {
                 $(this).removeClass('icon-check');
                 $(this).addClass('icon-check-empty');
@@ -116,6 +116,7 @@ require(['jquery', 'jquery-jsonrpc', 'eyecandy'], function($, _, eyecandy) {
           }
         })
       })
+       $("#delete_selected_packages").hide();
     }
 
     // Called after successful package creation
