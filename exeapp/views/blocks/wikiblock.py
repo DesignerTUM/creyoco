@@ -5,6 +5,7 @@ class WikipediaBlock(GenericBlock):
 
     def process(self, action, data):
         if action == "Load":
+            self.idevice.language = data['language']
             self.idevice.load_article(data['article_name'])
             self.idevice.save()
             return self.render()
