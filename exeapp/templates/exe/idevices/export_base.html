@@ -5,7 +5,7 @@
 	{% include 'exe/idevices/idevice_id.html' %}>
 {% if idevice.emphasis != idevice.NOEMPHASIS %}
 	{% if idevice.icon %}
-		<img alt="Idevice Icon" class="iDevice_icon" src="{% block icon_url %}{{idevice.icon}}{% endblock %}" />
+{#		<img alt="Idevice Icon" class="iDevice_icon" src="{% block icon_url %}{{idevice.icon}}{% endblock %}" />#}
 	{% endif %}
 	<h2>{{idevice.title}}</h2>
 <div class="iDevice_inner">
