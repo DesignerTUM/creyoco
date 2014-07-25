@@ -121,8 +121,6 @@ def export(request, package, export_format):
     zip_file = file_obj.getvalue()
     file_obj.close()
     response = HttpResponse(content_type="application/zip")
-    response['Content-Disposition'] = 'attachment; filename=%s.zip' \
-                                      % package.title
     response['Content-Length'] = len(zip_file)
 
     # To inspect details for the below code,
@@ -136,7 +134,6 @@ def export(request, package, export_format):
         filename_header = 'filename*=UTF-8\'\'%s' % parse.quote(filename)
     response['Content-Disposition'] = 'attachment; ' + filename_header
 
-    return response
     response.write(zip_file)
     return response
 
