@@ -44,8 +44,11 @@ is covered by the GNU free documentation license.</p>""")
                                    help_text=_("""Enter a phrase or term you
                                    wish to search
 within Wikipedia."""))
+    language_choices = (('de', 'DE'), ('en', 'EN'))
+    #language = models.CharField(max_length=2, choices=language_choices, default='en')
+    language = models.CharField(max_length=2, default="en", choices=language_choices)
     content = fields.RichTextField(blank=True, default="")
-    site = "http://en.wikipedia.org/wiki/"
+    site = "wikipedia.org/wiki/"
     icon = "icon_inter.gif"
     userResources = []
     # TODO FDL has to be in the package
@@ -62,6 +65,7 @@ within Wikipedia."""))
         Load the article from Wikipedia
         """
         self.articleName = title
+        self.site = self.language + "." + self.site
         url = ""
         title = quote(title.replace(" ", "_").encode('utf-8'))
         try:
@@ -88,7 +92,6 @@ within Wikipedia."""))
 
         # remove the wiktionary, wikimedia commons, and categories boxes
         #  and the protected icon and the needs citations box
-        print(content)
         if content:
             content['id'] = 'wiki_content'
             infoboxes = content.findAll('div',
