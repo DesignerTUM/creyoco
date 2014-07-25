@@ -6,6 +6,7 @@ from django.template.defaultfilters import unordered_list
 
 class TOCBlock(GenericBlock):
     preview_template = "exe/idevices/toc/preview.html"
+    view_template = "exe/idevices/toc/view.html"
     edit_template = "exe/idevices/toc/edit.html"
 
     def renderPreview(self):
@@ -14,7 +15,7 @@ class TOCBlock(GenericBlock):
 
     def renderView(self):
         content = mark_safe(self.populate_toc(export_url=True))
-        return render_to_string(self.preview_template, locals())
+        return render_to_string(self.view_template, locals())
 
     def renderEdit(self):
         return render_to_string(self.edit_template, {"idevice": self.idevice})
