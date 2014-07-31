@@ -33,7 +33,10 @@ class PDFIdevice(Idevice):
 
     def _resources(self):
         user = self.parent_node.package.user.username
-        return set([os.path.basename(self.pdf_file.path)])
+        if self.page_list:
+            return set([os.path.basename(self.modified_pdf_file)])
+        else:
+            return set([os.path.basename(self.pdf_file.path)])
 
     class Meta:
         app_label = "exeapp"
