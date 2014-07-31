@@ -1,15 +1,18 @@
-import re
-import sys
 import wikipedia
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from bs4 import BeautifulSoup
+from django.utils.text import slugify
+import urllib
+import os
+from exeapp.utils.path import Path
 
 from exeapp.models.idevices.genericidevice import GenericIdevice
 from exeapp.models.idevices.idevice import Idevice
 from exeapp.models.idevices import fields
 
 
+'''
 PY2 = sys.version_info[0] == 2
 try:
     from urllib.request import urlopen, FancyURLopener
@@ -25,7 +28,7 @@ try:
 except ImportError:
     if PY2:
         import urllib
-
+'''
 
 class WikipediaIdevice(GenericIdevice):
     name = _("Wiki Article")
@@ -68,16 +71,53 @@ within Wikipedia."""))
         wikipedia.set_lang(self.language)
         self.article_name = title
         page = wikipedia.page(title)
-        wikiHTML = page.html()
-        self.content = self.process_html (wikiHTML)
+        page = self.store_images(page)
+        self.content = self.process_html (page)
 
 
     def process_html(self, html):
+        print("process html")
         soup = BeautifulSoup(html)
-        #remove edit buttons from sections
+        soup = self.remove_edit_link(soup)
+        #soup = self.store_images(soup)
+        return soup.prettify()
+
+    def remove_edit_link(self, soup):
+        print("remove edit link")
         for edit_span in soup.findAll('span', 'mw-editsection'):
             edit_span.extract()
-        return soup.prettify()
+        return soup
+
+
+    def store_images(self,page):
+        #for storing files
+        local_path = Path.joinpath(Path(self.parent_node.package.user.get_profile().media_path), Path("wiki_cache_images"))
+        local_path = Path.joinpath(local_path, Path(self.parent_node.package.id))
+        local_path = Path.joinpath(local_path, Path(self.id))
+
+        #for url
+        global_path = Path.joinpath(Path(self.parent_node.package.user.get_profile().media_url), Path("wiki_cache_images"))
+        global_path = Path.joinpath(global_path, Path(self.parent_node.package.id))
+        global_path = Path.joinpath(global_path, Path(self.id))
+        #create directory structure
+        os.makedirs(local_path)
+
+
+        soup = BeautifulSoup(page.html())
+        #save file and update link in content
+        for img in soup.findAll('img'):
+            image = "http:"+ img['src']
+            filename = img['src'].split('/')[-1]
+            filename = slugify(Path._get_namebase(filename)) + Path._get_ext(filename)  #sanitizing filename
+            file_path = Path.joinpath(local_path, Path(filename))
+            urllib.request.urlretrieve(image, file_path)
+            img['src'] = Path.joinpath(global_path, Path.basename(filename))
+        #update image hyperlink to wiki for bigger version image
+        for image_link in soup.findAll("a", { "class" : "image" }):
+            image_link['href'] = "http://wikipedia.org" + image_link['href']
+
+        page = soup.prettify()
+        return page
 
     class Meta:
         app_label = "exeapp"
