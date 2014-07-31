@@ -60,14 +60,24 @@ within Wikipedia."""))
         """Just returns an empty set"""
         return set()
 
+
     def load_article(self, title):
         """
         Load the article from Wikipedia
         """
+        wikipedia.set_lang(self.language)
         self.article_name = title
         page = wikipedia.page(title)
-        self.content = page.html()
+        wikiHTML = page.html()
+        self.content = self.process_html (wikiHTML)
 
+
+    def process_html(self, html):
+        soup = BeautifulSoup(html)
+        #remove edit buttons from sections
+        for edit_span in soup.findAll('span', 'mw-editsection'):
+            edit_span.extract()
+        return soup.prettify()
 
     class Meta:
         app_label = "exeapp"
