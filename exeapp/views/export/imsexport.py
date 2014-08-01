@@ -178,7 +178,7 @@ class IMSExport(WebsiteExport):
 
         self.copy_files()
 
-        self.do_zip(self.file_obj, self.output_dir)
+        self.do_zip()
         # Clean up the temporary dir
         self.output_dir.rmtree()
 
@@ -187,15 +187,5 @@ class IMSExport(WebsiteExport):
         self.schemasDir.copylist(('imscp_v1p1.xsd',
                                   'imsmd_v1p2p2.xsd',
                                   'ims_xml.xsd'), self.output_dir)
-
-    def do_zip(self, fileObj, outputDir):
-        """
-        Actually does the zipping of the file. Called by 'Path.safeSave'
-        """
-        zipped = ZipFile(fileObj, "w")
-        for scormFile in outputDir.files():
-            zipped.write(scormFile,
-                         scormFile.basename(), ZIP_DEFLATED)
-        zipped.close()
 
 # ===========================================================================
