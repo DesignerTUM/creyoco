@@ -29,11 +29,9 @@ Exports an eXe package as an IMS Content Package
 """
 
 import logging
-from zipfile import ZipFile, ZIP_DEFLATED
 from exeapp.utils.path import Path
 from django.template.loader import render_to_string
 from exeapp.views.export.pages import Page
-from codecs import open
 
 log = logging.getLogger(__name__)
 
@@ -65,11 +63,11 @@ class Manifest(object):
         Save a imsmanifest file and metadata to self.output_dir
         """
         filename = "imsmanifest.xml"
-        out = open(self.output_dir / filename, "wb")
-        out.write(self.createXML().encode('utf8'))
+        out = open(self.output_dir / filename, "w", encoding='utf-8')
+        out.write(self.createXML())
         out.close()
         # if user did not supply metadata title, description or creator
-        #  then use package title, description, or creator in imslrm
+        # then use package title, description, or creator in imslrm
         #  if they did not supply a package title, use the package name
         lrm = model_to_dict(self.package.dublincore)
         if lrm.get('title', '') == '':

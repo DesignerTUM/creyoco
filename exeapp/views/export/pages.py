@@ -62,7 +62,7 @@ class Page(object):
         file.  'output_dir' is the directory where the filenames will be saved
         (a 'path' instance)
         """
-        outfile = codecs.open(output_dir / self.name + ".html", "w", "utf-8")
+        outfile = open(output_dir / self.name + ".html", "w", encoding="utf-8")
         content = self.render()
         outfile.write(content)
         outfile.close()

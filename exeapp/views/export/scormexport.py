@@ -113,7 +113,7 @@ class Manifest(object):
         """
         Save a imsmanifest file to self.outputDir
         """
-        out = open(self.outputDir / filename, "w")
+        out = open(self.outputDir / filename, "w", encoding='utf-8')
         if filename == "imsmanifest.xml":
             out.write(self.createXML())
         out.close()
