@@ -3,7 +3,6 @@ from django.utils.safestring import mark_safe
 
 
 class IdeviceForm(forms.ModelForm):
-
     def render_edit(self):
         return self.as_p()
 
@@ -33,8 +32,9 @@ class IdeviceForm(forms.ModelForm):
         modules = []
         for field in list(self.fields.values()):
             if hasattr(field.widget, "js_modules"):
-                    modules += field.widget.js_modules
+                modules += field.widget.js_modules
         return modules
+
 
 class IdeviceFormFactory(object):
     def __init__(self, model, fields, form_class=IdeviceForm, widgets={},
