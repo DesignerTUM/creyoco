@@ -6,7 +6,7 @@ from django.utils.text import slugify
 import urllib
 import os
 from exeapp.utils.path import Path
-
+from django.conf import settings
 from exeapp.models.idevices.genericidevice import GenericIdevice
 from exeapp.models.idevices.idevice import Idevice
 from exeapp.models.idevices import fields
@@ -61,7 +61,14 @@ within Wikipedia."""))
 
     def _resources(self):
         """Just returns an empty set"""
-        return set()
+        resource_list = set()
+        global_path = Path.joinpath(Path(self.parent_node.package.user.get_profile().media_url), Path("wiki_cache_images"))
+        global_path = Path.joinpath(global_path, Path(self.parent_node.package.id))
+        global_path = Path.joinpath(global_path, Path(self.id))
+        for file in os.listdir(global_path):
+            resource_list.add(os.path.basename(file))
+        print("\n\n\n"+resource_list+"\n\n\n")
+        return resource_list
 
 
     def load_article(self, title):
@@ -79,7 +86,6 @@ within Wikipedia."""))
         print("process html")
         soup = BeautifulSoup(html)
         soup = self.remove_edit_link(soup)
-        #soup = self.store_images(soup)
         return soup.prettify()
 
     def remove_edit_link(self, soup):
@@ -91,16 +97,13 @@ within Wikipedia."""))
 
     def store_images(self,page):
         #for storing files
-        local_path = Path.joinpath(Path(self.parent_node.package.user.get_profile().media_path), Path("wiki_cache_images"))
-        local_path = Path.joinpath(local_path, Path(self.parent_node.package.id))
-        local_path = Path.joinpath(local_path, Path(self.id))
+        local_path = Path.joinpath(Path( settings.MEDIA_ROOT), Path("wiki_cache_images"))
 
         #for url
-        global_path = Path.joinpath(Path(self.parent_node.package.user.get_profile().media_url), Path("wiki_cache_images"))
-        global_path = Path.joinpath(global_path, Path(self.parent_node.package.id))
-        global_path = Path.joinpath(global_path, Path(self.id))
+        global_path = Path.joinpath(Path(settings.MEDIA_URL), Path("wiki_cache_images"))
         #create directory structure
-        os.makedirs(local_path)
+        if not os.path.isdir(local_path):
+            os.makedirs(local_path)
 
 
         soup = BeautifulSoup(page.html())
