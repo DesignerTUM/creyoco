@@ -21,3 +21,4 @@ autobahn[asyncio,accelerate]
 aiohttp
 PyPDF2
 twisted
+wikipedia

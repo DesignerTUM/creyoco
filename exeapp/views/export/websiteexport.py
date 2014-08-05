@@ -24,6 +24,7 @@ WebsiteExport will export a package as a website of HTML pages
 from django.conf import settings
 
 import logging
+import os
 from exeapp.utils.path import Path
 from exeapp.views.export.websitepage import WebsitePage
 from zipfile import ZipFile, ZIP_DEFLATED
@@ -58,6 +59,7 @@ class WebsiteExport(object):
         self.pages = []
         self.file_obj = file_obj
         self.media_dir = Path(package.user.profile.media_path)
+        self.media_root = Path(os.path.abspath(settings.MEDIA_ROOT))
         self.page_class = WebsitePage
 
         self.output_dir = Path(tempfile.mkdtemp())
@@ -170,6 +172,8 @@ class WebsiteExport(object):
 
     def copy_resources(self):
         view_media = set()
+        wiki_media = set()
+        nonwiki_media = set()
         for page in self.pages:
             view_media = view_media.union(page.view_media._js).\
                             union(page.view_media._css.get('all', []))
@@ -177,7 +181,14 @@ class WebsiteExport(object):
                       for medium in view_media
                       if not "tinymce" in medium]
         Path(settings.STATIC_ROOT).copylist(view_media, self.output_dir)
-        self.media_dir.copylist(self.package.resources, self.output_dir)
+        for x in self.package.resources:
+            if settings.WIKI_CACHE_DIR in x:
+                wiki_media.add(x)
+            else:
+                nonwiki_media.add(x)
+        self.media_dir.copylist(nonwiki_media, self.output_dir)
+        self.media_root.copylist(wiki_media, self.output_dir)
+
 
     def generate_pages(self, node, depth, kwargs=None):
         """

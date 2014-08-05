@@ -62,12 +62,19 @@ within Wikipedia."""))
     def _resources(self):
         """Just returns an empty set"""
         resource_list = set()
-        global_path = Path.joinpath(Path(self.parent_node.package.user.get_profile().media_url), Path("wiki_cache_images"))
-        global_path = Path.joinpath(global_path, Path(self.parent_node.package.id))
-        global_path = Path.joinpath(global_path, Path(self.id))
-        for file in os.listdir(global_path):
-            resource_list.add(os.path.basename(file))
-        print("\n\n\n"+resource_list+"\n\n\n")
+        res_path = Path(settings.MEDIA_URL)
+
+        soup = BeautifulSoup(self.content)
+        imgs = soup.findAll("img")
+        for img in imgs:
+            if not img['src'].startswith("data:image"):
+                resource_list.add(urllib.parse.unquote(img['src'].replace(res_path, "")))
+
+
+        '''for img in imgs:
+                if not img['src'].startswith("data:image"):
+                    resource_list.add(
+                        unquote(img['src'].replace(media_url, "")))'''
         return resource_list
 
 
@@ -97,10 +104,10 @@ within Wikipedia."""))
 
     def store_images(self,page):
         #for storing files
-        local_path = Path.joinpath(Path( settings.MEDIA_ROOT), Path("wiki_cache_images"))
+        local_path = Path.joinpath(settings.MEDIA_ROOT, settings.WIKI_CACHE_DIR)    # creyoco/exedjango/exeapp_media/wiki_cache_images
 
         #for url
-        global_path = Path.joinpath(Path(settings.MEDIA_URL), Path("wiki_cache_images"))
+        global_path = Path.joinpath(settings.MEDIA_URL, settings.WIKI_CACHE_DIR)
         #create directory structure
         if not os.path.isdir(local_path):
             os.makedirs(local_path)
