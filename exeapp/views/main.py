@@ -1,10 +1,10 @@
 '''Main view for a user. Handles both GET/POST request and rpc calls'''
 
-from django.shortcuts import render_to_response, get_object_or_404, redirect
+from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
-from django.template import RequestContext
-from jsonrpc import jsonrpc_method
+from django.db.models import Q
 
+from jsonrpc import jsonrpc_method
 from exeapp.models import Package, User
 from exeapp.shortcuts import get_package_by_id_or_error
 from exeapp.views.export.exporter_factory import exporter_map
@@ -15,9 +15,11 @@ def main(request):
     '''Serve the main page with a list of packages.
     TODO: Use a generic view'''
     user = User.objects.get(username=request.user.username)
-    package_list = Package.objects.filter(user=user)
-    exporter_type_title_map = dict(((export_type, exporter.title) \
-                    for export_type, exporter in list(exporter_map.items())))
+    package_list = Package.objects.filter(Q(user=user) |
+                                          Q(collaborators__pk__contains=user.pk))
+    exporter_type_title_map = dict(((export_type, exporter.title)
+                                    for export_type, exporter in
+                                    list(exporter_map.items())))
 
     return render_to_response('main.html', locals())
 

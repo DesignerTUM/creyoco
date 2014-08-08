@@ -19,32 +19,30 @@
 // ===========================================================================
 
 
-// Strings to be translated
-SELECT_AN_IMAGE = "Select an image";
-IMAGE_FILES = "Image Files (.jpg, .jpeg, .png, .gif)";
-JPEG_FILES = "JPEG Files (.jpg, .jpeg)";
-SELECT_A_FILE = "Select a file";
-FLASH_MOVIE = "Flash Movie (.flv)";
-FLASH_OBJECT = "Flash Object (.swf)";
-SELECT_AN_MP3_FILE = "Select an mp3 file";
-SELECT_AN_TEX_FILE = "Select an TeX file";
-TEX_FILE = "TeX File"
-MP3_AUDIO = "MP3 Audio (.mp3)";
-PDF = "PDF Files (.pdf)";
-SELECT_A_PDF = "Select a pdf file";
-SHOCKWAVE_FILES = "Shockwave Director Files (.dcr)"
-QUICKTIME_FILES = "Quicktime Files (.mov, .qt, .mpg, .mp3, .mp4, .mpeg)"
-WINDOWSMEDIA_FILES = "Windows Media Player Files (.avi, .wmv, .wm, .asf, .asx, .wmx, .wvx)"
-REALMEDIA_AUDIO = "RealMedia Audio Files (.rm, .ra, .ram, .mp3)"
-SELECT_KPSE = "Select kpsewhich"
-
-
-SELECT_A_PACKAGE = "Select a package";
-YOUR_SCORE_IS = "Your score is ";
 
 define(['jquery', 'wamp_handler', 'jquery-form', 'jquery-pjax', 'jquery-jsonrpc', 'jquery-cookie'],
     function ($, wamp_handler) {
         "use strict";
+        // Strings to be translated
+        var SELECT_AN_IMAGE = "Select an image";
+        var IMAGE_FILES = "Image Files (.jpg, .jpeg, .png, .gif)";
+        var JPEG_FILES = "JPEG Files (.jpg, .jpeg)";
+        var SELECT_A_FILE = "Select a file";
+        var FLASH_MOVIE = "Flash Movie (.flv)";
+        var FLASH_OBJECT = "Flash Object (.swf)";
+        var SELECT_AN_MP3_FILE = "Select an mp3 file";
+        var SELECT_AN_TEX_FILE = "Select an TeX file";
+        var TEX_FILE = "TeX File"
+        var MP3_AUDIO = "MP3 Audio (.mp3)";
+        var PDF = "PDF Files (.pdf)";
+        var SELECT_A_PDF = "Select a pdf file";
+        var SHOCKWAVE_FILES = "Shockwave Director Files (.dcr)"
+        var QUICKTIME_FILES = "Quicktime Files (.mov, .qt, .mpg, .mp3, .mp4, .mpeg)"
+        var WINDOWSMEDIA_FILES = "Windows Media Player Files (.avi, .wmv, .wm, .asf, .asx, .wmx, .wvx)"
+        var REALMEDIA_AUDIO = "RealMedia Audio Files (.rm, .ra, .ram, .mp3)"
+        var SELECT_KPSE = "Select kpsewhich"
+        var SELECT_A_PACKAGE = "Select a package";
+        var YOUR_SCORE_IS = "Your score is ";
 
         var exports = {
             initialize_authoring: function () {
