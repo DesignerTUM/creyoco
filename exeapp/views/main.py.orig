@@ -55,5 +55,9 @@ def delete_package(request, package):
 def duplicate_package(request, package):
     '''Duplicates a package'''
     p = package.duplicate()
+<<<<<<< HEAD
+    return {"id": p['id'], "title": p['title']}
+>>>>>>> duplicate package fix
+=======
     return {"id": p['id'], "title": p['title']}
 >>>>>>> duplicate package fix
