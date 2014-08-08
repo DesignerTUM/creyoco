@@ -140,7 +140,7 @@ define(['jquery', 'wamp_handler', 'jquery-form', 'jquery-pjax', 'jquery-jsonrpc'
                     $(document).on("pjax:popstate", function (event) {
                         var current_url = event.state.url;
                         var current_node_id = current_url.match(/.*\/(\d+)\//)[1]
-                        get_outline_pane().jstree("select_node", "#node" + current_node_id, true);
+                        exports.get_outline_pane().jstree("select_node", "#node" + current_node_id, true);
                     });
                     $.jsonRPC.setup({
                         endPoint: '/exeapp/json/',
