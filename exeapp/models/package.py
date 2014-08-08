@@ -625,6 +625,21 @@ i.e. the "package".
     def __unicode__(self):
         return "Package %s: %s" % (self.id, self.title)
 
+    def duplicate(self):
+        """Create a copy of this package"""
+        log.debug("Duplicate package {}".format(self.pk))
+        nodes = list(self.nodes.all())
+        new_package = self
+        new_package.pk = None
+        new_package.dublincore.pk = None
+        new_package.dublincore.save()
+        new_package.dublincore_id = new_package.dublincore.pk
+        new_package.save()
+        for node in nodes:
+            node.duplicate(package=new_package)
+        return {'id': new_package.pk, 'title': new_package.title}
+
+
     class Meta:
         app_label = "exeapp"
 

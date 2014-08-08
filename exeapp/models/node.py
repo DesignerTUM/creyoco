@@ -223,15 +223,17 @@ with it'''
                                    title=new_name,
                                    parent=self)
 
-    def duplicate(self, parent=None):
+    def duplicate(self, parent=None, package=None):
         """Create a copy of this node"""
         log.debug("Duplicate node {}".format(self.pk))
         children = list(self.children.all())
         idevices = list(self.idevices.all())
         node = self
+        if package is not None:
+            node.package = package
         if parent is not None:
             node.parent = parent
-        elif node.parent is None and node.is_root:
+        elif node.parent is None and node.is_root and package is None:
             node.is_root = False
             node.parent = self
         node.pk = None

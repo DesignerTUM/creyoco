@@ -48,6 +48,10 @@
 	<i class="icon-trash"></i> {% trans "Remove selected courses" %}
 </button>
 
+<button style="margin-right:10px;display:none" type='submit' id='duplicate_selected_packages'>
+	<i class="icon-copy"></i> {% trans "Duplicate selected courses" %}
+</button>
+
 <br><br><br>
 <ul id="package_list">
 	{% for package in package_list %}
