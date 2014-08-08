@@ -234,11 +234,13 @@ header {
 
 span.shareduser {
   display: inline-block;
+  position: relative;
+  bottom: 1px;
   font-size: .789em;
   background-color: lightblue;
   @include border-radius(2px);
-  padding: 2px 3px 0 3px;
-  margi-left: 5px;
+  padding: 0px 3px 0 3px;
+  margin-left: 3px;
   line-height: 150%;
   color: $darkgrey;
   &:hover {
