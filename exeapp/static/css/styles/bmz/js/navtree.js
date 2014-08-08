@@ -4,7 +4,6 @@
 
   $(function() {
     var active, hide, left, show, update;
-    console.log("it works2");
     show = function(el) {
       return el.addClass("navshown").removeClass("navhidden");
     };

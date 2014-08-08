@@ -1,5 +1,4 @@
 $ ->
-  console.log "it works2"
   show = (el) -> el.addClass("navshown").removeClass("navhidden")
   hide = (el) -> el.removeClass("navshown").addClass("navhidden")
   update = () ->
