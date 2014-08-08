@@ -39,5 +39,8 @@ def delete_package(request, package):
     '''Removes a package'''
 
     package_id = package.id
-    package.delete()
-    return {"package_id": package_id}
+    if package.user == request.user:
+        package.delete()
+        return {"package_id": package_id}
+    else:
+        return {"package_id": -1}

@@ -240,6 +240,10 @@ span.shareduser {
   padding: 2px 3px 0 3px;
   margi-left: 5px;
   line-height: 150%;
+  color: $darkgrey;
+  &:hover {
+    color: $darkgrey;
+  }
 
 }
 

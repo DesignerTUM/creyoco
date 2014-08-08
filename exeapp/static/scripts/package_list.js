@@ -81,7 +81,7 @@ require(['jquery', 'jquery-jsonrpc', 'eyecandy'], function($, _, eyecandy) {
         $('#middle-row').on("click", ".icon-eye-open", function() {
             var packageid = $(this).parent().parent().attr('packageid');
             $('#previewIFrame >iframe').attr('src', '/exeapp/package/' + packageid + '/preview');
-            eyecandy.show_lightbox( $( window ).width()-100, $( window ).height()-100, $('#previewIFrame'));  
+            eyecandy.show_lightbox( $( window ).width()-100, $( window ).height()-100, $('#previewIFrame'));
 
             //console.log(w + ',' + h);
         });
@@ -112,7 +112,9 @@ require(['jquery', 'jquery-jsonrpc', 'eyecandy'], function($, _, eyecandy) {
                 // Just a pre-caution that we remove the same package as the
                 // server
               callback_delete_package(deleted_package_id);
-            }
+            } else {
+                  alert("Can't delete a package you don't own.")
+              }
           }
         })
       })
