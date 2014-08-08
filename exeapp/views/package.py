@@ -165,7 +165,10 @@ def preview_static(request, package, node, path):
     media_path = request.user.profile.media_path
     if os.path.exists(os.path.join(media_path, path)):
         user_media_url = request.user.profile.media_url
-        return HttpResponsePermanentRedirect(user_media_url + path)
+        return HttpResponseRedirect(user_media_url + path)
+    elif os.path.exists(os.path.join(settings.MEDIA_ROOT, settings.WIKI_CACHE_DIR, path)):
+        url = settings.MEDIA_URL + settings.WIKI_CACHE_DIR + "/" + path
+        return HttpResponseRedirect(url)
     else:
         node_style_url = settings.STATIC_URL + \
                          "css/styles/" + \

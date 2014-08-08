@@ -1,15 +1,18 @@
-import re
-import sys
-
+import wikipedia
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from bs4 import BeautifulSoup
-
+from django.utils.text import slugify
+import urllib
+import os
+from exeapp.utils.path import Path
+from django.conf import settings
 from exeapp.models.idevices.genericidevice import GenericIdevice
 from exeapp.models.idevices.idevice import Idevice
 from exeapp.models.idevices import fields
 
 
+'''
 PY2 = sys.version_info[0] == 2
 try:
     from urllib.request import urlopen, FancyURLopener
@@ -25,7 +28,7 @@ try:
 except ImportError:
     if PY2:
         import urllib
-
+'''
 
 class WikipediaIdevice(GenericIdevice):
     name = _("Wiki Article")
@@ -58,83 +61,73 @@ within Wikipedia."""))
 
     def _resources(self):
         """Just returns an empty set"""
-        return set()
+        resource_list = set()
+        res_path = Path(settings.MEDIA_URL)
+
+        soup = BeautifulSoup(self.content)
+        imgs = soup.findAll("img")
+        for img in imgs:
+            if not img['src'].startswith("data:image"):
+                resource_list.add(urllib.parse.unquote(img['src'].replace(res_path, "")))
+
+
+        '''for img in imgs:
+                if not img['src'].startswith("data:image"):
+                    resource_list.add(
+                        unquote(img['src'].replace(media_url, "")))'''
+        return resource_list
+
 
     def load_article(self, title):
         """
         Load the article from Wikipedia
         """
-        self.articleName = title
-        self.site = self.language + "." + self.site
-        url = ""
-        title = quote(title.replace(" ", "_").encode('utf-8'))
-        try:
-            url = (self.site or self.ownUrl)
-            if not url.endswith('/') and title != '':
-                url += '/'
-            if '://' not in url:
-                url = 'http://' + url
-            url += title
-            net = urlopen(url)
-            page = net.read().decode("utf-8")
-            net.close()
-        except IOError:
-            self.content = _(
-                "Unable to download from %s <br/>Please check the spelling "
-                "and connection and try again.") % url
-            return
+        wikipedia.set_lang(self.language)
+        self.article_name = title
+        page = wikipedia.page(title)
+        page = self.store_images(page)
+        self.content = self.process_html (page)
 
-        # FIXME avoid problems with numeric entities in attributes
-        page = page.replace('&#160;', '&nbsp;')
 
-        soup = BeautifulSoup(page)
-        content = soup.find('div', {'id': "content"})
+    def process_html(self, html):
+        print("process html")
+        soup = BeautifulSoup(html)
+        soup = self.remove_edit_link(soup)
+        return soup.prettify()
 
-        # remove the wiktionary, wikimedia commons, and categories boxes
-        #  and the protected icon and the needs citations box
-        if content:
-            content['id'] = 'wiki_content'
-            infoboxes = content.findAll('div',
-                                        {'class': 'infobox sisterproject'})
-            [infobox.extract() for infobox in infoboxes]
-            catboxes = content.findAll('div', {'id': 'catlinks'})
-            [catbox.extract() for catbox in catboxes]
-            amboxes = content.findAll('table',
-                                      {'class': re.compile(r'.*\bambox\b.*')})
-            [ambox.extract() for ambox in amboxes]
-            protecteds = content.findAll('div', {'id': 'protected-icon'})
-            [protected.extract() for protected in protecteds]
-        else:
-            content = soup.first('body')
+    def remove_edit_link(self, soup):
+        print("remove edit link")
+        for edit_span in soup.findAll('span', 'mw-editsection'):
+            edit_span.extract()
+        return soup
 
-        if not content:
-            self.content = _(
-                "Unable to download from %s <br/>Please check the spelling "
-                "and connection and try again.") % url
-            # set the other elements as well
-            return
 
-        bits = url.split('/')
-        netloc = '%s//%s' % (bits[0], bits[2])
-        self.content = self.reformatArticle(netloc, str(content))
-        # now that these are supporting images, any direct manipulation
-        # of the content field must also store this updated information
-        # into the other corresponding fields of TextAreaField:
-        # (perhaps eventually a property should be made for TextAreaField
-        #  such that these extra set's are not necessary, but for now, here:)
+    def store_images(self,page):
+        #for storing files
+        local_path = Path.joinpath(settings.MEDIA_ROOT, settings.WIKI_CACHE_DIR)    # creyoco/exedjango/exeapp_media/wiki_cache_images
 
-    def reformatArticle(self, netloc, content):
-        """
-        Changes links, etc
-        """
-        content = re.sub(r'href="/', r'href="%s/' % netloc, content)
-        content = re.sub(
-            r'<(span|div)\s+(id|class)="(editsection|jump-to-nav)".*?</\1>',
-            '', content)
-        # TODO Find a way to remove scripts without removing newlines
-        content = content.replace("\n", " ")
-        content = re.sub(r'<script.*?</script>', '', content)
-        return content
+        #for url
+        global_path = Path.joinpath(settings.MEDIA_URL, settings.WIKI_CACHE_DIR)
+        #create directory structure
+        if not os.path.isdir(local_path):
+            os.makedirs(local_path)
+
+
+        soup = BeautifulSoup(page.html())
+        #save file and update link in content
+        for img in soup.findAll('img'):
+            image = "http:"+ img['src']
+            filename = img['src'].split('/')[-1]
+            filename = slugify(Path._get_namebase(filename)) + Path._get_ext(filename)  #sanitizing filename
+            file_path = Path.joinpath(local_path, Path(filename))
+            urllib.request.urlretrieve(image, file_path)
+            img['src'] = Path.joinpath(global_path, Path.basename(filename))
+        #update image hyperlink to wiki for bigger version image
+        for image_link in soup.findAll("a", { "class" : "image" }):
+            image_link['href'] = "http://wikipedia.org" + image_link['href']
+
+        page = soup.prettify()
+        return page
 
     class Meta:
         app_label = "exeapp"

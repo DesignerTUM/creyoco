@@ -154,6 +154,8 @@ STATIC_URL = '/static/'
 STYLE_DIR = "%s/css/styles/" % STATIC_ROOT
 STATICFILES_STORAGE = 'require.storage.OptimizedStaticFilesStorage'
 
+WIKI_CACHE_DIR = "wiki_cache_images"
+
 TINYMCE_JS_URL = os.path.join(STATIC_URL, 'tiny_mce/tiny_mce.js')
 
 TINYMCE_JS_ROOT = os.path.join(STATIC_ROOT, 'tiny_mce')

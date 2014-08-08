@@ -7,7 +7,10 @@ class SimpleSession(wamp.ApplicationSession):
     """Tracks open nodes and notifies new users"""
 
     def onConnect(self):
-        self.join("creyoco")
+        try:
+            self.join("creyoco")
+        except:
+            print("issue with autobahn onconnect")
 
     def onJoin(self, details):
         counter = 0
