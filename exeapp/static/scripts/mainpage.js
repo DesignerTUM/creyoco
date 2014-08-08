@@ -507,6 +507,7 @@ require(['jquery', "common", "eyecandy", "wamp_handler", 'jquery-pjax', 'jquery-
 
         //generates node data from a result object
         function generate_node_data(result) {
+            var child, rslt;
             var children = [];
             for (child in result.children) {
                 children.push(generate_node_data(result.children[child]));

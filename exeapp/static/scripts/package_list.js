@@ -55,9 +55,11 @@ require(['jquery', 'jquery-jsonrpc', 'eyecandy'], function($, _, eyecandy) {
 
             if($('li').hasClass('active')) {
                 $("#delete_selected_packages").show();
+                $("#duplicate_selected_packages").show();
             }
             else {
                 $("#delete_selected_packages").hide();
+                $("#duplicate_selected_packages").hide();
             }
         });
 
@@ -68,6 +70,7 @@ require(['jquery', 'jquery-jsonrpc', 'eyecandy'], function($, _, eyecandy) {
       });
       $("#create_package").click(create_package);
       $("#delete_selected_packages").click(delete_selected_packages);
+      $("#duplicate_selected_packages").click(duplicate_selected_packages);
 
         $('#middle-row').on("click", ".icon-download", function() {
             var packageid = $(this).parent().parent().attr('packageid');
@@ -119,6 +122,33 @@ require(['jquery', 'jquery-jsonrpc', 'eyecandy'], function($, _, eyecandy) {
         })
       })
        $("#delete_selected_packages").hide();
+        $("#duplicate_selected_packages").hide();
+    }
+
+    // Duplicates packages indicated by selected checkboxes
+    function duplicate_selected_packages(){
+      $(".active").
+      each(function (i){
+        var package_id = $(this).attr("packageid");
+        $.jsonRPC.request('duplicate_package', {
+            params: [package_id],
+            success: function(results){
+                callback_create_package(results.result.id, results.result.title)
+          }
+        })
+      })
+
+        $('#middle-row #package_list li.active').removeClass('active');
+        if($('#middle-row #package_list li span .check').hasClass('icon-check'))
+        {
+            $('#middle-row #package_list li span .check').removeClass('icon-check');
+            $('#middle-row #package_list li span .check').addClass('icon-check-empty');
+        }
+
+
+
+       $("#delete_selected_packages").hide();
+       $("#duplicate_selected_packages").hide();
     }
 
     // Called after successful package creation

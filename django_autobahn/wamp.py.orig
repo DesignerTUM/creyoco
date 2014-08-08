@@ -10,7 +10,11 @@ class SimpleSession(wamp.ApplicationSession):
         try:
             self.join("creyoco")
         except:
+<<<<<<< HEAD
+            print("issue with autobahn onconnect")
+=======
             print("autobahn onconnect error")
+>>>>>>> duplicate package fix
 
     def onJoin(self, details):
         counter = 0
