@@ -54,7 +54,12 @@
 	<li class='package' id="package{{ package.id }}" packageid="{{ package.id }}">
 		<span style="display:block;float:left">
 			<i class="check icon-check-empty"></i>
-			<a href="{{ package.get_absolute_url }}">{{ package.title }}</a>
+			<a href="{{ package.get_absolute_url }}">
+        {{ package.title }}
+        {% if package.user != user %}
+          <span class="shareduser">shared by: {{ package.user.username }}</span>
+        {% endif %}
+      </a>
 		</span>
 		<span class="qs">
 			<i class="icon-eye-open" ></i>

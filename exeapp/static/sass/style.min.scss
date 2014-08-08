@@ -232,6 +232,17 @@ header {
   }
 }
 
+span.shareduser {
+  display: inline-block;
+  font-size: .789em;
+  background-color: lightblue;
+  @include border-radius(2px);
+  padding: 2px 3px 0 3px;
+  margi-left: 5px;
+  line-height: 150%;
+
+}
+
 #content {
   background: image-url('content-bg.png') repeat-y;
   background-size: 100% 100%;

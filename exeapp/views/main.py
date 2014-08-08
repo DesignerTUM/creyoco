@@ -15,8 +15,10 @@ def main(request):
     '''Serve the main page with a list of packages.
     TODO: Use a generic view'''
     user = User.objects.get(username=request.user.username)
-    package_list = Package.objects.filter(Q(user=user) |
-                                          Q(collaborators__pk__contains=user.pk))
+    package_list = Package.objects.filter(
+        Q(user=user) |
+        Q(collaborators__pk__contains=user.pk)
+    )
     exporter_type_title_map = dict(((export_type, exporter.title)
                                     for export_type, exporter in
                                     list(exporter_map.items())))
