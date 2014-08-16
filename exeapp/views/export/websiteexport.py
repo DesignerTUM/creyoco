@@ -58,7 +58,7 @@ class WebsiteExport(object):
         self.style_dir = static_dir / "css" / "styles" / package.style
         self.scripts_dir = static_dir / "scripts"
         self.pages = []
-        self.json_file = "a.json"
+        self.json_file = self.create_temp_json_file()
         self.file_obj = file_obj
         self.media_dir = Path(package.user.profile.media_path)
         self.media_root = Path(os.path.abspath(settings.MEDIA_ROOT))
@@ -87,7 +87,6 @@ class WebsiteExport(object):
         """
         zipped = ZipFile(self.file_obj, "w")
         self.add_dir_to_zip(zipped, Path(self.output_dir))
-        zipped.write(self.json_file)
         zipped.close()
 
     def add_dir_to_zip(self, zipped, path, rel_path=Path(".")):
@@ -138,7 +137,7 @@ class WebsiteExport(object):
                                   self.output_dir)
         self.copy_players()
         self.copy_licence()
-        self.create_json()
+        self.copy_json()
 
     def create_pages(self, additional_kwargs=None):
         additional_kwargs = additional_kwargs or {}
@@ -243,3 +242,14 @@ for retrieving later. Kwargs will be used at page creation.
 
         with open(self.json_file, "w") as out:
             out.write(json.dumps(dict_for_json))
+
+
+    def copy_json(self):
+        self.create_json()
+        Path.copyfile(self.json_file, Path.joinpath(self.output_dir, Path("a.json")))
+
+    def create_temp_json_file(self):
+        f= tempfile.NamedTemporaryFile(mode='w+t', suffix='.json', prefix='', delete=False)
+        _filename = f.name
+        f.close()
+        return _filename
