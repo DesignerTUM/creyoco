@@ -184,3 +184,10 @@ def preview_static(request, package, node, path):
                          node.package.style + \
                          "/"
         return HttpResponseRedirect(node_style_url + path)
+
+'''
+@login_required
+@get_package_by_id_or_error
+def import(request, package):
+
+    return'''
