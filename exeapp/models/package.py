@@ -31,7 +31,8 @@ i.e. the "package".
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.conf import settings
-
+import json
+import tempfile
 import logging
 import time
 import zipfile
@@ -294,6 +295,32 @@ class PackageManager(models.Manager):
                     title="Home", is_root=True)
         root.save()
         return package
+
+    def import_package(self, filename, user):
+        try:
+            zipped_file = zipfile.ZipFile(filename, "r")
+        except zipfile.BadZipFile:
+            log.error("File %s is not a zip file" % filename)
+            return None
+
+        temp_dir = tempfile.mkdtemp()
+        try:
+            for file_in_zip in zipped_file.namelist():
+                if file_in_zip.endswith(".json"):
+                    zipped_file.extract(file_in_zip, temp_dir)
+                    with open(Path.joinpath(Path(temp_dir),Path(file_in_zip))) as json_file:
+                        json_data = json.load(json_file)
+                        #need to include all necessary fields. talk with dimitri
+                        p = Package(title=json_data['title'], user=user)
+                        dublincore = DublinCore.objects.create()
+                        p.dublincore = dublincore
+                        p.save()
+                        Node.objects.import_node(json_data['nodes'][0], p, None)
+
+        finally:
+            Path.rmtree(temp_dir)
+
+        return {'id': p.pk, 'title': p.title}
 
 
 class Package(models.Model):

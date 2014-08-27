@@ -47,6 +47,21 @@ class NodeManager(models.Manager):
         node.save()
         return node
 
+    def import_node(self, json_data, package, parent):
+        print(json_data['id'])
+        n = Node(package=package, parent=parent, title=json_data['title'],
+                    is_root=json_data['is_root'])
+        n.save()
+        if 'idevices' in json_data:
+            for idevice in json_data['idevices']:
+                print(idevice)
+                #i = Node.add_idevice(n, idevice['child_type'])  #childtype case doesnt match.
+        if 'children' in json_data:
+            for n2 in json_data['children']:
+                self.import_node(n2, package, n)
+
+        return n
+
 
 class Node(models.Model):
     """

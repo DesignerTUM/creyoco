@@ -71,6 +71,7 @@ require(['jquery', 'jquery-jsonrpc', 'eyecandy'], function($, _, eyecandy) {
       $("#create_package").click(create_package);
       $("#delete_selected_packages").click(delete_selected_packages);
       $("#duplicate_selected_packages").click(duplicate_selected_packages);
+      $("#import_package").click(import_package);
 
         $('#middle-row').on("click", ".icon-download", function() {
             var packageid = $(this).parent().parent().attr('packageid');
@@ -99,6 +100,14 @@ require(['jquery', 'jquery-jsonrpc', 'eyecandy'], function($, _, eyecandy) {
             success: function(results){
             callback_create_package(results.result.id, results.result.title)
           }
+        });
+    }
+    function import_package(){
+        console.log("Test");
+        $.jsonRPC.request('import_package', {
+            success: function (results) {
+                callback_create_package(results.result.id, results.result.title)
+            }
         });
     }
 

@@ -50,3 +50,10 @@ def duplicate_package(request, package):
     '''Duplicates a package'''
     p = package.duplicate()
     return {"id": p['id'], "title": p['title']}
+
+
+@jsonrpc_method('main.import_package', authenticated=True)
+def import_package(request):
+    print("test")
+    p = Package.objects.import_package("/home/zakaria/Downloads/asd.zip", User.objects.get(username=request.user.username))
+    return {"id": p['id'], "title": p['title']}
