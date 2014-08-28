@@ -23,11 +23,14 @@ FreeTextIdevice: just has a block of text
 """
 from django.utils.translation import ugettext_lazy as _
 import logging
+
+from datetime import datetime
+from django.db import models
 from exeapp.models.idevices.idevice import Idevice
 from exeapp.models.idevices.genericidevice import GenericIdevice
 from exeapp.models.idevices import fields
-
 log = logging.getLogger(__name__)
+
 
 # ===========================================================================
 
@@ -47,10 +50,25 @@ This provides the framework within which the learning activities are built and
 delivered.""")
     emphasis = Idevice.NOEMPHASIS
     content = fields.RichTextField(blank=True, default="")
-
     class Meta:
         app_label = "exeapp"
 
+    def get_previous_version(self, date=datetime.now()):
+        f1 = FreeTextVersion.objects.filter(idevice_id=self.id, date_created__lt=date).order_by('-date_created')
+        return f1[0]
+
+    def apply_changes(self, formdata, formsetdata=None):
+        FreeTextVersion.objects.create(idevice=self, content=formdata['content'])
+        self.edit = False
+
 
 # ===========================================================================
+
+class FreeTextVersion(models.Model):
+    idevice = models.ForeignKey("FreeTextIdevice", related_name="versions")
+    content = fields.RichTextField(blank=True, default="")
+    date_created = models.DateTimeField(default=datetime.now())
+
+    class Meta:
+        app_label = "exeapp"
 
