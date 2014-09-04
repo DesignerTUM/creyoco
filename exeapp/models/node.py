@@ -55,7 +55,7 @@ class NodeManager(models.Manager):
         if 'idevices' in json_data:
             for idevice in json_data['idevices']:
                 print(idevice)
-                i = Node.add_idevice(n, idevice['child_type'])  #childtype case doesnt match.
+                #i = Node.add_idevice(n, idevice['child_type'])  #childtype case doesnt match.
         if 'children' in json_data:
             for n2 in json_data['children']:
                 self.import_node(n2, package, n)
