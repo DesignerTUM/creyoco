@@ -220,17 +220,20 @@ for retrieving later. Kwargs will be used at page creation.
     def dict_of_node(self, node):
         print(node.id)
         node_dict = self._cleanup_dict(node.__dict__)
+        child_list = []
         if node.children.count():
             i = 0
-            child_list = []
             for child in node.children.all():
                 i = i + 1
                 print(i)
                 child_list.append(self.dict_of_node(child))
-            node_dict['children'] = child_list
-            node_dict['idevices'] = []
-            for idevice in node.idevices.all():
-                node_dict['idevices'].append(self._cleanup_dict(idevice.as_child().__dict__))
+        node_dict['children'] = child_list
+        node_dict['idevices'] = []
+        for idevice in node.idevices.all():
+            child = idevice.as_child()
+            clean_dict = self._cleanup_dict(child.__dict__)
+            clean_dict['child_type'] = child.__class__.__name__
+            node_dict['idevices'].append(clean_dict)
         return node_dict
 
     def create_json(self):
