@@ -9,6 +9,7 @@ from django import forms
 from django.conf import settings
 from exeapp.models.idevices.multiplechoice import MultiChoiceIdevice, \
     MultiChoiceOptionIdevice
+from exeapp.views.blocks.freetextblock import FreeTextBlock
 
 from exeapp.views.blocks.genericblock import GenericBlock
 from exeapp.models.idevices import FreeTextIdevice
@@ -43,7 +44,7 @@ from exeapp.views.blocks.glossaryblock import GlossaryBlock
 from exeapp.views.blocks.tocblock import TOCBlock
 
 idevice_map = {
-    FreeTextIdevice: GenericBlock,
+    FreeTextIdevice: FreeTextBlock,
     ActivityIdevice: GenericBlock,
     GlossaryIdevice: GlossaryBlock,
     ReadingActivityIdevice: GenericBlock,

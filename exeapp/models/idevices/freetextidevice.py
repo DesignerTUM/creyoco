@@ -50,15 +50,74 @@ This provides the framework within which the learning activities are built and
 delivered.""")
     emphasis = Idevice.NOEMPHASIS
     content = fields.RichTextField(blank=True, default="")
+    date_created = models.DateTimeField(blank=True, null=True, editable=False)
     class Meta:
         app_label = "exeapp"
 
-    def get_previous_version(self, date=datetime.now()):
+    def has_previous_version(self, date=None):
+        if date is None:
+            date = self.date_created
+            if date is None:
+                return False
+        if FreeTextVersion.objects.filter(idevice_id=self.id, date_created__lt=date).count():
+            return True
+        else:
+            return False
+
+    def has_later_version(self, date=None):
+        if date is None:
+            date = self.date_created
+            if date is None:
+                return False
+        if FreeTextVersion.objects.filter(idevice_id=self.id, date_created__gt=date).count():
+            return True
+        else:
+            return False
+
+    def get_previous_version(self, date=None):
+        if date is None:
+            date = self.date_created
+            if date is None:
+                return None
         f1 = FreeTextVersion.objects.filter(idevice_id=self.id, date_created__lt=date).order_by('-date_created')
-        return f1[0]
+        if f1.count() > 0:
+            return f1[0]
+        else:
+            return None
+
+    def get_later_version(self, date=None):
+        if date is None:
+            date = self.date_created
+            if date is None:
+                return None
+        f = FreeTextVersion.objects.filter(idevice_id=self.id, date_created__gt=date).order_by('date_created')
+        if f.count() > 0:
+            return f[0]
+        else:
+            return None
+
+    def get_current_version(self):
+        f = FreeTextVersion.objects.filter(idevice_id=self.id, date_created=self.date_created)
+        if f.count() > 0:
+            return f[0]
+        else:
+            return None
+
+    def delete_unnecessary_version(self):
+        FreeTextVersion.objects.filter(idevice_id=self.id, date_created__gt=self.date_created).delete()
 
     def apply_changes(self, formdata, formsetdata=None):
-        FreeTextVersion.objects.create(idevice=self, content=formdata['content'])
+        #check for first time. it is none at first
+        if self.date_created:
+            self.delete_unnecessary_version()
+        #check for same old version saving again. avoid duplication during creating versions
+        v = self.get_current_version()
+        if v is None:
+            self.date_created = datetime.now()
+            FreeTextVersion.objects.create(idevice=self, content=formdata['content'], date_created=self.date_created)
+        elif self.content != v.content:
+            self.date_created = datetime.now()
+            FreeTextVersion.objects.create(idevice=self, content=formdata['content'], date_created=self.date_created)
         self.edit = False
 
 
