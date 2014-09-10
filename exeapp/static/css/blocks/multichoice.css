@@ -20,3 +20,9 @@
     color: green;
 }
 
+.multichoiceoption input {
+    position: relative;
+    top: 2px;
+    margin-right: 6px;
+}
+
