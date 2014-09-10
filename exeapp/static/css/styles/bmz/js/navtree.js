@@ -3,15 +3,17 @@
 (function() {
 
   $(function() {
-    var active, hide, left, show, update;
+    var active, hide, lastTimeout, left, show, update;
     show = function(el) {
       return el.addClass("navshown").removeClass("navhidden");
     };
     hide = function(el) {
       return el.removeClass("navshown").addClass("navhidden");
     };
+    lastTimeout = void 0;
     update = function() {
-      return setTimeout((function() {
+      clearTimeout(lastTimeout);
+      return lastTimeout = setTimeout((function() {
         $(".navshown").slideDown();
         return $(".navhidden:not(.neverhide)").slideUp();
       }), 200);

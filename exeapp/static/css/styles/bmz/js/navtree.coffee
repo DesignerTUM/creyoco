@@ -1,8 +1,10 @@
 $ ->
   show = (el) -> el.addClass("navshown").removeClass("navhidden")
   hide = (el) -> el.removeClass("navshown").addClass("navhidden")
+  lastTimeout = undefined
   update = () ->
-    setTimeout(
+    clearTimeout(lastTimeout)
+    lastTimeout = setTimeout(
       (() ->
         $(".navshown").slideDown()
         $(".navhidden:not(.neverhide)").slideUp()
