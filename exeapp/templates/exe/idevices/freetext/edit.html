@@ -1,0 +1,15 @@
+{% extends "exe/idevices/edit_base.html" %}
+{% block idevice %}{{form.render_edit}}
+<p>
+{% if self.idevice.has_previous_version %}
+	<input id="load_earlier_version" type="submit" name="idevice_action" value="Earlier Version"/>
+{% else %}
+    <input id="load_earlier_version" disabled type="submit" name="idevice_action" value="Earlier Version"/>
+{% endif %}
+{% if self.idevice.has_later_version %}
+    <input id="load_later_version" type="submit" name="idevice_action" value="Later Version"/>
+{% else %}
+    <input id="load_later_version" disabled type="submit" name="idevice_action" value="Later Version"/>
+{% endif %}
+</p>
+{% endblock %}
