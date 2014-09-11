@@ -20,11 +20,12 @@
 """
 WebsiteExport will export a package as a website of HTML pages
 """
-
+from django.core import serializers
 from django.conf import settings
-
 import logging
 import os
+import json
+from exeapp.models import Package, Node
 from exeapp.utils.path import Path
 from exeapp.views.export.websitepage import WebsitePage
 from zipfile import ZipFile, ZIP_DEFLATED
@@ -57,6 +58,7 @@ class WebsiteExport(object):
         self.style_dir = static_dir / "css" / "styles" / package.style
         self.scripts_dir = static_dir / "scripts"
         self.pages = []
+        self.json_file = self.create_temp_json_file()
         self.file_obj = file_obj
         self.media_dir = Path(package.user.profile.media_path)
         self.media_root = Path(os.path.abspath(settings.MEDIA_ROOT))
@@ -135,6 +137,7 @@ class WebsiteExport(object):
                                   self.output_dir)
         self.copy_players()
         self.copy_licence()
+        self.copy_json()
 
     def create_pages(self, additional_kwargs=None):
         additional_kwargs = additional_kwargs or {}
@@ -175,8 +178,8 @@ class WebsiteExport(object):
         wiki_media = set()
         nonwiki_media = set()
         for page in self.pages:
-            view_media = view_media.union(page.view_media._js).\
-                            union(page.view_media._css.get('all', []))
+            view_media = view_media.union(page.view_media._js). \
+                union(page.view_media._css.get('all', []))
         view_media = [unquote(medium.replace(settings.STATIC_URL, ""))
                       for medium in view_media
                       if not "tinymce" in medium]
@@ -209,5 +212,44 @@ for retrieving later. Kwargs will be used at page creation.
             self.pages.append(page)
             self.generate_pages(child, depth + 1)
 
+    def _cleanup_dict(self, dic):
+        return dict([(x, y) for x, y in dic.items() if not x.startswith('_')])
 
 
+
+    def dict_of_node(self, node):
+        print(node.id)
+        node_dict = self._cleanup_dict(node.__dict__)
+        if node.children.count():
+            i = 0
+            child_list = []
+            for child in node.children.all():
+                i = i + 1
+                print(i)
+                child_list.append(self.dict_of_node(child))
+            node_dict['children'] = child_list
+            node_dict['idevices'] = []
+            for idevice in node.idevices.all():
+                node_dict['idevices'].append(self._cleanup_dict(idevice.as_child().__dict__))
+        return node_dict
+
+    def create_json(self):
+        print("json")
+        dict_for_json = self._cleanup_dict(self.package.__dict__)
+        for node in self.package.nodes.all():
+            dict_for_json['nodes'] = []
+            dict_for_json['nodes'].append(self.dict_of_node(node))
+
+        with open(self.json_file, "w") as out:
+            out.write(json.dumps(dict_for_json))
+
+
+    def copy_json(self):
+        self.create_json()
+        Path.copyfile(self.json_file, Path.joinpath(self.output_dir, Path("a.json")))
+
+    def create_temp_json_file(self):
+        f= tempfile.NamedTemporaryFile(mode='w+t', suffix='.json', prefix='', delete=False)
+        _filename = f.name
+        f.close()
+        return _filename
