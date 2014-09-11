@@ -46,6 +46,8 @@ class WebsiteExport(object):
     WebsiteExport will export a package as a website of HTML pages
     """
     title = "Website (Zip)"
+    wiki_media = set()
+    nonwiki_media = set()
 
     def __init__(self, package, file_obj):
         """
@@ -175,8 +177,6 @@ class WebsiteExport(object):
 
     def copy_resources(self):
         view_media = set()
-        wiki_media = set()
-        nonwiki_media = set()
         for page in self.pages:
             view_media = view_media.union(page.view_media._js). \
                 union(page.view_media._css.get('all', []))
@@ -186,11 +186,11 @@ class WebsiteExport(object):
         Path(settings.STATIC_ROOT).copylist(view_media, self.output_dir)
         for x in self.package.resources:
             if settings.WIKI_CACHE_DIR in x:
-                wiki_media.add(x)
+                self.wiki_media.add(x)
             else:
-                nonwiki_media.add(x)
-        self.media_dir.copylist(nonwiki_media, self.output_dir)
-        self.media_root.copylist(wiki_media, self.output_dir)
+                self.nonwiki_media.add(x)
+        self.media_dir.copylist(self.nonwiki_media, self.output_dir)
+        self.media_root.copylist(self.wiki_media, self.output_dir)
 
 
     def generate_pages(self, node, depth, kwargs=None):
@@ -231,14 +231,20 @@ for retrieving later. Kwargs will be used at page creation.
         node_dict['idevices'] = []
         for idevice in node.idevices.all():
             child = idevice.as_child()
-            clean_dict = self._cleanup_dict(child.__dict__)
-            clean_dict['child_type'] = child.__class__.__name__
+            #add todict for every idevice
+            clean_dict = child.to_dict()
             node_dict['idevices'].append(clean_dict)
         return node_dict
 
     def create_json(self):
         print("json")
         dict_for_json = self._cleanup_dict(self.package.__dict__)
+        dict_for_json['files'] = []
+        for f in self.wiki_media:
+            dict_for_json['files'].append(f)
+        for f in self.nonwiki_media:
+            dict_for_json['files'].append(f)
+
         for node in self.package.nodes.all():
             dict_for_json['nodes'] = []
             dict_for_json['nodes'].append(self.dict_of_node(node))

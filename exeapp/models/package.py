@@ -296,6 +296,23 @@ class PackageManager(models.Manager):
         root.save()
         return package
 
+    def _copy_resources_from_zip(self, list, dir, pack):
+        print(list)
+        wiki_dir = Path(os.path.join(settings.MEDIA_ROOT, settings.WIKI_CACHE_DIR))
+        nonwiki_dir = Path(pack.user.profile.media_path)
+        for f in list:
+            f = Path(f).name
+            f = Path(os.path.join(dir, f))
+            if f.name.startswith("wiki__"):
+                f2 = Path.joinpath(wiki_dir, Path(f.name))
+                if Path.exists(f2) is False:
+                    Path.copyfile(f, f2)
+
+            else:
+                f2 = Path.joinpath(nonwiki_dir, Path(f.name))
+                if Path.exists(f2) is False:
+                    Path.copyfile(f, f2)
+
     def import_package(self, filename, user):
         try:
             zipped_file = zipfile.ZipFile(filename, "r")
@@ -307,11 +324,11 @@ class PackageManager(models.Manager):
         try:
             for file_in_zip in zipped_file.namelist():
                 if file_in_zip.endswith(".json"):
-                    zipped_file.extract(file_in_zip, temp_dir)
-                    with open(Path.joinpath(Path(temp_dir),Path(file_in_zip))) as json_file:
+                    zipped_file.extractall(path=temp_dir)
+                    with open(Path.joinpath(Path(temp_dir), Path(file_in_zip))) as json_file:
                         json_data = json.load(json_file)
-                        #need to include all necessary fields. talk with dimitri
                         p = Package(title=json_data['title'], user=user)
+                        self._copy_resources_from_zip(json_data['files'], temp_dir, p)
                         dublincore = DublinCore.objects.create()
                         p.dublincore = dublincore
                         p.save()
@@ -319,7 +336,6 @@ class PackageManager(models.Manager):
 
         finally:
             Path.rmtree(temp_dir)
-
         return {'id': p.pk, 'title': p.title}
 
 

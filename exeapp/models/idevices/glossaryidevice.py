@@ -26,6 +26,33 @@ class GlossaryIdevice(Idevice):
     def add_child(self):
         GlossaryTerm.objects.create(idevice=self)
 
+    def to_dict(self):
+        d = self.__dict__
+        d = {k: v for k, v in d.items() if k != 'id'
+                                    and k != 'idevice_ptr_id'
+                                    and k != 'parent_node_id'
+                                    and not k.startswith('_')
+            }
+        d['child_type'] = self.get_klass()
+        d['terms'] = []
+        for term in self.terms.all():
+            d['terms'].append(term.to_dict())
+        return d
+
+    def from_dict(self, dic):
+        print(dic)
+        self.title = dic['title']
+        self.edit = dic['edit']
+        #clear blank answer created by default for this question in the manager
+        GlossaryTerm.objects.filter(idevice=self).delete()
+        for term in dic['terms']:
+            GlossaryTerm.objects.create(idevice=self,
+                                        title=term['title'],
+                                        definition=term['definition']
+                                        )
+        self.save()
+        return self
+
     class Meta:
         app_label = "exeapp"
 
@@ -37,6 +64,14 @@ class GlossaryTerm(models.Model):
                                       help_text=_(
                                           "Enter definition of the term"))
     idevice = models.ForeignKey("GlossaryIdevice", related_name="terms")
+
+    def to_dict(self):
+        d = self.__dict__
+        d = {k: v for k, v in d.items() if k != 'idevice_id'
+                                    and k != 'id'
+                                    and not k.startswith('_')
+            }
+        return d
 
     class Meta:
         app_label = "exeapp"

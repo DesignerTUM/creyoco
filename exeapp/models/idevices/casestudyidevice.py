@@ -47,6 +47,34 @@ of the case and if so how are ideas feed back to the class</li></ul>""")
     def add_child(self):
         CaseActivity.objects.create(idevice=self)
 
+    def to_dict(self):
+        d = self.__dict__
+        d = {k: v for k, v in d.items() if k != 'id'
+                                    and k != 'idevice_ptr_id'
+                                    and k != 'parent_node_id'
+                                    and not k.startswith('_')
+            }
+        d['child_type'] = self.get_klass()
+        d['terms'] = []
+        for term in self.terms.all():
+            d['terms'].append(term.to_dict())
+        return d
+
+    def from_dict(self, dic):
+        print(dic)
+        self.title = dic['title']
+        self.edit = dic['edit']
+        self.story = dic['story']
+        #clear blank answer created by default for this question in the manager
+        CaseActivity.objects.filter(idevice=self).delete()
+        for term in dic['terms']:
+            CaseActivity.objects.create(idevice=self,
+                                        activity=term['activity'],
+                                        feedback=term['feedback']
+                                        )
+        self.save()
+        return self
+
     class Meta:
         app_label = "exeapp"
 
@@ -63,6 +91,14 @@ class CaseActivity(models.Model):
         blank=True, default="",
         help_text=_("Provide relevant feedback on the situation"))
     idevice = models.ForeignKey("CaseStudyIdevice", related_name="terms")
+
+    def to_dict(self):
+        d = self.__dict__
+        d = {k: v for k, v in d.items() if k != 'idevice_id'
+                                    and k != 'id'
+                                    and not k.startswith('_')
+            }
+        return d
 
     class Meta:
         app_label = "exeapp"
