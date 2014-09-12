@@ -26,6 +26,14 @@
 	                </iframe>
             	</div>
 
+    <div id="importZip" class="modal">
+        <h3>Browse file</h3>
+        <form action="exeapp/upload_package/" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Upload" id="Save"/>
+        </form>
+    </div>
 
         <div id="download_box" class="modal">
             <h3>Wählen Sie das Dateiformat für den Kurs-Export.</h3>
@@ -54,6 +62,14 @@
 <button style="margin-right:10px" type='submit' id='import_package'>
 	<i class="icon-save"></i> {% trans "Import Course" %}
 </button>
+
+{% if messages %}
+<ul class="messages" style="position: relative;" id="error_messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
 
 <br><br><br>
 <ul id="package_list">

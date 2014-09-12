@@ -41,6 +41,9 @@ require.config({
 require(['jquery', 'jquery-jsonrpc', 'eyecandy'], function($, _, eyecandy) {
 
     $(document).ready(function() {
+        // fade out the error message
+        $('#error_messages').delay(5000).fadeOut();
+
         $('#middle-row').on("click", ".check", function() {
             if($(this).parent().parent().hasClass('active')) {
                 $(this).removeClass('icon-check');
@@ -103,12 +106,7 @@ require(['jquery', 'jquery-jsonrpc', 'eyecandy'], function($, _, eyecandy) {
         });
     }
     function import_package(){
-        console.log("Test");
-        $.jsonRPC.request('import_package', {
-            success: function (results) {
-                callback_create_package(results.result.id, results.result.title)
-            }
-        });
+        eyecandy.show_lightbox(365, 200, $('#importZip'));
     }
 
     // Deletes packages which idicated by selected checkboxes

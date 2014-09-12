@@ -314,11 +314,12 @@ class PackageManager(models.Manager):
                     Path.copyfile(f, f2)
 
     def import_package(self, filename, user):
+        p = None
         try:
             zipped_file = zipfile.ZipFile(filename, "r")
         except zipfile.BadZipFile:
             log.error("File %s is not a zip file" % filename)
-            return None
+            return False
 
         temp_dir = tempfile.mkdtemp()
         try:
@@ -336,7 +337,10 @@ class PackageManager(models.Manager):
 
         finally:
             Path.rmtree(temp_dir)
-        return {'id': p.pk, 'title': p.title}
+        if p:
+            return True
+        else:
+            return False
 
 
 class Package(models.Model):

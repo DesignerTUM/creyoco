@@ -12,7 +12,7 @@ from exeapp.views import main
 
 urlpatterns = patterns('',
                        (r'^$', main.main),
-
+                       (r'^upload_package/$', main.upload_zip),
                        url(r'^json/$', jsonrpc_site.dispatch,
                            name="jsonrpc_mountpoint"),
                        (r'package/$', RedirectView.as_view(url='/exeapp/')),
