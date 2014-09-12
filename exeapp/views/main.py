@@ -10,7 +10,7 @@ from jsonrpc import jsonrpc_method
 from exeapp.views import upload_file_form
 from exeapp.models import Package, User
 from exeapp.shortcuts import get_package_by_id_or_error
-from views.export.exporter_factory import exporter_map
+from exeapp.views.export.exporter_factory import exporter_map
 
 
 @login_required
