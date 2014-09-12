@@ -48,6 +48,33 @@ class MultiChoiceIdevice(Idevice):
         """
         return self.options.filter(right_answer=True).count() > 1
 
+    def to_dict(self):
+        d = self.__dict__
+        d = {k: v for k, v in d.items() if k != 'id'
+                                    and k != 'idevice_ptr_id'
+                                    and k != 'parent_node_id'
+                                    and not k.startswith('_')
+            }
+        d['child_type'] = self.get_klass()
+        d['answers'] = []
+        for answer in self.options.all():
+            d['answers'].append(answer.to_dict())
+        return d
+
+    def from_dict(self, dic):
+        print(dic)
+        self.question = dic['question']
+        self.edit = dic['edit']
+        #clear blank answer created by default for this question in the manager
+        MultiChoiceOptionIdevice.objects.filter(idevice=self).delete()
+        for answer in dic['answers']:
+            MultiChoiceOptionIdevice.objects.create(idevice=self,
+                                                    option=answer['option'],
+                                                    right_answer=answer['right_answer']
+                                                    )
+        self.save()
+        return self
+
 
 class MultiChoiceOptionIdevice(models.Model):
     option = fields.MultiChoiceOptionField(
@@ -57,6 +84,14 @@ class MultiChoiceOptionIdevice(models.Model):
     )
     right_answer = models.BooleanField(default=False)
     idevice = models.ForeignKey("MultiChoiceIdevice", related_name="options")
+
+    def to_dict(self):
+        d = self.__dict__
+        d = {k: v for k, v in d.items() if k != 'idevice_id'
+                                    and k != 'id'
+                                    and not k.startswith('_')
+            }
+        return d
 
     class Meta:
         app_label = "exeapp"

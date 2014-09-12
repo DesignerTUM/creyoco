@@ -22,7 +22,7 @@ class PDFBlock(GenericBlock):
         """
         Returns an XHTML string for previewing this block
         """
-        if self.idevice.page_list:
+        if self.idevice.page_list and self.idevice.modified_pdf_file is None:
             print("\n\n######################\n")
             print("render preview ")
             filename = Path.joinpath(Path(settings.MEDIA_ROOT),Path.relpath(self.idevice.pdf_file.path))

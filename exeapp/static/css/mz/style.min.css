@@ -2388,7 +2388,7 @@ ul#package_list li {
 
 /* line 554, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
 footer {
-  position: absolute;
+  position: relative;
   bottom: 10px;
   max-width: 1800px;
   min-width: 960px;

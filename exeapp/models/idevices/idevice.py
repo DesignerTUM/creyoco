@@ -20,6 +20,7 @@
 import os
 from django.conf import settings
 from django.db.models.fields import AutoField
+import exeapp.models
 
 """
 The base class for all iDevices
@@ -29,7 +30,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 import logging
-#from exe.engine.translate import lateTranslate
+# from exe.engine.translate import lateTranslate
 
 log = logging.getLogger(__name__)
 
@@ -45,11 +46,11 @@ class Idevice(models.Model):
     # Class attributes
     # see derieved classes for persistenceVersion
     NOEMPHASIS, SOMEEMPHASIS, STRONGEMPHASIS = list(range(3))
-    CONTENT, DIDACTICS, COMMUNICATION,  TEST, MEDIA, UNKNOWN = \
-            _("Content"), _("Didactics"), _("Communication"), _("Test"),\
-            _("Media"), _("Unknown")
+    CONTENT, DIDACTICS, COMMUNICATION, TEST, MEDIA, UNKNOWN = \
+        _("Content"), _("Didactics"), _("Communication"), _("Test"), \
+        _("Media"), _("Unknown")
 
-    GROUP_ORDER = [CONTENT, DIDACTICS, COMMUNICATION,  TEST, MEDIA, UNKNOWN]
+    GROUP_ORDER = [CONTENT, DIDACTICS, COMMUNICATION, TEST, MEDIA, UNKNOWN]
 
     # should be overwritten by child classes
     title = ""
@@ -74,6 +75,7 @@ class Idevice(models.Model):
         else:
             klass = str(self.as_child().__class__).split('.')[-1]
             return klass[:-2]
+
     klass = property(get_klass)
 
     def icon_url(self):
@@ -90,9 +92,9 @@ class Idevice(models.Model):
     def resources(self):
         '''Safe attritube, which checks if idevice owner has the right to
 reference the resources'''
-        resources = set((resource for resource in self._resources()\
-                    if not os.path.normpath(resource).\
-                                            startswith(os.path.pardir)))
+        resources = set((resource for resource in self._resources() \
+                         if not os.path.normpath(resource). \
+            startswith(os.path.pardir)))
         if self.icon:
             resources.add(os.path.join(settings.STATIC_ROOT,
                                        "css/styles/",
@@ -134,7 +136,7 @@ finding. Returns a list of (name, url) tuples'''
         Return true if this is the last iDevice in this node
         """
         return self._order == \
-            len(self.parent_node.idevices.get_query_set()) - 1
+               len(self.parent_node.idevices.get_query_set()) - 1
 
     def move_up(self):
         """
@@ -145,8 +147,8 @@ finding. Returns a list of (name, url) tuples'''
         # get_previous_in_order doesn't work either.
         base_idevice = self.base_idevice
         prev_idevice = base_idevice.get_previous_in_order()
-        prev_idevice._order, self._order =\
-                 self._order, prev_idevice._order
+        prev_idevice._order, self._order = \
+            self._order, prev_idevice._order
         prev_idevice.save()
         self.save()
 
@@ -161,9 +163,9 @@ finding. Returns a list of (name, url) tuples'''
 
     def clone(self):
         initial = {field.name: getattr(self, field.name)
-                    for field in self._meta.fields
-                    if not isinstance(field, AutoField) and
-                       not field in list(self._meta.parents.values())}
+                   for field in self._meta.fields
+                   if not isinstance(field, AutoField) and
+                   not field in list(self._meta.parents.values())}
         return self.__class__(**initial)
 
     # Kudos to crucialfelix for djangosnippet 1031
@@ -201,8 +203,8 @@ finding. Returns a list of (name, url) tuples'''
         # in the parent iDevice class, merely return a None,
         # and let each specific iDevice class implement its own version:
         log.warn("getResourcesField called on iDevice; no specific "
-                + "implementation available for this particular iDevice "
-                + "class: " + repr(self) )
+                 + "implementation available for this particular iDevice "
+                 + "class: " + repr(self))
         return None
 
     def getRichTextFields(self):
@@ -215,13 +217,33 @@ finding. Returns a list of (name, url) tuples'''
         # in the parent iDevice class, merely return an empty list,
         # and let each specific iDevice class implement its own version:
         log.warn("getRichTextFields called on iDevice; no specific "
-                + "implementation available for this particular iDevice "
-                + "class: " + repr(self) )
+                 + "implementation available for this particular iDevice "
+                 + "class: " + repr(self))
         return []
 
     def __unicode__(self):
         return "FreeTextIdevice: %s" % self.id
 
+    def to_dict(self):
+        d = self.__dict__
+        d = {k: v for k, v in d.items() if k != 'id'
+                                    and k != 'idevice_ptr_id'
+                                    and k != 'parent_node_id'
+                                    and not k.startswith('_')
+            }
+        d['child_type'] = self.get_klass()
+        return d
+
+    def from_dict(self, dic):
+        print(dic)
+        dic = {k: v for k, v in dic.items() if k != 'child_type'}
+        try:
+            idevice_class = exeapp.models.idevice_store[self.get_klass()]
+        except KeyError:
+            raise KeyError("Idevice type %s does not exist." % self.get_klass())
+        else:
+            idevice_class.objects.filter(id=self.id).update(**dic)
+        return self
 
     class Meta:
         order_with_respect_to = 'parent_node'

@@ -27,6 +27,7 @@ Nodes provide the structure to the package hierarchy
 from django.db import models
 
 from exeapp.models import idevice_store
+from exeapp.models.idevices.idevice import Idevice
 
 import logging
 from copy import deepcopy
@@ -46,6 +47,26 @@ class NodeManager(models.Manager):
                     is_root=is_root)
         node.save()
         return node
+
+    def import_node(self, json_data, package, parent):
+        print(json_data['id'])
+        n = Node(package=package, parent=parent, title=json_data['title'],
+                 is_root=json_data['is_root'])
+        n.save()
+        if 'idevices' in json_data:
+            for idevice_json in json_data['idevices']:
+                print(idevice_json)
+                try:
+                    idevice_class = idevice_store[idevice_json['child_type']]
+                except KeyError:
+                    raise KeyError("Idevice type %s does not exist." % idevice_json['child_type'])
+                else:
+                    idevice = idevice_class.objects.create(parent_node=n)
+                    idevice.from_dict(idevice_json)
+        if 'children' in json_data:
+            for n2 in json_data['children']:
+                self.import_node(n2, package, n)
+        return n
 
 
 class Node(models.Model):
@@ -103,7 +124,7 @@ with it'''
             node = this_nodes_ancestors[loop]
             if node is not None:
                 # note: if node is None,
-                #   appears to be an invalid ancestor in an Extracted package,
+                # appears to be an invalid ancestor in an Extracted package,
                 #   but continue on, since it was probably one of the top nodes
                 #   above the extraction that is None.
                 # but this node IS valid, so add it to the path:
@@ -178,7 +199,7 @@ with it'''
         """
         log.debug("getResources ")
         resources = set()
-        #        from IPython import embed; embed()
+        # from IPython import embed; embed()
         for idevice in self.idevices.all():
             resources.update(idevice.as_child().resources)
 
@@ -275,7 +296,7 @@ with it'''
         try:
             sibling = Node.objects.get(pk=int(sibling))
         except (TypeError, ValueError):
-            assert(sibling is None or isinstance(sibling, Node))
+            assert (sibling is None or isinstance(sibling, Node))
 
         if new_parent is None:
             assert sibling is not None, \
@@ -287,7 +308,7 @@ with it'''
             except (TypeError, ValueError):
                 isinstance(new_parent, Node)
             if sibling is not None:
-                assert(new_parent.children.filter(pk=sibling.pk).exists())
+                assert (new_parent.children.filter(pk=sibling.pk).exists())
 
         self.parent = new_parent
         self.save()

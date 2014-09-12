@@ -31,7 +31,8 @@ i.e. the "package".
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.conf import settings
-
+import json
+import tempfile
 import logging
 import time
 import zipfile
@@ -294,6 +295,52 @@ class PackageManager(models.Manager):
                     title="Home", is_root=True)
         root.save()
         return package
+
+    def _copy_resources_from_zip(self, list, dir, pack):
+        print(list)
+        wiki_dir = Path(os.path.join(settings.MEDIA_ROOT, settings.WIKI_CACHE_DIR))
+        nonwiki_dir = Path(pack.user.profile.media_path)
+        for f in list:
+            f = Path(f).name
+            f = Path(os.path.join(dir, f))
+            if f.name.startswith("wiki__"):
+                f2 = Path.joinpath(wiki_dir, Path(f.name))
+                if Path.exists(f2) is False:
+                    Path.copyfile(f, f2)
+
+            else:
+                f2 = Path.joinpath(nonwiki_dir, Path(f.name))
+                if Path.exists(f2) is False:
+                    Path.copyfile(f, f2)
+
+    def import_package(self, filename, user):
+        p = None
+        try:
+            zipped_file = zipfile.ZipFile(filename, "r")
+        except zipfile.BadZipFile:
+            log.error("File %s is not a zip file" % filename)
+            return False
+
+        temp_dir = tempfile.mkdtemp()
+        try:
+            for file_in_zip in zipped_file.namelist():
+                if file_in_zip.endswith(".json"):
+                    zipped_file.extractall(path=temp_dir)
+                    with open(Path.joinpath(Path(temp_dir), Path(file_in_zip))) as json_file:
+                        json_data = json.load(json_file)
+                        p = Package(title=json_data['title'], user=user)
+                        self._copy_resources_from_zip(json_data['files'], temp_dir, p)
+                        dublincore = DublinCore.objects.create()
+                        p.dublincore = dublincore
+                        p.save()
+                        Node.objects.import_node(json_data['nodes'][0], p, None)
+
+        finally:
+            Path.rmtree(temp_dir)
+        if p:
+            return True
+        else:
+            return False
 
 
 class Package(models.Model):

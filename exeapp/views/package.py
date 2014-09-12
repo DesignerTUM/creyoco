@@ -184,3 +184,4 @@ def preview_static(request, package, node, path):
                          node.package.style + \
                          "/"
         return HttpResponseRedirect(node_style_url + path)
+
