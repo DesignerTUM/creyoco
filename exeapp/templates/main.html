@@ -43,6 +43,17 @@
         </div>
 {% endblock %}
 
+{% block header %}
+<div class="user_info">
+    <div class="account">
+        <p>Logged in as: <em>{{ user }}</em>
+            <a href="/accounts/logout/" style="text-align:left">(Logout)</a>
+        </p>
+    </div>
+</div>
+    {{ block.super }}
+{% endblock %}
+
 {% block h2 %}{% trans "Overview" %}{% endblock %}
 
 {% block content %}
