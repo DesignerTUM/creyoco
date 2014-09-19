@@ -36,6 +36,7 @@ click on the underscore button in the toolbar."""))
     feedback = fields.FeedbackField(blank=True, default="",
                 help_text=_("""Enter any feedback you wish to provide the learner
                 with-in the feedback field. This field can be left blank."""))
+    drag_n_drop = models.BooleanField(default=False)
 
     class Meta:
         app_label = "exeapp"
