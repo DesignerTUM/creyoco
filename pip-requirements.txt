@@ -1,6 +1,6 @@
 BeautifulSoup4
 cymysql
-Django>=1.6
+Django==1.6
 argparse
 distribute
 django-extensions
