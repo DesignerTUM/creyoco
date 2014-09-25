@@ -21,3 +21,17 @@
     color: red !important;
     border-color: red !important;
 }
+
+.drag_n_drop_container{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 2px 8px 2px 8px;
+    border: 1px solid grey;
+    
+}
+.drag_n_drop_answer{
+    border: 1px solid #a9a9a9;
+    display: inline-block;
+    margin-right: 5px;
+    padding: 2px 8px 2px 8px;
+}
