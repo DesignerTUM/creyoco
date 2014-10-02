@@ -10,10 +10,9 @@ django-grappelli
 django-tinymce
 django-sendfile
 django-cymysql
--e git+https://github.com/alendit/django-json-rpc.git@python3#egg=django-json-rpc
+-e git+https://github.com/alendit/django-json-rpc.git#egg=django-json-rpc
 -e git+https://github.com/alendit/django-filebrowser.git#egg=django-filebrowser
 pillow
-south==0.8.4
 gunicorn
 feedparser
 django-require
