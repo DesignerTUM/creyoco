@@ -19,7 +19,8 @@ require.config({
         "cloze": "widgets/cloze",
         "multichoice": "blocks/multichoice",
         "autobahn": "thirdparty/autobahn.min",
-        "wamp_handler": "wamp_handler"
+        "wamp_handler": "wamp_handler",
+        "jquery-ui": "thirdparty/jquery-ui.min"
 
     },
 

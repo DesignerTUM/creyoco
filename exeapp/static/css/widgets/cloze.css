@@ -2,7 +2,7 @@
 
 .cloze_gap {
     display: inline-block;
-    min-width: 30px !important;
+    min-width: 50px !important;
 
     height: 1.3em;
 
@@ -10,6 +10,18 @@
     text-align: center;
     padding: 0px 4px 0px 4px;
     border: solid 1px;
+}
+
+.cloze_gap.ui-state-hover{
+    display: inline-block;
+    min-width: 50px !important;
+    background-color: gold;
+    height: 1.3em;
+    font-weight: bold !important;
+    text-align: center;
+    padding: 0px 4px 0px 4px;
+    border: solid 1px;
+
 }
 
 .cloze_right {
@@ -20,4 +32,19 @@
 .cloze_wrong {
     color: red !important;
     border-color: red !important;
+}
+
+.drag_n_drop_container{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 2px 8px 2px 8px;
+    border: 1px solid grey;
+    
+}
+.drag_n_drop_answer{
+    border: 1px solid #a9a9a9;
+    display: inline-block;
+    margin-right: 5px;
+    padding: 2px 8px 2px 8px;
+    cursor: move;
 }

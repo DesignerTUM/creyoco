@@ -9,6 +9,7 @@ from django import forms
 from django.conf import settings
 from exeapp.models.idevices.multiplechoice import MultiChoiceIdevice, \
     MultiChoiceOptionIdevice
+from exeapp.views.blocks.clozetextblock import ClozeTextBlock
 from exeapp.views.blocks.freetextblock import FreeTextBlock
 
 from exeapp.views.blocks.genericblock import GenericBlock
@@ -59,7 +60,7 @@ idevice_map = {
     RSSIdevice: RSSBlock,
     ExternalURLIdevice: ExternalURLBlock,
     AppletIdevice: AppletBlock,
-    ClozeIdevice: GenericBlock,
+    ClozeIdevice: ClozeTextBlock,
     CaseStudyIdevice: FormsetBlockFactory(
         CaseActivity,
         ("activity", "feedback"),
