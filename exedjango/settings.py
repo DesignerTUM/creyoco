@@ -127,7 +127,6 @@ INSTALLED_APPS = (
     'require',
     'grappelli',
     'filebrowser',
-    'south',
     'registration',
     'django.contrib.admin',
     'django.contrib.staticfiles',
