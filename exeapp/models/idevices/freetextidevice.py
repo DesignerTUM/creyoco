@@ -54,6 +54,26 @@ delivered.""")
     class Meta:
         app_label = "exeapp"
 
+    def to_dict(self):
+        d = self.__dict__
+        d = {k: v for k, v in d.items() if k != 'id'
+                                    and k != 'idevice_ptr_id'
+                                    and k != 'parent_node_id'
+                                    and k != 'date_created'
+                                    and not k.startswith('_')
+            }
+        d['child_type'] = self.get_klass()
+        return d
+
+    def from_dict(self, dic):
+        print(dic)
+        self.edit = dic['edit']
+        self.content = dic['content']
+        self.date_created = datetime.now()
+        self.save()
+        FreeTextVersion.objects.create(idevice=self, content=self.content, date_created=self.date_created)
+        return self
+
     def has_previous_version(self, date=None):
         if date is None:
             date = self.date_created
