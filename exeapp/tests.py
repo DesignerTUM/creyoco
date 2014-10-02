@@ -21,7 +21,7 @@ except ImportError:
         raise
 
 from django.test import TestCase, Client
-from django.utils import simplejson
+import json
 from django.utils.encoding import smart_text
 from django.utils.html import escape
 from django.conf import settings
@@ -459,8 +459,10 @@ view, this tests should be also merged'''
         self.root.add_idevice(self.IDEVICE_TYPE)
         response = self.c.get("{}authoring/?partial=true&media=true".format(
             self.VIEW_URL))
-        self.assertEquals(simplejson.loads(smart_text(response.content))['js'],
-                          [reverse('tinymce-filebrowser')])
+        self.assertIn(
+            reverse('tinymce-filebrowser'),
+            json.loads(smart_text(response.content))['js']
+        )
 
     def test_resource_finding(self):
         RESOURCE = 'test.jpg'
@@ -504,7 +506,7 @@ view, this tests should be also merged'''
             raise AssertionError("Couldn't find link array in {}".format(
                 response.content))
         try:
-            simplejson.loads(link_list)
+            json.loads(link_list)
         except:
             raise AssertionError("Couldn't parse %s" % link_list)
 
