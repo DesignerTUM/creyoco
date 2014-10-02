@@ -17,12 +17,15 @@ from exeapp.views.export.exporter_factory import exporter_map
 def main(request):
     '''Serve the main page with a list of packages.
     TODO: Use a generic view'''
+    user = request.user
     package_list = Package.objects.filter(
             Q(user=request.user) |
             Q(collaborators__pk__contains=request.user.pk)
     )
     exporter_type_title_map = dict(((export_type, exporter.title)
         for export_type, exporter in list(exporter_map.items())))
+
+    form = upload_file_form.UploadFileForm()
 
     return render_to_response(
         'main.html',
