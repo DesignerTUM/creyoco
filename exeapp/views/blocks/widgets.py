@@ -1,6 +1,7 @@
 import sys
 import re
 
+from aloha.widgets import AlohaWidget
 from tinymce.widgets import TinyMCE
 from django.conf import settings
 from django.utils.safestring import mark_safe
@@ -16,19 +17,7 @@ else:
     from urllib import unquote
 
 
-class FreeTextWidget(TinyMCE):
-    def __init__(self, content_language=None, attrs=None, mce_attrs=None,
-                 height=None):
-        if height is not None:
-            style_height = "height: %dpx;" % height
-            attrs = attrs or {}
-            if "style" in attrs:
-                attrs['style'] += style_height
-            else:
-                attrs['style'] = style_height
-        super(FreeTextWidget, self).__init__(content_language,
-                                             attrs,
-                                             mce_attrs)
+class FreeTextWidget(AlohaWidget):
 
     def render_preview(self, content):
         return mark_safe(content)
