@@ -1,0 +1,12 @@
+{% extends 'exe/idevices/preview_base.html' %}
+{% block idevice %}
+    {% if idevice.password %}
+        <form id="pwd_form">
+        Password: <input type="password" id="pwd_for_protected_freetext"><br>
+        <input type="submit" value="Submit" onclick= "pwdCheck();">
+        </form>
+    {% else %}
+        {{ form.render_preview }}
+    {% endif %}
+
+{% endblock %}

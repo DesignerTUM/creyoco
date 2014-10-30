@@ -9,6 +9,7 @@ from django import forms
 from django.conf import settings
 from exeapp.models.idevices.multiplechoice import MultiChoiceIdevice, \
     MultiChoiceOptionIdevice
+from exeapp.models.idevices.protectedfreetextidevice import ProtectedFreeTextIdevice
 from exeapp.views.blocks.clozetextblock import ClozeTextBlock
 from exeapp.views.blocks.freetextblock import FreeTextBlock
 
@@ -24,6 +25,7 @@ from exeapp.models.idevices.readingactidevice import ReadingActivityIdevice
 from exeapp.models.idevices.reflectionidevice import ReflectionIdevice
 from exeapp.models.idevices.tocidevice import TOCIdevice
 from exeapp.models.idevices.wikiidevice import WikipediaIdevice
+from exeapp.views.blocks.protectedfreetextblock import ProtectedFreeTextBlock
 from exeapp.views.blocks.wikiblock import WikipediaBlock
 from exeapp.models.idevices.objectivesidevice import ObjectivesIdevice
 from exeapp.models import PreknowledgeIdevice
@@ -46,6 +48,7 @@ from exeapp.views.blocks.tocblock import TOCBlock
 
 idevice_map = {
     FreeTextIdevice: FreeTextBlock,
+    ProtectedFreeTextIdevice: ProtectedFreeTextBlock,
     ActivityIdevice: GenericBlock,
     GlossaryIdevice: GlossaryBlock,
     ReadingActivityIdevice: GenericBlock,
