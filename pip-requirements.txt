@@ -7,7 +7,7 @@ django-extensions
 ipython>=0.13
 git+https://github.com/macropin/django-registration.git#egg=django-registration
 django-grappelli
-django-tinymce
+django-tinymce==1.5.2
 django-sendfile
 django-cymysql
 -e git+https://github.com/alendit/django-json-rpc.git#egg=django-json-rpc
