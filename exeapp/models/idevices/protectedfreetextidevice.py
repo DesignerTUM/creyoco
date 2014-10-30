@@ -12,8 +12,7 @@ class ProtectedFreeTextIdevice(GenericIdevice):
     name = _("Protected Free Text")
     title = _("Protected Free Text")
 
-    password = models.CharField(max_length=20, blank=True, default="",
-                        help_text=_("Input password to encrypt content"))
+
 
     purpose = _("""The majority of a learning resource will be
 establishing context, delivering instructions and providing general information.
@@ -21,6 +20,8 @@ This provides the framework within which the learning activities are built and
 delivered.""")
     emphasis = Idevice.NOEMPHASIS
     content = fields.RichTextField(blank=True, default="")
+    password = models.CharField(max_length=20, blank=True, default="",
+                        help_text=_("Input password to encrypt content"))
     date_created = models.DateTimeField(blank=True, null=True, editable=False)
 
     class Meta:

@@ -1,10 +1,9 @@
 {% extends 'exe/idevices/preview_base.html' %}
 {% block idevice %}
     {% if idevice.password %}
-        <form id="pwd_form">
-        Password: <input type="password" id="pwd_for_protected_freetext"><br>
-        <input type="submit" value="Submit" onclick= "pwdCheck();">
-        </form>
+        <input type="text" id="pwd_for_protected_freetext" placeholder="Password"><br>
+        <div id="protected_content" style="display: none;"> {{ block_ref.xor }} </div>
+        <input id = "pwd_freetext_btn" type="button" value="Submit" onclick="pwdCheck()">
     {% else %}
         {{ form.render_preview }}
     {% endif %}

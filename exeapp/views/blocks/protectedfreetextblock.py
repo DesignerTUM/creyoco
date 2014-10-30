@@ -1,3 +1,4 @@
+import urllib
 from django.forms import forms
 from django.conf import settings
 from django.template import TemplateDoesNotExist
@@ -11,24 +12,21 @@ from exeapp.views.blocks.genericblock import GenericBlock, TemplateNotDefined
 class ProtectedFreeTextBlock(FreeTextBlock):
     # use_common_content = True
 
-    edit_template = "exe/idevices/freetext/edit.html"
-    preview_template = "exe/idevices/generic/preview.html"
+    edit_template = "exe/idevices/protectedfreetext/edit.html"
+    preview_template = "exe/idevices/protectedfreetext/preview.html"
+    view_template = "exe/idevices/protectedfreetext/export.html"
 
     def _render_view(self, template, form=None):
         """
         Code reuse function for rendering the correct template
         """
-        temp_idevice = self.idevice
-        temp_idevice.content = self.xor(temp_idevice.content, self.idevice.password)
         form = form or self.BlockForm(instance=self.idevice,
                                       auto_id="%s_field_" % self.idevice.id +
                                               "%s")
         try:
-            html = render_to_string(template, {"idevice": temp_idevice,
-                                               "form": form,
-                                               "content_template": self
-                                               .content_template,
-                                               "self": self,
+            html = render_to_string(template, {"form": form,
+                                               "block_ref": self,
+                                               "idevice": self.idevice
                                                 }
                                     )
         except TemplateDoesNotExist as e:
@@ -40,8 +38,12 @@ class ProtectedFreeTextBlock(FreeTextBlock):
         else:
             return html
 
-    def xor(self, data, key):
-        return ''.join(chr(ord(k)^ord(c)) for c,k in zip(data,itertools.cycle(key)))
+    def xor(self, data=None, key=None):
+        if data is None:
+            data = self.idevice.content
+        if key is None:
+            key = self.idevice.password
+        return urllib.parse.quote(''.join(chr(ord(k) ^ ord(c)) for c,k in zip(data, itertools.cycle(key))))
 
     @property
     def media(self):
