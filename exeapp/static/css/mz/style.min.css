@@ -1772,9 +1772,8 @@ textarea {
 
 /* line 317, /home/zakaria/creyoco/exeapp/static/sass/forms.scss */
 .protected_password_error {
-  position: absolute;
-  padding-left: 13px;
-  padding-right: 13px;
+  padding: 5px;
+  margin-left: 5px;
   height: 24px;
   color: white;
   font-size: 12px;

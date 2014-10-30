@@ -3,6 +3,7 @@ var protectedfreetext = {
         "use strict";
         $(document).ready(function () {
 
+
         });
     }
 };
@@ -71,9 +72,8 @@ function xor_js(source, password) {
 
 function pwdCheck(elem)
 {
-    var password = $("#pwd_for_protected_freetext").val();
-    var content = $("#protected_content").text();
-    var id = elem.id;
+    var password = $(elem).siblings(".pwd_for_protected_freetext").val();
+    var content = $(elem).siblings(".protected_content").text();
     //$("#protected_content").remove();
 
     var plaintext = xor_js(decodeURI(content.trim()), password)
@@ -82,16 +82,17 @@ function pwdCheck(elem)
     {
         var index_of_proof = plaintext.lastIndexOf("proof");
         plaintext = plaintext.substring(0, index_of_proof);
-        $("#pwd_for_protected_freetext").remove();
-        $("#pwd_freetext_btn").remove();
-        $("#protected_content").text('');
-        $("#protected_content").append(plaintext);
-        $("#protected_content").removeAttr( "style" );
+        $(elem).siblings(".pwd_for_protected_freetext").remove();
+        $(elem).siblings(".protected_freetext_hint").remove();
+        $(elem).siblings(".protected_content").text('');
+        $(elem).siblings(".protected_content").append(plaintext);
+        $(elem).siblings(".protected_content").removeAttr( "style" );
+        $(elem).remove();
     }
     else
     {
         $(elem).siblings(".protected_password_error").css("display", "inline");;
-        $(elem).siblings(".protected_password_error").fadeIn().delay(5000).fadeOut();
+        $(elem).siblings(".protected_password_error").fadeIn().delay(1500).fadeOut();
     }
     //console.log(decodeURI(content));
     //console.log(password);
