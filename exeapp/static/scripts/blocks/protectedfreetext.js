@@ -69,18 +69,32 @@ function xor_js(source, password) {
 
 }
 
-function pwdCheck()
+function pwdCheck(elem)
 {
     var password = $("#pwd_for_protected_freetext").val();
     var content = $("#protected_content").text();
+    var id = elem.id;
     //$("#protected_content").remove();
-    $("#pwd_for_protected_freetext").remove();
-    $("#pwd_freetext_btn").remove();
-    $("#protected_content").text('');
-    $("#protected_content").append(xor_js(decodeURI(content.trim()), password));
-    $("#protected_content").removeAttr( "style" );
+
+    var plaintext = xor_js(decodeURI(content.trim()), password)
+    plaintext = plaintext.trim();
+    if(plaintext.match(/proof$/))
+    {
+        var index_of_proof = plaintext.lastIndexOf("proof");
+        plaintext = plaintext.substring(0, index_of_proof);
+        $("#pwd_for_protected_freetext").remove();
+        $("#pwd_freetext_btn").remove();
+        $("#protected_content").text('');
+        $("#protected_content").append(plaintext);
+        $("#protected_content").removeAttr( "style" );
+    }
+    else
+    {
+        $(elem).siblings(".protected_password_error").css("display", "inline");;
+        $(elem).siblings(".protected_password_error").fadeIn().delay(5000).fadeOut();
+    }
     //console.log(decodeURI(content));
-    console.log(password);
+    //console.log(password);
     //console.log(xor_js(decodeURI(content), password));
 }
 
