@@ -48,4 +48,6 @@ class ProtectedFreeTextBlock(FreeTextBlock):
 
     @property
     def media(self):
-        return forms.Media(js=['{}scripts/blocks/protectedfreetext.js'.format(settings.STATIC_URL)])
+        return forms.Media(js=['{}scripts/blocks/protectedfreetext.js'.format(settings.STATIC_URL)],
+                           css={'all': ['{}css/blocks/protectedfreetext.css' \
+                             .format(settings.STATIC_URL)]})

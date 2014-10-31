@@ -2,13 +2,24 @@ var protectedfreetext = {
     init: function () {
         "use strict";
         $(document).ready(function () {
-
-
         });
     }
 };
 
 //''.join(chr(ord(k) ^ ord(c)) for c,k in zip(data, itertools.cycle(key)))
+
+function disableEnterKey(e)
+{
+    var key;
+    if(window.event)
+        key = window.event.keyCode;     //IE
+    else
+        key = e.which;     //firefox
+    if(key == 13)
+        return false;
+    else
+        return true;
+}
 
 function xor_js(source, password) {
   var ret_ar = [],
