@@ -8,15 +8,19 @@ var protectedfreetext = {
 
 //''.join(chr(ord(k) ^ ord(c)) for c,k in zip(data, itertools.cycle(key)))
 
-function disableEnterKey(e)
+function disableEnterKey(elem, evnt)
 {
     var key;
+    var btn = $(elem).siblings(".pwd_freetext_btn");
     if(window.event)
         key = window.event.keyCode;     //IE
     else
-        key = e.which;     //firefox
+        key = evnt.which;     //firefox
     if(key == 13)
+    {
+        pwdCheck(btn);
         return false;
+    }
     else
         return true;
 }
