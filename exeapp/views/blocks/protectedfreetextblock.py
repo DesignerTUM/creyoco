@@ -44,7 +44,8 @@ class ProtectedFreeTextBlock(FreeTextBlock):
         if key is None:
             key = self.idevice.password
         data = data + "proof"   #proof is for checking if pw is right after decrypting
-        return urllib.parse.quote(''.join(chr(ord(k) ^ ord(c)) for c,k in zip(data, itertools.cycle(key))))
+        return urllib.parse.quote(''.join(chr(ord(k) ^ ord(c)) for c,k in zip(data, itertools.cycle(key))), safe='~@#$&()*!+=:;,.?/\'')
+        #return ''.join(chr(ord(k) ^ ord(c)) for c,k in zip(data, itertools.cycle(key)))
 
     @property
     def media(self):

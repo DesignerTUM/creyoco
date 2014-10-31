@@ -8,76 +8,76 @@ var protectedfreetext = {
 
 //''.join(chr(ord(k) ^ ord(c)) for c,k in zip(data, itertools.cycle(key)))
 
-function disableEnterKey(e)
+function disableEnterKey(elem, evnt)
 {
     var key;
+    var btn = $(elem).siblings(".pwd_freetext_btn");
     if(window.event)
         key = window.event.keyCode;     //IE
     else
-        key = e.which;     //firefox
+        key = evnt.which;     //firefox
     if(key == 13)
+    {
+        pwdCheck(btn);
         return false;
+    }
     else
         return true;
 }
 
 function xor_js(source, password) {
-  var ret_ar = [],
-    i, len,
-    pwlen,
-    pwindex = 0,
-    s, p;
-  if(typeof source === 'string') {
-    source = source.split('');
-  }
-  if(Object.prototype.toString.call(source) === '[object Array]') {
-    for(i = 0, len = source.length; i < len; ++i) {
-      s = source[i];
-      if(typeof s === 'string') {
-        source[i] = s.charCodeAt(0);
-      } else if(typeof s !== 'number') {
-        console.log(s);
-        throw("Only str or [number, 'c', 'h',...] in xor \n Bad first param in function xor:" + s);
-      }
+    var ret_ar = [],
+        i, len,
+        pwlen,
+        pwindex = 0,
+        s, p;
+    if (typeof source === 'string') {
+        source = source.split('');
     }
-  } else {
-    throw('Very Bad first param in function xor:' + source);
-  }
-  if(typeof password === 'string') {
-    password = password.split('');
-  }
-  if(Object.prototype.toString.call(password) === '[object Array]') {
-    for(i = 0, len = password.length; i < len; ++i) {
-      p = password[i];
-      if(typeof p === 'string') {
-        password[i] = p.charCodeAt(0);
-      } else if(typeof p !== 'number') {
-        console.log(p);
-        throw("Only str or [number, 'c', 'h',...] in xor \n Bad second param in function xor:" + p);
-      }
+    if (Object.prototype.toString.call(source) === '[object Array]') {
+        for (i = 0, len = source.length; i < len; ++i) {
+            s = source[i];
+            if (typeof s === 'string') {
+                source[i] = s.charCodeAt(0);
+            } else if (typeof s !== 'number') {
+                console.log(s);
+                throw ("Only str or [number, 'c', 'h',...] in xor \n Bad first param in function xor:" + s);
+            }
+        }
+    } else {
+        throw ('Very Bad first param in function xor:' + source);
     }
-  } else {
-    throw('Very Bad second param in function xor:' + p);
-  }
-  pwindex = 0;
-  pwlen = password.length - 1;
-  len = source.length;
-  if(pwlen >= 0) {
-    for(i = 0; i < len; ++i) {
-      ret_ar[i] = source[i] ^ password[pwindex]; // unefined ^7 === 7
-      if(pwindex >= pwlen) pwindex = 0;
-      else ++pwindex;
+    if (typeof password === 'string') {
+        password = password.split('');
     }
-  } else
-  {
-    for(i = 0; i < len; ++i) {
-      ret_ar[i] = ~source[i]; // ~unefined === -1
+    if (Object.prototype.toString.call(password) === '[object Array]') {
+        for (i = 0, len = password.length; i < len; ++i) {
+            p = password[i];
+            if (typeof p === 'string') {
+                password[i] = p.charCodeAt(0);
+            } else if (typeof p !== 'number') {
+                console.log(p);
+                throw ("Only str or [number, 'c', 'h',...] in xor \n Bad second param in function xor:" + p);
+            }
+        }
+    } else {
+        throw ('Very Bad second param in function xor:' + p);
     }
-  }
-  source = password = i = pwlen = pwindex = null;
-  return ret_ar.map(function (code) {
-    return String.fromCharCode(code)
-  }).join('');
+    pwlen = password.length;
+    len = source.length;
+    if (pwlen > 0) {
+        for (i = 0; i < len; ++i) {
+            ret_ar[i] = source[i] ^ password[i % pwlen]; // unefined ^7 === 7
+        }
+    } else {
+        for (i = 0; i < len; ++i) {
+            ret_ar[i] = ~source[i]; // ~unefined === -1
+        }
+    }
+    source = password = i = pwlen = pwindex = null;
+    return ret_ar.map(function(code) {
+        return String.fromCharCode(code)
+    }).join('');
 
 }
 
