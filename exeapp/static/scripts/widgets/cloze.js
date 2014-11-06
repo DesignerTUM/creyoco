@@ -47,8 +47,8 @@ var cloze = {
             return array;
         }
 
-        function show_suggestion(answers) {
-            if($("#wrapper").attr("class") != "checked") {
+        function show_suggestion(elem, answers) {
+            if($(elem).hasClass("checked") == false) {
                 shuffle(answers);
                 var div = document.createElement("div");
                 $(div).addClass("drag_n_drop_container");
@@ -59,26 +59,24 @@ var cloze = {
                     ansDiv.innerHTML += answers[i].value;
                     div.appendChild(ansDiv);
                 }
-                var drag_n_drop = $("#wrapper").find("#drag_n_drop");
+                var drag_n_drop = $("#wrapper").find(".drag_n_drop");
                 //drag_n_drop.last().prev().prev().before(div);
-                $(".cloze_submit").before(div);
-                $("#wrapper").addClass("checked");
+                $(elem).find(".cloze_submit").before(div);
+                $(elem).addClass("checked");
                 $(".drag_n_drop_answer").draggable({ revert: true });
             }
         }
 
         $(document).ready(function () {
-            var wrapper = this.getElementById("wrapper");
-            if(wrapper) {
-                var answers = $("#wrapper").find(".cloze_answer");
-                var drag_n_drop = $("#wrapper").find("#drag_n_drop");
+            $(".close").each(function(){
+                var answers = $(this).find(".cloze_answer");
+                var drag_n_drop = $(this).nextAll(".drag_n_drop");
                 if (answers.length > 0) {
                     if (drag_n_drop.val() == "True") {
-                        //$(".cloze_submit").hide();
-                        show_suggestion(answers);
+                        show_suggestion(this, answers);
                     }
                 }
-            }
+            });
 
             $(".cloze_gap").droppable({
                 accept: ".drag_n_drop_answer",
