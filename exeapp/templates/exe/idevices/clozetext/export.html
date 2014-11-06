@@ -1,0 +1,5 @@
+{% extends 'exe/idevices/export_base.html' %}
+{% block idevice %}
+{{form.render_export}}
+<input type="hidden" id="drag_n_drop" value="{{ idevice.drag_n_drop }}">
+{% endblock %}
