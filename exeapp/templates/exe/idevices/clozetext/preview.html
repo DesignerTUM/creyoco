@@ -1,5 +1,5 @@
 {% extends 'exe/idevices/preview_base.html' %}
 {% block idevice %}
 {{ form.render_preview }}
-<input type="hidden" id="drag_n_drop" value="{{ idevice.drag_n_drop }}">
+<input type="hidden" class="drag_n_drop" value="{{ idevice.drag_n_drop }}">
 {% endblock %}
