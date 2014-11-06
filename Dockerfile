@@ -11,7 +11,7 @@ MAINTAINER medienzentrum
 
 # RUN		echo 'deb http://archive.ubuntu.com/ubuntu trusty main universe' > /etc/apt/sources.list
 RUN 	apt-get update
-RUN 	apt-get install -y python3-pip build-essential git openjdk-7-jre-headless libjpeg-dev
+RUN 	apt-get install -y python3-pip build-essential git openjdk-7-jre-headless libtiff4-dev libjpeg8-dev zlib1g-dev libfreetype6-dev liblcms2-dev libwebp-dev tcl8.5-dev tk8.5-dev
 RUN 	pip3 install virtualenv
 RUN		virtualenv  creyocoenv
 RUN 	cd creyocoenv
