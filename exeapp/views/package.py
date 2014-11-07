@@ -37,7 +37,7 @@ class PackagePropertiesForm(forms.ModelForm):
 
     class Meta:
         model = Package
-        fields = ('title', 'author', 'email', 'description')
+        fields = ('title', 'author', 'email', 'description', 'logoImg')
 
 
 class DublinCoreForm(forms.ModelForm):
