@@ -22,7 +22,7 @@ class PDFBlock(GenericBlock):
         """
         Returns an XHTML string for previewing this block
         """
-        if self.idevice.page_list and self.idevice.modified_pdf_file is None:
+        if self.idevice.page_list:
             print("\n\n######################\n")
             print("render preview ")
             filename = Path.joinpath(Path(settings.MEDIA_ROOT),Path.relpath(self.idevice.pdf_file.path))
@@ -35,8 +35,7 @@ class PDFBlock(GenericBlock):
                 output.addPage(input.getPage(page-1))
             with open(modified_filename,'wb') as output_pdf:
                 output.write(output_pdf)
-            self.idevice.modified_pdf_file = Path.joinpath(Path(self.idevice.parent_node.package.user.get_profile().media_url), Path.basename(modified_filename))
-
+            self.idevice.modified_pdf_file = Path(settings.MEDIA_URL).joinpath(Path(settings.MEDIA_ROOT).relpathto(Path(modified_filename)))
 
             print("\n\n######################\n")
 
