@@ -426,7 +426,7 @@ i.e. the "package".
             }
         return d
 
-    def getLogo(self):
+    def get_logo(self):
         return os.path.basename(self.logoImg.url)
 
 
