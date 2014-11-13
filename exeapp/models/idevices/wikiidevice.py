@@ -130,6 +130,9 @@ within Wikipedia."""))
             if link['href'].startswith("/wiki"):
                 link['href'] = "http://wikipedia.org" + link['href']
                 link['target'] = "_blank"
+            elif link['href'].startswith("//"):
+                link['href'] = "http:" + link['href']
+                link['target'] = "_blank"
         page = soup.prettify()
         return page
 
