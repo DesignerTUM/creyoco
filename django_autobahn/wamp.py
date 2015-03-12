@@ -12,6 +12,7 @@ class SimpleSession(wamp.ApplicationSession):
         except:
             print("autobahn onconnect error")
 
+    @asyncio.coroutine
     def onJoin(self, details):
         counter = 0
         while True:
