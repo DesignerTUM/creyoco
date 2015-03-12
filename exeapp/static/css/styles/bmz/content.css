@@ -134,75 +134,78 @@ header {
     .content article p {
       margin-bottom: 20px; }
     /* line 159, sass/content.scss */
+    .content article table tr p {
+      margin: 3px 5px 3px 5px; }
+    /* line 162, sass/content.scss */
     .content article ul {
       list-style-position: inside;
       margin-bottom: 20px; }
-      /* line 161, sass/content.scss */
+      /* line 164, sass/content.scss */
       .content article ul li {
         list-style: square;
         margin-left: 20px; }
-    /* line 168, sass/content.scss */
+    /* line 171, sass/content.scss */
     .content article ol {
       list-style-position: inside;
       margin-bottom: 20px; }
-      /* line 170, sass/content.scss */
+      /* line 173, sass/content.scss */
       .content article ol li {
         list-style: decimal;
         margin-left: 20px; }
-    /* line 176, sass/content.scss */
+    /* line 179, sass/content.scss */
     .content article strong {
       color: #7cb22d;
       font-weight: bold; }
-    /* line 180, sass/content.scss */
+    /* line 183, sass/content.scss */
     .content article .lup {
       float: right;
       margin-left: 20px; }
-    /* line 185, sass/content.scss */
+    /* line 188, sass/content.scss */
     .content article #idevice ul {
       padding-left: 0px !important;
       margin-bottom: 0px; }
-      /* line 188, sass/content.scss */
+      /* line 191, sass/content.scss */
       .content article #idevice ul li {
         margin-left: 0px;
         font-family: "FontAwesome";
         padding-left: 0px; }
-      /* line 194, sass/content.scss */
+      /* line 197, sass/content.scss */
       .content article #idevice ul a {
         display: inline-block;
         width: 100%;
         color: #737373;
         text-decoration: none; }
-        /* line 199, sass/content.scss */
+        /* line 202, sass/content.scss */
         .content article #idevice ul a:hover {
           color: #7cb22d; }
-    /* line 205, sass/content.scss */
+    /* line 208, sass/content.scss */
     .content article #idevice .toc {
       display: block;
       page-break-after: 0px;
       padding-left: 30px !important; }
-      /* line 209, sass/content.scss */
+      /* line 212, sass/content.scss */
       .content article #idevice .toc li {
         margin-left: 0px !important;
         font-family: "FontAwesome";
         list-style: none;
         font-weight: bold; }
-        /* line 214, sass/content.scss */
+        /* line 217, sass/content.scss */
         .content article #idevice .toc li ul li {
           list-style: disc;
           margin-left: 15px !important; }
-          /* line 217, sass/content.scss */
+          /* line 220, sass/content.scss */
           .content article #idevice .toc li ul li ul li {
             font-weight: normal !important;
             margin-left: -10px !important; }
 
-/* line 232, sass/content.scss */
+/* line 235, sass/content.scss */
 footer .container {
   margin-top: 30px;
   border-top: 1px solid #7cb22d; }
-  /* line 236, sass/content.scss */
+  /* line 239, sass/content.scss */
   footer .container .copyright {
     font-size: 11px;
     color: #737373; }
-    /* line 240, sass/content.scss */
+    /* line 243, sass/content.scss */
     footer .container .copyright strong {
       font-style: italic; }

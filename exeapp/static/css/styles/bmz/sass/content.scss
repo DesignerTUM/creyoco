@@ -156,6 +156,9 @@ header {
     p {
       margin-bottom: 20px;
     }
+    table tr p {
+      margin: 3px 5px 3px 5px;
+    }
     ul {
       list-style-position: inside;
       li {
@@ -180,9 +183,6 @@ header {
     .lup {
       float: right;
       margin-left: 20px;
-    }
-    table tr p {
-      margin: 3px 5px 3px 5px;
     }
     #idevice {
       ul {
