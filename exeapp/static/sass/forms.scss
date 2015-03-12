@@ -10,7 +10,9 @@ $border: lighten($darkgrey, 10%);
     color: $color;
   }
 }
-
+#preview_id_logoImg{
+  display: none;
+}
 #properties {
   label .errorlist {
     color: $red !important;
@@ -42,6 +44,10 @@ $border: lighten($darkgrey, 10%);
   textarea {
     box-sizing: border-box;
     width: 100%;
+    &[name='logoImg'] {
+      width: 95%;
+      display: inline;
+    }
   }
 
   #dublincore_form {
@@ -70,7 +76,7 @@ $border: lighten($darkgrey, 10%);
     }
 
     textarea {
-      height: 81px;
+      height: 150px;
     }
   }
 
@@ -324,3 +330,5 @@ textarea {
   white-space: nowrap;
   background: rgba(167, 30, 32, 0.8);
 }
+
+

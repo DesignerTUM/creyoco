@@ -16,7 +16,10 @@
 	{% if properties_form.email.errors %}
 		{{properties_form.email.errors}}
 	{% endif %}
-	
+
+    {% if properties_form.logoImg.errors %}
+        {{properties_form.logoImg.errors}}
+    {% endif %}
 	{% for hidden in properties_form.hidden_fields %}
 	{{ hidden }}
 	{% endfor %}
@@ -25,7 +28,7 @@
 		<label for="title">Kursname</label>
 
 		<input placeholder="Kursname" name="title" type="text" value="{{ properties_form.title.value }}">
-		
+
 		<div class="pull-left">
 			<label for="author">Autor</label>
 			<input placeholder="Der Autor des Kurses." name="author" type="text" value="{{ properties_form.author.value }}">
@@ -35,12 +38,16 @@
 			<label for="email">Email</label>
 			<input placeholder="eMail-Adresse." name="email" type="text" value="{{ properties_form.email.value }}">
 		</div>
-
-		<input class="pull-left submit" type="reset" value="Abbrechen">
-		<input class="pull-right submit" type="submit" value="Übernehmen">
+        <label for="logoImg">Logo</label><br>
+        {{ properties_form.logoImg }}
+        <input class="pull-left submit" type="reset" value="Abbrechen">
+        <input class="pull-right submit" type="submit" value="Übernehmen">
 	</div>
 	<div class="pull-right">
-			<label for="description">Beschreibung</label>
-			<textarea placeholder="Ihre Beschreibung des Kurses." name="description">{{ properties_form.description.value }}</textarea>
-	</div>
+        <label for="description">Beschreibung</label>
+        <textarea placeholder="Ihre Beschreibung des Kurses." name="description">{{ properties_form.description.value }}</textarea>
+
+    </div>
+
+
 </form>

@@ -21,6 +21,7 @@ import os
 import datetime
 
 from django.db import models
+from filebrowser.fields import FileBrowseField
 
 
 """
@@ -226,7 +227,7 @@ def loadNode(pass_num, resourceDir, zippedFile, node, doc, item, level):
                                 # Although they WILL be saved out with the
                                 # project
                                 # upon the next Save.
-                                ##########
+                                # #########
             break
 
     # process this node's children
@@ -366,6 +367,9 @@ i.e. the "package".
     style = models.CharField(max_length=20, default="default")
     resourceDir = models.FileField(upload_to="resources",
                                    blank=True, null=True)
+    logoImg = FileBrowseField("Image", max_length=100,
+                              extensions=['.jpg', '.jpeg', '.gif', '.png', '.bmp'],
+                              blank=True, null=True)
     dublincore = models.OneToOneField(DublinCore)
 
     level1 = models.CharField(max_length=20, default=DEFAULT_LEVEL_NAMES[0])
@@ -415,6 +419,16 @@ i.e. the "package".
         else:
             self._footerImg = ''
 
+    def to_dict(self):
+        d = self.__dict__
+        d = {k: v for k, v in d.items() if k != 'logoImg'
+                                            and not k.startswith('_')
+            }
+        return d
+
+    def get_logo(self):
+        return os.path.basename(self.logoImg.url)
+
 
     # Properties
     @property
@@ -452,6 +466,8 @@ i.e. the "package".
         resources = set()
         for node in self.nodes.all():
             resources.update(node.resources)
+        if self.logoImg:
+            resources.add(os.path.basename(self.logoImg.path))
         return resources
 
 
@@ -547,9 +563,9 @@ i.e. the "package".
 
         try:
             newPackage = decodeObjectRaw(toDecode)
-            #            G.application.afterUpgradeHandlers = []
+            # G.application.afterUpgradeHandlers = []
             newPackage.resourceDir = resourceDir
-            #            G.application.afterUpgradeZombies2Delete = []
+            # G.application.afterUpgradeZombies2Delete = []
 
             if newLoad:
                 # provide newPackage to doUpgrade's versionUpgrade() to
@@ -565,11 +581,11 @@ i.e. the "package".
                     # even though it was just set above? should not get here:
                     log.error("newPackage resourceDir has NO resourceDir!")
 
-                #                doUpgrade(newPackage)
+                    # doUpgrade(newPackage)
 
-                # after doUpgrade, compare the largest found field ID:
-                #                if G.application.maxFieldId >= Field.nextId:
-                #                    Field.nextId = G.application.maxFieldId + 1
+                    # after doUpgrade, compare the largest found field ID:
+                    #                if G.application.maxFieldId >= Field.nextId:
+                    #                    Field.nextId = G.application.maxFieldId + 1
 
             else:
                 # and when merging, automatically set package references to
@@ -597,8 +613,8 @@ i.e. the "package".
                           isMerge=True, preMergePackage=newPackage)
 
                 # after doUpgrade, compare the largest found field ID:
-            #                if G.application.maxFieldId >= Field.nextId:
-            #                    Field.nextId = G.application.maxFieldId + 1
+                # if G.application.maxFieldId >= Field.nextId:
+                #                    Field.nextId = G.application.maxFieldId + 1
 
         except:
             import traceback
@@ -683,7 +699,9 @@ i.e. the "package".
         new_package.dublincore_id = new_package.dublincore.pk
         new_package.save()
         for node in nodes:
-            node.duplicate(package=new_package)
+            if node.is_root:
+                node.duplicate(package=new_package)
+            # break
         return {'id': new_package.pk, 'title': new_package.title}
 
 

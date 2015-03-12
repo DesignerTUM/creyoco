@@ -265,7 +265,7 @@ with it'''
             new_idevice.save()
         children_return = []
         for child in children:
-            children_return.append(child.duplicate(parent=node))
+            children_return.append(child.duplicate(parent=node, package=package))
         return {'node': node, "children": children_return}
 
     def add_idevice(self, idevice_type):

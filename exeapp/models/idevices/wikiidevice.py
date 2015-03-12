@@ -30,6 +30,7 @@ except ImportError:
         import urllib
 '''
 
+
 class WikipediaIdevice(GenericIdevice):
     name = _("Wiki Article")
     title = models.CharField(max_length=100, default=name)
@@ -48,7 +49,7 @@ is covered by the GNU free documentation license.</p>""")
                                    wish to search
 within Wikipedia."""))
     language_choices = (('de', 'DE'), ('en', 'EN'))
-    #language = models.CharField(max_length=2, choices=language_choices, default='en')
+    # language = models.CharField(max_length=2, choices=language_choices, default='en')
     language = models.CharField(max_length=2, default="en", choices=language_choices)
     content = fields.RichTextField(blank=True, default="")
     site = "wikipedia.org/wiki/"
@@ -70,7 +71,6 @@ within Wikipedia."""))
             if not img['src'].startswith("data:image"):
                 resource_list.add(urllib.parse.unquote(img['src'].replace(res_path, "")))
 
-
         '''for img in imgs:
                 if not img['src'].startswith("data:image"):
                     resource_list.add(
@@ -86,7 +86,7 @@ within Wikipedia."""))
         self.article_name = title
         page = wikipedia.page(title)
         page = self.store_images(page)
-        self.content = self.process_html (page)
+        self.content = self.process_html(page)
 
 
     def process_html(self, html):
@@ -102,9 +102,10 @@ within Wikipedia."""))
         return soup
 
 
-    def store_images(self,page):
+    def store_images(self, page):
         #for storing files
-        local_path = Path.joinpath(settings.MEDIA_ROOT, settings.WIKI_CACHE_DIR)    # creyoco/exedjango/exeapp_media/wiki_cache_images
+        local_path = Path.joinpath(settings.MEDIA_ROOT,
+                                   settings.WIKI_CACHE_DIR)  # creyoco/exedjango/exeapp_media/wiki_cache_images
 
         #for url
         global_path = Path.joinpath(settings.MEDIA_URL, settings.WIKI_CACHE_DIR)
@@ -112,20 +113,26 @@ within Wikipedia."""))
         if not os.path.isdir(local_path):
             os.makedirs(local_path)
 
-
         soup = BeautifulSoup(page.html())
         #save file and update link in content
         for img in soup.findAll('img'):
-            image = "http:"+ img['src']
+            image = "http:" + img['src']
             filename = img['src'].split('/')[-1]
             filename = slugify(Path._get_namebase(filename)) + Path._get_ext(filename)  #sanitizing filename
             file_path = Path.joinpath(local_path, Path(filename))
             urllib.request.urlretrieve(image, file_path)
             img['src'] = Path.joinpath(global_path, Path.basename(filename))
         #update image hyperlink to wiki for bigger version image
-        for image_link in soup.findAll("a", { "class" : "image" }):
+        for image_link in soup.findAll("a", {"class": "image"}):
             image_link['href'] = "http://wikipedia.org" + image_link['href']
 
+        for link in soup.findAll("a"):
+            if link['href'].startswith("/wiki"):
+                link['href'] = "http://wikipedia.org" + link['href']
+                link['target'] = "_blank"
+            elif link['href'].startswith("//"):
+                link['href'] = "http:" + link['href']
+                link['target'] = "_blank"
         page = soup.prettify()
         return page
 

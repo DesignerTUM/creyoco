@@ -238,7 +238,7 @@ for retrieving later. Kwargs will be used at page creation.
 
     def create_json(self):
         print("json")
-        dict_for_json = self._cleanup_dict(self.package.__dict__)
+        dict_for_json = self._cleanup_dict(self.package.to_dict())
         dict_for_json['files'] = []
         for f in self.wiki_media:
             dict_for_json['files'].append(f)

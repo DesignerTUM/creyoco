@@ -21,9 +21,9 @@ class BasicTest(TestCase):
     def setUp(self):
         user = User.objects.create_user(username=self.TEST_USER,
                                         password=self.TEST_PASSWORD)
-        media_path = user.get_profile().media_path
+        media_path = user.profile.media_path
         open(os.path.join(media_path, self.FILE_NAME), 'w').write(self.CONTENT)
-        self.file_url = user.get_profile().media_url + self.FILE_NAME
+        self.file_url = user.profile.media_url + self.FILE_NAME
         self.client = Client()
 
     def test_basic_access(self):
