@@ -1481,128 +1481,74 @@ a:hover .btn [class*=" icon-"].icon-large.icon-question-sign {
 .chosen-container-multi .chosen-drop .result-selected {
   display: none; }
 
-<<<<<<< HEAD
-/* line 15, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
-#properties label .errorlist {
-  color: #a71e20 !important; }
-/* line 20, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
-=======
-/* line 13, /home/zakaria/creyoco/exeapp/static/sass/forms.scss */
+/* line 13, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
 #preview_id_logoImg {
   display: none; }
 
-/* line 17, /home/zakaria/creyoco/exeapp/static/sass/forms.scss */
+/* line 17, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
 #properties label .errorlist {
   color: #a71e20 !important; }
-/* line 22, /home/zakaria/creyoco/exeapp/static/sass/forms.scss */
->>>>>>> origin/bugfix
+/* line 22, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
 #properties input[type='text'], #properties input[type='password'] {
   display: block;
   margin: 0;
   letter-spacing: 0.08em; }
-<<<<<<< HEAD
-/* line 29, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
-=======
-/* line 31, /home/zakaria/creyoco/exeapp/static/sass/forms.scss */
->>>>>>> origin/bugfix
+/* line 31, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
 #properties label {
   margin-top: 20px;
   margin-bottom: 5px;
   display: inline-block;
   letter-spacing: 0.1em; }
-<<<<<<< HEAD
-/* line 42, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
-=======
-/* line 44, /home/zakaria/creyoco/exeapp/static/sass/forms.scss */
->>>>>>> origin/bugfix
+/* line 44, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
 #properties input[type='reset'],
 #properties input[type='submit'],
 #properties input[type='text'],
 #properties textarea {
   box-sizing: border-box;
   width: 100%; }
-<<<<<<< HEAD
-/* line 47, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
-#properties #dublincore_form {
-  display: none; }
-  /* line 50, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
-  #properties #dublincore_form div {
-    width: 49%; }
-  /* line 54, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
-  #properties #dublincore_form .submit {
-    width: 49%;
-    margin-top: 37px; }
-/* line 61, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
-#properties #properties_form div {
-  width: 49%; }
-  /* line 63, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
-  #properties #properties_form div > div {
-    width: 48%; }
-  /* line 66, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
-  #properties #properties_form div .submit {
-    width: 48%;
-    margin-top: 20px; }
-/* line 72, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
-#properties #properties_form textarea {
-  height: 81px; }
-/* line 77, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
-#properties h3 {
-  margin-top: 30px;
-  cursor: pointer; }
-/* line 82, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
-#properties #download label {
-  display: inline;
-  margin: 0; }
-/* line 86, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
-#properties #download input[type="checkbox"] {
-  display: inline; }
-
-/* line 94, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
-=======
-  /* line 47, /home/zakaria/creyoco/exeapp/static/sass/forms.scss */
+  /* line 47, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
   #properties input[type='reset'][name='logoImg'],
   #properties input[type='submit'][name='logoImg'],
   #properties input[type='text'][name='logoImg'],
   #properties textarea[name='logoImg'] {
     width: 95%;
     display: inline; }
-/* line 53, /home/zakaria/creyoco/exeapp/static/sass/forms.scss */
+/* line 53, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
 #properties #dublincore_form {
   display: none; }
-  /* line 56, /home/zakaria/creyoco/exeapp/static/sass/forms.scss */
+  /* line 56, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
   #properties #dublincore_form div {
     width: 49%; }
-  /* line 60, /home/zakaria/creyoco/exeapp/static/sass/forms.scss */
+  /* line 60, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
   #properties #dublincore_form .submit {
     width: 49%;
     margin-top: 37px; }
-/* line 67, /home/zakaria/creyoco/exeapp/static/sass/forms.scss */
+/* line 67, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
 #properties #properties_form div {
   width: 49%; }
-  /* line 69, /home/zakaria/creyoco/exeapp/static/sass/forms.scss */
+  /* line 69, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
   #properties #properties_form div > div {
     width: 48%; }
-  /* line 72, /home/zakaria/creyoco/exeapp/static/sass/forms.scss */
+  /* line 72, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
   #properties #properties_form div .submit {
     width: 48%;
     margin-top: 20px; }
-/* line 78, /home/zakaria/creyoco/exeapp/static/sass/forms.scss */
+/* line 78, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
 #properties #properties_form textarea {
   height: 150px; }
-/* line 83, /home/zakaria/creyoco/exeapp/static/sass/forms.scss */
+/* line 83, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
 #properties h3 {
   margin-top: 30px;
   cursor: pointer; }
-/* line 88, /home/zakaria/creyoco/exeapp/static/sass/forms.scss */
+/* line 88, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
 #properties #download label {
   display: inline;
   margin: 0; }
-/* line 92, /home/zakaria/creyoco/exeapp/static/sass/forms.scss */
+/* line 92, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
 #properties #download input[type="checkbox"] {
   display: inline; }
 
-/* line 100, /home/zakaria/creyoco/exeapp/static/sass/forms.scss */
->>>>>>> origin/bugfix
+/* line 100, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
 input[type='text'], input[type='password'] {
   width: 250px;
   padding-top: 2px;
@@ -1619,11 +1565,7 @@ input[type='text'], input[type='password'] {
   outline: none;
   border: 1px solid #737373;
   background-color: white; }
-<<<<<<< HEAD
-  /* line 108, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
-=======
-  /* line 114, /home/zakaria/creyoco/exeapp/static/sass/forms.scss */
->>>>>>> origin/bugfix
+  /* line 114, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
   input[type='text']:focus, input[type='password']:focus {
     border: 1px solid #a71e20; }
   /* line 3, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
@@ -1636,11 +1578,7 @@ input[type='text'], input[type='password'] {
   input[type='text']::-webkit-input-placeholder, input[type='password']::-webkit-input-placeholder {
     color: #b3b3b3; }
 
-<<<<<<< HEAD
-/* line 116, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
-=======
-/* line 122, /home/zakaria/creyoco/exeapp/static/sass/forms.scss */
->>>>>>> origin/bugfix
+/* line 122, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
 textarea {
   width: 250px;
   line-height: 22px;
@@ -1655,11 +1593,7 @@ textarea {
   outline: none;
   border: 1px solid #737373;
   resize: none; }
-<<<<<<< HEAD
-  /* line 128, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
-=======
-  /* line 134, /home/zakaria/creyoco/exeapp/static/sass/forms.scss */
->>>>>>> origin/bugfix
+  /* line 134, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
   textarea:focus {
     border: 1px solid #a71e20; }
   /* line 3, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
@@ -1672,36 +1606,20 @@ textarea {
   textarea::-webkit-input-placeholder {
     color: #b3b3b3; }
 
-<<<<<<< HEAD
-/* line 135, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
+/* line 141, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
 select {
   width: 190px; }
 
-/* line 139, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
+/* line 145, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
 .no_margin {
   margin: 0; }
 
-/* line 143, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
-=======
-/* line 141, /home/zakaria/creyoco/exeapp/static/sass/forms.scss */
-select {
-  width: 190px; }
-
-/* line 145, /home/zakaria/creyoco/exeapp/static/sass/forms.scss */
-.no_margin {
-  margin: 0; }
-
-/* line 149, /home/zakaria/creyoco/exeapp/static/sass/forms.scss */
->>>>>>> origin/bugfix
+/* line 149, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
 .login_password {
   width: 145px !important;
   margin-bottom: 0px !important; }
 
-<<<<<<< HEAD
-/* line 150, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
-=======
-/* line 156, /home/zakaria/creyoco/exeapp/static/sass/forms.scss */
->>>>>>> origin/bugfix
+/* line 156, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
 input[type='reset'],
 input[type='submit'],
 button {
@@ -1722,21 +1640,13 @@ button {
   outline: none;
   border: 1px solid #737373;
   margin: 0; }
-<<<<<<< HEAD
-  /* line 168, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
-=======
-  /* line 174, /home/zakaria/creyoco/exeapp/static/sass/forms.scss */
->>>>>>> origin/bugfix
+  /* line 174, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
   input[type='reset']:hover,
   input[type='submit']:hover,
   button:hover {
     color: #a71e20; }
 
-<<<<<<< HEAD
-/* line 173, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
-=======
-/* line 179, /home/zakaria/creyoco/exeapp/static/sass/forms.scss */
->>>>>>> origin/bugfix
+/* line 179, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
 #box_left button {
   width: 20%;
   margin-right: 0;
@@ -1755,69 +1665,38 @@ button {
       margin-left: 0;
   }
   */ }
-<<<<<<< HEAD
-  /* line 191, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
-=======
-  /* line 197, /home/zakaria/creyoco/exeapp/static/sass/forms.scss */
->>>>>>> origin/bugfix
+  /* line 197, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
   #box_left button.last {
     margin-right: 0;
     padding-right: 0; }
 
-<<<<<<< HEAD
-/* line 197, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
-=======
-/* line 203, /home/zakaria/creyoco/exeapp/static/sass/forms.scss */
->>>>>>> origin/bugfix
+/* line 203, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
 #header button {
   width: 145px;
   margin-right: 10px;
   float: left; }
-<<<<<<< HEAD
-  /* line 202, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
+  /* line 208, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
   #header button .left {
     margin-right: 30px; }
-  /* line 206, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
+  /* line 212, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
   #header button .right {
     margin-left: 20px; }
 
-/* line 211, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
-=======
-  /* line 208, /home/zakaria/creyoco/exeapp/static/sass/forms.scss */
-  #header button .left {
-    margin-right: 30px; }
-  /* line 212, /home/zakaria/creyoco/exeapp/static/sass/forms.scss */
-  #header button .right {
-    margin-left: 20px; }
-
-/* line 217, /home/zakaria/creyoco/exeapp/static/sass/forms.scss */
->>>>>>> origin/bugfix
+/* line 217, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
 .login_submit {
   display: inline-block;
   width: 90px;
   margin-left: 10px; }
 
-<<<<<<< HEAD
-/* line 217, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
+/* line 223, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
 .reg_submit {
   width: 262px; }
 
-/* line 221, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
+/* line 227, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
 textarea {
   height: 100px; }
 
-/* line 225, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
-=======
-/* line 223, /home/zakaria/creyoco/exeapp/static/sass/forms.scss */
-.reg_submit {
-  width: 262px; }
-
-/* line 227, /home/zakaria/creyoco/exeapp/static/sass/forms.scss */
-textarea {
-  height: 100px; }
-
-/* line 231, /home/zakaria/creyoco/exeapp/static/sass/forms.scss */
->>>>>>> origin/bugfix
+/* line 231, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
 .forgot_pw {
   font-size: 10px;
   color: #e6e6e6;
@@ -1825,11 +1704,7 @@ textarea {
   display: inline-block;
   margin-top: 10px; }
 
-<<<<<<< HEAD
-/* line 233, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
-=======
-/* line 239, /home/zakaria/creyoco/exeapp/static/sass/forms.scss */
->>>>>>> origin/bugfix
+/* line 239, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
 .error {
   position: absolute;
   top: 50%;
@@ -1842,21 +1717,13 @@ textarea {
   white-space: nowrap;
   background: rgba(167, 30, 32, 0.8); }
 
-<<<<<<< HEAD
-/* line 246, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
-=======
-/* line 252, /home/zakaria/creyoco/exeapp/static/sass/forms.scss */
->>>>>>> origin/bugfix
+/* line 252, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
 .error-after {
   content: '';
   display: block;
   margin: 6px 0px 0px 0px; }
 
-<<<<<<< HEAD
-/* line 252, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
-=======
-/* line 258, /home/zakaria/creyoco/exeapp/static/sass/forms.scss */
->>>>>>> origin/bugfix
+/* line 258, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
 .error-left {
   position: absolute;
   top: 50%;
@@ -1870,11 +1737,7 @@ textarea {
   background: rgba(167, 30, 32, 0.8);
   right: 100%;
   margin-right: 9px; }
-<<<<<<< HEAD
-  /* line 266, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
-=======
-  /* line 272, /home/zakaria/creyoco/exeapp/static/sass/forms.scss */
->>>>>>> origin/bugfix
+  /* line 272, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
   .error-left::after {
     content: '';
     display: block;
@@ -1887,11 +1750,7 @@ textarea {
     border-right: 0;
     border-left: 5px solid rgba(167, 30, 32, 0.8); }
 
-<<<<<<< HEAD
-/* line 280, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
-=======
-/* line 286, /home/zakaria/creyoco/exeapp/static/sass/forms.scss */
->>>>>>> origin/bugfix
+/* line 286, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
 .error-right {
   position: absolute;
   top: 50%;
@@ -1905,11 +1764,7 @@ textarea {
   background: rgba(167, 30, 32, 0.8);
   left: 100%;
   margin-left: 9px; }
-<<<<<<< HEAD
-  /* line 294, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
-=======
-  /* line 300, /home/zakaria/creyoco/exeapp/static/sass/forms.scss */
->>>>>>> origin/bugfix
+  /* line 300, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
   .error-right::after {
     content: '';
     display: block;
@@ -1922,21 +1777,13 @@ textarea {
     border-left: 0;
     border-right: 5px solid rgba(167, 30, 32, 0.8); }
 
-<<<<<<< HEAD
-/* line 310, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
-=======
-/* line 316, /home/zakaria/creyoco/exeapp/static/sass/forms.scss */
->>>>>>> origin/bugfix
+/* line 316, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
 .protected_freetext_hint span {
   background-color: #f4f379;
   padding-left: 5px;
   padding-right: 5px; }
 
-<<<<<<< HEAD
-/* line 317, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
-=======
-/* line 323, /home/zakaria/creyoco/exeapp/static/sass/forms.scss */
->>>>>>> origin/bugfix
+/* line 323, /home/alendit/creyoco/exeapp/static/sass/forms.scss */
 .protected_password_error {
   padding: 5px;
   margin-left: 5px;

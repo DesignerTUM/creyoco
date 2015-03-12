@@ -16,7 +16,7 @@ pillow
 gunicorn
 feedparser
 django-require
-autobahn[asyncio,accelerate]==0.9.3-2
+autobahn[asyncio,twisted,accelerate]==0.9.3-2
 aiohttp
 PyPDF2
 twisted
