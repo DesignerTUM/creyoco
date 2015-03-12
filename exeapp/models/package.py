@@ -697,6 +697,7 @@ i.e. the "package".
         new_package.dublincore.pk = None
         new_package.dublincore.save()
         new_package.dublincore_id = new_package.dublincore.pk
+        new_package.title = new_package.title + " (" + _("Copy") + ")"
         new_package.save()
         for node in nodes:
             if node.is_root:
