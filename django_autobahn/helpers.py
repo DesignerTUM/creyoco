@@ -3,7 +3,7 @@ Collection of useful autobahn helpers
 """
 import asyncio
 
-from autobahn.wamp import router
+from autobahn.twisted.wamp import router
 from autobahn.asyncio import wamp, websocket
 
 
