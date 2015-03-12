@@ -699,7 +699,9 @@ i.e. the "package".
         new_package.dublincore_id = new_package.dublincore.pk
         new_package.save()
         for node in nodes:
-            node.duplicate(package=new_package)
+            if node.is_root:
+                node.duplicate(package=new_package)
+            # break
         return {'id': new_package.pk, 'title': new_package.title}
 
 
