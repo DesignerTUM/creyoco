@@ -364,7 +364,7 @@ i.e. the "package".
     footerImg = models.ImageField(upload_to='footer',
                                   blank=True, null=True)
     license = models.CharField(max_length=50, blank=True)
-    style = models.CharField(max_length=20, default="default")
+    style = models.CharField(max_length=20, default="tum2")
     resourceDir = models.FileField(upload_to="resources",
                                    blank=True, null=True)
     logoImg = FileBrowseField("Image", max_length=100,
