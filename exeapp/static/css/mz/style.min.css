@@ -1954,10 +1954,10 @@ h1, h2, h3, h4 {
   clear: both; }
 
 /* line 87, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
-table tbody {
+.idevice_form table tbody {
   border: 1px; }
   /* line 89, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
-  table tbody tr p {
+  .idevice_form table tbody tr td p {
     margin: 3px 5px 3px 5px; }
 
 /* line 94, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
