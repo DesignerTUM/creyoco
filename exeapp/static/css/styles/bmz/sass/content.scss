@@ -105,13 +105,15 @@ header {
       li {
         list-style: none;
         line-height: 30px;
-        a {
+        margin-left: 15px;
+        > a {
           display: inline-block;
-          padding-left: 35px;
+          padding-left: 20px;
           width: 100%;
+          line-height: 25px;
           color: $grey;
           text-decoration: none;
-          text-indent: -15px;
+          text-indent: -20px;
 
           &.active {
             color: $green;
@@ -122,15 +124,6 @@ header {
             color: white;
           }
         }
-
-        ul li {
-          line-height: 25px;
-          a {
-            font-size: 90%;
-            padding-left: 30px;
-          }
-        }
-
       }
     }
   }
