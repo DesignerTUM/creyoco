@@ -101,9 +101,9 @@ body {
   color: $darkgrey;
   a {
     color: $darkgrey;
-    text-decoration: none;
+    text-decoration: underline;
     &:hover {
-      text-decoration: none;
+      text-decoration: underline;
       color: $red;
     }
   }

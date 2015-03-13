@@ -1983,10 +1983,10 @@ body {
   /* line 102, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
   body a {
     color: #595959;
-    text-decoration: none; }
+    text-decoration: underline; }
     /* line 105, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */
     body a:hover {
-      text-decoration: none;
+      text-decoration: underline;
       color: #a71e20; }
 
 /* line 112, /home/alendit/creyoco/exeapp/static/sass/style.min.scss */

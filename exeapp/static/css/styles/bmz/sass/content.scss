@@ -184,7 +184,7 @@ header {
       float: right;
       margin-left: 20px;
     }
-    #idevice {
+    .iDevice {
       ul {
         padding-left: 0px !important;
         margin-bottom: 0px;
@@ -193,23 +193,22 @@ header {
           font-family: "FontAwesome";
           padding-left: 0px;
         }
-
-        a {
-          display: inline-block;
-          width: 100%;
-          color: $grey;
-          text-decoration: none;
-          &:hover {
-            color: $green;
-          }
+      }
+      a {
+        color: $grey;
+        text-decoration: underline;
+        &:hover {
+          color: $green;
         }
-
       }
       .toc {
         display: block;
         page-break-after: 0px;
         padding-left: 30px !important;
         li {
+          a {
+            text-decoration: none;
+          }
           margin-left: 0px !important;
           font-family: "FontAwesome";
           list-style: none;
