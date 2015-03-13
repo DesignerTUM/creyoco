@@ -306,11 +306,15 @@ class PackageManager(models.Manager):
             f = Path(os.path.join(dir, f))
             if f.name.startswith("wiki__"):
                 f2 = Path.joinpath(wiki_dir, Path(f.name))
+                if Path.exists(wiki_dir) is False:
+                    wiki_dir.mkdir()
                 if Path.exists(f2) is False:
                     Path.copyfile(f, f2)
 
             else:
                 f2 = Path.joinpath(nonwiki_dir, Path(f.name))
+                if Path.exists(nonwiki_dir) is False:
+                    nonwiki_dir.mkdir()
                 if Path.exists(f2) is False:
                     Path.copyfile(f, f2)
 

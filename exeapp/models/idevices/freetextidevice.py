@@ -21,14 +21,17 @@
 """
 FreeTextIdevice: just has a block of text
 """
+from bs4 import BeautifulSoup
 from django.utils.translation import ugettext_lazy as _
 import logging
 
+from exeapp.utils.path import Path
 from datetime import datetime
 from django.db import models
 from exeapp.models.idevices.idevice import Idevice
 from exeapp.models.idevices.genericidevice import GenericIdevice
 from exeapp.models.idevices import fields
+from django.conf import settings
 log = logging.getLogger(__name__)
 
 
@@ -63,12 +66,21 @@ delivered.""")
                                     and not k.startswith('_')
             }
         d['child_type'] = self.get_klass()
+        soup = BeautifulSoup(d['content'])
+        images = soup.findAll("img")
+        for img in images:
+            img['src'] = Path(img['src']).basename()
+        d['content'] = soup.prettify()
         return d
 
     def from_dict(self, dic):
         print(dic)
         self.edit = dic['edit']
-        self.content = dic['content']
+        soup = BeautifulSoup(dic['content'])
+        images = soup.findAll("img")
+        for img in images:
+            img['src'] = Path.joinpath(self.parent_node.package.user.profile.media_url, img['src'])
+        self.content = soup.prettify()
         self.date_created = datetime.now()
         self.save()
         FreeTextVersion.objects.create(idevice=self, content=self.content, date_created=self.date_created)
