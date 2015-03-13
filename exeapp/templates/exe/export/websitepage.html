@@ -50,13 +50,13 @@
             {% navigation_bar current_page full_style_url %}
         </nav>
         </aside>
-        <h1>{{current_page.node.title}}</h1>
         <div class="middle">
-            {% include NAVIGATION_LINKS %}
-            {% include "exe/export/page_content.html" %}
-            {% include NAVIGATION_LINKS %}
-            {% render_licence current_page %}
-            {% include "exe/export/footer.html" %}
+          <h1 class="pagetitle">{{current_page.node.title}}</h1>
+          {% include NAVIGATION_LINKS %}
+          {% include "exe/export/page_content.html" %}
+          {% include NAVIGATION_LINKS %}
+          {% render_licence current_page %}
+          {% include "exe/export/footer.html" %}
         </div>
         <aside class="right">
             <div class="rightimages"></div>
