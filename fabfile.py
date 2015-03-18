@@ -16,12 +16,6 @@ def push():
     local('git push')
 
 
-def update():
-    execute(push)
-    execute(pull)
-    execute(restart)
-
-
 def collectstatic():
     with cd(env.code_dir):
         run("{} manage.py collectstatic --noinput --settings=exedjango.deployment_settings".format(env.python_path))
@@ -34,3 +28,10 @@ def copy_site():
 
 def restart():
     run("kill -HUP $(cat /tmp/creyoco.pid)")
+
+
+def update():
+    execute(push)
+    execute(pull)
+    execute(collectstatic)
+    execute(restart)
