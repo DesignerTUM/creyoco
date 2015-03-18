@@ -170,45 +170,44 @@ header {
       /* line 192, sass/content.scss */
       .content article .iDevice ul li {
         margin-left: 0px;
-        font-family: "FontAwesome";
         padding-left: 0px; }
-    /* line 198, sass/content.scss */
+    /* line 197, sass/content.scss */
     .content article .iDevice a {
       color: #4d4d4d;
       text-decoration: underline; }
-      /* line 201, sass/content.scss */
+      /* line 200, sass/content.scss */
       .content article .iDevice a:hover {
         color: #7cb22d; }
-    /* line 205, sass/content.scss */
+    /* line 204, sass/content.scss */
     .content article .iDevice .toc {
       display: block;
       page-break-after: 0px;
       padding-left: 30px !important; }
-      /* line 209, sass/content.scss */
+      /* line 208, sass/content.scss */
       .content article .iDevice .toc ul {
         padding-left: 5px; }
-        /* line 211, sass/content.scss */
+        /* line 210, sass/content.scss */
         .content article .iDevice .toc ul li {
           list-style-type: none;
           font-weight: bold; }
-          /* line 212, sass/content.scss */
+          /* line 211, sass/content.scss */
           .content article .iDevice .toc ul li a {
             text-decoration: none; }
-          /* line 217, sass/content.scss */
+          /* line 216, sass/content.scss */
           .content article .iDevice .toc ul li ul li {
             margin-left: 15px !important; }
-            /* line 219, sass/content.scss */
+            /* line 218, sass/content.scss */
             .content article .iDevice .toc ul li ul li ul li {
               font-weight: normal !important; }
 
-/* line 232, sass/content.scss */
+/* line 231, sass/content.scss */
 footer .container {
   margin-top: 30px;
   border-top: 1px solid #7cb22d; }
-  /* line 236, sass/content.scss */
+  /* line 235, sass/content.scss */
   footer .container .copyright {
     font-size: 11px;
     color: #4d4d4d; }
-    /* line 240, sass/content.scss */
+    /* line 239, sass/content.scss */
     footer .container .copyright strong {
       font-style: italic; }
