@@ -139,17 +139,17 @@ header {
     /* line 160, sass/content.scss */
     .content article ul {
       margin: 3px 5px 3px 5px;
-      padding-left: 16px;
+      padding-left: 0;
       list-style-position: inside;
       margin-bottom: 20px; }
       /* line 164, sass/content.scss */
       .content article ul li {
-        list-style: square;
+        list-style-type: square;
         margin-left: 20px; }
     /* line 171, sass/content.scss */
     .content article ol {
       margin: 3px 5px 3px 5px;
-      padding-left: 16px;
+      padding-left: 0;
       list-style-position: inside;
       margin-bottom: 20px; }
       /* line 175, sass/content.scss */
@@ -185,31 +185,31 @@ header {
       page-break-after: 0px;
       padding-left: 30px !important; }
       /* line 209, sass/content.scss */
-      .content article .iDevice .toc li {
-        margin-left: 0px !important;
-        font-family: "FontAwesome";
-        list-style: none;
-        font-weight: bold; }
-        /* line 210, sass/content.scss */
-        .content article .iDevice .toc li a {
-          text-decoration: none; }
-        /* line 217, sass/content.scss */
-        .content article .iDevice .toc li ul li {
-          list-style: disc;
-          margin-left: 15px !important; }
-          /* line 220, sass/content.scss */
-          .content article .iDevice .toc li ul li ul li {
-            font-weight: normal !important;
-            margin-left: -10px !important; }
+      .content article .iDevice .toc ul {
+        padding-left: 5px; }
+        /* line 211, sass/content.scss */
+        .content article .iDevice .toc ul li {
+          list-style-type: none;
+          font-family: "FontAwesome";
+          font-weight: bold; }
+          /* line 212, sass/content.scss */
+          .content article .iDevice .toc ul li a {
+            text-decoration: none; }
+          /* line 218, sass/content.scss */
+          .content article .iDevice .toc ul li ul li {
+            margin-left: 15px !important; }
+            /* line 220, sass/content.scss */
+            .content article .iDevice .toc ul li ul li ul li {
+              font-weight: normal !important; }
 
-/* line 235, sass/content.scss */
+/* line 233, sass/content.scss */
 footer .container {
   margin-top: 30px;
   border-top: 1px solid #7cb22d; }
-  /* line 239, sass/content.scss */
+  /* line 237, sass/content.scss */
   footer .container .copyright {
     font-size: 11px;
     color: #4d4d4d; }
-    /* line 243, sass/content.scss */
+    /* line 241, sass/content.scss */
     footer .container .copyright strong {
       font-style: italic; }

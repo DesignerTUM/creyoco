@@ -159,10 +159,10 @@ header {
     }
     ul {
       margin: 3px 5px 3px 5px;
-      padding-left: 16px;
+      padding-left: 0;
       list-style-position: inside;
       li {
-        list-style: square;
+        list-style-type: square;
         margin-left: 20px;
       }
       margin-bottom: 20px;
@@ -170,7 +170,7 @@ header {
 
     ol {
       margin: 3px 5px 3px 5px;
-      padding-left: 16px;
+      padding-left: 0;
       list-style-position: inside;
       li {
         list-style: decimal;
@@ -206,25 +206,23 @@ header {
         display: block;
         page-break-after: 0px;
         padding-left: 30px !important;
-        li {
-          a {
-            text-decoration: none;
-          }
-          margin-left: 0px !important;
-          font-family: "FontAwesome";
-          list-style: none;
-          font-weight: bold;
-          ul li {
-            list-style: disc;
-            margin-left: 15px !important;
-            ul li {
-              font-weight: normal !important;
-              margin-left: -10px !important;
+        ul {
+          padding-left: 5px;
+          li {
+            a {
+              text-decoration: none;
             }
-
+            list-style-type: none;
+            font-family: "FontAwesome";
+            font-weight: bold;
+            ul li {
+              margin-left: 15px !important;
+              ul li {
+                font-weight: normal !important;
+              }
+            }
           }
         }
-
       }
     }
 
