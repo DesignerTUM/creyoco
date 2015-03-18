@@ -3,7 +3,7 @@
 
 $lightgreen: rgb(86%, 91%, 76%);
 $green: rgb(49%, 70%, 18%);
-$grey: lighten(black, 45%);
+$grey: lighten(black, 30%);
 $headerimage: "tumlogo_bea.png";
 
 @import url("//fonts.googleapis.com/css?family=Open+Sans:400,100,300,500,700,900");
@@ -20,7 +20,7 @@ body {
   font-family: "Open Sans";
   font-size: 14px;
   line-height: 1.428571429;
-  color: lighten(black, 30%);
+  color: $grey;
   background-image: url(img/debut_light.png);
   background-repeat: repeat;
 }
@@ -41,7 +41,6 @@ h1 {
   font-family: "Droid Serif";
   font-weight: bold;
   letter-spacing: 1px;
-  border-bottom: 1px solid $green;
   &.pagetitle {
     color: $green;
   }
@@ -53,6 +52,7 @@ h2 {
   font-weight: bold;
   letter-spacing: 1px;
   margin-bottom: 10px;
+  border-bottom: 1px solid $green;
 }
 
 h3 {
@@ -61,7 +61,7 @@ h3 {
 }
 
 h1, h2, h3, h4, h5 {
-  color: grey
+  color: $green;
 }
 
 header {
@@ -158,6 +158,8 @@ header {
       margin: 3px 5px 3px 5px;
     }
     ul {
+      margin: 3px 5px 3px 5px;
+      padding-left: 16px;
       list-style-position: inside;
       li {
         list-style: square;
@@ -167,6 +169,8 @@ header {
     }
 
     ol {
+      margin: 3px 5px 3px 5px;
+      padding-left: 16px;
       list-style-position: inside;
       li {
         list-style: decimal;
