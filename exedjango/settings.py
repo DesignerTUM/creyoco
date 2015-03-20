@@ -183,14 +183,13 @@ TINYMCE_DEFAULT_CONFIG = {
                                "forecolor,backcolor,separator,sub,sup,"
                                "separator,justifyleft,justifycenter,"
                                "justifyright,justifyfull,separator,bullist,"
-                               "numlist,outdent,indent,separator,anchor,"
-                               "separator,cut,copy,paste,pastetext,pasteword,"
-                               "help",
+                               "numlist,outdent,indent",
     "theme_advanced_buttons2": "image,media,exemath,advhr,fontselect,"
                                "tablecontrols,separator,link,unlink,"
                                "separator, undo,redo,separator,charmap,code,"
-                               "removeformat",
-    "theme_advanced_buttons3": "",
+                               "removeformat,separator,anchor",
+    "theme_advanced_buttons3": "cut,copy,paste,pastetext,"
+                               "pasteword",
     "advimage_image_browser_callback": "chooseImage_viaTinyMCE",
     "advimage_image2insert_browser_callback": "chooseImage_viaTinyMCE",
     "media_media_browser_callback": "chooseImage_viaTinyMCE",
