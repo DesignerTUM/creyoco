@@ -32,7 +32,7 @@ class GenericIdevice(Idevice):
                     resource_list.add(
                         unquote(img['src'].replace(media_url, "")))
             for link in soup.findAll("a"):
-                if link['href'].startswith(media_url):
+                if 'href' in link and link['href'].startswith(media_url):
                     resource_list.add(
                         unquote(link['href'].replace(media_url, "")))
             objs = soup.findAll("object")
