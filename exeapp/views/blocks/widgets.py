@@ -35,10 +35,14 @@ class FreeTextWidget(TinyMCE):
 
     def _replace_sources(self, content):
         soup = BeautifulSoup(content)
-        imgs = soup.findAll("img")
-        for img in imgs:
-            if img['src'].startswith(settings.MEDIA_URL):
-                img['src'] = img['src'].split("/")[-1]
+        resource_holders = soup.findAll(["img", "a"])
+        for holder in resource_holders:
+            if holder.name == "img":
+                if holder['src'].startswith(settings.MEDIA_URL):
+                    holder['src'] = holder['src'].split("/")[-1]
+            elif holder.name == "a":
+                if holder['href'].startswith(settings.MEDIA_URL):
+                    holder['href'] = holder['href'].split("/")[-1]
         objs = soup.findAll("object")
         for obj in objs:
             obj['data'] = obj['data'].split("/")[-1]

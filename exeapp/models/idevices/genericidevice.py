@@ -31,6 +31,10 @@ class GenericIdevice(Idevice):
                 if not img['src'].startswith("data:image"):
                     resource_list.add(
                         unquote(img['src'].replace(media_url, "")))
+            for link in soup.findAll("a"):
+                if link['href'].startswith(media_url):
+                    resource_list.add(
+                        unquote(link['href'].replace(media_url, "")))
             objs = soup.findAll("object")
             for obj in objs:
                 # check if it is a full url
