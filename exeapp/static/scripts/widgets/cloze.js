@@ -4,7 +4,7 @@ var cloze = {
         function submit_cloze(e) {
             var gap_count = 0;
             var right_answer_count = 0;
-            $(this).parent().find(".cloze_gap").each(function () {
+            $(this).parents(".iDevice").find(".cloze_gap").each(function () {
                 gap_count++;
                 var right_answer = get_right_answer($(this));
                 $(this).removeClass("cloze_right cloze_wrong");
@@ -25,7 +25,7 @@ var cloze = {
 
         function get_right_answer($gap) {
             var gap_id = /gap_(.*)$/.exec($gap.attr("id"))[1];
-            return $gap.parent().parent().find("#answer_" + gap_id).val();
+            return $gap.parents(".iDevice").find("#answer_" + gap_id).val();
         }
 
         function shuffle(array) {
@@ -91,7 +91,7 @@ var cloze = {
             $(".cloze_submit").off("click").on("click", submit_cloze);
             $(".cloze_restart").off("click").on("click", function (e) {
                 $(this).parent().hide();
-                $(this).parent().parent()
+                $(this).parents(".iDevice")
                     .find(".cloze_gap").each(function () {
                         $(this).text("");
                         $(this).removeClass("cloze_right cloze_wrong");
@@ -104,7 +104,7 @@ var cloze = {
                     }
             });
             $(".cloze_show_answers").off("click").on("click", function (e) {
-                $(this).parent().parent().find(".cloze_gap").each(function () {
+                $(this).parents(".iDevice").find(".cloze_gap").each(function () {
                     $(this).text(get_right_answer($(this)));
                     $(this).removeClass("cloze_wrong").addClass("cloze_right");
                 });
