@@ -41,7 +41,7 @@ class FreeTextWidget(TinyMCE):
                 if holder['src'].startswith(settings.MEDIA_URL):
                     holder['src'] = holder['src'].split("/")[-1]
             elif holder.name == "a":
-                if holder['href'].startswith(settings.MEDIA_URL):
+                if 'href' in holder and holder['href'].startswith(settings.MEDIA_URL):
                     holder['href'] = holder['href'].split("/")[-1]
         objs = soup.findAll("object")
         for obj in objs:

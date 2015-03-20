@@ -1022,7 +1022,10 @@ class Path(str):
         copies them to 'destination'
         """
         for fn in fnlist:
-            (self / fn).copy(destination)
+            try:
+                (self / fn).copy(destination)
+            except FileNotFoundError:
+                pass
 
     def copyfiles(self, destination):
         """
