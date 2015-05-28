@@ -80,11 +80,11 @@ header {
   a {
     float: right;
 
-    .headerimage {
-      @include background(url(img/#{$headerimage}));
-      height: image-height($headerimage) - 1; // leaks white when full height
-      width: image-width($headerimage);
-    }
+//    .headerimage {
+//      @include background(url(img/#{$headerimage}));
+//      height: image-height($headerimage) - 1; // leaks white when full height
+//      width: image-width($headerimage);
+//    }
   }
 }
 

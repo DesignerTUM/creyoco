@@ -68,11 +68,6 @@ header {
   /* line 80, sass/content.scss */
   header a {
     float: right; }
-    /* line 83, sass/content.scss */
-    header a .headerimage {
-      background: url(img/tumlogo_bea.png);
-      height: 38px;
-      width: 73px; }
 
 /* line 91, sass/content.scss */
 .content {
