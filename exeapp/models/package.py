@@ -709,6 +709,8 @@ i.e. the "package".
             # break
         return {'id': new_package.pk, 'title': new_package.title}
 
+    def __str__(self):
+        return self.title
 
     class Meta:
         app_label = "exeapp"
