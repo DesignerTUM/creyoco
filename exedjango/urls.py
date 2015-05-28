@@ -1,8 +1,6 @@
 from django.conf.urls import *
-from django.conf import settings
 
 from django.contrib import admin
-from django.core.urlresolvers import reverse
 
 from strict_filebrowser.sites import site
 admin.autodiscover()
@@ -20,6 +18,7 @@ urlpatterns = patterns('',
 
 )
 
+# from django.conf import settings
 # if settings.DEBUG:
 #    urlpatterns += patterns('',
 #        url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {

@@ -6,7 +6,7 @@ import sys
 
 def _get_file_from_root(folder_name):
     '''Returns path to a file or folder in root of the project'''
-    return os.path.join(os.path.dirname(__file__), folder_name).replace('\\',
+    return os.path.join(os.path.dirname(os.path.dirname(__file__)), folder_name).replace('\\',
                                                                         '/')
 
 
@@ -32,7 +32,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': _get_file_from_root('sqlite.db'),
+        'NAME': _get_file_from_root('exedjango/sqlite.db'),
         'USER': '',
         'PASSWORD': '',
         'HOST': '',
@@ -65,7 +65,7 @@ USE_L10N = True
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = _get_file_from_root('exeapp_media')
+MEDIA_ROOT = _get_file_from_root('exedjango/exeapp_media')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
@@ -89,6 +89,10 @@ TEMPLATE_LOADERS = (
     #     'django.template.loaders.eggs.Loader',
 )
 
+TEMPLATE_DIRS = (
+    _get_file_from_root("templates"),
+)
+
 AUTH_PROFILE_MODULE = "exeapp.UserProfile"
 
 MIDDLEWARE_CLASSES = (
@@ -105,9 +109,6 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'exedjango.urls'
-
-TEMPLATE_DIRS = (_get_file_from_root('exeapp_templates'),
-)
 
 CACHES = {
     'default': {
