@@ -146,7 +146,7 @@ ABSOLUTE_URL_OVERRIDES = {
     'auth.user': lambda user: '/',
 }
 
-STATIC_ROOT = _get_file_from_root('static')
+STATIC_ROOT = _get_file_from_root('exedjango/static')
 STATICFILES_DIRS = (
     'require',
 )
