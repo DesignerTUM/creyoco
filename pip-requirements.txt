@@ -5,7 +5,7 @@ argparse
 distribute
 django-extensions
 ipython>=0.13
-git+https://github.com/macropin/django-registration.git#egg=django-registration
+django-registration-redux
 django-grappelli
 django-tinymce==1.5.2
 django-sendfile
