@@ -70,7 +70,7 @@ idevice_map = {
     ),
     MultiChoiceIdevice: FormsetBlockFactory(
         MultiChoiceOptionIdevice,
-        ("option", "right_answer"),
+        ("option", "feedback", "right_answer"),
         forms.Media(
             js=['{}scripts/blocks/multichoice.js'.format(settings.STATIC_URL)],
             css={'all': ['{}css/blocks/multichoice.css' \

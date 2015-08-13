@@ -35,4 +35,7 @@ class MultiChoiceForm(IdeviceForm):
             field.widget.attrs['option_id'] = self.instance.pk
             field.widget.attrs['right'] = self.instance.right_answer
             field.widget.attrs['multioptional'] = self.Meta.multioptional
+            field.widget.attrs['feedback'] = self.instance.feedback
+            if name == "feedback": # don't render feedback
+                return ''
             return renderer(self.initial[name])

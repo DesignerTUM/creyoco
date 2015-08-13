@@ -62,7 +62,6 @@ class MultiChoiceIdevice(Idevice):
         return d
 
     def from_dict(self, dic):
-        print(dic)
         self.question = dic['question']
         self.edit = dic['edit']
         #clear blank answer created by default for this question in the manager
@@ -70,7 +69,8 @@ class MultiChoiceIdevice(Idevice):
         for answer in dic['answers']:
             MultiChoiceOptionIdevice.objects.create(idevice=self,
                                                     option=answer['option'],
-                                                    right_answer=answer['right_answer']
+                                                    right_answer=answer['right_answer'],
+                                                    feedback=answer.get('feedback', None)
                                                     )
         self.save()
         return self
@@ -82,6 +82,8 @@ class MultiChoiceOptionIdevice(models.Model):
         help_text=_("An answer option for the multiple choice question. Check"
                     " the 'right answer' checkmark to mark the right option")
     )
+    feedback = fields.RichTextField("Feedback", "feedback", blank=True, null=True,
+                                    help_text="Feedback text for the answer")
     right_answer = models.BooleanField(default=False)
     idevice = models.ForeignKey("MultiChoiceIdevice", related_name="options")
 

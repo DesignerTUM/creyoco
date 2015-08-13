@@ -6,6 +6,7 @@ var multichoice = {
                 var options = $(this).parent().find("input[type='radio'], input[type='checkbox']");
                 var wrong = false;
                 var result_el = $(this).parent().find(".result");
+                $(this).parent().find(".feedback").remove();
                 $.each(options, function (n, el) {
                     $(el).next()
                         .removeClass("wrong_answer")
@@ -14,11 +15,13 @@ var multichoice = {
                         $(el).next().addClass('right_answer');
                         if (!($(el).prop("checked"))) {
                             wrong = true;
+                            multichoice.show_feedback($(el));
                         }
                     } else {
                         if ($(el).prop("checked")) {
                             $(el).next().addClass('wrong_answer');
                             wrong = true;
+                            multichoice.show_feedback($(el));
                         }
                     }
                 });
@@ -34,6 +37,12 @@ var multichoice = {
                 }
             });
         });
+    },
+    show_feedback: function($el) {
+        $("<p />")
+            .html($el.attr("data-feedback"))
+            .addClass("feedback")
+            .appendTo($el.parent());
     }
 };
 

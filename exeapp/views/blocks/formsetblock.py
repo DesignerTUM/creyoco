@@ -81,7 +81,8 @@ class BaseFormsetBlock(GenericBlock):
     def _render_view(self, template, form=None, formset=None):
         form = form or self.BlockForm(
             instance=self.idevice,
-            auto_id="%s_field_" % self.idevice.id + "%s")
+            auto_id="%s_field_" % self.idevice.id + "%s"
+        )
         formset = formset or self.BlockFormset(queryset=self.model. \
             objects.filter(idevice=self.idevice))
         try:
