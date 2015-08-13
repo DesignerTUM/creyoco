@@ -6,7 +6,7 @@ var multichoice = {
                 var options = $(this).parent().find("input[type='radio'], input[type='checkbox']");
                 var wrong = false;
                 var result_el = $(this).parent().find(".result");
-                $(this).parent().find(".feedback").remove();
+                $(this).parent().find(".mc-feedback").remove();
                 $.each(options, function (n, el) {
                     $(el).next()
                         .removeClass("wrong_answer")
@@ -41,7 +41,7 @@ var multichoice = {
     show_feedback: function($el) {
         $("<p />")
             .html($el.attr("data-feedback"))
-            .addClass("feedback")
+            .addClass("mc-feedback")
             .appendTo($el.parent());
     }
 };
