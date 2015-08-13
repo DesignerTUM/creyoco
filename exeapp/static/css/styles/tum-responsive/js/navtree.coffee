@@ -2,6 +2,7 @@ $ ->
   narrow = ->
     left = $("aside.left > nav")
     left.find("li").off()
+    left.find("ul > li > ul").removeClass()
     menu_toggle = $('#menu-toggle')
     menu_toggle.off()
     menu_toggle.click (e) ->

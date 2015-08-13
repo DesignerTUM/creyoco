@@ -7,6 +7,7 @@
       var left, menu_toggle;
       left = $("aside.left > nav");
       left.find("li").off();
+      left.find("ul > li > ul").removeClass();
       menu_toggle = $('#menu-toggle');
       menu_toggle.off();
       return menu_toggle.click(function(e) {
