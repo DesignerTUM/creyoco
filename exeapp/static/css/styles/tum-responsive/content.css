@@ -205,20 +205,21 @@ footer .container {
       font-style: italic; }
 
 @media (max-width: 767px) {
-  /* line 252, sass/content.scss */
+  /* line 250, sass/content.scss */
   .left {
     margin-left: -250px;
     transition: all 0.4s ease 0s;
-    position: absolute; }
+    position: absolute;
+    z-index: 1; }
 
-  /* line 260, sass/content.scss */
+  /* line 258, sass/content.scss */
   body.active .left {
     margin-left: 0px;
     width: 250px;
     transition: all 0.4s ease 0s;
     position: absolute; }
 
-  /* line 268, sass/content.scss */
+  /* line 266, sass/content.scss */
   #menu-toggle {
     display: inline-block;
     float: left;
