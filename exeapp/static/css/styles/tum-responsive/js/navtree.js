@@ -2,40 +2,62 @@
 (function() {
 
   $(function() {
-    var active, hide, lastTimeout, left, show, update;
-    show = function(el) {
-      return el.addClass("navshown").removeClass("navhidden");
+    var narrow, wide;
+    narrow = function() {
+      var left, menu_toggle;
+      left = $("aside.left > nav");
+      left.find("li").off();
+      menu_toggle = $('#menu-toggle');
+      menu_toggle.off();
+      return menu_toggle.click(function(e) {
+        e.preventDefault();
+        $('body').toggleClass('active');
+      });
     };
-    hide = function(el) {
-      return el.removeClass("navshown").addClass("navhidden");
+    wide = function() {
+      var active, hide, lastTimeout, left, show, update;
+      show = function(el) {
+        return el.addClass("navshown").removeClass("navhidden");
+      };
+      hide = function(el) {
+        return el.removeClass("navshown").addClass("navhidden");
+      };
+      lastTimeout = void 0;
+      update = function() {
+        clearTimeout(lastTimeout);
+        return lastTimeout = setTimeout((function() {
+          $(".navshown").slideDown();
+          return $(".navhidden:not(.neverhide)").slideUp();
+        }), 200);
+      };
+      left = $("aside.left > nav");
+      hide(left.find("ul > li > ul").hide());
+      active = left.find(".active").parent();
+      active.show().addClass("neverhide");
+      active.find("> li, > ul").show().addClass("neverhide");
+      active.parents("ul").show().addClass("neverhide");
+      left.find("li").on("mouseover", function(ev) {
+        show($(this).find("> ul"));
+        show($(this).parents("ul"));
+        return update();
+      });
+      return left.find("li").on("mouseout", function(ev) {
+        hide($(this).find("> ul"));
+        return update();
+      });
     };
-    lastTimeout = void 0;
-    update = function() {
-      clearTimeout(lastTimeout);
-      return lastTimeout = setTimeout((function() {
-        $(".navshown").slideDown();
-        return $(".navhidden:not(.neverhide)").slideUp();
-      }), 200);
-    };
-    left = $("aside.left > nav");
-    hide(left.find("ul > li > ul").hide());
-    active = left.find(".active").parent();
-    active.show().addClass("neverhide");
-    active.find("> li, > ul").show().addClass("neverhide");
-    active.parents("ul").show().addClass("neverhide");
-    left.find("li").on("mouseover", function(ev) {
-      show($(this).find("> ul"));
-      show($(this).parents("ul"));
-      return update();
+    $(window).on('resize', function() {
+      if ($(this).width() > 767) {
+        return wide();
+      } else {
+        return narrow();
+      }
     });
-    left.find("li").on("mouseout", function(ev) {
-      hide($(this).find("> ul"));
-      return update();
-    });
-    return $('#menu-toggle').click(function(e) {
-      e.preventDefault();
-      $('body').toggleClass('active');
-    });
+    if ($(window).width() > 767) {
+      return wide();
+    } else {
+      return narrow();
+    }
   });
 
 }).call(this);
