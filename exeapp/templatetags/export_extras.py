@@ -134,3 +134,13 @@ def process_internal_links(html, package):
     using the fully exported (and unique) file names for each node.
     """
     return common.renderInternalLinkNodeFilenames(package, html)
+
+@register.simple_tag
+def render_custom_include(page, filename):
+    include_file = os.path.join(page.exporter.style_dir, filename)
+    html = ""
+    with open(include_file) as f:
+        for line in f.readlines():
+            html += line
+
+    return html
