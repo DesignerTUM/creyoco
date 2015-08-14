@@ -249,7 +249,12 @@ footer .container {
       float: right;
       padding: 3px; }
 
-  /* line 293, sass/content.scss */
+  /* line 292, sass/content.scss */
+  img {
+    width: 100%;
+    height: auto; }
+
+  /* line 297, sass/content.scss */
   #menu-toggle {
     display: inline-block;
     float: left;

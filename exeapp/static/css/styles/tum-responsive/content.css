@@ -18,7 +18,7 @@ body {
 
 /* line 31, sass/content.scss */
 .container {
-  width: 1170px;
+  width: 100%;
   margin: 0 auto; }
 
 /* line 37, sass/content.scss */
@@ -127,7 +127,7 @@ header {
     width: 728px; }
   /* line 157, sass/content.scss */
   .content article {
-    width: 728px;
+    width: 100%;
     float: left; }
     /* line 160, sass/content.scss */
     .content article p {
@@ -212,13 +212,30 @@ footer .container {
     position: absolute;
     z-index: 1; }
 
-  /* line 259, sass/content.scss */
+  /* line 257, sass/content.scss */
+  img {
+    width: 100%;
+    height: auto; }
+
+  /* line 261, sass/content.scss */
+  .right {
+    display: none; }
+
+  /* line 265, sass/content.scss */
+  .middle {
+    width: 100% !important; }
+
+  /* line 268, sass/content.scss */
+  .content {
+    width: 100%; }
+
+  /* line 273, sass/content.scss */
   body.active .left {
     margin-left: 0px;
     width: 250px;
     transition: all 0.4s ease 0s;
     position: absolute; }
-    /* line 264, sass/content.scss */
+    /* line 278, sass/content.scss */
     body.active .left .glyphicon {
       margin: 2px 8px 2px 2px;
       border: 1px solid black;
@@ -226,7 +243,7 @@ footer .container {
       float: right;
       padding: 3px; }
 
-  /* line 274, sass/content.scss */
+  /* line 288, sass/content.scss */
   #menu-toggle {
     display: inline-block;
     float: left;

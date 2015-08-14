@@ -29,7 +29,7 @@ body {
 }
 
 .container {
-  width: 1170px;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -155,7 +155,7 @@ header {
   }
 
   article {
-    width: 728px;
+    width: 100%;
     float: left;
     p {
       margin-bottom: 20px;
@@ -253,6 +253,20 @@ footer {
     position: absolute;
     z-index: 1;
 
+  }
+  img{
+    width: 100%;
+    height: auto;
+  }
+  .right{
+    display: none;
+  }
+
+  .middle{
+    width: 100% !important;
+  }
+  .content{
+    width: 100%;
   }
 
   body.active{
