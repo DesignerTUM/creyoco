@@ -260,6 +260,14 @@ footer {
       width: 250px;
       transition: all 0.4s ease 0s;
       position: absolute;
+
+      .glyphicon{
+        margin: 2px 8px 2px 2px;
+        border: 1px solid black;
+        border-radius: 2px;
+        float: right;
+        padding: 3px;
+      }
     }
   }
 
