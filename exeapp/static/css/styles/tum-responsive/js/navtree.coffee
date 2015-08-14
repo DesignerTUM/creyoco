@@ -25,9 +25,12 @@ $ ->
     a_list = $(".left").find("ul").not(".neverhide").parent().children("a")
     a_list.each ->
       a = $(this)
-      a.html a.html() + '<span class=\'glyphicon glyphicon-chevron-down\'></span>'
+      url_text = a.html()
+      if url_text.indexOf("</span>") == -1
+        a.html url_text + '<span class=\'glyphicon glyphicon-chevron-down\'></span>'
       return
 
+    $('.left .glyphicon').off('click')
     $('.left .glyphicon').on 'click', (e) ->
       e.preventDefault()
       if $(this).hasClass('glyphicon-chevron-down')

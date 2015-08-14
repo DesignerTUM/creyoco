@@ -29,10 +29,14 @@
       left.find();
       a_list = $(".left").find("ul").not(".neverhide").parent().children("a");
       a_list.each(function() {
-        var a;
+        var a, url_text;
         a = $(this);
-        a.html(a.html() + '<span class=\'glyphicon glyphicon-chevron-down\'></span>');
+        url_text = a.html();
+        if (url_text.indexOf("</span>") === -1) {
+          a.html(url_text + '<span class=\'glyphicon glyphicon-chevron-down\'></span>');
+        }
       });
+      $('.left .glyphicon').off('click');
       $('.left .glyphicon').on('click', function(e) {
         var parent;
         e.preventDefault();
