@@ -1,12 +1,10 @@
 @import "compass/css3";
 @import "compass/css3/images";
 
-$lightblue: rgb(219, 226, 233);
-$blue: rgb(0, 33, 67);
-$white: lighten(white, 100%);
-$text_black: rgb(51, 51, 51);
+$lightgreen: rgb(86%, 91%, 76%);
+$green: rgb(49%, 70%, 18%);
 $grey: lighten(black, 45%);
-$headerimage: "tumlogo.png";
+$headerimage: "tumlogo_bea.png";
 
 @import url("//fonts.googleapis.com/css?family=Open+Sans:400,100,300,500,700,900");
 @import url("//fonts.googleapis.com/css?family=Droid+Serif:400,700");
@@ -19,12 +17,11 @@ $headerimage: "tumlogo.png";
 
 body {
   font-size: 100%;
-  font-family: Helvetica Neue, HelveticaNeue, Helvetica, Arial, Lucida Grande, sans-serif;
+  font-family: "Open Sans";
   font-size: 14px;
   line-height: 1.428571429;
-  color: $text_black;
-  //background-image: url(img/debut_light.png);
-  background-color: $white;
+  color: lighten(black, 30%);
+  background-image: url(img/debut_light.png);
   background-repeat: repeat;
 }
 
@@ -41,36 +38,39 @@ nav {
 
 h1 {
   font-size: 24px;
+  font-family: "Droid Serif";
   font-weight: bold;
-  color: $blue;
+  color: $green;
   letter-spacing: 1px;
 }
 
 h2 {
-  color: $blue;
+  color: $green;
   font-size: 16px;
+  font-family: "Droid Serif";
   font-weight: bold;
   letter-spacing: 1px;
-  border-bottom: 1px solid $blue;
+  border-bottom: 1px solid $green;
   margin-bottom: 10px;
 }
 
 h3 {
-  color: $blue;
+  color: $green;
   font-size: 14px;
   font-weight: bold;
 }
 
 header {
-  background-color: $blue;
+  background-color: $green;
   padding-top: 10px;
   padding-bottom: 10px;
   margin-bottom: 30px;
   box-shadow: 0 1px 10px -2px gray;
-  height: 84px;
+
   span {
     color: white;
     font-size: 30px;
+    font-family: "Droid Serif";
   }
 
   a {
@@ -84,22 +84,18 @@ header {
   }
 }
 
-#menu-toggle {
-  display: none;
-}
-
 .content {
   width: 1170px;
   margin: 0 auto;
   .left {
-    background-color: $lightblue;
+    background-color: rgba(86%, 91%, 76%, 0.6);
     float: left;
     width: 200px;
     margin-right: 20px;
     padding-top: 10px;
     padding-bottom: 10px;
     border-radius: 5px;
-    border: 1px solid $blue;
+    border: 1px solid $green;
 
     ul {
       li {
@@ -113,11 +109,11 @@ header {
           text-decoration: none;
 
           &.active {
-            color: $blue;
+            color: $green;
             font-weight: bold;
           }
           &:hover {
-            background-color: $blue;
+            background-color: $green;
             color: white;
           }
         }
@@ -141,10 +137,10 @@ header {
 
         .rightimages {
             margin-bottom: 10px;
-            //background: url("img/right_logo.png");
+            background: url("img/right_logo.png");
             background-repeat: no-repeat;
-            //width: image-width("right_logo.png");
-            //height: image-height("right_logo.png");
+            width: image-width("right_logo.png");
+            height: image-height("right_logo.png");
         }
 	}
 
@@ -178,12 +174,15 @@ header {
       margin-bottom: 20px;
     }
     strong {
-      color: $blue;
+      color: $green;
       font-weight: bold;
     }
     .lup {
       float: right;
       margin-left: 20px;
+    }
+    table tr p {
+      margin: 3px 5px 3px 5px;
     }
     #idevice {
       ul {
@@ -191,6 +190,7 @@ header {
         margin-bottom: 0px;
         li {
           margin-left: 0px;
+          font-family: "FontAwesome";
           padding-left: 0px;
         }
 
@@ -200,7 +200,7 @@ header {
           color: $grey;
           text-decoration: none;
           &:hover {
-            color: $blue;
+            color: $green;
           }
         }
 
@@ -211,6 +211,7 @@ header {
         padding-left: 30px !important;
         li {
           margin-left: 0px !important;
+          font-family: "FontAwesome";
           list-style: none;
           font-weight: bold;
           ul li {
@@ -233,7 +234,7 @@ header {
 footer {
   .container {
     margin-top: 30px;
-    border-top: 1px solid $blue;
+    border-top: 1px solid $green;
 
     .copyright {
       font-size: 11px;
@@ -243,38 +244,6 @@ footer {
         font-style: italic;
       }
     }
-  }
-}
-
-@media (max-width:767px) {
-  .left{
-    margin-left: -250px;
-    transition: all 0.4s ease 0s;
-    position: absolute;
-    z-index: 1;
-
-  }
-
-  body.active{
-    .left {
-      margin-left: 0px;
-      width: 250px;
-      transition: all 0.4s ease 0s;
-      position: absolute;
-      .glyphicon{
-        margin: 2px 8px 2px 2px;
-        border: 1px solid black;
-        border-radius: 2px;
-        float: right;
-        padding: 3px;
-      }
-    }
-  }
-
-  #menu-toggle {
-    display: inline-block;
-    float: left;
-    margin: 0em 1em 0em 1em;
   }
 }
 
