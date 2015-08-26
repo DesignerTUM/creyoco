@@ -26,14 +26,14 @@ nav ul {
   padding-left: 0; }
 
 /* line 42, sass/content.scss */
-h1 {
+.middle h1 {
   font-size: 24px;
   font-weight: bold;
   color: #002143;
   letter-spacing: 1px; }
 
 /* line 49, sass/content.scss */
-h2 {
+.middle h2 {
   color: #002143;
   font-size: 16px;
   font-weight: bold;
@@ -42,7 +42,7 @@ h2 {
   margin-bottom: 10px; }
 
 /* line 58, sass/content.scss */
-h3 {
+.middle h3 {
   color: #002143;
   font-size: 14px;
   font-weight: bold; }

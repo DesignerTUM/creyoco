@@ -36,7 +36,7 @@ nav {
   }
 }
 
-h1 {
+.middle h1 {
   font-size: 24px;
   font-family: "Droid Serif";
   font-weight: bold;
@@ -46,7 +46,7 @@ h1 {
   }
 }
 
-h2 {
+.middle h2 {
   font-size: 16px;
   font-family: "Droid Serif";
   font-weight: bold;
@@ -55,13 +55,15 @@ h2 {
   border-bottom: 1px solid $green;
 }
 
-h3 {
+.middle h3 {
   font-size: 14px;
   font-weight: bold;
 }
 
-h1, h2, h3, h4, h5 {
-  color: $green;
+.middle {
+    h1, h2, h3, h4, h5 {
+      color: $green;
+    }
 }
 
 header {
