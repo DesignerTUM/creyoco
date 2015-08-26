@@ -246,7 +246,15 @@ footer {
   }
 }
 
-@media (max-width:767px) {
+@media (max-width:1200px) {
+  .iDevice {
+    margin-left: 3vw;
+    margin-right: 3vw;
+    .iDevice_inner, > p {
+      margin-left: 1vw;
+      margin-right: 1vw;
+    }
+  }
   .left{
     margin-left: -250px;
     transition: all 0.4s ease 0s;

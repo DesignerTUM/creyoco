@@ -211,37 +211,46 @@ footer .container {
 #menu-toggle {
   display: none; }
 
-@media (max-width: 767px) {
+@media (max-width: 1200px) {
   /* line 251, sass/content.scss */
+  .iDevice {
+    margin-left: 3vw;
+    margin-right: 3vw; }
+    /* line 254, sass/content.scss */
+    .iDevice .iDevice_inner, .iDevice > p {
+      margin-left: 1vw;
+      margin-right: 1vw; }
+
+  /* line 259, sass/content.scss */
   .left {
     margin-left: -250px;
     transition: all 0.4s ease 0s;
     position: absolute;
     z-index: 1; }
 
-  /* line 257, sass/content.scss */
+  /* line 265, sass/content.scss */
   .right {
     display: none; }
 
-  /* line 261, sass/content.scss */
+  /* line 269, sass/content.scss */
   .middle {
     width: 100% !important; }
 
-  /* line 264, sass/content.scss */
+  /* line 272, sass/content.scss */
   .content {
     width: 100%; }
 
-  /* line 269, sass/content.scss */
+  /* line 277, sass/content.scss */
   body.active .left {
     margin-left: 0px;
     width: 250px;
     transition: all 0.4s ease 0s;
     position: absolute;
     background-color: #dbe8c1; }
-    /* line 277, sass/content.scss */
+    /* line 285, sass/content.scss */
     body.active .left ul li a {
       text-indent: 0px; }
-    /* line 283, sass/content.scss */
+    /* line 291, sass/content.scss */
     body.active .left .glyphicon {
       margin: 2px 8px 2px 2px;
       border: 1px solid black;
@@ -249,12 +258,12 @@ footer .container {
       float: right;
       padding: 3px; }
 
-  /* line 292, sass/content.scss */
+  /* line 300, sass/content.scss */
   img {
     width: 100%;
     height: auto; }
 
-  /* line 297, sass/content.scss */
+  /* line 305, sass/content.scss */
   #menu-toggle {
     display: inline-block;
     float: left;
