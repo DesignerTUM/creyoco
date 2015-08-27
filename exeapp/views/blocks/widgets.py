@@ -1,6 +1,7 @@
 import sys
 import re
 
+from ckeditor.widgets import CKEditorWidget
 from tinymce.widgets import TinyMCE
 from django.conf import settings
 from django.utils.safestring import mark_safe
@@ -16,7 +17,7 @@ else:
     from urllib import unquote
 
 
-class FreeTextWidget(TinyMCE):
+class FreeTextWidget(CKEditorWidget):
     def __init__(self, content_language=None, attrs=None, mce_attrs=None,
                  height=None):
         if height is not None:

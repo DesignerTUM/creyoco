@@ -140,6 +140,7 @@ INSTALLED_APPS = (
     'strict_filebrowser',
     'exeapp',
     'gunicorn',
+    'ckeditor',
 )
 
 ABSOLUTE_URL_OVERRIDES = {
@@ -237,3 +238,6 @@ REQUIRE_STANDALONE_MODULES = {
         "build_profile": "app.build.js",
     }
 }
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_JQUERY_URL = os.path.join(STATIC_URL, "scripts/bower_components/jquery/jquery.min.js")
