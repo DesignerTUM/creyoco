@@ -53,18 +53,27 @@ define(['jquery', 'wamp_handler', 'jquery-form', 'jquery-pjax', 'jquery-jsonrpc'
                         var idevice_id = $form.attr("idevice_id");
                         exports.scroll_to_element($form);
                         $form.find("textarea").each(function () {
-                            tinyMCE.execCommand("mceRemoveControl", true, $(this).attr("id"));
+                            var editor = CKEDITOR.instances[$(this).attr("id")];
+                            if (editor) { editor.destroy(true); }
                         });
                         if (responseText) {
                             exports.get_media("authoring/?idevice_id=" + idevice_id + "&media=true");
+//                            $(responseText).find("textarea").each(function () {
+//                                CKEDITOR.replace($(this).attr("id"));
+//                            });
                             $form.html(responseText);
+                            $form.find("textarea").each(function () {
+                                CKEDITOR.replace($(this).attr("id"));
+                            });
                         } else {
                             exports.reload_authoring();
                         }
                         exports.bind_wamp();
                     },
                     beforeSerialize: function () {
-                        tinyMCE.triggerSave(true, true);
+                        for (var x in CKEDITOR.instances)
+                           CKEDITOR.instances[x].getData();
+
                     },
                     beforeSubmit: function (arr, $form, opts) {
                         for (var i = 0; i < arr.length; i++) {
@@ -88,7 +97,6 @@ define(['jquery', 'wamp_handler', 'jquery-form', 'jquery-pjax', 'jquery-jsonrpc'
             bind_wamp: function () {
                 $("input[name='idevice_action']").off("click").on("click", function () {
                     var connection = wamp_handler.create_connection();
-                    var _this = this;
                     connection.onopen = function (session) {
                         var idevice_id = $(_this).parents(".idevice_form").attr("idevice_id");
                         if ($(_this).val() == "edit_mode") {

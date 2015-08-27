@@ -135,7 +135,6 @@ INSTALLED_APPS = (
     'jsonrpc',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-    'tinymce',
     'check_media',
     'strict_filebrowser',
     'exeapp',
