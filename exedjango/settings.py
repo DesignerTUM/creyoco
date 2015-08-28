@@ -7,7 +7,7 @@ import sys
 def _get_file_from_root(folder_name):
     '''Returns path to a file or folder in root of the project'''
     return os.path.join(os.path.dirname(os.path.dirname(__file__)), folder_name).replace('\\',
-                                                                        '/')
+                                                                                         '/')
 
 
 DEBUG = True
@@ -86,7 +86,7 @@ SECRET_KEY = 'g4c9r)uzvpig@%g5mc+6i$6o6tm-qh@^l=*8=#hw+jo_j_*fl_'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-    #     'django.template.loaders.eggs.Loader',
+    # 'django.template.loaders.eggs.Loader',
 )
 
 TEMPLATE_DIRS = (
@@ -115,7 +115,6 @@ CACHES = {
         'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
     }
 }
-
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -242,7 +241,95 @@ CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_JQUERY_URL = os.path.join(STATIC_URL, "scripts/bower_components/jquery/jquery.min.js")
 CKEDITOR_CONFIGS = {
     'creyoco': {
-        "toolbar": "Basic",
+        "toolbar": [
+            {
+                "name": "clipboard",
+                "items": [
+                    "Cut",
+                    "Copy",
+                    "Paste",
+                    "PasteText",
+                    "PasteFromWord",
+                    "-",
+                    "Undo",
+                    "Redo"
+                ]
+            },
+            {
+                "name": "paragraph",
+                "items": [
+                    "NumberedList",
+                    "BulletedList",
+                    "-",
+                    "Outdent",
+                    "Indent",
+                    "-",
+                    "Blockquote",
+                    "-",
+                    "JustifyLeft",
+                    "JustifyCenter",
+                    "JustifyRight",
+                    "JustifyBlock"
+                ]
+            },
+            {
+                "name": "links",
+                "items": [
+                    "Link",
+                    "Unlink",
+                    "Anchor"
+                ]
+            },
+            {
+                "name": "insert",
+                "items": [
+                    "Image",
+                    "Table",
+                    "HorizontalRule"
+                ]
+            },
+            "/",
+            {
+                "name": "styles",
+                "items": [
+                    "Styles",
+                    "Format",
+                    "FontSize"
+                ]
+            },
+            {
+                "name": "basicstyles",
+                "items": [
+                    "Bold",
+                    "Italic",
+                    "Underline",
+                    "Strike",
+                    "Subscript",
+                    "Superscript",
+                    "-",
+                    "RemoveFormat"
+                ]
+            },
+            {
+                "name": "colors",
+                "items": [
+                    "TextColor",
+                    "BGColor"
+                ]
+            },
+            {
+                "name": "document",
+                "items": [
+                    "Source"
+                ]
+            },
+            {
+                "name": "tools",
+                "items": [
+                    "Maximize"
+                ]
+            }
+        ],
         "width": "720",
     },
 }
