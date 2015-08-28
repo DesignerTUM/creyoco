@@ -20,7 +20,8 @@ urlpatterns = patterns('',
                         include('exeapp.package_urls')),
                        (r'pages', include('django.contrib.flatpages.urls')),
                        (r'^ckeditor/', include('ckeditor.urls')),
-                    )
+                       (r'^ckeditor_config/$', 'exeapp.views.authoring.get_ckeditor_config'),
+)
 
 if settings.DEBUG:
     urlpatterns += patterns('',

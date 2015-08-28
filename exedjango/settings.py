@@ -240,3 +240,9 @@ REQUIRE_STANDALONE_MODULES = {
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_JQUERY_URL = os.path.join(STATIC_URL, "scripts/bower_components/jquery/jquery.min.js")
+CKEDITOR_CONFIGS = {
+    'creyoco': {
+        "toolbar": "Basic",
+        "width": "720",
+    },
+}

@@ -607,6 +607,7 @@ require(['jquery', "common", "eyecandy", "wamp_handler", 'jquery-pjax', 'jquery-
 //            common.get_outline_pane().attr('current_node', common.get_current_node().attr('nodeid'));
             updateTitle();
             $.pjax.click(event, {container: "#authoring"});
+
         }
 
         function set_current_style() {

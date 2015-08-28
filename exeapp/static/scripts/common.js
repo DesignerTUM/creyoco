@@ -46,7 +46,11 @@ define(['jquery', 'wamp_handler', 'jquery-form', 'jquery-pjax', 'jquery-jsonrpc'
 
         var exports = {
             initialize_authoring: function () {
-
+                // initialize uninitialized editors
+                $(".idevice_form textarea").each(function () {
+                    if ($(this).css("display") == "none") return false;
+                    CKEDITOR.replace($(this).attr("id"), {'customConfig': '/exeapp/ckeditor_config/'});
+                });
                 //$(".action_button").bind("click", handle_action_button)
                 $(".idevice_form").ajaxForm({
                     success: function (responseText, statusText, xhr, $form) {
@@ -58,12 +62,9 @@ define(['jquery', 'wamp_handler', 'jquery-form', 'jquery-pjax', 'jquery-jsonrpc'
                         });
                         if (responseText) {
                             exports.get_media("authoring/?idevice_id=" + idevice_id + "&media=true");
-//                            $(responseText).find("textarea").each(function () {
-//                                CKEDITOR.replace($(this).attr("id"));
-//                            });
                             $form.html(responseText);
                             $form.find("textarea").each(function () {
-                                CKEDITOR.replace($(this).attr("id"));
+                                CKEDITOR.replace($(this).attr("id"), {'customConfig': '/exeapp/ckeditor_config/'});
                             });
                         } else {
                             exports.reload_authoring();
@@ -72,8 +73,7 @@ define(['jquery', 'wamp_handler', 'jquery-form', 'jquery-pjax', 'jquery-jsonrpc'
                     },
                     beforeSerialize: function () {
                         for (var x in CKEDITOR.instances)
-                           CKEDITOR.instances[x].getData();
-
+                           CKEDITOR.instances[x].updateElement();
                     },
                     beforeSubmit: function (arr, $form, opts) {
                         for (var i = 0; i < arr.length; i++) {

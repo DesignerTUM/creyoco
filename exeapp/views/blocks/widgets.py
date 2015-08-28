@@ -18,7 +18,17 @@ else:
 
 
 class FreeTextWidget(CKEditorWidget):
-    def __init__(self, content_language=None, attrs=None, mce_attrs=None,
+
+    @property
+    def media(self):
+        media = self.__class__.Media()
+        return forms.Media(
+        js=list(media.js),
+        css={"all": []})
+
+    js_modules = []
+
+    def __init__(self, config_name='creyoco', content_language=None, attrs=None, mce_attrs=None,
                  height=None):
         if height is not None:
             style_height = "height: %dpx;" % height
@@ -27,7 +37,7 @@ class FreeTextWidget(CKEditorWidget):
                 attrs['style'] += style_height
             else:
                 attrs['style'] = style_height
-        super(FreeTextWidget, self).__init__(content_language,
+        super(FreeTextWidget, self).__init__(config_name, content_language,
                                              attrs,
                                              mce_attrs)
 

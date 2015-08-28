@@ -4,16 +4,21 @@ Created on May 17, 2011
 @author: Alendit
 """
 import json as simplejson
+from ckeditor.widgets import CKEditorWidget
 
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, Http404, \
     HttpResponseBadRequest
 from django.core.exceptions import ObjectDoesNotExist
 from django import forms
+from django.conf import settings
+from django.shortcuts import render_to_response
+from django.views.decorators.cache import cache_page
 
 from exeapp.shortcuts import get_package_by_id_or_error
 from exeapp import shortcuts
 from exeapp.views.blocks.blockfactory import block_factory
+import json
 
 
 @login_required
@@ -60,7 +65,7 @@ def get_media_list(node, ajax=False):
     """Returns the idevice-specific media list for a given node. Always
     includes tinymce compressor, since it can't be loaded dynamically"""
     media = forms.Media(
-        js=["/static/tiny_mce/tiny_mce.js", "/tinymce/filebrowser/"])
+        js=["/static/ckeditor/ckeditor/ckeditor.js", "/tinymce/filebrowser/"])
     a = 1
     b = 2
     js_modules = set()
@@ -98,6 +103,14 @@ def get_unique_media_list(node, idevice):
         'css': media._css,
         'js_modules': js_modules
     }
+
+@cache_page(60 * 60 * 24 * 30)
+def get_ckeditor_config(request):
+    mock_widget = CKEditorWidget(config_name="creyoco")
+    config = {key: json.dumps(value) for key, value in mock_widget.config.items()}
+    return render_to_response("exe/ckconfig.js",
+                              {'config': config},
+                              content_type="application/json")
 
 
 @login_required
