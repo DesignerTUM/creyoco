@@ -2,7 +2,6 @@ import sys
 import re
 
 from ckeditor.widgets import CKEditorWidget
-from tinymce.widgets import TinyMCE
 from django.conf import settings
 from django.utils.safestring import mark_safe
 from django.forms.widgets import TextInput

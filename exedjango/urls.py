@@ -1,9 +1,11 @@
 from django.conf.urls import *
 
 from django.contrib import admin
-
+from exeapp.utils.filebrowser_monkeypatch import monkey_patch_url
 from strict_filebrowser.sites import site
 admin.autodiscover()
+
+monkey_patch_url()
 
 urlpatterns = patterns('',
     (r'^$', include('exeapp.urls')),

@@ -115,7 +115,6 @@ CACHES = {
         'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
     }
 }
-
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -125,7 +124,6 @@ INSTALLED_APPS = (
     'django.contrib.flatpages',
     'django_autobahn',
     'require',
-    'grappelli',
     'filebrowser',
     'registration',
     'django.contrib.admin',
@@ -140,6 +138,7 @@ INSTALLED_APPS = (
     'gunicorn',
     'ckeditor',
 )
+
 
 ABSOLUTE_URL_OVERRIDES = {
     'auth.user': lambda user: '/',
@@ -208,8 +207,8 @@ TINYMCE_DEFAULT_CONFIG = {
 FILEBROWSER_PATH_FILEBROWSER_MEDIA = "%s/filebrowser/" % STATIC_ROOT
 FILEBROWSER_URL_FILEBROWSER_MEDIA = "%sfilebrowser/" % STATIC_URL
 
-FILEBROWSER_URL_TINYMCE = "%stiny_mce/" % STATIC_URL
-FILEBROWSER_PATH_TINYMCE = "/tinymce/"
+# FILEBROWSER_URL_TINYMCE = "%stiny_mce/" % STATIC_URL
+# FILEBROWSER_PATH_TINYMCE = "/tinymce/"
 
 FILEBROWSER_SAVE_FULL_URL = True
 
@@ -241,6 +240,7 @@ CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_JQUERY_URL = os.path.join(STATIC_URL, "scripts/bower_components/jquery/jquery.min.js")
 CKEDITOR_CONFIGS = {
     'creyoco': {
+        "filebrowserBrowseUrl": '/exeapp/filebrowser/browse/?pop=3',
         "toolbar": [
             {
                 "name": "clipboard",
@@ -330,6 +330,6 @@ CKEDITOR_CONFIGS = {
                 ]
             }
         ],
-        "width": "720",
+        "width": "740",
     },
 }

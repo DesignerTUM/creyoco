@@ -65,7 +65,8 @@ def get_media_list(node, ajax=False):
     """Returns the idevice-specific media list for a given node. Always
     includes tinymce compressor, since it can't be loaded dynamically"""
     media = forms.Media(
-        js=["/static/ckeditor/ckeditor/ckeditor.js", "/tinymce/filebrowser/"])
+        js=["/static/ckeditor/ckeditor/ckeditor.js",
+            "/static/filebrowser/js/FB_CKEditor.js"])
     a = 1
     b = 2
     js_modules = set()
@@ -75,9 +76,6 @@ def get_media_list(node, ajax=False):
         media += block.media
         js_modules = js_modules.union(block.js_modules)
     if ajax:
-        # don't include tinymce js in ajax script loading
-        if "/static/tiny_mce/tiny_mce.js" in media._js:
-            media._js.remove("/static/tiny_mce/tiny_mce.js")
         return simplejson.dumps(
             {
                 "js": media._js,
@@ -95,9 +93,6 @@ def get_unique_media_list(node, idevice):
     block = block_factory(idevice.as_child())
     media = block.media
     js_modules = block.js_modules
-    # compressor is always loaded per default
-    if "/static/tiny_mce/tiny_mce.js" in media._js:
-        media._js.remove("/static/tiny_mce/tiny_mce.js")
     return {
         'js': media._js,
         'css': media._css,
