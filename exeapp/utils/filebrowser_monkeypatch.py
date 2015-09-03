@@ -1,4 +1,6 @@
 import types
+from django.views.decorators.cache import never_cache
+from django.views.decorators.clickjacking import xframe_options_sameorigin
 from django.views.decorators.csrf import csrf_exempt
 from filebrowser.decorators import path_exists, file_exists
 from filebrowser.sites import filebrowser_view
@@ -27,6 +29,11 @@ def get_urls(self):
     )
     return urlpatterns
 
+def filebrowser_view(view):
+    "Only let staff browse the files"
+    return never_cache(xframe_options_sameorigin(view))
+
 
 def monkey_patch_url():
     site.get_urls = types.MethodType(get_urls, site)
+    site.filebrowser_view = types.MethodType(filebrowser_view, site)
