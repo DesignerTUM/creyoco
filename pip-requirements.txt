@@ -6,12 +6,9 @@ distribute
 django-extensions
 ipython>=0.13
 django-registration-redux
-django-grappelli
-django-tinymce==1.5.2
 django-sendfile
 django-cymysql
 -e git+https://github.com/alendit/django-json-rpc.git#egg=django-json-rpc
--e git+https://github.com/alendit/django-filebrowser.git#egg=django-filebrowser
 pillow
 gunicorn
 feedparser
@@ -21,3 +18,5 @@ aiohttp
 PyPDF2
 twisted
 wikipedia
+django-filebrowser-no-grappelli
+ckeditor
