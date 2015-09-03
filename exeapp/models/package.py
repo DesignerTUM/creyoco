@@ -298,7 +298,6 @@ class PackageManager(models.Manager):
         return package
 
     def _copy_resources_from_zip(self, list, dir, pack):
-        print(list)
         wiki_dir = Path(os.path.join(settings.MEDIA_ROOT, settings.WIKI_CACHE_DIR))
         nonwiki_dir = Path(pack.user.profile.media_path)
         for f in list:
@@ -316,7 +315,11 @@ class PackageManager(models.Manager):
                 if Path.exists(nonwiki_dir) is False:
                     nonwiki_dir.mkdir()
                 if Path.exists(f2) is False:
-                    Path.copyfile(f, f2)
+                    try:
+                        Path.copyfile(f, f2)
+                    except FileNotFoundError:
+                        # some icons may be missing
+                        pass
 
     def import_package(self, filename, user):
         p = None
@@ -337,6 +340,7 @@ class PackageManager(models.Manager):
                         self._copy_resources_from_zip(json_data['files'], temp_dir, p)
                         dublincore = DublinCore.objects.create()
                         p.dublincore = dublincore
+                        dublincore.save()
                         p.save()
                         Node.objects.import_node(json_data['nodes'][0], p, None)
 

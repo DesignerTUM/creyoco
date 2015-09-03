@@ -275,7 +275,11 @@ span.shareduser {
     //border: 1px dotted $darkgrey;
     min-height: 400px;
     max-height: 750px;
-    overflow: auto;
+    overflow: visible;
+    #authoring {
+        overflow: auto;
+        max-height: 720px;
+    }
     margin-bottom: 40px;
     padding: 15px;
     #authoring {

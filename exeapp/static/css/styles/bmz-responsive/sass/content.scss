@@ -36,7 +36,7 @@ nav {
   }
 }
 
-h1 {
+.middle h1 {
   font-size: 24px;
   font-family: "Droid Serif";
   font-weight: bold;
@@ -46,7 +46,7 @@ h1 {
   }
 }
 
-h2 {
+.middle h2 {
   font-size: 16px;
   font-family: "Droid Serif";
   font-weight: bold;
@@ -55,13 +55,15 @@ h2 {
   border-bottom: 1px solid $green;
 }
 
-h3 {
+.middle h3 {
   font-size: 14px;
   font-weight: bold;
 }
 
-h1, h2, h3, h4, h5 {
-  color: $green;
+.middle {
+    h1, h2, h3, h4, h5 {
+      color: $green;
+    }
 }
 
 header {
@@ -110,7 +112,9 @@ header {
           display: inline-block;
           padding-left: 20px;
           width: 100%;
-          line-height: 25px;
+          padding-top: 4px;
+          padding-bottom: 4px;
+          line-height: 18px;
           color: $grey;
           text-decoration: none;
           text-indent: -20px;
@@ -247,7 +251,15 @@ footer {
   display: none;
 }
 
-@media (max-width:767px) {
+@media (max-width:1200px) {
+  .iDevice {
+    margin-left: 3vw;
+    margin-right: 3vw;
+    .iDevice_inner, > p {
+      margin-left: 1vw;
+      margin-right: 1vw;
+    }
+  }
   .left{
     margin-left: -250px;
     transition: all 0.4s ease 0s;

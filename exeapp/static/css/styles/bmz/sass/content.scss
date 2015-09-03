@@ -108,9 +108,11 @@ header {
         margin-left: 15px;
         > a {
           display: inline-block;
-          padding-left: 20px;
           width: 100%;
-          line-height: 25px;
+          padding-left: 20px;
+          padding-top: 4px;
+          padding-bottom: 4px;
+          line-height: 18px;
           color: $grey;
           text-decoration: none;
           text-indent: -20px;

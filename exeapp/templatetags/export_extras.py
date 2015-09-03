@@ -139,8 +139,11 @@ def process_internal_links(html, package):
 def render_custom_include(page, filename):
     include_file = os.path.join(page.exporter.style_dir, filename)
     html = ""
-    with open(include_file) as f:
-        for line in f.readlines():
-            html += line
+    try:
+        with open(include_file) as f:
+            for line in f.readlines():
+                html += line
+    except FileNotFoundError:
+        pass
 
     return html

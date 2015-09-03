@@ -79,26 +79,26 @@
 
         <div id="outline">
             <div class="clearfix">
-                <button class="first" id="btnAdd" class="newline-first"><i
-                        class="icon-plus icon-large"></i></button>
-                <button id="btnRemove"><i
-                        class="icon-trash icon-large jstree-drop"></i></button>
-                <button id="btnRename" action="RenameNode"><i
-                        class="icon-pencil icon-large"></i></button>
-                <button id="btnDuplicate"><i class="icon-copy icon-large"></i>
-                </button>
-                <button class="last" onclick="$('.secondary').toggle(800);"><i
-                        class="icon-sitemap icon-large"></i></button>
+                <button class="first" id="btnAdd" class="newline-first" title='{% trans "Add Page" %}'>
+                    <i class="icon-plus icon-large"></i> </button>
+                <button id="btnRemove" title='{% trans "Remove Page" %}'>
+                    <i class="icon-trash icon-large jstree-drop"></i></button>
+                <button id="btnRename" action="RenameNode" title='{% trans "Rename Page" %}'>
+                    <i class="icon-pencil icon-large"></i></button>
+                <button id="btnDuplicate" title='{% trans "Duplicate Page" %}'>
+                    <i class="icon-copy icon-large"></i> </button>
+                <button class="last" onclick="$('.secondary').toggle(800);" title='{% trans "More..." %}'>
+                    <i class="icon-sitemap icon-large"></i></button>
             </div>
             <div class="secondary clearfix">
-                <button class="first" id="btnDemote"><i
-                        class="icon-arrow-right icon-large"></i></button>
-                <button id="btnPromote"><i
-                        class="icon-arrow-left icon-large"></i></button>
-                <button id="btnUp"><i class="icon-chevron-up icon-large"></i>
-                </button>
-                <button class="last" id="btnDown"><i
-                        class="icon-chevron-down icon-large"></i></button>
+                <button class="first" id="btnDemote" title='{% trans "Demote Page" %}'>
+                    <i class="icon-arrow-right icon-large"></i></button>
+                <button id="btnPromote" title='{% trans "Promote Page" %}'>
+                    <i class="icon-arrow-left icon-large"></i></button>
+                <button id="btnUp" title='{% trans "Move Up" %}'>
+                    <i class="icon-chevron-up icon-large"></i></button>
+                <button class="last" id="btnDown" title='{% trans "Move Down" %}'>
+                    <i class="icon-chevron-down icon-large"></i></button>
             </div>
             {% render_outline package current_node %}
         </div>

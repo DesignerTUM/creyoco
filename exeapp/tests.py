@@ -8,6 +8,7 @@ _clean_up_database_and_store for it.
 
 import os
 import sys
+from exeapp.utils.path import Path
 
 PY2 = sys.version_info[0] == 2
 try:
@@ -599,6 +600,7 @@ class ExportTestCase(TestCase):
         self.data.root.add_idevice(IDEVICE_TYPE)
         exporter = Mock()
         exporter.pages = []
+        exporter.style_dir = Path(settings.STATIC_ROOT) / "css" / "styles" / "bmz"
         websitepage = WebsitePage(self.data.root, 0, exporter)
         exporter.pages.append(websitepage)
         self.assertTrue('class="%s" id="id1"' % IDEVICE_TYPE
