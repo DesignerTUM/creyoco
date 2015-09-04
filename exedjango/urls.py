@@ -9,9 +9,7 @@ monkey_patch_url()
 
 urlpatterns = patterns('',
     (r'^$', include('exeapp.urls')),
-    (r'grappelli', include('grappelli.urls')),
     (r'filebrowser/', include(site.urls)),
-    (r'tinymce/', include('tinymce.urls')),
     (r'^exeapp/', include('exeapp.urls')),
     (r'^admin/', include(admin.site.urls)),
     (r'^accounts/', include('registration.backends.simple.urls')),
