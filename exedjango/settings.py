@@ -218,7 +218,7 @@ FILEBROWSER_STRICT_PIL = True
 FILEBROWSER_EXTENSIONS = {
     'Folder': [''],
     'Image': ['.jpg', '.jpeg', '.gif', '.png', '.tif', '.tiff'],
-    'Document': ['.pdf', '.doc', '.rtf', '.txt', '.xls', '.csv', '.docx', '.ppt', '.pptx'],
+    'Document': ['.pdf', '.doc', '.rtf', '.txt', '.xls', '.xlsx', '.csv', '.docx', '.ppt', '.pptx'],
     'Video': ['.mov', '.wmv', '.mpeg', '.mpg', '.avi', '.rm'],
     'Audio': ['.mp3', '.mp4', '.wav', '.aiff', '.midi', '.m4p']
 }
@@ -242,6 +242,7 @@ CKEDITOR_CONFIGS = {
     'creyoco': {
         "filebrowserBrowseUrl": '/exeapp/filebrowser/browse/?pop=3',
         "removeDialogTabs": 'link:upload;image:Upload',
+        "autoParagraph": False,
         "toolbar": [
             {
                 "name": "clipboard",
