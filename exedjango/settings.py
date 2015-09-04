@@ -241,6 +241,7 @@ CKEDITOR_JQUERY_URL = os.path.join(STATIC_URL, "scripts/bower_components/jquery/
 CKEDITOR_CONFIGS = {
     'creyoco': {
         "filebrowserBrowseUrl": '/exeapp/filebrowser/browse/?pop=3',
+        "removeDialogTabs": 'link:upload;image:Upload',
         "toolbar": [
             {
                 "name": "clipboard",
