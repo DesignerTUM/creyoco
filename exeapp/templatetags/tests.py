@@ -1,6 +1,7 @@
 import unittest
 import sys
 from bs4 import BeautifulSoup
+from exeapp.templatetags.common import strip_p
 
 from exeapp.templatetags.mainpage_extras import idevice_ul
 from exeapp.templatetags.authoring_extras import *
@@ -77,3 +78,11 @@ class MainpageExtrasTestCase(unittest.TestCase):
         self.assertEquals(len(soup.findAll('li')), 5)
         self.assertEquals(len(soup.findAll('a')), 5)
         self.assertEquals(len(soup.findAll('ul')), 3)
+
+class CommonTestCase(unittest.TestCase):
+
+    def test_strip_p(self):
+        output = strip_p("<p><div>Hello</div></p>")
+        self.assertEqual(output, "<div>Hello</div>")
+        output = strip_p("<p><div>Hello</div><div>Hello2</div></p>")
+        self.assertEqual(output, "<div>Hello</div>\n<div>Hello2</div>")

@@ -1,4 +1,8 @@
+{% load common %}
+
 <div class="multichoiceoption">
+    <p>
     <input type="{% if widget.multioptional %}checkbox{% else %}radio{% endif %}" name="option" value="{{ widget.option_id }}"
-           data-right="{{ widget.right|lower }}" data-feedback="{{ widget.feedback | safe }}"/>{{ content|safe }}
+           data-right="{{ widget.right|lower }}" data-feedback="{{ widget.feedback | safe }}"/>{{ content|safe|strip_p }}
+    </p>
 </div>

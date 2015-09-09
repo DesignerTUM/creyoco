@@ -26,7 +26,7 @@ This module is for the common HTML used in all webpages.
 
 import logging
 from django.conf import settings
-
+from bs4 import BeautifulSoup
 register = template.Library()
 lastId = 0
 
@@ -41,6 +41,7 @@ def newId():
     
 log = logging.getLogger(__name__)
 
+
 @register.simple_tag
 def doc_type():
     """Generates the documentation type string"""
@@ -49,6 +50,16 @@ def doc_type():
             'Transitional//EN" '
             '"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\n')
 
+@register.filter
+def strip_p(value):
+    """
+    Strip container tag from the content
+    """
+    soup = list(BeautifulSoup(value).children)[0]
+    if soup.name == "p":
+        return "\n".join(str(child) for child in soup.children)
+    else:
+        return str(soup)
 
 def header(style='default'):
     """Generates the common header XHTML"""
