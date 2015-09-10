@@ -66,6 +66,7 @@ define(['jquery', 'wamp_handler', 'jquery-form', 'jquery-pjax', 'jquery-jsonrpc'
                             $form.find("textarea").each(function () {
                                 CKEDITOR.replace($(this).attr("id"), {'customConfig': '/exeapp/ckeditor_config/'});
                             });
+                            MathJax.Hub.Typeset();
                         } else {
                             exports.reload_authoring();
                         }
@@ -90,6 +91,7 @@ define(['jquery', 'wamp_handler', 'jquery-form', 'jquery-pjax', 'jquery-jsonrpc'
                         return true;
                     }
                 });
+                MathJax.Hub.Typeset();
                 exports.get_media("authoring/?partial=true&media=true");
                 exports.bind_wamp();
             },
