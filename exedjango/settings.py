@@ -247,7 +247,6 @@ CKEDITOR_CONFIGS = {
         "height": 150,
         "autoGrow_minHeight": 150,
         "autoGrow_maxHeight": 500,
-        "resize_dir": "both",
         "width": "100%",
         "toolbar": [
             {
