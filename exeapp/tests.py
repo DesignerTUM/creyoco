@@ -461,7 +461,7 @@ view, this tests should be also merged'''
         response = self.c.get("{}authoring/?partial=true&media=true".format(
             self.VIEW_URL))
         self.assertIn(
-            reverse('tinymce-filebrowser'),
+            "{}ckeditor/ckeditor/ckeditor.js".format(settings.STATIC_URL),
             json.loads(smart_text(response.content))['js']
         )
 
