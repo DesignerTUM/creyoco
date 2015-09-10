@@ -39,6 +39,9 @@ REQUIRE_STANDALONE_MODULES = {
     "main": {
         "out": "main-built.js",
         "build_profile": "app.build.js",
+        "paths": {
+            "mathjax": ":empty"
+        }
     }
 }
 
