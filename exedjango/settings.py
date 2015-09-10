@@ -243,7 +243,8 @@ CKEDITOR_CONFIGS = {
         "filebrowserBrowseUrl": '/exeapp/filebrowser/browse/?pop=3',
         "removeDialogTabs": 'link:upload;image:Upload',
         "autoParagraph": False,
-        "extraPlugins": 'autogrow,mathjax',
+        "extraPlugins": 'autogrow,mathjax,video',
+        "extraAllowedContent": 'video[*]{*};source[*]{*}',
         "mathJaxLib": '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML',
         "height": 150,
         "autoGrow_minHeight": 150,
@@ -261,7 +262,7 @@ CKEDITOR_CONFIGS = {
                 "name": "links", "items": [ "Link", "Unlink", "Anchor" ]
             },
             {
-                "name": "insert", "items": [ "Image", "Table", "HorizontalRule", "Mathjax" ]
+                "name": "insert", "items": [ "Image", "Video", "Table", "HorizontalRule", "Mathjax" ]
             },
             "/",
             {
