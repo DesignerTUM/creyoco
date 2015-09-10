@@ -57,7 +57,7 @@ NOT_IMPLEMENTED = "This function is not implemented yet."
 SAVE_DIRTY_PACKAGE = "Package has been changed. Do you want to save it, before you leave?"
 
 require(['jquery', "common", "eyecandy", "wamp_handler", 'jquery-pjax', 'jquery-cookie', 'jquery-jsonrpc', "jstree", 'jquery-modal', 'modernizr',
-    'multichoice', 'feedback', 'cloze', 'filebrowser', 'mathjax'],
+    'multichoice', 'feedback', 'cloze', 'filebrowser'],
     function ($, common, eyecandy, wamp_handler) {
         "use strict";
         // set crfs cookie
