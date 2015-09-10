@@ -37,8 +37,21 @@ class ProtectedFreeTextBlock(FreeTextBlock):
                     "Please define a template for the action")
         else:
             return html
+    def export_encrypted(self):
+        form = self.BlockForm(instance=self.idevice,
+                                      auto_id="%s_field_" % self.idevice.id +
+                                              "%s")
+        content = form.fields['content'].widget.render_export(self.idevice.content)
+        return self._xor(data=content)
 
-    def xor(self, data=None, key=None):
+    def preview_encrypted(self):
+        form = self.BlockForm(instance=self.idevice,
+                              auto_id="%s_field_" % self.idevice.id +
+                                      "%s")
+        content = form.fields['content'].widget.render_preview(self.idevice.content)
+        return self._xor(content)
+
+    def _xor(self, data=None, key=None):
         if data is None:
             data = self.idevice.content
         if key is None:

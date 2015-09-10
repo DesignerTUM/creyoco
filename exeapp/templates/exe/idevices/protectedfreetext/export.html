@@ -4,7 +4,7 @@
         <p class="protected_freetext_hint"><span>Protected FreeText. Provide password to unlock.</span></p>
         <input type="text" class="pwd_for_protected_freetext" placeholder="Password" style="display: inline" onKeyPress="return disableEnterKey(this, event)">
         <div class="protected_password_error" style="display: none"><span>The provided password was incorrect.</span></div>
-        <div class="protected_content" style="display: none;"> {{ block_ref.xor }} </div>
+        <div class="protected_content" style="display: none;"> {{ block_ref.export_encrypted }} </div>
         <br>
         <input class = "pwd_freetext_btn" type="button" value="Submit" onclick="pwdCheck(this)">
     {% else %}
