@@ -243,95 +243,38 @@ CKEDITOR_CONFIGS = {
         "filebrowserBrowseUrl": '/exeapp/filebrowser/browse/?pop=3',
         "removeDialogTabs": 'link:upload;image:Upload',
         "autoParagraph": False,
+        "resize_dir": "both",
+        "width": "100%",
         "toolbar": [
             {
-                "name": "clipboard",
-                "items": [
-                    "Cut",
-                    "Copy",
-                    "Paste",
-                    "PasteText",
-                    "PasteFromWord",
-                    "-",
-                    "Undo",
-                    "Redo"
-                ]
+                "name": "clipboard", "items": [ "Cut", "Copy", "Paste", "PasteText", "PasteFromWord", "-", "Undo", "Redo" ]
             },
             {
                 "name": "paragraph",
-                "items": [
-                    "NumberedList",
-                    "BulletedList",
-                    "-",
-                    "Outdent",
-                    "Indent",
-                    "-",
-                    "Blockquote",
-                    "-",
-                    "JustifyLeft",
-                    "JustifyCenter",
-                    "JustifyRight",
-                    "JustifyBlock"
-                ]
+                "items": [ "NumberedList", "BulletedList", "-", "Outdent", "Indent", "-", "Blockquote", "-", "JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock" ] }
+            ,
+            {
+                "name": "links", "items": [ "Link", "Unlink", "Anchor" ]
             },
             {
-                "name": "links",
-                "items": [
-                    "Link",
-                    "Unlink",
-                    "Anchor"
-                ]
-            },
-            {
-                "name": "insert",
-                "items": [
-                    "Image",
-                    "Table",
-                    "HorizontalRule"
-                ]
+                "name": "insert", "items": [ "Image", "Table", "HorizontalRule" ]
             },
             "/",
             {
-                "name": "styles",
-                "items": [
-                    "Styles",
-                    "Format",
-                    "FontSize"
-                ]
+                "name": "styles", "items": [ "Styles", "Format", "FontSize" ]
             },
             {
-                "name": "basicstyles",
-                "items": [
-                    "Bold",
-                    "Italic",
-                    "Underline",
-                    "Strike",
-                    "Subscript",
-                    "Superscript",
-                    "-",
-                    "RemoveFormat"
-                ]
+                "name": "basicstyles", "items": [ "Bold", "Italic", "Underline", "Strike", "Subscript", "Superscript", "-", "RemoveFormat" ]
             },
             {
-                "name": "colors",
-                "items": [
-                    "TextColor",
-                    "BGColor"
-                ]
+                "name": "colors", "items": [ "TextColor", "BGColor" ]
             },
             {
-                "name": "document",
-                "items": [
-                    "Source"
-                ]
+                "name": "document", "items": [ "Source" ]
             },
             {
-                "name": "tools",
-                "items": [
-                    "Maximize"
-                ]
+                "name": "tools", "items": [ "Maximize" ]
             }
         ],
-        "width": "740",
     },
 }
