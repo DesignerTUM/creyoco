@@ -244,6 +244,7 @@ CKEDITOR_CONFIGS = {
         "removeDialogTabs": 'link:upload;image:Upload',
         "autoParagraph": False,
         "extraPlugins": 'autogrow,mathjax',
+        "mathJaxLib": '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML',
         "height": 150,
         "autoGrow_minHeight": 150,
         "autoGrow_maxHeight": 500,
