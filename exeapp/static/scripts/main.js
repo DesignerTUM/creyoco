@@ -20,7 +20,8 @@ require.config({
         "multichoice": "blocks/multichoice",
         "autobahn": "thirdparty/autobahn.min",
         "wamp_handler": "wamp_handler",
-        "jquery-ui": "thirdparty/jquery-ui.min"
+        "jquery-ui": "thirdparty/jquery-ui.min",
+        "mathjax": "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
 
     },
 

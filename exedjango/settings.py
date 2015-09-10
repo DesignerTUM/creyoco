@@ -243,6 +243,10 @@ CKEDITOR_CONFIGS = {
         "filebrowserBrowseUrl": '/exeapp/filebrowser/browse/?pop=3',
         "removeDialogTabs": 'link:upload;image:Upload',
         "autoParagraph": False,
+        "extraPlugins": 'autogrow,mathjax',
+        "height": 150,
+        "autoGrow_minHeight": 150,
+        "autoGrow_maxHeight": 500,
         "resize_dir": "both",
         "width": "100%",
         "toolbar": [
@@ -257,7 +261,7 @@ CKEDITOR_CONFIGS = {
                 "name": "links", "items": [ "Link", "Unlink", "Anchor" ]
             },
             {
-                "name": "insert", "items": [ "Image", "Table", "HorizontalRule" ]
+                "name": "insert", "items": [ "Image", "Table", "HorizontalRule", "Mathjax" ]
             },
             "/",
             {

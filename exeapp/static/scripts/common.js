@@ -48,7 +48,7 @@ define(['jquery', 'wamp_handler', 'jquery-form', 'jquery-pjax', 'jquery-jsonrpc'
             initialize_authoring: function () {
                 // initialize uninitialized editors
                 $(".idevice_form textarea").each(function () {
-                    if ($(this).css("display") == "none") return false;
+                    if ($(this).css("visibility") == "hidden") return false;
                     CKEDITOR.replace($(this).attr("id"), {'customConfig': '/exeapp/ckeditor_config/'});
                 });
                 //$(".action_button").bind("click", handle_action_button)
