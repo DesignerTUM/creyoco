@@ -225,29 +225,24 @@ footer .container {
     z-index: 1; }
 
   /* line 268, sass/content.scss */
-  img {
-    width: 100%;
-    height: auto; }
-
-  /* line 272, sass/content.scss */
   .right {
     display: none; }
 
-  /* line 276, sass/content.scss */
+  /* line 272, sass/content.scss */
   .middle {
     width: 100% !important; }
 
-  /* line 279, sass/content.scss */
+  /* line 275, sass/content.scss */
   .content {
     width: 100%; }
 
-  /* line 284, sass/content.scss */
+  /* line 280, sass/content.scss */
   body.active .left {
     margin-left: 0px;
     width: 250px;
     transition: all 0.4s ease 0s;
     position: absolute; }
-    /* line 289, sass/content.scss */
+    /* line 285, sass/content.scss */
     body.active .left .glyphicon {
       margin: 2px 8px 2px 2px;
       border: 1px solid black;
@@ -255,7 +250,7 @@ footer .container {
       float: right;
       padding: 3px; }
 
-  /* line 299, sass/content.scss */
+  /* line 295, sass/content.scss */
   #menu-toggle {
     display: inline-block;
     float: left;
