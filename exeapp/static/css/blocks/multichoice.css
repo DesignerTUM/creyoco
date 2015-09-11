@@ -11,13 +11,19 @@
 }
 
 .multichoiceoption .wrong_answer {
-    font-style: italic;
+    font-weight: bold;
     color: red;
 }
 
 .multichoiceoption .right_answer {
-    font-style: italic;
+    font-weight: bold;
     color: green;
+}
+
+.multichoiceoption .right_answer .mc-feedback, .multichoiceoption .wrong_answer .mc-feedback {
+    font-style: italic;
+    font-weight: normal;
+    color: red;
 }
 
 .multichoiceoption input {

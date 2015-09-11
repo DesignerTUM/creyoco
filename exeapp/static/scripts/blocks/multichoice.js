@@ -12,14 +12,14 @@ var multichoice = {
                         .removeClass("wrong_answer")
                         .removeClass("right_answer");
                     if ($(el).attr("data-right") === "true") {
-                        $(el).next().addClass('right_answer');
+                        $(el).parent().addClass('right_answer');
                         if (!($(el).prop("checked"))) {
                             wrong = true;
                             multichoice.show_feedback($(el));
                         }
                     } else {
                         if ($(el).prop("checked")) {
-                            $(el).next().addClass('wrong_answer');
+                            $(el).parent().addClass('wrong_answer');
                             wrong = true;
                             multichoice.show_feedback($(el));
                         }
