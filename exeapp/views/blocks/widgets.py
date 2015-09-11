@@ -45,7 +45,7 @@ class FreeTextWidget(CKEditorWidget):
 
     def _replace_sources(self, content):
         soup = BeautifulSoup(content)
-        resource_holders = soup.findAll(["img", "a"])
+        resource_holders = soup.findAll(["img", "a", "video"])
         for holder in resource_holders:
             if holder.name == "img":
                 if holder['src'].startswith(settings.MEDIA_URL):
@@ -53,6 +53,11 @@ class FreeTextWidget(CKEditorWidget):
             elif holder.name == "a":
                 if holder.has_key('href') and holder['href'].startswith(settings.MEDIA_URL):
                     holder['href'] = holder['href'].split("/")[-1]
+            elif holder.name == "video":
+                video_sources = holder.findAll('source')
+                for video_source in video_sources:
+                    if video_source['src'].startswith(settings.MEDIA_URL):
+                        video_source['src'] = video_source['src'].split("/")[-1]
         objs = soup.findAll("object")
         for obj in objs:
             obj['data'] = obj['data'].split("/")[-1]

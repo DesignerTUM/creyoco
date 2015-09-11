@@ -53,6 +53,14 @@ class GenericIdevice(Idevice):
                         value.replace(media_url, "")
                         resource_list.add(unquote(value.replace(media_url, "")))
                         break
+            videos = soup.findAll("video")
+            for video in videos:
+                video_sources = video.findAll("source")
+                for video_source in video_sources:
+                    if video_source['src'].startswith(media_url):
+                        resource_list.add(
+                            unquote(video_source['src'].replace(media_url, ""))
+                        )
         return resource_list
 
     @property
