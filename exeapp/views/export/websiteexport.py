@@ -119,6 +119,8 @@ class WebsiteExport(object):
             (self.style_dir / "img").copytree(self.output_dir / "img")
         if (self.style_dir / "js").exists():
             (self.style_dir / "js").copytree(self.output_dir / "js")
+        if (self.style_dir / "fonts").exists():
+            (self.style_dir / "fonts").copytree(self.output_dir / "fonts")
 
     def copy_licence(self):
         """Copy licence file"""
