@@ -8,7 +8,7 @@ var multichoice = {
                 var result_el = $(this).parent().find(".result");
                 $(this).parent().find(".mc-feedback").remove();
                 $.each(options, function (n, el) {
-                    $(el).next()
+                    $(el).parent()
                         .removeClass("wrong_answer")
                         .removeClass("right_answer");
                     if ($(el).attr("data-right") === "true") {
