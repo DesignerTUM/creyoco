@@ -73,13 +73,13 @@
       });
     };
     $(window).on('resize', function() {
-      if ($(this).width() > 767) {
+      if ($(this).width() > 1200) {
         return wide();
       } else {
         return narrow();
       }
     });
-    if ($(window).width() > 767) {
+    if ($(window).width() > 1200) {
       return wide();
     } else {
       return narrow();
