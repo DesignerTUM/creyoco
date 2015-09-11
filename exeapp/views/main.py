@@ -71,3 +71,10 @@ def duplicate_package(request, package):
     p = package.duplicate()
     return {"id": p['id'], "title": p['title']}
 
+
+@jsonrpc_method('main.drag_package', authenticated=True)
+@get_package_by_id_or_error
+def drag_package(request, package, position):
+    return{"packageid": package.title, "position": position}
+
+

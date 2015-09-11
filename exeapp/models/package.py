@@ -289,6 +289,7 @@ class DublinCore(models.Model):
 class PackageManager(models.Manager):
     def create(self, *args, **kwargs):
         package = Package(*args, **kwargs)
+        user = package.user
         dublincore = DublinCore.objects.create()
         package.dublincore = dublincore
         package.save()
@@ -350,6 +351,9 @@ class PackageManager(models.Manager):
             return True
         else:
             return False
+
+
+
 
 
 class Package(models.Model):
@@ -719,5 +723,10 @@ i.e. the "package".
     class Meta:
         app_label = "exeapp"
 
+
+# class PackageOrder(models.Model):
+#     package = models.ForeignKey(Package)
+#     user = models.ForeignKey(User)
+#     sort_order = models.IntegerField()
 
 # ===========================================================================

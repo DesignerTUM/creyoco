@@ -10,8 +10,9 @@
 
 {% block head_css %}
 <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/mz/style.min.css">
+<link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/mz/style.min.css">
 <link rel="stylesheet"
-          href="{% get_static_prefix %}scripts/bower_components/jquery-modal/jquery.modal.css"
+          href="{% get_static_prefix %}scripts/thirdparty/dragula/dragula.css"
           type="text/css" media="screen"/>
 {% endblock %}
 
@@ -86,7 +87,9 @@
 <ul id="package_list">
 	{% for package in package_list %}
 	<li class='package' id="package{{ package.id }}" packageid="{{ package.id }}">
+
 		<span style="display:block;float:left">
+            <i class="icon-move"></i>
 			<i class="check icon-check-empty"></i>
 			<a href="{{ package.get_absolute_url }}">
         {{ package.title }}
