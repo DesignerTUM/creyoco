@@ -121,7 +121,7 @@ delivered.""")
 class ProtectedFreeTextVersion(models.Model):
     idevice = models.ForeignKey("ProtectedFreeTextIdevice", related_name="versions")
     content = fields.RichTextField(blank=True, default="")
-    date_created = models.DateTimeField(default=datetime.now())
+    date_created = models.DateTimeField(default=datetime.now)
 
     class Meta:
         app_label = "exeapp"

@@ -158,7 +158,7 @@ delivered.""")
 class FreeTextVersion(models.Model):
     idevice = models.ForeignKey("FreeTextIdevice", related_name="versions")
     content = fields.RichTextField(blank=True, default="")
-    date_created = models.DateTimeField(default=datetime.now())
+    date_created = models.DateTimeField(default=datetime.now)
 
     class Meta:
         app_label = "exeapp"
