@@ -247,9 +247,10 @@ CKEDITOR_CONFIGS = {
         "extraAllowedContent": 'video[*]{*};source[*]{*}',
         "mathJaxLib": '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML',
         "height": 150,
-        "autoGrow_minHeight": 150,
+        "autoGrow_minHeight": 100,
         "autoGrow_maxHeight": 500,
         "width": "100%",
+        "height": 100,
         "toolbar": [
             {
                 "name": "clipboard", "items": [ "Cut", "Copy", "Paste", "PasteText", "PasteFromWord", "-", "Undo", "Redo" ]
