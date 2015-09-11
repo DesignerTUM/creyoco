@@ -110,7 +110,10 @@ class ClozeWidget(FreeTextWidget):
     js_modules = ['cloze']
 
     def render_preview(self, content):
-        gaps = BeautifulSoup(content).findAll("u")
+        soup = BeautifulSoup(content)
+        gaps = soup.findAll("u")
+        gaps += soup.findAll(
+            attrs={"style": "text-decoration: underline;"})
         for gap_number, gap in enumerate(gaps):
             content = content.replace(str(gap), '<span contenteditable="true"'
                                                 'class="cloze_gap"' \
