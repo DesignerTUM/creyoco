@@ -67,8 +67,6 @@ def get_media_list(node, ajax=False):
     media = forms.Media(
         js=["/static/ckeditor/ckeditor/ckeditor.js",
             "/static/filebrowser/js/FB_CKEditor.js"])
-    a = 1
-    b = 2
     js_modules = set()
     for idevice in node.idevices.all():
         idevice = idevice.as_child()

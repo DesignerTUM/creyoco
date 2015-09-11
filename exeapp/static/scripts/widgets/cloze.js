@@ -59,8 +59,6 @@ var cloze = {
                     ansDiv.innerHTML += answers[i].value;
                     div.appendChild(ansDiv);
                 }
-                var drag_n_drop = $("#wrapper").find(".drag_n_drop");
-                //drag_n_drop.last().prev().prev().before(div);
                 $(elem).find(".cloze_submit").before(div);
                 $(elem).addClass("checked");
                 $(".drag_n_drop_answer").draggable({ revert: true });
@@ -68,7 +66,7 @@ var cloze = {
         }
 
         $(document).ready(function () {
-            $(".close").each(function(){
+            $(".cloze").each(function(){
                 var answers = $(this).find(".cloze_answer");
                 var drag_n_drop = $(this).nextAll(".drag_n_drop");
                 if (answers.length > 0) {
@@ -89,6 +87,7 @@ var cloze = {
                 }
             });
             $(".cloze_submit").off("click").on("click", submit_cloze);
+            var that = this;
             $(".cloze_restart").off("click").on("click", function (e) {
                 $(this).parent().hide();
                 $(this).parents(".iDevice")
@@ -97,10 +96,12 @@ var cloze = {
                         $(this).removeClass("cloze_right cloze_wrong");
                     });
                 e.preventDefault();
+                var drag_n_drop = $("#wrapper").find(".drag_n_drop");
                 if (drag_n_drop.val() == "True") {
                     $("#wrapper").removeClass("checked");
                     $(".drag_n_drop_container").remove();
-                    show_suggestion(answers);
+                    var answers = $(that).find(".cloze_answer");
+                    show_suggestion(that, answers);
                     }
             });
             $(".cloze_show_answers").off("click").on("click", function (e) {

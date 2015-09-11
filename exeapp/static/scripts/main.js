@@ -25,6 +25,10 @@ require.config({
     },
 
     shim: {
+        "jquery-ui": {
+            "deps": ['jquery'],
+            "exports": ["jQuery.fn.draggable", "jQuery.fn.droppable"]
+        },
         "jquery-jsonrpc": {
             "deps": ['jquery'],
             "exports": "jQuery.fn.jsonrpc"

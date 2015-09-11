@@ -21,8 +21,10 @@ class FreeTextWidget(CKEditorWidget):
     @property
     def media(self):
         media = self.__class__.Media()
+        js = list(media.js)
+        js.remove(settings.CKEDITOR_JQUERY_URL)  # we already load jquery
         return forms.Media(
-        js=list(media.js),
+        js=js,
         css={"all": []})
 
     js_modules = []
