@@ -246,7 +246,6 @@ CKEDITOR_CONFIGS = {
         "extraPlugins": 'autogrow,mathjax,video',
         "extraAllowedContent": 'video[*]{*};source[*]{*}',
         "mathJaxLib": '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML',
-        "height": 150,
         "autoGrow_minHeight": 100,
         "autoGrow_maxHeight": 500,
         "width": "100%",
