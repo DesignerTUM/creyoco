@@ -1,6 +1,8 @@
 $ ->
-  show = (el) -> el.addClass("navshown").removeClass("navhidden")
-  hide = (el) -> el.removeClass("navshown").addClass("navhidden")
+  show = (el) ->
+    el.addClass("navshown").removeClass("navhidden")
+  hide = (el) ->
+    el.removeClass("navshown").addClass("navhidden")
   lastTimeout = undefined
   update = () ->
     clearTimeout(lastTimeout)
@@ -19,7 +21,20 @@ $ ->
   active.find("> li, > ul").show().addClass("neverhide")
   active.parents("ul").show().addClass("neverhide")
 
-  narrow = ->
+  debounce= (func, threshold, execAsap) ->
+    timeout = null
+    (args...) ->
+      obj = this
+      delayed = ->
+        func.apply(obj, args) unless execAsap
+        timeout = null
+      if timeout
+        clearTimeout(timeout)
+      else if (execAsap)
+        func.apply(obj, args)
+      timeout = setTimeout delayed, threshold || 100
+
+  narrow = debounce((->
     left.find("li").off()
     left.find()
     a_list = $(".left").find("ul").not(".neverhide").parent().children("a")
@@ -52,9 +67,9 @@ $ ->
       e.preventDefault()
       $('body').toggleClass 'active'
       return
+    ),500)
 
-
-  wide = ->
+  wide = debounce((->
     left.find("span.glyphicon").remove()
     left.find("li").on "mouseover", (ev) ->
       show($(this).find("> ul"))
@@ -64,6 +79,7 @@ $ ->
     left.find("li").on "mouseout", (ev) ->
       hide($(this).find("> ul"))
       update()
+      ),500)
 
 
   $(window).on 'resize', ->
