@@ -1,3 +1,4 @@
+{% load i18n %}
 <form id="properties_form" class="clearfix" method="post" action=".#properties">{% csrf_token %}
 	{% if properties_form.errors %}
 	<p>Please correct following error{{ properties_form.errors|pluralize }}</p>
@@ -25,27 +26,27 @@
 	{% endfor %}
 
 	<div class="pull-left">
-		<label for="title">Kursname</label>
+		<label for="title">{% trans "Package title" %}</label>
 
-		<input placeholder="Kursname" name="title" type="text" value="{{ properties_form.title.value }}">
+		<input placeholder="{% trans 'Title' %}" name="title" type="text" value="{{ properties_form.title.value }}">
 
 		<div class="pull-left">
-			<label for="author">Autor</label>
-			<input placeholder="Der Autor des Kurses." name="author" type="text" value="{{ properties_form.author.value }}">
+			<label for="author">{% trans "Package Author" %}</label>
+			<input placeholder="{% trans 'Package Author' %}" name="author" type="text" value="{{ properties_form.author.value }}">
 		</div>
 		
 		<div class="pull-right">		
-			<label for="email">Email</label>
-			<input placeholder="eMail-Adresse." name="email" type="text" value="{{ properties_form.email.value }}">
+			<label for="email">{% trans "Email" %}</label>
+			<input placeholder="eMail Address." name="email" type="text" value="{{ properties_form.email.value }}">
 		</div>
         <label for="logoImg">Logo</label><br>
         {{ properties_form.logoImg }}
-        <input class="pull-left submit" type="reset" value="Abbrechen">
-        <input class="pull-right submit" type="submit" value="Übernehmen">
+        <input class="pull-left submit" type="reset" value="{% trans 'Cancel' %}">
+        <input class="pull-right submit" type="submit" value="{% trans 'Apply' %}">
 	</div>
 	<div class="pull-right">
-        <label for="description">Beschreibung</label>
-        <textarea placeholder="Ihre Beschreibung des Kurses." name="description">{{ properties_form.description.value }}</textarea>
+        <label for="description">{% trans "Description" %}</label>
+        <textarea placeholder="{% trans 'Description of the Package' %}" name="description">{{ properties_form.description.value }}</textarea>
 
     </div>
 

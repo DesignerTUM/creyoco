@@ -117,10 +117,10 @@
 
 {% block navi %}
     <ul id="navi" class="clearfix">
-        <li id="edit" class="active"><a href="">Inhalt bearbeiten</a></li>
-        <li id="layout"><a href="#layout">Layout wählen</a></li>
-        <li id="download"><a>Kurs herunterladen</a></li>
-        <li id="export" style="float:right;margin-right:0"><a href="#export">Metadaten</a>
+        <li id="edit" class="active"><a href="">{% trans  "Edit content" %}</a></li>
+        <li id="layout"><a href="#layout">{% trans "Choose layout" %}</a></li>
+        <li id="download"><a>{% trans "Download package" %}</a></li>
+        <li id="export" style="float:right;margin-right:0"><a href="#export">{% trans "Metadata" %}</a>
         </li>
     </ul>
 {% endblock %}

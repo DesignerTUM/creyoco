@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-14 13:36+0100\n"
+"POT-Creation-Date: 2015-09-24 15:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,29 +18,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
-#: tests.py:96 templates/main.html:9 templates/main.html.py:33
-msgid "Overview"
-msgstr "Kursübersicht"
-
-#: tests.py:178 models/idevices/freetextidevice.py:41
-#: models/idevices/freetextidevice.py:42
-msgid "Free Text"
-msgstr "Textfeld"
-
-#: models/package.py:415
-msgid "?????"
-msgstr ""
-
 #: models/idevices/activityidevice.py:10
 msgid "Activity"
 msgstr "Aufgabe"
 
 #: models/idevices/activityidevice.py:12 models/idevices/clozeidevice.py:12
 #: models/idevices/externalurlidevice.py:10
-#: models/idevices/freetextidevice.py:43
+#: models/idevices/freetextidevice.py:49
 #: models/idevices/objectivesidevice.py:12
 #: models/idevices/readingactidevice.py:13
-#: models/idevices/reflectionidevice.py:12 models/idevices/wikiidevice.py:33
+#: models/idevices/reflectionidevice.py:12 models/idevices/wikiidevice.py:37
 msgid "University of Auckland"
 msgstr ""
 
@@ -78,9 +65,8 @@ msgstr ""
 msgid "Case Study"
 msgstr "Fallstudie"
 
-#: models/idevices/casestudyidevice.py:18
-#: models/idevices/glossaryidevice.py:18 models/idevices/pdfidevice.py:13
-#: models/idevices/tocidevice.py:17
+#: models/idevices/casestudyidevice.py:18 models/idevices/glossaryidevice.py:18
+#: models/idevices/pdfidevice.py:17 models/idevices/tocidevice.py:17
 msgid "Technical University Munich"
 msgstr ""
 
@@ -115,14 +101,14 @@ msgid ""
 "        situation."
 msgstr ""
 
-#: models/idevices/casestudyidevice.py:58
+#: models/idevices/casestudyidevice.py:86
 msgid ""
 "Describe the activity tasks relevant to the case storyprovided. These could "
 "be in the form of questions or instructions for activity which may lead the "
 "learner to resolving a dilemma presented. "
 msgstr ""
 
-#: models/idevices/casestudyidevice.py:64
+#: models/idevices/casestudyidevice.py:92
 msgid "Provide relevant feedback on the situation"
 msgstr ""
 
@@ -160,7 +146,8 @@ msgid ""
 "the\n"
 "field.To select words to hide, double click on the word to select it and\n"
 "click on the underscore button in the toolbar."
-msgstr "Geben Sie der Text füt die Lückentextaktivität ein\n"
+msgstr ""
+"Geben Sie der Text füt die Lückentextaktivität ein\n"
 "Um die versteckte Wörter zu wählen, markieren Sie den zu verbergenden "
 "Abschnitt und drücken Sie den 'Unterschreichen'-Knopf."
 
@@ -205,7 +192,7 @@ msgid ""
 "and select the size of the area to display it in."
 msgstr ""
 
-#: models/idevices/feedbackidevice.py:7 templatetags/common.py:239
+#: models/idevices/feedbackidevice.py:7 templatetags/common.py:250
 #: utils/common.py:248
 msgid "Feedback"
 msgstr "Feedback"
@@ -218,7 +205,13 @@ msgstr ""
 msgid "Use it to put a feedback link to your documents"
 msgstr ""
 
-#: models/idevices/freetextidevice.py:44
+#: models/idevices/freetextidevice.py:47 models/idevices/freetextidevice.py:48
+#: tests.py:180
+msgid "Free Text"
+msgstr "Textfeld"
+
+#: models/idevices/freetextidevice.py:50
+#: models/idevices/protectedfreetextidevice.py:17
 msgid ""
 "The majority of a learning resource will be\n"
 "establishing context, delivering instructions and providing general "
@@ -236,35 +229,35 @@ msgstr "Glossar"
 msgid "Adds a alphabethicaly sorted glossary"
 msgstr ""
 
-#: models/idevices/glossaryidevice.py:35
+#: models/idevices/glossaryidevice.py:62
 msgid "Enter term you want to describe"
 msgstr ""
 
-#: models/idevices/glossaryidevice.py:38
+#: models/idevices/glossaryidevice.py:65
 msgid "Enter definition of the term"
 msgstr ""
 
-#: models/idevices/idevice.py:49 templates/exe/mainpage.html:126
+#: models/idevices/idevice.py:50 templates/exe/mainpage.html:128
 msgid "Content"
 msgstr "Inhalt"
 
-#: models/idevices/idevice.py:49
+#: models/idevices/idevice.py:50
 msgid "Didactics"
 msgstr "Didaktik"
 
-#: models/idevices/idevice.py:49
+#: models/idevices/idevice.py:50
 msgid "Communication"
 msgstr "Kommunikation"
 
-#: models/idevices/idevice.py:49
+#: models/idevices/idevice.py:50
 msgid "Test"
 msgstr "Test"
 
-#: models/idevices/idevice.py:50
+#: models/idevices/idevice.py:51
 msgid "Media"
 msgstr "Medien"
 
-#: models/idevices/idevice.py:50
+#: models/idevices/idevice.py:51
 msgid "Unknown"
 msgstr "Unbekannt"
 
@@ -288,7 +281,7 @@ msgid ""
 "    learned material. Click \"Add option\" to add more answer options"
 msgstr ""
 
-#: models/idevices/multiplechoice.py:55
+#: models/idevices/multiplechoice.py:82
 msgid ""
 "An answer option for the multiple choice question. Check the 'right answer' "
 "checkmark to mark the right option"
@@ -310,17 +303,17 @@ msgstr ""
 msgid "Type the learning objectives for this resource."
 msgstr ""
 
-#: models/idevices/pdfidevice.py:11
+#: models/idevices/pdfidevice.py:15
 msgid "Pdf iDevice"
 msgstr "PDF iDevice"
 
-#: models/idevices/pdfidevice.py:14
+#: models/idevices/pdfidevice.py:18
 msgid ""
 "Import local pdf and display them.\n"
 "    Requires Acrobat Reader plugin."
 msgstr ""
 
-#: models/idevices/pdfidevice.py:23
+#: models/idevices/pdfidevice.py:28
 msgid ""
 "Input coma-separated pages or page ranges to import. For example: 1,2,3-8. "
 "Leave empty to import all pages"
@@ -346,6 +339,17 @@ msgstr ""
 msgid ""
 "Describe the prerequisite knowledge learners\n"
 "                        should have to effectively complete this learning."
+msgstr ""
+
+#: models/idevices/protectedfreetextidevice.py:12
+#: models/idevices/protectedfreetextidevice.py:13
+#, fuzzy
+#| msgid "Free Text"
+msgid "Protected Free Text"
+msgstr "Textfeld"
+
+#: models/idevices/protectedfreetextidevice.py:24
+msgid "Input password to encrypt content"
 msgstr ""
 
 #: models/idevices/readingactidevice.py:11
@@ -470,11 +474,11 @@ msgstr ""
 "Der Inhalt von diesem iDevice wird automatisch generiert und kann nicht "
 "manuell geändert werden"
 
-#: models/idevices/wikiidevice.py:31
+#: models/idevices/wikiidevice.py:35
 msgid "Wiki Article"
 msgstr "Wikipedia Artikel"
 
-#: models/idevices/wikiidevice.py:34
+#: models/idevices/wikiidevice.py:38
 msgid ""
 "<p>The Wikipedia iDevice allows you to locate\n"
 "existing content from within Wikipedia and download this content into your "
@@ -489,145 +493,182 @@ msgid ""
 "is covered by the GNU free documentation license.</p>"
 msgstr ""
 
-#: models/idevices/wikiidevice.py:44
+#: models/idevices/wikiidevice.py:48
 msgid ""
 "Enter a phrase or term you\n"
 "                                   wish to search\n"
 "within Wikipedia."
 msgstr ""
 
-#: models/idevices/wikiidevice.py:75 models/idevices/wikiidevice.py:105
-#, python-format
-msgid ""
-"Unable to download from %s <br/>Please check the spelling and connection and "
-"try again."
+#: models/package.py:496
+msgid "?????"
+msgstr ""
+
+#: models/package.py:708
+msgid "Copy"
 msgstr ""
 
 #: templates/base.html:76
 msgid "Site notice"
 msgstr "Impressum"
 
-#: templates/main.html:39
-msgid "Create a new course"
-msgstr "Neues Lernmodul erstellen"
-
-#: templates/main.html:43
-msgid "Remove selected courses"
-msgstr "Gewählte Kurse löschen"
-
-#: templates/exe/mainpage.html:27
+#: templates/exe/mainpage.html:29
 #, fuzzy
 msgid "Enter a new node name "
 msgstr "Geben Sie den Namen für die neue Seite ein!"
 
-#: templates/exe/mainpage.html:28
+#: templates/exe/mainpage.html:30
 msgid "New name:"
 msgstr "Seitenname:"
 
-#: templates/exe/mainpage.html:30
+#: templates/exe/mainpage.html:32
 #, fuzzy
 msgid "Create"
 msgstr "Erstellen"
 
-#: templates/exe/mainpage.html:35
+#: templates/exe/mainpage.html:37
 msgid "Do you really want to remove "
 msgstr ""
 
-#: templates/exe/mainpage.html:37
+#: templates/exe/mainpage.html:39
 msgid "No"
 msgstr ""
 
-#: templates/exe/mainpage.html:38
+#: templates/exe/mainpage.html:40
 msgid "Yes"
 msgstr ""
 
-#: templates/exe/mainpage.html:79
+#: templates/exe/mainpage.html:81
 #, fuzzy
 msgid "Table of Content"
 msgstr "Inhaltsangabe"
 
-#: templates/exe/mainpage.html:111
+#: templates/exe/mainpage.html:85
+msgid "Add Page"
+msgstr ""
+
+#: templates/exe/mainpage.html:87
+msgid "Remove Page"
+msgstr ""
+
+#: templates/exe/mainpage.html:89
+msgid "Rename Page"
+msgstr ""
+
+#: templates/exe/mainpage.html:91
+msgid "Duplicate Page"
+msgstr ""
+
+#: templates/exe/mainpage.html:93
+msgid "More..."
+msgstr ""
+
+#: templates/exe/mainpage.html:97
+msgid "Demote Page"
+msgstr ""
+
+#: templates/exe/mainpage.html:99
+msgid "Promote Page"
+msgstr ""
+
+#: templates/exe/mainpage.html:101
+msgid "Move Up"
+msgstr ""
+
+#: templates/exe/mainpage.html:103
+msgid "Move Down"
+msgstr ""
+
+#: templates/exe/mainpage.html:113
 msgid "Tools"
 msgstr "Werkzeuge"
 
-#: templates/registration/login.html:10
-msgid "Welcome to creyoco!"
-msgstr "Willkommen bei creyoco!"
-
-#: templates/registration/login.html:14
-msgid "Have an account?"
-msgstr "Bereits Mitglied?"
-
-#: templates/registration/login.html:15
-msgid "Login!"
-msgstr "Melde dich an!"
-
-#: templates/registration/login.html:21
-msgid "Username or..."
-msgstr "Benutzername oder..."
-
-#: templates/registration/login.html:24 templates/registration/login.html:46
-#: templates/registration/register.html:14
-msgid "Username"
-msgstr "Benutzername"
-
-#: templates/registration/login.html:28
-msgid "password is wrong."
-msgstr "Password ist falsch."
-
-#: templates/registration/login.html:32 templates/registration/login.html:48
-#: templates/registration/register.html:19
-msgid "Password"
-msgstr "Passwort"
-
-#: templates/registration/login.html:33
+#: templates/exe/mainpage.html:120
 #, fuzzy
-msgid "Login"
-msgstr "Anmelden"
+#| msgid "Content"
+msgid "Edit content"
+msgstr "Inhalt"
 
-#: templates/registration/login.html:37
-msgid "Recover password"
-msgstr "Passwort vergessen?"
+#: templates/exe/mainpage.html:121
+msgid "Choose layout"
+msgstr ""
 
-#: templates/registration/login.html:41
-msgid "New to creyoco?"
-msgstr "Neu bei creyoco?"
+#: templates/exe/mainpage.html:122
+msgid "Download package"
+msgstr ""
 
-#: templates/registration/login.html:42
-msgid "Register now!"
-msgstr "Registriere dich jetzt!"
+#: templates/exe/mainpage.html:123
+msgid "Metadata"
+msgstr ""
 
-#: templates/registration/login.html:47
-msgid "E-Mail"
-msgstr "E-Mail"
+#: templates/exe/properties_form.html:29
+msgid "Package title"
+msgstr ""
 
-#: templates/registration/login.html:49
-#: templates/registration/register.html:24
-msgid "Password (again)"
-msgstr "Passwort (wiederholen)"
+#: templates/exe/properties_form.html:31
+msgid "Title"
+msgstr ""
 
-#: templates/registration/login.html:50
-msgid "Create account"
-msgstr "Benutzerkonto erstellen"
+#: templates/exe/properties_form.html:34 templates/exe/properties_form.html:35
+msgid "Package Author"
+msgstr ""
 
-#: templates/registration/register.html:8
-msgid "Please correct the errors below"
-msgstr "Bitte, beseitigen Sie folgende Fehler"
+#: templates/exe/properties_form.html:39
+msgid "Email"
+msgstr ""
 
-#: templatetags/common.py:71 utils/common.py:70
+#: templates/exe/properties_form.html:44
+msgid "Cancel"
+msgstr ""
+
+#: templates/exe/properties_form.html:45
+msgid "Apply"
+msgstr ""
+
+#: templates/exe/properties_form.html:48
+msgid "Description"
+msgstr ""
+
+#: templates/exe/properties_form.html:49
+msgid "Description of the Package"
+msgstr ""
+
+#: templates/main.html:9 templates/main.html.py:57 tests.py:96
+msgid "Overview"
+msgstr "Kursübersicht"
+
+#: templates/main.html:63
+msgid "Create a new course"
+msgstr "Neues Lernmodul erstellen"
+
+#: templates/main.html:67
+msgid "Remove selected courses"
+msgstr "Gewählte Kurse löschen"
+
+#: templates/main.html:71
+#, fuzzy
+#| msgid "Remove selected courses"
+msgid "Duplicate selected courses"
+msgstr "Gewählte Kurse löschen"
+
+#: templates/main.html:74
+msgid "Import Course"
+msgstr ""
+
+#: templatetags/common.py:82 utils/common.py:70
 msgid "eXe : elearning XHTML editor"
 msgstr ""
 
-#: templatetags/common.py:312 utils/common.py:321
+#: templatetags/common.py:323 utils/common.py:321
 msgid "Instructions"
 msgstr ""
 
-#: templatetags/common.py:318 templatetags/common.py:322 utils/common.py:327
+#: templatetags/common.py:329 templatetags/common.py:333 utils/common.py:327
 #: utils/common.py:331
 msgid "Click for completion instructions"
 msgstr ""
 
-#: templatetags/common.py:327 templatetags/common.py:328 utils/common.py:336
+#: templatetags/common.py:338 templatetags/common.py:339 utils/common.py:336
 #: utils/common.py:337
 msgid "Close"
 msgstr "Schließen"
@@ -639,119 +680,165 @@ msgid ""
 "%s unchanged"
 msgstr ""
 
-#: views/handlers/package_rpc.py:75
+#: views/handlers/package_rpc.py:74
 msgid "Can't dublicate root element"
 msgstr ""
 
-#: views/handlers/package_rpc.py:489 views/handlers/package_rpc.py:597
+#: views/handlers/package_rpc.py:488 views/handlers/package_rpc.py:596
 #, python-format
 msgid "Preview directory %s is a file, cannot replace it"
 msgstr ""
 
-#: views/handlers/package_rpc.py:509
+#: views/handlers/package_rpc.py:508
 #, python-format
 msgid "Local file %s is not found, cannot preview it"
 msgstr ""
 
-#: views/handlers/package_rpc.py:567 views/handlers/package_rpc.py:917
+#: views/handlers/package_rpc.py:566 views/handlers/package_rpc.py:916
 #, python-format
 msgid ""
 "SAVE FAILED!\n"
 "%s"
 msgstr ""
 
-#: views/handlers/package_rpc.py:639
+#: views/handlers/package_rpc.py:638
 #, python-format
 msgid ""
 "MimeTeX compile failed!\n"
 "%s"
 msgstr ""
 
-#: views/handlers/package_rpc.py:705 views/handlers/package_rpc.py:847
+#: views/handlers/package_rpc.py:704 views/handlers/package_rpc.py:846
 msgid "Cannot access directory named "
 msgstr ""
 
-#: views/handlers/package_rpc.py:707 views/handlers/package_rpc.py:847
+#: views/handlers/package_rpc.py:706 views/handlers/package_rpc.py:846
 msgid ". Please use ASCII names."
 msgstr ""
 
-#: views/handlers/package_rpc.py:741 views/handlers/package_rpc.py:748
-#: views/handlers/package_rpc.py:751 views/handlers/package_rpc.py:754
-#: views/handlers/package_rpc.py:757 views/handlers/package_rpc.py:1020
+#: views/handlers/package_rpc.py:740 views/handlers/package_rpc.py:747
+#: views/handlers/package_rpc.py:750 views/handlers/package_rpc.py:753
+#: views/handlers/package_rpc.py:756 views/handlers/package_rpc.py:1019
 msgid "EXPORT FAILED!"
 msgstr ""
 
-#: views/handlers/package_rpc.py:855 views/handlers/package_rpc.py:1036
-#: views/handlers/package_rpc.py:1092 views/handlers/package_rpc.py:1113
+#: views/handlers/package_rpc.py:854 views/handlers/package_rpc.py:1035
+#: views/handlers/package_rpc.py:1091 views/handlers/package_rpc.py:1112
 #, python-format
 msgid ""
 "\"%s\" already exists.\n"
 "Please try again with a different filename"
 msgstr ""
 
-#: views/handlers/package_rpc.py:856 views/handlers/package_rpc.py:873
+#: views/handlers/package_rpc.py:855 views/handlers/package_rpc.py:872
 #, python-format
 msgid ""
 "EXTRACT FAILED!\n"
 "%s"
 msgstr ""
 
-#: views/handlers/package_rpc.py:875
+#: views/handlers/package_rpc.py:874
 #, python-format
 msgid "Package extracted to: %s"
 msgstr ""
 
-#: views/handlers/package_rpc.py:903 views/handlers/package_rpc.py:945
-#: views/handlers/package_rpc.py:1064
+#: views/handlers/package_rpc.py:902 views/handlers/package_rpc.py:944
+#: views/handlers/package_rpc.py:1063
 #, python-format
 msgid "Filename %s is a file, cannot replace it"
 msgstr ""
 
-#: views/handlers/package_rpc.py:909 views/handlers/package_rpc.py:951
-#: views/handlers/package_rpc.py:1070
+#: views/handlers/package_rpc.py:908 views/handlers/package_rpc.py:950
+#: views/handlers/package_rpc.py:1069
 #, python-format
 msgid ""
 "Folder name %s already exists. Please choose another one or delete existing "
 "one then try again."
 msgstr ""
 
-#: views/handlers/package_rpc.py:959 views/handlers/package_rpc.py:1024
-#: views/handlers/package_rpc.py:1037 views/handlers/package_rpc.py:1043
-#: views/handlers/package_rpc.py:1077 views/handlers/package_rpc.py:1093
-#: views/handlers/package_rpc.py:1099 views/handlers/package_rpc.py:1114
-#: views/handlers/package_rpc.py:1120
+#: views/handlers/package_rpc.py:958 views/handlers/package_rpc.py:1023
+#: views/handlers/package_rpc.py:1036 views/handlers/package_rpc.py:1042
+#: views/handlers/package_rpc.py:1076 views/handlers/package_rpc.py:1092
+#: views/handlers/package_rpc.py:1098 views/handlers/package_rpc.py:1113
+#: views/handlers/package_rpc.py:1119
 #, python-format
 msgid ""
 "EXPORT FAILED!\n"
 "%s"
 msgstr ""
 
-#: views/handlers/package_rpc.py:1026 views/handlers/package_rpc.py:1045
-#: views/handlers/package_rpc.py:1079 views/handlers/package_rpc.py:1101
-#: views/handlers/package_rpc.py:1122
+#: views/handlers/package_rpc.py:1025 views/handlers/package_rpc.py:1044
+#: views/handlers/package_rpc.py:1078 views/handlers/package_rpc.py:1100
+#: views/handlers/package_rpc.py:1121
 #, python-format
 msgid "Exported to %s"
 msgstr ""
 
-#: views/handlers/package_rpc.py:1152
+#: views/handlers/package_rpc.py:1151
 #, python-format
 msgid "File %s does not exist or is not readable."
 msgstr ""
 
-#: views/handlers/package_rpc.py:1156
+#: views/handlers/package_rpc.py:1155
 msgid "Couldn't load file, please email file to bugs@exelearning.org"
 msgstr ""
 
-#: views/handlers/package_rpc.py:1159
+#: views/handlers/package_rpc.py:1158
 #, python-format
 msgid ""
 "Sorry, wrong file format:\n"
 "%s"
 msgstr ""
 
-#: views/handlers/package_rpc.py:1161
+#: views/handlers/package_rpc.py:1160
 msgid "Sorry, wrong file format"
 msgstr ""
+
+#~ msgid "Welcome to creyoco!"
+#~ msgstr "Willkommen bei creyoco!"
+
+#~ msgid "Have an account?"
+#~ msgstr "Bereits Mitglied?"
+
+#~ msgid "Login!"
+#~ msgstr "Melde dich an!"
+
+#~ msgid "Username or..."
+#~ msgstr "Benutzername oder..."
+
+#~ msgid "Username"
+#~ msgstr "Benutzername"
+
+#~ msgid "password is wrong."
+#~ msgstr "Password ist falsch."
+
+#~ msgid "Password"
+#~ msgstr "Passwort"
+
+#, fuzzy
+#~ msgid "Login"
+#~ msgstr "Anmelden"
+
+#~ msgid "Recover password"
+#~ msgstr "Passwort vergessen?"
+
+#~ msgid "New to creyoco?"
+#~ msgstr "Neu bei creyoco?"
+
+#~ msgid "Register now!"
+#~ msgstr "Registriere dich jetzt!"
+
+#~ msgid "E-Mail"
+#~ msgstr "E-Mail"
+
+#~ msgid "Password (again)"
+#~ msgstr "Passwort (wiederholen)"
+
+#~ msgid "Create account"
+#~ msgstr "Benutzerkonto erstellen"
+
+#~ msgid "Please correct the errors below"
+#~ msgstr "Bitte, beseitigen Sie folgende Fehler"
 
 #~ msgid "Help"
 #~ msgstr "Hilfe"
