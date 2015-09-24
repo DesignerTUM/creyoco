@@ -21,6 +21,7 @@ import os
 import datetime
 
 from django.db import models
+from django.db.models import Max
 from filebrowser.fields import FileBrowseField
 
 
@@ -289,10 +290,18 @@ class DublinCore(models.Model):
 class PackageManager(models.Manager):
     def create(self, *args, **kwargs):
         package = Package(*args, **kwargs)
-        user = package.user
         dublincore = DublinCore.objects.create()
         package.dublincore = dublincore
         package.save()
+
+        user = kwargs['user']
+        order = PackageOrder.objects.filter(user=user).aggregate(Max('sort_order'))['sort_order__max']
+        if order is None:
+            order = 0
+        else:
+            order += 1
+        package_order = PackageOrder(package=package, user=user, sort_order=order)
+        package_order.save()
         root = Node(package=package, parent=None,
                     title="Home", is_root=True)
         root.save()
@@ -351,9 +360,6 @@ class PackageManager(models.Manager):
             return True
         else:
             return False
-
-
-
 
 
 class Package(models.Model):
@@ -434,8 +440,8 @@ i.e. the "package".
     def to_dict(self):
         d = self.__dict__
         d = {k: v for k, v in d.items() if k != 'logoImg'
-                                            and not k.startswith('_')
-            }
+             and not k.startswith('_')
+        }
         return d
 
     def get_logo(self):
@@ -596,7 +602,7 @@ i.e. the "package".
                     # doUpgrade(newPackage)
 
                     # after doUpgrade, compare the largest found field ID:
-                    #                if G.application.maxFieldId >= Field.nextId:
+                    # if G.application.maxFieldId >= Field.nextId:
                     #                    Field.nextId = G.application.maxFieldId + 1
 
             else:
@@ -626,7 +632,7 @@ i.e. the "package".
 
                 # after doUpgrade, compare the largest found field ID:
                 # if G.application.maxFieldId >= Field.nextId:
-                #                    Field.nextId = G.application.maxFieldId + 1
+                # Field.nextId = G.application.maxFieldId + 1
 
         except:
             import traceback
@@ -714,7 +720,7 @@ i.e. the "package".
         for node in nodes:
             if node.is_root:
                 node.duplicate(package=new_package)
-            # break
+                # break
         return {'id': new_package.pk, 'title': new_package.title}
 
     def __str__(self):
@@ -724,9 +730,36 @@ i.e. the "package".
         app_label = "exeapp"
 
 
-# class PackageOrder(models.Model):
-#     package = models.ForeignKey(Package)
-#     user = models.ForeignKey(User)
-#     sort_order = models.IntegerField()
+class PackageOrder(models.Model):
+    package = models.ForeignKey(Package)
+    user = models.ForeignKey(User)
+    sort_order = models.IntegerField()
+
+    @staticmethod
+    def reorder_package(package, user, new_position):
+        sort_orders = sorted(list(PackageOrder.objects.values_list("sort_order", flat=True).filter(user=user)))
+        po_instance = PackageOrder.objects.get(package=package, user=user)
+        old_position = sort_orders.index(po_instance.sort_order)
+        new_position = new_position
+        if old_position == new_position:
+            return
+        elif old_position > new_position:
+            package_list = PackageOrder.objects.filter(user=user, sort_order__lt=sort_orders[old_position],
+                                                       sort_order__gte=sort_orders[new_position])
+            for p in package_list:
+                i = sort_orders.index(p.sort_order)
+                p.sort_order = sort_orders[i+1]
+                p.save()
+        else:
+            package_list = PackageOrder.objects.filter(user=user, sort_order__gt=sort_orders[old_position],
+                                                       sort_order__lte=sort_orders[new_position])
+            for p in package_list:
+                i = sort_orders.index(p.sort_order)
+                p.sort_order = sort_orders[i-1]
+                p.save()
+        po_instance.sort_order = sort_orders[new_position]
+        po_instance.save()
+        return new_position
+
 
 # ===========================================================================

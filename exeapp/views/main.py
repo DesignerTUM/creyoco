@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 
 from jsonrpc import jsonrpc_method
+from exeapp.models.package import PackageOrder
 from exeapp.views import upload_file_form
 from exeapp.models import Package, User
 from exeapp.shortcuts import get_package_by_id_or_error
@@ -18,12 +19,16 @@ def main(request):
     '''Serve the main page with a list of packages.
     TODO: Use a generic view'''
     user = request.user
-    package_list = Package.objects.filter(
-            Q(user=request.user) |
-            Q(collaborators__pk__contains=request.user.pk)
-    )
+    order_list = [(order.package, order.sort_order) for order in
+                  PackageOrder.objects.filter(
+                          Q(user=request.user)
+                          | Q(package__collaborators__pk__contains=request.user.pk)
+                  ).select_related("package")]
+    package_list = [package for package, _ in sorted(order_list, key=lambda k: k[1])]
+
+
     exporter_type_title_map = dict(((export_type, exporter.title)
-        for export_type, exporter in list(exporter_map.items())))
+                                    for export_type, exporter in list(exporter_map.items())))
 
     form = upload_file_form.UploadFileForm()
 
@@ -75,6 +80,7 @@ def duplicate_package(request, package):
 @jsonrpc_method('main.drag_package', authenticated=True)
 @get_package_by_id_or_error
 def drag_package(request, package, position):
-    return{"packageid": package.title, "position": position}
+    pos = PackageOrder.reorder_package(package, request.user, position)
+    return {"packageid": package.title, "position": pos}
 
 

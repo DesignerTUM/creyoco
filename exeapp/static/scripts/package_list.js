@@ -54,7 +54,6 @@ require(['jquery', 'jquery-jsonrpc', 'eyecandy', 'dragula'], function ($, _, eye
             var package_id = el.getAttribute("packageid");
             var package_ids = $(container).find("li").map(function(){return $(this).attr("packageid");})
             var pos = $.inArray(package_id, package_ids);
-            this.cancel();
             drag_package(package_id, pos)
         });
 
@@ -183,6 +182,7 @@ require(['jquery', 'jquery-jsonrpc', 'eyecandy', 'dragula'], function ($, _, eye
     function callback_create_package(id, title) {
         $("<li />").addClass('package').attr("id", "package" + id).attr('packageid', id).append(
                 '<span id="" style="display:block;float:left">\
+                    \<i class="icon-move"></i>\
                     <i class="check icon-check-empty"></i>\
                     <a href="exeapp/package/' + id + '">' + title + '</a>\
             </span>\
