@@ -20,3 +20,4 @@ twisted
 wikipedia
 django-filebrowser-no-grappelli
 django-ckeditor
+sqlparse
