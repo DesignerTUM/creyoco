@@ -20,6 +20,7 @@
 """
 WebsiteExport will export a package as a website of HTML pages
 """
+import shutil
 from django.core import serializers
 from django.conf import settings
 import logging
@@ -88,15 +89,23 @@ class WebsiteExport(object):
         """
         Actually saves the zip data. Called by 'Path.safeSave'
         """
-        inner_zip_name = self.package.title + '.zip'
-        inner_zip = ZipFile(inner_zip_name, "w")
-        self.add_dir_to_zip(inner_zip, Path(self.output_dir))
-        inner_zip.close()
+        tmpdir = tempfile.mkdtemp()
+        inner_zip_file_name = self.package.title + '.zip'
+        try:
+            inner_zip_name = os.path.join(tmpdir, inner_zip_file_name)
+            inner_zip = ZipFile(inner_zip_name, "w")
+            self.add_dir_to_zip(inner_zip, Path(self.output_dir))
+            inner_zip.close()
 
-        outer_zip = ZipFile(self.file_obj, "w")
-        self.add_dir_to_zip(outer_zip, Path(self.output_dir))
-        outer_zip.write(inner_zip_name)
-        outer_zip.close()
+            outer_zip = ZipFile(self.file_obj, "w")
+            self.add_dir_to_zip(outer_zip, Path(self.output_dir))
+            self.add_dir_to_zip(outer_zip, Path(tmpdir))
+            outer_zip.close()
+
+        finally:
+            shutil.rmtree(tmpdir)
+
+
 
     def add_dir_to_zip(self, zipped, path, rel_path=Path(".")):
         """
