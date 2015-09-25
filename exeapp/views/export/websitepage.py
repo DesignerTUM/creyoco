@@ -41,4 +41,5 @@ class WebsitePage(Page):
         styles in pages.
         """
         current_page = self
+        zip_name = self.node.package.title + '.zip'
         return render_to_string("exe/export/websitepage.html", locals())

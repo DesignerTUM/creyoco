@@ -46,11 +46,25 @@
     </header>
     <section class="content">
       <!-- TODO Background -->
-        <aside class="left">
-        <nav>
-            {% navigation_bar current_page full_style_url %}
-        </nav>
-        </aside>
+        <div style="float:left">
+            <aside class="left">
+            <nav>
+                {% navigation_bar current_page full_style_url %}
+            </nav>
+            </aside>
+
+            <aside class="left" style="float: none; margin-top: 100px;">
+                <nav>
+                    <ul>
+                        <li><a class="active" href={{ zip_name }} title="Download">Download package</a></li>
+                    </ul>
+                </nav>
+            </aside>
+        </div>
+
+
+
+
         <div class="middle">
           <h1 class="pagetitle">{{current_page.node.title}}</h1>
           {% include NAVIGATION_LINKS %}
