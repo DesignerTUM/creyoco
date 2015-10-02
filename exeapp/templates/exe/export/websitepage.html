@@ -66,8 +66,8 @@
 
 
         <div class="middle">
-          <h1 class="pagetitle">{{current_page.node.title}}</h1>
           {% include NAVIGATION_LINKS %}
+          <h1 class="pagetitle">{{current_page.node.title}}</h1>
           {% include "exe/export/page_content.html" %}
           {% include NAVIGATION_LINKS %}
           {% render_licence current_page %}

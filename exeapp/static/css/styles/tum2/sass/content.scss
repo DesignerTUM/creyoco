@@ -153,6 +153,7 @@ header {
   article {
     width: 728px;
     float: left;
+    margin-bottom: 20px;
     p {
       margin-bottom: 20px;
     }
@@ -224,6 +225,28 @@ header {
     }
 
   }
+}
+
+
+div.midnav {
+  float: right;
+
+  a.mid-nav-url {
+    padding: 5px 10px 5px 10px;
+    text-align: center;
+    background-color: $lightblue;
+    border-radius: 5px;
+    border: 1px solid $blue;
+    text-decoration: none;
+    color: $grey;
+
+    &:hover {
+      background-color: $blue;
+      text-decoration: none;
+      color: $white;
+    }
+  }
+
 }
 
 footer {

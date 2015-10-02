@@ -1,10 +1,10 @@
-/* line 10, sass/content.scss */
+/* line 9, sass/content.scss */
 * {
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-font-smoothing: antialiased; }
 
-/* line 16, sass/content.scss */
+/* line 15, sass/content.scss */
 body {
   font-size: 100%;
   font-family: "Open Sans";
@@ -14,26 +14,26 @@ body {
   background-image: url(img/debut_light.png);
   background-repeat: repeat; }
 
-/* line 26, sass/content.scss */
+/* line 25, sass/content.scss */
 .container {
   width: 100%;
   margin: 0 auto; }
 
-/* line 32, sass/content.scss */
+/* line 31, sass/content.scss */
 nav ul {
   padding-left: 0; }
 
-/* line 37, sass/content.scss */
+/* line 36, sass/content.scss */
 .middle h1 {
   font-size: 24px;
   font-family: "Droid Serif";
   font-weight: bold;
   letter-spacing: 1px; }
-  /* line 42, sass/content.scss */
+  /* line 41, sass/content.scss */
   .middle h1.pagetitle {
     color: #7cb22d; }
 
-/* line 47, sass/content.scss */
+/* line 46, sass/content.scss */
 .middle h2 {
   font-size: 16px;
   font-family: "Droid Serif";
@@ -42,36 +42,36 @@ nav ul {
   margin-bottom: 10px;
   border-bottom: 1px solid #7cb22d; }
 
-/* line 56, sass/content.scss */
+/* line 55, sass/content.scss */
 .middle h3 {
   font-size: 14px;
   font-weight: bold; }
 
-/* line 62, sass/content.scss */
+/* line 61, sass/content.scss */
 .middle h1, .middle h2, .middle h3, .middle h4, .middle h5 {
   color: #7cb22d; }
 
-/* line 67, sass/content.scss */
+/* line 66, sass/content.scss */
 header {
   background-color: #7cb22d;
   padding-top: 10px;
   padding-bottom: 10px;
   margin-bottom: 30px;
   box-shadow: 0 1px 10px -2px gray; }
-  /* line 74, sass/content.scss */
+  /* line 73, sass/content.scss */
   header span {
     color: white;
     font-size: 30px;
     font-family: "Droid Serif"; }
-  /* line 80, sass/content.scss */
+  /* line 79, sass/content.scss */
   header a {
     float: right; }
 
-/* line 91, sass/content.scss */
+/* line 90, sass/content.scss */
 .content {
   width: 1170px;
   margin: 0 auto; }
-  /* line 94, sass/content.scss */
+  /* line 93, sass/content.scss */
   .content .left {
     background-color: rgba(219, 232, 193, 0.6);
     float: left;
@@ -81,12 +81,12 @@ header {
     padding-bottom: 10px;
     border-radius: 5px;
     border: 1px solid #7cb22d; }
-    /* line 105, sass/content.scss */
+    /* line 104, sass/content.scss */
     .content .left ul li {
       list-style: none;
       line-height: 30px;
       margin-left: 15px; }
-      /* line 109, sass/content.scss */
+      /* line 108, sass/content.scss */
       .content .left ul li > a {
         display: inline-block;
         padding-left: 20px;
@@ -97,160 +97,179 @@ header {
         color: #4d4d4d;
         text-decoration: none;
         text-indent: -20px; }
-        /* line 120, sass/content.scss */
+        /* line 119, sass/content.scss */
         .content .left ul li > a.active {
           color: #7cb22d;
           font-weight: bold; }
-        /* line 124, sass/content.scss */
+        /* line 123, sass/content.scss */
         .content .left ul li > a:hover {
           background-color: #7cb22d;
           color: white; }
-  /* line 133, sass/content.scss */
+  /* line 132, sass/content.scss */
   .content .right {
     width: 202px;
     float: right;
     margin-left: 20px; }
-    /* line 138, sass/content.scss */
+    /* line 137, sass/content.scss */
     .content .right .rightimages {
       margin-bottom: 10px;
       background: url("img/right_logo.png");
       background-repeat: no-repeat;
       width: 200px;
       height: 292px; }
-  /* line 148, sass/content.scss */
+  /* line 146, sass/content.scss */
   .content .middle {
     float: left;
     width: 728px; }
-  /* line 153, sass/content.scss */
+  /* line 151, sass/content.scss */
   .content article {
     width: 100%;
-    float: left; }
-    /* line 156, sass/content.scss */
+    float: left;
+    margin-bottom: 20px; }
+    /* line 155, sass/content.scss */
     .content article p {
       margin-bottom: 20px; }
-    /* line 159, sass/content.scss */
+    /* line 158, sass/content.scss */
     .content article table tr p {
       margin: 3px 5px 3px 5px; }
-    /* line 162, sass/content.scss */
+    /* line 161, sass/content.scss */
     .content article ul {
       margin: 3px 5px 3px 5px;
       padding-left: 0;
       list-style-position: inside;
       margin-bottom: 20px; }
-      /* line 166, sass/content.scss */
+      /* line 165, sass/content.scss */
       .content article ul li {
         list-style-type: square;
         margin-left: 20px; }
-    /* line 173, sass/content.scss */
+    /* line 172, sass/content.scss */
     .content article ol {
       margin: 3px 5px 3px 5px;
       padding-left: 0;
       list-style-position: inside;
       margin-bottom: 20px; }
-      /* line 177, sass/content.scss */
+      /* line 176, sass/content.scss */
       .content article ol li {
         list-style: decimal;
         margin-left: 20px; }
-    /* line 183, sass/content.scss */
+    /* line 182, sass/content.scss */
     .content article strong {
       color: #4d4d4d;
       font-weight: bold; }
-    /* line 187, sass/content.scss */
+    /* line 186, sass/content.scss */
     .content article .lup {
       float: right;
       margin-left: 20px; }
-    /* line 192, sass/content.scss */
+    /* line 191, sass/content.scss */
     .content article .iDevice ul {
       margin-bottom: 0px; }
-      /* line 194, sass/content.scss */
+      /* line 193, sass/content.scss */
       .content article .iDevice ul li {
         margin-left: 0px;
         padding-left: 0px; }
-    /* line 199, sass/content.scss */
+    /* line 198, sass/content.scss */
     .content article .iDevice a {
       color: #4d4d4d;
       text-decoration: underline; }
-      /* line 202, sass/content.scss */
+      /* line 201, sass/content.scss */
       .content article .iDevice a:hover {
         color: #7cb22d; }
-    /* line 206, sass/content.scss */
+    /* line 205, sass/content.scss */
     .content article .iDevice .toc {
       display: block;
       page-break-after: 0px;
       padding-left: 30px !important; }
-      /* line 210, sass/content.scss */
+      /* line 209, sass/content.scss */
       .content article .iDevice .toc ul {
         padding-left: 5px; }
-        /* line 212, sass/content.scss */
+        /* line 211, sass/content.scss */
         .content article .iDevice .toc ul li {
           list-style-type: none;
           font-weight: bold; }
-          /* line 213, sass/content.scss */
+          /* line 212, sass/content.scss */
           .content article .iDevice .toc ul li a {
             text-decoration: none; }
-          /* line 218, sass/content.scss */
+          /* line 217, sass/content.scss */
           .content article .iDevice .toc ul li ul li {
             margin-left: 15px !important; }
-            /* line 220, sass/content.scss */
+            /* line 219, sass/content.scss */
             .content article .iDevice .toc ul li ul li ul li {
               font-weight: normal !important; }
 
-/* line 233, sass/content.scss */
+/* line 231, sass/content.scss */
+div.midnav {
+  float: right; }
+  /* line 234, sass/content.scss */
+  div.midnav a.mid-nav-url {
+    padding: 5px 10px 5px 10px;
+    text-align: center;
+    background-color: #dbe8c1;
+    border-radius: 5px;
+    border: 1px solid #7cb22d;
+    text-decoration: none;
+    color: #4d4d4d; }
+    /* line 243, sass/content.scss */
+    div.midnav a.mid-nav-url:hover {
+      background-color: #7cb22d;
+      text-decoration: none;
+      color: white; }
+
+/* line 253, sass/content.scss */
 footer .container {
   margin-top: 30px;
   border-top: 1px solid #7cb22d; }
-  /* line 237, sass/content.scss */
+  /* line 257, sass/content.scss */
   footer .container .copyright {
     font-size: 11px;
     color: #4d4d4d; }
-    /* line 241, sass/content.scss */
+    /* line 261, sass/content.scss */
     footer .container .copyright strong {
       font-style: italic; }
 
-/* line 248, sass/content.scss */
+/* line 268, sass/content.scss */
 #menu-toggle {
   display: none; }
 
 @media (max-width: 1200px) {
-  /* line 253, sass/content.scss */
+  /* line 273, sass/content.scss */
   .iDevice {
     margin-left: 3vw;
     margin-right: 3vw; }
-    /* line 256, sass/content.scss */
+    /* line 276, sass/content.scss */
     .iDevice .iDevice_inner, .iDevice > p {
       margin-left: 1vw;
       margin-right: 1vw; }
 
-  /* line 261, sass/content.scss */
+  /* line 281, sass/content.scss */
   .left {
     margin-left: -250px;
     transition: all 0.4s ease 0s;
     position: absolute;
     z-index: 1; }
 
-  /* line 267, sass/content.scss */
+  /* line 287, sass/content.scss */
   .right {
     display: none; }
 
-  /* line 271, sass/content.scss */
+  /* line 291, sass/content.scss */
   .middle {
     width: 100% !important; }
 
-  /* line 274, sass/content.scss */
+  /* line 294, sass/content.scss */
   .content {
     width: 100%; }
 
-  /* line 279, sass/content.scss */
+  /* line 299, sass/content.scss */
   body.active .left {
     margin-left: 0px;
     width: 250px;
     transition: all 0.4s ease 0s;
     position: absolute;
     background-color: #dbe8c1; }
-    /* line 287, sass/content.scss */
+    /* line 307, sass/content.scss */
     body.active .left ul li a {
       text-indent: 0px; }
-    /* line 293, sass/content.scss */
+    /* line 313, sass/content.scss */
     body.active .left .glyphicon {
       margin: 2px 8px 2px 2px;
       border: 1px solid black;
@@ -258,7 +277,7 @@ footer .container {
       float: right;
       padding: 3px; }
 
-  /* line 303, sass/content.scss */
+  /* line 323, sass/content.scss */
   #menu-toggle {
     display: inline-block;
     float: left;

@@ -6,7 +6,6 @@ $green: rgb(49%, 70%, 18%);
 $grey: lighten(black, 30%);
 $headerimage: "tumlogo_bea.png";
 
-
 * {
   box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -59,9 +58,9 @@ nav {
 }
 
 .middle {
-    h1, h2, h3, h4, h5 {
-      color: $green;
-    }
+  h1, h2, h3, h4, h5 {
+    color: $green;
+  }
 }
 
 header {
@@ -80,11 +79,11 @@ header {
   a {
     float: right;
 
-//    .headerimage {
-//      @include background(url(img/#{$headerimage}));
-//      height: image-height($headerimage) - 1; // leaks white when full height
-//      width: image-width($headerimage);
-//    }
+    //    .headerimage {
+    //      @include background(url(img/#{$headerimage}));
+    //      height: image-height($headerimage) - 1; // leaks white when full height
+    //      width: image-width($headerimage);
+    //    }
   }
 }
 
@@ -130,20 +129,19 @@ header {
     }
   }
 
-	.right {
-		width:202px;
-		float:right;
-		margin-left: 20px;
+  .right {
+    width: 202px;
+    float: right;
+    margin-left: 20px;
 
-        .rightimages {
-            margin-bottom: 10px;
-            background: url("img/right_logo.png");
-            background-repeat: no-repeat;
-            width: image-width("right_logo.png");
-            height: image-height("right_logo.png");
-        }
-	}
-
+    .rightimages {
+      margin-bottom: 10px;
+      background: url("img/right_logo.png");
+      background-repeat: no-repeat;
+      width: image-width("right_logo.png");
+      height: image-height("right_logo.png");
+    }
+  }
 
   .middle {
     float: left;
@@ -153,6 +151,7 @@ header {
   article {
     width: 100%;
     float: left;
+    margin-bottom: 20px;
     p {
       margin-bottom: 20px;
     }
@@ -229,6 +228,27 @@ header {
   }
 }
 
+div.midnav {
+  float: right;
+
+  a.mid-nav-url {
+    padding: 5px 10px 5px 10px;
+    text-align: center;
+    background-color: $lightgreen;
+    border-radius: 5px;
+    border: 1px solid $green;
+    text-decoration: none;
+    color: $grey;
+
+    &:hover {
+      background-color: $green;
+      text-decoration: none;
+      color: white;
+    }
+  }
+
+}
+
 footer {
   .container {
     margin-top: 30px;
@@ -249,7 +269,7 @@ footer {
   display: none;
 }
 
-@media (max-width:1200px) {
+@media (max-width: 1200px) {
   .iDevice {
     margin-left: 3vw;
     margin-right: 3vw;
@@ -258,39 +278,39 @@ footer {
       margin-right: 1vw;
     }
   }
-  .left{
+  .left {
     margin-left: -250px;
     transition: all 0.4s ease 0s;
     position: absolute;
     z-index: 1;
   }
-  .right{
+  .right {
     display: none;
   }
-  
-  .middle{
+
+  .middle {
     width: 100% !important;
   }
-  .content{
+  .content {
     width: 100%;
   }
 
-  body.active{
+  body.active {
     .left {
       margin-left: 0px;
       width: 250px;
       transition: all 0.4s ease 0s;
       position: absolute;
       background-color: rgb(86%, 91%, 76%);
-      ul{
-        li{
-          a{
+      ul {
+        li {
+          a {
             text-indent: 0px;
           }
         }
       }
 
-      .glyphicon{
+      .glyphicon {
         margin: 2px 8px 2px 2px;
         border: 1px solid black;
         border-radius: 2px;
