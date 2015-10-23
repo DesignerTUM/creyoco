@@ -91,6 +91,11 @@ header {
 .content {
   width: 1170px;
   margin: 0 auto;
+  hr {
+    color: #777777;
+    background-color: #777777;
+    height: 1px;
+  }
   .left {
     background-color: $lightblue;
     float: left;
@@ -171,7 +176,12 @@ header {
       }
       margin-bottom: 20px;
     }
-
+    table td {
+      padding: 3px 5px 3px 5px;
+    }
+    table {
+      margin-bottom: 20px;
+    }
     ol {
       list-style-position: inside;
       li {

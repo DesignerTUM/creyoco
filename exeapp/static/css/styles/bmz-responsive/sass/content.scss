@@ -93,6 +93,11 @@ header {
 .content {
   width: 1170px;
   margin: 0 auto;
+  hr {
+    color: #777777;
+    background-color: #777777;
+    height: 1px;
+  }
   .left {
     background-color: rgba(86%, 91%, 76%, 0.6);
     float: left;
@@ -158,8 +163,11 @@ header {
     p {
       margin-bottom: 20px;
     }
-    table tr p {
-      margin: 3px 5px 3px 5px;
+    table td {
+      padding: 3px 5px 3px 5px;
+    }
+    table {
+      margin-bottom: 20px;
     }
     ul {
       margin: 3px 5px 3px 5px;
