@@ -279,3 +279,11 @@ div.tleft {
 div.node { page-break-after: always; }
 }
 
+nav hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+nav .download-block {
+    margin-bottom: 0;
+}

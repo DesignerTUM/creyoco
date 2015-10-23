@@ -54,7 +54,7 @@ def navigation_bar(current_page, full_url):
                                   "full_url": full_url,
                                   }))
     while depth > 0:
-        html.append("</li>")
+        html.append("</li></ul>")
         depth -= 1
     html.append("</ul>")
     return "\n".join(html)
