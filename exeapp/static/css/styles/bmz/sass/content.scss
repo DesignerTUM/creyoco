@@ -6,8 +6,6 @@ $green: rgb(49%, 70%, 18%);
 $grey: lighten(black, 30%);
 $headerimage: "tumlogo_bea.png";
 
-@import url("//fonts.googleapis.com/css?family=Open+Sans:400,100,300,500,700,900");
-@import url("//fonts.googleapis.com/css?family=Droid+Serif:400,700");
 
 * {
   box-sizing: border-box;
@@ -153,6 +151,8 @@ header {
   article {
     width: 728px;
     float: left;
+    margin-bottom: 20px;
+
     p {
       margin-bottom: 20px;
     }
@@ -227,6 +227,27 @@ header {
     }
 
   }
+}
+
+div.midnav {
+  float: right;
+
+  a.mid-nav-url {
+    padding: 5px 10px 5px 10px;
+    text-align: center;
+    background-color: $lightgreen;
+    border-radius: 5px;
+    border: 1px solid $green;
+    text-decoration: none;
+    color: $grey;
+
+    &:hover {
+      background-color: $green;
+      text-decoration: none;
+      color: white;
+    }
+  }
+
 }
 
 footer {

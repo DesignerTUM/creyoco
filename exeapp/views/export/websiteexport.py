@@ -20,11 +20,13 @@
 """
 WebsiteExport will export a package as a website of HTML pages
 """
+import shutil
 from django.core import serializers
 from django.conf import settings
 import logging
 import os
 import json
+from io import BytesIO
 from exeapp.models import Package, Node
 from exeapp.utils.path import Path
 from exeapp.views.export.websitepage import WebsitePage
@@ -87,9 +89,23 @@ class WebsiteExport(object):
         """
         Actually saves the zip data. Called by 'Path.safeSave'
         """
-        zipped = ZipFile(self.file_obj, "w")
-        self.add_dir_to_zip(zipped, Path(self.output_dir))
-        zipped.close()
+        tmpdir = tempfile.mkdtemp()
+        inner_zip_file_name = self.package.title + '.zip'
+        try:
+            inner_zip_name = os.path.join(tmpdir, inner_zip_file_name)
+            inner_zip = ZipFile(inner_zip_name, "w")
+            self.add_dir_to_zip(inner_zip, Path(self.output_dir))
+            inner_zip.close()
+
+            outer_zip = ZipFile(self.file_obj, "w")
+            self.add_dir_to_zip(outer_zip, Path(self.output_dir))
+            self.add_dir_to_zip(outer_zip, Path(tmpdir))
+            outer_zip.close()
+
+        finally:
+            shutil.rmtree(tmpdir)
+
+
 
     def add_dir_to_zip(self, zipped, path, rel_path=Path(".")):
         """
@@ -194,7 +210,6 @@ class WebsiteExport(object):
         self.media_dir.copylist(self.nonwiki_media, self.output_dir)
         self.media_root.copylist(self.wiki_media, self.output_dir)
 
-
     def generate_pages(self, node, depth, kwargs=None):
         """
         Recursively generate pages and store in pages member variable
@@ -218,7 +233,6 @@ for retrieving later. Kwargs will be used at page creation.
         return dict([(x, y) for x, y in dic.items() if not x.startswith('_')])
 
 
-
     def dict_of_node(self, node):
         print(node.id)
         node_dict = self._cleanup_dict(node.__dict__)
@@ -233,7 +247,7 @@ for retrieving later. Kwargs will be used at page creation.
         node_dict['idevices'] = []
         for idevice in node.idevices.all():
             child = idevice.as_child()
-            #add todict for every idevice
+            # add todict for every idevice
             clean_dict = child.to_dict()
             node_dict['idevices'].append(clean_dict)
         return node_dict
@@ -260,7 +274,7 @@ for retrieving later. Kwargs will be used at page creation.
         Path.copyfile(self.json_file, Path.joinpath(self.output_dir, Path("a.json")))
 
     def create_temp_json_file(self):
-        f= tempfile.NamedTemporaryFile(mode='w+t', suffix='.json', prefix='', delete=False)
+        f = tempfile.NamedTemporaryFile(mode='w+t', suffix='.json', prefix='', delete=False)
         _filename = f.name
         f.close()
         return _filename

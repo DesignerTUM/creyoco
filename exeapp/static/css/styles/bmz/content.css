@@ -1,12 +1,10 @@
-@import url("//fonts.googleapis.com/css?family=Open+Sans:400,100,300,500,700,900");
-@import url("//fonts.googleapis.com/css?family=Droid+Serif:400,700");
-/* line 12, sass/content.scss */
+/* line 10, sass/content.scss */
 * {
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-font-smoothing: antialiased; }
 
-/* line 18, sass/content.scss */
+/* line 16, sass/content.scss */
 body {
   font-size: 100%;
   font-family: "Open Sans";
@@ -16,26 +14,26 @@ body {
   background-image: url(img/debut_light.png);
   background-repeat: repeat; }
 
-/* line 28, sass/content.scss */
+/* line 26, sass/content.scss */
 .container {
   width: 1170px;
   margin: 0 auto; }
 
-/* line 34, sass/content.scss */
+/* line 32, sass/content.scss */
 nav ul {
   padding-left: 0; }
 
-/* line 39, sass/content.scss */
+/* line 37, sass/content.scss */
 h1 {
   font-size: 24px;
   font-family: "Droid Serif";
   font-weight: bold;
   letter-spacing: 1px; }
-  /* line 44, sass/content.scss */
+  /* line 42, sass/content.scss */
   h1.pagetitle {
     color: #7cb22d; }
 
-/* line 49, sass/content.scss */
+/* line 47, sass/content.scss */
 h2 {
   font-size: 16px;
   font-family: "Droid Serif";
@@ -44,36 +42,36 @@ h2 {
   margin-bottom: 10px;
   border-bottom: 1px solid #7cb22d; }
 
-/* line 58, sass/content.scss */
+/* line 56, sass/content.scss */
 h3 {
   font-size: 14px;
   font-weight: bold; }
 
-/* line 63, sass/content.scss */
+/* line 61, sass/content.scss */
 h1, h2, h3, h4, h5 {
   color: #7cb22d; }
 
-/* line 67, sass/content.scss */
+/* line 65, sass/content.scss */
 header {
   background-color: #7cb22d;
   padding-top: 10px;
   padding-bottom: 10px;
   margin-bottom: 30px;
   box-shadow: 0 1px 10px -2px gray; }
-  /* line 74, sass/content.scss */
+  /* line 72, sass/content.scss */
   header span {
     color: white;
     font-size: 30px;
     font-family: "Droid Serif"; }
-  /* line 80, sass/content.scss */
+  /* line 78, sass/content.scss */
   header a {
     float: right; }
 
-/* line 91, sass/content.scss */
+/* line 89, sass/content.scss */
 .content {
   width: 1170px;
   margin: 0 auto; }
-  /* line 94, sass/content.scss */
+  /* line 92, sass/content.scss */
   .content .left {
     background-color: rgba(219, 232, 193, 0.6);
     float: left;
@@ -83,12 +81,12 @@ header {
     padding-bottom: 10px;
     border-radius: 5px;
     border: 1px solid #7cb22d; }
-    /* line 105, sass/content.scss */
+    /* line 103, sass/content.scss */
     .content .left ul li {
       list-style: none;
       line-height: 30px;
       margin-left: 15px; }
-      /* line 109, sass/content.scss */
+      /* line 107, sass/content.scss */
       .content .left ul li > a {
         display: inline-block;
         width: 100%;
@@ -99,34 +97,35 @@ header {
         color: #4d4d4d;
         text-decoration: none;
         text-indent: -20px; }
-        /* line 120, sass/content.scss */
+        /* line 118, sass/content.scss */
         .content .left ul li > a.active {
           color: #7cb22d;
           font-weight: bold; }
-        /* line 124, sass/content.scss */
+        /* line 122, sass/content.scss */
         .content .left ul li > a:hover {
           background-color: #7cb22d;
           color: white; }
-  /* line 133, sass/content.scss */
+  /* line 131, sass/content.scss */
   .content .right {
     width: 202px;
     float: right;
     margin-left: 20px; }
-    /* line 138, sass/content.scss */
+    /* line 136, sass/content.scss */
     .content .right .rightimages {
       margin-bottom: 10px;
       background: url("img/right_logo.png");
       background-repeat: no-repeat;
       width: 200px;
       height: 292px; }
-  /* line 148, sass/content.scss */
+  /* line 146, sass/content.scss */
   .content .middle {
     float: left;
     width: 728px; }
-  /* line 153, sass/content.scss */
+  /* line 151, sass/content.scss */
   .content article {
     width: 728px;
-    float: left; }
+    float: left;
+    margin-bottom: 20px; }
     /* line 156, sass/content.scss */
     .content article p {
       margin-bottom: 20px; }
@@ -197,14 +196,32 @@ header {
             .content article .iDevice .toc ul li ul li ul li {
               font-weight: normal !important; }
 
-/* line 233, sass/content.scss */
+/* line 232, sass/content.scss */
+div.midnav {
+  float: right; }
+  /* line 235, sass/content.scss */
+  div.midnav a.mid-nav-url {
+    padding: 5px 10px 5px 10px;
+    text-align: center;
+    background-color: #dbe8c1;
+    border-radius: 5px;
+    border: 1px solid #7cb22d;
+    text-decoration: none;
+    color: #4d4d4d; }
+    /* line 244, sass/content.scss */
+    div.midnav a.mid-nav-url:hover {
+      background-color: #7cb22d;
+      text-decoration: none;
+      color: white; }
+
+/* line 254, sass/content.scss */
 footer .container {
   margin-top: 30px;
   border-top: 1px solid #7cb22d; }
-  /* line 237, sass/content.scss */
+  /* line 258, sass/content.scss */
   footer .container .copyright {
     font-size: 11px;
     color: #4d4d4d; }
-    /* line 241, sass/content.scss */
+    /* line 262, sass/content.scss */
     footer .container .copyright strong {
       font-style: italic; }

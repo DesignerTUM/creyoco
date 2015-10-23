@@ -8,8 +8,6 @@ $text_black: rgb(51, 51, 51);
 $grey: lighten(black, 45%);
 $headerimage: "tumlogo.png";
 
-@import url("//fonts.googleapis.com/css?family=Open+Sans:400,100,300,500,700,900");
-@import url("//fonts.googleapis.com/css?family=Droid+Serif:400,700");
 
 * {
   box-sizing: border-box;
@@ -165,6 +163,7 @@ header {
   article {
     width: 100%;
     float: left;
+    margin-bottom: 20px;
     p {
       margin-bottom: 20px;
     }
@@ -241,6 +240,27 @@ header {
     }
 
   }
+}
+
+div.midnav {
+  float: right;
+
+  a.mid-nav-url {
+    padding: 5px 10px 5px 10px;
+    text-align: center;
+    background-color: $lightblue;
+    border-radius: 5px;
+    border: 1px solid $blue;
+    text-decoration: none;
+    color: $grey;
+
+    &:hover {
+      background-color: $blue;
+      text-decoration: none;
+      color: $white;
+    }
+  }
+
 }
 
 footer {
