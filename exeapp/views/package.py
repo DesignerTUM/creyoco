@@ -2,6 +2,7 @@ import os
 from urllib import parse
 from io import BytesIO
 import logging
+from django.db.models import Q
 
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
@@ -17,7 +18,7 @@ from exeapp.models import User, idevice_store, Package
 from exeapp.shortcuts import get_package_by_id_or_error
 from django import forms
 from django.core.urlresolvers import reverse
-from exeapp.models.package import DublinCore
+from exeapp.models.package import DublinCore, PackageOrder
 from exeapp.views.export.exporter_factory import exporter_factory, exporter_map
 from exeapp.views.authoring import authoring
 from django.template.loader import render_to_string
@@ -64,7 +65,14 @@ def generate_package_main(request, package, current_node, **kwargs):
     dublincore_form = kwargs.get(DublinCoreForm.form_type,
                                  DublinCoreForm(instance=package.dublincore))
     user = User.objects.get(username=request.user.username)
-    package_list = Package.objects.filter(user=user)
+    order_list = [(order.package, order.sort_order) for order in
+                  PackageOrder.objects.filter(
+                          Q(user=request.user)
+                          | Q(package__collaborators__pk__contains=request.user.pk)
+                  ).select_related("package")]
+    package_list = [package for package, _ in sorted(order_list, key=lambda k: k[1])]
+    print("#" * 100)
+    print(package_list)
     return render_to_response('exe/mainpage.html', locals())
 
 

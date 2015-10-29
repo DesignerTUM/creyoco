@@ -64,7 +64,6 @@
         <div class="chzn">
             <select data-placeholder="Wählen Sie einen Kurs" class="chzn-select"
                     tabindex="-1" id="select_course">
-                <option value="{{ package.get_absolute_url }}">{{ package.title }}</option>
                 {% for package_iter in package_list %}
                     {% if package.title != package_iter.title %}
                         <option value='{{ package_iter.get_absolute_url }}'>{{ package_iter.title }}</option>
