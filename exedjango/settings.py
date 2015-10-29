@@ -217,7 +217,7 @@ FILEBROWSER_STRICT_PIL = True
 
 FILEBROWSER_EXTENSIONS = {
     'Folder': [''],
-    'Image': ['.jpg', '.jpeg', '.gif', '.png', '.tif', '.tiff'],
+    'Image': ['.jpg', '.jpeg', '.gif', '.png', '.tif', '.tiff', '.svg'],
     'Document': ['.pdf', '.doc', '.rtf', '.txt', '.xls', '.xlsx', '.csv', '.docx', '.ppt', '.pptx'],
     'Video': ['.mov', '.wmv', '.mpeg', '.mpg', '.avi', '.rm'],
     'Audio': ['.mp3', '.mp4', '.wav', '.aiff', '.midi', '.m4p']
