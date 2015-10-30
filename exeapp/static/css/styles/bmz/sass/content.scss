@@ -161,9 +161,10 @@ header {
     }
     ul {
       margin: 3px 5px 3px 5px;
-      padding-left: 0;
-      list-style-position: inside;
+      padding-left: 40px;
+      list-style-position: outside;
       li {
+        list-style-position: outside;
         list-style-type: square;
         margin-left: 20px;
       }
@@ -172,9 +173,10 @@ header {
 
     ol {
       margin: 3px 5px 3px 5px;
-      padding-left: 0;
-      list-style-position: inside;
+      padding-left: 40px;
+      list-style-position: outside;
       li {
+        list-style-position: outside;
         list-style: decimal;
         margin-left: 20px;
       }
