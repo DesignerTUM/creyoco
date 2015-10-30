@@ -44,11 +44,7 @@ img.submit, img.help, img.info, img.gallery {
 #go_next img {display: none;}
 #go_prev img {display: none;}
 
-li {
-    list-style-position: inside;
-}
-
-p#nodeTitle { 
+p#nodeTitle {
     font-weight: bold;
     display: inline;
 }
