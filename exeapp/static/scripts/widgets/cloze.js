@@ -72,6 +72,7 @@ var cloze = {
                 if (answers.length > 0) {
                     if (drag_n_drop.val() == "True") {
                         show_suggestion(this, answers);
+                        $(".cloze_gap").prop("contenteditable", false);
                     }
                 }
             });
@@ -81,11 +82,19 @@ var cloze = {
                 hoverClass: "ui-state-hover",
                 drop: function( event, ui ) {
                     {
-                        $(ui.draggable).remove();
-                        $(this).html(ui.draggable.text());
+                        $(ui.draggable).hide();
+                        $(this).text(ui.draggable.text());
                     }
                 }
-            });
+            })
+                .click(function() {
+                    var answer = $(this).text();
+                    if (answer) {
+                      var draggable = $("div.drag_n_drop_answer:contains("+answer+")");
+                      $(this).text("");
+                      draggable.show();
+                    }
+                });
             $(".cloze_submit").off("click").on("click", submit_cloze);
             var that = this;
             $(".cloze_restart").off("click").on("click", function (e) {
@@ -96,12 +105,10 @@ var cloze = {
                         $(this).removeClass("cloze_right cloze_wrong");
                     });
                 e.preventDefault();
-                var drag_n_drop = $("#wrapper").find(".drag_n_drop");
-                if (drag_n_drop.val() == "True") {
+                var drag_n_drop = $(".drag_n_drop_answer");
+                if (drag_n_drop.length !== 0) {
                     $("#wrapper").removeClass("checked");
-                    $(".drag_n_drop_container").remove();
-                    var answers = $(that).find(".cloze_answer");
-                    show_suggestion(that, answers);
+                    $("div.drag_n_drop_answer").show();
                     }
             });
             $(".cloze_show_answers").off("click").on("click", function (e) {
