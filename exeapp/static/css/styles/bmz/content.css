@@ -54,154 +54,163 @@ h1, h2, h3, h4, h5 {
 /* line 65, sass/content.scss */
 header {
   background-color: #7db32e;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-bottom: 15px;
   margin-bottom: 30px;
-  box-shadow: 0 1px 10px -2px gray; }
-  /* line 72, sass/content.scss */
+  box-shadow: 0 1px 10px -2px gray;
+  position: fixed;
+  right: 10px;
+  left: 10px; }
+  /* line 74, sass/content.scss */
   header span {
     color: white;
     font-size: 30px;
     font-family: "Droid Serif"; }
-  /* line 78, sass/content.scss */
+  /* line 80, sass/content.scss */
   header a {
     float: right; }
 
-/* line 89, sass/content.scss */
+/* line 91, sass/content.scss */
 .content {
   width: 1170px;
-  margin: 0 auto; }
-  /* line 92, sass/content.scss */
+  margin: 77px auto; }
+  /* line 94, sass/content.scss */
   .content .left {
-    background-color: rgba(219, 232, 194, 0.6);
     float: left;
     width: 200px;
-    margin-right: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border-radius: 5px;
-    border: 1px solid #7db32e; }
-    /* line 103, sass/content.scss */
-    .content .left ul li {
-      list-style: none;
-      line-height: 30px;
-      margin-left: 15px; }
-      /* line 107, sass/content.scss */
-      .content .left ul li > a {
-        display: inline-block;
-        width: 100%;
-        padding-left: 20px;
-        padding-top: 4px;
-        padding-bottom: 4px;
-        line-height: 18px;
-        color: #4d4d4d;
-        text-decoration: none;
-        text-indent: -20px; }
-        /* line 118, sass/content.scss */
-        .content .left ul li > a.active {
-          color: #7db32e;
-          font-weight: bold; }
-        /* line 122, sass/content.scss */
-        .content .left ul li > a:hover {
-          background-color: #7db32e;
-          color: white; }
-  /* line 131, sass/content.scss */
+    min-height: 1px; }
+    /* line 98, sass/content.scss */
+    .content .left nav {
+      background-color: rgba(219, 232, 194, 0.6);
+      margin-right: 20px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      border-radius: 5px;
+      border: 1px solid #7db32e;
+      position: fixed;
+      width: 185px; }
+      /* line 108, sass/content.scss */
+      .content .left nav ul li {
+        list-style: none;
+        line-height: 30px;
+        margin-left: 15px; }
+        /* line 112, sass/content.scss */
+        .content .left nav ul li > a {
+          display: inline-block;
+          width: 100%;
+          padding-left: 20px;
+          padding-top: 4px;
+          padding-bottom: 4px;
+          line-height: 18px;
+          color: #4d4d4d;
+          text-decoration: none;
+          text-indent: -20px; }
+          /* line 123, sass/content.scss */
+          .content .left nav ul li > a.active {
+            color: #7db32e;
+            font-weight: bold; }
+          /* line 127, sass/content.scss */
+          .content .left nav ul li > a:hover {
+            background-color: #7db32e;
+            color: white; }
+  /* line 137, sass/content.scss */
   .content .right {
     width: 202px;
     float: right;
-    margin-left: 20px; }
-    /* line 136, sass/content.scss */
+    margin-left: 20px;
+    min-height: 1px; }
+    /* line 143, sass/content.scss */
     .content .right .rightimages {
+      position: fixed;
       margin-bottom: 10px;
       background: url("img/right_logo.png");
       background-repeat: no-repeat;
       width: 200px;
       height: 292px; }
-  /* line 146, sass/content.scss */
+  /* line 154, sass/content.scss */
   .content .middle {
     float: left;
     width: 728px; }
-  /* line 151, sass/content.scss */
+  /* line 159, sass/content.scss */
   .content article {
     width: 728px;
     float: left;
     margin-bottom: 20px; }
-    /* line 156, sass/content.scss */
+    /* line 164, sass/content.scss */
     .content article p {
       margin-bottom: 20px; }
-    /* line 159, sass/content.scss */
+    /* line 167, sass/content.scss */
     .content article table tr p {
       margin: 3px 5px 3px 5px; }
-    /* line 162, sass/content.scss */
+    /* line 170, sass/content.scss */
     .content article ul {
       margin: 3px 5px 3px 5px;
       padding-left: 40px;
       list-style-position: outside;
       margin-bottom: 20px; }
-      /* line 166, sass/content.scss */
+      /* line 174, sass/content.scss */
       .content article ul li {
         list-style-position: outside;
         list-style-type: square;
         margin-left: 20px; }
-    /* line 174, sass/content.scss */
+    /* line 182, sass/content.scss */
     .content article ol {
       margin: 3px 5px 3px 5px;
       padding-left: 40px;
       list-style-position: outside;
       margin-bottom: 20px; }
-      /* line 178, sass/content.scss */
+      /* line 186, sass/content.scss */
       .content article ol li {
         list-style-position: outside;
         list-style: decimal;
         margin-left: 20px; }
-    /* line 185, sass/content.scss */
+    /* line 193, sass/content.scss */
     .content article strong {
       color: #4d4d4d;
       font-weight: bold; }
-    /* line 189, sass/content.scss */
+    /* line 197, sass/content.scss */
     .content article .lup {
       float: right;
       margin-left: 20px; }
-    /* line 194, sass/content.scss */
+    /* line 202, sass/content.scss */
     .content article .iDevice ul {
       margin-bottom: 0px; }
-      /* line 196, sass/content.scss */
+      /* line 204, sass/content.scss */
       .content article .iDevice ul li {
         margin-left: 0px;
         padding-left: 0px; }
-    /* line 201, sass/content.scss */
+    /* line 209, sass/content.scss */
     .content article .iDevice a {
       color: #4d4d4d;
       text-decoration: underline; }
-      /* line 204, sass/content.scss */
+      /* line 212, sass/content.scss */
       .content article .iDevice a:hover {
         color: #7db32e; }
-    /* line 208, sass/content.scss */
+    /* line 216, sass/content.scss */
     .content article .iDevice .toc {
       display: block;
       page-break-after: 0px;
       padding-left: 30px !important; }
-      /* line 212, sass/content.scss */
+      /* line 220, sass/content.scss */
       .content article .iDevice .toc ul {
         padding-left: 5px; }
-        /* line 214, sass/content.scss */
+        /* line 222, sass/content.scss */
         .content article .iDevice .toc ul li {
           list-style-type: none;
           font-weight: bold; }
-          /* line 215, sass/content.scss */
+          /* line 223, sass/content.scss */
           .content article .iDevice .toc ul li a {
             text-decoration: none; }
-          /* line 220, sass/content.scss */
+          /* line 228, sass/content.scss */
           .content article .iDevice .toc ul li ul li {
             margin-left: 15px !important; }
-            /* line 222, sass/content.scss */
+            /* line 230, sass/content.scss */
             .content article .iDevice .toc ul li ul li ul li {
               font-weight: normal !important; }
 
-/* line 234, sass/content.scss */
+/* line 242, sass/content.scss */
 div.midnav {
   float: right; }
-  /* line 237, sass/content.scss */
+  /* line 245, sass/content.scss */
   div.midnav a.mid-nav-url {
     padding: 5px 10px 5px 10px;
     text-align: center;
@@ -210,20 +219,20 @@ div.midnav {
     border: 1px solid #7db32e;
     text-decoration: none;
     color: #4d4d4d; }
-    /* line 246, sass/content.scss */
+    /* line 254, sass/content.scss */
     div.midnav a.mid-nav-url:hover {
       background-color: #7db32e;
       text-decoration: none;
       color: white; }
 
-/* line 256, sass/content.scss */
+/* line 264, sass/content.scss */
 footer .container {
   margin-top: 30px;
   border-top: 1px solid #7db32e; }
-  /* line 260, sass/content.scss */
+  /* line 268, sass/content.scss */
   footer .container .copyright {
     font-size: 11px;
     color: #4d4d4d; }
-    /* line 264, sass/content.scss */
+    /* line 272, sass/content.scss */
     footer .container .copyright strong {
       font-style: italic; }

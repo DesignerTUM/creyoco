@@ -64,10 +64,12 @@ h1, h2, h3, h4, h5 {
 
 header {
   background-color: $green;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-bottom: 15px;
   margin-bottom: 30px;
   box-shadow: 0 1px 10px -2px gray;
+  position: fixed;
+  right: 10px;
+  left: 10px;
 
   span {
     color: white;
@@ -88,40 +90,44 @@ header {
 
 .content {
   width: 1170px;
-  margin: 0 auto;
+  margin: 77px auto;
   .left {
-    background-color: rgba(86%, 91%, 76%, 0.6);
     float: left;
     width: 200px;
-    margin-right: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border-radius: 5px;
-    border: 1px solid $green;
+    min-height: 1px;
+    nav {
+      background-color: rgba(86%, 91%, 76%, 0.6);
+      margin-right: 20px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      border-radius: 5px;
+      border: 1px solid $green;
+      position: fixed;
+      width: 185px;
+      ul {
+        li {
+          list-style: none;
+          line-height: 30px;
+          margin-left: 15px;
+          > a {
+            display: inline-block;
+            width: 100%;
+            padding-left: 20px;
+            padding-top: 4px;
+            padding-bottom: 4px;
+            line-height: 18px;
+            color: $grey;
+            text-decoration: none;
+            text-indent: -20px;
 
-    ul {
-      li {
-        list-style: none;
-        line-height: 30px;
-        margin-left: 15px;
-        > a {
-          display: inline-block;
-          width: 100%;
-          padding-left: 20px;
-          padding-top: 4px;
-          padding-bottom: 4px;
-          line-height: 18px;
-          color: $grey;
-          text-decoration: none;
-          text-indent: -20px;
-
-          &.active {
-            color: $green;
-            font-weight: bold;
-          }
-          &:hover {
-            background-color: $green;
-            color: white;
+            &.active {
+              color: $green;
+              font-weight: bold;
+            }
+            &:hover {
+              background-color: $green;
+              color: white;
+            }
           }
         }
       }
@@ -132,8 +138,10 @@ header {
 		width:202px;
 		float:right;
 		margin-left: 20px;
+		min-height: 1px;
 
         .rightimages {
+            position: fixed;
             margin-bottom: 10px;
             background: url("img/right_logo.png");
             background-repeat: no-repeat;
