@@ -1,7 +1,7 @@
 <div class="midnav">
     {% if current_page.prev_page %}
         <a class="mid-nav-url" href="
-                {% if full_url %}
+                {% if full_style_url %}
                     {% url "exeapp.views.package.preview" current_page.prev_page.node.package_id current_page.prev_page.node.id %}
                 {% else %}
                     {{ current_page.prev_page.name }}.html
@@ -10,7 +10,7 @@
     {% endif %}
     {% if current_page.next_page %}
         <a class="mid-nav-url" href="
-                {% if full_url %}
+                {% if full_style_url %}
                     {% url "exeapp.views.package.preview" current_page.next_page.node.package_id current_page.next_page.node.id %}
                 {% else %}
                     {{ current_page.next_page.name }}.html
