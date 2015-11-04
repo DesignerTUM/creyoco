@@ -109,7 +109,7 @@ var cloze = {
                 if (drag_n_drop.length !== 0) {
                     $("#wrapper").removeClass("checked");
                     $("div.drag_n_drop_answer").show();
-                    }
+                }
             });
             $(".cloze_show_answers").off("click").on("click", function (e) {
                 $(this).parents(".iDevice").find(".cloze_gap").each(function () {
