@@ -80,6 +80,7 @@ var cloze = {
             $(".cloze_gap").droppable({
                 accept: ".drag_n_drop_answer",
                 hoverClass: "ui-state-hover",
+                tolerance: "pointer",
                 drop: function( event, ui ) {
                     {
                         $(ui.draggable).hide();
