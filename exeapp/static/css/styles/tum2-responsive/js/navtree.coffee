@@ -83,7 +83,7 @@ $ ->
 
 
   $(window).on 'resize', ->
-    if $(this).width() > 767
+    if $(this).width() > 767    # this value should be same in scss @media (max-width: 767px)
       wide()
     else
       narrow()
@@ -94,3 +94,7 @@ $ ->
     narrow()
 
 
+#  $('header').affix offset: top: $('body').height()
+#  $('.left').affix offset: top: $('body').height()
+  $('header').affix()
+  $('.left').affix()

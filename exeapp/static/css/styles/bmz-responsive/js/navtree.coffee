@@ -78,3 +78,6 @@ $ ->
     narrow()
 
 
+  $('header').affix()
+  $('.left').affix()
+

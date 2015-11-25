@@ -73,17 +73,19 @@
       });
     };
     $(window).on('resize', function() {
-      if ($(this).width() > 1200) {
+      if ($(this).width() > 767) {
         return wide();
       } else {
         return narrow();
       }
     });
-    if ($(window).width() > 1200) {
-      return wide();
+    if ($(window).width() > 767) {
+      wide();
     } else {
-      return narrow();
+      narrow();
     }
+    $('header').affix();
+    return $('.left').affix();
   });
 
 }).call(this);

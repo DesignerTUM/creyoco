@@ -1,10 +1,10 @@
-/* line 12, sass/content.scss */
+/* line 11, sass/content.scss */
 * {
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-font-smoothing: antialiased; }
 
-/* line 18, sass/content.scss */
+/* line 17, sass/content.scss */
 body {
   font-size: 100%;
   font-family: Helvetica Neue, HelveticaNeue, Helvetica, Arial, Lucida Grande, sans-serif;
@@ -14,23 +14,23 @@ body {
   background-color: white;
   background-repeat: repeat; }
 
-/* line 29, sass/content.scss */
+/* line 28, sass/content.scss */
 .container {
   width: 100%;
   margin: 0 auto; }
 
-/* line 35, sass/content.scss */
+/* line 34, sass/content.scss */
 nav ul {
   padding-left: 0; }
 
-/* line 40, sass/content.scss */
+/* line 39, sass/content.scss */
 .middle h1 {
   font-size: 24px;
   font-weight: bold;
   color: #002143;
   letter-spacing: 1px; }
 
-/* line 47, sass/content.scss */
+/* line 46, sass/content.scss */
 .middle h2 {
   color: #002143;
   font-size: 16px;
@@ -39,176 +39,212 @@ nav ul {
   border-bottom: 1px solid #002143;
   margin-bottom: 10px; }
 
-/* line 56, sass/content.scss */
+/* line 55, sass/content.scss */
 .middle h3 {
   color: #002143;
   font-size: 14px;
   font-weight: bold; }
 
-/* line 62, sass/content.scss */
+/* line 61, sass/content.scss */
 header {
   background-color: #002143;
   padding-top: 10px;
   padding-bottom: 10px;
   margin-bottom: 30px;
   box-shadow: 0 1px 10px -2px gray;
-  height: 84px; }
+  min-height: 84px; }
   /* line 69, sass/content.scss */
+  header.affix {
+    position: fixed;
+    top: 0;
+    right: 10px;
+    left: 10px;
+    z-index: 10; }
+    /* line 76, sass/content.scss */
+    header.affix span {
+      color: white;
+      font-size: 30px;
+      float: left;
+      width: 50%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis; }
+  /* line 86, sass/content.scss */
   header span {
     color: white;
-    font-size: 30px; }
-  /* line 74, sass/content.scss */
+    font-size: 30px;
+    float: left;
+    width: 50%; }
+  /* line 93, sass/content.scss */
   header a {
     float: right; }
-    /* line 77, sass/content.scss */
+    /* line 95, sass/content.scss */
+    header a.logo {
+      float: right;
+      width: 30%; }
+    /* line 99, sass/content.scss */
     header a .headerimage {
       background: url(img/tumlogo.png);
       height: 62px;
       width: 195px; }
 
-/* line 85, sass/content.scss */
+/* line 107, sass/content.scss */
 #menu-toggle {
   display: none; }
 
-/* line 89, sass/content.scss */
+/* line 111, sass/content.scss */
 .content {
   width: 1170px;
   margin: 0 auto; }
-  /* line 92, sass/content.scss */
+  /* line 114, sass/content.scss */
   .content hr {
     color: #777777;
     background-color: #777777;
     height: 1px; }
-  /* line 97, sass/content.scss */
-  .content .left {
-    background-color: #dbe2e9;
+  /* line 119, sass/content.scss */
+  .content .left_wrapper {
     float: left;
     width: 200px;
     margin-right: 20px;
     padding-top: 10px;
-    padding-bottom: 10px;
-    border-radius: 5px;
-    border: 1px solid #002143; }
-    /* line 108, sass/content.scss */
-    .content .left ul li {
-      list-style: none;
-      line-height: 30px; }
-      /* line 111, sass/content.scss */
-      .content .left ul li a {
-        display: inline-block;
-        padding-left: 20px;
-        padding-top: 4px;
-        padding-bottom: 4px;
-        line-height: 18px;
-        width: 100%;
-        color: #737373;
-        text-decoration: none; }
-        /* line 121, sass/content.scss */
-        .content .left ul li a.active {
-          color: #002143;
-          font-weight: bold; }
-        /* line 125, sass/content.scss */
-        .content .left ul li a:hover {
-          background-color: #002143;
-          color: white; }
-      /* line 131, sass/content.scss */
-      .content .left ul li ul li {
-        line-height: 25px; }
-        /* line 133, sass/content.scss */
-        .content .left ul li ul li a {
-          font-size: 90%;
-          padding-left: 30px; }
-  /* line 143, sass/content.scss */
+    padding-bottom: 10px; }
+    /* line 125, sass/content.scss */
+    .content .left_wrapper .left {
+      background-color: #dbe2e9;
+      float: left;
+      width: 200px;
+      margin-right: 20px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      border-radius: 5px;
+      border: 1px solid #002143; }
+      /* line 140, sass/content.scss */
+      .content .left_wrapper .left.affix-top {
+        position: static; }
+      /* line 144, sass/content.scss */
+      .content .left_wrapper .left.affix {
+        position: fixed;
+        top: 94px; }
+      /* line 150, sass/content.scss */
+      .content .left_wrapper .left ul li {
+        list-style: none;
+        line-height: 30px; }
+        /* line 153, sass/content.scss */
+        .content .left_wrapper .left ul li a {
+          display: inline-block;
+          padding-left: 20px;
+          padding-top: 4px;
+          padding-bottom: 4px;
+          line-height: 18px;
+          width: 100%;
+          color: #737373;
+          text-decoration: none; }
+          /* line 163, sass/content.scss */
+          .content .left_wrapper .left ul li a.active {
+            color: #002143;
+            font-weight: bold; }
+          /* line 167, sass/content.scss */
+          .content .left_wrapper .left ul li a:hover {
+            background-color: #002143;
+            color: white; }
+        /* line 173, sass/content.scss */
+        .content .left_wrapper .left ul li ul li {
+          line-height: 25px; }
+          /* line 175, sass/content.scss */
+          .content .left_wrapper .left ul li ul li a {
+            font-size: 90%;
+            padding-left: 30px; }
+  /* line 187, sass/content.scss */
   .content .right {
     width: 202px;
     float: right;
     margin-left: 20px; }
-    /* line 148, sass/content.scss */
+    /* line 192, sass/content.scss */
     .content .right .rightimages {
       margin-bottom: 10px;
       background-repeat: no-repeat; }
-  /* line 158, sass/content.scss */
+  /* line 201, sass/content.scss */
   .content .middle {
     float: left;
     width: 728px; }
-  /* line 163, sass/content.scss */
+  /* line 206, sass/content.scss */
   .content article {
     width: 100%;
     float: left;
     margin-bottom: 20px; }
-    /* line 167, sass/content.scss */
+    /* line 210, sass/content.scss */
     .content article p {
       margin-bottom: 20px; }
-    /* line 170, sass/content.scss */
+    /* line 213, sass/content.scss */
     .content article ul {
       list-style-position: inside;
       margin-bottom: 20px; }
-      /* line 172, sass/content.scss */
+      /* line 215, sass/content.scss */
       .content article ul li {
         list-style: square;
         margin-left: 20px; }
-    /* line 178, sass/content.scss */
+    /* line 221, sass/content.scss */
     .content article table td {
       padding: 3px 5px 3px 5px; }
-    /* line 181, sass/content.scss */
+    /* line 224, sass/content.scss */
     .content article table {
       margin-bottom: 20px; }
-    /* line 184, sass/content.scss */
+    /* line 227, sass/content.scss */
     .content article ol {
       list-style-position: inside;
       margin-bottom: 20px; }
-      /* line 186, sass/content.scss */
+      /* line 229, sass/content.scss */
       .content article ol li {
         list-style: decimal;
         margin-left: 20px; }
-    /* line 192, sass/content.scss */
+    /* line 235, sass/content.scss */
     .content article strong {
       color: #002143;
       font-weight: bold; }
-    /* line 196, sass/content.scss */
+    /* line 239, sass/content.scss */
     .content article .lup {
       float: right;
       margin-left: 20px; }
-    /* line 201, sass/content.scss */
+    /* line 244, sass/content.scss */
     .content article #idevice ul {
       padding-left: 0px !important;
       margin-bottom: 0px; }
-      /* line 204, sass/content.scss */
+      /* line 247, sass/content.scss */
       .content article #idevice ul li {
         margin-left: 0px;
         padding-left: 0px; }
-      /* line 209, sass/content.scss */
+      /* line 252, sass/content.scss */
       .content article #idevice ul a {
         display: inline-block;
         width: 100%;
         color: #737373;
         text-decoration: none; }
-        /* line 214, sass/content.scss */
+        /* line 257, sass/content.scss */
         .content article #idevice ul a:hover {
           color: #002143; }
-    /* line 220, sass/content.scss */
+    /* line 263, sass/content.scss */
     .content article #idevice .toc {
       display: block;
       page-break-after: 0px;
       padding-left: 30px !important; }
-      /* line 224, sass/content.scss */
+      /* line 267, sass/content.scss */
       .content article #idevice .toc li {
         margin-left: 0px !important;
         list-style: none;
         font-weight: bold; }
-        /* line 228, sass/content.scss */
+        /* line 271, sass/content.scss */
         .content article #idevice .toc li ul li {
           list-style: disc;
           margin-left: 15px !important; }
-          /* line 231, sass/content.scss */
+          /* line 274, sass/content.scss */
           .content article #idevice .toc li ul li ul li {
             font-weight: normal !important;
             margin-left: -10px !important; }
 
-/* line 245, sass/content.scss */
+/* line 288, sass/content.scss */
 div.midnav {
   float: right; }
-  /* line 248, sass/content.scss */
+  /* line 291, sass/content.scss */
   div.midnav a.mid-nav-url {
     padding: 5px 10px 5px 10px;
     text-align: center;
@@ -217,73 +253,73 @@ div.midnav {
     border: 1px solid #002143;
     text-decoration: none;
     color: #737373; }
-    /* line 257, sass/content.scss */
+    /* line 300, sass/content.scss */
     div.midnav a.mid-nav-url:hover {
       background-color: #002143;
       text-decoration: none;
       color: white; }
 
-/* line 267, sass/content.scss */
+/* line 310, sass/content.scss */
 footer .container {
   margin-top: 30px;
   border-top: 1px solid #002143; }
-  /* line 271, sass/content.scss */
+  /* line 314, sass/content.scss */
   footer .container .copyright {
     font-size: 11px;
     color: #737373; }
-    /* line 275, sass/content.scss */
+    /* line 318, sass/content.scss */
     footer .container .copyright strong {
       font-style: italic; }
 
-@media (max-width: 1200px) {
-  /* line 283, sass/content.scss */
+@media (max-width: 767px) {
+  /* line 326, sass/content.scss */
   .iDevice {
     margin-left: 3vw;
     margin-right: 3vw; }
-    /* line 286, sass/content.scss */
+    /* line 329, sass/content.scss */
     .iDevice .iDevice_inner, .iDevice > p {
       margin-left: 1vw;
       margin-right: 1vw; }
 
-  /* line 291, sass/content.scss */
-  .left {
+  /* line 334, sass/content.scss */
+  .left_wrapper {
     margin-left: -250px;
     transition: all 0.4s ease 0s;
     position: absolute;
     z-index: 1; }
 
-  /* line 298, sass/content.scss */
+  /* line 341, sass/content.scss */
   img {
     width: 100%;
     height: auto; }
 
-  /* line 302, sass/content.scss */
+  /* line 345, sass/content.scss */
   .right {
     display: none; }
 
-  /* line 306, sass/content.scss */
+  /* line 349, sass/content.scss */
   .middle {
     width: 100% !important; }
 
-  /* line 309, sass/content.scss */
+  /* line 352, sass/content.scss */
   .content {
     width: 100%; }
 
-  /* line 314, sass/content.scss */
-  body.active .left {
+  /* line 357, sass/content.scss */
+  body.active .left_wrapper {
     margin-left: 0px;
     width: 250px;
     transition: all 0.4s ease 0s;
     position: absolute; }
-    /* line 319, sass/content.scss */
-    body.active .left .glyphicon {
+    /* line 362, sass/content.scss */
+    body.active .left_wrapper .glyphicon {
       margin: 2px 8px 2px 2px;
       border: 1px solid black;
       border-radius: 2px;
       float: right;
       padding: 3px; }
 
-  /* line 329, sass/content.scss */
+  /* line 372, sass/content.scss */
   #menu-toggle {
     display: inline-block;
     float: left;

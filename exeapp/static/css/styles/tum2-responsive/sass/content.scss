@@ -8,7 +8,6 @@ $text_black: rgb(51, 51, 51);
 $grey: lighten(black, 45%);
 $headerimage: "tumlogo.png";
 
-
 * {
   box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -65,15 +64,38 @@ header {
   padding-bottom: 10px;
   margin-bottom: 30px;
   box-shadow: 0 1px 10px -2px gray;
-  height: 84px;
+  min-height: 84px;
+
+  &.affix {
+    position: fixed;
+    top: 0;
+    right: 10px;
+    left: 10px;
+    z-index: 10;
+
+    span {
+      color: white;
+      font-size: 30px;
+      float: left;
+      width: 50%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
   span {
     color: white;
     font-size: 30px;
+    float: left;
+    width: 50%;
   }
 
   a {
     float: right;
-
+    &.logo {
+      float: right;
+      width: 30%;
+    }
     .headerimage {
       @include background(url(img/#{$headerimage}));
       height: image-height($headerimage) - 1; // leaks white when full height
@@ -94,66 +116,87 @@ header {
     background-color: #777777;
     height: 1px;
   }
-  .left {
-    background-color: $lightblue;
+  .left_wrapper {
     float: left;
     width: 200px;
     margin-right: 20px;
     padding-top: 10px;
     padding-bottom: 10px;
-    border-radius: 5px;
-    border: 1px solid $blue;
+    .left {
+      //      background-color: $lightblue;
+      //      width: 200px;
+      //      border-radius: 5px;
+      //      border: 1px solid $blue;
 
-    ul {
-      li {
-        list-style: none;
-        line-height: 30px;
-        a {
-          display: inline-block;
-          padding-left: 20px;
-          padding-top: 4px;
-          padding-bottom: 4px;
-          line-height: 18px;
-          width: 100%;
-          color: $grey;
-          text-decoration: none;
+      background-color: $lightblue;
+      float: left;
+      width: 200px;
+      margin-right: 20px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      border-radius: 5px;
+      border: 1px solid $blue;
 
-          &.active {
-            color: $blue;
-            font-weight: bold;
-          }
-          &:hover {
-            background-color: $blue;
-            color: white;
-          }
-        }
+      &.affix-top {
+        position: static;
+      }
 
-        ul li {
-          line-height: 25px;
+      &.affix {
+        position: fixed;
+        top: 94px;
+      }
+
+      ul {
+        li {
+          list-style: none;
+          line-height: 30px;
           a {
-            font-size: 90%;
-            padding-left: 30px;
-          }
-        }
+            display: inline-block;
+            padding-left: 20px;
+            padding-top: 4px;
+            padding-bottom: 4px;
+            line-height: 18px;
+            width: 100%;
+            color: $grey;
+            text-decoration: none;
 
+            &.active {
+              color: $blue;
+              font-weight: bold;
+            }
+            &:hover {
+              background-color: $blue;
+              color: white;
+            }
+          }
+
+          ul li {
+            line-height: 25px;
+            a {
+              font-size: 90%;
+              padding-left: 30px;
+            }
+          }
+
+        }
       }
     }
+
   }
 
-	.right {
-		width:202px;
-		float:right;
-		margin-left: 20px;
+  .right {
+    width: 202px;
+    float: right;
+    margin-left: 20px;
 
-        .rightimages {
-            margin-bottom: 10px;
-            //background: url("img/right_logo.png");
-            background-repeat: no-repeat;
-            //width: image-width("right_logo.png");
-            //height: image-height("right_logo.png");
-        }
-	}
-
+    .rightimages {
+      margin-bottom: 10px;
+      //background: url("img/right_logo.png");
+      background-repeat: no-repeat;
+      //width: image-width("right_logo.png");
+      //height: image-height("right_logo.png");
+    }
+  }
 
   .middle {
     float: left;
@@ -279,7 +322,7 @@ footer {
   }
 }
 
-@media (max-width:1200px) {
+@media (max-width: 767px) {
   .iDevice {
     margin-left: 3vw;
     margin-right: 3vw;
@@ -288,35 +331,35 @@ footer {
       margin-right: 1vw;
     }
   }
-  .left{
+  .left_wrapper {
     margin-left: -250px;
     transition: all 0.4s ease 0s;
     position: absolute;
     z-index: 1;
 
   }
-  img{
+  img {
     width: 100%;
     height: auto;
   }
-  .right{
+  .right {
     display: none;
   }
 
-  .middle{
+  .middle {
     width: 100% !important;
   }
-  .content{
+  .content {
     width: 100%;
   }
 
-  body.active{
-    .left {
+  body.active {
+    .left_wrapper {
       margin-left: 0px;
       width: 250px;
       transition: all 0.4s ease 0s;
       position: absolute;
-      .glyphicon{
+      .glyphicon {
         margin: 2px 8px 2px 2px;
         border: 1px solid black;
         border-radius: 2px;

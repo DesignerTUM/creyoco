@@ -22,7 +22,8 @@
       <script type="text/javascript" src="js/vendor/jquery-1.9.1.min.js"></script>
       <script type="text/javascript" src="js/vendor/jquery-ui.min.js"></script>
       <script type="text/javascript" src="js/navtree.js"></script>
-        {% render_custom_include current_page "custom_includes.html"%}
+      <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+      <script type="text/javascript" src="js/vendor/bootstrap.min.js"></script>
         {% view_media current_page full_style_url %}
        {% if full_style_url %}
 
@@ -36,7 +37,7 @@
     {% render_custom_include current_page "custom_header.html"%}
         <section class="container">
             <span>{{ current_page.node.package.title }}</span>
-            <a href="">
+            <a href="" class="logo">
                 <div class="headerimage"></div>
             </a>
             {% if current_page.node.package.logoImg %}
@@ -46,15 +47,17 @@
     </header>
     <section class="content">
       <!-- TODO Background -->
-        <aside class="left">
-        <nav>
-            {% navigation_bar current_page full_style_url %}
-            <hr />
-            <ul class="download-block">
-                <li><a class="active" href={{ zip_name|urlencode }} title="Download">Download package</a></li>
-            </ul>
-        </nav>
-        </aside>
+        <div class="left_wrapper">
+            <aside class="left">
+                <nav>
+                    {% navigation_bar current_page full_style_url %}
+                    <hr />
+                    <ul class="download-block">
+                        <li><a class="active" href={{ zip_name|urlencode }} title="Download">Download package</a></li>
+                    </ul>
+                </nav>
+            </aside>
+        </div>
 
 
 

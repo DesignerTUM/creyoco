@@ -69,9 +69,28 @@ header {
   padding-bottom: 10px;
   margin-bottom: 30px;
   box-shadow: 0 1px 10px -2px gray;
-  position: fixed;
+  //  position: fixed;
   right: 10px;
   left: 10px;
+
+  &.affix {
+    position: fixed;
+    top: 0;
+    right: 10px;
+    left: 10px;
+    z-index: 10;
+
+    span {
+      color: white;
+      font-size: 30px;
+      font-family: "Droid Serif";
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      float: left;
+      width: 80%;
+    }
+  }
 
   span {
     color: white;
@@ -98,43 +117,61 @@ header {
     background-color: #777777;
     height: 1px;
   }
-  .left {
-  float: left;
-  width: 200px;
-  min-height: 1px;
-  nav {
-      background-color: rgba(86%, 91%, 76%, 0.6);
-      margin-right: 20px;
-      padding-top: 10px;
-      padding-bottom: 10px;
-      border-radius: 5px;
-      border: 1px solid $green;
-      width: 185px;
-      position: fixed;
 
-      ul {
-        li {
-          list-style: none;
-          line-height: 30px;
-          margin-left: 15px;
-          > a {
-            display: inline-block;
-            padding-left: 20px;
-            width: 100%;
-            padding-top: 4px;
-            padding-bottom: 4px;
-            line-height: 18px;
-            color: $grey;
-            text-decoration: none;
-            text-indent: -20px;
+  .left_wrapper {
+    float: left;
+    width: 200px;
+    margin-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 
-            &.active {
-              color: $green;
-              font-weight: bold;
-            }
-            &:hover {
-              background-color: $green;
-              color: white;
+    .left {
+      float: left;
+      width: 200px;
+      min-height: 1px;
+      nav {
+        background-color: rgba(86%, 91%, 76%, 0.6);
+        margin-right: 20px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-radius: 5px;
+        border: 1px solid $green;
+        width: 185px;
+        position: fixed;
+
+        &.affix-top {
+          position: static;
+        }
+
+        &.affix {
+          position: fixed;
+          top: 94px;
+        }
+
+        ul {
+          li {
+            list-style: none;
+            line-height: 30px;
+            margin-left: 15px;
+            > a {
+              display: inline-block;
+              padding-left: 20px;
+              width: 100%;
+              padding-top: 4px;
+              padding-bottom: 4px;
+              line-height: 18px;
+              color: $grey;
+              text-decoration: none;
+              text-indent: -20px;
+
+              &.active {
+                color: $green;
+                font-weight: bold;
+              }
+              &:hover {
+                background-color: $green;
+                color: white;
+              }
             }
           }
         }
@@ -289,7 +326,7 @@ footer {
   display: none;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 767px) {
   .iDevice {
     margin-left: 3vw;
     margin-right: 3vw;
@@ -298,7 +335,7 @@ footer {
       margin-right: 1vw;
     }
   }
-  .left {
+  .left_wrapper {
     margin-left: -250px;
     transition: all 0.4s ease 0s;
     position: absolute;
@@ -316,12 +353,12 @@ footer {
   }
 
   body.active {
-    .left {
+    .left_wrapper {
       margin-left: 0px;
       width: 250px;
       transition: all 0.4s ease 0s;
       position: absolute;
-      background-color: rgb(86%, 91%, 76%);
+      //      background-color: rgb(86%, 91%, 76%);
       ul {
         li {
           a {
