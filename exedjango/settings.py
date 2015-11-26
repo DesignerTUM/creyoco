@@ -219,7 +219,7 @@ FILEBROWSER_EXTENSIONS = {
     'Folder': [''],
     'Image': ['.jpg', '.jpeg', '.gif', '.png', '.tif', '.tiff', '.svg'],
     'Document': ['.pdf', '.doc', '.rtf', '.txt', '.xls', '.xlsx', '.csv', '.docx', '.ppt', '.pptx'],
-    'Video': ['.mov', '.wmv', '.mpeg', '.mpg', '.avi', '.rm'],
+    'Video': ['.mov', '.wmv', '.mpeg', '.mpg', '.avi', '.rm', '.mp4', '.webm'],
     'Audio': ['.mp3', '.mp4', '.wav', '.aiff', '.midi', '.m4p']
 }
 
