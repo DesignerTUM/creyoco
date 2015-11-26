@@ -71,7 +71,7 @@
           {% include "exe/export/footer.html" %}
         </div>
         <aside class="right">
-            <div class="rightimages"></div>
+            {% render_custom_include current_page "custom_right_image.html" %}
         </aside>
     </section>
     <div style="clear:both"></div>

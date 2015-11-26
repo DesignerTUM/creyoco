@@ -187,22 +187,13 @@ header {
     margin-left: 20px;
     min-height: 1px;
 
-    .rightimages {
+    &.affix-top {
       position: fixed;
-      margin-bottom: 10px;
-      background: url("img/right_logo.png");
-      background-repeat: no-repeat;
-      width: image-width("right_logo.png");
-      height: image-height("right_logo.png");
+    }
 
-      &.affix-top {
-        position: fixed;
-      }
-
-      &.affix {
-        position: fixed;
-        top: 102px;
-      }
+    &.affix {
+      position: fixed;
+      top: 122px;
     }
   }
 
