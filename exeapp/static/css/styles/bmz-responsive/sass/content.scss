@@ -163,7 +163,6 @@ header {
               line-height: 18px;
               color: $grey;
               text-decoration: none;
-              text-indent: -20px;
 
               &.active {
                 color: $green;
@@ -368,14 +367,7 @@ footer {
       width: 250px;
       transition: all 0.4s ease 0s;
       position: absolute;
-      //      background-color: rgb(86%, 91%, 76%);
-      ul {
-        li {
-          a {
-            text-indent: 0px;
-          }
-        }
-      }
+
 
       .glyphicon {
         margin: 2px 8px 2px 2px;
