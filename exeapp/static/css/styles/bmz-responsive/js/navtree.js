@@ -85,7 +85,8 @@
       narrow();
     }
     $('header').affix();
-    return $('.left').affix();
+    $('.left').affix();
+    $('.rightimages').affix();
   });
 
 }).call(this);

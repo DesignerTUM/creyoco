@@ -16,8 +16,6 @@ base style sheet for all themes
 body {
     margin: 0px;
     padding: 10px;
-    padding-top: 1px;
-    margin-top: -1px;
     font-family: arial, verdana, helvetica, sans-serif;
     font-size: .8em;
     background-color: none;

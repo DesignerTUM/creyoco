@@ -111,7 +111,8 @@ header {
 
 .content {
   width: 1170px;
-  margin: 77px auto;
+  margin-left: auto;
+  margin-right: auto;
   hr {
     color: #777777;
     background-color: #777777;
@@ -129,6 +130,14 @@ header {
       float: left;
       width: 200px;
       min-height: 1px;
+      &.affix-top {
+        position: static;
+      }
+
+      &.affix {
+        position: fixed;
+        top: 112px;
+      }
       nav {
         background-color: rgba(86%, 91%, 76%, 0.6);
         margin-right: 20px;
@@ -139,14 +148,6 @@ header {
         width: 185px;
         position: fixed;
 
-        &.affix-top {
-          position: static;
-        }
-
-        &.affix {
-          position: fixed;
-          top: 94px;
-        }
 
         ul {
           li {
@@ -192,6 +193,15 @@ header {
       background-repeat: no-repeat;
       width: image-width("right_logo.png");
       height: image-height("right_logo.png");
+
+      &.affix-top {
+        position: fixed;
+      }
+
+      &.affix {
+        position: fixed;
+        top: 102px;
+      }
     }
   }
 

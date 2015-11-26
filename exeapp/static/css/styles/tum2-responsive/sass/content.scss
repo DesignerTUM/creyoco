@@ -65,6 +65,7 @@ header {
   margin-bottom: 30px;
   box-shadow: 0 1px 10px -2px gray;
   min-height: 84px;
+  right: 10px;
 
   &.affix {
     position: fixed;
@@ -72,6 +73,7 @@ header {
     right: 10px;
     left: 10px;
     z-index: 10;
+    min-height: 0;
 
     span {
       color: white;
@@ -81,6 +83,10 @@ header {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+    }
+
+    .headerimage {
+      height: 40px;
     }
   }
   span {

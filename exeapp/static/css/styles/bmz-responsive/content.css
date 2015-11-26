@@ -31,7 +31,7 @@ nav ul {
   letter-spacing: 1px; }
   /* line 41, sass/content.scss */
   .middle h1.pagetitle {
-    color: #7cb22d; }
+    color: #7db32e; }
 
 /* line 46, sass/content.scss */
 .middle h2 {
@@ -40,7 +40,7 @@ nav ul {
   font-weight: bold;
   letter-spacing: 1px;
   margin-bottom: 10px;
-  border-bottom: 1px solid #7cb22d; }
+  border-bottom: 1px solid #7db32e; }
 
 /* line 55, sass/content.scss */
 .middle h3 {
@@ -49,11 +49,11 @@ nav ul {
 
 /* line 61, sass/content.scss */
 .middle h1, .middle h2, .middle h3, .middle h4, .middle h5 {
-  color: #7cb22d; }
+  color: #7db32e; }
 
 /* line 66, sass/content.scss */
 header {
-  background-color: #7cb22d;
+  background-color: #7db32e;
   padding-top: 10px;
   padding-bottom: 10px;
   margin-bottom: 30px;
@@ -89,47 +89,48 @@ header {
 /* line 112, sass/content.scss */
 .content {
   width: 1170px;
-  margin: 77px auto; }
-  /* line 115, sass/content.scss */
+  margin-left: auto;
+  margin-right: auto; }
+  /* line 116, sass/content.scss */
   .content hr {
     color: #777777;
     background-color: #777777;
     height: 1px; }
-  /* line 121, sass/content.scss */
+  /* line 122, sass/content.scss */
   .content .left_wrapper {
     float: left;
     width: 200px;
     margin-right: 20px;
     padding-top: 10px;
     padding-bottom: 10px; }
-    /* line 128, sass/content.scss */
+    /* line 129, sass/content.scss */
     .content .left_wrapper .left {
       float: left;
       width: 200px;
       min-height: 1px; }
-      /* line 132, sass/content.scss */
+      /* line 133, sass/content.scss */
+      .content .left_wrapper .left.affix-top {
+        position: static; }
+      /* line 137, sass/content.scss */
+      .content .left_wrapper .left.affix {
+        position: fixed;
+        top: 112px; }
+      /* line 141, sass/content.scss */
       .content .left_wrapper .left nav {
-        background-color: rgba(219, 232, 193, 0.6);
+        background-color: rgba(219, 232, 194, 0.6);
         margin-right: 20px;
         padding-top: 10px;
         padding-bottom: 10px;
         border-radius: 5px;
-        border: 1px solid #7cb22d;
+        border: 1px solid #7db32e;
         width: 185px;
         position: fixed; }
-        /* line 142, sass/content.scss */
-        .content .left_wrapper .left nav.affix-top {
-          position: static; }
-        /* line 146, sass/content.scss */
-        .content .left_wrapper .left nav.affix {
-          position: fixed;
-          top: 94px; }
-        /* line 152, sass/content.scss */
+        /* line 153, sass/content.scss */
         .content .left_wrapper .left nav ul li {
           list-style: none;
           line-height: 30px;
           margin-left: 15px; }
-          /* line 156, sass/content.scss */
+          /* line 157, sass/content.scss */
           .content .left_wrapper .left nav ul li > a {
             display: inline-block;
             padding-left: 20px;
@@ -140,21 +141,21 @@ header {
             color: #4d4d4d;
             text-decoration: none;
             text-indent: -20px; }
-            /* line 167, sass/content.scss */
+            /* line 168, sass/content.scss */
             .content .left_wrapper .left nav ul li > a.active {
-              color: #7cb22d;
+              color: #7db32e;
               font-weight: bold; }
-            /* line 171, sass/content.scss */
+            /* line 172, sass/content.scss */
             .content .left_wrapper .left nav ul li > a:hover {
-              background-color: #7cb22d;
+              background-color: #7db32e;
               color: white; }
-  /* line 182, sass/content.scss */
+  /* line 183, sass/content.scss */
   .content .right {
     width: 202px;
     float: right;
     margin-left: 20px;
     min-height: 1px; }
-    /* line 188, sass/content.scss */
+    /* line 189, sass/content.scss */
     .content .right .rightimages {
       position: fixed;
       margin-bottom: 10px;
@@ -162,163 +163,170 @@ header {
       background-repeat: no-repeat;
       width: 200px;
       height: 292px; }
-  /* line 198, sass/content.scss */
+      /* line 197, sass/content.scss */
+      .content .right .rightimages.affix-top {
+        position: fixed; }
+      /* line 201, sass/content.scss */
+      .content .right .rightimages.affix {
+        position: fixed;
+        top: 102px; }
+  /* line 208, sass/content.scss */
   .content .middle {
     float: left;
     width: 728px; }
-  /* line 203, sass/content.scss */
+  /* line 213, sass/content.scss */
   .content article {
     width: 100%;
     float: left;
     margin-bottom: 20px; }
-    /* line 207, sass/content.scss */
+    /* line 217, sass/content.scss */
     .content article p {
       margin-bottom: 20px; }
-    /* line 210, sass/content.scss */
+    /* line 220, sass/content.scss */
     .content article table td {
       padding: 3px 5px 3px 5px; }
-    /* line 213, sass/content.scss */
+    /* line 223, sass/content.scss */
     .content article table {
       margin-bottom: 20px; }
-    /* line 216, sass/content.scss */
+    /* line 226, sass/content.scss */
     .content article ul {
       margin: 3px 5px 3px 5px;
       padding-left: 40px;
       list-style-position: outside;
       margin-bottom: 20px; }
-      /* line 220, sass/content.scss */
+      /* line 230, sass/content.scss */
       .content article ul li {
         list-style-position: outside;
         list-style-type: square;
         margin-left: 20px; }
-    /* line 228, sass/content.scss */
+    /* line 238, sass/content.scss */
     .content article ol {
       margin: 3px 5px 3px 5px;
       padding-left: 40px;
       list-style-position: outside;
       margin-bottom: 20px; }
-      /* line 232, sass/content.scss */
+      /* line 242, sass/content.scss */
       .content article ol li {
         list-style-position: outside;
         list-style: decimal;
         margin-left: 20px; }
-    /* line 239, sass/content.scss */
+    /* line 249, sass/content.scss */
     .content article strong {
       color: #4d4d4d;
       font-weight: bold; }
-    /* line 243, sass/content.scss */
+    /* line 253, sass/content.scss */
     .content article .lup {
       float: right;
       margin-left: 20px; }
-    /* line 248, sass/content.scss */
+    /* line 258, sass/content.scss */
     .content article .iDevice ul {
       margin-bottom: 0px; }
-      /* line 250, sass/content.scss */
+      /* line 260, sass/content.scss */
       .content article .iDevice ul li {
         margin-left: 0px;
         padding-left: 0px; }
-    /* line 255, sass/content.scss */
+    /* line 265, sass/content.scss */
     .content article .iDevice a {
       color: #4d4d4d;
       text-decoration: underline; }
-      /* line 258, sass/content.scss */
+      /* line 268, sass/content.scss */
       .content article .iDevice a:hover {
-        color: #7cb22d; }
-    /* line 262, sass/content.scss */
+        color: #7db32e; }
+    /* line 272, sass/content.scss */
     .content article .iDevice .toc {
       display: block;
       page-break-after: 0px;
       padding-left: 30px !important; }
-      /* line 266, sass/content.scss */
+      /* line 276, sass/content.scss */
       .content article .iDevice .toc ul {
         padding-left: 5px; }
-        /* line 268, sass/content.scss */
+        /* line 278, sass/content.scss */
         .content article .iDevice .toc ul li {
           list-style-type: none;
           font-weight: bold; }
-          /* line 269, sass/content.scss */
+          /* line 279, sass/content.scss */
           .content article .iDevice .toc ul li a {
             text-decoration: none; }
-          /* line 274, sass/content.scss */
+          /* line 284, sass/content.scss */
           .content article .iDevice .toc ul li ul li {
             margin-left: 15px !important; }
-            /* line 276, sass/content.scss */
+            /* line 286, sass/content.scss */
             .content article .iDevice .toc ul li ul li ul li {
               font-weight: normal !important; }
 
-/* line 288, sass/content.scss */
+/* line 298, sass/content.scss */
 div.midnav {
   float: right; }
-  /* line 291, sass/content.scss */
+  /* line 301, sass/content.scss */
   div.midnav a.mid-nav-url {
     padding: 5px 10px 5px 10px;
     text-align: center;
-    background-color: #dbe8c1;
+    background-color: #dbe8c2;
     border-radius: 5px;
-    border: 1px solid #7cb22d;
+    border: 1px solid #7db32e;
     text-decoration: none;
     color: #4d4d4d; }
-    /* line 300, sass/content.scss */
+    /* line 310, sass/content.scss */
     div.midnav a.mid-nav-url:hover {
-      background-color: #7cb22d;
+      background-color: #7db32e;
       text-decoration: none;
       color: white; }
 
-/* line 310, sass/content.scss */
+/* line 320, sass/content.scss */
 footer .container {
   margin-top: 30px;
-  border-top: 1px solid #7cb22d; }
-  /* line 314, sass/content.scss */
+  border-top: 1px solid #7db32e; }
+  /* line 324, sass/content.scss */
   footer .container .copyright {
     font-size: 11px;
     color: #4d4d4d; }
-    /* line 318, sass/content.scss */
+    /* line 328, sass/content.scss */
     footer .container .copyright strong {
       font-style: italic; }
 
-/* line 325, sass/content.scss */
+/* line 335, sass/content.scss */
 #menu-toggle {
   display: none; }
 
 @media (max-width: 767px) {
-  /* line 330, sass/content.scss */
+  /* line 340, sass/content.scss */
   .iDevice {
     margin-left: 3vw;
     margin-right: 3vw; }
-    /* line 333, sass/content.scss */
+    /* line 343, sass/content.scss */
     .iDevice .iDevice_inner, .iDevice > p {
       margin-left: 1vw;
       margin-right: 1vw; }
 
-  /* line 338, sass/content.scss */
+  /* line 348, sass/content.scss */
   .left_wrapper {
     margin-left: -250px;
     transition: all 0.4s ease 0s;
     position: absolute;
     z-index: 1; }
 
-  /* line 344, sass/content.scss */
+  /* line 354, sass/content.scss */
   .right {
     display: none; }
 
-  /* line 348, sass/content.scss */
+  /* line 358, sass/content.scss */
   .middle {
     width: 100% !important; }
 
-  /* line 351, sass/content.scss */
+  /* line 361, sass/content.scss */
   .content {
     width: 100%; }
 
-  /* line 356, sass/content.scss */
+  /* line 366, sass/content.scss */
   body.active .left_wrapper {
     margin-left: 0px;
     width: 250px;
     transition: all 0.4s ease 0s;
     position: absolute; }
-    /* line 364, sass/content.scss */
+    /* line 374, sass/content.scss */
     body.active .left_wrapper ul li a {
       text-indent: 0px; }
-    /* line 370, sass/content.scss */
+    /* line 380, sass/content.scss */
     body.active .left_wrapper .glyphicon {
       margin: 2px 8px 2px 2px;
       border: 1px solid black;
@@ -326,7 +334,7 @@ footer .container {
       float: right;
       padding: 3px; }
 
-  /* line 380, sass/content.scss */
+  /* line 390, sass/content.scss */
   #menu-toggle {
     display: inline-block;
     float: left;
