@@ -117,7 +117,7 @@ header {
         top: 112px; }
       /* line 141, sass/content.scss */
       .content .left_wrapper .left nav {
-        background-color: rgba(219, 232, 193, 0.6);
+        background-color: #dbe8c1;
         margin-right: 20px;
         padding-top: 10px;
         padding-bottom: 10px;
