@@ -31,9 +31,10 @@ h1 {
   letter-spacing: 1px; }
   /* line 42, sass/content.scss */
   h1.pagetitle {
-    color: #7cb22d; }
+    color: #7cb22d;
+    margin-top: 25px; }
 
-/* line 47, sass/content.scss */
+/* line 48, sass/content.scss */
 h2 {
   font-size: 16px;
   font-family: "Droid Serif";
@@ -42,16 +43,16 @@ h2 {
   margin-bottom: 10px;
   border-bottom: 1px solid #7cb22d; }
 
-/* line 56, sass/content.scss */
+/* line 57, sass/content.scss */
 h3 {
   font-size: 14px;
   font-weight: bold; }
 
-/* line 61, sass/content.scss */
+/* line 62, sass/content.scss */
 h1, h2, h3, h4, h5 {
   color: #7cb22d; }
 
-/* line 65, sass/content.scss */
+/* line 66, sass/content.scss */
 header {
   background-color: #7cb22d;
   padding-bottom: 15px;
@@ -60,25 +61,25 @@ header {
   position: fixed;
   right: 10px;
   left: 10px; }
-  /* line 74, sass/content.scss */
+  /* line 75, sass/content.scss */
   header span {
     color: white;
     font-size: 30px;
     font-family: "Droid Serif"; }
-  /* line 80, sass/content.scss */
+  /* line 81, sass/content.scss */
   header a {
     float: right; }
 
-/* line 91, sass/content.scss */
+/* line 92, sass/content.scss */
 .content {
   width: 1170px;
   margin: 77px auto; }
-  /* line 94, sass/content.scss */
+  /* line 95, sass/content.scss */
   .content .left {
     float: left;
     width: 200px;
     min-height: 1px; }
-    /* line 98, sass/content.scss */
+    /* line 99, sass/content.scss */
     .content .left nav {
       background-color: rgba(219, 232, 193, 0.6);
       margin-right: 20px;
@@ -88,12 +89,12 @@ header {
       border: 1px solid #7cb22d;
       position: fixed;
       width: 185px; }
-      /* line 108, sass/content.scss */
+      /* line 109, sass/content.scss */
       .content .left nav ul li {
         list-style: none;
         line-height: 30px;
         margin-left: 15px; }
-        /* line 112, sass/content.scss */
+        /* line 113, sass/content.scss */
         .content .left nav ul li > a {
           display: inline-block;
           width: 100%;
@@ -104,21 +105,21 @@ header {
           color: #4d4d4d;
           text-decoration: none;
           text-indent: -20px; }
-          /* line 123, sass/content.scss */
+          /* line 124, sass/content.scss */
           .content .left nav ul li > a.active {
             color: #7cb22d;
             font-weight: bold; }
-          /* line 127, sass/content.scss */
+          /* line 128, sass/content.scss */
           .content .left nav ul li > a:hover {
             background-color: #7cb22d;
             color: white; }
-  /* line 137, sass/content.scss */
+  /* line 138, sass/content.scss */
   .content .right {
     width: 202px;
     float: right;
     margin-left: 20px;
     min-height: 1px; }
-    /* line 143, sass/content.scss */
+    /* line 144, sass/content.scss */
     .content .right .rightimages {
       position: fixed;
       margin-bottom: 10px;
@@ -126,91 +127,91 @@ header {
       background-repeat: no-repeat;
       width: 200px;
       height: 292px; }
-  /* line 154, sass/content.scss */
+  /* line 155, sass/content.scss */
   .content .middle {
     float: left;
     width: 728px; }
-  /* line 159, sass/content.scss */
+  /* line 160, sass/content.scss */
   .content article {
     width: 728px;
     float: left;
     margin-bottom: 20px; }
-    /* line 164, sass/content.scss */
+    /* line 165, sass/content.scss */
     .content article p {
       margin-bottom: 20px; }
-    /* line 167, sass/content.scss */
+    /* line 168, sass/content.scss */
     .content article table tr p {
       margin: 3px 5px 3px 5px; }
-    /* line 170, sass/content.scss */
+    /* line 171, sass/content.scss */
     .content article ul {
       margin: 3px 5px 3px 5px;
       padding-left: 40px;
       list-style-position: outside;
       margin-bottom: 20px; }
-      /* line 174, sass/content.scss */
+      /* line 175, sass/content.scss */
       .content article ul li {
         list-style-position: outside;
         list-style-type: square;
         margin-left: 20px; }
-    /* line 182, sass/content.scss */
+    /* line 183, sass/content.scss */
     .content article ol {
       margin: 3px 5px 3px 5px;
       padding-left: 40px;
       list-style-position: outside;
       margin-bottom: 20px; }
-      /* line 186, sass/content.scss */
+      /* line 187, sass/content.scss */
       .content article ol li {
         list-style-position: outside;
         list-style: decimal;
         margin-left: 20px; }
-    /* line 193, sass/content.scss */
+    /* line 194, sass/content.scss */
     .content article strong {
       color: #4d4d4d;
       font-weight: bold; }
-    /* line 197, sass/content.scss */
+    /* line 198, sass/content.scss */
     .content article .lup {
       float: right;
       margin-left: 20px; }
-    /* line 202, sass/content.scss */
+    /* line 203, sass/content.scss */
     .content article .iDevice ul {
       margin-bottom: 0px; }
-      /* line 204, sass/content.scss */
+      /* line 205, sass/content.scss */
       .content article .iDevice ul li {
         margin-left: 0px;
         padding-left: 0px; }
-    /* line 209, sass/content.scss */
+    /* line 210, sass/content.scss */
     .content article .iDevice a {
       color: #4d4d4d;
       text-decoration: underline; }
-      /* line 212, sass/content.scss */
+      /* line 213, sass/content.scss */
       .content article .iDevice a:hover {
         color: #7cb22d; }
-    /* line 216, sass/content.scss */
+    /* line 217, sass/content.scss */
     .content article .iDevice .toc {
       display: block;
       page-break-after: 0px;
       padding-left: 30px !important; }
-      /* line 220, sass/content.scss */
+      /* line 221, sass/content.scss */
       .content article .iDevice .toc ul {
         padding-left: 5px; }
-        /* line 222, sass/content.scss */
+        /* line 223, sass/content.scss */
         .content article .iDevice .toc ul li {
           list-style-type: none;
           font-weight: bold; }
-          /* line 223, sass/content.scss */
+          /* line 224, sass/content.scss */
           .content article .iDevice .toc ul li a {
             text-decoration: none; }
-          /* line 228, sass/content.scss */
+          /* line 229, sass/content.scss */
           .content article .iDevice .toc ul li ul li {
             margin-left: 15px !important; }
-            /* line 230, sass/content.scss */
+            /* line 231, sass/content.scss */
             .content article .iDevice .toc ul li ul li ul li {
               font-weight: normal !important; }
 
-/* line 242, sass/content.scss */
+/* line 243, sass/content.scss */
 div.midnav {
   float: right; }
-  /* line 245, sass/content.scss */
+  /* line 246, sass/content.scss */
   div.midnav a.mid-nav-url {
     padding: 5px 10px 5px 10px;
     text-align: center;
@@ -220,20 +221,20 @@ div.midnav {
     text-decoration: none;
     color: #4d4d4d;
     margin-left: 10px; }
-    /* line 255, sass/content.scss */
+    /* line 256, sass/content.scss */
     div.midnav a.mid-nav-url:hover {
       background-color: #7cb22d;
       text-decoration: none;
       color: white; }
 
-/* line 265, sass/content.scss */
+/* line 266, sass/content.scss */
 footer .container {
   margin-top: 30px;
   border-top: 1px solid #7cb22d; }
-  /* line 269, sass/content.scss */
+  /* line 270, sass/content.scss */
   footer .container .copyright {
     font-size: 11px;
     color: #4d4d4d; }
-    /* line 273, sass/content.scss */
+    /* line 274, sass/content.scss */
     footer .container .copyright strong {
       font-style: italic; }

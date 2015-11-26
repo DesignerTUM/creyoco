@@ -41,6 +41,9 @@ nav {
   font-weight: bold;
   color: $blue;
   letter-spacing: 1px;
+  &.pagetitle {
+    margin-top: 25px;
+  }
 }
 
 .middle h2 {

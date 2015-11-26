@@ -1,14 +1,4 @@
 <div class="midnav">
-    {% if current_page.node.parent %}
-        <a class="mid-nav-url" href="
-                {% if full_style_url %}
-                    {% url "exeapp.views.package.preview" current_page.node.parent.package_id current_page.node.parent.id %}
-{#                {% else %}#}
-{#                    {{ current_page.prev_page.name }}.html#}
-                {% endif %}
-                ">Parent
-        </a>
-    {% endif %}
 
     {% if current_page.prev_page %}
         <a class="mid-nav-url" href="
@@ -21,6 +11,18 @@
         </a>
 
     {% endif %}
+
+ {% if current_page.node.parent %}
+        <a class="mid-nav-url" href="
+                {% if full_style_url %}
+                    {% url "exeapp.views.package.preview" current_page.node.parent.package_id current_page.node.parent.id %}
+{#                {% else %}#}
+{#                    {{ current_page.prev_page.name }}.html#}
+                {% endif %}
+                ">Parent
+        </a>
+    {% endif %}
+
     {% if current_page.next_page %}
         <a class="mid-nav-url" href="
                 {% if full_style_url %}

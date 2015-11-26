@@ -41,6 +41,9 @@ h1 {
   font-weight: bold;
   color: $blue;
   letter-spacing: 1px;
+  &.pagetitle {
+    margin-top: 25px;
+  }
 }
 
 h2 {
