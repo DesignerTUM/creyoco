@@ -201,21 +201,22 @@ div.midnav {
     border-radius: 5px;
     border: 1px solid #002143;
     text-decoration: none;
-    color: #737373; }
-    /* line 243, sass/content.scss */
+    color: #737373;
+    margin-left: 10px; }
+    /* line 244, sass/content.scss */
     div.midnav a.mid-nav-url:hover {
       background-color: #002143;
       text-decoration: none;
       color: white; }
 
-/* line 253, sass/content.scss */
+/* line 254, sass/content.scss */
 footer .container {
   margin-top: 30px;
   border-top: 1px solid #002143; }
-  /* line 257, sass/content.scss */
+  /* line 258, sass/content.scss */
   footer .container .copyright {
     font-size: 11px;
     color: #737373; }
-    /* line 261, sass/content.scss */
+    /* line 262, sass/content.scss */
     footer .container .copyright strong {
       font-style: italic; }
