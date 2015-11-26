@@ -9,7 +9,9 @@ env.python_path = '/home/medienzentrum/.virtualenvs/creyoco/bin/python'
 
 def pull():
     with cd(env.code_dir):
+        run('git stash')
         run('git pull')
+        run('git stash pop')
 
 
 def push():
