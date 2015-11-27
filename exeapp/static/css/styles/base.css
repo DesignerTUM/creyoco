@@ -29,6 +29,10 @@ body > #header {
     font-weight: bold;
 }
 
+.middle h1, .middle h2, .middle h3 {
+    margin-top: 10px;
+}
+
 a {
     text-decoration: none;
 }
