@@ -279,7 +279,7 @@ footer .container {
     footer .container .copyright strong {
       font-style: italic; }
 
-@media (max-width: 767px) {
+@media (max-width: 1200px) {
   /* line 335, sass/content.scss */
   .iDevice {
     margin-left: 3vw;
