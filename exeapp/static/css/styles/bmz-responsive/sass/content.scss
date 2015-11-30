@@ -78,8 +78,9 @@ header {
   &.affix {
     position: fixed;
     top: 0;
-    right: 10px;
-    left: 10px;
+    right: 0px;
+    left: 0px;
+    width: 100%;
     z-index: 10;
 
     span {
@@ -187,13 +188,13 @@ header {
     margin-left: 20px;
     min-height: 1px;
 
-    &.affix-top {
+    .rightimages.affix-top {
       position: fixed;
     }
 
-    &.affix {
-      position: fixed;
-      top: 122px;
+    .rightimages.affix {
+      position: fixed !important;
+      top: 102px;
     }
   }
 
@@ -378,4 +379,3 @@ footer {
     margin: 0em 1em 0em 1em;
   }
 }
-
