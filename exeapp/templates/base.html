@@ -1,76 +1,76 @@
-{% load static %}
-{% load i18n %}
-<!DOCTYPE html>
-<html lang="de">
-	<head>
-		<meta charset="UTF-8">
-		<title>{% block title %}{% endblock %}</title>
+    {% load static %}
+    {% load i18n %}
+    <!DOCTYPE html>
+    <html lang="de">
+        <head>
+            <meta charset="UTF-8">
+            <title>{% block title %}{% endblock %}</title>
 
-		{% block head_css %}
-      <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/normalize.css"/>
-      <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/mz/style.min.css">
-		{% endblock %}
+            {% block head_css %}
+          <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/normalize.css"/>
+          <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/mz/style.min.css">
+            {% endblock %}
 
-        {% block head_javascript %}{% endblock %}
+            {% block head_javascript %}{% endblock %}
 
 
-		<!-- Start Open Web Analytics Tracker -->
-		<!--<script type="text/javascript">
-		//<![CDATA[
-		var owa_baseUrl = 'http://tassiloweidner.com/owa/';
-		var owa_cmds = owa_cmds || [];
-		owa_cmds.push(['setSiteId', '013b6dca1fb8d3d7ac152e34660b990f']);
-		owa_cmds.push(['trackPageView']);
-		owa_cmds.push(['trackClicks']);
-		owa_cmds.push(['trackDomStream']);
+            <!-- Start Open Web Analytics Tracker -->
+            <!--<script type="text/javascript">
+            //<![CDATA[
+            var owa_baseUrl = 'http://tassiloweidner.com/owa/';
+            var owa_cmds = owa_cmds || [];
+            owa_cmds.push(['setSiteId', '013b6dca1fb8d3d7ac152e34660b990f']);
+            owa_cmds.push(['trackPageView']);
+            owa_cmds.push(['trackClicks']);
+            owa_cmds.push(['trackDomStream']);
 
-		(function() {
-			var _owa = document.createElement('script'); _owa.type = 'text/javascript'; _owa.async = true;
-			owa_baseUrl = ('https:' == document.location.protocol ? window.owa_baseSecUrl || owa_baseUrl.replace(/http:/, 'https:') : owa_baseUrl );
-			_owa.src = owa_baseUrl + 'modules/base/js/owa.tracker-combined-min.js';
-			var _owa_s = document.getElementsByTagName('script')[0]; _owa_s.parentNode.insertBefore(_owa, _owa_s);
-		}());
-		//]]>
-		</script>-->
-		<!-- End Open Web Analytics Code -->
-	</head>
-	<body>
-        {% block dialog %}
-        {% endblock %}
+            (function() {
+                var _owa = document.createElement('script'); _owa.type = 'text/javascript'; _owa.async = true;
+                owa_baseUrl = ('https:' == document.location.protocol ? window.owa_baseSecUrl || owa_baseUrl.replace(/http:/, 'https:') : owa_baseUrl );
+                _owa.src = owa_baseUrl + 'modules/base/js/owa.tracker-combined-min.js';
+                var _owa_s = document.getElementsByTagName('script')[0]; _owa_s.parentNode.insertBefore(_owa, _owa_s);
+            }());
+            //]]>
+            </script>-->
+            <!-- End Open Web Analytics Code -->
+        </head>
+        <body>
+            {% block dialog %}
+            {% endblock %}
 
-		<header>
-			<div>
-			{% block header %}
-				<a href="/"><h1>creyoco</h1></a>
-				<hr>
-			{% endblock %}
-			</div>
-		</header>
+            <header>
+                <div>
+                {% block header %}
+                    <a href="/"><h1>creyoco</h1></a>
+                    <hr>
+                {% endblock %}
+                </div>
+            </header>
 
-		<div id="wrapper">
-			<div id="box_left">
-				{% block box_left %}{% endblock %}
-			</div>
+            <div id="wrapper">
+                <div id="box_left">
+                    {% block box_left %}{% endblock %}
+                </div>
 
-			<div id="content">
-				<h2>{% block h2 %}{% endblock %}</h2>
+                <div id="content">
+                    <h2>{% block h2 %}{% endblock %}</h2>
 
-				{% block navi %}{% endblock %}
+                    {% block navi %}{% endblock %}
 
-				<div class="shadow-top-right"></div>
-				<div id="middle-row">
-					{% block content %}{% endblock %}
-				</div>
+                    <div class="shadow-top-right"></div>
+                    <div id="middle-row">
+                        {% block content %}{% endblock %}
+                    </div>
 
-				<div class="shadow-bottom-left"></div>
-				<div class="shadow-bottom-right"></div>
-			</div>
-			<div id="box_right">
-				{% block box_right %}{% endblock %}
-			</div>
-			<div style="clear:both"></div>
-		</div>
-		<footer>
+                    <div class="shadow-bottom-left"></div>
+                    <div class="shadow-bottom-right"></div>
+                </div>
+                <div id="box_right">
+                    {% block box_right %}{% endblock %}
+                </div>
+                <div style="clear:both"></div>
+            </div>
+            <footer>
 			{% block footer %}
 			<div style="text-align:right;">
 				<a href="#impressum">{% trans "Site notice" %}</a>
