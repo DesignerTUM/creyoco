@@ -56,9 +56,9 @@ CANT_MOVE_NODE_FURTHER = "Can't move up any farther"
 NOT_IMPLEMENTED = "This function is not implemented yet."
 SAVE_DIRTY_PACKAGE = "Package has been changed. Do you want to save it, before you leave?"
 
-require(['jquery', "common", "eyecandy", "wamp_handler", 'jquery-pjax', 'jquery-cookie', 'jquery-jsonrpc', "jstree", 'jquery-modal', 'modernizr',
+require(['jquery', "common", "eyecandy", "wamp_handler", 'dragula', 'jquery-pjax', 'jquery-cookie', 'jquery-jsonrpc', "jstree", 'jquery-modal', 'modernizr',
     'multichoice', 'feedback', 'cloze', 'filebrowser'],
-    function ($, common, eyecandy, wamp_handler) {
+    function ($, common, eyecandy, wamp_handler, dragula) {
         "use strict";
         // set crfs cookie
         function csrfSafeMethod(method) {
@@ -167,6 +167,28 @@ require(['jquery', "common", "eyecandy", "wamp_handler", 'jquery-pjax', 'jquery-
             });
             $("#idevice_pane").on("loaded.jstree", function (event, data) {
                 $("#idevice_pane").jstree('open_all', $('#idevice_pane>ul'));
+                //for drag and drop by dropping right menu commands
+                var containers = $('#idevice_pane>ul ul').toArray();
+                containers.push($('#authoring').get(0));
+                dragula(containers, {
+                    moves: function (el, container, handle) {
+                        return true;
+                    },
+                    accepts: function(el, target, source, sibling){
+                        return target.id === 'authoring';
+                    },
+                    copy: true
+                }).on('drop', function (el, target, source, sibling) {
+                    this.remove();
+                    var idevice_type = $(el).find('a').attr('ideviceid');
+                    if (sibling == null){
+                        add_idevice(idevice_type);
+                    }
+                    else{
+                        var pos = parseInt($(sibling).attr('serial'));
+                        add_idevice_in_position(idevice_type, pos);
+                    }
+                });
             });
 
             //bind actions to outline buttons
@@ -188,8 +210,23 @@ require(['jquery', "common", "eyecandy", "wamp_handler", 'jquery-pjax', 'jquery-
                 }
             });
 
+            // for drag and drop idevices by handle
+            dragula([document.getElementById('authoring')], {
+                moves: function (el, container, handle) {
+                    return handle.className === 'icon-move';
+                },
+                revertOnSpill: true,
+                direction: 'vertical'
+            }).on('drop', function (el, container) {
+                var idevice_serial = el.getAttribute("serial");
+                var idevice_serials = $(container).find(".formholder").map(function(){return $(this).attr("serial");})
+                var idevice_id = parseInt($(el).find('input[name="idevice_id"]').val());
+                var pos = $.inArray(idevice_serial, idevice_serials);
+                drag_idevice(idevice_id, pos)
+            });
 
             //bind action to idevice items
+
             $("#idevice_pane").delegate(".ideviceItem", "click", add_idevice);
             updateTitle();
 
@@ -198,6 +235,7 @@ require(['jquery', "common", "eyecandy", "wamp_handler", 'jquery-pjax', 'jquery-
             eyecandy.init();
             wamp_handler.listen_to_idevice_changes();
         });
+
 
         // Called after successful package deletion
         function callback_delete_package(id) {
@@ -399,10 +437,10 @@ require(['jquery', "common", "eyecandy", "wamp_handler", 'jquery-pjax', 'jquery-
             });
         }
 
-        function add_idevice() {
-            var ideviceid = $("#idevice_pane").jstree("get_selected").find(">a").attr('ideviceid');
+        function add_idevice(ideviceType) {
+            var ideviceType = typeof ideviceType == 'string' ? ideviceType : $("#idevice_pane").jstree("get_selected").find(">a").attr('ideviceid');
             $.jsonRPC.request('add_idevice', {
-                params: [get_package_id(), common.get_current_node_id(), ideviceid],
+                params: [get_package_id(), common.get_current_node_id(), ideviceType],
                 success: function (results) {
                     common.insert_idevice(
                         results.result.idevice_id
@@ -412,6 +450,29 @@ require(['jquery', "common", "eyecandy", "wamp_handler", 'jquery-pjax', 'jquery-
             return false;
         }
 
+        function add_idevice_in_position(idevice_type, pos) {
+            $.jsonRPC.request('add_idevice', {
+                params: [get_package_id(), common.get_current_node_id(), idevice_type, pos],
+                success: function (results) {
+                    common.insert_idevice_in_position(
+                        results.result.idevice_id,
+                        pos
+                    );
+                }
+            });
+            return false;
+        }
+
+        function drag_idevice(ideviceid, new_pos){
+            $.jsonRPC.request('drag_idevice',{
+                params: [get_package_id(), common.get_current_node_id(), ideviceid, new_pos],
+                success:function(result){
+                    console.log(result);
+                    return true;
+                }
+            });
+            return false;
+        }
         // Handles outline_pane selection event. Calls package.change_current_node
         // via rpc.
         function handle_select_node(event, data) {

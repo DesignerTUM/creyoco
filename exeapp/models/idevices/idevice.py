@@ -245,6 +245,10 @@ finding. Returns a list of (name, url) tuples'''
             idevice_class.objects.filter(id=self.id).update(**dic)
         return self
 
+    @property
+    def get_order(self):
+        return self._order
+
     class Meta:
         order_with_respect_to = 'parent_node'
         app_label = "exeapp"

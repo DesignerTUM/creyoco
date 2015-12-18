@@ -20,8 +20,8 @@ require.config({
         "multichoice": "blocks/multichoice",
         "autobahn": "thirdparty/autobahn.min",
         "wamp_handler": "wamp_handler",
-        "jquery-ui": "thirdparty/jquery-ui.min"
-
+        "jquery-ui": "thirdparty/jquery-ui.min",
+        "dragula": "thirdparty/dragula/dragula"
     },
 
     shim: {

@@ -277,8 +277,8 @@ span.shareduser {
     max-height: 750px;
     overflow: visible;
     #authoring {
-        overflow: auto;
-        max-height: 720px;
+      overflow: auto;
+      max-height: 720px;
     }
     margin-bottom: 40px;
     padding: 15px;
@@ -309,6 +309,19 @@ span.shareduser {
         margin-bottom: 10px;
         //text-align: right;
         //font-weight: bold;
+      }
+      .jstree-leaf {
+        background-color: #fff;
+        border: 1px solid $red;
+        line-height: 140%;
+        min-height: 80px;
+        padding: 20px;
+        margin-bottom: 20px;
+        position: relative;
+        width: inherit;
+        a {
+          text-decoration: none;
+        }
       }
     }
     .theme {
@@ -433,7 +446,7 @@ ul#navi {
   background: rgba(0, 0, 0, 0.7);
 }
 
-.idevice_form, .content_element {
+.formholder, .content_element {
   background-color: #fff;
   border: 1px solid $lightgrey;
   line-height: 140%;

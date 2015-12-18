@@ -48,11 +48,25 @@ def set_package_style(request, package, node, style_id):
 
 
 @jsonrpc_authernticating_method('package.add_idevice')
-def add_idevice(request, package, node, idevice_type):
+def add_idevice(request, package, node, idevice_type, position=None):
     '''Adds a idevice of given type to the current node'''
 
     idevice = node.add_idevice(idevice_type)
+    if position:
+        position = int(position)
+        idevice_list = [x.id for x in node.idevices.all()]
+        idevice_list.remove(idevice.id)
+        newlist = idevice_list[:position] + [idevice.id] + idevice_list[position:]
+        node.set_idevice_serial(newlist)
+
     return {'idevice_id': idevice.id}
+
+@jsonrpc_authernticating_method('package.drag_idevice')
+def drag_idevice(request, package, node, idevice_id, new_position):
+    idevice_list = [x.id for x in node.idevices.all()]
+    idevice_list.remove(idevice_id)
+    newlist = idevice_list[:new_position] + [idevice_id] + idevice_list[new_position:]
+    node.set_idevice_serial(newlist)
 
 
 @jsonrpc_authernticating_method('package.testPrintMessage')
