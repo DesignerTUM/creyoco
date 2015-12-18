@@ -225,6 +225,19 @@ define(['jquery', 'wamp_handler', 'jquery-form', 'jquery-pjax', 'jquery-jsonrpc'
                 });
             },
 
+            insert_idevice_in_position: function (idevice_id, pos) {
+                $.ajax({
+                    url: "authoring/?idevice_id=" + idevice_id,
+                    dataType: 'html',
+                    success: function (data) {
+                        $('#authoring').eq(pos).before(data);
+                        exports.initialize_authoring();
+                        var element = $('#authoring').children().eq(pos);
+                        exports.scroll_to_element(element);
+                    }
+                });
+            },
+
 
             // Takes a jQuery object and returns the id of the idevice it
             // belongs to

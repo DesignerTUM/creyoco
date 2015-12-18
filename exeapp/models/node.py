@@ -453,6 +453,9 @@ Returns True is successful
 
         return "Node %s" % self.title
 
+    def set_idevice_serial(self, new_ordered_idevices):
+        self.set_idevice_order(new_ordered_idevices)
+
     class Meta:
         app_label = "exeapp"
         order_with_respect_to = 'parent'

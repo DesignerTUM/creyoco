@@ -1,3 +1,7 @@
-<form idevice_id="{{block.idevice.id}}" class="idevice_form" action="handle_action/" method="post">
-	  {{ block.render }}
-</form>
+<div class="formholder" serial="{{ block.idevice.get_order }}">
+    <i class="icon-move" style="float: right"></i>
+
+    <form idevice_id="{{ block.idevice.id }}" class="idevice_form" action="handle_action/" method="post">
+        {{ block.render }}
+    </form>
+</div>
