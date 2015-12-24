@@ -230,9 +230,9 @@ define(['jquery', 'wamp_handler', 'jquery-form', 'jquery-pjax', 'jquery-jsonrpc'
                     url: "authoring/?idevice_id=" + idevice_id,
                     dataType: 'html',
                     success: function (data) {
-                        $('#authoring').eq(pos).before(data);
+                        $('#authoring').children('.formholder').eq(pos).before(data);
                         exports.initialize_authoring();
-                        var element = $('#authoring').children().eq(pos);
+                        var element = $('#authoring').children('.formholder').eq(pos);
                         exports.scroll_to_element(element);
                     }
                 });
