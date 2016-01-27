@@ -135,14 +135,12 @@ def export(request, package, export_format):
     exporter.export()
     zip_file = file_obj.getvalue()
     file_obj.close()
+    filename = package.title.replace(':', ' ') + '.zip'
     response = HttpResponse(content_type="application/zip")
-    response['Content-Disposition'] = 'attachment; filename=%s.zip' \
-                                      % package.title
+    response['Content-Disposition'] = 'attachment; filename=%s' \
+                                      % filename
     response['Content-Length'] = len(zip_file)
 
-    # To inspect details for the below code,
-    # see http://greenbytes.de/tech/tc2231/
-    filename = package.title + '.zip'
     if u'WebKit' in request.META['HTTP_USER_AGENT']:
         filename_header = 'filename=%s' % filename
     elif u'MSIE' in request.META['HTTP_USER_AGENT']:
