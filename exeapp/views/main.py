@@ -1,4 +1,6 @@
 '''Main view for a user. Handles both GET/POST request and rpc calls'''
+from collections import OrderedDict
+
 from django.db.models import Q
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
@@ -27,7 +29,7 @@ def main(request):
     package_list = [package for package, _ in sorted(order_list, key=lambda k: k[1])]
 
 
-    exporter_type_title_map = dict(((export_type, exporter.title)
+    exporter_type_title_map = OrderedDict(((export_type, exporter.title)
                                     for export_type, exporter in list(exporter_map.items())))
 
     form = upload_file_form.UploadFileForm()

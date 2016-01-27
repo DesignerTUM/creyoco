@@ -23,6 +23,7 @@ from exeapp.views.export.exporter_factory import exporter_factory, exporter_map
 from exeapp.views.authoring import authoring
 from django.template.loader import render_to_string
 from io import BytesIO
+from collections import OrderedDict
 
 import logging
 
@@ -57,7 +58,7 @@ def generate_package_main(request, package, current_node, **kwargs):
     log.info("%s accesses package of %s" % (request.user.username,
                                             package.user.username))
     idevices = list(idevice_store.values())
-    exporter_type_title_map = dict(((export_type, exporter.title) \
+    exporter_type_title_map = OrderedDict(((export_type, exporter.title) \
                                     for export_type, exporter in
                                     list(exporter_map.items())))
     properties_form = kwargs.get(PackagePropertiesForm.form_type,
