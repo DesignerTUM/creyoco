@@ -68,6 +68,7 @@ var cloze = {
             $gap
                 .find('div.drag_n_drop_answer')
                 .appendTo($gap.parents('.cloze').find('.drag_n_drop_container'));
+            $gap.text('');
         }
 
         $(document).ready(function () {
@@ -90,9 +91,7 @@ var cloze = {
                     {
                         var $this = $(this);
                         var answer = $this.find('div.drag_n_drop_answer')[0];
-                        if (answer) {
-                            resetGap($this);
-                        }
+                        resetGap($this);
 
                         $(ui.draggable)
                             .hide()
@@ -119,8 +118,10 @@ var cloze = {
             });
             $(".cloze_show_answers").off("click").on("click", function (e) {
                 $(this).parents(".iDevice").find(".cloze_gap").each(function () {
-                    $(this).text(get_right_answer($(this)));
-                    $(this).removeClass("cloze_wrong").addClass("cloze_right");
+                    var $this = $(this);
+                    resetGap($this);
+                    $this.text(get_right_answer($this));
+                    $this.removeClass("cloze_wrong").addClass("cloze_right");
                 });
                 e.preventDefault();
             });
