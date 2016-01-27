@@ -1,7 +1,7 @@
 require.config({
     baseUrl: '/static/scripts/',
     paths: {
-        "jquery": "bower_components/jquery/jquery",
+        "jquery": "bower_components/jquery/dist/jquery",
         "modernizr": "bower_components/modernizr/modernizr",
         "eventEmitter": "bower_components/eventEmitter",
         "eventie": "bower_components/eventie",
