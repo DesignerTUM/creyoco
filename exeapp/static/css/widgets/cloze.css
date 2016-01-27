@@ -1,15 +1,23 @@
-.cloze_result {display: none;}
+.cloze {
+    line-height: 200%;
+}
+
+.cloze_result {
+    display: none;
+}
 
 .cloze_gap {
     display: inline-block;
     min-width: 50px !important;
 
-    height: 1.3em;
+    height: 1.6em;
 
     font-weight: bold !important;
     text-align: center;
-    padding: 0px 4px 0px 4px;
     border: solid 1px;
+    vertical-align: middle;
+    padding: 0 4px 0 4px;
+    line-height: 140%;
 }
 
 .cloze_gap.ui-state-hover{
