@@ -1,11 +1,5 @@
-jQuery Component
-================
+# jQuery Dist
 
-Shim repository for the [jQuery](http://jquery.com).
+This repo only contains package distribution files for jQuery Core.
 
-Package Managers
-----------------
-
-* [Bower](http://bower.io/): `jquery`
-* [Component](https://github.com/component/component): `components/jquery`
-* [Composer](http://packagist.org/packages/components/jquery): `components/jquery`
+For source files and issues, visit the [jQuery repo](https://github.com/jquery/jquery).
