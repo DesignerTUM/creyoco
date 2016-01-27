@@ -48,21 +48,26 @@ var cloze = {
         }
 
         function show_suggestion(elem, answers) {
-            if($(elem).hasClass("checked") == false) {
-                shuffle(answers);
-                var div = document.createElement("div");
-                $(div).addClass("drag_n_drop_container");
-                div.innerHTML += "<p>Drag and drop suggestions:</p>";
-                for (var i = 0; i < answers.length; i++) {
-                    var ansDiv = document.createElement("div");
-                    $(ansDiv).addClass("drag_n_drop_answer");
-                    ansDiv.innerHTML += answers[i].value;
-                    div.appendChild(ansDiv);
-                }
-                $(elem).find(".cloze_submit").before(div);
-                $(elem).addClass("checked");
-                $(".drag_n_drop_answer").draggable({ revert: true });
+            shuffle(answers);
+            var div = document.createElement("div");
+            $(div).addClass("drag_n_drop_container");
+            div.innerHTML += "<p>Drag and drop suggestions:</p>";
+            for (var i = 0; i < answers.length; i++) {
+                var ansDiv = document.createElement("div");
+                $(ansDiv).addClass("drag_n_drop_answer");
+                ansDiv.innerHTML += answers[i].value;
+                div.appendChild(ansDiv);
             }
+            $(elem).find(".cloze_submit").before(div);
+            $(".drag_n_drop_answer").draggable({
+                revert: true,
+            });
+        }
+
+        function resetGap($gap) {
+            $gap
+                .find('div.drag_n_drop_answer')
+                .appendTo($gap.siblings('.drag_n_drop_container'));
         }
 
         $(document).ready(function () {
@@ -83,34 +88,34 @@ var cloze = {
                 tolerance: "pointer",
                 drop: function( event, ui ) {
                     {
-                        $(ui.draggable).hide();
-                        $(this).text(ui.draggable.text());
+                        var $this = $(this);
+                        var answer = $this.find('div.drag_n_drop_answer')[0];
+                        if (answer) {
+                            resetGap($this);
+                        }
+
+                        $(ui.draggable)
+                            .hide()
+                            .css({ top: 0, left: 0 })
+                            .appendTo($this)
+                            .fadeIn();
                     }
                 }
             })
                 .click(function() {
-                    var answer = $(this).text();
-                    if (answer) {
-                      var draggable = $("div.drag_n_drop_answer:contains("+answer+")");
-                      $(this).text("");
-                      draggable.show();
-                    }
+                    resetGap($(this));
                 });
             $(".cloze_submit").off("click").on("click", submit_cloze);
             var that = this;
             $(".cloze_restart").off("click").on("click", function (e) {
+                e.preventDefault();
                 $(this).parent().hide();
                 $(this).parents(".iDevice")
                     .find(".cloze_gap").each(function () {
-                        $(this).text("");
-                        $(this).removeClass("cloze_right cloze_wrong");
+                        var $this = $(this);
+                        resetGap($this);
+                        $this.removeClass('cloze_right').removeClass('cloze_wrong');
                     });
-                e.preventDefault();
-                var drag_n_drop = $(".drag_n_drop_answer");
-                if (drag_n_drop.length !== 0) {
-                    $("#wrapper").removeClass("checked");
-                    $("div.drag_n_drop_answer").show();
-                }
             });
             $(".cloze_show_answers").off("click").on("click", function (e) {
                 $(this).parents(".iDevice").find(".cloze_gap").each(function () {
