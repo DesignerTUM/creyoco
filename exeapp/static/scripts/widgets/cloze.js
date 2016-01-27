@@ -67,7 +67,7 @@ var cloze = {
         function resetGap($gap) {
             $gap
                 .find('div.drag_n_drop_answer')
-                .appendTo($gap.siblings('.drag_n_drop_container'));
+                .appendTo($gap.parents('.cloze').find('.drag_n_drop_container'));
         }
 
         $(document).ready(function () {
@@ -98,7 +98,7 @@ var cloze = {
                             .hide()
                             .css({ top: 0, left: 0 })
                             .appendTo($this)
-                            .fadeIn();
+                            .fadeIn(200);
                     }
                 }
             })
