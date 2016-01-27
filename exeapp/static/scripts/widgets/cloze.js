@@ -58,7 +58,7 @@ var cloze = {
                 ansDiv.innerHTML += answers[i].value;
                 div.appendChild(ansDiv);
             }
-            $(elem).find(".cloze_submit").before(div);
+            $(elem).prepend(div);
             $(".drag_n_drop_answer").draggable({
                 revert: true,
             });
