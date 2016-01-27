@@ -48,8 +48,6 @@ class WebsiteExport(object):
     WebsiteExport will export a package as a website of HTML pages
     """
     title = "Website (Zip)"
-    wiki_media = set()
-    nonwiki_media = set()
 
     def __init__(self, package, file_obj):
         """
@@ -67,6 +65,8 @@ class WebsiteExport(object):
         self.media_dir = Path(package.user.profile.media_path)
         self.media_root = Path(os.path.abspath(settings.MEDIA_ROOT))
         self.page_class = WebsitePage
+        self.wiki_media = set()
+        self.nonwiki_media = set()
 
         self.output_dir = Path(tempfile.mkdtemp())
         print(self.output_dir)
