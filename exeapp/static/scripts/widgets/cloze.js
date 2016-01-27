@@ -79,6 +79,14 @@ var cloze = {
                     if (drag_n_drop.val() == "True") {
                         show_suggestion(this, answers);
                         $(".cloze_gap").prop("contenteditable", false);
+                        $(".cloze_gap").each(function() {
+                            var $this = $(this);
+                            if ($this.parent().prop('tagName') === 'TD'
+                                && $this.parent().text() === $this.text()) {
+                                // the same text means parent has a single element
+                                $this.parent().addClass('cloze_single_cell');
+                            }
+                        })
                     }
                 }
             });

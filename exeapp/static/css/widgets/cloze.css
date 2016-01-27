@@ -1,6 +1,9 @@
 .cloze {
     line-height: 200%;
 }
+.cloze table td.cloze_single_cell {
+    text-align: center;
+}
 
 .cloze_result {
     display: none;
