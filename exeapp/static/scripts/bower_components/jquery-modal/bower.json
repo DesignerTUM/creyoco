@@ -19,14 +19,5 @@
   "dependencies": {
     "jquery": "1.8.0 - 2.1.x"
   },
-  "license": "MIT",
-  "_release": "0.5.11",
-  "_resolution": {
-    "type": "version",
-    "tag": "v0.5.11",
-    "commit": "abd5556b29ea0f0661a78f6b30ff290c7342d359"
-  },
-  "_source": "git://github.com/kylefox/jquery-modal.git",
-  "_target": "~0.5.2",
-  "_originalSource": "jquery-modal"
+  "license": "MIT"
 }

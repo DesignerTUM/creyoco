@@ -1,7 +1,7 @@
 require.config({
     baseUrl: '/static/scripts/',
     paths: {
-        "jquery": "bower_components/jquery/jquery",
+        "jquery": "bower_components/jquery/dist/jquery",
         "jquery-jsonrpc": "thirdparty/jquery.jsonrpc",
         "chosen": "thirdparty/chosen.jquery",
         "qtip2": "bower_components/qtip2/jquery.qtip",

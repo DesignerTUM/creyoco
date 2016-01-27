@@ -1,6 +1,6 @@
 /*
     A simple jQuery modal (http://github.com/kylefox/jquery-modal)
-    Version 0.5.2
+    Version 0.5.11
 */
 (function($) {
 
@@ -11,6 +11,7 @@
     var remove, target;
     this.$body = $('body');
     this.options = $.extend({}, $.modal.defaults, options);
+    this.options.doFade = !isNaN(parseInt(this.options.fadeDuration, 10));
     if (el.is('a')) {
       target = el.attr('href');
       //Select element by id from href
@@ -40,6 +41,7 @@
       }
     } else {
       this.$elm = el;
+      this.$body.append(this.$elm);
       this.open();
     }
   };
@@ -48,8 +50,16 @@
     constructor: $.modal,
 
     open: function() {
-      this.block();
-      this.show();
+      var m = this;
+      if(this.options.doFade) {
+        this.block();
+        setTimeout(function() {
+          m.show();
+        }, this.options.fadeDuration * this.options.fadeDelay);
+      } else {
+        this.block();
+        this.show();
+      }
       if (this.options.escapeClose) {
         $(document).on('keydown.modal', function(event) {
           if (event.which == 27) $.modal.close();
@@ -65,6 +75,7 @@
     },
 
     block: function() {
+      var initialOpacity = this.options.doFade ? 0 : this.options.opacity;
       this.$elm.trigger($.modal.BEFORE_BLOCK, [this._ctx()]);
       this.blocker = $('<div class="jquery-modal blocker"></div>').css({
         top: 0, right: 0, bottom: 0, left: 0,
@@ -72,31 +83,56 @@
         position: "fixed",
         zIndex: this.options.zIndex,
         background: this.options.overlay,
-        opacity: this.options.opacity
+        opacity: initialOpacity
       });
       this.$body.append(this.blocker);
+      if(this.options.doFade) {
+        this.blocker.animate({opacity: this.options.opacity}, this.options.fadeDuration);
+      }
       this.$elm.trigger($.modal.BLOCK, [this._ctx()]);
     },
 
     unblock: function() {
-      this.blocker.remove();
+      if(this.options.doFade) {
+        this.blocker.fadeOut(this.options.fadeDuration, function() {
+          $(this).remove();
+        });
+      } else {
+        this.blocker.remove();
+      }
     },
 
     show: function() {
       this.$elm.trigger($.modal.BEFORE_OPEN, [this._ctx()]);
       if (this.options.showClose) {
-        this.closeButton = $('<a href="#close-modal" rel="modal:close" class="close-modal">' + this.options.closeText + '</a>');
+        this.closeButton = $('<a href="#close-modal" rel="modal:close" class="close-modal ' + this.options.closeClass + '">' + this.options.closeText + '</a>');
         this.$elm.append(this.closeButton);
       }
       this.$elm.addClass(this.options.modalClass + ' current');
       this.center();
-      this.$elm.show().trigger($.modal.OPEN, [this._ctx()]);
+      if(this.options.doFade) {
+        this.$elm.fadeIn(this.options.fadeDuration);
+      } else {
+        this.$elm.show();
+      }
+      this.$elm.trigger($.modal.OPEN, [this._ctx()]);
     },
 
     hide: function() {
       this.$elm.trigger($.modal.BEFORE_CLOSE, [this._ctx()]);
       if (this.closeButton) this.closeButton.remove();
-      this.$elm.removeClass('current').hide();
+      this.$elm.removeClass('current');
+
+      var _this = this;
+      if(this.options.doFade) {
+        this.$elm.fadeOut(this.options.fadeDuration, function () {
+          _this.$elm.trigger($.modal.AFTER_CLOSE, [_this._ctx()]);
+        });
+      } else {
+        this.$elm.hide(0, function () {
+          _this.$elm.trigger($.modal.AFTER_CLOSE, [_this._ctx()]);
+        });
+      }
       this.$elm.trigger($.modal.CLOSE, [this._ctx()]);
     },
 
@@ -136,13 +172,20 @@
     if (!current) return;
     if (event) event.preventDefault();
     current.close();
+    var that = current.$elm;
     current = null;
+    return that;
   };
 
   $.modal.resize = function() {
     if (!current) return;
     current.resize();
   };
+
+  // Returns if there currently is an active modal
+  $.modal.isActive = function () {
+    return current ? true : false;
+  }
 
   $.modal.defaults = {
     overlay: "#000",
@@ -151,10 +194,13 @@
     escapeClose: true,
     clickClose: true,
     closeText: 'Close',
+    closeClass: '',
     modalClass: "modal",
     spinnerHtml: null,
     showSpinner: true,
-    showClose: true
+    showClose: true,
+    fadeDuration: null,   // Number of milliseconds the fade animation takes.
+    fadeDelay: 1.0        // Point during the overlay's fade-in that the modal begins to fade in (.5 = 50%, 1.5 = 150%, etc.)
   };
 
   // Event constants
@@ -164,6 +210,7 @@
   $.modal.OPEN = 'modal:open';
   $.modal.BEFORE_CLOSE = 'modal:before-close';
   $.modal.CLOSE = 'modal:close';
+  $.modal.AFTER_CLOSE = 'modal:after-close';
   $.modal.AJAX_SEND = 'modal:ajax:send';
   $.modal.AJAX_SUCCESS = 'modal:ajax:success';
   $.modal.AJAX_FAIL = 'modal:ajax:fail';
@@ -177,8 +224,8 @@
   };
 
   // Automatically bind links with rel="modal:close" to, well, close the modal.
-  $(document).on('click', 'a[rel="modal:close"]', $.modal.close);
-  $(document).on('click', 'a[rel="modal:open"]', function(event) {
+  $(document).on('click.modal', 'a[rel="modal:close"]', $.modal.close);
+  $(document).on('click.modal', 'a[rel="modal:open"]', function(event) {
     event.preventDefault();
     $(this).modal();
   });

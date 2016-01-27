@@ -15,73 +15,144 @@ and does so with as little HTML & CSS as possible.
 
 # Installation
 
-Include [jQuery](http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js) and `jquery.modal.min.js` scripts:
+You can install [jquery-modal](https://www.npmjs.com/package/jquery-modal) with npm:
 
-    <script src="jquery.min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="jquery.modal.min.js" type="text/javascript" charset="utf-8"></script>
-    
-Include the `jquery.modal.css` stylesheet:
+`npm install jquery-modal`
 
-    <link rel="stylesheet" href="jquery.modal.css" type="text/css" media="screen" />
-    
-As of version 0.3.0, jQuery 1.7 is required. If you're using an earlier version of jQuery you can use the [v.0.2.5 tag.](https://github.com/kylefox/jquery-modal/tags)
+or with [Bower](http://bower.io/):
+
+`bower install jquery-modal`
+
+or the good old fashioned way of including the scripts & styles manually:
+
+```html
+<script src="jquery.modal.min.js" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" href="jquery.modal.css" type="text/css" media="screen" />
+```
+
+_(You'll obviously need to include jQuery as well)._
+
+**Using Rails?** Check out the [jquery-modal-rails plugin](https://github.com/dei79/jquery-modal-rails)!
+
+**jQuery Requirements:** As of version 0.3.0, jQuery 1.7 is required. If you're using an earlier version of jQuery you can use the [v.0.2.5 tag.](https://github.com/kylefox/jquery-modal/tags)
+
+**Naming conflict with Bootstrap:** Bootstrap's [modal](http://getbootstrap.com/javascript/#modals) uses the same `$.modal` namespace. If you want to use jquery-modal with Bootstrap, the simplest solution is to manually modify the name of this plugin.
 
 # Opening
 
-**Method 1: Manually**
+#### Method 1: Automatically attaching to links
 
-Basic usage is to embed your modal's HTML (with the 'modal' class) directly into the document.
+The simplest approach is to add `rel="modal:open"` to your links and use the `href` attribute to specify what to open in the modal.
 
-    <form id="login-form" class="modal">
-      ...
-    </form>
+Open an existing DOM element by ID:
 
-and then invoke `modal()` on the element.
+```html
+<form id="login-form" class="modal">
+  ...
+</form>
 
-    $('#login-form').modal();
+<a href="#login-form" rel="modal:open">Login</a>
+```
 
-You can also invoke `modal()` on links.
-
-    <a href="#ex5"> Open modal by getting the dom id from href</a>
-    <a href="ajax.html"> Open modal by making an AJAX call</a>
-
-    $(a).click(function(event) {
-      event.preventDefault();
-      $(this).modal();
-    });
-
-**Method 2: Automatically attaching to links**
-
-An even simpler way is to add `rel="modal:open"` to links.  When the link is clicked, the link's `href` is loaded into a modal.
-
-Open an existing DOM element:
-
-    <a href="#login-form" rel="modal:open">Login</a>
-    
 Load a remote URL with AJAX:
 
-    <a href="login.html" rel="modal:open">Login</a>
-    
-You should apply a width to all your modal elements using normal CSS.
+```html
+<a href="login.html" rel="modal:open">Login</a>
+```
 
-    #login-form.modal { width: 400px; }
+#### Method 2: Manually
 
-The modal doesn't have a fixed height, and thus will expand & contract vertically to fit the content.
+You can manually open a modal by calling the `.modal()` method on the element:
+
+```html
+<form id="login-form" class="modal">
+  ...
+</form>
+```
+
+```js
+$('#login-form').modal();
+```
+
+You can also invoke `.modal()` directly on links:
+
+```html
+<a href="#ex5" data-modal>Open a DOM element</a>
+<a href="ajax.html" data-modal>Open an AJAX modal</a>
+```
+
+```js
+$('a[data-modal]').click(function(event) {
+  $(this).modal();
+  return false;
+});
+```
+
+### Compatibility Fallback
+
+You can provide a clean fallback for users who have JavaScript disabled by manually attaching the modal via the `data-modal` attribute. This allows you to write your links pointing to the `href` as normal (fallback) while enabling modals where JavaScript is enabled.
+
+```html
+<!-- By default link takes user to /login.html -->
+<a href="/login.html" data-modal="#login-modal">Login</a>
+
+<!-- Login modal embedded in page -->
+<div id="login-modal" class="modal">
+  ...
+</div>
+
+<!-- For browsers with JavaScript, open the modal. -->
+<script>
+  $(function() {
+    $('a[data-modal]').on('click', function() {
+      $($(this).data('modal')).modal();
+      return false;
+    });
+  });
+</script>
+```
+
+#### Fade Transitions
+
+By default the overlay & window appear instantaneously, but you can enable a fade effect by specifying the `fadeDuration` option.
+
+    $('a.open-modal').click(function(event) {
+      $(this).modal({
+        fadeDuration: 250
+      });
+      return false;
+    });
+
+This will fade in the overlay and modal over 250 milliseconds _simultaneously._ If you want the effect of the overlay appearing _before_ the window, you can specify the `fadeDelay` option. This indicates at what point during the overlay transition the window transition should begin.
+
+So if you wanted the window to fade in when the overlay's was 80% finished:
+
+      $(elm).modal({
+        fadeDuration: 250,
+        fadeDelay: 0.80
+      });
+
+Or, if you wanted the window to fade in a few moments after the overlay transition has completely finished:
+
+      $(elm).modal({
+        fadeDuration: 250,
+        fadeDelay: 1.5
+      });
+
+Fading is the only supported transition. Also, there are no transitions when closing the modal.
 
 # Closing
 
 Because there can be only one modal active at a single time, there's no need to select which modal to close:
 
     $.modal.close();
-    
-_TODO: this should be changed so that when called on a specific element, the element is returned (normal jQuery fashion)._
 
 Similar to how links can be automatically bound to open modals, they can be bound to close modals using `rel="modal:close"`:
 
     <a href="#close" rel="modal:close">Close window</a>
-    
+
 _(Note that modals loaded with AJAX are removed from the DOM when closed)._
-    
+
 # Resizing
 
 There's really no need to manually resize modals, since the default styles don't specify a fixed height; modals will expand vertically (like a normal HTML element) to fit their contents.
@@ -89,7 +160,11 @@ There's really no need to manually resize modals, since the default styles don't
 However, when this occurs, you will probably want to at least re-center the modal in the viewport:
 
     $.modal.resize()
-    
+
+# Checking current state
+
+Use `$.modal.isActive()` to check if a modal is currently being displayed.
+
 # Options
 
 These are the supported options and their default values:
@@ -101,12 +176,15 @@ These are the supported options and their default values:
       escapeClose: true,      // Allows the user to close the modal by pressing `ESC`
       clickClose: true,       // Allows the user to close the modal by clicking the overlay
       closeText: 'Close',     // Text content for the close <a> tag.
+      closeClass: '',         // Add additional class(es) to the close <a> tag.
       showClose: true,        // Shows a (X) icon/link in the top-right corner
       modalClass: "modal",    // CSS class added to the element being displayed in the modal.
       spinnerHtml: null,      // HTML appended to the default spinner during AJAX requests.
-      showSpinner: true       // Enable/disable the default spinner during AJAX requests.
+      showSpinner: true,      // Enable/disable the default spinner during AJAX requests.
+      fadeDuration: null,     // Number of milliseconds the fade transition takes (null means no transition)
+      fadeDelay: 1.0          // Point during the overlay's fade-in that the modal begins to fade in (.5 = 50%, 1.5 = 150%, etc.)
     };
-    
+
 # Events
 
 The following events are triggered on the modal element at various points in the open/close cycle (see below for AJAX events).  Hopefully the names are self-explanatory.
@@ -117,7 +195,8 @@ The following events are triggered on the modal element at various points in the
     $.modal.OPEN = 'modal:open';
     $.modal.BEFORE_CLOSE = 'modal:before-close';
     $.modal.CLOSE = 'modal:close';
-    
+    $.modal.AFTER_CLOSE = 'modal:after-close';
+
 The first and only argument passed to these event handlers is the `modal` object, which has three properties:
 
     modal.elm;        // Original jQuery object upon which modal() was invoked.
@@ -162,35 +241,53 @@ and make your AJAX request in the link's click handler. Note that you need to ma
     $('a[rel="ajax:modal"]').click(function(event) {
 
       $.ajax({
-        
+
         url: $(this).attr('href'),
-        
+
         success: function(newHTML, textStatus, jqXHR) {
-          $(newHTML).appendTo('body').modal();      
+          $(newHTML).appendTo('body').modal();
         },
-        
+
         error: function(jqXHR, textStatus, errorThrown) {
           // Handle AJAX errors
         }
-        
+
         // More AJAX customization goes here.
-        
+
       });
-  
+
       return false;
     });
 
 Note that the AJAX response must be wrapped in a div with class <code>modal</code> when using the second (manual) method.
 
+# Bugs & Feature Requests
+
+### Found a bug? MEH!
+
+![](http://drops.kylefox.ca/1cqGP+)
+
+**Just kidding.** Please [create an issue](https://github.com/kylefox/jquery-modal/issues/new) and **include a publicly-accessible demonstration of the bug.** [Dropbox](https://www.dropbox.com) or [JSFiddle](http://jsfiddle.net/) work well for demonstrating reproducable bugs, but you can use anything as long as it's publicly accessible. Your issue is much more likely to be resolved/merged if it includes a fix & pull request.
+
+**Have an idea that improves jquery-modal?** Awesome! Please fork this repository, implement your idea (including documentation, if necessary), and submit a pull request.
+
+I don't use this library as frequently as I used to, so if you want to see a fix/improvement you're best off submitting a pull request. Bugs without a test case and/or improvements without a pull request will be shown no mercy and closed!
+
 # Contributing
 
-I would love help improving this plugin, particularly with:
+I welcome improvements to this plugin, particularly with:
 
 * Performance improvements
 * Making the code as concise/efficient as possible
 * Bug fixes & browser compatibility
 
 Please fork and send pull requests, or create an [issue](https://github.com/kylefox/jquery-modal/issues).
+
+Keep in mind the spirit of this plugin is **minimalism** so I'm very picky about adding _new_ features.
+
+# Support
+
+Please post a question on [StackOverflow](http://stackoverflow.com/). Commercial support by email is also available — please contact kylefox@gmail.com for rates. Unfortunately I am unable to provide free email support.
 
 # License (MIT)
 
