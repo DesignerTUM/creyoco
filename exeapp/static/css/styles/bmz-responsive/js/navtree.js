@@ -85,6 +85,7 @@
       narrow();
     }
     $('header').affix();
+    $(window).on('scroll', function() { $('header').affix('checkPosition'); });
     $('.left').affix();
     $('.rightimages').affix();
   });
