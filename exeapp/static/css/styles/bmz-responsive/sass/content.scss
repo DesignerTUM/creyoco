@@ -20,6 +20,7 @@ body {
   color: $grey;
   background-image: url(img/debut_light.png);
   background-repeat: repeat;
+  overflow-y: visible;
 }
 
 .container {
@@ -70,18 +71,15 @@ header {
   padding-top: 10px;
   padding-bottom: 10px;
   margin-bottom: 30px;
-  box-shadow: 0 1px 10px -2px gray;
-  //  position: fixed;
-  right: 10px;
-  left: 10px;
+
 
   &.affix {
     position: fixed;
     top: 0;
-    right: 0px;
-    left: 0px;
+    margin: 0;
     width: 100%;
     z-index: 10;
+    transition: all 0.5s ease;
 
     span {
       color: white;
@@ -201,6 +199,9 @@ header {
   .middle {
     float: left;
     width: 728px;
+    &.withAffix {
+      margin-top: 77px;
+    }
   }
 
   article {

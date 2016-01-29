@@ -86,8 +86,20 @@
     }
     $('header').affix();
     $(window).on('scroll', function() { $('header').affix('checkPosition'); });
+    $('header')
+      .on('affixed.bs.affix', function() {
+        $('header').data('affixed', true);
+        $('.middle').addClass('withAffix');
+      })
+      .on('affix.bs.affix affix-top.bs.affix', function(evt) {
+        if (!!$(this).data('affixed')) {
+          evt.preventDefault();
+        }
+      });
+
     $('.left').affix();
     $('.rightimages').affix();
+
   });
 
-}).call(this);
+}).call();
