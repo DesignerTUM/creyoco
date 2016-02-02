@@ -61,6 +61,7 @@ var cloze = {
             $(elem).prepend(div);
             $(".drag_n_drop_answer").draggable({
                 revert: true,
+                cursor: 'move',
             });
         }
 
