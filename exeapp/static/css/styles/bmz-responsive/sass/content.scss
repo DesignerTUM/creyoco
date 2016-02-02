@@ -73,13 +73,17 @@ header {
   margin-bottom: 30px;
 
 
-  &.affix {
+  &.affix-static:not(.affix) {
+    position: static !important;
+    margin-bottom: 40px;
+  }
+
+  &.affix, &.affix-static {
     position: fixed;
     top: 0;
     margin: 0;
     width: 100%;
     z-index: 10;
-    transition: all 0.5s ease;
 
     span {
       color: white;
@@ -199,9 +203,6 @@ header {
   .middle {
     float: left;
     width: 728px;
-    &.withAffix {
-      margin-top: 77px;
-    }
   }
 
   article {
@@ -341,7 +342,6 @@ footer {
   }
   .left_wrapper {
     margin-left: -250px;
-    transition: all 0.4s ease 0s;
     position: absolute;
     z-index: 1;
   }
@@ -360,7 +360,6 @@ footer {
     .left_wrapper {
       margin-left: 0px;
       width: 250px;
-      transition: all 0.4s ease 0s;
       position: absolute;
 
 
