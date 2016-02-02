@@ -84,6 +84,7 @@
     } else {
       narrow();
     }
+    window.scrollTo(0, 0);
     $('header').affix();
     $(window).on('scroll', function() {
       $('header').affix('checkPosition');
