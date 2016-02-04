@@ -3,6 +3,7 @@
 }
 .cloze table td.cloze_single_cell {
     text-align: center;
+    position: relative;
 }
 
 .cloze_result {
