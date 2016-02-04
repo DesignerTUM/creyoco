@@ -90,7 +90,7 @@ class WebsiteExport(object):
         Actually saves the zip data. Called by 'Path.safeSave'
         """
         tmpdir = tempfile.mkdtemp()
-        inner_zip_file_name = self.package.title.replace(':', ' ') + '.zip'
+        inner_zip_file_name = self.package.zipname
         try:
             inner_zip_name = os.path.join(tmpdir, inner_zip_file_name)
             inner_zip = ZipFile(inner_zip_name, "w")

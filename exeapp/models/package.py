@@ -404,6 +404,10 @@ i.e. the "package".
 
     # Property Handlers
 
+    @property
+    def zipname(self):
+        return self.title.replace(':', ' ') + '.zip'
+
     def set_backgroundImg(self, value):
         """Set the background image for this package"""
         if self._backgroundImg:

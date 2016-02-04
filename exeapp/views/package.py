@@ -135,7 +135,7 @@ def export(request, package, export_format):
     exporter.export()
     zip_file = file_obj.getvalue()
     file_obj.close()
-    filename = package.title.replace(':', ' ') + '.zip'
+    filename = package.zipname
     response = HttpResponse(content_type="application/zip")
     response['Content-Disposition'] = 'attachment; filename=%s' \
                                       % filename
