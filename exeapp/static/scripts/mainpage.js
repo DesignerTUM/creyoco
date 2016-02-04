@@ -172,7 +172,7 @@ require(['jquery', "common", "eyecandy", "wamp_handler", 'dragula', 'jquery-pjax
                 containers.push($('#authoring').get(0));
                 dragula(containers, {
                     moves: function (el, container, handle) {
-                        return true;
+                        return $(el).find('a').hasClass('ideviceItem');
                     },
                     accepts: function(el, target, source, sibling){
                         return target.id === 'authoring';
@@ -210,8 +210,8 @@ require(['jquery', "common", "eyecandy", "wamp_handler", 'dragula', 'jquery-pjax
                 }
             });
 
-            // for drag and drop idevices by handle
-            dragula([document.getElementById('authoring')], {
+            //for drag and drop idevices by handle
+            dragula([$('#authoring').get(0)], {
                 moves: function (el, container, handle) {
                     return handle.className === 'icon-move';
                 },
