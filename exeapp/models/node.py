@@ -94,17 +94,6 @@ class Node(models.Model):
 
     level = property(getLevel)
 
-    def get_idevice(self, idevice_id):
-        '''Returns idevice with given id. Can't use dictionary, because
-it is unordered and can't use OrderedDict, because jelly doesn't play nice
-with it'''
-        for idevice in self.idevices:
-            if idevice.id == idevice_id:
-                return idevice
-        raise KeyError("Idevice %s not found" % idevice_id)
-
-        #
-
     def GetFullNodePath(self, new_node_title=""):
         """
         A general purpose single-line node-naming convention,
@@ -228,6 +217,12 @@ with it'''
             response = block.process(action, data)
             block.idevice.save()
             return response
+
+    def move_idevice_to(self, idevice_id, node_id):
+        idevice = self.idevices.get(pk=idevice_id)
+        new_parent = Node.objects.get(pk=node_id)
+        idevice.parent_node = new_parent
+        idevice.save()
 
     def rename(self, new_title):
         if new_title not in ['', 'null', 'undefined']:

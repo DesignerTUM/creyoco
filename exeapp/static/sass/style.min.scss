@@ -178,6 +178,10 @@ body {
     }
     #outline_pane {
       margin-top: 15px;
+      .drop-node > a {
+        border: 1px solid $red;
+        padding: .7rem;
+      }
     }
   }
 

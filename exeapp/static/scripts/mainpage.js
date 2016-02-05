@@ -211,18 +211,52 @@ require(['jquery', "common", "eyecandy", "wamp_handler", 'dragula', 'jquery-pjax
             });
 
             //for drag and drop idevices by handle
-            dragula([$('#authoring').get(0)], {
-                moves: function (el, container, handle) {
-                    return handle.className === 'icon-move';
-                },
-                revertOnSpill: true,
-                direction: 'vertical'
-            }).on('drop', function (el, container) {
-                var idevice_serial = el.getAttribute("serial");
-                var idevice_serials = $(container).find(".formholder").map(function(){return $(this).attr("serial");})
-                var idevice_id = parseInt($(el).find('input[name="idevice_id"]').val());
-                var pos = $.inArray(idevice_serial, idevice_serials);
-                drag_idevice(idevice_id, pos)
+            $("#outline_pane").on("loaded.jstree", function (event, data) {
+                var container = $('#outline_pane li').toArray();
+                container.push($('#authoring').get(0));
+                dragula(container, {
+                    moves: function (el, container, handle) {
+                        return handle.className === 'icon-move';
+                    },
+                    revertOnSpill: true,
+                    direction: 'vertical',
+                    copy: false,
+                })
+                    .on('shadow', function(el, container, source) {
+                        if (container.tagName === 'LI') {
+                            $(el).remove();
+                            $(container).addClass('drop-node')
+                        }
+                    })
+                    .on('out', function(el, container) {
+                        $(container).removeClass('drop-node');
+                    })
+                    .on('drop', function (el, target, source, sibling ) {
+                    if (target.id === 'authoring') {
+                        var $el = $(el);
+                        $el.detach().insertBefore($(sibling));
+                        var idevice_serial = el.getAttribute("serial");
+                        var idevice_serials = $(target).find(".formholder").map(function () {
+                            return $(this).attr("serial");
+                        });
+                        var idevice_id = parseInt($(el).find('input[name="idevice_id"]').val());
+                        var pos = $.inArray(idevice_serial, idevice_serials);
+                        drag_idevice(idevice_id, pos);
+                    } else {
+                        var target_node_id = parseInt(
+                            $(target).find('a').attr('nodeid'), 10);
+                        var idevice_id = parseInt(
+                            $(el).find('>form').attr('idevice_id'), 10);
+                            $.jsonRPC.request('move_idevice_to_node',{
+                                params: [get_package_id(), common.get_current_node_id(), idevice_id, target_node_id],
+                                success:function(result){
+                                    console.log(result);
+                                    return true;
+                                }
+                            });
+                            return false;
+                    }
+                });
             });
 
             //bind action to idevice items

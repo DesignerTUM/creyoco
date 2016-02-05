@@ -29,6 +29,8 @@ import logging
 import traceback
 import shutil
 from django.utils.encoding import force_text
+
+from exeapp.models import Node
 from exeapp.utils.path import Path
 from tempfile import mkdtemp
 import re, subprocess
@@ -67,6 +69,12 @@ def drag_idevice(request, package, node, idevice_id, new_position):
     idevice_list.remove(idevice_id)
     newlist = idevice_list[:new_position] + [idevice_id] + idevice_list[new_position:]
     node.set_idevice_serial(newlist)
+
+
+@jsonrpc_authernticating_method('package.move_idevice_to_node')
+def move_idevice_to_node(request, package, node, idevice_id, new_node_id):
+    node.move_idevice_to(idevice_id, new_node_id)
+    return 'success'
 
 
 @jsonrpc_authernticating_method('package.testPrintMessage')
