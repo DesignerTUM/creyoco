@@ -117,7 +117,7 @@ header {
       /* line 142, sass/content.scss */
       .content .left_wrapper .left.affix {
         position: fixed;
-        top: 112px; }
+        top: 102px; }
       /* line 146, sass/content.scss */
       .content .left_wrapper .left nav {
         background-color: #dbe8c2;
@@ -163,7 +163,7 @@ header {
     /* line 197, sass/content.scss */
     .content .right .rightimages.affix {
       position: fixed !important;
-      top: 102px; }
+      top: 92px; }
   /* line 203, sass/content.scss */
   .content .middle {
     float: left;
@@ -296,26 +296,29 @@ footer .container {
   .left_wrapper {
     margin-left: -250px;
     position: absolute;
-    z-index: 1; }
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.5s ease; }
 
-  /* line 348, sass/content.scss */
+  /* line 350, sass/content.scss */
   .right {
     display: none; }
 
-  /* line 352, sass/content.scss */
+  /* line 354, sass/content.scss */
   .middle {
     width: 100% !important; }
 
-  /* line 355, sass/content.scss */
+  /* line 357, sass/content.scss */
   .content {
     width: 100%; }
 
-  /* line 360, sass/content.scss */
+  /* line 362, sass/content.scss */
   body.active .left_wrapper {
     margin-left: 0px;
     width: 250px;
-    position: absolute; }
-    /* line 366, sass/content.scss */
+    position: absolute;
+    opacity: 1; }
+    /* line 369, sass/content.scss */
     body.active .left_wrapper .glyphicon {
       margin: 2px 8px 2px 2px;
       border: 1px solid black;
@@ -323,7 +326,7 @@ footer .container {
       float: right;
       padding: 3px; }
 
-  /* line 376, sass/content.scss */
+  /* line 379, sass/content.scss */
   #menu-toggle {
     display: inline-block;
     float: left;
