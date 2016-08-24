@@ -16,12 +16,8 @@
 </head>
 <body>
 <div id="outer">
-    <div id="main">
-        <div id="nodeDecoration">
-            <p id="nodeTitle">
-                {{ current_page.node.titleLong }}
-            </p>
-        </div>
+    <div id="middle">
+        <div id="nodeDecoration"><p id="nodeTitle">{{ self.node.titleLong }}</p></div>
         {% include "exe/export/page_content.html" %}
     </div>
     {% render_licence current_page %}

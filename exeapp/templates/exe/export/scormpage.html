@@ -32,8 +32,8 @@
     <body onload="loadPage()" onunload="unloadPage()">
 {% endif %}
 <div id="outer">
-    <div id="main">
-        <div id="nodeDecoration"><p id="nodeTitle">{{ self.node.titleLong }}</p></div>
+    <div id="middle">
+        <h1 class="pagetitle">{{current_page.node.title}}</h1>
         {% include "exe/export/page_content.html" %}
     </div>
 </div>
