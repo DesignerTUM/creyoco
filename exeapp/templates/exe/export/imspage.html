@@ -3,27 +3,29 @@
 {% doc_type %}
 <html xmlns=\"http://www.w3.org/1999/xhtml\">
 <head>
-	<meta http-equiv="Content-type" content="text/html;" charset="utf-8" />
-	<title>eXe</title>
-	<style type="text/css">
-		@import url(base.css);
-		@import url(content.css);
-	</style>
-	<script type="text/javascript" src="jquery.js"></script>
+    <meta http-equiv="Content-type" content="text/html;" charset="utf-8"/>
+    <title>eXe</title>
+    <style type="text/css">
+        @import url(base.css);
+        @import url(content.css);
+    </style>
+    <script type="text/javascript" src="js/vendor/modernizr-2.6.2.min.js"></script>
+    <script type="text/javascript" src="js/vendor/jquery.min.js"></script>
+    <script type="text/javascript" src="js/vendor/jquery-ui.min.js"></script>
     {% view_media current_page False %}
 </head>
-	<body>
-		<div id="outer">
-			<div id="main">
-				<div id="nodeDecoration">
-					<p id="nodeTitle">
-						{{current_page.node.titleLong}}
-					</p>
-				</div>
-				{% include "exe/export/page_content.html" %}
-       		</div>
-       		{% render_licence current_page %}
-       		{% include "exe/export/footer.html" %}
-      	</div>
-   </body>
+<body>
+<div id="outer">
+    <div id="main">
+        <div id="nodeDecoration">
+            <p id="nodeTitle">
+                {{ current_page.node.titleLong }}
+            </p>
+        </div>
+        {% include "exe/export/page_content.html" %}
+    </div>
+    {% render_licence current_page %}
+    {% include "exe/export/footer.html" %}
+</div>
+</body>
 </html>

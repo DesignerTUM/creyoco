@@ -3,34 +3,41 @@
 {% doc_type %}
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-	<head>
-	<title>eXe</title>
-	<meta http-equiv="Content-Type" content="text/html;"  charset=utf-8" />
-	<!-- Created using eXe: http://exelearning.org -->
-	<style type="text/css">
-	@import url(base.css);
-	@import url(content.css);
-    body {
-        background: transparent;
-    }
-	</style>
-	<script type="text/javascript" src="jquery.js"></script>
+<head>
+    <title>eXe</title>
+    <meta http-equiv="Content-Type" content="text/html;" charset=utf-8"/>
+    <!-- Created using eXe: http://exelearning.org -->
+    <style type="text/css">
+        @import url(base.css);
+        @import url(content.css);
+        @import url(bootstrap.min.css);
+        /* override the background of the theme
+        body {
+            background: transparent;
+            background-image: none;
+            background-repeat: no-repeat;
+        }
+        */
+    </style>
+    <script type="text/javascript" src="js/vendor/modernizr-2.6.2.min.js"></script>
+    <script type="text/javascript" src="js/vendor/jquery.min.js"></script>
+    <script type="text/javascript" src="js/vendor/jquery-ui.min.js"></script>
     {% view_media current_page False %}
-	</head>
-	{% if current_page.scormType == 'commoncartridge' %}
-	    <body>
-	{% else %}
-	    <script type="text/javascript" src="APIWrapper.js"></script>
-	    <script type="text/javascript" src="SCOFunctions.js"></script>
-	    <body onload="loadPage()" onunload="unloadPage()">
-	{% endif %}
-	<div id="outer">
-		<div id="main">
-			<div id="nodeDecoration"><p id="nodeTitle">{{self.node.titleLong}}</p></div>
-			{% include "exe/export/page_content.html" %}
-		</div>
-	</div>
-	{% render_licence current_page %}
-	{% include "exe/export/footer.html" %}
-	</body>
+</head>
+{% if current_page.scormType == 'commoncartridge' %}
+    <body>
+{% else %}
+    <script type="text/javascript" src="APIWrapper.js"></script>
+    <script type="text/javascript" src="SCOFunctions.js"></script>
+    <body onload="loadPage()" onunload="unloadPage()">
+{% endif %}
+<div id="outer">
+    <div id="main">
+        <div id="nodeDecoration"><p id="nodeTitle">{{ self.node.titleLong }}</p></div>
+        {% include "exe/export/page_content.html" %}
+    </div>
+</div>
+{% render_licence current_page %}
+{% include "exe/export/footer.html" %}
+</body>
 </html>
