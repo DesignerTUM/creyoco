@@ -33,21 +33,21 @@
         a = $(this);
         url_text = a.html();
         if (url_text.indexOf("</span>") === -1) {
-          a.html(url_text + '<span class=\'glyphicon glyphicon-chevron-down\'></span>');
+          a.html(url_text + '<span class=\'glyphicon glyphicon-chevron-right\'></span>');
         }
       });
       $('.left .glyphicon').off('click');
       $('.left .glyphicon').on('click', function(e) {
         var parent;
         e.preventDefault();
-        if ($(this).hasClass('glyphicon-chevron-down')) {
-          $(this).removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
+        if ($(this).hasClass('glyphicon-chevron-right')) {
+          $(this).removeClass('glyphicon-chevron-right').addClass('glyphicon-chevron-down');
           parent = $(this).parent().parent();
           show(parent.find("> ul"));
           show(parent.parents("ul"));
           return update();
-        } else if ($(this).hasClass('glyphicon-chevron-up')) {
-          $(this).removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+        } else if ($(this).hasClass('glyphicon-chevron-down')) {
+          $(this).removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-right');
           parent = $(this).parent().parent();
           hide(parent.find("> ul"));
           return update();
@@ -73,17 +73,9 @@
       });
     };
     $(window).on('resize', function() {
-      if ($(this).width() > 1200) {
-        return wide();
-      } else {
-        return narrow();
-      }
-    });
-    if ($(window).width() > 1200) {
-      wide();
-    } else {
       narrow();
-    }
+    });
+    narrow();
     window.scrollTo(0, 0);
     $('header').affix();
     $(window).on('scroll', function() {

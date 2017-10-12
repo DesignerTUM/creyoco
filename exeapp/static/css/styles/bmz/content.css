@@ -1,98 +1,83 @@
-/* line 10, sass/content.scss */
+/* line 7, ../common.scss */
 * {
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-font-smoothing: antialiased; }
 
-/* line 16, sass/content.scss */
+/* line 13, ../common.scss */
 body {
   font-size: 100%;
-  font-family: "Open Sans";
+  font-family: Helvetica Neue, HelveticaNeue, Helvetica, Arial, Lucida Grande, sans-serif;
   font-size: 14px;
   line-height: 1.428571429;
-  color: #4d4d4d;
-  background-image: url(img/debut_light.png);
+  color: #333333;
+  background-color: white;
   background-repeat: repeat; }
 
-/* line 26, sass/content.scss */
+/* line 24, ../common.scss */
 .container {
   width: 1170px;
   margin: 0 auto; }
 
-/* line 32, sass/content.scss */
+/* line 31, ../common.scss */
 nav ul {
   padding-left: 0; }
 
-/* line 37, sass/content.scss */
+/* line 36, ../common.scss */
 h1 {
   font-size: 24px;
-  font-family: "Droid Serif";
   font-weight: bold;
   letter-spacing: 1px; }
-  /* line 42, sass/content.scss */
+  /* line 40, ../common.scss */
   h1.pagetitle {
-    color: #7db32e;
+    color: #737373;
     margin-top: 25px; }
 
-/* line 48, sass/content.scss */
+/* line 46, ../common.scss */
 h2 {
   font-size: 16px;
   font-family: "Droid Serif";
   font-weight: bold;
   letter-spacing: 1px;
   margin-bottom: 10px;
-  border-bottom: 1px solid #7db32e; }
+  border-bottom: 1px solid; }
 
-/* line 57, sass/content.scss */
-h3 {
-  font-size: 14px;
-  font-weight: bold; }
-
-/* line 62, sass/content.scss */
-h1, h2, h3, h4, h5 {
-  color: #7db32e; }
-
-/* line 66, sass/content.scss */
+/* line 55, ../common.scss */
 header {
-  background-color: #7db32e;
-  padding-bottom: 15px;
-  margin-bottom: 30px;
-  box-shadow: 0 1px 10px -2px gray;
-  right: 10px;
-  left: 10px; }
-  /* line 74, sass/content.scss */
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 30px; }
+  /* line 59, ../common.scss */
   header span {
+    width: 100%;
     color: white;
-    font-size: 30px;
-    font-family: "Droid Serif"; }
-  /* line 80, sass/content.scss */
+    font-size: 30px; }
+  /* line 65, ../common.scss */
   header a {
     float: right; }
 
-/* line 91, sass/content.scss */
+/* line 77, ../common.scss */
 .content {
   width: 1170px; }
-  /* line 93, sass/content.scss */
+  /* line 79, ../common.scss */
   .content .left {
     float: left;
     width: 200px;
     min-height: 1px; }
-    /* line 97, sass/content.scss */
+    /* line 83, ../common.scss */
     .content .left nav {
-      background-color: rgba(219, 232, 194, 0.6);
       margin-right: 20px;
       padding-top: 10px;
       padding-bottom: 10px;
       border-radius: 5px;
-      border: 1px solid #7db32e;
       position: fixed;
       width: 185px; }
-      /* line 107, sass/content.scss */
+      /* line 91, ../common.scss */
       .content .left nav ul li {
         list-style: none;
         line-height: 30px;
         margin-left: 15px; }
-        /* line 111, sass/content.scss */
+        /* line 95, ../common.scss */
         .content .left nav ul li > a {
           display: inline-block;
           width: 100%;
@@ -100,140 +85,245 @@ header {
           padding-top: 4px;
           padding-bottom: 4px;
           line-height: 18px;
-          color: #4d4d4d;
           text-decoration: none;
           text-indent: -20px; }
-          /* line 122, sass/content.scss */
+          /* line 105, ../common.scss */
           .content .left nav ul li > a.active {
-            color: #7db32e;
             font-weight: bold; }
-          /* line 126, sass/content.scss */
+          /* line 108, ../common.scss */
           .content .left nav ul li > a:hover {
-            background-color: #7db32e;
             color: white; }
-  /* line 136, sass/content.scss */
+  /* line 116, ../common.scss */
   .content .right {
     width: 202px;
     float: right;
     margin-left: 20px;
     min-height: 1px; }
-    /* line 142, sass/content.scss */
-    .content .right .rightimages {
-      position: fixed;
-      margin-bottom: 10px;
-      background: url("img/right_logo.png");
-      background-repeat: no-repeat;
-      width: 200px;
-      height: 310px; }
-  /* line 153, sass/content.scss */
+  /* line 125, ../common.scss */
   .content .middle {
     float: left;
     width: 728px; }
-  /* line 158, sass/content.scss */
+  /* line 130, ../common.scss */
   .content article {
     width: 728px;
     float: left;
     margin-bottom: 20px; }
-    /* line 163, sass/content.scss */
+    /* line 135, ../common.scss */
     .content article p {
       margin-bottom: 20px; }
-    /* line 166, sass/content.scss */
+    /* line 138, ../common.scss */
     .content article table tr p {
       margin: 3px 5px 3px 5px; }
-    /* line 169, sass/content.scss */
+    /* line 141, ../common.scss */
     .content article ul {
-      margin: 3px 5px 3px 5px;
-      padding-left: 40px;
-      list-style-position: outside;
       margin-bottom: 20px; }
-      /* line 173, sass/content.scss */
+      /* line 142, ../common.scss */
       .content article ul li {
-        list-style-position: outside;
         list-style-type: square;
         margin-left: 20px; }
-    /* line 181, sass/content.scss */
+    /* line 149, ../common.scss */
     .content article ol {
-      margin: 3px 5px 3px 5px;
-      padding-left: 40px;
-      list-style-position: outside;
       margin-bottom: 20px; }
-      /* line 185, sass/content.scss */
+      /* line 150, ../common.scss */
       .content article ol li {
-        list-style-position: outside;
         list-style: decimal;
         margin-left: 20px; }
-    /* line 192, sass/content.scss */
+    /* line 156, ../common.scss */
     .content article strong {
-      color: #4d4d4d;
       font-weight: bold; }
-    /* line 196, sass/content.scss */
+    /* line 159, ../common.scss */
     .content article .lup {
       float: right;
       margin-left: 20px; }
-    /* line 201, sass/content.scss */
+    /* line 164, ../common.scss */
     .content article .iDevice ul {
       margin-bottom: 0px; }
-      /* line 203, sass/content.scss */
+      /* line 166, ../common.scss */
       .content article .iDevice ul li {
         margin-left: 0px;
         padding-left: 0px; }
-    /* line 208, sass/content.scss */
+    /* line 171, ../common.scss */
     .content article .iDevice a {
-      color: #4d4d4d;
+      color: #737373;
       text-decoration: underline; }
-      /* line 211, sass/content.scss */
+      /* line 174, ../common.scss */
       .content article .iDevice a:hover {
-        color: #7db32e; }
-    /* line 215, sass/content.scss */
+        color: #737373; }
+    /* line 178, ../common.scss */
     .content article .iDevice .toc {
       display: block;
       page-break-after: 0px;
       padding-left: 30px !important; }
-      /* line 219, sass/content.scss */
+      /* line 182, ../common.scss */
       .content article .iDevice .toc ul {
         padding-left: 5px; }
-        /* line 221, sass/content.scss */
+        /* line 184, ../common.scss */
         .content article .iDevice .toc ul li {
           list-style-type: none;
           font-weight: bold; }
-          /* line 222, sass/content.scss */
+          /* line 185, ../common.scss */
           .content article .iDevice .toc ul li a {
             text-decoration: none; }
-          /* line 227, sass/content.scss */
+          /* line 190, ../common.scss */
           .content article .iDevice .toc ul li ul li {
             margin-left: 15px !important; }
-            /* line 229, sass/content.scss */
+            /* line 192, ../common.scss */
             .content article .iDevice .toc ul li ul li ul li {
               font-weight: normal !important; }
 
-/* line 241, sass/content.scss */
+/* line 203, ../common.scss */
 div.midnav {
   float: right; }
-  /* line 244, sass/content.scss */
+  /* line 206, ../common.scss */
   div.midnav a.mid-nav-url {
     display: inline-block;
     padding: 5px 10px 5px 10px;
     text-align: center;
-    background-color: #dbe8c2;
     border-radius: 5px;
-    border: 1px solid #7db32e;
     text-decoration: none;
-    color: #4d4d4d;
+    color: #737373;
     margin-left: 10px; }
-    /* line 255, sass/content.scss */
+    /* line 215, ../common.scss */
     div.midnav a.mid-nav-url:hover {
-      background-color: #7db32e;
       text-decoration: none;
       color: white; }
 
-/* line 265, sass/content.scss */
+/* line 223, ../common.scss */
 footer .container {
   margin-top: 30px;
-  border-top: 1px solid #7db32e; }
-  /* line 269, sass/content.scss */
+  border-top: 1px solid; }
+  /* line 227, ../common.scss */
   footer .container .copyright {
     font-size: 11px;
-    color: #4d4d4d; }
-    /* line 273, sass/content.scss */
+    color: #737373; }
+    /* line 231, ../common.scss */
     footer .container .copyright strong {
       font-style: italic; }
+
+/* line 10, sass/content.scss */
+body {
+  background-image: url(img/debut_light.png); }
+
+/* line 14, sass/content.scss */
+h1 {
+  font-family: "Droid Serif"; }
+  /* line 16, sass/content.scss */
+  h1.pagetitle {
+    color: #7db32e; }
+
+/* line 21, sass/content.scss */
+h2 {
+  border-bottom: 1px solid #7db32e; }
+
+/* line 25, sass/content.scss */
+h3 {
+  font-size: 14px;
+  font-weight: bold; }
+
+/* line 30, sass/content.scss */
+h1, h2, h3, h4, h5 {
+  color: #7db32e; }
+
+/* line 34, sass/content.scss */
+header {
+  background-color: #7db32e;
+  padding-bottom: 15px;
+  margin-bottom: 30px;
+  box-shadow: 0 1px 10px -2px gray;
+  right: 10px;
+  left: 10px; }
+  /* line 42, sass/content.scss */
+  header span {
+    width: 100%;
+    color: white;
+    font-size: 30px;
+    font-family: "Droid Serif"; }
+  /* line 49, sass/content.scss */
+  header a {
+    float: right; }
+
+/* line 62, sass/content.scss */
+.content .left nav {
+  background-color: rgba(219, 232, 194, 0.6);
+  border: 1px solid #7db32e; }
+  /* line 67, sass/content.scss */
+  .content .left nav ul li > a {
+    color: #4d4d4d; }
+    /* line 69, sass/content.scss */
+    .content .left nav ul li > a.active {
+      color: #7db32e; }
+    /* line 72, sass/content.scss */
+    .content .left nav ul li > a:hover {
+      background-color: #7db32e; }
+/* line 82, sass/content.scss */
+.content .right .rightimages {
+  position: fixed;
+  margin-bottom: 10px;
+  background: url("img/right_logo.png");
+  background-repeat: no-repeat;
+  width: 200px;
+  height: 310px; }
+/* line 93, sass/content.scss */
+.content article ul {
+  margin: 3px 5px 3px 5px;
+  padding-left: 40px;
+  list-style-position: outside;
+  margin-bottom: 20px; }
+  /* line 97, sass/content.scss */
+  .content article ul li {
+    list-style-position: outside;
+    list-style-type: square;
+    margin-left: 20px; }
+/* line 105, sass/content.scss */
+.content article ol {
+  margin: 3px 5px 3px 5px;
+  padding-left: 40px;
+  list-style-position: outside;
+  margin-bottom: 20px; }
+  /* line 109, sass/content.scss */
+  .content article ol li {
+    list-style-position: outside;
+    list-style: decimal;
+    margin-left: 20px; }
+/* line 116, sass/content.scss */
+.content article strong {
+  color: #4d4d4d; }
+/* line 121, sass/content.scss */
+.content article .iDevice a {
+  color: #4d4d4d;
+  text-decoration: underline; }
+  /* line 124, sass/content.scss */
+  .content article .iDevice a:hover {
+    color: #7db32e; }
+/* line 129, sass/content.scss */
+.content article .iDevice .toc ul {
+  padding-left: 5px; }
+  /* line 131, sass/content.scss */
+  .content article .iDevice .toc ul li {
+    list-style-type: none;
+    font-weight: bold; }
+    /* line 132, sass/content.scss */
+    .content article .iDevice .toc ul li a {
+      text-decoration: none; }
+    /* line 137, sass/content.scss */
+    .content article .iDevice .toc ul li ul li {
+      margin-left: 15px !important; }
+      /* line 139, sass/content.scss */
+      .content article .iDevice .toc ul li ul li ul li {
+        font-weight: normal !important; }
+
+/* line 151, sass/content.scss */
+div.midnav {
+  float: right; }
+  /* line 154, sass/content.scss */
+  div.midnav a.mid-nav-url {
+    background-color: #dbe8c2;
+    border: 1px solid #7db32e;
+    color: #4d4d4d; }
+    /* line 159, sass/content.scss */
+    div.midnav a.mid-nav-url:hover {
+      background-color: #7db32e; }
+
+/* line 166, sass/content.scss */
+footer .container {
+  border-top: 1px solid #7db32e; }

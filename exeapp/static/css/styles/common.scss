@@ -1,0 +1,241 @@
+@import "compass/css3";
+$text_black: rgb(51, 51, 51);
+$white: lighten(white, 100%);
+$grey: lighten(black, 45%);
+
+
+* {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-size: 100%;
+  font-family: Helvetica Neue, HelveticaNeue, Helvetica, Arial, Lucida Grande, sans-serif;
+  font-size: 14px;
+  line-height: 1.428571429;
+  color: $text_black;
+  //background-image: url(img/debut_light.png);
+  background-color: $white;
+  background-repeat: repeat;
+}
+
+.container {
+  width: 1170px;
+  margin: 0 auto;
+}
+
+
+nav {
+  ul {
+    padding-left: 0;
+  }
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  &.pagetitle {
+    color: $grey;
+    margin-top: 25px;
+  }
+}
+
+h2 {
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid;
+}
+
+h3 {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+header {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 30px;
+  span {
+    width: 100%;
+    display: inline;
+    color: white;
+    font-size: 30px;
+  }
+
+  a {
+    float: right;
+
+//    .headerimage {
+//      @include background(url(img/#{$headerimage}));
+//      height: image-height($headerimage) - 1; // leaks white when full height
+//      width: image-width($headerimage);
+//    }
+  }
+}
+
+
+.content {
+  width: 1170px;
+  .left {
+    float: left;
+    width: 200px;
+    min-height: 1px;
+    nav {
+      margin-right: 20px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      border-radius: 5px;
+      position: fixed;
+      width: 185px;
+      ul {
+        li {
+          list-style: none;
+          line-height: 30px;
+          margin-left: 15px;
+          > a {
+            display: inline-block;
+            width: 100%;
+            padding-left: 20px;
+            padding-top: 4px;
+            padding-bottom: 4px;
+            line-height: 18px;
+            text-decoration: none;
+            text-indent: -20px;
+
+            &.active {
+              font-weight: bold;
+            }
+            &:hover {
+              color: white;
+            }
+          }
+        }
+      }
+    }
+  }
+  .right {
+      width:202px;
+      float:right;
+      margin-left: 20px;
+      min-height: 1px;
+
+      .rightimages {
+      }
+  }
+  .middle {
+    float: left;
+    width: 728px;
+  }
+
+  article {
+    width: 728px;
+    float: left;
+    margin-bottom: 20px;
+
+    p {
+      margin-bottom: 20px;
+    }
+    table tr p {
+      margin: 3px 5px 3px 5px;
+    }
+    ul {
+      li {
+        list-style-type: square;
+        margin-left: 20px;
+      }
+      margin-bottom: 20px;
+    }
+
+    ol {
+      li {
+        list-style: decimal;
+        margin-left: 20px;
+      }
+      margin-bottom: 20px;
+    }
+    strong {
+      font-weight: bold;
+    }
+    .lup {
+      float: right;
+      margin-left: 20px;
+    }
+    .iDevice {
+      ul {
+        margin-bottom: 0px;
+        li {
+          margin-left: 0px;
+          padding-left: 0px;
+        }
+      }
+      a {
+        color: $grey;
+        text-decoration: underline;
+        &:hover {
+          color: $grey;
+        }
+      }
+      .toc {
+        display: block;
+        page-break-after: 0;
+        padding-left: 30px !important;
+        ul {
+          padding-left: 5px;
+          li {
+            a {
+              text-decoration: none;
+            }
+            list-style-type: none;
+            font-weight: bold;
+            ul li {
+              margin-left: 15px !important;
+              ul li {
+                font-weight: normal !important;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+div.midnav {
+  float: right;
+
+  a.mid-nav-url {
+    display: inline-block;
+    padding: 5px 10px 5px 10px;
+    text-align: center;
+    border-radius: 5px;
+    text-decoration: none;
+    color: $grey;
+    margin-left: 10px;
+
+    &:hover {
+      text-decoration: none;
+      color: $white;
+    }
+  }
+}
+
+footer {
+  .container {
+    margin-top: 30px;
+    border-top: 1px solid;
+
+    .copyright {
+      font-size: 11px;
+      color: $grey;
+
+      strong {
+        font-style: italic;
+      }
+    }
+  }
+}

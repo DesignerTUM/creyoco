@@ -1,5 +1,6 @@
 @import "compass/css3";
 @import "compass/css3/images";
+@import "../../common.scss";
 
 $lightblue: rgb(219, 226, 233);
 $blue: rgb(0, 33, 67);
@@ -8,27 +9,6 @@ $text_black: rgb(51, 51, 51);
 $grey: lighten(black, 45%);
 $headerimage: "tumlogo.png";
 
-* {
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-font-smoothing: antialiased;
-}
-
-body {
-  font-size: 100%;
-  font-family: Helvetica Neue, HelveticaNeue, Helvetica, Arial, Lucida Grande, sans-serif;
-  font-size: 14px;
-  line-height: 1.428571429;
-  color: $text_black;
-  //background-image: url(img/debut_light.png);
-  background-color: $white;
-  background-repeat: repeat;
-}
-
-.container {
-  width: 1170px;
-  margin: 0 auto;
-}
 
 nav {
   ul {
@@ -37,22 +17,12 @@ nav {
 }
 
 h1 {
-  font-size: 24px;
-  font-weight: bold;
   color: $blue;
-  letter-spacing: 1px;
-  &.pagetitle {
-    margin-top: 25px;
-  }
 }
 
 h2 {
   color: $blue;
-  font-size: 16px;
-  font-weight: bold;
-  letter-spacing: 1px;
   border-bottom: 1px solid $blue;
-  margin-bottom: 10px;
 }
 
 h3 {
@@ -68,10 +38,6 @@ header {
   margin-bottom: 30px;
   box-shadow: 0 1px 10px -2px gray;
   height: 84px;
-  span {
-    color: white;
-    font-size: 30px;
-  }
 
   a {
     float: right;
@@ -85,59 +51,28 @@ header {
 }
 
 .content {
-  width: 1170px;
-  margin: 0 auto;
   .left {
     background-color: $lightblue;
-    float: left;
-    width: 200px;
-    margin-right: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border-radius: 5px;
     border: 1px solid $blue;
 
     ul {
       li {
-        list-style: none;
-        line-height: 30px;
         a {
-          display: inline-block;
-          padding-left: 20px;
-          width: 100%;
-          padding-top: 4px;
-          padding-bottom: 4px;
-          line-height: 18px;
           color: $grey;
-          text-decoration: none;
 
           &.active {
             color: $blue;
-            font-weight: bold;
           }
           &:hover {
             background-color: $blue;
             color: white;
           }
         }
-
-        ul li {
-          line-height: 25px;
-          a {
-            font-size: 90%;
-            padding-left: 30px;
-          }
-        }
-
       }
     }
   }
 
 	.right {
-		width:202px;
-		float:right;
-		margin-left: 20px;
-
         .rightimages {
             margin-bottom: 10px;
             //background: url("img/right_logo.png");
@@ -147,19 +82,7 @@ header {
         }
 	}
 
-
-  .middle {
-    float: left;
-    width: 728px;
-  }
-
   article {
-    width: 728px;
-    float: left;
-    margin-bottom: 20px;
-    p {
-      margin-bottom: 20px;
-    }
     ul {
       list-style-position: inside;
       li {
@@ -179,25 +102,12 @@ header {
     }
     strong {
       color: $blue;
-      font-weight: bold;
     }
-    .lup {
-      float: right;
-      margin-left: 20px;
-    }
-    #idevice {
+    .iDevice {
       ul {
         padding-left: 0px !important;
-        margin-bottom: 0px;
-        li {
-          margin-left: 0px;
-          padding-left: 0px;
-        }
 
         a {
-          display: inline-block;
-          width: 100%;
-          color: $grey;
           text-decoration: none;
           &:hover {
             color: $blue;
@@ -206,9 +116,6 @@ header {
 
       }
       .toc {
-        display: block;
-        page-break-after: 0px;
-        padding-left: 30px !important;
         li {
           margin-left: 0px !important;
           list-style: none;
@@ -235,38 +142,19 @@ div.midnav {
   float: right;
 
   a.mid-nav-url {
-    display: inline-block;
-    padding: 5px 10px 5px 10px;
-    text-align: center;
     background-color: $lightblue;
-    border-radius: 5px;
     border: 1px solid $blue;
-    text-decoration: none;
     color: $grey;
-    margin-left: 10px;
 
     &:hover {
       background-color: $blue;
-      text-decoration: none;
-      color: $white;
     }
   }
-
 }
 
 footer {
   .container {
-    margin-top: 30px;
     border-top: 1px solid $blue;
-
-    .copyright {
-      font-size: 11px;
-      color: $grey;
-
-      strong {
-        font-style: italic;
-      }
-    }
   }
 }
 

@@ -1,56 +1,24 @@
 @import "compass/css3";
 @import "compass/css3/images";
+@import "../../common.scss";
 
 $lightgreen: rgb(86%, 91%, 76%);
 $green: rgb(49%, 70%, 18%);
 $grey: lighten(black, 30%);
 $headerimage: "tumlogo_bea.png";
 
-
-* {
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-font-smoothing: antialiased;
-}
-
 body {
-  font-size: 100%;
-  font-family: "Open Sans";
-  font-size: 14px;
-  line-height: 1.428571429;
-  color: $grey;
   background-image: url(img/debut_light.png);
-  background-repeat: repeat;
-}
-
-.container {
-  width: 1170px;
-  margin: 0 auto;
-}
-
-nav {
-  ul {
-    padding-left: 0;
-  }
 }
 
 h1 {
-  font-size: 24px;
   font-family: "Droid Serif";
-  font-weight: bold;
-  letter-spacing: 1px;
   &.pagetitle {
     color: $green;
-    margin-top: 25px;
   }
 }
 
 h2 {
-  font-size: 16px;
-  font-family: "Droid Serif";
-  font-weight: bold;
-  letter-spacing: 1px;
-  margin-bottom: 10px;
   border-bottom: 1px solid $green;
 }
 
@@ -72,6 +40,7 @@ header {
   left: 10px;
 
   span {
+    width: 100%;
     color: white;
     font-size: 30px;
     font-family: "Droid Serif";
@@ -89,43 +58,19 @@ header {
 }
 
 .content {
-  width: 1170px;
   .left {
-    float: left;
-    width: 200px;
-    min-height: 1px;
     nav {
       background-color: rgba(86%, 91%, 76%, 0.6);
-      margin-right: 20px;
-      padding-top: 10px;
-      padding-bottom: 10px;
-      border-radius: 5px;
       border: 1px solid $green;
-      position: fixed;
-      width: 185px;
       ul {
         li {
-          list-style: none;
-          line-height: 30px;
-          margin-left: 15px;
           > a {
-            display: inline-block;
-            width: 100%;
-            padding-left: 20px;
-            padding-top: 4px;
-            padding-bottom: 4px;
-            line-height: 18px;
             color: $grey;
-            text-decoration: none;
-            text-indent: -20px;
-
             &.active {
               color: $green;
-              font-weight: bold;
             }
             &:hover {
               background-color: $green;
-              color: white;
             }
           }
         }
@@ -134,11 +79,6 @@ header {
   }
 
 	.right {
-		width:202px;
-		float:right;
-		margin-left: 20px;
-		min-height: 1px;
-
         .rightimages {
             position: fixed;
             margin-bottom: 10px;
@@ -149,23 +89,7 @@ header {
         }
 	}
 
-
-  .middle {
-    float: left;
-    width: 728px;
-  }
-
   article {
-    width: 728px;
-    float: left;
-    margin-bottom: 20px;
-
-    p {
-      margin-bottom: 20px;
-    }
-    table tr p {
-      margin: 3px 5px 3px 5px;
-    }
     ul {
       margin: 3px 5px 3px 5px;
       padding-left: 40px;
@@ -191,20 +115,9 @@ header {
     }
     strong {
       color: $grey;
-      font-weight: bold;
-    }
-    .lup {
-      float: right;
-      margin-left: 20px;
     }
     .iDevice {
-      ul {
-        margin-bottom: 0px;
-        li {
-          margin-left: 0px;
-          padding-left: 0px;
-        }
-      }
+
       a {
         color: $grey;
         text-decoration: underline;
@@ -213,9 +126,6 @@ header {
         }
       }
       .toc {
-        display: block;
-        page-break-after: 0px;
-        padding-left: 30px !important;
         ul {
           padding-left: 5px;
           li {
@@ -242,38 +152,19 @@ div.midnav {
   float: right;
 
   a.mid-nav-url {
-    display: inline-block;
-    padding: 5px 10px 5px 10px;
-    text-align: center;
     background-color: $lightgreen;
-    border-radius: 5px;
     border: 1px solid $green;
-    text-decoration: none;
     color: $grey;
-    margin-left: 10px;
 
     &:hover {
       background-color: $green;
-      text-decoration: none;
-      color: white;
     }
   }
-
 }
 
 footer {
   .container {
-    margin-top: 30px;
     border-top: 1px solid $green;
-
-    .copyright {
-      font-size: 11px;
-      color: $grey;
-
-      strong {
-        font-style: italic;
-      }
-    }
   }
 }
 
