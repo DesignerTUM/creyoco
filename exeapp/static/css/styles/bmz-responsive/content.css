@@ -252,6 +252,7 @@ div.midnav {
   float: right; }
   /* line 295, sass/content.scss */
   div.midnav a.mid-nav-url {
+    display: inline-block;
     padding: 5px 10px 5px 10px;
     text-align: center;
     background-color: #dbe8c2;
@@ -260,39 +261,39 @@ div.midnav {
     text-decoration: none;
     color: #4d4d4d;
     margin-left: 10px; }
-    /* line 305, sass/content.scss */
+    /* line 306, sass/content.scss */
     div.midnav a.mid-nav-url:hover {
       background-color: #7db32e;
       text-decoration: none;
       color: white; }
 
-/* line 315, sass/content.scss */
+/* line 316, sass/content.scss */
 footer .container {
   margin-top: 30px;
   border-top: 1px solid #7db32e; }
-  /* line 319, sass/content.scss */
+  /* line 320, sass/content.scss */
   footer .container .copyright {
     font-size: 11px;
     color: #4d4d4d; }
-    /* line 323, sass/content.scss */
+    /* line 324, sass/content.scss */
     footer .container .copyright strong {
       font-style: italic; }
 
-/* line 330, sass/content.scss */
+/* line 331, sass/content.scss */
 #menu-toggle {
   display: none; }
 
 @media (max-width: 1200px) {
-  /* line 335, sass/content.scss */
+  /* line 336, sass/content.scss */
   .iDevice {
     margin-left: 3vw;
     margin-right: 3vw; }
-    /* line 338, sass/content.scss */
+    /* line 339, sass/content.scss */
     .iDevice .iDevice_inner, .iDevice > p {
       margin-left: 1vw;
       margin-right: 1vw; }
 
-  /* line 343, sass/content.scss */
+  /* line 344, sass/content.scss */
   .left_wrapper {
     margin-left: -250px;
     position: absolute;
@@ -300,25 +301,25 @@ footer .container {
     opacity: 0;
     transition: opacity 0.5s ease; }
 
-  /* line 350, sass/content.scss */
+  /* line 351, sass/content.scss */
   .right {
     display: none; }
 
-  /* line 354, sass/content.scss */
+  /* line 355, sass/content.scss */
   .middle {
     width: 100% !important; }
 
-  /* line 357, sass/content.scss */
+  /* line 358, sass/content.scss */
   .content {
     width: 100%; }
 
-  /* line 362, sass/content.scss */
+  /* line 363, sass/content.scss */
   body.active .left_wrapper {
     margin-left: 0px;
     width: 250px;
     position: absolute;
     opacity: 1; }
-    /* line 369, sass/content.scss */
+    /* line 370, sass/content.scss */
     body.active .left_wrapper .glyphicon {
       margin: 2px 8px 2px 2px;
       border: 1px solid black;
@@ -326,7 +327,7 @@ footer .container {
       float: right;
       padding: 3px; }
 
-  /* line 379, sass/content.scss */
+  /* line 380, sass/content.scss */
   #menu-toggle {
     display: inline-block;
     float: left;

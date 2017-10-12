@@ -211,6 +211,7 @@ div.midnav {
   float: right; }
   /* line 244, sass/content.scss */
   div.midnav a.mid-nav-url {
+    display: inline-block;
     padding: 5px 10px 5px 10px;
     text-align: center;
     background-color: #dbe8c2;
@@ -219,20 +220,20 @@ div.midnav {
     text-decoration: none;
     color: #4d4d4d;
     margin-left: 10px; }
-    /* line 254, sass/content.scss */
+    /* line 255, sass/content.scss */
     div.midnav a.mid-nav-url:hover {
       background-color: #7db32e;
       text-decoration: none;
       color: white; }
 
-/* line 264, sass/content.scss */
+/* line 265, sass/content.scss */
 footer .container {
   margin-top: 30px;
   border-top: 1px solid #7db32e; }
-  /* line 268, sass/content.scss */
+  /* line 269, sass/content.scss */
   footer .container .copyright {
     font-size: 11px;
     color: #4d4d4d; }
-    /* line 272, sass/content.scss */
+    /* line 273, sass/content.scss */
     footer .container .copyright strong {
       font-style: italic; }

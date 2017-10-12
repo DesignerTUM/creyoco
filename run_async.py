@@ -17,8 +17,8 @@ def run():
 
     app = web.Application()
     if not deployment:
-        app.router.add_static(settings.STATIC_URL, settings.STATIC_ROOT)
-        app.router.add_static(settings.MEDIA_URL, settings.MEDIA_ROOT)
+        app.router.add_static(settings.STATIC_URL, settings.STATIC_ROOT, follow_symlinks=True)
+        app.router.add_static(settings.MEDIA_URL, settings.MEDIA_ROOT, follow_symlinks=True)
     app.router.add_route("*", "/{path_info:.*}", wsgi_handler)
     signal_registrant.run_clients()
     web.run_app(app)

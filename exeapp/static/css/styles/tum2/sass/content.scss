@@ -235,6 +235,7 @@ div.midnav {
   float: right;
 
   a.mid-nav-url {
+    display: inline-block;
     padding: 5px 10px 5px 10px;
     text-align: center;
     background-color: $lightblue;
