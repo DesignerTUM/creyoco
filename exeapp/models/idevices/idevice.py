@@ -136,7 +136,7 @@ finding. Returns a list of (name, url) tuples'''
         Return true if this is the last iDevice in this node
         """
         return self._order == \
-               len(self.parent_node.idevices.get_query_set()) - 1
+               len(self.parent_node.idevices.get_queryset()) - 1
 
     def move_up(self):
         """

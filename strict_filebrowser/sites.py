@@ -8,7 +8,7 @@ from django.views.decorators.cache import never_cache
 
 from filebrowser.sites import FileBrowserSite
 import filebrowser.sites
-from filebrowser.settings import *
+from django.conf import settings
 from filebrowser.actions import *
 
 
@@ -44,8 +44,8 @@ class StrictFilebrowserSite(FileBrowserSite):
 
 
 storage = DefaultStorage()
-storage.location = MEDIA_ROOT
-storage.base_url = MEDIA_URL
+storage.location = settings.MEDIA_ROOT
+storage.base_url = settings.MEDIA_URL
 # Default FileBrowser site
 site = StrictFilebrowserSite(name='filebrowser', storage=storage)
 

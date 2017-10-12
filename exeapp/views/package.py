@@ -49,6 +49,7 @@ class DublinCoreForm(forms.ModelForm):
 
     class Meta:
         model = DublinCore
+        exclude=()
 
 
 def generate_package_main(request, package, current_node, **kwargs):

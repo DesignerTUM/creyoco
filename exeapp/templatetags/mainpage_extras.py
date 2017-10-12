@@ -16,19 +16,19 @@ log = getLogger()
 register = template.Library()
 
 
-@register.filter()
+@register.filter(is_safe=True)
 def idevice_ul(groups, group_order):
     idevice_list = []
     for group in group_order:
-        idevice_list.append("<a>%s</a>" % force_text(group))
+        idevice_list.append(force_text("<a>%s</a>" % group))
         prototype_list = []
         for prototype in groups[group]:
-            prototype_list.append('<a class="ideviceItem" href="#"' + \
+            prototype_list.append(force_text('<a class="ideviceItem" href="#"' + \
                                   ' ideviceid="%s">%s</a>' % (
                                       prototype.__name__,
-                                      force_text(prototype.name)))
+                                      force_text(prototype.name))))
         idevice_list.append(prototype_list)
-    return unordered_list(idevice_list)
+    return unordered_list(idevice_list, autoescape=False)
 
 
 @register.inclusion_tag('exe/outlinepane.html')

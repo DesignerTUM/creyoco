@@ -1,8 +1,7 @@
 BeautifulSoup4
 cymysql
-Django==1.7
+Django==1.8
 argparse
-distribute
 django-extensions
 ipython>=0.13
 django-registration-redux
@@ -19,5 +18,6 @@ PyPDF2
 twisted
 wikipedia
 django-filebrowser-no-grappelli
-django-ckeditor
+django-ckeditor==5.0.1
 sqlparse
+aiohttp-wsgi==0.7.0

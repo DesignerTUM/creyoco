@@ -11,6 +11,7 @@ def _get_file_from_root(folder_name):
 
 
 DEBUG = True
+REQUIRE_DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 if DEBUG:
