@@ -1,5 +1,4 @@
 <div class="midnav">
-
     {% if current_page.prev_page %}
         <a class="mid-nav-url" href="
                 {% if full_style_url %}
@@ -19,7 +18,7 @@
                 {% else %}
                     {{ current_page.node.parent.unique_name }}.html
                 {% endif %}
-                ">Parent
+                ">Overview
         </a>
     {% endif %}
 
