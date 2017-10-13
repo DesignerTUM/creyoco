@@ -1,5 +1,3 @@
-import os
-os.environ['DJANGO_SETTINGS_MODULE'] = 'exedjango.settings'
 from aiohttp import web
 from aiohttp_wsgi import WSGIHandler
 from exedjango.wsgi import application
