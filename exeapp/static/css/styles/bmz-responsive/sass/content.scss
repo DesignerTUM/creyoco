@@ -64,7 +64,8 @@ header {
   .left_wrapper {
     .left {
       &.affix-top {
-        position: static;
+        position: fixed;
+        top: 102px
       }
 
       &.affix {
@@ -97,6 +98,10 @@ header {
   .rightimages.affix {
     position: fixed !important;
     top: 92px;
+  }
+
+  .middle {
+    margin-left: 210px;
   }
 
   article {
@@ -177,6 +182,7 @@ footer {
 
   .middle {
     width: 100% !important;
+    margin-left: 0px;
   }
   .content {
     width: 100%;

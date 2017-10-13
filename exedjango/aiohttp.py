@@ -1,9 +1,10 @@
+import os
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'exedjango.settings')
 from aiohttp import web
 from aiohttp_wsgi import WSGIHandler
 from exedjango.wsgi import application
 from django_autobahn.signals import signal_registrant
 from django.conf import settings
-
 
 def create_aiohttp_app():
     """
@@ -12,7 +13,7 @@ def create_aiohttp_app():
     wsgi_handler = WSGIHandler(application)
 
     app = web.Application()
-    if not settings.DEBUG:
+    if settings.DEBUG:
         app.router.add_static(settings.STATIC_URL, settings.STATIC_ROOT, follow_symlinks=True)
         app.router.add_static(settings.MEDIA_URL, settings.MEDIA_ROOT, follow_symlinks=True)
     app.router.add_route("*", "/{path_info:.*}", wsgi_handler)
