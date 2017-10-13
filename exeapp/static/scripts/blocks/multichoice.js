@@ -25,6 +25,7 @@ var multichoice = {
         });
     },
     show_answers: function ($this) {
+        this.reset($this);
         var options = $this.parent().find("input[type='radio'], input[type='checkbox']");
         $(this).parent().find(".mc-feedback").remove();
         $.each(options, function (n, el) {
