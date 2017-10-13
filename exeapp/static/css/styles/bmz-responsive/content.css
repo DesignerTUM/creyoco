@@ -352,7 +352,7 @@ footer .container {
   /* line 183, sass/content.scss */
   .middle {
     width: 100% !important;
-    margin-left: 0px; }
+    margin-left: 0px !important; }
 
   /* line 187, sass/content.scss */
   .content {
