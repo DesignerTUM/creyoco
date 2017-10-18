@@ -251,6 +251,7 @@ CKEDITOR_CONFIGS = {
         "autoGrow_maxHeight": 500,
         "width": "100%",
         "height": 100,
+        "mathJaxLib": "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js",
         "toolbar": [
             {
                 "name": "clipboard", "items": [ "Cut", "Copy", "Paste", "PasteText", "PasteFromWord", "-", "Undo", "Redo" ]
