@@ -33,6 +33,8 @@ class TOCBlock(GenericBlock):
             list.append(self._generate_item(child, export_url))
             if child.children.exists():
                 list.append(self._generate_toc_tree(child, export_url))
+            else:
+                list.append([])
 
         return list
 

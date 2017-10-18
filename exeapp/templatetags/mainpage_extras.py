@@ -37,6 +37,7 @@ def render_outline(package, current_node):
 
     node_list = [render_to_string(NODE_TEMPLATE, {"node": package.root}),
                  _create_children_list(package.root, NODE_TEMPLATE)]
+    node_list_content = unordered_list(node_list, autoescape=False)
 
     return locals()
 
@@ -112,4 +113,6 @@ be rendered using given template. """
             if child.children.exists():
                 children_list.append(_create_children_list(child,
                                                            template))
+            else:
+                children_list.append([])
     return children_list
