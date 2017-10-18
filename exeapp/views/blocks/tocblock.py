@@ -25,7 +25,7 @@ class TOCBlock(GenericBlock):
         toc_list = [self._generate_item(package.root, export_url)]
         if package.root.children.exists():
             toc_list.append(self._generate_toc_tree(package.root, export_url))
-        return '<ul class="toc">%s</ul>' % unordered_list(toc_list)
+        return '<ul class="toc">%s</ul>' % unordered_list(toc_list, autoescape=False)
 
     def _generate_toc_tree(self, node, export_url):
         list = []
@@ -37,10 +37,8 @@ class TOCBlock(GenericBlock):
         return list
 
     def _generate_item(self, node, export_url):
-        print(export_url)
         if export_url:
             node_url = node.unique_name() + ".html"
         else:
             node_url = node.url()
-        return '<a href="%s">%s</a>' %\
-                    (node_url, node.title)
+        return '<a href="%s">%s</a>' % (node_url, node.title)

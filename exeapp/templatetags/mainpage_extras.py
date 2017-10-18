@@ -102,14 +102,14 @@ will
 be rendered using given template. """
     children_list = []
 
-    if node.children.all():
+    if node.children.exists():
         for child in node.children.all():
             if template is None:
                 node_item = child.title
             else:
                 node_item = render_to_string(template, {"node": child})
             children_list.append(node_item)
-            if child.children.all():
+            if child.children.exists():
                 children_list.append(_create_children_list(child,
                                                            template))
     return children_list
