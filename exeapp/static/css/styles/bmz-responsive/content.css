@@ -205,139 +205,142 @@ footer .container {
     footer .container .copyright strong {
       font-style: italic; }
 
-/* line 11, sass/content.scss */
+/* line 10, sass/content.scss */
 body {
   font-family: "Open Sans";
   color: #4d4d4d;
   background-image: url(img/debut_light.png);
   overflow-y: visible; }
 
-/* line 18, sass/content.scss */
+/* line 17, sass/content.scss */
 .middle h2 {
   font-family: "Droid Serif"; }
 
-/* line 23, sass/content.scss */
+/* line 22, sass/content.scss */
 .middle h1, .middle h2, .middle h3, .middle h4, .middle h5 {
   color: #7db32e; }
 
-/* line 28, sass/content.scss */
+/* line 27, sass/content.scss */
 header {
   background-color: #7db32e;
   font-family: "Droid Serif"; }
-  /* line 33, sass/content.scss */
+  /* line 31, sass/content.scss */
   header.affix-static:not(.affix) {
     position: static !important;
     margin-bottom: 40px; }
-  /* line 38, sass/content.scss */
+  /* line 36, sass/content.scss */
   header.affix, header.affix-static {
     position: fixed;
     top: 0;
     margin: 0;
     width: 100%;
     z-index: 10; }
-    /* line 45, sass/content.scss */
+    /* line 43, sass/content.scss */
     header.affix span, header.affix-static span {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
       float: left;
       width: calc(100% - 40.02px); }
+  /* line 51, sass/content.scss */
+  header.affix ~ section.content > .middle {
+    margin-top: 102px; }
 
-/* line 55, sass/content.scss */
+/* line 56, sass/content.scss */
 .content {
   margin-left: auto;
   margin-right: auto; }
-  /* line 58, sass/content.scss */
+  /* line 59, sass/content.scss */
   .content hr {
     color: #777777;
     background-color: #777777;
     height: 1px; }
-  /* line 66, sass/content.scss */
+  /* line 67, sass/content.scss */
   .content .left_wrapper .left.affix-top {
     position: fixed;
     top: 102px; }
-  /* line 71, sass/content.scss */
+  /* line 72, sass/content.scss */
   .content .left_wrapper .left.affix {
     position: fixed;
     top: 102px; }
-  /* line 75, sass/content.scss */
+  /* line 76, sass/content.scss */
   .content .left_wrapper .left nav {
     background-color: #dbe8c2;
     border: 1px solid #7db32e; }
-    /* line 82, sass/content.scss */
+    /* line 83, sass/content.scss */
     .content .left_wrapper .left nav ul li > a.active {
       color: #7db32e; }
-    /* line 85, sass/content.scss */
+    /* line 86, sass/content.scss */
     .content .left_wrapper .left nav ul li > a:hover {
       background-color: #7db32e; }
-  /* line 94, sass/content.scss */
+  /* line 95, sass/content.scss */
   .content .rightimages.affix-top {
     position: static; }
-  /* line 98, sass/content.scss */
+  /* line 99, sass/content.scss */
   .content .rightimages.affix {
     position: fixed !important;
     top: 92px; }
-  /* line 103, sass/content.scss */
+  /* line 104, sass/content.scss */
   .content .middle {
     margin-left: 210px; }
-  /* line 107, sass/content.scss */
+  /* line 108, sass/content.scss */
   .content article {
     width: 100%; }
-    /* line 109, sass/content.scss */
+    /* line 110, sass/content.scss */
     .content article ul {
       list-style-position: outside; }
-      /* line 111, sass/content.scss */
+      /* line 112, sass/content.scss */
       .content article ul li {
         list-style-position: outside; }
-    /* line 116, sass/content.scss */
+    /* line 117, sass/content.scss */
     .content article ol {
       margin: 3px 5px 3px 5px;
       list-style-position: outside; }
-      /* line 119, sass/content.scss */
+      /* line 120, sass/content.scss */
       .content article ol li {
         list-style-position: outside; }
-    /* line 123, sass/content.scss */
+    /* line 124, sass/content.scss */
     .content article strong {
       color: #4d4d4d; }
-    /* line 127, sass/content.scss */
+    /* line 128, sass/content.scss */
     .content article .iDevice a {
       color: #4d4d4d; }
-      /* line 129, sass/content.scss */
+      /* line 130, sass/content.scss */
       .content article .iDevice a:hover {
         color: #7db32e; }
 
-/* line 138, sass/content.scss */
+/* line 139, sass/content.scss */
 div.midnav a.mid-nav-url {
   background-color: #dbe8c2; }
-  /* line 140, sass/content.scss */
+  /* line 141, sass/content.scss */
   div.midnav a.mid-nav-url:hover {
     background-color: #7db32e; }
 
-/* line 148, sass/content.scss */
+/* line 149, sass/content.scss */
 footer .container {
   border-top: 1px solid #7db32e; }
 
-/* line 153, sass/content.scss */
+/* line 154, sass/content.scss */
 #menu-toggle {
   display: none; }
 
-/* line 157, sass/content.scss */
+/* line 158, sass/content.scss */
 .glyphicon {
   margin: 2px 8px 2px 2px;
   float: right;
   padding: 3px; }
 
 @media (max-width: 1200px) {
-  /* line 164, sass/content.scss */
+  /* line 165, sass/content.scss */
   .iDevice {
     margin-left: 3vw;
     margin-right: 3vw; }
-    /* line 167, sass/content.scss */
+    /* line 168, sass/content.scss */
     .iDevice .iDevice_inner, .iDevice > p {
       margin-left: 1vw;
       margin-right: 1vw; }
 
-  /* line 172, sass/content.scss */
+  /* line 173, sass/content.scss */
   .left_wrapper {
     margin-left: -250px;
     position: absolute;
@@ -345,27 +348,27 @@ footer .container {
     opacity: 0;
     transition: opacity 0.5s ease; }
 
-  /* line 179, sass/content.scss */
+  /* line 180, sass/content.scss */
   .right {
     display: none; }
 
-  /* line 183, sass/content.scss */
+  /* line 184, sass/content.scss */
   .middle {
     width: 100% !important;
     margin-left: 0px !important; }
 
-  /* line 187, sass/content.scss */
+  /* line 188, sass/content.scss */
   .content {
     width: 100%; }
 
-  /* line 192, sass/content.scss */
+  /* line 193, sass/content.scss */
   body.active .left_wrapper {
     margin-left: 0px;
     width: 250px;
     position: absolute;
     opacity: 1; }
 
-  /* line 200, sass/content.scss */
+  /* line 201, sass/content.scss */
   #menu-toggle {
     display: inline-block;
     float: left;

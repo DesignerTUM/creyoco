@@ -1,5 +1,6 @@
 @import "compass/css3";
 @import "compass/css3/images";
+@import "../../common.scss";
 
 $lightblue: rgb(219, 226, 233);
 $blue: rgb(0, 33, 67);
@@ -89,6 +90,9 @@ header {
 
     .headerimage {
       height: 40px;
+    }
+    & ~ section.content > .middle {
+      margin-top: 102px;
     }
   }
   span {

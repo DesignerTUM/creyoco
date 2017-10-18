@@ -7,7 +7,6 @@ $green: rgb(49%, 70%, 18%);
 $grey: lighten(black, 30%);
 $headerimage: "tumlogo_bea.png";
 
-
 body {
   font-family: "Open Sans";
   color: $grey;
@@ -29,7 +28,6 @@ header {
   background-color: $green;
   font-family: "Droid Serif";
 
-
   &.affix-static:not(.affix) {
     position: static !important;
     margin-bottom: 40px;
@@ -49,6 +47,9 @@ header {
       float: left;
       width: calc(100% - 40.02px);
     }
+  }
+  &.affix ~ section.content > .middle {
+    margin-top: 102px;
   }
 }
 
