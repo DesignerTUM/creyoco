@@ -332,7 +332,7 @@ class PackageManager(models.Manager):
                         pass
 
     def import_package(self, filename, user):
-        p = None
+        package = None
         try:
             zipped_file = zipfile.ZipFile(filename, "r")
         except zipfile.BadZipFile:
@@ -346,17 +346,20 @@ class PackageManager(models.Manager):
                     zipped_file.extractall(path=temp_dir)
                     with open(Path.joinpath(Path(temp_dir), Path(file_in_zip))) as json_file:
                         json_data = json.load(json_file)
-                        p = Package(title=json_data['title'], user=user)
-                        self._copy_resources_from_zip(json_data['files'], temp_dir, p)
+                        package = Package(title=json_data['title'], user=user)
+                        self._copy_resources_from_zip(json_data['files'], temp_dir, package)
                         dublincore = DublinCore.objects.create()
-                        p.dublincore = dublincore
+                        package.dublincore = dublincore
                         dublincore.save()
-                        p.save()
-                        Node.objects.import_node(json_data['nodes'][0], p, None)
+                        package.save()
+                        order = PackageOrder.objects.filter(user=user).aggregate(Max('sort_order'))['sort_order__max']
+                        package_order = PackageOrder(package=package, user=user, sort_order=order)
+                        package_order.save()
+                        Node.objects.import_node(json_data['nodes'][0], package, None)
 
         finally:
             Path.rmtree(temp_dir)
-        if p:
+        if package:
             return True
         else:
             return False
