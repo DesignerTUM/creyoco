@@ -716,11 +716,22 @@ i.e. the "package".
         nodes = list(self.nodes.all())
         new_package = self
         new_package.pk = None
+
         new_package.dublincore.pk = None
         new_package.dublincore.save()
         new_package.dublincore_id = new_package.dublincore.pk
+
         new_package.title = new_package.title + " (" + _("Copy") + ")"
         new_package.save()
+
+        order = PackageOrder.objects.filter(user=self.user).aggregate(Max('sort_order'))['sort_order__max']
+        if not order:
+            order = 0
+        else:
+            order += 1
+        new_package_order = PackageOrder(package=new_package, user=self.user, sort_order=order)
+        new_package_order.save()
+
         for node in nodes:
             if node.is_root:
                 node.duplicate(package=new_package)
