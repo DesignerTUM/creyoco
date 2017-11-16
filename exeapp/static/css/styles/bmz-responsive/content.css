@@ -108,91 +108,94 @@ header {
           /* line 126, ../common.scss */
           .content .left nav ul li > a.active {
             font-weight: bold; }
-          /* line 129, ../common.scss */
+            /* line 128, ../common.scss */
+            .content .left nav ul li > a.active:hover {
+              color: white; }
+          /* line 132, ../common.scss */
           .content .left nav ul li > a:hover {
             color: white; }
-  /* line 137, ../common.scss */
+  /* line 140, ../common.scss */
   .content .right {
     width: 202px;
     float: right;
     margin-left: 20px;
     min-height: 1px; }
-  /* line 146, ../common.scss */
+  /* line 149, ../common.scss */
   .content .middle {
     float: left;
     width: 728px; }
-  /* line 151, ../common.scss */
+  /* line 154, ../common.scss */
   .content article {
     width: 728px;
     float: left;
     margin-bottom: 20px; }
-    /* line 156, ../common.scss */
+    /* line 159, ../common.scss */
     .content article p {
       margin-bottom: 20px; }
-    /* line 159, ../common.scss */
+    /* line 162, ../common.scss */
     .content article table tr p {
       margin: 3px 5px 3px 5px; }
-    /* line 162, ../common.scss */
+    /* line 165, ../common.scss */
     .content article ul {
       margin-bottom: 20px; }
-      /* line 163, ../common.scss */
+      /* line 166, ../common.scss */
       .content article ul li {
         list-style-type: square;
         margin-left: 20px; }
-    /* line 170, ../common.scss */
+    /* line 173, ../common.scss */
     .content article ol {
       margin-bottom: 20px; }
-      /* line 171, ../common.scss */
+      /* line 174, ../common.scss */
       .content article ol li {
         list-style: decimal;
         margin-left: 20px; }
-    /* line 177, ../common.scss */
+    /* line 180, ../common.scss */
     .content article strong {
       font-weight: bold; }
-    /* line 180, ../common.scss */
+    /* line 183, ../common.scss */
     .content article .lup {
       float: right;
       margin-left: 20px; }
-    /* line 185, ../common.scss */
+    /* line 188, ../common.scss */
     .content article .iDevice ul {
       margin-bottom: 0px; }
-      /* line 187, ../common.scss */
+      /* line 190, ../common.scss */
       .content article .iDevice ul li {
         margin-left: 0px;
         padding-left: 0px; }
-    /* line 192, ../common.scss */
+    /* line 195, ../common.scss */
     .content article .iDevice a {
       color: #737373;
       text-decoration: underline; }
-      /* line 195, ../common.scss */
+      /* line 198, ../common.scss */
       .content article .iDevice a:hover {
         color: #737373; }
-    /* line 199, ../common.scss */
+    /* line 202, ../common.scss */
     .content article .iDevice .toc {
       display: block;
       page-break-after: 0;
       padding-left: 30px !important; }
-      /* line 203, ../common.scss */
+      /* line 206, ../common.scss */
       .content article .iDevice .toc ul {
         padding-left: 5px; }
-        /* line 205, ../common.scss */
+        /* line 208, ../common.scss */
         .content article .iDevice .toc ul li {
           list-style-type: none;
           font-weight: bold; }
-          /* line 206, ../common.scss */
+          /* line 209, ../common.scss */
           .content article .iDevice .toc ul li a {
             text-decoration: none; }
-          /* line 211, ../common.scss */
+          /* line 214, ../common.scss */
           .content article .iDevice .toc ul li ul li {
             margin-left: 15px !important; }
-            /* line 213, ../common.scss */
+            /* line 216, ../common.scss */
             .content article .iDevice .toc ul li ul li ul li {
               font-weight: normal !important; }
 
-/* line 224, ../common.scss */
+/* line 227, ../common.scss */
 div.midnav {
   float: right; }
-  /* line 227, ../common.scss */
+  /* line 230, ../common.scss */
   div.midnav a.mid-nav-url {
     display: inline-block;
     padding: 5px 10px 5px 10px;
@@ -201,20 +204,20 @@ div.midnav {
     text-decoration: none;
     color: #737373;
     margin-left: 10px; }
-    /* line 236, ../common.scss */
+    /* line 239, ../common.scss */
     div.midnav a.mid-nav-url:hover {
       text-decoration: none;
       color: white; }
 
-/* line 244, ../common.scss */
+/* line 247, ../common.scss */
 footer .container {
   margin-top: 30px;
   border-top: 1px solid; }
-  /* line 248, ../common.scss */
+  /* line 251, ../common.scss */
   footer .container .copyright {
     font-size: 11px;
     color: #737373; }
-    /* line 252, ../common.scss */
+    /* line 255, ../common.scss */
     footer .container .copyright strong {
       font-style: italic; }
 
@@ -285,75 +288,76 @@ header {
       color: #7db32e; }
     /* line 86, sass/content.scss */
     .content .left_wrapper .left nav ul li > a:hover {
-      background-color: #7db32e; }
-  /* line 95, sass/content.scss */
+      background-color: #7db32e;
+      color: white; }
+  /* line 96, sass/content.scss */
   .content .rightimages.affix-top {
     position: static; }
-  /* line 99, sass/content.scss */
+  /* line 100, sass/content.scss */
   .content .rightimages.affix {
     position: fixed !important;
     top: 92px; }
-  /* line 104, sass/content.scss */
+  /* line 105, sass/content.scss */
   .content .middle {
     margin-left: 210px; }
-  /* line 108, sass/content.scss */
+  /* line 109, sass/content.scss */
   .content article {
     width: 100%; }
-    /* line 110, sass/content.scss */
+    /* line 111, sass/content.scss */
     .content article ul {
       list-style-position: outside; }
-      /* line 112, sass/content.scss */
+      /* line 113, sass/content.scss */
       .content article ul li {
         list-style-position: outside; }
-    /* line 117, sass/content.scss */
+    /* line 118, sass/content.scss */
     .content article ol {
       margin: 3px 5px 3px 5px;
       list-style-position: outside; }
-      /* line 120, sass/content.scss */
+      /* line 121, sass/content.scss */
       .content article ol li {
         list-style-position: outside; }
-    /* line 124, sass/content.scss */
+    /* line 125, sass/content.scss */
     .content article strong {
       color: #4d4d4d; }
-    /* line 128, sass/content.scss */
+    /* line 129, sass/content.scss */
     .content article .iDevice a {
       color: #4d4d4d; }
-      /* line 130, sass/content.scss */
+      /* line 131, sass/content.scss */
       .content article .iDevice a:hover {
         color: #7db32e; }
 
-/* line 139, sass/content.scss */
+/* line 140, sass/content.scss */
 div.midnav a.mid-nav-url {
   background-color: #dbe8c2; }
-  /* line 141, sass/content.scss */
+  /* line 142, sass/content.scss */
   div.midnav a.mid-nav-url:hover {
     background-color: #7db32e; }
 
-/* line 149, sass/content.scss */
+/* line 150, sass/content.scss */
 footer .container {
   border-top: 1px solid #7db32e; }
 
-/* line 154, sass/content.scss */
+/* line 155, sass/content.scss */
 #menu-toggle {
   display: none; }
 
-/* line 158, sass/content.scss */
+/* line 159, sass/content.scss */
 .glyphicon {
   margin: 2px 8px 2px 2px;
   float: right;
   padding: 3px; }
 
 @media (max-width: 1200px) {
-  /* line 165, sass/content.scss */
+  /* line 166, sass/content.scss */
   .iDevice {
     margin-left: 3vw;
     margin-right: 3vw; }
-    /* line 168, sass/content.scss */
+    /* line 169, sass/content.scss */
     .iDevice .iDevice_inner, .iDevice > p {
       margin-left: 1vw;
       margin-right: 1vw; }
 
-  /* line 173, sass/content.scss */
+  /* line 174, sass/content.scss */
   .left_wrapper {
     margin-left: -250px;
     position: absolute;
@@ -361,27 +365,27 @@ footer .container {
     opacity: 0;
     transition: opacity 0.5s ease; }
 
-  /* line 180, sass/content.scss */
+  /* line 181, sass/content.scss */
   .right {
     display: none; }
 
-  /* line 184, sass/content.scss */
+  /* line 185, sass/content.scss */
   .middle {
     width: 100% !important;
     margin-left: 0px !important; }
 
-  /* line 188, sass/content.scss */
+  /* line 189, sass/content.scss */
   .content {
     width: 100%; }
 
-  /* line 193, sass/content.scss */
+  /* line 194, sass/content.scss */
   body.active .left_wrapper {
     margin-left: 0px;
     width: 250px;
     position: absolute;
     opacity: 1; }
 
-  /* line 201, sass/content.scss */
+  /* line 202, sass/content.scss */
   #menu-toggle {
     display: inline-block;
     float: left;

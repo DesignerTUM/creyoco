@@ -125,6 +125,9 @@ header {
 
             &.active {
               font-weight: bold;
+              &:hover {
+                color: white;
+              }
             }
             &:hover {
               color: white;
