@@ -29,11 +29,12 @@
       left.find();
       var a_list = $(".left").find("ul").not(".neverhide").parent().children("a");
       a_list.each(function() {
-        var a, url_text;
-        a = $(this);
-        url_text = a.html();
-        if (url_text.indexOf("</span>") === -1) {
-          a.html(url_text + '<span class=\'glyphicon glyphicon-chevron-right\'></span>');
+        var a = $(this);
+        if (a.find('span.glyphicon').length === 0) {
+          $('<span />')
+              .addClass('glyphicon')
+              .addClass('glyphicon-chevron-right')
+              .appendTo(a);
         }
       });
       $('.left .glyphicon').off('click');

@@ -1,11 +1,11 @@
   	{% if page == current_page %}
         <a class="active {% if page.node.children and not page.node.is_root %}withChild{% endif %}"
-           href="" title="{{ page.node.title }}">{{ page.node.title }}</a>
+           href="" title="{{ page.node.title }}"><span class="pageTitle">{{ page.node.title }}</span></a>
     {% else %}
         <a class="{% if page.node.children %}withChild{% else %}withoutChild{% endif %}"
            href="
 
 
                    {% if full_url %}{% url "exeapp.views.package.preview" package.id page.node.id %}{% else %}{{ page.name }}.html{% endif %}"
-           title="{{ page.node.title }}">{{ page.node.title }}</a>
+           title="{{ page.node.title }}"><span class="pageTitle">{{ page.node.title }}</span></a>
     {% endif %}

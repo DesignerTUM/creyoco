@@ -22,6 +22,7 @@ block'''
     block = block_factory(idevice.as_child())
     return block.renderView()
 
+
 # @register.inclusion_tag('navigation_bar.html')
 
 
@@ -48,11 +49,11 @@ def navigation_bar(current_page, full_url):
             depth -= 1
 
         html.append(render_to_string("exe/export/navigation_bar_item.html",
-                                 {"page": page,
-                                  "current_page": current_page,
-                                  "package": package,
-                                  "full_url": full_url,
-                                  }))
+                                     {"page": page,
+                                      "current_page": current_page,
+                                      "package": package,
+                                      "full_url": full_url,
+                                      }))
     while depth > 0:
         html.append("</li></ul>")
         depth -= 1
@@ -66,33 +67,33 @@ def render_licence(current_page):
     Returns an XHTML string rendering the license.
     """
     licences = {"GNU Free Documentation License":
-                 "http://www.gnu.org/copyleft/fdl.html",
-                 "Creative Commons Attribution 3.0 License":
-                 "http://creativecommons.org/licenses/by/3.0/",
-                 "Creative Commons Attribution Share Alike 3.0 License":
-                 "http://creativecommons.org/licenses/by-sa/3.0/",
-                 "Creative Commons Attribution No Derivatives 3.0 License":
-                 "http://creativecommons.org/licenses/by-nd/3.0/",
-                 "Creative Commons Attribution Non-commercial 3.0 License":
-                 "http://creativecommons.org/licenses/by-nc/3.0/",
-                 "Creative Commons Attribution Non-commercial Share Alike 3.0 License":
-                 "http://creativecommons.org/licenses/by-nc-sa/3.0/",
-                 "Creative Commons Attribution Non-commercial No Derivatives 3.0 License":
-                 "http://creativecommons.org/licenses/by-nc-nd/3.0/",
-                 "Creative Commons Attribution 2.5 License":
-                 "http://creativecommons.org/licenses/by/2.5/",
-                 "Creative Commons Attribution-ShareAlike 2.5 License":
-                 "http://creativecommons.org/licenses/by-sa/2.5/",
-                 "Creative Commons Attribution-NoDerivs 2.5 License":
-                 "http://creativecommons.org/licenses/by-nd/2.5/",
-                 "Creative Commons Attribution-NonCommercial 2.5 License":
-                 "http://creativecommons.org/licenses/by-nc/2.5/",
-                 "Creative Commons Attribution-NonCommercial-ShareAlike 2.5 License":
-                 "http://creativecommons.org/licenses/by-nc-sa/2.5/",
-                 "Creative Commons Attribution-NonCommercial-NoDerivs 2.5 License":
-                 "http://creativecommons.org/licenses/by-nc-nd/2.5/",
-                 "Developing Nations 2.0":
-                 "http://creativecommons.org/licenses/devnations/2.0/"}
+                    "http://www.gnu.org/copyleft/fdl.html",
+                "Creative Commons Attribution 3.0 License":
+                    "http://creativecommons.org/licenses/by/3.0/",
+                "Creative Commons Attribution Share Alike 3.0 License":
+                    "http://creativecommons.org/licenses/by-sa/3.0/",
+                "Creative Commons Attribution No Derivatives 3.0 License":
+                    "http://creativecommons.org/licenses/by-nd/3.0/",
+                "Creative Commons Attribution Non-commercial 3.0 License":
+                    "http://creativecommons.org/licenses/by-nc/3.0/",
+                "Creative Commons Attribution Non-commercial Share Alike 3.0 License":
+                    "http://creativecommons.org/licenses/by-nc-sa/3.0/",
+                "Creative Commons Attribution Non-commercial No Derivatives 3.0 License":
+                    "http://creativecommons.org/licenses/by-nc-nd/3.0/",
+                "Creative Commons Attribution 2.5 License":
+                    "http://creativecommons.org/licenses/by/2.5/",
+                "Creative Commons Attribution-ShareAlike 2.5 License":
+                    "http://creativecommons.org/licenses/by-sa/2.5/",
+                "Creative Commons Attribution-NoDerivs 2.5 License":
+                    "http://creativecommons.org/licenses/by-nd/2.5/",
+                "Creative Commons Attribution-NonCommercial 2.5 License":
+                    "http://creativecommons.org/licenses/by-nc/2.5/",
+                "Creative Commons Attribution-NonCommercial-ShareAlike 2.5 License":
+                    "http://creativecommons.org/licenses/by-nc-sa/2.5/",
+                "Creative Commons Attribution-NonCommercial-NoDerivs 2.5 License":
+                    "http://creativecommons.org/licenses/by-nc-nd/2.5/",
+                "Developing Nations 2.0":
+                    "http://creativecommons.org/licenses/devnations/2.0/"}
 
     licence = current_page.node.package.license
     licence_url = licences.get(licence)
@@ -122,8 +123,9 @@ def view_media(page, full_url):
                 js.add("<script src='{}'></script>".format(each.split('/')[-1]))
             for each in block.media._css.get('all', []):
                 css.add("<link rel='stylesheet' href='{}' />".format(
-                                                each.split('/')[-1]))
+                    each.split('/')[-1]))
         return "\n".join(css) + "\n" + "\n".join(js)
+
 
 @register.filter
 def process_internal_links(html, package):
@@ -134,6 +136,7 @@ def process_internal_links(html, package):
     using the fully exported (and unique) file names for each node.
     """
     return common.renderInternalLinkNodeFilenames(package, html)
+
 
 @register.simple_tag
 def render_custom_include(page, filename):

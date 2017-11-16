@@ -31,6 +31,22 @@ nav {
   ul {
     padding-left: 0;
   }
+
+  li {
+    span.glyphicon {
+      margin: 0;
+      padding: 0;
+      top: 2px;
+    }
+    span.pageTitle {
+      max-width: 140px;
+      display: inline-block;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      padding-left: 20px;
+    }
+  }
 }
 
 h1 {
