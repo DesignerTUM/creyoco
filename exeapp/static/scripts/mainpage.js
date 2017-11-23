@@ -393,6 +393,8 @@ require(['jquery', "common", "eyecandy", "wamp_handler", 'dragula', 'jquery-pjax
                 alert("Somehow you managed to call dblclik event without a single click. Please, reload page!");
                 return null;
             }
+            var current_name = common.get_current_node().text().trim();
+            common.get_outline_pane().data('previousName', current_name);
             common.get_outline_pane().jstree("rename");
         }
 
@@ -535,7 +537,18 @@ require(['jquery', "common", "eyecandy", "wamp_handler", 'dragula', 'jquery-pjax
         //handle renamed node event. Calls package.rename_node over rpc.
         function handle_renamed_current_node(e, data) {
             var new_title = data.rslt.name;
-            $.jsonRPC.request('rename_current_node', {params: [get_package_id(), common.get_current_node_id(), new_title]}, {
+            var event_node_id = data.rslt.obj.find('a').attr('nodeid');
+            var selected_node = common.get_current_node_id();
+            var outline = common.get_outline_pane();
+            var previous_name = outline.data('previousName');
+            outline.data('previousName', '');
+
+            // check if the node has changed
+            if (event_node_id !== selected_node) {
+                data.rslt.obj.find('a').text(previous_name);
+                return;
+            }
+            $.jsonRPC.request('rename_current_node', {params: [get_package_id(), selected_node, new_title]}, {
                 success: function (results) {
                     var server_title = ""
                     if ("title" in results.result) {
