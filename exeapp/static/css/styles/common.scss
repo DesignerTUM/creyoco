@@ -27,6 +27,8 @@ body {
 
 
 nav {
+  overflow-y: auto;
+  max-height: calc(100% - 135px);
   ul {
     padding-left: 0;
   }

@@ -48,9 +48,6 @@ header {
       width: calc(100% - 50px);
     }
   }
-  &.affix ~ section.content > .middle {
-    margin-top: 115px;
-  }
 }
 
 .content {
@@ -93,12 +90,8 @@ header {
       }
     }
   }
-  .rightimages.affix-top {
-    position: static;
-  }
-
-  .rightimages.affix {
-    position: fixed !important;
+  .rightimages {
+    position: fixed;
     top: 115px;
   }
 
