@@ -16,18 +16,17 @@ body {
 
 /* line 24, ../common.scss */
 .container {
-  width: 1170px;
   margin: 0 auto; }
 
-/* line 31, ../common.scss */
+/* line 30, ../common.scss */
 nav ul {
   padding-left: 0; }
-/* line 36, ../common.scss */
+/* line 35, ../common.scss */
 nav li span.glyphicon {
   margin: 0;
   padding: 0;
   top: 2px; }
-/* line 41, ../common.scss */
+/* line 40, ../common.scss */
 nav li span.pageTitle {
   max-width: 145px;
   display: inline-block;
@@ -36,17 +35,17 @@ nav li span.pageTitle {
   white-space: nowrap;
   padding-left: 20px; }
 
-/* line 52, ../common.scss */
+/* line 51, ../common.scss */
 h1 {
   font-size: 24px;
   font-weight: bold;
   letter-spacing: 1px; }
-  /* line 56, ../common.scss */
+  /* line 55, ../common.scss */
   h1.pagetitle {
     color: #737373;
     margin-top: 25px; }
 
-/* line 62, ../common.scss */
+/* line 61, ../common.scss */
 h2 {
   font-size: 16px;
   font-weight: bold;
@@ -54,35 +53,35 @@ h2 {
   margin-bottom: 10px;
   border-bottom: 1px solid; }
 
-/* line 70, ../common.scss */
+/* line 69, ../common.scss */
 h3 {
   font-size: 14px;
   font-weight: bold; }
 
-/* line 75, ../common.scss */
+/* line 74, ../common.scss */
 header {
   padding-top: 10px;
   padding-bottom: 10px;
-  margin-bottom: 30px; }
-  /* line 79, ../common.scss */
+  margin-bottom: 11px; }
+  /* line 78, ../common.scss */
   header span {
     width: 100%;
     display: inline;
     color: white;
     font-size: 30px; }
-  /* line 86, ../common.scss */
+  /* line 85, ../common.scss */
   header a {
     float: right; }
 
-/* line 98, ../common.scss */
+/* line 97, ../common.scss */
 .content {
   width: 1170px; }
-  /* line 100, ../common.scss */
+  /* line 99, ../common.scss */
   .content .left {
     float: left;
     width: 200px;
     min-height: 1px; }
-    /* line 104, ../common.scss */
+    /* line 103, ../common.scss */
     .content .left nav {
       margin-right: 20px;
       padding-top: 10px;
@@ -90,14 +89,14 @@ header {
       border-radius: 5px;
       position: fixed;
       width: 185px; }
-      /* line 112, ../common.scss */
+      /* line 111, ../common.scss */
       .content .left nav ul li {
         list-style: none;
         line-height: 30px;
         margin-left: 5px;
         maring-right: 5px;
         overflow: hidden; }
-        /* line 118, ../common.scss */
+        /* line 117, ../common.scss */
         .content .left nav ul li > a {
           display: inline-block;
           width: 100%;
@@ -107,97 +106,97 @@ header {
           line-height: 18px;
           text-decoration: none;
           text-indent: -20px; }
-          /* line 128, ../common.scss */
+          /* line 127, ../common.scss */
           .content .left nav ul li > a.active {
             font-weight: bold; }
-            /* line 130, ../common.scss */
+            /* line 129, ../common.scss */
             .content .left nav ul li > a.active:hover {
               color: white; }
-          /* line 134, ../common.scss */
+          /* line 133, ../common.scss */
           .content .left nav ul li > a:hover {
             color: white; }
-  /* line 142, ../common.scss */
+  /* line 141, ../common.scss */
   .content .right {
     width: 202px;
     float: right;
     margin-left: 20px;
     min-height: 1px; }
-  /* line 151, ../common.scss */
+  /* line 150, ../common.scss */
   .content .middle {
     float: left;
     width: 728px; }
-  /* line 156, ../common.scss */
+  /* line 155, ../common.scss */
   .content article {
     width: 728px;
     float: left;
     margin-bottom: 20px; }
-    /* line 161, ../common.scss */
+    /* line 160, ../common.scss */
     .content article p {
       margin-bottom: 20px; }
-    /* line 164, ../common.scss */
+    /* line 163, ../common.scss */
     .content article table tr p {
       margin: 3px 5px 3px 5px; }
-    /* line 167, ../common.scss */
+    /* line 166, ../common.scss */
     .content article ul {
       margin-bottom: 20px; }
-      /* line 168, ../common.scss */
+      /* line 167, ../common.scss */
       .content article ul li {
         list-style-type: square;
         margin-left: 20px; }
-    /* line 175, ../common.scss */
+    /* line 174, ../common.scss */
     .content article ol {
       margin-bottom: 20px; }
-      /* line 176, ../common.scss */
+      /* line 175, ../common.scss */
       .content article ol li {
         list-style: decimal;
         margin-left: 20px; }
-    /* line 182, ../common.scss */
+    /* line 181, ../common.scss */
     .content article strong {
       font-weight: bold; }
-    /* line 185, ../common.scss */
+    /* line 184, ../common.scss */
     .content article .lup {
       float: right;
       margin-left: 20px; }
-    /* line 190, ../common.scss */
+    /* line 189, ../common.scss */
     .content article .iDevice ul {
       margin-bottom: 0px; }
-      /* line 192, ../common.scss */
+      /* line 191, ../common.scss */
       .content article .iDevice ul li {
         margin-left: 0px;
         padding-left: 0px; }
-    /* line 197, ../common.scss */
+    /* line 196, ../common.scss */
     .content article .iDevice a {
       color: #737373;
       text-decoration: underline; }
-      /* line 200, ../common.scss */
+      /* line 199, ../common.scss */
       .content article .iDevice a:hover {
         color: #737373; }
-    /* line 204, ../common.scss */
+    /* line 203, ../common.scss */
     .content article .iDevice .toc {
       display: block;
       page-break-after: 0;
       padding-left: 30px !important; }
-      /* line 208, ../common.scss */
+      /* line 207, ../common.scss */
       .content article .iDevice .toc ul {
         padding-left: 5px; }
-        /* line 210, ../common.scss */
+        /* line 209, ../common.scss */
         .content article .iDevice .toc ul li {
           list-style-type: none;
           font-weight: bold; }
-          /* line 211, ../common.scss */
+          /* line 210, ../common.scss */
           .content article .iDevice .toc ul li a {
             text-decoration: none; }
-          /* line 216, ../common.scss */
+          /* line 215, ../common.scss */
           .content article .iDevice .toc ul li ul li {
             margin-left: 15px !important; }
-            /* line 218, ../common.scss */
+            /* line 217, ../common.scss */
             .content article .iDevice .toc ul li ul li ul li {
               font-weight: normal !important; }
 
-/* line 229, ../common.scss */
+/* line 228, ../common.scss */
 div.midnav {
   float: right; }
-  /* line 232, ../common.scss */
+  /* line 231, ../common.scss */
   div.midnav a.mid-nav-url {
     display: inline-block;
     padding: 5px 10px 5px 10px;
@@ -206,20 +205,20 @@ div.midnav {
     text-decoration: none;
     color: #737373;
     margin-left: 10px; }
-    /* line 241, ../common.scss */
+    /* line 240, ../common.scss */
     div.midnav a.mid-nav-url:hover {
       text-decoration: none;
       color: white; }
 
-/* line 249, ../common.scss */
+/* line 248, ../common.scss */
 footer .container {
   margin-top: 30px;
   border-top: 1px solid; }
-  /* line 253, ../common.scss */
+  /* line 252, ../common.scss */
   footer .container .copyright {
     font-size: 11px;
     color: #737373; }
-    /* line 257, ../common.scss */
+    /* line 256, ../common.scss */
     footer .container .copyright strong {
       font-style: italic; }
 

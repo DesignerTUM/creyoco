@@ -45,7 +45,7 @@ header {
       overflow: hidden;
       text-overflow: ellipsis;
       float: left;
-      width: calc(100% - 61px);
+      width: calc(100% - 50px);
     }
   }
   &.affix ~ section.content > .middle {
@@ -154,6 +154,12 @@ footer {
 
 #menu-toggle {
   display: none;
+  padding-right: 0px;
+  padding-left: 4px;
+  padding-bottom: 4px;
+  padding-top: 4px;
+  border-top-width: 1px;
+  margin-top: 4px;
 }
 
 .glyphicon {
