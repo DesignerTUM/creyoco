@@ -39,7 +39,7 @@ nav {
       top: 2px;
     }
     span.pageTitle {
-      max-width: 140px;
+      max-width: 145px;
       display: inline-block;
       text-overflow: ellipsis;
       overflow: hidden;
@@ -112,7 +112,9 @@ header {
         li {
           list-style: none;
           line-height: 30px;
-          margin-left: 15px;
+          margin-left: 5px;
+          maring-right: 5px;
+          overflow: hidden;
           > a {
             display: inline-block;
             width: 100%;
