@@ -4,15 +4,15 @@ var multichoice = {
         $(document).ready(function () {
             $(".check_multichoice").off("click").on("click", function (e) {
                 var $this = $(this);
-                var result_el = $(this).parent().find(".result");
+                var result_el = $(this).parent().find(".mc-result");
                 if (!multichoice.checkCorectness($this)) {
-                    result_el.removeClass("right")
-                        .addClass("wrong")
+                    result_el.removeClass("mc-right")
+                        .addClass("mc-wrong")
                         .text("Incorrect answer!");
                     return false;
                 } else {
-                    result_el.removeClass("wrong")
-                        .addClass("right")
+                    result_el.removeClass("mc-wrong")
+                        .addClass("mc-right")
                         .text("Correct!");
                 }
             });
@@ -27,7 +27,7 @@ var multichoice = {
     show_answers: function ($this) {
         this.reset($this);
         var options = $this.parent().find("input[type='radio'], input[type='checkbox']");
-        $(this).parent().find(".mc-feedback").remove();
+        $this.parent().find(".mc-feedback").remove();
         $.each(options, function (n, el) {
             $(el).parent()
                 .removeClass("wrong_answer")
@@ -48,7 +48,7 @@ var multichoice = {
     checkCorectness: function ($this) {
         var options = $this.parent().find("input[type='radio'], input[type='checkbox']");
         var correct = true;
-        $(this).parent().find(".mc-feedback").remove();
+        $this.parent().find(".mc-feedback").remove();
         $.each(options, function (n, el) {
             if ($(el).attr("data-right") === "true") {
                 if (!($(el).prop("checked"))) {
@@ -74,7 +74,7 @@ var multichoice = {
         $this.parent().find('.right_answer').removeClass('right_answer');
         $this.parent().find('.wrong_answer').removeClass('wrong_answer');
         $this.parent().find('.mc-feedback').remove();
-        $this.parent().find('.result')
+        $this.parent().find('.mc-result')
             .removeClass('right')
             .removeClass('wrong')
             .html('');

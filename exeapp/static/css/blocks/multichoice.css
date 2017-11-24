@@ -1,12 +1,12 @@
-.multichoice.right {
+.multichoice.mc-right {
     color: green;
 }
 
-.multichoice.wrong {
+.multichoice.mc-wrong {
     color: red;
 }
 
-.multichoice.result {
+.multichoice.mc-result {
     font-weight: bold;
 }
 
