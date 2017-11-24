@@ -45,11 +45,11 @@ header {
       overflow: hidden;
       text-overflow: ellipsis;
       float: left;
-      width: calc(100% - 40.02px);
+      width: calc(100% - 61px);
     }
   }
   &.affix ~ section.content > .middle {
-    margin-top: 102px;
+    margin-top: 115px;
   }
 }
 
@@ -66,12 +66,12 @@ header {
     .left {
       &.affix-top {
         position: fixed;
-        top: 102px
+        top: 115px
       }
 
       &.affix {
         position: fixed;
-        top: 102px;
+        top: 115px;
       }
       nav {
         background-color: rgb(86%, 91%, 76%);
@@ -99,7 +99,7 @@ header {
 
   .rightimages.affix {
     position: fixed !important;
-    top: 92px;
+    top: 115px;
   }
 
   .middle {

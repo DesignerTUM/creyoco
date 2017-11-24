@@ -63,7 +63,7 @@ h3 {
 header {
   padding-top: 10px;
   padding-bottom: 10px;
-  margin-bottom: 30px; }
+  margin-bottom: 11px; }
   /* line 79, ../common.scss */
   header span {
     width: 100%;
@@ -259,10 +259,10 @@ header {
       overflow: hidden;
       text-overflow: ellipsis;
       float: left;
-      width: calc(100% - 40.02px); }
+      width: calc(100% - 61px); }
   /* line 51, sass/content.scss */
   header.affix ~ section.content > .middle {
-    margin-top: 102px; }
+    margin-top: 115px; }
 
 /* line 56, sass/content.scss */
 .content {
@@ -276,11 +276,11 @@ header {
   /* line 67, sass/content.scss */
   .content .left_wrapper .left.affix-top {
     position: fixed;
-    top: 102px; }
+    top: 115px; }
   /* line 72, sass/content.scss */
   .content .left_wrapper .left.affix {
     position: fixed;
-    top: 102px; }
+    top: 115px; }
   /* line 76, sass/content.scss */
   .content .left_wrapper .left nav {
     background-color: #dbe8c2;
@@ -298,7 +298,7 @@ header {
   /* line 100, sass/content.scss */
   .content .rightimages.affix {
     position: fixed !important;
-    top: 92px; }
+    top: 115px; }
   /* line 105, sass/content.scss */
   .content .middle {
     margin-left: 210px; }
