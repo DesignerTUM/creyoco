@@ -20,7 +20,8 @@ var multichoice = {
                 multichoice.show_answers($(this));
             })
             $(".reset_multichoice").off('click').on('click', function(e) {
-                multichoice.reset($(this));
+                var removeSelection = true;
+                multichoice.reset($(this), removeSelection);
             })
         });
     },
@@ -70,11 +71,15 @@ var multichoice = {
             .addClass("mc-feedback")
             .appendTo($el.parent());
     },
-    reset: function($this) {
-        $this.parent().find('.right_answer').removeClass('right_answer');
-        $this.parent().find('.wrong_answer').removeClass('wrong_answer');
-        $this.parent().find('.mc-feedback').remove();
-        $this.parent().find('.mc-result')
+    reset: function($this, removeSelection) {
+        var $parent = $this.parent();
+        if (!!removeSelection) {
+            $parent.find(':checked').prop('checked', false);
+        }
+        $parent.find('.right_answer').removeClass('right_answer');
+        $parent.find('.wrong_answer').removeClass('wrong_answer');
+        $parent.find('.mc-feedback').remove();
+        $parent.find('.mc-result')
             .removeClass('right')
             .removeClass('wrong')
             .html('');
