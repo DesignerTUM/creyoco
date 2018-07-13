@@ -13,8 +13,9 @@ class PDFBlock(GenericBlock):
 
     def renderView(self):
         soup = BeautifulSoup(super(PDFBlock, self).renderView())
-        url = soup.findAll('object')[0]['data']
-        soup.findAll('object')[0]['data'] = soup.findAll('object')[0]['data'].\
+        obj = soup.findAll('object')
+        if obj:
+            soup.findAll('object')[0]['data'] = soup.findAll('object')[0]['data'].\
                                                 split("/")[-1]
         return str(soup)
 

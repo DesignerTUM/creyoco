@@ -42,7 +42,7 @@ class PDFIdevice(Idevice):
                                             and k != 'pdf_file'
                                             and not k.startswith('_')
             }
-        d['pdf_file_location'] = self.pdf_file.name
+        d['pdf_file_location'] = self.pdf_file.name if self.pdf_file else ""
         d['child_type'] = self.get_klass()
         return d
 
